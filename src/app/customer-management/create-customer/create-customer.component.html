@@ -1,0 +1,117 @@
+<div class="container topAlignContainer">
+  <form [formGroup]="customerDetailsForm"
+   (ngSubmit)="addSingleCustomer(customerDetailsForm)">
+    <div fxLayout="row wrap" fxLayout.lt-sm="column">
+      <div fxFlex="100">
+        <label class="pageBoxLg-label">Create Customer</label>
+      </div>
+      <div fxFlex="50" class="p-2">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="mobileNumber" placeholder="Mobile Number" required>
+          <mat-error *ngIf="customerDetailsForm.controls['mobileNumber'].errors?.required" required>
+            Enter Mobile Number
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="p-2">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="name" placeholder="Name">
+          <mat-error *ngIf="customerDetailsForm.controls['name'].errors?.required" required>
+            Enter Name
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="p-2">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="emailId" placeholder="Email Id">
+          <mat-error *ngIf="customerDetailsForm.controls['emailId'].errors?.required">
+            Enter Email ID
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="p-2">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="location" placeholder="Location">
+          <mat-error *ngIf="customerDetailsForm.controls['location'].errors?.required">
+            Enter Location
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="p-2">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="city" placeholder="City">
+          <mat-error *ngIf="customerDetailsForm.controls['city'].errors?.required">
+            Enter City
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="p-2">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="state" placeholder="State">
+
+          <mat-error *ngIf="customerDetailsForm.controls['state'].errors?.required">
+            Enter State
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="p-2">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="pincode" placeholder="PIN">
+          <mat-error *ngIf="customerDetailsForm.controls['pincode'].errors?.required">
+            Enter PIN
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="p-2">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="companyName" placeholder="Company Name">
+          <mat-error *ngIf="customerDetailsForm.controls['companyName'].errors?.required">
+            Enter Company Name
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxFlex="50" class="p-2">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="companyAddress" placeholder="Company Address">
+          <mat-error *ngIf="customerDetailsForm.controls['companyAddress'].errors?.required">
+            Enter Company Address
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="p-2">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="gstNumber" placeholder="GST Number">
+          <mat-error *ngIf="customerDetailsForm.controls['gstNumber'].errors?.required">
+            Enter GST Number
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="p-2">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="brandName" placeholder="Brand Name">
+          <mat-error *ngIf="customerDetailsForm.controls['brandName'].errors?.required">
+            Enter Brand Name
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div fxFlex="100" class="mt-1">
+        <button mat-raised-button color="primary">Save</button>
+        <span fxFlex></span>
+        <button mat-raised-button mat-button color="accent" type="button"
+         (click)="cancel()">Cancel</button>
+      </div>
+    </div>
+  </form>
+</div>
