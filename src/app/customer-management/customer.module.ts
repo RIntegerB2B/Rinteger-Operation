@@ -36,7 +36,8 @@ import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
-  declarations: [CreateCustomerComponent, ViewCustomerComponent, EditCustomerComponent],
+  declarations: [
+     ViewCustomerComponent, CreateCustomerComponent , EditCustomerComponent],
   imports: [
     HttpClientModule,
     HttpModule,
@@ -72,5 +73,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   providers: [
     CustomerManagementService
   ],
+  entryComponents: [CreateCustomerComponent]
 })
 export class CustomersModule { }

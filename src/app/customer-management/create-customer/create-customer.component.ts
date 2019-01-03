@@ -15,6 +15,8 @@ export class CreateCustomerComponent implements OnInit {
   customerDetailsForm: FormGroup;
   customerModel: Customer;
   constructor(private fb: FormBuilder,
+    public dialogRef: MatDialogRef<CreateCustomerComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private customerManagementService: CustomerManagementService,
     private route: ActivatedRoute,
     private router: Router
@@ -64,5 +66,6 @@ export class CreateCustomerComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+    this.dialogRef.close();
   }
 }

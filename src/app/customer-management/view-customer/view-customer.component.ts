@@ -4,11 +4,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomerManagementService } from './../customer-management.service';
 import { Customer } from './../create-customer/customer.model';
 import { Router } from '@angular/router';
-
+import { CreateCustomerService } from './../../customer-management/create-customer/create-customer.service';
 @Component({
   selector: 'app-view-customer',
   templateUrl: './view-customer.component.html',
-  styleUrls: ['./view-customer.component.css']
+  styleUrls: ['./view-customer.component.css'],
+  providers: [CreateCustomerService]
 })
 export class ViewCustomerComponent implements OnInit {
   customerDetailsForm: FormGroup;
@@ -16,7 +17,7 @@ export class ViewCustomerComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private customerManagementService:
       CustomerManagementService,
-    private dialog: MatDialog, private router: Router) { }
+    private dialog: MatDialog, private router: Router, private createCustomerService: CreateCustomerService) { }
 
   ngOnInit() {
     this.createForm();
@@ -37,6 +38,9 @@ export class ViewCustomerComponent implements OnInit {
       gstNumber: ['', Validators.required],
       brandName: ['', Validators.required]
     });
+  }
+  addCustomer()   {
+    this.createCustomerService.openCustomer();
   }
   getDeleteCustomer(customerDetailsForm: FormGroup, row) {
     row.editing = false;

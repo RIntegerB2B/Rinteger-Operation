@@ -1,0 +1,114 @@
+<form [formGroup]="leadDetailsForm">
+  <div class="pageBoxLg">
+    <!-- <div class="container-fluid"> -->
+      <div class="row">
+        <div class="btn">
+          <a (click)="addLead()">
+            <mat-icon class="gridEdit">add_box</mat-icon>
+          </a>
+        </div>
+      </div>
+      <div class="row gridRowHeader display-none-small">
+        <div class="col-md-2 vcenterHeader">
+          <div class="form-group">
+            <label>Lead ID</label>
+          </div>
+        </div>
+        <div class="col-md-2 vcenterHeader">
+          <div class="form-group">
+            <label>Name</label>
+          </div>
+        </div>
+        <div class="col-md-2 vcenterHeader">
+          <div class="form-group">
+            <label>Mobile Number</label>
+          </div>
+        </div>
+        <div class="col-md-2 vcenterHeader">
+          <div>
+            <label>Date</label>
+          </div>
+        </div>
+        <div class="col-md-2 vcenterHeader">
+          <div class="form-group">
+            <label>Lead Status</label>
+          </div>
+        </div>
+        <div class="col-md-2 vcenterHeader">
+          <div class="form-group">
+            <label>Action</label>
+          </div>
+        </div>
+      </div>
+      <div *ngFor="let data of leadModel">
+        <div class="row gridRow">
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Lead ID:</label>
+          </div>
+          <div class="col-md-2 col-6 vcenter form-group">
+            {{data.leadID}}
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Name:</label>
+          </div>
+          <div class="col-md-2 col-6 vcenter form-group">
+            {{data.name}}
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Mobile Number:</label>
+          </div>
+          <div class="col-md-2 col-6 vcenter form-group">
+            {{data.mobileNumber}}
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Date:</label>
+          </div>
+          <div class="col-md-2 col-6 vcenter form-group">
+            {{data.date | date: 'MM/dd/yyyy'}}
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Lead Status:</label>
+          </div>
+          <div class="col-md-2 col-6 vcenter form-group">
+            {{data.leadStatus}}
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Action:</label>
+          </div>
+          <div class="col-md-2 col-6 vcenter form-group">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <a class="nav-link" (click)="getViewLead(data)">
+                view
+              </a>
+              <a class="nav-link" (click)="getEditLead(leadDetailsForm, data._id)">
+                Edit
+              </a>
+              <a class="nav-link" (click)="getDeleteLead(leadDetailsForm, data)">
+                Delete
+              </a>
+              <a class="nav-link" (click)="createWorkOrder(data)">
+                Create Work order
+              </a>
+              <a class="nav-link" (click)="createQuotation(data)">
+                  Create Qutotation
+                </a>
+              <a class="nav-link" (click)="viewWorkOrder(data)">
+                  View Work order
+                </a>
+                <a class="nav-link" (click)="viewQuotation(data)">
+                    View Qutotation
+                </a>
+              
+            </mat-menu>
+          </div>
+        </div>
+      
+
+
+      </div>
+   <!--  </div> -->
+  </div>
+</form>

@@ -1,0 +1,70 @@
+
+import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { Invoice } from './../shared/invoice.model';
+import { AppSetting } from './../config/appSetting';
+import { HttpClient, HttpHeaders, HttpEvent } from '@angular/common/http';
+import { Http, Response, RequestOptions, Headers } from '@angular/http';
+import { Customer } from '../customer-management/create-customer/customer.model';
+
+@Injectable({
+  providedIn: 'root'
+})
+
+export class InvoiceService {
+  serviceUrl: string = AppSetting.serviceUrl;
+  headers: Headers = new Headers({
+    'Content-Type': 'application/json; charset=utf-8'
+  });
+  requestOptions: RequestOptions = new RequestOptions({ headers: this.headers });
+
+  handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      // TODO: send the error to remote logging infrastructure
+      console.log(error); // log to console instead
+      // TODO: better job of transforming error for user consumption
+      // this.log(`${operation} failed: ${error.message}`);
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+  }
+  constructor(private http: Http, private httpClient: HttpClient) { }
+  /* createCustomer(data: any): Observable<any> {
+    const addUrl = 'customers';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<Customer[]>(url, data);
+  } */
+  // all customer details
+  createInvoice(row, id): Observable<any> {
+    const addUrl = 'invoice/';
+    const url: string = this.serviceUrl + addUrl + id;
+    return this.httpClient.post<Invoice[]>(url, row);
+  }
+  viewAllInvoice(id): Observable<any> {
+    const addUrl = 'viewinvoice/';
+    const url: string = this.serviceUrl + addUrl + id;
+    return this.httpClient.get<Invoice[]>(url);
+  }
+  viewSingleInvoice(leadid, invid): Observable<any> {
+    const addUrl = 'viewsingleinvoice/';
+    const singleUrl = '/single/';
+    const url: string = this.serviceUrl + addUrl + leadid + singleUrl + invid;
+    return this.httpClient.get<Invoice[]>(url);
+  }
+  deleteSingleInvoice(leadid, invid)   {
+    const addUrl = 'invoice/';
+    const subUrl = '/onedelete/';
+    const url: string = this.serviceUrl + addUrl + leadid + subUrl + invid;
+    return this.httpClient.delete<Invoice[]>(url);
+  }
+  workorderPDFDetails(): Observable<any> {
+    const addUrl = 'workorderpdfdetails/';
+    const url: string = this.serviceUrl + addUrl ;
+    return this.httpClient.get<Customer[]>(url);
+  }
+  singleCustomerDetails(id): Observable<any> {
+    const addUrl = 'customerdetails/';
+    const url: string = this.serviceUrl + addUrl + id ;
+    return this.httpClient.get<Customer[]>(url);
+  }
+}

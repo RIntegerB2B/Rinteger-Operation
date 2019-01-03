@@ -1,30 +1,30 @@
 export class Customer {
-    _id: string;
+    _id?: string;
     customerID?: string;
-    mobileNumber: number;
-    name: string;
-    emailId: string;
-    location: String;
-    city: string;
-    state: string;
-    pincode: string;
-    companyName: string;
-    companyAddress: string;
-    gstNumber: string;
-    brandName: string;
+    mobileNumber?: number;
+    name?: string;
+    emailId?: string;
+    location?: String;
+    city?: string;
+    state?: string;
+    pincode?: string;
+    companyName?: string;
+    companyAddress?: string;
+    gstNumber?: string;
+    brandName?: string;
     constructor(
-        customerID: string,
-        mobileNumber: number,
-        name: string,
-        emailId: string,
-        location: string,
-        city: string,
-        state: string,
-        pincode: string,
-        companyName: string,
-        companyAddress: string,
-        gstNumber: string,
-        brandName: string,
+        customerID?: string,
+        mobileNumber?: number,
+        name?: string,
+        emailId?: string,
+        location?: string,
+        city?: string,
+        state?: string,
+        pincode?: string,
+        companyName?: string,
+        companyAddress?: string,
+        gstNumber?: string,
+        brandName?: string,
     ) {
         this.customerID = customerID;
         this.mobileNumber = mobileNumber;

@@ -1,0 +1,140 @@
+<form novalidate style="padding-top:20px" [formGroup]="singleWorkorderDetailsForm">
+  <label class="pageBoxLg-label">Work Order Details</label>
+  <div class="pageBoxLg">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Customer ID</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{workOrder?.customerID}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Customer Name</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{workOrder?.customerName}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Company Name</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{workOrder?.companyName}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Company Address</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{workOrder?.companyAddress}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Mobile Number</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{workOrder?.mobileNumber}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">WorkOrder ID</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{workOrder?.workOrderID}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Date</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{workOrder?.date | date: 'dd/MM/yyyy' }}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row gridRow" *ngFor="let data of workOrder?.requirements; let i = index">
+      <div class="display-none-large col-6">
+        <label class="gridLabel">Item:</label>
+      </div>
+      <div class="col-md-2 col-6 vcenter form-group">
+        {{data.item}}
+      </div>
+      <div class="display-none-large col-6">
+        <label class="gridLabel">Quantity:</label>
+      </div>
+      <div class="col-md-2 col-6 vcenter form-group">
+        {{data.quantity}}
+      </div>
+      <div class="display-none-large col-6">
+        <label class="gridLabel">Price:</label>
+      </div>
+      <div class="col-md-2 col-6 vcenter form-group">
+        {{data.price}}
+      </div>
+      <div class="display-none-large col-6">
+        <label class="gridLabel">Discount:</label>
+      </div>
+      <div class="col-md-2 col-6 vcenter form-group">
+        {{data.discount}}
+      </div>
+      <div class="display-none-large col-6">
+        <label class="gridLabel">Description:</label>
+      </div>
+      <div class="col-md-2 col-6 vcenter form-group">
+        {{data.description}}
+      </div>
+      <div class="display-none-large col-6">
+        <label class="gridLabel">Total:</label>
+      </div>
+      <div class="col-md-2 col-6 vcenter form-group">
+        {{data.total}}
+      </div>
+    </div>
+    <div class="col-md-6">
+
+      <div class="col-md-6">
+        <label class="pr-2 " *ngFor="let terms of TypesOfTerms">
+          <input type="radio" formControlName="termsType" [value]="terms">&nbsp;&nbsp;{{ terms}}
+        </label>
+        <mat-form-field>
+          <mat-select #tempVal placeholder="Select the template">
+            <mat-option *ngFor="let val of templates" [value]="val">
+              {{val}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <button (click)="templateType(tempVal.value)">Save as PDF</button>
+    </div>
+
+  </div>
+</form>
