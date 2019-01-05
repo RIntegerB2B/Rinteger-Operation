@@ -11,7 +11,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   selector: 'app-view-lead',
   templateUrl: './view-lead.component.html',
   styleUrls: ['./view-lead.component.css'],
-  providers: [CreateCustomerService]
+  providers: [CreateCustomerService, LeadManagementService]
 })
 export class ViewLeadComponent implements OnInit {
   leadDetailsForm: FormGroup;
@@ -19,7 +19,8 @@ export class ViewLeadComponent implements OnInit {
   leadModelCheck: Lead;
   constructor(private fb: FormBuilder,
     private leadManagementService: LeadManagementService,
-    private createCustomerService: CreateCustomerService, private dialog: MatDialog, private router: Router) {
+    private createCustomerService: CreateCustomerService, private dialog: MatDialog, 
+    private router: Router) {
    }
   ngOnInit() {
     this.createForm();
@@ -67,7 +68,7 @@ export class ViewLeadComponent implements OnInit {
       if (data.length === 0) {
         this.createCustomerService.openCustomer(row);
       } else {
-        this.router.navigate(['createquotation', data[0]._id, row._id]);
+        this.router.navigate(['quotation/createquotation', data[0]._id, row._id]);
       }
     }, error => {
       console.log(error);
@@ -91,14 +92,14 @@ export class ViewLeadComponent implements OnInit {
   }
   viewWorkOrder(data)   {
     if (data.workOrder.length !== 0)     {
-    this.router.navigate(['viewworkorder', data._id]);
+    this.router.navigate(['workorder/viewworkorder', data._id]);
     } else     {
       this.createWorkOrder(data);
     }
   }
   viewQuotation(data)   {
     if (data.quotation.length !== 0)     {
-      this.router.navigate(['viewquotation', data._id]);
+      this.router.navigate(['quotation/viewquotation', data._id]);
       } else     {
         this.createQuotation(data);
   }

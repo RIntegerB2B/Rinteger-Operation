@@ -8,17 +8,20 @@ import { CustomerManagementService } from './../../customer-management/customer-
 import { Lead } from './../../shared/lead.model';
 import { Customer } from './../../customer-management/create-customer/customer.model';
 import {WorkOrderPdf} from '../../shared/workorderpdf.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-workorder',
   templateUrl: './create-workorder.component.html',
-  styleUrls: ['./create-workorder.component.css']
+  styleUrls: ['./create-workorder.component.css'],
+  providers: [LeadManagementService, CustomerManagementService, WorkOrderService  ]
 })
 export class CreateWorkorderComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private workOrderService: WorkOrderService
     , private route: ActivatedRoute, private leadManagementService: LeadManagementService,
-    private customerManagementService: CustomerManagementService
+    private customerManagementService: CustomerManagementService,
+    private router: Router
     ) { }
   requirements: FormArray;
   workOrderDetailsForm: FormGroup;
@@ -63,11 +66,16 @@ export class CreateWorkorderComponent implements OnInit {
   }
   viewCompanyDetails() {
     this.workOrderService.workorderPDFDetails().subscribe(data => {
-      this.workOrderPDFModel = data;
-      this.gstVal = this.workOrderPDFModel[0].gst;
+      if (data.length !== 0)      {
+        this.workOrderPDFModel = data;
+        this.gstVal = this.workOrderPDFModel[0].gst;
+      }
     }, error => {
       console.log(error);
     });
+  }
+  cancelWorkOrder()   {
+    this.router.navigate(['lead/leadview']);
   }
   createLeadWorkOrder(workOrderDetailsForm: FormGroup)   {
     console.log('value', this.taxVal);
@@ -87,7 +95,7 @@ export class CreateWorkorderComponent implements OnInit {
     );
     this.workOrderService.createWorkOrder(this.workOrder, this.leadId).subscribe(data => {
       this.workOrder = data;
-      console.log('singleWorkOrder', this.workOrder);
+      this.router.navigate(['workorder/viewworkorder', this.leadId]);
     }, error => {
       console.log(error);
     });

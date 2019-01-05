@@ -34,7 +34,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
+import { CreateCustomerService } from './../customer-management/create-customer/create-customer.service';
 @NgModule({
   declarations: [
      ViewCustomerComponent, CreateCustomerComponent , EditCustomerComponent],
@@ -71,7 +71,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FlexLayoutModule
   ],
   providers: [
-    CustomerManagementService
+    CustomerManagementService, CreateCustomerService
   ],
   entryComponents: [CreateCustomerComponent]
 })

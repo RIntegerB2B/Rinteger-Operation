@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Optional } from '@angular/core';
 import { Customer } from './customer.model';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -15,12 +15,12 @@ export class CreateCustomerComponent implements OnInit {
   customerDetailsForm: FormGroup;
   customerModel: Customer;
   constructor(private fb: FormBuilder,
-    public dialogRef: MatDialogRef<CreateCustomerComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Optional() public dialogRef: MatDialogRef<CreateCustomerComponent>,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
     private customerManagementService: CustomerManagementService,
     private route: ActivatedRoute,
     private router: Router
-   ) {
+  ) {
   }
 
   ngOnInit() {
@@ -44,11 +44,10 @@ export class CreateCustomerComponent implements OnInit {
     });
   }
   cancel() {
-    this.router.navigate(['customers/viewcustomer']);
+    this.dialogRef.close();
   }
   addSingleCustomer(customerDetailsForm: FormGroup) {
     this.customerModel = new Customer(
-      customerDetailsForm.controls.customerID.value,
       customerDetailsForm.controls.mobileNumber.value,
       customerDetailsForm.controls.name.value,
       customerDetailsForm.controls.emailId.value,

@@ -44,7 +44,6 @@ export class ViewSingleLeadComponent implements OnInit {
     });
   }
   addForm() {
-
     const requirements = this.fb.group({
       item: [''],
       quantity: [''],

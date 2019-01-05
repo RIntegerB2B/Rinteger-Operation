@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CreateInvoiceComponent } from './create-invoice/create-invoice.component';
-import { ViewInvoiceComponent } from './view-invoice/view-invoice.component';
-import { ViewSingleInvoiceComponent } from './view-single-invoice/view-single-invoice.component';
+import { InvoiceService } from './invoice.service';
 import {
   MatSidenavModule,
   MatListModule,
@@ -26,12 +24,17 @@ import {
   MatChipsModule,
   MatInputModule,
   MatStepperModule,
-  MatDatepickerModule
+  MatDatepickerModule,
+  MatNativeDateModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { CreateInvoiceComponent } from './create-invoice/create-invoice.component';
+import { ViewInvoiceComponent } from './view-invoice/view-invoice.component';
+import { ViewSingleInvoiceComponent } from './view-single-invoice/view-single-invoice.component';
+import { InvoiceRoutingModule } from './invoice-routing.module'
 
 @NgModule({
   declarations: [CreateInvoiceComponent, ViewInvoiceComponent, ViewSingleInvoiceComponent],
@@ -62,9 +65,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatInputModule,
     MatStepperModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     FormsModule,
     ReactiveFormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    InvoiceRoutingModule
   ],
+  providers: [InvoiceService]
 })
 export class InvoiceManagementModule { }

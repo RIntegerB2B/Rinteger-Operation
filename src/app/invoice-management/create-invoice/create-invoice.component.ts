@@ -11,7 +11,8 @@ import { WorkOrderPdf } from '../../shared/workorderpdf.model';
 @Component({
   selector: 'app-create-invoice',
   templateUrl: './create-invoice.component.html',
-  styleUrls: ['./create-invoice.component.css']
+  styleUrls: ['./create-invoice.component.css'],
+  providers: [LeadManagementService, WorkOrderService  ]
 })
 export class CreateInvoiceComponent implements OnInit {
 

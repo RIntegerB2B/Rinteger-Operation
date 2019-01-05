@@ -24,7 +24,7 @@ export class ViewQuotationComponent implements OnInit {
   }
   getViewQuotation(data)   {
     console.log('dataData', data);
-    this.router.navigate(['viewsinglequotation', this.leadId, data._id]);
+    this.router.navigate(['quotation/viewsinglequotation', this.leadId, data._id]);
   }
   /* getEditQuotation(data)   {
     this.router.navigate(['editworkorder', this.leadId, data._id]);

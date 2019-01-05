@@ -13,7 +13,7 @@ export class Customer {
     gstNumber?: string;
     brandName?: string;
     constructor(
-        customerID?: string,
+        /*  customerID?: string, */
         mobileNumber?: number,
         name?: string,
         emailId?: string,
@@ -21,12 +21,11 @@ export class Customer {
         city?: string,
         state?: string,
         pincode?: string,
-        companyName?: string,
+           companyName?: string,
         companyAddress?: string,
         gstNumber?: string,
         brandName?: string,
     ) {
-        this.customerID = customerID;
         this.mobileNumber = mobileNumber;
         this.name = name;
         this.emailId = emailId;
@@ -35,8 +34,8 @@ export class Customer {
         this.state = state;
         this.pincode = pincode;
         this.companyName = companyName;
-        this.companyAddress = companyAddress;
-        this.gstNumber = gstNumber;
-        this.brandName = brandName;
+                this.companyAddress = companyAddress;
+         this.gstNumber = gstNumber;
+         this.brandName = brandName;
     }
 }

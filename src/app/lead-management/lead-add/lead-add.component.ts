@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Inject, Input, Output, EventEmitter, ViewChild, Optional } from '@angular/core';
 import { Router } from '@angular/router';
 import { Lead } from './../../shared/lead.model';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -27,8 +27,9 @@ import { LeadSettings } from '../../shared/lead-settings.model';
     arryValue: any = [];
     sum = 0;
     constructor(private fb: FormBuilder, private leadManagementService: LeadManagementService
-      , private settingsservice: SettingsServiceService, public dialogRef: MatDialogRef<LeadAddComponent>,
-      @Inject(MAT_DIALOG_DATA) public data: Lead) {
+      , private settingsservice: SettingsServiceService,
+      @Optional()  public dialogRef: MatDialogRef<LeadAddComponent>,
+      @Optional()   @Inject(MAT_DIALOG_DATA) public data: Lead) {
       console.log(data);
     }
     cancel(): void {
@@ -38,7 +39,6 @@ import { LeadSettings } from '../../shared/lead-settings.model';
       this.createForm();
       this.viewLeadSettings();
     }
-  
     createForm() {
       this.leadDetailsForm = this.fb.group({
         leadID: [''],

@@ -12,7 +12,15 @@ const routes: Routes = [
   },
   {
     path: 'workorder',
-    loadChildren: './work-order-management/work-order-management.module#WorkOrderRoutingModule'
+    loadChildren: './work-order-management/work-order-management.module#WorkOrderManagementModule'
+  },
+  {
+    path: 'quotation',
+    loadChildren: './quotation-management/quotation-management.module#QuotationManagementModule'
+  },
+  {
+    path: 'invoice',
+    loadChildren: './invoice-management/invoice-management.module#InvoiceManagementModule'
   },
   {
     path: '',

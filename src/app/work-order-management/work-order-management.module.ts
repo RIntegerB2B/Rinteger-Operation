@@ -4,6 +4,8 @@ import { CreateWorkorderComponent } from './create-workorder/create-workorder.co
 import { ViewSingleWorkorderComponent } from './view-single-workorder/view-single-workorder.component';
 import { EditWorkorderComponent } from './edit-workorder/edit-workorder.component';
 import { ViewWorkorderComponent } from './view-workorder/view-workorder.component';
+import { WorkOrderRoutingModule } from './work-order-routing.module';
+import { WorkOrderService } from './work-order.service';
 import {
   MatSidenavModule,
   MatListModule,
@@ -31,7 +33,7 @@ import {
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
@@ -43,6 +45,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
       HttpClientModule,
       HttpModule,
       CommonModule,
+      WorkOrderRoutingModule,
       MatSidenavModule,
       MatListModule,
       MatTooltipModule,
@@ -70,5 +73,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
       ReactiveFormsModule,
       FlexLayoutModule
     ],
+    providers: [WorkOrderService]
 })
 export class WorkOrderManagementModule { }

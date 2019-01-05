@@ -13,7 +13,8 @@ import {WorkOrderPdf} from '../../shared/workorderpdf.model';
 @Component({
   selector: 'app-create-quotation',
   templateUrl: './create-quotation.component.html',
-  styleUrls: ['./create-quotation.component.css']
+  styleUrls: ['./create-quotation.component.css'],
+  providers: [LeadManagementService, CustomerManagementService  ]
 })
 export class CreateQuotationComponent implements OnInit {
 

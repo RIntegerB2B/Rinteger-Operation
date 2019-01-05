@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-view-workorder',
   templateUrl: './view-workorder.component.html',
-  styleUrls: ['./view-workorder.component.css']
+  styleUrls: ['./view-workorder.component.css'],
 })
 export class ViewWorkorderComponent implements OnInit {
   workOrder: WorkOrder[] = [];
@@ -30,7 +30,7 @@ export class ViewWorkorderComponent implements OnInit {
     });
   }
   viewInvoice(row) {
-    this.router.navigate(['viewinvoice', this.leadId, row]);
+    this.router.navigate(['invoice/viewinvoice', this.leadId, row]);
   }
   createProfomaInvoice(row) {
     this.router.navigate(['createproformainvoice', this.leadId, row._id]);
@@ -39,11 +39,11 @@ export class ViewWorkorderComponent implements OnInit {
     this.router.navigate(['viewproformainvoice', this.leadId, row]);
   }
   createInvoice(row) {
-    this.router.navigate(['createinvoice', this.leadId, row._id]);
+    this.router.navigate(['invoice/createinvoice', this.leadId, row._id]);
   }
   getViewWorkOrder(data) {
     console.log('dataData', data);
-    this.router.navigate(['viewsingleworkorder', this.leadId, data._id]);
+    this.router.navigate(['workorder/viewsingleworkorder', this.leadId, data._id]);
   }
   getInvoice(data) {
     this.router.navigate(['createinvoice', this.leadId, data._id]);

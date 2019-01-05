@@ -8,7 +8,7 @@ import { ViewWorkorderComponent } from './view-workorder/view-workorder.componen
 
 const routes: Routes = [
   {
-    path: 'createworkorder',
+    path: 'creatework/:id/:leadId',
     component: CreateWorkorderComponent
   },
   {

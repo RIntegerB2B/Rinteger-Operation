@@ -86,9 +86,7 @@ import { ViewSingleLeadComponent } from './view-single-lead/view-single-lead.com
     FlexLayoutModule,
     LeadManagementRoutingModule
   ],
-  providers: [
-    LeadManagementService, CustomerManagementService
-  ]
+  providers: [LeadManagementService]
 })
 export class LeadManagementModule { }
 
