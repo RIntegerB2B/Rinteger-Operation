@@ -5,6 +5,7 @@ import { ViewSingleProformaComponent } from './view-single-proforma/view-single-
 import { ViewProformaComponent } from './view-proforma/view-proforma.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { ProformaInvoiceService } from './proforma-invoice.service';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
@@ -30,14 +31,16 @@ import {
   MatChipsModule,
   MatInputModule,
   MatStepperModule,
-  MatDatepickerModule
+  MatDatepickerModule,
+  MatNativeDateModule
 } from '@angular/material';
-
+import { ProformaRoutingModule } from './proforma-routing.module';
 
 @NgModule({
   declarations: [CreateProformaComponent,
     ViewSingleProformaComponent, ViewProformaComponent],
     imports: [
+      ProformaRoutingModule,
       HttpClientModule,
       HttpModule,
       CommonModule,
@@ -64,9 +67,11 @@ import {
       MatInputModule,
       MatStepperModule,
       MatDatepickerModule,
+      MatNativeDateModule,
       FormsModule,
       ReactiveFormsModule,
       FlexLayoutModule
     ],
+    providers: [ProformaInvoiceService]
 })
 export class ProformaInvoiceManagementModule { }

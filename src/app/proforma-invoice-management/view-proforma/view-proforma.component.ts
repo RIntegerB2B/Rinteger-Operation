@@ -25,11 +25,12 @@ export class ViewProformaComponent implements OnInit {
   }
   getViewProformaInvoice(data)   {
     console.log('dataData', data);
-    this.router.navigate(['viewsingleproformainvoice', this.leadId, data._id]);
+    this.router.navigate(['proformainvoice/viewsingleproformainvoice', this.leadId, data._id]);
   }
-  /* getEditQuotation(data)   {
+  getEditQuotation(data)   {
     this.router.navigate(['editworkorder', this.leadId, data._id]);
-  } */
+  }
+  
   getAllProformaInvoice() {
     this.proformaInvoiceService.viewAllProformaInvoice(this.leadId).subscribe(data => {
       this.proformaInvoice = data;

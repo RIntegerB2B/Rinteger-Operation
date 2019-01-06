@@ -28,8 +28,8 @@ import { LeadSettings } from '../../shared/lead-settings.model';
     sum = 0;
     constructor(private fb: FormBuilder, private leadManagementService: LeadManagementService
       , private settingsservice: SettingsServiceService,
-      @Optional()  public dialogRef: MatDialogRef<LeadAddComponent>,
-      @Optional()   @Inject(MAT_DIALOG_DATA) public data: Lead) {
+      public dialogRef: MatDialogRef<LeadAddComponent>,
+      @Inject(MAT_DIALOG_DATA) public data: Lead) {
       console.log(data);
     }
     cancel(): void {

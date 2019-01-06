@@ -6,12 +6,13 @@ import { ActivatedRoute } from '@angular/router';
 import { LeadManagementService } from './../../lead-management/lead-management.service';
 import { WorkOrderService } from './../../work-order-management/work-order.service';
 import { WorkOrder } from './../../shared/workorder.model';
-import {WorkOrderPdf} from '../../shared/workorderpdf.model';
+import { WorkOrderPdf } from '../../shared/workorderpdf.model';
 
 @Component({
   selector: 'app-create-proforma',
   templateUrl: './create-proforma.component.html',
-  styleUrls: ['./create-proforma.component.css']
+  styleUrls: ['./create-proforma.component.css'],
+  providers: [LeadManagementService, WorkOrderService  ]
 })
 export class CreateProformaComponent implements OnInit {
 

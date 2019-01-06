@@ -31,7 +31,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
+import { SettingsServiceService } from './settings-service.service';
+import { SettingsRoutingModule } from './settings-routing.module';
 @NgModule({
   declarations: [LeadSettingsComponent, WorkorderPdfTemplateComponent],
   imports: [
@@ -63,7 +64,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatDatepickerModule,
     FormsModule,
     ReactiveFormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    SettingsRoutingModule
   ],
+  providers: [SettingsServiceService]
 })
 export class SettingsManagementModule { }

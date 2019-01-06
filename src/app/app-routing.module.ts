@@ -23,8 +23,16 @@ const routes: Routes = [
     loadChildren: './invoice-management/invoice-management.module#InvoiceManagementModule'
   },
   {
+    path: 'proformainvoice',
+    loadChildren: './proforma-invoice-management/proforma-invoice-management.module#ProformaInvoiceManagementModule'
+  },
+  {
+    path: 'settings',
+    loadChildren: './settings-management/settings-management.module#SettingsManagementModule'
+  },
+  {
     path: '',
-    redirectTo: '',
+    redirectTo: 'lead/leadview',
     pathMatch: 'full'
   }];
 

@@ -33,10 +33,10 @@ export class ViewWorkorderComponent implements OnInit {
     this.router.navigate(['invoice/viewinvoice', this.leadId, row]);
   }
   createProfomaInvoice(row) {
-    this.router.navigate(['createproformainvoice', this.leadId, row._id]);
+    this.router.navigate(['proformainvoice/createproformainvoice', this.leadId, row._id]);
   }
   viewProfomaInvoice(row) {
-    this.router.navigate(['viewproformainvoice', this.leadId, row]);
+    this.router.navigate(['proformainvoice/viewproformainvoice', this.leadId, row]);
   }
   createInvoice(row) {
     this.router.navigate(['invoice/createinvoice', this.leadId, row._id]);

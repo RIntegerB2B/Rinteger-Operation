@@ -8,7 +8,7 @@ import { SettingsServiceService } from '../settings-service.service';
 import { WorkOrderPdf } from './../../shared/workorderpdf.model';
 import { BankDetails } from './../../shared/bankdetails.model';
 import { CompanyDetails } from './../../shared/companydetails.model';
-import {FooterDetails} from './../../shared/footerdetails.model';
+import { FooterDetails } from './../../shared/footerdetails.model';
 
 @Component({
   selector: 'app-workorder-pdf-template',
@@ -152,9 +152,9 @@ export class WorkorderPdfTemplateComponent implements OnInit {
     this.workOrderModel.gst = workOrderPdfForm.controls.gst.value;
     this.settingService.addGST(this.workOrderModel).subscribe(data => {
       this.workOrderModel = data;
-     this.snackBar.open(this.message, this.action, {
-      duration: 3000,
-    });
+      this.snackBar.open(this.message, this.action, {
+        duration: 3000,
+      });
     }, err => {
       console.log(err);
     });
@@ -165,9 +165,9 @@ export class WorkorderPdfTemplateComponent implements OnInit {
     this.workOrderModel.sgst = workOrderPdfForm.controls.sgst.value;
     this.settingService.addSGST(this.workOrderModel).subscribe(data => {
       this.workOrderModel = data;
-     this.snackBar.open(this.message, this.action, {
-      duration: 3000,
-    });
+      this.snackBar.open(this.message, this.action, {
+        duration: 3000,
+      });
     }, err => {
       console.log(err);
     });
@@ -178,9 +178,9 @@ export class WorkorderPdfTemplateComponent implements OnInit {
     this.workOrderModel.cgst = workOrderPdfForm.controls.cgst.value;
     this.settingService.addCGST(this.workOrderModel).subscribe(data => {
       this.workOrderModel = data;
-     this.snackBar.open(this.message, this.action, {
-      duration: 3000,
-    });
+      this.snackBar.open(this.message, this.action, {
+        duration: 3000,
+      });
     }, err => {
       console.log(err);
     });
@@ -266,35 +266,35 @@ export class WorkorderPdfTemplateComponent implements OnInit {
     });
   }
   getPdfTemplate() {
-this.settingService.getPdfWorkOrderDetails().subscribe(data => {
-  this.workOrderModel = data;
-  this.workOrderPdfForm.setValue({
-    gst: this.workOrderModel[0].gst,
-    sgst: this.workOrderModel[0].sgst,
-    cgst: this.workOrderModel[0].cgst,
-    terms: this.workOrderModel[0].terms,
-    digitalterms: this.workOrderModel[0].digitalterms,
-    accountname: this.workOrderModel[0].bankdetails[0].accName,
-    accountnumber: this.workOrderModel[0].bankdetails[0].accNo,
-    bankname: this.workOrderModel[0].bankdetails[0].bankName,
-    accounttype: this.workOrderModel[0].bankdetails[0].accountType,
-    branchname: this.workOrderModel[0].bankdetails[0].branchName,
-    ifsc: this.workOrderModel[0].bankdetails[0].IFSC,
-    companyName: this.workOrderModel[0].companydetails[0].companyName,
-    tax: this.workOrderModel[0].companydetails[0].TAX,
-    pan: this.workOrderModel[0].companydetails[0].PAN,
-    sac: this.workOrderModel[0].companydetails[0].SAC,
-    pincode: this.workOrderModel[0].companydetails[0].pincode,
-    address: this.workOrderModel[0].companydetails[0].address,
-    phNo: this.workOrderModel[0].companydetails[0].phNo,
-    emailId: this.workOrderModel[0].footerdetails[0].emailId,
-    website: this.workOrderModel[0].footerdetails[0].website,
-    footerCompanyName: this.workOrderModel[0].footerdetails[0].companyName,
-    footerAddress: this.workOrderModel[0].footerdetails[0].address,
-    footerPhNo: this.workOrderModel[0].footerdetails[0].phNo,
-  });
-}, err => {
-  console.log(err);
-});
- }
+    this.settingService.getPdfWorkOrderDetails().subscribe(data => {
+      this.workOrderModel = data;
+      this.workOrderPdfForm.setValue({
+        gst: this.workOrderModel[0].gst,
+        sgst: this.workOrderModel[0].sgst,
+        cgst: this.workOrderModel[0].cgst,
+        terms: this.workOrderModel[0].terms,
+        digitalterms: this.workOrderModel[0].digitalterms,
+        accountname: this.workOrderModel[0].bankdetails[0].accName,
+        accountnumber: this.workOrderModel[0].bankdetails[0].accNo,
+        bankname: this.workOrderModel[0].bankdetails[0].bankName,
+        accounttype: this.workOrderModel[0].bankdetails[0].accountType,
+        branchname: this.workOrderModel[0].bankdetails[0].branchName,
+        ifsc: this.workOrderModel[0].bankdetails[0].IFSC,
+        companyName: this.workOrderModel[0].companydetails[0].companyName,
+        tax: this.workOrderModel[0].companydetails[0].TAX,
+        pan: this.workOrderModel[0].companydetails[0].PAN,
+        sac: this.workOrderModel[0].companydetails[0].SAC,
+        pincode: this.workOrderModel[0].companydetails[0].pincode,
+        address: this.workOrderModel[0].companydetails[0].address,
+        phNo: this.workOrderModel[0].companydetails[0].phNo,
+        emailId: this.workOrderModel[0].footerdetails[0].emailId,
+        website: this.workOrderModel[0].footerdetails[0].website,
+        footerCompanyName: this.workOrderModel[0].footerdetails[0].companyName,
+        footerAddress: this.workOrderModel[0].footerdetails[0].address,
+        footerPhNo: this.workOrderModel[0].footerdetails[0].phNo,
+      });
+    }, err => {
+      console.log(err);
+    });
+  }
 }
