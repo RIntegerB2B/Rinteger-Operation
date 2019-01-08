@@ -31,7 +31,8 @@ export class WorkorderPdfTemplateComponent implements OnInit {
   showDigitaltermsForm: boolean;
   showbankDetailsForm: boolean;
   showfooterDetailsForm: boolean;
-  constructor(private fb: FormBuilder, private dialog: MatDialog, private settingService: SettingsServiceService,
+  constructor(private fb: FormBuilder,
+    private dialog: MatDialog, private settingService: SettingsServiceService,
     public snackBar: MatSnackBar) { }
 
   ngOnInit() {
@@ -257,8 +258,8 @@ export class WorkorderPdfTemplateComponent implements OnInit {
     this.footerDetailModel.phNo = workOrderPdfForm.controls.footerPhNo.value;
     this.footerDetailModel.website = workOrderPdfForm.controls.website.value;
     this.settingService.addFooterDetails(this.footerDetailModel).subscribe(data => {
-      this.workOrderModel = data;
-      this.snackBar.open(this.message, this.action, {
+    this.workOrderModel = data;
+    this.snackBar.open(this.message, this.action, {
         duration: 3000,
       });
     }, err => {

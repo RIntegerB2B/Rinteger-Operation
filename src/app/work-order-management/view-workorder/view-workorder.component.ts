@@ -18,8 +18,13 @@ export class ViewWorkorderComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+   /*  if (typeof this.leadId !== 'undefined')     {
     this.leadId = this.route.snapshot.params.leadId;
     this.getSingleLeads();
+  } else   {
+    this.getAllWorkOrder();
+  } */
+  this.getSingleLeads();
   }
   getSingleLeads() {
     this.workOrderService.viewAllWorkOrder(this.leadId).subscribe(data => {
@@ -59,4 +64,12 @@ export class ViewWorkorderComponent implements OnInit {
       console.log(error);
     });
   }
+  /* getAllWorkOrder() {
+    this.workOrderService.allAllWorkOrder().subscribe(data => {
+      const allWorkOrder = data.map().workOrder;
+      this.workOrder = allWorkOrder;
+    }, error => {
+      console.log(error);
+    });
+  } */
 }

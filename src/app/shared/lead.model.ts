@@ -11,6 +11,10 @@ export class Lead {
     leadStatus: string;
     service: string;
     requirements: [Detail];
+    workOrder?: [string];
+    invoice?: [string];
+    proformaInvoice?: [string];
+    quotation?: [string];
     date: Date;
     remarks: string;
     allTotal: number;

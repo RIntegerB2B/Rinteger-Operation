@@ -31,6 +31,10 @@ const routes: Routes = [
     loadChildren: './settings-management/settings-management.module#SettingsManagementModule'
   },
   {
+    path: 'dashboard',
+    loadChildren: './dashboard/dashboard.module#DashboardModule'
+  },
+  {
     path: '',
     redirectTo: 'lead/leadview',
     pathMatch: 'full'

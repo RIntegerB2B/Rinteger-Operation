@@ -22,7 +22,10 @@ const routes: Routes = [
 {
   path: 'viewworkorder/:leadId',
   component: ViewWorkorderComponent
-},
+}, {
+  path: 'viewworkorder',
+  component: ViewWorkorderComponent
+}
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],

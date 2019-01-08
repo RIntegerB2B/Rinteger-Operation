@@ -1,15 +1,13 @@
-
 import { Component, OnInit } from '@angular/core';
 import * as  jspdf from 'jspdf';
 import 'jspdf-autotable';
 import { WorkOrderService } from './../work-order.service';
 import { WorkOrder } from './../../shared/workorder.model';
-import { WorkOrderPdf } from '../../shared/workorderpdf.model';
+import { WorkOrderPdf } from './../../shared/workorderpdf.model';
 import { Customer } from './../../customer-management/create-customer/customer.model';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-
 @Component({
   selector: 'app-view-single-workorder',
   templateUrl: './view-single-workorder.component.html',
@@ -200,7 +198,7 @@ export class ViewSingleWorkorderComponent implements OnInit {
           this.allValues[i].price, this.allValues[i].discount, this.allValues[i].total);
           this.printArray.push(this.tempArray[i]);
       }
-      const imgData = '../../../assets/images/logo.jpg';
+      const imgData = '';
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Discount %', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
@@ -400,11 +398,11 @@ export class ViewSingleWorkorderComponent implements OnInit {
           this.allValues[i].price, this.allValues[i].discount, this.allValues[i].total);
           this.printArray.push(this.tempArray[i]);
       }
-      const imgData = '../../../assets/images/logo.jpg';
+      /* const imgData = '../../../../assets/images/logo.jpg'; */
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15);
+      /* this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15); */
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');

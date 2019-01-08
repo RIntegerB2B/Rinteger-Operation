@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InvoiceService } from './invoice.service';
+import { DashboardService } from './dashboard.service';
 import {
   MatSidenavModule,
   MatListModule,
@@ -31,13 +31,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { CreateInvoiceComponent } from './create-invoice/create-invoice.component';
-import { ViewInvoiceComponent } from './view-invoice/view-invoice.component';
-import { ViewSingleInvoiceComponent } from './view-single-invoice/view-single-invoice.component';
-import { InvoiceRoutingModule } from './invoice-routing.module';
+import { DashboardRoutingModule } from './dashboard-routing.module';
+import { ManimenuComponent } from './manimenu/manimenu.component';
 
 @NgModule({
-  declarations: [CreateInvoiceComponent, ViewInvoiceComponent, ViewSingleInvoiceComponent],
+  declarations: [ManimenuComponent],
   imports: [
     HttpClientModule,
     HttpModule,
@@ -69,8 +67,8 @@ import { InvoiceRoutingModule } from './invoice-routing.module';
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    InvoiceRoutingModule
+    DashboardRoutingModule
   ],
-  providers: [InvoiceService]
+  providers: [DashboardService]
 })
-export class InvoiceManagementModule { }
+export class DashboardModule { }
