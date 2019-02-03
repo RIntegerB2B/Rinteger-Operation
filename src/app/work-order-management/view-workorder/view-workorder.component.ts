@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WorkOrderService } from './../work-order.service';
 import { WorkOrder } from './../../shared/workorder.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 @Component({
@@ -24,6 +24,11 @@ export class ViewWorkorderComponent implements OnInit {
   } else   {
     this.getAllWorkOrder();
   } */
+  this.route.paramMap.subscribe(
+    (params: ParamMap) => {
+      this.leadId = params.get('leadId');
+    }
+  );
   this.getSingleLeads();
   }
   getSingleLeads() {
@@ -48,7 +53,7 @@ export class ViewWorkorderComponent implements OnInit {
   }
   getViewWorkOrder(data) {
     console.log('dataData', data);
-    this.router.navigate(['workorder/viewsingleworkorder', this.leadId, data._id]);
+    this.router.navigate(['workorder/viewsingleworkorder', data._id]);
   }
   getInvoice(data) {
     this.router.navigate(['createinvoice', this.leadId, data._id]);
@@ -57,9 +62,8 @@ export class ViewWorkorderComponent implements OnInit {
     this.router.navigate(['editworkorder', this.leadId, data._id]);
   }
   getDeleteSingleWorkOrder(row) {
-    this.workOrderService.deleteSingleWorkOrder(this.leadId, row._id).subscribe(data => {
+    this.workOrderService.deleteSingleWorkOrder(row._id).subscribe(data => {
       this.workOrder = data;
-      console.log('all work order', this.workOrder);
     }, error => {
       console.log(error);
     });

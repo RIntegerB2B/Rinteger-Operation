@@ -92,7 +92,7 @@ export class CreateInvoiceComponent implements OnInit {
     this.requirementsForms.push(requirements);
   }
   viewWorkOrder() {
-    this.workOrderService.viewSingleWorkOrder(this.leadId, this.workId).subscribe(data => {
+    this.workOrderService.viewSingleWorkOrder(this.workId).subscribe(data => {
       this.workOrder = data;
       console.log('single Work Order Id', this.workOrder);
       this.addForm();
@@ -103,7 +103,7 @@ export class CreateInvoiceComponent implements OnInit {
     });
   }
   addForm() {
-    for (let i = 0; i <= this.workOrder.requirements.length - 1; i++) {
+    for (let i = 0; i <= this.workOrder[0].requirements.length - 1; i++) {
       this.requirementsData = this.fb.group({
         id: [this.workOrder.requirements[i]._id],
         item: [this.workOrder.requirements[i].item],

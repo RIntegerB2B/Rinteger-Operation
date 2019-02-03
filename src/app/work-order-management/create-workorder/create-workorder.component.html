@@ -221,7 +221,7 @@
           </div>
         </div>
         <div class="col-md-2 col-2">
-          <div class="form-group">
+          <div class="form-group pointerDiv">
             <a (click)="deleteRequirements(i)">
               <mat-icon>clear</mat-icon>
             </a>
@@ -254,7 +254,7 @@
             <mat-form-field class="full-width">
               <input matInput formControlName="allTotal" [readonly]="true"
                placeholder="Total" [ngModel]="(workOrderDetailsForm.controls.tax.value
-                + workOrderDetailsForm.controls.subTotal.value )">
+                + workOrderDetailsForm.controls.subTotal.value | number )">
             </mat-form-field>
           </div>
         </div>

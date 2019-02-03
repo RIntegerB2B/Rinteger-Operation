@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@ang
 import { LeadManagementService } from './../lead-management.service';
 import { ActivatedRoute } from '@angular/router';
 import { Lead } from './../../shared/lead.model';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-view-single-lead',
   templateUrl: './view-single-lead.component.html',
@@ -13,7 +15,8 @@ export class ViewSingleLeadComponent implements OnInit {
   leadDetailsForm: FormGroup;
   leadModel: Lead;
   id;
-  constructor(private leadManagementService: LeadManagementService, private route: ActivatedRoute) {
+  constructor(private leadManagementService: LeadManagementService,
+     private route: ActivatedRoute) {
   }
   ngOnInit() {
     /* this.createForm(); */

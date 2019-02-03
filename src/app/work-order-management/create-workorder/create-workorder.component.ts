@@ -95,7 +95,7 @@ export class CreateWorkorderComponent implements OnInit {
     );
     this.workOrderService.createWorkOrder(this.workOrder, this.leadId).subscribe(data => {
       this.workOrder = data;
-      this.router.navigate(['workorder/viewworkorder', this.leadId]);
+      this.router.navigate(['workorder/viewworkorder', this.workOrder.leadID]);
     }, error => {
       console.log(error);
     });

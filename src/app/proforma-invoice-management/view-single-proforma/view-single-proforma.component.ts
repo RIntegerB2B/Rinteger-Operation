@@ -109,7 +109,7 @@ export class ViewSingleProformaComponent implements OnInit {
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Discount %', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15);
+      /* this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15); */
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');
@@ -211,7 +211,7 @@ export class ViewSingleProformaComponent implements OnInit {
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Discount %', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15);
+      /* this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15); */
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');
@@ -313,7 +313,7 @@ export class ViewSingleProformaComponent implements OnInit {
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15);
+      /* this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15); */
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');
@@ -416,7 +416,7 @@ export class ViewSingleProformaComponent implements OnInit {
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15);
+      /* this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15); */
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');
@@ -513,7 +513,7 @@ export class ViewSingleProformaComponent implements OnInit {
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Discount %', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15);
+      /* this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15); */
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');
@@ -615,7 +615,7 @@ export class ViewSingleProformaComponent implements OnInit {
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Discount %', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15);
+      /* this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15); */
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');
@@ -715,7 +715,7 @@ export class ViewSingleProformaComponent implements OnInit {
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15);
+      /* this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15); */
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');
@@ -815,7 +815,7 @@ export class ViewSingleProformaComponent implements OnInit {
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Discount %', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15);
+      /* this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15); */
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');
@@ -915,7 +915,7 @@ export class ViewSingleProformaComponent implements OnInit {
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15);
+      /* this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15); */
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');

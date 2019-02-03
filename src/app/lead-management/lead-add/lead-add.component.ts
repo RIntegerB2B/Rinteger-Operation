@@ -26,14 +26,9 @@ import { LeadSettings } from '../../shared/lead-settings.model';
     fullLeadService;
     arryValue: any = [];
     sum = 0;
-    constructor(private fb: FormBuilder, private leadManagementService: LeadManagementService
-      , private settingsservice: SettingsServiceService,
-      public dialogRef: MatDialogRef<LeadAddComponent>,
-      @Inject(MAT_DIALOG_DATA) public data: Lead) {
-      console.log(data);
-    }
-    cancel(): void {
-      this.dialogRef.close();
+    constructor(private fb: FormBuilder,
+       private leadManagementService: LeadManagementService, private router: Router
+      ) {
     }
     ngOnInit() {
       this.createForm();
@@ -102,13 +97,16 @@ import { LeadSettings } from '../../shared/lead-settings.model';
       );
       this.leadManagementService.addSingleLead(this.leadModel).subscribe(data => {
         this.leadModel = data;
+        this.router.navigate(['lead/leadview']);
       }, error => {
         console.log(error);
       });
-      this.dialogRef.close();
+    }
+    cancel()     {
+      this.router.navigate(['lead/leadview']);
     }
     viewLeadSettings() {
-      this.settingsservice.leadSource().subscribe(data => {
+      this.leadManagementService.leadSource().subscribe(data => {
         this.fullLeadSource = data[0].leadSource;
         this.fullLeadService = data[0].service;
         this.fullLeadStatus = data[0].leadStatus;

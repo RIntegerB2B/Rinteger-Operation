@@ -100,7 +100,7 @@ export class CreateProformaComponent implements OnInit {
     this.requirementsForms.push(requirements);
   }
   viewWorkOrder()   {
-    this.workOrderService.viewSingleWorkOrder(this.leadId, this.workId).subscribe(data => {
+    this.workOrderService.viewSingleWorkOrder(this.workId).subscribe(data => {
       this.workOrder = data;
       console.log('single Work Order Id', this.workOrder);
       this.addForm();

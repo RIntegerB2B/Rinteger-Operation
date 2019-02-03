@@ -103,7 +103,7 @@ export class ViewSingleQuotationComponent implements OnInit {
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Discount %', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15);
+      /* this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15); */
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');
@@ -203,7 +203,7 @@ export class ViewSingleQuotationComponent implements OnInit {
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Discount %', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15);
+      /* this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15); */
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');
@@ -299,11 +299,11 @@ export class ViewSingleQuotationComponent implements OnInit {
           this.allValues[i].price, this.allValues[i].discount, this.allValues[i].total);
         this.printArray.push(this.tempArray[i]);
       }
-      const imgData = '../../../assets/images/logo.jpg';
+      /* const imgData = './../../../assets/images/logo.jpg'; */
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15);
+      /* this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15); */
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');
@@ -403,7 +403,7 @@ export class ViewSingleQuotationComponent implements OnInit {
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15);
+      /* this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15); */
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');

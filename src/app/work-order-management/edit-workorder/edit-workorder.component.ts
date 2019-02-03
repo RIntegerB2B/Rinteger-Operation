@@ -47,7 +47,7 @@ export class EditWorkorderComponent implements OnInit {
     });
   }
   viewWorkOrder()   {
-    this.workOrderService.viewSingleWorkOrder(this.leadId, this.workId).subscribe(data => {
+    this.workOrderService.viewSingleWorkOrder(this.workId).subscribe(data => {
       this.workOrder = data;
       console.log('single Work Order Id', this.workOrder);
       this.addForm();

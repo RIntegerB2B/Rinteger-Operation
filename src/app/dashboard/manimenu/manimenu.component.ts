@@ -28,37 +28,31 @@ export class ManimenuComponent implements OnInit {
 
   ngOnInit() {
     this.getAllLeads();
+    this.viewAllinvoice();
+    this.getAllWorkOrder();
+  }
+  viewAllinvoice() {
+    this.dashboardService.allAllInvoice().subscribe(data => {
+      this.invoiceModel = data;
+      console.log(this.invoiceModel);
+    }, error => {
+      console.log(error);
+    });
   }
   getAllLeads() {
     this.dashboardService.allLead().subscribe(data => {
       this.leadModel = data;
-      this.worKOrderLength = this.leadModel.map(x => x.workOrder);
-      this.invoiceLength = this.leadModel.map(x => x.invoice);
-      this.performaInvoiceLength = this.leadModel.map(x => x.proformaInvoice);
-      this.quotationLength = this.leadModel.map(x => x.proformaInvoice);
-
-     this.sumWorkOrder = 0;
-      this.sumInvoice = 0;
-      this.sumPerformaInvoice = 0;
-      this.sumQuotation = 0;
-      for (let i = 0; i <= this.worKOrderLength.length - 1; i++) {
-        const lengthOfWorkOrder = this.worKOrderLength[i].length;
-        this.sumWorkOrder += lengthOfWorkOrder;
-      }
-      for (let i = 0; i <= this.invoiceLength.length - 1; i++) {
-        const lengthOfInvoice = this.invoiceLength[i].length;
-        this.sumInvoice += lengthOfInvoice;
-      }
-      for (let i = 0; i <= this.performaInvoiceLength.length - 1; i++) {
-        const lengthOfPerformaInvoice = this.performaInvoiceLength[i].length;
-        this.sumPerformaInvoice += lengthOfPerformaInvoice;
-      }
-      for (let i = 0; i <= this.quotationLength.length - 1; i++) {
-        const lengthOfPerformaInvoice = this.quotationLength[i].length;
-        this.sumQuotation += lengthOfPerformaInvoice;
-      }
     }, error => {
       console.log(error);
-    });
+    }
+    );
+  }
+  getAllWorkOrder() {
+    this.dashboardService.allWorkOrder().subscribe(data => {
+      this.workOrderModel = data;
+    }, error => {
+      console.log(error);
+    }
+    );
   }
 }

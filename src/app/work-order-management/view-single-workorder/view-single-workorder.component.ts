@@ -5,7 +5,7 @@ import { WorkOrderService } from './../work-order.service';
 import { WorkOrder } from './../../shared/workorder.model';
 import { WorkOrderPdf } from './../../shared/workorderpdf.model';
 import { Customer } from './../../customer-management/create-customer/customer.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 @Component({
@@ -30,11 +30,15 @@ export class ViewSingleWorkorderComponent implements OnInit {
   selected = 'withDiscount';
   TypesOfTerms = ['Production Terms', 'Digital Marketing Terms'];
   templates = ['With Discount + GST', 'Without Discount + GST'];
+  imgData = './../../../assets/images/logo.jpg';
   constructor(private workOrderService: WorkOrderService, private route: ActivatedRoute,
     private router: Router, private fb: FormBuilder) { }
   ngOnInit() {
-    this.leadId = this.route.snapshot.params.leadId;
-    this.workId = this.route.snapshot.params.workId;
+    this.route.paramMap.subscribe(
+      (params: ParamMap) => {
+        this.workId = params.get('workId');
+      }
+    );
     this.viewWorkOrder();
     this.createForm();
   }
@@ -44,7 +48,7 @@ export class ViewSingleWorkorderComponent implements OnInit {
     });
   }
   viewWorkOrder() {
-    this.workOrderService.viewSingleWorkOrder(this.leadId, this.workId).subscribe(data => {
+    this.workOrderService.viewSingleWorkOrder(this.workId).subscribe(data => {
       console.log('work order details', data);
       this.workOrder = data;
       this.customerID = this.workOrder.customerID;
@@ -76,7 +80,7 @@ export class ViewSingleWorkorderComponent implements OnInit {
   }
   savePDFWithDiscountTerms() {
     this.viewCompanyDetails();
-    this.workOrderService.singleCustomerDetails(this.workOrder.customerID).subscribe(data => {
+    this.workOrderService.singleCustomerDetails(this.workOrder[0].customerID).subscribe(data => {
       this.customerModel = data;
       const options = {
         margin: {
@@ -88,8 +92,8 @@ export class ViewSingleWorkorderComponent implements OnInit {
           top: 80
         },
       };
-      for (let i = 0; i <= this.workOrder.requirements.length - 1; i++) {
-        this.allValues.push(this.workOrder.requirements[i]);
+      for (let i = 0; i <= this.workOrder[0].requirements.length - 1; i++) {
+        this.allValues.push(this.workOrder[0].requirements[i]);
       }
       for (let i = 0; i <= this.allValues.length - 1; i++) {
         this.tempArray[i] = new Array();
@@ -98,11 +102,10 @@ export class ViewSingleWorkorderComponent implements OnInit {
           this.allValues[i].price, this.allValues[i].discount, this.allValues[i].total);
           this.printArray.push(this.tempArray[i]);
       }
-      const imgData = '../../../assets/images/logo.jpg';
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Discount %', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15);
+      /* this.doc.addImage(this.imgData, 'JPEG', 140, 5, 15, 15); */
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');
@@ -164,7 +167,7 @@ export class ViewSingleWorkorderComponent implements OnInit {
       }
       );
       this.doc.setFontType('normal');
-      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.workOrder.subTotal.toString());
+      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.workOrder[0].subTotal.toString());
       this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.workOrder.tax);
       this.doc.text(140, 190, 'Total :Rs' + ' ' + this.workOrder.allTotal);
       this.doc.save('proper.pdf');
@@ -176,7 +179,7 @@ export class ViewSingleWorkorderComponent implements OnInit {
   }
   savePDFWithDiscountDigtalTerms() {
     this.viewCompanyDetails();
-    this.workOrderService.singleCustomerDetails(this.workOrder.customerID).subscribe(data => {
+    this.workOrderService.singleCustomerDetails(this.workOrder[0].customerID).subscribe(data => {
       this.customerModel = data;
       const options = {
         margin: {
@@ -188,8 +191,8 @@ export class ViewSingleWorkorderComponent implements OnInit {
           top: 80
         },
       };
-      for (let i = 0; i <= this.workOrder.requirements.length - 1; i++) {
-        this.allValues.push(this.workOrder.requirements[i]);
+      for (let i = 0; i <= this.workOrder[0].requirements.length - 1; i++) {
+        this.allValues.push(this.workOrder[0].requirements[i]);
       }
       for (let i = 0; i <= this.allValues.length - 1; i++) {
         this.tempArray[i] = new Array();
@@ -198,11 +201,10 @@ export class ViewSingleWorkorderComponent implements OnInit {
           this.allValues[i].price, this.allValues[i].discount, this.allValues[i].total);
           this.printArray.push(this.tempArray[i]);
       }
-      const imgData = '';
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Discount %', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15);
+      /* this.doc.addImage(this.imgData, 'JPEG', 140, 5, 15, 15); */
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');
@@ -234,8 +236,8 @@ export class ViewSingleWorkorderComponent implements OnInit {
       this.doc.setFontType('bold');
       this.doc.text(10, 75, 'Work Order Details');
       this.doc.setFontType('normal');
-      this.doc.text(10, 80, 'Work Order ID :' + this.workOrder.workOrderID);
-      this.doc.text(10, 85, ' Date :' + this.workOrder.date);
+      this.doc.text(10, 80, 'Work Order ID :' + this.workOrder[0].workOrderID);
+      this.doc.text(10, 85, ' Date :' + this.workOrder[0].date);
       this.doc.setFontType('bold');
       this.doc.text(130, 75, 'Bank Details');
       this.doc.setFontType('normal');
@@ -264,9 +266,9 @@ export class ViewSingleWorkorderComponent implements OnInit {
       }
       );
       this.doc.setFontType('normal');
-      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.workOrder.subTotal.toString());
-      this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.workOrder.tax);
-      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.workOrder.allTotal);
+      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.workOrder[0].subTotal.toString());
+      this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.workOrder[0].tax);
+      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.workOrder[0].allTotal);
       this.doc.save('proper.pdf');
       /* this.router.navigate(['/lead']); */
     }, err => {
@@ -276,7 +278,7 @@ export class ViewSingleWorkorderComponent implements OnInit {
   }
   savePDFWithoutDiscountTerms() {
     this.viewCompanyDetails();
-    this.workOrderService.singleCustomerDetails(this.workOrder.customerID).subscribe(data => {
+    this.workOrderService.singleCustomerDetails(this.workOrder[0].customerID).subscribe(data => {
       this.customerModel = data;
       const options = {
         margin: {
@@ -288,8 +290,8 @@ export class ViewSingleWorkorderComponent implements OnInit {
           top: 80
         },
       };
-      for (let i = 0; i <= this.workOrder.requirements.length - 1; i++) {
-        this.allValues.push(this.workOrder.requirements[i]);
+      for (let i = 0; i <= this.workOrder[0].requirements.length - 1; i++) {
+        this.allValues.push(this.workOrder[0].requirements[i]);
       }
       for (let i = 0; i <= this.allValues.length - 1; i++) {
         this.tempArray[i] = new Array();
@@ -298,11 +300,10 @@ export class ViewSingleWorkorderComponent implements OnInit {
           this.allValues[i].price, this.allValues[i].discount, this.allValues[i].total);
           this.printArray.push(this.tempArray[i]);
       }
-      const imgData = '../../../assets/images/logo.jpg';
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15);
+      /* this.doc.addImage(this.imgData, 'JPEG', 140, 5, 15, 15); */
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');
@@ -334,8 +335,8 @@ export class ViewSingleWorkorderComponent implements OnInit {
       this.doc.setFontType('bold');
       this.doc.text(10, 75, 'Work Order Details');
       this.doc.setFontType('normal');
-      this.doc.text(10, 80, 'Work Order ID :' + this.workOrder.workOrderID);
-      this.doc.text(10, 85, ' Date :' + this.workOrder.date);
+      this.doc.text(10, 80, 'Work Order ID :' + this.workOrder[0].workOrderID);
+      this.doc.text(10, 85, ' Date :' + this.workOrder[0].date);
       this.doc.setFontType('bold');
       this.doc.text(130, 75, 'Bank Details');
       this.doc.setFontType('normal');
@@ -364,7 +365,7 @@ export class ViewSingleWorkorderComponent implements OnInit {
       }
       );
       this.doc.setFontType('normal');
-      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.workOrder.subTotal.toString());
+      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.workOrder[0].subTotal.toString());
       this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.workOrder.tax);
       this.doc.text(140, 190, 'Total :Rs' + ' ' + this.workOrder.allTotal);
       this.doc.save('proper.pdf');
@@ -376,7 +377,7 @@ export class ViewSingleWorkorderComponent implements OnInit {
   }
   savePDFWithoutDiscountDigtalTerms() {
     this.viewCompanyDetails();
-    this.workOrderService.singleCustomerDetails(this.workOrder.customerID).subscribe(data => {
+    this.workOrderService.singleCustomerDetails(this.workOrder[0].customerID).subscribe(data => {
       this.customerModel = data;
       const options = {
         margin: {
@@ -388,8 +389,8 @@ export class ViewSingleWorkorderComponent implements OnInit {
           top: 80
         },
       };
-      for (let i = 0; i <= this.workOrder.requirements.length - 1; i++) {
-        this.allValues.push(this.workOrder.requirements[i]);
+      for (let i = 0; i <= this.workOrder[0].requirements.length - 1; i++) {
+        this.allValues.push(this.workOrder[0].requirements[i]);
       }
       for (let i = 0; i <= this.allValues.length - 1; i++) {
         this.tempArray[i] = new Array();
@@ -402,7 +403,7 @@ export class ViewSingleWorkorderComponent implements OnInit {
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      /* this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15); */
+      /* this.doc.addImage(this.imgData, 'JPEG', 140, 5, 15, 15); */
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');

@@ -47,10 +47,9 @@ export class WorkOrderService {
     const url: string = this.serviceUrl + addUrl + id;
     return this.httpClient.get<WorkOrder[]>(url);
   }
-  viewSingleWorkOrder(leadid, workid): Observable<any> {
+  viewSingleWorkOrder(workid): Observable<any> {
     const addUrl = 'viewsingleworkorder/';
-    const singleUrl = '/single/';
-    const url: string = this.serviceUrl + addUrl + leadid + singleUrl + workid;
+    const url: string = this.serviceUrl + addUrl  + workid;
     return this.httpClient.get<WorkOrder[]>(url);
   }
   singleCustomerDetails(id): Observable<any> {
@@ -69,10 +68,9 @@ workorderPDFDetails(): Observable<any> {
     const url: string = this.serviceUrl + addUrl + leadid + subUrl + workid;
     return this.httpClient.put<WorkOrder>(url, row);
   }
-  deleteSingleWorkOrder(leadid, workid)   {
+  deleteSingleWorkOrder(workid)   {
     const addUrl = 'workorder/';
-    const subUrl = '/onedelete/';
-    const url: string = this.serviceUrl + addUrl + leadid + subUrl + workid;
+    const url: string = this.serviceUrl + addUrl +  workid;
     return this.httpClient.delete<WorkOrder[]>(url);
   }
   viewCompanyDetails(leadid, workid): Observable<any> {

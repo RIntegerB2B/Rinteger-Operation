@@ -1,3 +1,4 @@
+<div class="pageBoxLg">
 <form [formGroup]="leadDetailsForm" (ngSubmit)="addSingleLead(leadDetailsForm)">
   <div fxLayout="row wrap" fxLayout.lt-sm="column">
     <div fxFlex="50" class="pr-1">
@@ -22,7 +23,7 @@
       <mat-form-field class="full-width">
         <input matInput formControlName="leadOwner" placeholder="Lead Owner">
         <mat-error *ngIf="leadDetailsForm.controls['leadOwner'].errors?.required">
-          Enter Mobile No
+          Enter Lead Owner
           <strong>required</strong>
         </mat-error>
       </mat-form-field>
@@ -153,9 +154,13 @@
       </div>
     </div>
     <div fxFlex="100" class="mt-1">
-      <button mat-raised-button color="primary">Save</button>
+      
+      <button mat-raised-button mat-button
+       color="accent" type="button"
+       (click)="cancel()">Cancel</button>
       <span fxFlex></span>
-      <button mat-raised-button mat-button color="accent" type="button" (click)="cancel()">Cancel</button>
+      <button mat-raised-button color="primary">Save</button>
     </div>
   </div>
 </form>
+</div>

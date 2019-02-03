@@ -61,7 +61,7 @@ export class DashboardService {
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.get<ProformaInvoice[]>(url);
   }
-  allAllWorkOrder(): Observable<any> {
+  allWorkOrder(): Observable<any> {
     const addUrl = 'viewallworkorder';
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.get<WorkOrder[]>(url);

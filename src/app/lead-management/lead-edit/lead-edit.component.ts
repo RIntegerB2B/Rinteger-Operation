@@ -22,7 +22,7 @@ export class LeadEditComponent implements OnInit {
   fullLeadStatus;
   fullLeadService;
   constructor(private fb: FormBuilder, private leadManagementService: LeadManagementService
-    , public dialogRef: MatDialogRef<LeadEditComponent>, private settingsservice: SettingsServiceService,
+    , public dialogRef: MatDialogRef<LeadEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data) {
     console.log('single Lead', data.details);
     this.leadModel = data;
@@ -95,7 +95,7 @@ export class LeadEditComponent implements OnInit {
     this.dialogRef.close();
   }
   viewLeadSettings() {
-    this.settingsservice.leadSource().subscribe(data => {
+    this.leadManagementService.leadSource().subscribe(data => {
       this.fullLeadSource = data[0].leadSource;
       this.fullLeadService = data[0].service;
       this.fullLeadStatus = data[0].leadStatus;

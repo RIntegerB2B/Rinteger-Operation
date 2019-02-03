@@ -7,6 +7,7 @@ import { HttpClient, HttpHeaders, HttpEvent } from '@angular/common/http';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { LeadAddComponent } from './lead-add/lead-add.component';
+import { LeadSettings } from '../shared/lead-settings.model';
 
 
 @Injectable({
@@ -118,15 +119,9 @@ export class LeadManagementService {
     const url: string = this.serviceUrl + addUrl + check.mobileNumber;
     return this.httpClient.get<Customer[]>(url);
   }
-  open(): Observable<boolean> {
-    this.dialogRef = this.dialog.open(LeadAddComponent,
-       { disableClose: true, backdropClass: 'light-backdrop'
-  });
-    return this.dialogRef.afterClosed();
-  }
-  close() {
-    if (this.dialogRef) {
-      this.dialogRef.close();
-    }
+  leadSource(): Observable<any> {
+    const addUrl = 'leadsources';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<LeadSettings[]>(url);
   }
 }

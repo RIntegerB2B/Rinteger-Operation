@@ -19,7 +19,7 @@ export class ViewLeadComponent implements OnInit {
   leadModelCheck: Lead;
   constructor(private fb: FormBuilder,
     private leadManagementService: LeadManagementService,
-    private createCustomerService: CreateCustomerService, private dialog: MatDialog, 
+    private createCustomerService: CreateCustomerService, private dialog: MatDialog,
     private router: Router) {
    }
   ngOnInit() {
@@ -75,7 +75,7 @@ export class ViewLeadComponent implements OnInit {
     });
   }
   addLead() {
-    this.leadManagementService.open();
+    this.router.navigate(['lead/leadadd']);
   }
   getEditLead(leadDetailsForm: FormGroup, id) {
      console.log('edit the row', id);
@@ -92,7 +92,7 @@ export class ViewLeadComponent implements OnInit {
   }
   viewWorkOrder(data)   {
     if (data.workOrder.length !== 0)     {
-    this.router.navigate(['workorder/viewworkorder', data._id]);
+    this.router.navigate(['workorder/viewworkorder', data.leadID]);
     } else     {
       this.createWorkOrder(data);
     }

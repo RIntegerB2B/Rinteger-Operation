@@ -6,10 +6,12 @@ import { AppComponent } from './app.component';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
+import { NavheaderComponent } from './home/navheader/navheader.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavheaderComponent
   ],
   imports: [
     BrowserModule,
