@@ -9,10 +9,11 @@ body {
 .topAlignContainer {
   margin-top: 10px;
 }
-.pointerDiv
-{
-    cursor: pointer;
+
+.pointerDiv {
+  cursor: pointer;
 }
+
 .pageBox {
   width: 70%;
   background: #FFF;

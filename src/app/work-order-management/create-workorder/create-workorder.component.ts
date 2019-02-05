@@ -93,7 +93,7 @@ export class CreateWorkorderComponent implements OnInit {
       workOrderDetailsForm.controls.subTotal.value,
       workOrderDetailsForm.controls.tax.value
     );
-    this.workOrderService.createWorkOrder(this.workOrder, this.leadId).subscribe(data => {
+    this.workOrderService.createWorkOrder(this.workOrder).subscribe(data => {
       this.workOrder = data;
       this.router.navigate(['workorder/viewworkorder', this.workOrder.leadID]);
     }, error => {

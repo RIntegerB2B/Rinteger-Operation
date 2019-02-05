@@ -37,9 +37,9 @@ export class WorkOrderService {
     return this.httpClient.post<Customer[]>(url, data);
   } */
   // all customer details
-  createWorkOrder(row, id): Observable<any> {
+  createWorkOrder(row): Observable<any> {
     const addUrl = 'workorder/';
-    const url: string = this.serviceUrl + addUrl + id;
+    const url: string = this.serviceUrl + addUrl;
     return this.httpClient.post<WorkOrder[]>(url, row);
   }
   viewAllWorkOrder(id): Observable<any> {

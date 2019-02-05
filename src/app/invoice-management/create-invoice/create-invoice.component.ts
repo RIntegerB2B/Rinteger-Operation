@@ -103,7 +103,7 @@ export class CreateInvoiceComponent implements OnInit {
     });
   }
   addForm() {
-    for (let i = 0; i <= this.workOrder[0].requirements.length - 1; i++) {
+    for (let i = 0; i <= this.workOrder.requirements.length - 1; i++) {
       this.requirementsData = this.fb.group({
         id: [this.workOrder.requirements[i]._id],
         item: [this.workOrder.requirements[i].item],
