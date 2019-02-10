@@ -11,13 +11,13 @@ const routes: Routes = [
     component: CreateInvoiceComponent
   },
   {
-    path: 'viewinvoice/:leadId/:workId',
+    path: 'viewinvoice/:workId',
     component: ViewInvoiceComponent
   },
   {
-    path: 'viewsingleinvoice/:leadId/:invId',
+    path: 'viewsingleinvoice/:invId',
     component: ViewSingleInvoiceComponent
-  },
+  }
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],

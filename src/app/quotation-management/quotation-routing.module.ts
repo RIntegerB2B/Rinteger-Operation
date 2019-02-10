@@ -14,7 +14,11 @@ const routes: Routes = [
     component: ViewQuotationComponent
   },
   {
-    path: 'viewsinglequotation/:leadId/:quoId',
+    path: 'viewquotation/',
+    component: ViewQuotationComponent
+  },
+  {
+    path: 'viewsinglequotation/:quoId',
     component: ViewSingleQuotationComponent
   }
 ];

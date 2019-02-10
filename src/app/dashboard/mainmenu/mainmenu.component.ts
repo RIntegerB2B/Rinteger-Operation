@@ -1,25 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { DashboardService } from './../dashboard.service';
-import { Lead } from './../../shared/lead.model';
-import { Invoice } from './../../shared/invoice.model';
-import { WorkOrder } from './../../shared/workorder.model';
-import { Quotation } from './../../shared/quotation.model';
-import { ProformaInvoice } from './../../shared/proformaInvoice.model';
+import { DashboardService } from '../dashboard.service';
+import { Lead } from '../../shared/lead.model';
+import { Invoice } from '../../shared/invoice.model';
+import { WorkOrder } from '../../shared/workorder.model';
+import { Quotation } from '../../shared/quotation.model';
+import { ProformaInvoice } from '../../shared/proformaInvoice.model';
 @Component({
-  selector: 'app-manimenu',
-  templateUrl: './manimenu.component.html',
-  styleUrls: ['./manimenu.component.css']
+  selector: 'app-mainmenu',
+  templateUrl: './mainmenu.component.html',
+  styleUrls: ['./mainmenu.component.css']
 })
-export class ManimenuComponent implements OnInit {
+export class MainmenuComponent implements OnInit {
   leadModel: Lead[] = [];
   invoiceModel: Invoice[] = [];
   workOrderModel: WorkOrder[] = [];
   quotationModel: Quotation[] = [];
   proformaInvoice: ProformaInvoice[] = [];
-  worKOrderLength: any = [];
-  invoiceLength: any = [];
-  performaInvoiceLength: any = [];
-  quotationLength: any = [];
   sumWorkOrder = 0;
   sumInvoice = 0;
   sumPerformaInvoice = 0;
@@ -30,6 +26,7 @@ export class ManimenuComponent implements OnInit {
     this.getAllLeads();
     this.viewAllinvoice();
     this.getAllWorkOrder();
+    this.getAllQuotation();
   }
   viewAllinvoice() {
     this.dashboardService.allAllInvoice().subscribe(data => {
@@ -50,6 +47,14 @@ export class ManimenuComponent implements OnInit {
   getAllWorkOrder() {
     this.dashboardService.allWorkOrder().subscribe(data => {
       this.workOrderModel = data;
+    }, error => {
+      console.log(error);
+    }
+    );
+  }
+  getAllQuotation() {
+    this.dashboardService.allQuotation().subscribe(data => {
+      this.quotationModel = data;
     }, error => {
       console.log(error);
     }

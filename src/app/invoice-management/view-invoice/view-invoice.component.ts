@@ -1,7 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { InvoiceService } from './../invoice.service';
 import { Invoice } from './../../shared/invoice.model';
 
@@ -20,28 +19,29 @@ export class ViewInvoiceComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.leadId = this.route.snapshot.params.leadId;
-    this.workId = this.route.snapshot.params.workId;
+    this.route.paramMap.subscribe(
+      (params: ParamMap) => {
+        this.leadId = params.get('leadId');
+        this.workId = params.get('workId');
+      }
+    );
     this.getAllInvoice();
   }
   getViewInvoice(data)   {
-    console.log('dataData', data);
-    this.router.navigate(['invoice/viewsingleinvoice', this.leadId, data._id]);
+    this.router.navigate(['invoice/viewsingleinvoice', data._id]);
   }
   getEditQuotation(data)   {
     this.router.navigate(['editworkorder', this.leadId, data._id]);
   }
   getAllInvoice() {
-    this.invoiceService.viewAllInvoice(this.leadId).subscribe(data => {
+    this.invoiceService.viewAllInvoice(this.workId).subscribe(data => {
       this.invoice = data;
-      console.log('all invoice', this.invoice);
     }, error => {
       console.log(error);
     });
   }
   getDeleteSingleInvoice(row)   {
-    this.invoiceService.deleteSingleInvoice(this.leadId,
-       row._id).subscribe(data => {
+    this.invoiceService.deleteSingleInvoice(this.workId).subscribe(data => {
       this.invoice = data;
       console.log('all view', this.invoice);
     }, error => {

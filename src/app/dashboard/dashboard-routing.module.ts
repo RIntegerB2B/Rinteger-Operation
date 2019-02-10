@@ -2,11 +2,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { ManimenuComponent } from './manimenu/manimenu.component';
+import { MainmenuComponent  } from './mainmenu/mainmenu.component';
 const routes: Routes = [
   {
     path: 'menu',
-    component: ManimenuComponent
+    component: MainmenuComponent
   }
 ];
 @NgModule({

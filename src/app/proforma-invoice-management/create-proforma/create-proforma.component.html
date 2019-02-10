@@ -3,7 +3,7 @@
 style="padding-top:20px">
   <label class="pageBoxLg-label">Create Proforma Invoice</label>
   <div class="pageBoxLg">
-    <div class="row">
+    <div class="row" *ngFor="let data of workOrder">
       <div class="col-md-6">
         <div class="row">
           <div class="col-md-4  col-6">
@@ -15,8 +15,8 @@ style="padding-top:20px">
             <div class="form-group">
               : <label class="itemLable">
                 <input hidden formControlName="customerID"
-                 [ngModel]="workOrder?.customerID">
-                {{workOrder?.customerID}}
+                 [ngModel]="data?.customerID">
+                {{data?.customerID}}
               </label>
             </div>
           </div>
@@ -28,8 +28,8 @@ style="padding-top:20px">
           <div class="col-md-8  col-6">
             <div class="form-group">
               <input hidden formControlName="customerName" 
-              [ngModel]="workOrder?.customerName">
-              : <label class="itemLable">{{workOrder?.customerName}}</label>
+              [ngModel]="data?.customerName">
+              : <label class="itemLable">{{data?.customerName}}</label>
             </div>
           </div>
           <div class="col-md-4  col-6">
@@ -40,8 +40,8 @@ style="padding-top:20px">
           <div class="col-md-8  col-6">
             <div class="form-group">
               <input hidden formControlName="companyName" 
-              [ngModel]="workOrder?.companyName">
-              : <label class="itemLable">{{workOrder?.companyName}}</label>
+              [ngModel]="data?.companyName">
+              : <label class="itemLable">{{data?.companyName}}</label>
             </div>
           </div>
           <div class="col-md-4  col-6">
@@ -52,8 +52,8 @@ style="padding-top:20px">
           <div class="col-md-8  col-6">
             <div class="form-group">
               <input hidden formControlName="companyAddress"
-               [ngModel]="workOrder?.companyAddress">
-              : <label class="itemLable">{{workOrder?.companyAddress}}</label>
+               [ngModel]="data?.companyAddress">
+              : <label class="itemLable">{{data?.companyAddress}}</label>
             </div>
           </div>
           <div class="col-md-4  col-6">
@@ -64,8 +64,8 @@ style="padding-top:20px">
           <div class="col-md-8  col-6">
             <div class="form-group">
               <input hidden formControlName="emailId"
-               [ngModel]="workOrder?.emailId">
-              : <label class="itemLable">{{workOrder?.emailId}}</label>
+               [ngModel]="data?.emailId">
+              : <label class="itemLable">{{data?.emailId}}</label>
             </div>
           </div>
           <div class="col-md-4  col-6">
@@ -77,8 +77,8 @@ style="padding-top:20px">
             <div class="form-group">
                 <input hidden
                 formControlName="workOrderID"
-                [ngModel]="workOrder?.workOrderID">
-              : <label class="itemLable">{{workOrder?.workOrderID}}</label>
+                [ngModel]="data?.workOrderID">
+              : <label class="itemLable">{{data?.workOrderID}}</label>
             </div>
           </div>
         </div>
@@ -92,10 +92,10 @@ style="padding-top:20px">
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              : <label class="itemLable">{{workOrder?.mobileNumber}}</label>
+              : <label class="itemLable">{{data?.mobileNumber}}</label>
               <input hidden
                 formControlName="mobileNumber"
-                [ngModel]="workOrder?.mobileNumber">
+                [ngModel]="data?.mobileNumber">
             </div>
           </div>
           <div class="col-md-4  col-6">
@@ -114,7 +114,8 @@ style="padding-top:20px">
               </label>
             </div>
           </div>
-          <input hidden formControlName="leadID" [ngModel]="workOrder?.leadID" placeholder="item">
+          <input hidden formControlName="leadID"
+           [ngModel]="data?.leadID" placeholder="item">
           <div class="col-md-4  col-6">
             <div class="form-group">
               <label class="divLable">expiryDate</label>
@@ -229,6 +230,7 @@ style="padding-top:20px">
         </div>
       </div>
     </div>
-    <button type="button" (click)="createLeadProformaInvoice(proformaInvoiceDetailsForm)" mat-raised-button color="primary">Save</button>
+    <button type="button"
+     (click)="createLeadProformaInvoice(proformaInvoiceDetailsForm)" mat-raised-button color="primary">Save</button>
   </div>
 </form>

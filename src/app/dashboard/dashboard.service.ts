@@ -66,4 +66,14 @@ export class DashboardService {
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.get<WorkOrder[]>(url);
   }
+  allQuotation(): Observable<any> {
+    const addUrl = 'viewallquotation';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<Quotation[]>(url);
+  }
+  viewAllInvoice(id): Observable<any> {
+    const addUrl = 'viewinvoice/';
+    const url: string = this.serviceUrl + addUrl + id;
+    return this.httpClient.get<Invoice[]>(url);
+  }
 }

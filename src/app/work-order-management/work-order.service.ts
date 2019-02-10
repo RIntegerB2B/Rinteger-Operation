@@ -79,7 +79,7 @@ workorderPDFDetails(): Observable<any> {
     const url: string = this.serviceUrl + addUrl + leadid + singleUrl + workid;
     return this.httpClient.get<WorkOrder[]>(url);
   }
-  allAllWorkOrder(): Observable<any> {
+  allWorkOrder(): Observable<any> {
     const addUrl = 'viewallworkorder';
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.get<WorkOrder[]>(url);

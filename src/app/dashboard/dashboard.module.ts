@@ -32,10 +32,10 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DashboardRoutingModule } from './dashboard-routing.module';
-import { ManimenuComponent } from './manimenu/manimenu.component';
+import { MainmenuComponent } from './mainmenu/mainmenu.component';
 
 @NgModule({
-  declarations: [ManimenuComponent],
+  declarations: [MainmenuComponent],
   imports: [
     HttpClientModule,
     HttpModule,

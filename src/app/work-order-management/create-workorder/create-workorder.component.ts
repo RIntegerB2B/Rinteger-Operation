@@ -97,7 +97,7 @@ export class CreateWorkorderComponent implements OnInit {
       this.workOrder = data;
       this.router.navigate(['workorder/viewworkorder', this.workOrder.leadID]);
     }, error => {
-      console.log(error);
+       console.log(error);
     });
   }
   addNewForm() {

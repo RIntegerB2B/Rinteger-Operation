@@ -26,6 +26,11 @@ export class CustomerManagementService {
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.post<Customer[]>(url, data);
   }
+  workorderPDFDetails(): Observable<any> {
+    const addUrl = 'workorderpdfdetails/';
+    const url: string = this.serviceUrl + addUrl ;
+    return this.httpClient.get<Customer[]>(url);
+  }
   editCustomer(edit): Observable<any> {
     const addUrl = 'customer/';
     const url: string = this.serviceUrl + addUrl + edit._id;

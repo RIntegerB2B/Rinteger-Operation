@@ -3,12 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { Quotation } from './../../shared/quotation.model';
 import { QuotationManagementService } from './../quotation-management.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LeadManagementService } from './../../lead-management/lead-management.service';
 import { CustomerManagementService } from './../../customer-management/customer-management.service';
 import { Lead } from './../../shared/lead.model';
 import { Customer } from './../../customer-management/create-customer/customer.model';
 import {WorkOrderPdf} from '../../shared/workorderpdf.model';
+
 
 @Component({
   selector: 'app-create-quotation',
@@ -20,7 +21,7 @@ export class CreateQuotationComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private quotationManagementService: QuotationManagementService
     , private route: ActivatedRoute, private leadManagementService: LeadManagementService,
-    private customerManagementService: CustomerManagementService
+    private customerManagementService: CustomerManagementService, private router: Router
   ) { }
   requirements: FormArray;
   quotationDetailsForm: FormGroup;
@@ -71,7 +72,6 @@ export class CreateQuotationComponent implements OnInit {
     });
   }
   createQuotation(quotationDetailsForm: FormGroup) {
-    console.log('id', quotationDetailsForm.controls.customerID.value);
     this.quotation = new Quotation(
       quotationDetailsForm.controls.customerID.value,
       quotationDetailsForm.controls.customerName.value,
@@ -88,9 +88,8 @@ export class CreateQuotationComponent implements OnInit {
       quotationDetailsForm.controls.allTotal.value,
       quotationDetailsForm.controls.tax.value
     );
-    this.quotationManagementService.createQuotation(this.quotation, this.leadId).subscribe(data => {
-      this.quotation = data;
-      console.log('singleQuotation', this.quotation);
+    this.quotationManagementService.createQuotation(this.quotation).subscribe(data => {
+      this.router.navigate(['quotation/viewquotation', this.quotation.leadID]);
     }, error => {
       console.log(error);
     });

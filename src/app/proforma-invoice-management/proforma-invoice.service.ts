@@ -6,6 +6,7 @@ import { AppSetting } from './../config/appSetting';
 import { HttpClient, HttpHeaders, HttpEvent } from '@angular/common/http';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import {Customer} from './../customer-management/create-customer/customer.model';
+import { WorkOrder } from './../shared/workorder.model';
 
 @Injectable({
   providedIn: 'root'
@@ -36,9 +37,9 @@ export class ProformaInvoiceService {
     return this.httpClient.post<Customer[]>(url, data);
   } */
   // all customer details
-  createProformaInvoice(row, id): Observable<any> {
+  createProformaInvoice(row): Observable<any> {
     const addUrl = 'proforma/';
-    const url: string = this.serviceUrl + addUrl + id;
+    const url: string = this.serviceUrl + addUrl;
     return this.httpClient.post<ProformaInvoice[]>(url, row);
   }
   viewAllProformaInvoice(id): Observable<any> {
@@ -46,10 +47,9 @@ export class ProformaInvoiceService {
     const url: string = this.serviceUrl + addUrl + id;
     return this.httpClient.get<ProformaInvoice[]>(url);
   }
-  viewSingleProformaInvoice(leadid, invid): Observable<any> {
+  viewSingleProformaInvoice(pinvid): Observable<any> {
     const addUrl = 'viewsingleproforma/';
-    const singleUrl = '/single/';
-    const url: string = this.serviceUrl + addUrl + leadid + singleUrl + invid;
+    const url: string = this.serviceUrl + addUrl + pinvid;
     return this.httpClient.get<ProformaInvoice[]>(url);
   }
   deleteSingleProformaInvoice(leadid, invid)   {
@@ -67,5 +67,10 @@ export class ProformaInvoiceService {
     const addUrl = 'customerdetails/';
     const url: string = this.serviceUrl + addUrl + id ;
     return this.httpClient.get<Customer[]>(url);
+  }
+  viewSingleWorkOrder(workid): Observable<any> {
+    const addUrl = 'viewsingleworkorder/';
+    const url: string = this.serviceUrl + addUrl  + workid;
+    return this.httpClient.get<WorkOrder[]>(url);
   }
 }

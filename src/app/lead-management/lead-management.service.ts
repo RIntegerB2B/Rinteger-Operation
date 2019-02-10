@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Lead } from './../shared/lead.model';
+import { WorkOrder } from './../shared/workorder.model';
+import { Quotation } from './../shared/quotation.model';
 import { Customer } from './../customer-management/create-customer/customer.model';
 import { AppSetting } from './../config/appSetting';
 import { HttpClient, HttpHeaders, HttpEvent } from '@angular/common/http';
@@ -123,5 +125,15 @@ export class LeadManagementService {
     const addUrl = 'leadsources';
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.get<LeadSettings[]>(url);
+  }
+  viewAllWorkOrder(id): Observable<any> {
+    const addUrl = 'viewworkorder/';
+    const url: string = this.serviceUrl + addUrl + id;
+    return this.httpClient.get<WorkOrder[]>(url);
+  }
+  viewAllQuotation(id): Observable<any> {
+    const addUrl = 'viewquotation/';
+    const url: string = this.serviceUrl + addUrl + id;
+    return this.httpClient.get<Quotation[]>(url);
   }
 }

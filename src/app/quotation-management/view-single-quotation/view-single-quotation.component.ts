@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { QuotationManagementService } from './../quotation-management.service';
 import { Quotation } from './../../shared/quotation.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { WorkOrderPdf } from '../../shared/workorderpdf.model';
 import { Customer } from './../../customer-management/create-customer/customer.model';
 import * as  jspdf from 'jspdf';
@@ -19,7 +19,6 @@ export class ViewSingleQuotationComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router, private fb: FormBuilder) { }
   singleQuotationDetailsForm: FormGroup;
-  leadId: string;
   quoId: string;
   quotation: Quotation;
   customerModel: Customer;
@@ -34,8 +33,11 @@ export class ViewSingleQuotationComponent implements OnInit {
   TypesOfTerms = ['Production Terms', 'Digital Marketing Terms'];
   templates = ['With Discount + GST', 'Without Discount + GST'];
   ngOnInit() {
-    this.leadId = this.route.snapshot.params.leadId;
-    this.quoId = this.route.snapshot.params.quoId;
+    this.route.paramMap.subscribe(
+      (params: ParamMap) => {
+        this.quoId = params.get('quoId');
+      }
+    );
     this.viewQuotation();
     this.createForm();
   }
@@ -48,9 +50,8 @@ export class ViewSingleQuotationComponent implements OnInit {
     this.templateOption = true;
   }
   viewQuotation() {
-    this.quotationManagementService.viewSingleQuotation(this.leadId, this.quoId).subscribe(data => {
+    this.quotationManagementService.viewSingleQuotation(this.quoId).subscribe(data => {
       this.quotation = data;
-      console.log('single Quotation', this.quotation);
     }, error => {
       console.log(error);
     });
@@ -77,7 +78,7 @@ export class ViewSingleQuotationComponent implements OnInit {
   }
   savePDFWithDiscountTerms() {
     this.viewCompanyDetails();
-    this.quotationManagementService.singleCustomerDetails(this.quotation.customerID).subscribe(data => {
+    this.quotationManagementService.singleCustomerDetails(this.quotation[0].customerID).subscribe(data => {
       this.customerModel = data;
       const options = {
         margin: {
@@ -89,8 +90,8 @@ export class ViewSingleQuotationComponent implements OnInit {
           top: 80
         },
       };
-      for (let i = 0; i <= this.quotation.requirements.length - 1; i++) {
-        this.allValues.push(this.quotation.requirements[i]);
+      for (let i = 0; i <= this.quotation[0].requirements.length - 1; i++) {
+        this.allValues.push(this.quotation[0].requirements[i]);
       }
       for (let i = 0; i <= this.allValues.length - 1; i++) {
         this.tempArray[i] = new Array();
@@ -135,8 +136,8 @@ export class ViewSingleQuotationComponent implements OnInit {
       this.doc.setFontType('bold');
       this.doc.text(10, 75, 'Quotation Details');
       this.doc.setFontType('normal');
-      this.doc.text(10, 80, 'Quotation ID :' + this.quotation.quotationID);
-      this.doc.text(10, 85, ' Date :' + this.quotation.date);
+      this.doc.text(10, 80, 'Quotation ID :' + this.quotation[0].quotationID);
+      this.doc.text(10, 85, ' Date :' + this.quotation[0].date);
       this.doc.setFontType('bold');
       this.doc.text(130, 75, 'Bank Details');
       this.doc.setFontType('normal');
@@ -165,9 +166,9 @@ export class ViewSingleQuotationComponent implements OnInit {
       }
       );
       this.doc.setFontType('normal');
-      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.quotation.subTotal.toString());
-      this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.quotation.tax);
-      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.quotation.allTotal);
+      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.quotation[0].subTotal.toString());
+      this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.quotation[0].tax);
+      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.quotation[0].allTotal);
       this.doc.save('proper.pdf');
       this.router.navigate(['/lead']);
     }, err => {
@@ -177,7 +178,7 @@ export class ViewSingleQuotationComponent implements OnInit {
   }
   savePDFWithDiscountDigtalTerms() {
     this.viewCompanyDetails();
-    this.quotationManagementService.singleCustomerDetails(this.quotation.customerID).subscribe(data => {
+    this.quotationManagementService.singleCustomerDetails(this.quotation[0].customerID).subscribe(data => {
       this.customerModel = data;
       const options = {
         margin: {
@@ -189,8 +190,8 @@ export class ViewSingleQuotationComponent implements OnInit {
           top: 80
         },
       };
-      for (let i = 0; i <= this.quotation.requirements.length - 1; i++) {
-        this.allValues.push(this.quotation.requirements[i]);
+      for (let i = 0; i <= this.quotation[0].requirements.length - 1; i++) {
+        this.allValues.push(this.quotation[0].requirements[i]);
       }
       for (let i = 0; i <= this.allValues.length - 1; i++) {
         this.tempArray[i] = new Array();
@@ -235,8 +236,8 @@ export class ViewSingleQuotationComponent implements OnInit {
       this.doc.setFontType('bold');
       this.doc.text(10, 75, 'Quotation Details');
       this.doc.setFontType('normal');
-      this.doc.text(10, 80, 'Quotation ID :' + this.quotation.quotationID);
-      this.doc.text(10, 85, ' Date :' + this.quotation.date);
+      this.doc.text(10, 80, 'Quotation ID :' + this.quotation[0].quotationID);
+      this.doc.text(10, 85, ' Date :' + this.quotation[0].date);
       this.doc.setFontType('bold');
       this.doc.text(130, 75, 'Bank Details');
       this.doc.setFontType('normal');
@@ -265,9 +266,9 @@ export class ViewSingleQuotationComponent implements OnInit {
       }
       );
       this.doc.setFontType('normal');
-      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.quotation.subTotal.toString());
-      this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.quotation.tax);
-      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.quotation.allTotal);
+      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.quotation[0].subTotal.toString());
+      this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.quotation[0].tax);
+      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.quotation[0].allTotal);
       this.doc.save('proper.pdf');
       /* this.router.navigate(['/lead']); */
     }, err => {
@@ -277,7 +278,7 @@ export class ViewSingleQuotationComponent implements OnInit {
   }
   savePDFWithoutDiscountTerms() {
     this.viewCompanyDetails();
-    this.quotationManagementService.singleCustomerDetails(this.quotation.customerID).subscribe(data => {
+    this.quotationManagementService.singleCustomerDetails(this.quotation[0].customerID).subscribe(data => {
       this.customerModel = data;
       const options = {
         margin: {
@@ -289,8 +290,8 @@ export class ViewSingleQuotationComponent implements OnInit {
           top: 80
         },
       };
-      for (let i = 0; i <= this.quotation.requirements.length - 1; i++) {
-        this.allValues.push(this.quotation.requirements[i]);
+      for (let i = 0; i <= this.quotation[0].requirements.length - 1; i++) {
+        this.allValues.push(this.quotation[0].requirements[i]);
       }
       for (let i = 0; i <= this.allValues.length - 1; i++) {
         this.tempArray[i] = new Array();
@@ -335,8 +336,8 @@ export class ViewSingleQuotationComponent implements OnInit {
       this.doc.setFontType('bold');
       this.doc.text(10, 75, 'Work Order Details');
       this.doc.setFontType('normal');
-      this.doc.text(10, 80, 'Work Order ID :' + this.quotation.quotationID);
-      this.doc.text(10, 85, ' Date :' + this.quotation.date);
+      this.doc.text(10, 80, 'Work Order ID :' + this.quotation[0].quotationID);
+      this.doc.text(10, 85, ' Date :' + this.quotation[0].date);
       this.doc.setFontType('bold');
       this.doc.text(130, 75, 'Bank Details');
       this.doc.setFontType('normal');
@@ -365,9 +366,9 @@ export class ViewSingleQuotationComponent implements OnInit {
       }
       );
       this.doc.setFontType('normal');
-      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.quotation.subTotal.toString());
-      this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.quotation.tax);
-      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.quotation.allTotal);
+      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.quotation[0].subTotal.toString());
+      this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.quotation[0].tax);
+      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.quotation[0].allTotal);
       this.doc.save('proper.pdf');
       this.router.navigate(['/lead']);
     }, err => {
@@ -377,7 +378,7 @@ export class ViewSingleQuotationComponent implements OnInit {
   }
   savePDFWithoutDiscountDigtalTerms() {
     this.viewCompanyDetails();
-    this.quotationManagementService.singleCustomerDetails(this.quotation.customerID).subscribe(data => {
+    this.quotationManagementService.singleCustomerDetails(this.quotation[0].customerID).subscribe(data => {
       this.customerModel = data;
       const options = {
         margin: {
@@ -389,8 +390,8 @@ export class ViewSingleQuotationComponent implements OnInit {
           top: 80
         },
       };
-      for (let i = 0; i <= this.quotation.requirements.length - 1; i++) {
-        this.allValues.push(this.quotation.requirements[i]);
+      for (let i = 0; i <= this.quotation[0].requirements.length - 1; i++) {
+        this.allValues.push(this.quotation[0].requirements[i]);
       }
       for (let i = 0; i <= this.allValues.length - 1; i++) {
         this.tempArray[i] = new Array();
@@ -435,8 +436,8 @@ export class ViewSingleQuotationComponent implements OnInit {
       this.doc.setFontType('bold');
       this.doc.text(10, 75, 'Quotation Details');
       this.doc.setFontType('normal');
-      this.doc.text(10, 80, 'Quotation ID :' + this.quotation.quotationID);
-      this.doc.text(10, 85, ' Date :' + this.quotation.date);
+      this.doc.text(10, 80, 'Quotation ID :' + this.quotation[0].quotationID);
+      this.doc.text(10, 85, ' Date :' + this.quotation[0].date);
       this.doc.setFontType('bold');
       this.doc.text(130, 75, 'Bank Details');
       this.doc.setFontType('normal');
@@ -465,9 +466,9 @@ export class ViewSingleQuotationComponent implements OnInit {
       }
       );
       this.doc.setFontType('normal');
-      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.quotation.subTotal.toString());
-      this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.quotation.tax);
-      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.quotation.allTotal);
+      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.quotation[0].subTotal.toString());
+      this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.quotation[0].tax);
+      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.quotation[0].allTotal);
       this.doc.save('proper.pdf');
       this.router.navigate(['/lead']);
     }, err => {

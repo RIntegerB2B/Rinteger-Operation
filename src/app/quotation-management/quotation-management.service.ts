@@ -38,9 +38,9 @@ export class QuotationManagementService {
     return this.httpClient.post<Customer[]>(url, data);
   } */
   // all customer details
-  createQuotation(row, id): Observable<any> {
+  createQuotation(row): Observable<any> {
     const addUrl = 'quotation/';
-    const url: string = this.serviceUrl + addUrl + id;
+    const url: string = this.serviceUrl + addUrl;
     return this.httpClient.post<Quotation[]>(url, row);
   }
   viewAllQuotation(id): Observable<any> {
@@ -48,22 +48,20 @@ export class QuotationManagementService {
     const url: string = this.serviceUrl + addUrl + id;
     return this.httpClient.get<Quotation[]>(url);
   }
-  viewSingleQuotation(leadid, quoid): Observable<any> {
+  viewSingleQuotation(quoid): Observable<any> {
     const addUrl = 'viewsinglequotation/';
-    const singleUrl = '/single/';
-    const url: string = this.serviceUrl + addUrl + leadid + singleUrl + quoid;
+    const url: string = this.serviceUrl + addUrl  + quoid;
     return this.httpClient.get<Quotation[]>(url);
   }
-  updateSingleQuotation(row, leadid, quoid)   {
+  updateSingleQuotation(row, quoid)   {
     const addUrl = 'workorder/';
     const subUrl = '/oneupdate/';
-    const url: string = this.serviceUrl + addUrl + leadid + subUrl + quoid;
+    const url: string = this.serviceUrl + addUrl  + subUrl + quoid;
     return this.httpClient.put<Quotation>(url, row);
   }
-  deleteSingleQuotation(leadid, quoid)   {
+  deleteSingleQuotation(quoid)   {
     const addUrl = 'deletequotation/';
-    const subUrl = '/onedelete/';
-    const url: string = this.serviceUrl + addUrl + leadid + subUrl + quoid;
+    const url: string = this.serviceUrl + addUrl  + quoid;
     return this.httpClient.delete<Quotation[]>(url);
   }
   workorderPDFDetails(): Observable<any> {

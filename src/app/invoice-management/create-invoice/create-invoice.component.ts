@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { Invoice } from './../../shared/invoice.model';
 import { InvoiceService } from './../invoice.service';
-import { ActivatedRoute } from '@angular/router';
-import { LeadManagementService } from './../../lead-management/lead-management.service';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { WorkOrderService } from './../../work-order-management/work-order.service';
 import { WorkOrder } from './../../shared/workorder.model';
 import { WorkOrderPdf } from '../../shared/workorderpdf.model';
@@ -11,14 +10,12 @@ import { WorkOrderPdf } from '../../shared/workorderpdf.model';
 @Component({
   selector: 'app-create-invoice',
   templateUrl: './create-invoice.component.html',
-  styleUrls: ['./create-invoice.component.css'],
-  providers: [LeadManagementService, WorkOrderService  ]
+  styleUrls: ['./create-invoice.component.css']
 })
 export class CreateInvoiceComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private invoiceService: InvoiceService
-    , private route: ActivatedRoute, private leadManagementService: LeadManagementService,
-    private workOrderService: WorkOrderService
+    , private route: ActivatedRoute, private router: Router
   ) { }
   requirements: FormArray;
   invoiceDetailsForm: FormGroup;
@@ -33,8 +30,12 @@ export class CreateInvoiceComponent implements OnInit {
   gstVal;
   workOrderPDFModel: WorkOrderPdf;
   ngOnInit() {
-    this.leadId = this.route.snapshot.params.leadId;
-    this.workId = this.route.snapshot.params.workId;
+    this.route.paramMap.subscribe(
+      (params: ParamMap) => {
+        this.leadId = params.get('leadId');
+        this.workId = params.get('workId');
+      }
+    );
     this.createForm();
     this.viewWorkOrder();
   }
@@ -73,9 +74,8 @@ export class CreateInvoiceComponent implements OnInit {
       invoiceDetailsForm.controls.subTotal.value,
       invoiceDetailsForm.controls.tax.value
     );
-    this.invoiceService.createInvoice(this.invoice, this.leadId).subscribe(data => {
-      this.invoice = data;
-      console.log('singleInvoice', this.invoice);
+    this.invoiceService.createInvoice(this.invoice).subscribe(data => {
+      this.router.navigate(['invoice/viewinvoice', data.workOrderID]);
     }, error => {
       console.log(error);
     });
@@ -92,9 +92,8 @@ export class CreateInvoiceComponent implements OnInit {
     this.requirementsForms.push(requirements);
   }
   viewWorkOrder() {
-    this.workOrderService.viewSingleWorkOrder(this.workId).subscribe(data => {
+    this.invoiceService.viewSingleWorkOrder(this.workId).subscribe(data => {
       this.workOrder = data;
-      console.log('single Work Order Id', this.workOrder);
       this.addForm();
       this.getTotal();
       this.viewCompanyDetails();
@@ -103,15 +102,15 @@ export class CreateInvoiceComponent implements OnInit {
     });
   }
   addForm() {
-    for (let i = 0; i <= this.workOrder.requirements.length - 1; i++) {
+    for (let i = 0; i <= this.workOrder[0].requirements.length - 1; i++) {
       this.requirementsData = this.fb.group({
-        id: [this.workOrder.requirements[i]._id],
-        item: [this.workOrder.requirements[i].item],
-        quantity: [this.workOrder.requirements[i].quantity],
-        price: [this.workOrder.requirements[i].price],
-        discount: [this.workOrder.requirements[i].discount],
-        description: [this.workOrder.requirements[i].description],
-        total: [this.workOrder.requirements[i].total]
+        id: [this.workOrder[0].requirements[i]._id],
+        item: [this.workOrder[0].requirements[i].item],
+        quantity: [this.workOrder[0].requirements[i].quantity],
+        price: [this.workOrder[0].requirements[i].price],
+        discount: [this.workOrder[0].requirements[i].discount],
+        description: [this.workOrder[0].requirements[i].description],
+        total: [this.workOrder[0].requirements[i].total]
       });
       this.requirementsForms.push(this.requirementsData);
     }
@@ -129,7 +128,7 @@ export class CreateInvoiceComponent implements OnInit {
     });
   }
   viewCompanyDetails() {
-    this.workOrderService.workorderPDFDetails().subscribe(data => {
+    this.invoiceService.workorderPDFDetails().subscribe(data => {
       this.workOrderPDFModel = data;
       this.gstVal = this.workOrderPDFModel[0].gst;
     }, error => {

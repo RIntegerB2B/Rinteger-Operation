@@ -37,7 +37,9 @@ import { ViewSingleInvoiceComponent } from './view-single-invoice/view-single-in
 import { InvoiceRoutingModule } from './invoice-routing.module';
 
 @NgModule({
-  declarations: [CreateInvoiceComponent, ViewInvoiceComponent, ViewSingleInvoiceComponent],
+  declarations: [CreateInvoiceComponent,
+     ViewInvoiceComponent,
+      ViewSingleInvoiceComponent],
   imports: [
     HttpClientModule,
     HttpModule,

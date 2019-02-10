@@ -1,6 +1,6 @@
 <form novalidate style="padding-top:20px" [formGroup]="singleProfomoInvoiceForm">
   <label class="pageBoxLg-label">Proforma Invoice Details</label>
-  <div class="pageBoxLg">
+  <div class="pageBoxLg" *ngFor="let data of proformaInvoice">
     <div class="row">
       <div class="col-md-6">
         <div class="row">
@@ -11,7 +11,7 @@
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              : <label class="itemLable">{{proformaInvoice?.companyName}}</label>
+              : <label class="itemLable">{{data?.companyName}}</label>
             </div>
           </div>
           <div class="col-md-4  col-6">
@@ -21,7 +21,7 @@
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              : <label class="itemLable">{{proformaInvoice?.mobileNumber}}</label>
+              : <label class="itemLable">{{data?.mobileNumber}}</label>
             </div>
           </div>
           <div class="col-md-4  col-6">
@@ -31,7 +31,7 @@
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              : <label class="itemLable">{{proformaInvoice?.customerName}}</label>
+              : <label class="itemLable">{{data?.customerName}}</label>
             </div>
           </div>
         </div>
@@ -45,7 +45,7 @@
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              : <label class="itemLable">{{proformaInvoice?.proformaInvoiceID}}</label>
+              : <label class="itemLable">{{data?.proformaInvoiceID}}</label>
             </div>
           </div>
           <div class="col-md-4  col-6">
@@ -55,7 +55,7 @@
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              : <label class="itemLable">{{proformaInvoice?.date | date: 'dd/MM/yyyy' }}</label>
+              : <label class="itemLable">{{data?.date | date: 'dd/MM/yyyy' }}</label>
             </div>
           </div>
           <div class="col-md-4  col-6">
@@ -65,7 +65,7 @@
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              : <label class="itemLable">{{proformaInvoice?.expiryDate | date: 'dd/MM/yyyy' }}</label>
+              : <label class="itemLable">{{data?.expiryDate | date: 'dd/MM/yyyy' }}</label>
             </div>
           </div>  
         </div>
@@ -109,24 +109,24 @@
           </div>
         </div>
       </div>
-      <div class="row gridRow" *ngFor="let data of proformaInvoice?.requirements; let i = index">
+      <div class="row gridRow" *ngFor="let dataReq of data?.requirements; let i = index">
         <div class="display-none-large col-6">
           <label class="gridLabel">Item:</label>
         </div>
         <div class="col-md-2 col-6 vcenter form-group">
-          {{data.item}}
+          {{dataReq.item}}
         </div>
         <div class="display-none-large col-6">
           <label class="gridLabel">Quantity:</label>
         </div>
         <div class="col-md-2 col-6 vcenter form-group">
-            {{data.quantity}}
+            {{dataReq.quantity}}
         </div>
         <div class="display-none-large col-6">
           <label class="gridLabel">Price:</label>
         </div>
         <div class="col-md-2 col-6 vcenter form-group">
-            {{data.price}}
+            {{dataReq.price}}
         </div>
         <div class="display-none-large col-6">
           <label class="gridLabel">Discount:</label>
@@ -138,13 +138,13 @@
           <label class="gridLabel">Description:</label>
         </div>
         <div class="col-md-2 col-6 vcenter form-group">
-          {{data.description}}
+          {{dataReq.description}}
         </div>
         <div class="display-none-large col-6">
           <label class="gridLabel">Total:</label>
         </div>
         <div class="col-md-2 col-6 vcenter form-group">
-            {{data.total}}
+            {{dataReq.total}}
         </div>
       </div>
   
@@ -156,11 +156,11 @@
       <div class="col-md-4 col-8 form-group">
         <div class="row pageBoxSmall">
            <div  class="col-md-6 col-6 form-group">Sub Total</div>
-           <div class="col-md-6 col-6 form-group">: {{proformaInvoice?.subTotal}}</div>
+           <div class="col-md-6 col-6 form-group">: {{data?.subTotal}}</div>
            <div  class="col-md-6 col-6 form-group">Tax</div>
-           <div class="col-md-6 col-6 form-group">: {{proformaInvoice?.tax}}</div>
+           <div class="col-md-6 col-6 form-group">: {{data?.tax}}</div>
            <div  class="col-md-6 col-6 form-group">Total</div>
-           <div class="col-md-6 col-6 form-group">: {{proformaInvoice?.allTotal}}</div>
+           <div class="col-md-6 col-6 form-group">: {{data?.allTotal}}</div>
         </div>
       </div>
     </div>

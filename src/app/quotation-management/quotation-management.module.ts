@@ -70,7 +70,7 @@ import { QuotationRoutingModule  } from './quotation-routing.module';
     ReactiveFormsModule,
     FlexLayoutModule,
     QuotationRoutingModule,
-    MatNativeDateModule 
+    MatNativeDateModule
   ],
   providers: [QuotationManagementService]
 })

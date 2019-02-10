@@ -3,7 +3,7 @@ import { InvoiceService } from './../invoice.service';
 import { Invoice } from './../../shared/invoice.model';
 import { WorkOrderPdf } from '../../shared/workorderpdf.model';
 import { Customer } from './../../customer-management/create-customer/customer.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import * as  jspdf from 'jspdf';
 import 'jspdf-autotable';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
@@ -32,13 +32,16 @@ export class ViewSingleInvoiceComponent implements OnInit {
   TypesOfTerms = ['Production Terms', 'Digital Marketing Terms'];
   templates = ['With Discount + GST', 'Without Discount + GST' , 'With Discount + SGST + CGST' , 'Without Discount + SGST + CGST'];
   ngOnInit() {
-    this.leadId = this.route.snapshot.params.leadId;
-    this.invId = this.route.snapshot.params.invId;
+    this.route.paramMap.subscribe(
+      (params: ParamMap) => {
+        this.invId = params.get('invId');
+      }
+    );
     this.viewSingleInvoice();
     this.createForm();
   }
   viewSingleInvoice() {
-    this.invoiceService.viewSingleInvoice(this.leadId,
+    this.invoiceService.viewSingleInvoice(
       this.invId).subscribe(data => {
         this.invoice = data;
         console.log('single View', this.invoice);
@@ -84,7 +87,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
   }
   pdfGSTDiscountTerms() {
     this.viewCompanyDetails();
-    this.invoiceService.singleCustomerDetails(this.invoice.customerID).subscribe(data => {
+    this.invoiceService.singleCustomerDetails(this.invoice[0].customerID).subscribe(data => {
       this.customerModel = data;
       const options = {
         margin: {
@@ -96,8 +99,8 @@ export class ViewSingleInvoiceComponent implements OnInit {
           top: 80
         },
       };
-      for (let i = 0; i <= this.invoice.requirements.length - 1; i++) {
-        this.allValues.push(this.invoice.requirements[i]);
+      for (let i = 0; i <= this.invoice[0].requirements.length - 1; i++) {
+        this.allValues.push(this.invoice[0].requirements[i]);
       }
       for (let i = 0; i <= this.allValues.length - 1; i++) {
         this.tempArray[i] = new Array();
@@ -142,9 +145,9 @@ export class ViewSingleInvoiceComponent implements OnInit {
       this.doc.setFontType('bold');
       this.doc.text(10, 75, 'Invoice Details');
       this.doc.setFontType('normal');
-      this.doc.text(10, 80, 'Invoice ID :' + this.invoice.invoiceID);
-      this.doc.text(10, 85, ' Date :' + this.invoice.date);
-      this.doc.text(10, 90, ' Expiry Date :' + this.invoice.expiryDate);
+      this.doc.text(10, 80, 'Invoice ID :' + this.invoice[0].invoiceID);
+      this.doc.text(10, 85, ' Date :' + this.invoice[0].date);
+      this.doc.text(10, 90, ' Expiry Date :' + this.invoice[0].expiryDate);
       this.doc.setFontType('bold');
       this.doc.text(130, 75, 'Bank Details');
       this.doc.setFontType('normal');
@@ -173,10 +176,10 @@ export class ViewSingleInvoiceComponent implements OnInit {
       }
       );
       this.doc.setFontType('normal');
-      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.invoice.subTotal.toString());
+      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.invoice[0].subTotal.toString());
       this.doc.text(120, 185, 'SGST (' + this.workOrderPDFModel[0].sgst + '%) +' + ' ' +
-      'CGST (' + this.workOrderPDFModel[0].cgst + '%) : Rs' + ' ' + this.invoice.tax.toString());
-      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice.allTotal);
+      'CGST (' + this.workOrderPDFModel[0].cgst + '%) : Rs' + ' ' + this.invoice[0].tax.toString());
+      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice[0].allTotal);
       this.doc.save('proper.pdf');
       this.router.navigate(['/lead']);
     }, err => {
@@ -186,7 +189,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
   }
   pdfGSTWithDiscountDigitalTerms() {
     this.viewCompanyDetails();
-    this.invoiceService.singleCustomerDetails(this.invoice.customerID).subscribe(data => {
+    this.invoiceService.singleCustomerDetails(this.invoice[0].customerID).subscribe(data => {
       this.customerModel = data;
       const options = {
         margin: {
@@ -198,8 +201,8 @@ export class ViewSingleInvoiceComponent implements OnInit {
           top: 80
         },
       };
-      for (let i = 0; i <= this.invoice.requirements.length - 1; i++) {
-        this.allValues.push(this.invoice.requirements[i]);
+      for (let i = 0; i <= this.invoice[0].requirements.length - 1; i++) {
+        this.allValues.push(this.invoice[0].requirements[i]);
       }
       for (let i = 0; i <= this.allValues.length - 1; i++) {
         this.tempArray[i] = new Array();
@@ -244,9 +247,9 @@ export class ViewSingleInvoiceComponent implements OnInit {
       this.doc.setFontType('bold');
       this.doc.text(10, 75, 'Invoice Details');
       this.doc.setFontType('normal');
-      this.doc.text(10, 80, 'Invoice ID :' + this.invoice.invoiceID);
-      this.doc.text(10, 85, ' Date :' + this.invoice.date);
-      this.doc.text(10, 90, ' Expiry Date :' + this.invoice.expiryDate);
+      this.doc.text(10, 80, 'Invoice ID :' + this.invoice[0].invoiceID);
+      this.doc.text(10, 85, ' Date :' + this.invoice[0].date);
+      this.doc.text(10, 90, ' Expiry Date :' + this.invoice[0].expiryDate);
       this.doc.setFontType('bold');
       this.doc.text(130, 75, 'Bank Details');
       this.doc.setFontType('normal');
@@ -275,10 +278,10 @@ export class ViewSingleInvoiceComponent implements OnInit {
       }
       );
       this.doc.setFontType('normal');
-      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.invoice.subTotal.toString());
+      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.invoice[0].subTotal.toString());
       this.doc.text(120, 185, 'SGST (' + this.workOrderPDFModel[0].sgst + '%) +' + ' ' +
-      'CGST (' + this.workOrderPDFModel[0].cgst + '%) : Rs' + ' ' + this.invoice.tax.toString());
-      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice.allTotal);
+      'CGST (' + this.workOrderPDFModel[0].cgst + '%) : Rs' + ' ' + this.invoice[0].tax.toString());
+      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice[0].allTotal);
       this.doc.save('proper.pdf');
       this.router.navigate(['/lead']);
     }, err => {
@@ -288,7 +291,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
   }
   pdfGSTWitouthDiscountDigitalTerms() {
     this.viewCompanyDetails();
-    this.invoiceService.singleCustomerDetails(this.invoice.customerID).subscribe(data => {
+    this.invoiceService.singleCustomerDetails(this.invoice[0].customerID).subscribe(data => {
       this.customerModel = data;
       const options = {
         margin: {
@@ -300,8 +303,8 @@ export class ViewSingleInvoiceComponent implements OnInit {
           top: 80
         },
       };
-      for (let i = 0; i <= this.invoice.requirements.length - 1; i++) {
-        this.allValues.push(this.invoice.requirements[i]);
+      for (let i = 0; i <= this.invoice[0].requirements.length - 1; i++) {
+        this.allValues.push(this.invoice[0].requirements[i]);
       }
       for (let i = 0; i <= this.allValues.length - 1; i++) {
         this.tempArray[i] = new Array();
@@ -346,9 +349,9 @@ export class ViewSingleInvoiceComponent implements OnInit {
       this.doc.setFontType('bold');
       this.doc.text(10, 75, 'Invoice Details');
       this.doc.setFontType('normal');
-      this.doc.text(10, 80, 'Invoice ID :' + this.invoice.invoiceID);
-      this.doc.text(10, 85, ' Date :' + this.invoice.date);
-      this.doc.text(10, 90, ' Expiry Date :' + this.invoice.expiryDate);
+      this.doc.text(10, 80, 'Invoice ID :' + this.invoice[0].invoiceID);
+      this.doc.text(10, 85, ' Date :' + this.invoice[0].date);
+      this.doc.text(10, 90, ' Expiry Date :' + this.invoice[0].expiryDate);
       this.doc.setFontType('bold');
       this.doc.text(130, 75, 'Bank Details');
       this.doc.setFontType('normal');
@@ -377,10 +380,10 @@ export class ViewSingleInvoiceComponent implements OnInit {
       }
       );
       this.doc.setFontType('normal');
-      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.invoice.subTotal.toString());
+      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.invoice[0].subTotal.toString());
       this.doc.text(120, 185, 'SGST (' + this.workOrderPDFModel[0].sgst + '%) +' + ' ' +
-      'CGST (' + this.workOrderPDFModel[0].cgst + '%) : Rs' + ' ' + this.invoice.tax.toString());
-      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice.allTotal);
+      'CGST (' + this.workOrderPDFModel[0].cgst + '%) : Rs' + ' ' + this.invoice[0].tax.toString());
+      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice[0].allTotal);
       this.doc.save('proper.pdf');
       this.router.navigate(['/lead']);
     }, err => {
@@ -390,7 +393,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
   }
   pdfGSTWithoutDiscountTerms() {
     this.viewCompanyDetails();
-    this.invoiceService.singleCustomerDetails(this.invoice.customerID).subscribe(data => {
+    this.invoiceService.singleCustomerDetails(this.invoice[0].customerID).subscribe(data => {
       this.customerModel = data;
       const options = {
         margin: {
@@ -402,8 +405,8 @@ export class ViewSingleInvoiceComponent implements OnInit {
           top: 80
         },
       };
-      for (let i = 0; i <= this.invoice.requirements.length - 1; i++) {
-        this.allValues.push(this.invoice.requirements[i]);
+      for (let i = 0; i <= this.invoice[0].requirements.length - 1; i++) {
+        this.allValues.push(this.invoice[0].requirements[i]);
       }
       for (let i = 0; i <= this.allValues.length - 1; i++) {
         this.tempArray[i] = new Array();
@@ -448,9 +451,9 @@ export class ViewSingleInvoiceComponent implements OnInit {
       this.doc.setFontType('bold');
       this.doc.text(10, 75, 'Invoice Details');
       this.doc.setFontType('normal');
-      this.doc.text(10, 80, 'Invoice ID :' + this.invoice.invoiceID);
-      this.doc.text(10, 85, ' Date :' + this.invoice.date);
-      this.doc.text(10, 90, ' Expiry Date :' + this.invoice.expiryDate);
+      this.doc.text(10, 80, 'Invoice ID :' + this.invoice[0].invoiceID);
+      this.doc.text(10, 85, ' Date :' + this.invoice[0].date);
+      this.doc.text(10, 90, ' Expiry Date :' + this.invoice[0].expiryDate);
       this.doc.setFontType('bold');
       this.doc.text(130, 75, 'Bank Details');
       this.doc.setFontType('normal');
@@ -479,10 +482,10 @@ export class ViewSingleInvoiceComponent implements OnInit {
       }
       );
       this.doc.setFontType('normal');
-      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.invoice.subTotal.toString());
+      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.invoice[0].subTotal.toString());
       this.doc.text(120, 185, 'SGST (' + this.workOrderPDFModel[0].sgst + '%) +' + ' ' +
-      'CGST (' + this.workOrderPDFModel[0].cgst + '%) : Rs' + ' ' + this.invoice.tax.toString());
-      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice.allTotal);
+      'CGST (' + this.workOrderPDFModel[0].cgst + '%) : Rs' + ' ' + this.invoice[0].tax.toString());
+      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice[0].allTotal);
       this.doc.save('proper.pdf');
       this.router.navigate(['/lead']);
     }, err => {
@@ -491,7 +494,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
   }
   pdfGSTDiscountDigitalTerms() {
     this.viewCompanyDetails();
-    this.invoiceService.singleCustomerDetails(this.invoice.customerID).subscribe(data => {
+    this.invoiceService.singleCustomerDetails(this.invoice[0].customerID).subscribe(data => {
       this.customerModel = data;
       const options = {
         margin: {
@@ -503,9 +506,10 @@ export class ViewSingleInvoiceComponent implements OnInit {
           top: 80
         },
       };
-      this.printArray.push(this.invoice.requirements[0].item, this.invoice.requirements[0].description,
+      this.printArray.push(this.invoice.requirements[0].item, this.invoice[0].requirements[0].description,
         this.invoice.requirements[0].quantity,
-        this.invoice.requirements[0].price, this.invoice.requirements[0].discount, this.invoice.requirements[0].total);
+        this.invoice.requirements[0].price, this.invoice[0].requirements[0].discount,
+        this.invoice[0].requirements[0].total);
       console.log('table details in array', this.printArray);
       this.printArray1.push(this.printArray);
       const imgData = '../../../assets/images/logo.jpg';
@@ -544,9 +548,9 @@ export class ViewSingleInvoiceComponent implements OnInit {
       this.doc.setFontType('bold');
       this.doc.text(10, 75, 'Invoice Details');
       this.doc.setFontType('normal');
-      this.doc.text(10, 80, 'Invoice ID :' + this.invoice.invoiceID);
-      this.doc.text(10, 85, ' Date :' + this.invoice.date);
-      this.doc.text(10, 90, ' Expiry Date :' + this.invoice.expiryDate);
+      this.doc.text(10, 80, 'Invoice ID :' + this.invoice[0].invoiceID);
+      this.doc.text(10, 85, ' Date :' + this.invoice[0].date);
+      this.doc.text(10, 90, ' Expiry Date :' + this.invoice[0].expiryDate);
       this.doc.setFontType('bold');
       this.doc.text(130, 75, 'Bank Details');
       this.doc.setFontType('normal');
@@ -575,10 +579,10 @@ export class ViewSingleInvoiceComponent implements OnInit {
       }
       );
       this.doc.setFontType('normal');
-      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.invoice.subTotal.toString());
+      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.invoice[0].subTotal.toString());
       this.doc.text(120, 185, 'SGST (' + this.workOrderPDFModel[0].sgst + '%) +' + ' ' +
-      'CGST (' + this.workOrderPDFModel[0].cgst + '%) : Rs' + ' ' + this.invoice.tax.toString());
-      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice.allTotal);
+      'CGST (' + this.workOrderPDFModel[0].cgst + '%) : Rs' + ' ' + this.invoice[0].tax.toString());
+      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice[0].allTotal);
       this.doc.save('proper.pdf');
       this.router.navigate(['/lead']);
     }, err => {
@@ -588,7 +592,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
   }
   savePDFWithDiscountTerms() {
     this.viewCompanyDetails();
-    this.invoiceService.singleCustomerDetails(this.invoice.customerID).subscribe(data => {
+    this.invoiceService.singleCustomerDetails(this.invoice[0].customerID).subscribe(data => {
       this.customerModel = data;
       const options = {
         margin: {
@@ -600,8 +604,8 @@ export class ViewSingleInvoiceComponent implements OnInit {
           top: 80
         },
       };
-      for (let i = 0; i <= this.invoice.requirements.length - 1; i++) {
-        this.allValues.push(this.invoice.requirements[i]);
+      for (let i = 0; i <= this.invoice[0].requirements.length - 1; i++) {
+        this.allValues.push(this.invoice[0].requirements[i]);
       }
       for (let i = 0; i <= this.allValues.length - 1; i++) {
         this.tempArray[i] = new Array();
@@ -646,9 +650,9 @@ export class ViewSingleInvoiceComponent implements OnInit {
       this.doc.setFontType('bold');
       this.doc.text(10, 75, 'Invoice Details');
       this.doc.setFontType('normal');
-      this.doc.text(10, 80, 'Invoice ID :' + this.invoice.invoiceID);
-      this.doc.text(10, 85, ' Date :' + this.invoice.date);
-      this.doc.text(10, 90, ' Expiry Date :' + this.invoice.expiryDate);
+      this.doc.text(10, 80, 'Invoice ID :' + this.invoice[0].invoiceID);
+      this.doc.text(10, 85, ' Date :' + this.invoice[0].date);
+      this.doc.text(10, 90, ' Expiry Date :' + this.invoice[0].expiryDate);
       this.doc.setFontType('bold');
       this.doc.text(130, 75, 'Bank Details');
       this.doc.setFontType('normal');
@@ -677,9 +681,9 @@ export class ViewSingleInvoiceComponent implements OnInit {
       }
       );
       this.doc.setFontType('normal');
-      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.invoice.subTotal.toString());
-      this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.invoice.tax);
-      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice.allTotal);
+      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.invoice[0].subTotal.toString());
+      this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.invoice[0].tax);
+      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice[0].allTotal);
       this.doc.save('proper.pdf');
       this.router.navigate(['/lead']);
     }, err => {
@@ -688,7 +692,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
   }
   savePDFWithoutDiscountTerms() {
     this.viewCompanyDetails();
-    this.invoiceService.singleCustomerDetails(this.invoice.customerID).subscribe(data => {
+    this.invoiceService.singleCustomerDetails(this.invoice[0].customerID).subscribe(data => {
       this.customerModel = data;
       const options = {
         margin: {
@@ -700,8 +704,8 @@ export class ViewSingleInvoiceComponent implements OnInit {
           top: 80
         },
       };
-      for (let i = 0; i <= this.invoice.requirements.length - 1; i++) {
-        this.allValues.push(this.invoice.requirements[i]);
+      for (let i = 0; i <= this.invoice[0].requirements.length - 1; i++) {
+        this.allValues.push(this.invoice[0].requirements[i]);
       }
       for (let i = 0; i <= this.allValues.length - 1; i++) {
         this.tempArray[i] = new Array();
@@ -746,9 +750,9 @@ export class ViewSingleInvoiceComponent implements OnInit {
       this.doc.setFontType('bold');
       this.doc.text(10, 75, 'Invoice Details');
       this.doc.setFontType('normal');
-      this.doc.text(10, 80, 'Invoice ID :' + this.invoice.invoiceID);
-      this.doc.text(10, 85, ' Date :' + this.invoice.date);
-      this.doc.text(10, 90, ' Expiry Date :' + this.invoice.expiryDate);
+      this.doc.text(10, 80, 'Invoice ID :' + this.invoice[0].invoiceID);
+      this.doc.text(10, 85, ' Date :' + this.invoice[0].date);
+      this.doc.text(10, 90, ' Expiry Date :' + this.invoice[0].expiryDate);
       this.doc.setFontType('bold');
       this.doc.text(130, 75, 'Bank Details');
       this.doc.setFontType('normal');
@@ -777,9 +781,9 @@ export class ViewSingleInvoiceComponent implements OnInit {
       }
       );
       this.doc.setFontType('normal');
-      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.invoice.subTotal.toString());
+      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.invoice[0].subTotal.toString());
       this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.invoice.tax);
-      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice.allTotal);
+      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice[0].allTotal);
       this.doc.save('proper.pdf');
       this.router.navigate(['/lead']);
     }, err => {
@@ -788,7 +792,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
   }
   savePDFWithDiscountDigtalTerms() {
     this.viewCompanyDetails();
-    this.invoiceService.singleCustomerDetails(this.invoice.customerID).subscribe(data => {
+    this.invoiceService.singleCustomerDetails(this.invoice[0].customerID).subscribe(data => {
       this.customerModel = data;
       const options = {
         margin: {
@@ -800,8 +804,8 @@ export class ViewSingleInvoiceComponent implements OnInit {
           top: 80
         },
       };
-      for (let i = 0; i <= this.invoice.requirements.length - 1; i++) {
-        this.allValues.push(this.invoice.requirements[i]);
+      for (let i = 0; i <= this.invoice[0].requirements.length - 1; i++) {
+        this.allValues.push(this.invoice[0].requirements[i]);
       }
       for (let i = 0; i <= this.allValues.length - 1; i++) {
         this.tempArray[i] = new Array();
@@ -877,9 +881,9 @@ export class ViewSingleInvoiceComponent implements OnInit {
       }
       );
       this.doc.setFontType('normal');
-      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.invoice.subTotal.toString());
+      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.invoice[0].subTotal.toString());
       this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.invoice.tax);
-      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice.allTotal);
+      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice[0].allTotal);
       this.doc.save('proper.pdf');
       this.router.navigate(['/lead']);
     }, err => {
@@ -888,7 +892,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
   }
   savePDFWithoutDiscountDigtalTerms() {
     this.viewCompanyDetails();
-    this.invoiceService.singleCustomerDetails(this.invoice.customerID).subscribe(data => {
+    this.invoiceService.singleCustomerDetails(this.invoice[0].customerID).subscribe(data => {
       this.customerModel = data;
       const options = {
         margin: {
@@ -900,9 +904,9 @@ export class ViewSingleInvoiceComponent implements OnInit {
           top: 80
         },
       };
-      this.printArray.push(this.invoice.requirements[0].item, this.invoice.requirements[0].description,
+      this.printArray.push(this.invoice.requirements[0].item, this.invoice[0].requirements[0].description,
         this.invoice.requirements[0].quantity,
-        this.invoice.requirements[0].price,  this.invoice.requirements[0].total);
+        this.invoice.requirements[0].price,  this.invoice[0].requirements[0].total);
       console.log('table details in array', this.printArray);
       this.printArray1.push(this.printArray);
       const imgData = '../../../assets/images/logo.jpg';
@@ -941,9 +945,9 @@ export class ViewSingleInvoiceComponent implements OnInit {
       this.doc.setFontType('bold');
       this.doc.text(10, 75, 'Invoice Details');
       this.doc.setFontType('normal');
-      this.doc.text(10, 80, 'Invoice ID :' + this.invoice.invoiceID);
-      this.doc.text(10, 85, ' Date :' + this.invoice.date);
-      this.doc.text(10, 90, ' Expiry Date :' + this.invoice.expiryDate);
+      this.doc.text(10, 80, 'Invoice ID :' + this.invoice[0].invoiceID);
+      this.doc.text(10, 85, ' Date :' + this.invoice[0].date);
+      this.doc.text(10, 90, ' Expiry Date :' + this.invoice[0].expiryDate);
       this.doc.setFontType('bold');
       this.doc.text(130, 75, 'Bank Details');
       this.doc.setFontType('normal');
@@ -972,9 +976,9 @@ export class ViewSingleInvoiceComponent implements OnInit {
       }
       );
       this.doc.setFontType('normal');
-      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.invoice.subTotal.toString());
-      this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.invoice.tax);
-      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice.allTotal);
+      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.invoice[0].subTotal.toString());
+      this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.invoice[0].tax);
+      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice[0].allTotal);
       this.doc.save('proper.pdf');
       this.router.navigate(['/lead']);
     }, err => {

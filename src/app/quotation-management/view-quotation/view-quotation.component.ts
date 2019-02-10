@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { QuotationManagementService} from './../quotation-management.service';
 import { Quotation } from './../../shared/quotation.model';
 
@@ -14,17 +14,21 @@ export class ViewQuotationComponent implements OnInit {
   leadId;
   quotation: Quotation[];
   constructor(
-    private quotationManagementService: QuotationManagementService, private route: ActivatedRoute,
+    private quotationManagementService: QuotationManagementService,
+     private route: ActivatedRoute,
      private router: Router
   ) { }
 
   ngOnInit() {
-    this.leadId = this.route.snapshot.params.leadId;
+    this.route.paramMap.subscribe(
+      (params: ParamMap) => {
+        this.leadId = params.get('leadId');
+      }
+    );
     this.getAllQuotation();
   }
   getViewQuotation(data)   {
-    console.log('dataData', data);
-    this.router.navigate(['quotation/viewsinglequotation', this.leadId, data._id]);
+    this.router.navigate(['quotation/viewsinglequotation', data._id]);
   }
   /* getEditQuotation(data)   {
     this.router.navigate(['editworkorder', this.leadId, data._id]);
@@ -38,7 +42,7 @@ export class ViewQuotationComponent implements OnInit {
     });
   }
   getDeleteSingleQuotation(row)   {
-    this.quotationManagementService.deleteSingleQuotation(this.leadId, row._id).subscribe(data => {
+    this.quotationManagementService.deleteSingleQuotation(row._id).subscribe(data => {
       this.quotation = data;
       console.log('all view', this.quotation);
     }, error => {

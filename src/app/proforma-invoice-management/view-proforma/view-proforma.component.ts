@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { ProformaInvoiceService } from './../proforma-invoice.service';
 import { ProformaInvoice } from './../../shared/proformaInvoice.model';
 
@@ -19,20 +19,24 @@ export class ViewProformaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.leadId = this.route.snapshot.params.leadId;
-    this.workId = this.route.snapshot.params.workId;
+    this.route.paramMap.subscribe(
+      (params: ParamMap) => {
+        this.leadId = params.get('leadId');
+        this.workId = params.get('workId');
+      }
+    );
     this.getAllProformaInvoice();
   }
   getViewProformaInvoice(data)   {
-    console.log('dataData', data);
-    this.router.navigate(['proformainvoice/viewsingleproformainvoice', this.leadId, data._id]);
+    this.router.navigate(['proformainvoice/viewsingleproformainvoice',
+    data._id]);
   }
   getEditQuotation(data)   {
     this.router.navigate(['editworkorder', this.leadId, data._id]);
   }
-  
+
   getAllProformaInvoice() {
-    this.proformaInvoiceService.viewAllProformaInvoice(this.leadId).subscribe(data => {
+    this.proformaInvoiceService.viewAllProformaInvoice(this.workId).subscribe(data => {
       this.proformaInvoice = data;
       console.log('all proformainvoice', this.proformaInvoice);
     }, error => {

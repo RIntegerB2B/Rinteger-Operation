@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Invoice } from './../shared/invoice.model';
+import { WorkOrder } from './../shared/workorder.model';
 import { AppSetting } from './../config/appSetting';
 import { HttpClient, HttpHeaders, HttpEvent } from '@angular/common/http';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
@@ -35,9 +36,9 @@ export class InvoiceService {
     return this.httpClient.post<Customer[]>(url, data);
   } */
   // all customer details
-  createInvoice(row, id): Observable<any> {
+  createInvoice(row): Observable<any> {
     const addUrl = 'invoice/';
-    const url: string = this.serviceUrl + addUrl + id;
+    const url: string = this.serviceUrl + addUrl;
     return this.httpClient.post<Invoice[]>(url, row);
   }
   viewAllInvoice(id): Observable<any> {
@@ -45,16 +46,20 @@ export class InvoiceService {
     const url: string = this.serviceUrl + addUrl + id;
     return this.httpClient.get<Invoice[]>(url);
   }
-  viewSingleInvoice(leadid, invid): Observable<any> {
+  viewSingleInvoice(invid): Observable<any> {
     const addUrl = 'viewsingleinvoice/';
-    const singleUrl = '/single/';
-    const url: string = this.serviceUrl + addUrl + leadid + singleUrl + invid;
+    /* const singleUrl = '/single/'; */
+    const url: string = this.serviceUrl + addUrl  + invid;
     return this.httpClient.get<Invoice[]>(url);
   }
-  deleteSingleInvoice(leadid, invid)   {
-    const addUrl = 'invoice/';
-    const subUrl = '/onedelete/';
-    const url: string = this.serviceUrl + addUrl + leadid + subUrl + invid;
+  viewSingleWorkOrder(workid): Observable<any> {
+    const addUrl = 'viewsingleworkorder/';
+    const url: string = this.serviceUrl + addUrl  + workid;
+    return this.httpClient.get<WorkOrder[]>(url);
+  }
+  deleteSingleInvoice(invid)   {
+    const addUrl = 'deleteinvoice/';
+    const url: string = this.serviceUrl + addUrl + + invid;
     return this.httpClient.delete<Invoice[]>(url);
   }
   workorderPDFDetails(): Observable<any> {

@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProformaInvoiceService } from './../proforma-invoice.service';
 import { ProformaInvoice } from './../../shared/proformaInvoice.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import * as  jspdf from 'jspdf';
 import 'jspdf-autotable';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
@@ -34,8 +34,11 @@ export class ViewSingleProformaComponent implements OnInit {
   TypesOfTerms = ['Production Terms', 'Digital Marketing Terms'];
   templates = ['With Discount + GST', 'Without Discount + GST', 'With Discount + SGST + CGST', 'Without Discount + SGST + CGST'];
   ngOnInit() {
-    this.leadId = this.route.snapshot.params.leadId;
-    this.pinvId = this.route.snapshot.params.pinvId;
+    this.route.paramMap.subscribe(
+      (params: ParamMap) => {
+        this.pinvId = params.get('pinvId');
+      }
+    );
     this.viewSingleproformaInvoice();
     this.createForm();
   }
@@ -45,10 +48,9 @@ export class ViewSingleProformaComponent implements OnInit {
     });
   }
   viewSingleproformaInvoice() {
-    this.proformaInvoiceService.viewSingleProformaInvoice(this.leadId,
+    this.proformaInvoiceService.viewSingleProformaInvoice(
       this.pinvId).subscribe(data => {
         this.proformaInvoice = data;
-        console.log('single View', this.proformaInvoice);
       }, error => {
         console.log(error);
       });
@@ -83,7 +85,7 @@ export class ViewSingleProformaComponent implements OnInit {
   }
   pdfGSTDiscountTerms() {
     this.viewCompanyDetails();
-    this.proformaInvoiceService.singleCustomerDetails(this.proformaInvoice.customerID).subscribe(data => {
+    this.proformaInvoiceService.singleCustomerDetails(this.proformaInvoice[0].customerID).subscribe(data => {
       this.customerModel = data;
       const options = {
         margin: {
@@ -95,8 +97,8 @@ export class ViewSingleProformaComponent implements OnInit {
           top: 80
         },
       };
-      for (let i = 0; i <= this.proformaInvoice.requirements.length - 1; i++) {
-        this.allValues.push(this.proformaInvoice.requirements[i]);
+      for (let i = 0; i <= this.proformaInvoice[0].requirements.length - 1; i++) {
+        this.allValues.push(this.proformaInvoice[0].requirements[i]);
       }
       for (let i = 0; i <= this.allValues.length - 1; i++) {
         this.tempArray[i] = new Array();
@@ -141,9 +143,9 @@ export class ViewSingleProformaComponent implements OnInit {
       this.doc.setFontType('bold');
       this.doc.text(10, 75, 'ProformaInvoice Details');
       this.doc.setFontType('normal');
-      this.doc.text(10, 80, 'ProformaInvoice ID :' + this.proformaInvoice.proformaInvoiceID);
-      this.doc.text(10, 85, ' Date :' + this.proformaInvoice.date);
-      this.doc.text(10, 90, ' Expiry Date :' + this.proformaInvoice.expiryDate);
+      this.doc.text(10, 80, 'ProformaInvoice ID :' + this.proformaInvoice[0].proformaInvoiceID);
+      this.doc.text(10, 85, ' Date :' + this.proformaInvoice[0].date);
+      this.doc.text(10, 90, ' Expiry Date :' + this.proformaInvoice[0].expiryDate);
       this.doc.setFontType('bold');
       this.doc.text(130, 75, 'Bank Details');
       this.doc.setFontType('normal');
@@ -172,10 +174,10 @@ export class ViewSingleProformaComponent implements OnInit {
       }
       );
       this.doc.setFontType('normal');
-      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.proformaInvoice.subTotal.toString());
+      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.proformaInvoice[0].subTotal.toString());
       this.doc.text(120, 185, 'SGST (' + this.workOrderPDFModel[0].sgst + '%) +' + ' ' +
-        'CGST (' + this.workOrderPDFModel[0].cgst + '%) : Rs' + ' ' + this.proformaInvoice.tax.toString());
-      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.proformaInvoice.allTotal);
+        'CGST (' + this.workOrderPDFModel[0].cgst + '%) : Rs' + ' ' + this.proformaInvoice[0].tax.toString());
+      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.proformaInvoice[0].allTotal);
       this.doc.save('proper.pdf');
       this.router.navigate(['/lead']);
     }, err => {
@@ -185,7 +187,7 @@ export class ViewSingleProformaComponent implements OnInit {
   }
   pdfGSTWithDiscountDigitalTerms() {
     this.viewCompanyDetails();
-    this.proformaInvoiceService.singleCustomerDetails(this.proformaInvoice.customerID).subscribe(data => {
+    this.proformaInvoiceService.singleCustomerDetails(this.proformaInvoice[0].customerID).subscribe(data => {
       this.customerModel = data;
       const options = {
         margin: {
@@ -197,8 +199,8 @@ export class ViewSingleProformaComponent implements OnInit {
           top: 80
         },
       };
-      for (let i = 0; i <= this.proformaInvoice.requirements.length - 1; i++) {
-        this.allValues.push(this.proformaInvoice.requirements[i]);
+      for (let i = 0; i <= this.proformaInvoice[0].requirements.length - 1; i++) {
+        this.allValues.push(this.proformaInvoice[0].requirements[i]);
       }
       for (let i = 0; i <= this.allValues.length - 1; i++) {
         this.tempArray[i] = new Array();
@@ -243,9 +245,9 @@ export class ViewSingleProformaComponent implements OnInit {
       this.doc.setFontType('bold');
       this.doc.text(10, 75, 'ProformaInvoice Details');
       this.doc.setFontType('normal');
-      this.doc.text(10, 80, 'ProformaInvoice ID :' + this.proformaInvoice.proformaInvoiceID);
-      this.doc.text(10, 85, ' Date :' + this.proformaInvoice.date);
-      this.doc.text(10, 90, ' Expiry Date :' + this.proformaInvoice.expiryDate);
+      this.doc.text(10, 80, 'ProformaInvoice ID :' + this.proformaInvoice[0].proformaInvoiceID);
+      this.doc.text(10, 85, ' Date :' + this.proformaInvoice[0].date);
+      this.doc.text(10, 90, ' Expiry Date :' + this.proformaInvoice[0].expiryDate);
       this.doc.setFontType('bold');
       this.doc.text(130, 75, 'Bank Details');
       this.doc.setFontType('normal');
@@ -274,10 +276,10 @@ export class ViewSingleProformaComponent implements OnInit {
       }
       );
       this.doc.setFontType('normal');
-      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.proformaInvoice.subTotal.toString());
+      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.proformaInvoice[0].subTotal.toString());
       this.doc.text(120, 185, 'SGST (' + this.workOrderPDFModel[0].sgst + '%) +' + ' ' +
-        'CGST (' + this.workOrderPDFModel[0].cgst + '%) : Rs' + ' ' + this.proformaInvoice.tax.toString());
-      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.proformaInvoice.allTotal);
+        'CGST (' + this.workOrderPDFModel[0].cgst + '%) : Rs' + ' ' + this.proformaInvoice[0].tax.toString());
+      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.proformaInvoice[0].allTotal);
       this.doc.save('proper.pdf');
       this.router.navigate(['/lead']);
     }, err => {
@@ -287,7 +289,7 @@ export class ViewSingleProformaComponent implements OnInit {
   }
   pdfGSTWitouthDiscountDigitalTerms() {
     this.viewCompanyDetails();
-    this.proformaInvoiceService.singleCustomerDetails(this.proformaInvoice.customerID).subscribe(data => {
+    this.proformaInvoiceService.singleCustomerDetails(this.proformaInvoice[0].customerID).subscribe(data => {
       this.customerModel = data;
       const options = {
         margin: {
@@ -299,8 +301,8 @@ export class ViewSingleProformaComponent implements OnInit {
           top: 80
         },
       };
-      for (let i = 0; i <= this.proformaInvoice.requirements.length - 1; i++) {
-        this.allValues.push(this.proformaInvoice.requirements[i]);
+      for (let i = 0; i <= this.proformaInvoice[0].requirements.length - 1; i++) {
+        this.allValues.push(this.proformaInvoice[0].requirements[i]);
       }
       for (let i = 0; i <= this.allValues.length - 1; i++) {
         this.tempArray[i] = new Array();
@@ -345,9 +347,9 @@ export class ViewSingleProformaComponent implements OnInit {
       this.doc.setFontType('bold');
       this.doc.text(10, 75, 'ProformaInvoice Details');
       this.doc.setFontType('normal');
-      this.doc.text(10, 80, 'ProformaInvoice ID :' + this.proformaInvoice.proformaInvoiceID);
-      this.doc.text(10, 85, ' Date :' + this.proformaInvoice.date);
-      this.doc.text(10, 90, ' Expiry Date :' + this.proformaInvoice.expiryDate);
+      this.doc.text(10, 80, 'ProformaInvoice ID :' + this.proformaInvoice[0].proformaInvoiceID);
+      this.doc.text(10, 85, ' Date :' + this.proformaInvoice[0].date);
+      this.doc.text(10, 90, ' Expiry Date :' + this.proformaInvoice[0].expiryDate);
       this.doc.setFontType('bold');
       this.doc.text(130, 75, 'Bank Details');
       this.doc.setFontType('normal');
@@ -376,10 +378,10 @@ export class ViewSingleProformaComponent implements OnInit {
       }
       );
       this.doc.setFontType('normal');
-      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.proformaInvoice.subTotal.toString());
+      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.proformaInvoice[0].subTotal.toString());
       this.doc.text(120, 185, 'SGST (' + this.workOrderPDFModel[0].sgst + '%) +' + ' ' +
-        'CGST (' + this.workOrderPDFModel[0].cgst + '%) : Rs' + ' ' + this.proformaInvoice.tax.toString());
-      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.proformaInvoice.allTotal);
+        'CGST (' + this.workOrderPDFModel[0].cgst + '%) : Rs' + ' ' + this.proformaInvoice[0].tax.toString());
+      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.proformaInvoice[0].allTotal);
       this.doc.save('proper.pdf');
       this.router.navigate(['/lead']);
     }, err => {
@@ -389,7 +391,7 @@ export class ViewSingleProformaComponent implements OnInit {
   }
   pdfGSTWithoutDiscountTerms() {
     this.viewCompanyDetails();
-    this.proformaInvoiceService.singleCustomerDetails(this.proformaInvoice.customerID).subscribe(data => {
+    this.proformaInvoiceService.singleCustomerDetails(this.proformaInvoice[0].customerID).subscribe(data => {
       this.customerModel = data;
       const options = {
         margin: {
@@ -401,8 +403,8 @@ export class ViewSingleProformaComponent implements OnInit {
           top: 80
         },
       };
-      for (let i = 0; i <= this.proformaInvoice.requirements.length - 1; i++) {
-        this.allValues.push(this.proformaInvoice.requirements[i]);
+      for (let i = 0; i <= this.proformaInvoice[0].requirements.length - 1; i++) {
+        this.allValues.push(this.proformaInvoice[0].requirements[i]);
       }
       for (let i = 0; i <= this.allValues.length - 1; i++) {
         this.tempArray[i] = new Array();
@@ -448,9 +450,9 @@ export class ViewSingleProformaComponent implements OnInit {
       this.doc.setFontType('bold');
       this.doc.text(10, 75, 'ProformaInvoice Details');
       this.doc.setFontType('normal');
-      this.doc.text(10, 80, 'ProformaInvoice ID :' + this.proformaInvoice.proformaInvoiceID);
-      this.doc.text(10, 85, ' Date :' + this.proformaInvoice.date);
-      this.doc.text(10, 90, ' Expiry Date :' + this.proformaInvoice.expiryDate);
+      this.doc.text(10, 80, 'ProformaInvoice ID :' + this.proformaInvoice[0].proformaInvoiceID);
+      this.doc.text(10, 85, ' Date :' + this.proformaInvoice[0].date);
+      this.doc.text(10, 90, ' Expiry Date :' + this.proformaInvoice[0].expiryDate);
       this.doc.setFontType('bold');
       this.doc.text(130, 75, 'Bank Details');
       this.doc.setFontType('normal');
@@ -479,10 +481,10 @@ export class ViewSingleProformaComponent implements OnInit {
       }
       );
       this.doc.setFontType('normal');
-      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.proformaInvoice.subTotal.toString());
+      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.proformaInvoice[0].subTotal.toString());
       this.doc.text(120, 185, 'SGST (' + this.workOrderPDFModel[0].sgst + '%) +' + ' ' +
-        'CGST (' + this.workOrderPDFModel[0].cgst + '%) : Rs' + ' ' + this.proformaInvoice.tax.toString());
-      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.proformaInvoice.allTotal);
+        'CGST (' + this.workOrderPDFModel[0].cgst + '%) : Rs' + ' ' + this.proformaInvoice[0].tax.toString());
+      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.proformaInvoice[0].allTotal);
       this.doc.save('proper.pdf');
       this.router.navigate(['/lead']);
     }, err => {
@@ -491,7 +493,7 @@ export class ViewSingleProformaComponent implements OnInit {
   }
   pdfGSTDiscountDigitalTerms() {
     this.viewCompanyDetails();
-    this.proformaInvoiceService.singleCustomerDetails(this.proformaInvoice.customerID).subscribe(data => {
+    this.proformaInvoiceService.singleCustomerDetails(this.proformaInvoice[0].customerID).subscribe(data => {
       this.customerModel = data;
       const options = {
         margin: {
@@ -503,10 +505,10 @@ export class ViewSingleProformaComponent implements OnInit {
           top: 80
         },
       };
-      this.printArray.push(this.proformaInvoice.requirements[0].item, this.proformaInvoice.requirements[0].description,
-        this.proformaInvoice.requirements[0].quantity,
-        this.proformaInvoice.requirements[0].price, this.proformaInvoice.requirements[0].discount,
-        this.proformaInvoice.requirements[0].total);
+      this.printArray.push(this.proformaInvoice[0].requirements[0].item, this.proformaInvoice[0].requirements[0].description,
+        this.proformaInvoice[0].requirements[0].quantity,
+        this.proformaInvoice[0].requirements[0].price, this.proformaInvoice.requirements[0].discount,
+        this.proformaInvoice[0].requirements[0].total);
       console.log('table details in array', this.printArray);
       this.printArray1.push(this.printArray);
       const imgData = '../../../assets/images/logo.jpg';
@@ -545,9 +547,9 @@ export class ViewSingleProformaComponent implements OnInit {
       this.doc.setFontType('bold');
       this.doc.text(10, 75, 'ProformaInvoice Details');
       this.doc.setFontType('normal');
-      this.doc.text(10, 80, 'ProformaInvoice ID :' + this.proformaInvoice.proformaInvoiceID);
-      this.doc.text(10, 85, ' Date :' + this.proformaInvoice.date);
-      this.doc.text(10, 90, ' Expiry Date :' + this.proformaInvoice.expiryDate);
+      this.doc.text(10, 80, 'ProformaInvoice ID :' + this.proformaInvoice[0].proformaInvoiceID);
+      this.doc.text(10, 85, ' Date :' + this.proformaInvoice[0].date);
+      this.doc.text(10, 90, ' Expiry Date :' + this.proformaInvoice[0].expiryDate);
       this.doc.setFontType('bold');
       this.doc.text(130, 75, 'Bank Details');
       this.doc.setFontType('normal');
@@ -576,10 +578,10 @@ export class ViewSingleProformaComponent implements OnInit {
       }
       );
       this.doc.setFontType('normal');
-      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.proformaInvoice.subTotal.toString());
+      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.proformaInvoice[0].subTotal.toString());
       this.doc.text(120, 185, 'SGST (' + this.workOrderPDFModel[0].sgst + '%) +' + ' ' +
-        'CGST (' + this.workOrderPDFModel[0].cgst + '%) : Rs' + ' ' + this.proformaInvoice.tax.toString());
-      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.proformaInvoice.allTotal);
+        'CGST (' + this.workOrderPDFModel[0].cgst + '%) : Rs' + ' ' + this.proformaInvoice[0].tax.toString());
+      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.proformaInvoice[0].allTotal);
       this.doc.save('proper.pdf');
       this.router.navigate(['/lead']);
     }, err => {
@@ -589,7 +591,7 @@ export class ViewSingleProformaComponent implements OnInit {
   }
   savePDFWithDiscountTerms() {
     this.viewCompanyDetails();
-    this.proformaInvoiceService.singleCustomerDetails(this.proformaInvoice.customerID).subscribe(data => {
+    this.proformaInvoiceService.singleCustomerDetails(this.proformaInvoice[0].customerID).subscribe(data => {
       this.customerModel = data;
       const options = {
         margin: {
@@ -601,8 +603,8 @@ export class ViewSingleProformaComponent implements OnInit {
           top: 80
         },
       };
-      for (let i = 0; i <= this.proformaInvoice.requirements.length - 1; i++) {
-        this.allValues.push(this.proformaInvoice.requirements[i]);
+      for (let i = 0; i <= this.proformaInvoice[0].requirements.length - 1; i++) {
+        this.allValues.push(this.proformaInvoice[0].requirements[i]);
       }
       for (let i = 0; i <= this.allValues.length - 1; i++) {
         this.tempArray[i] = new Array();
@@ -678,9 +680,9 @@ export class ViewSingleProformaComponent implements OnInit {
       }
       );
       this.doc.setFontType('normal');
-      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.proformaInvoice.subTotal.toString());
-      this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.proformaInvoice.tax);
-      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.proformaInvoice.allTotal);
+      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.proformaInvoice[0].subTotal.toString());
+      this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.proformaInvoice[0].tax);
+      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.proformaInvoice[0].allTotal);
       this.doc.save('proper.pdf');
       this.router.navigate(['/lead']);
     }, err => {
@@ -689,7 +691,7 @@ export class ViewSingleProformaComponent implements OnInit {
   }
   savePDFWithoutDiscountTerms() {
     this.viewCompanyDetails();
-    this.proformaInvoiceService.singleCustomerDetails(this.proformaInvoice.customerID).subscribe(data => {
+    this.proformaInvoiceService.singleCustomerDetails(this.proformaInvoice[0].customerID).subscribe(data => {
       this.customerModel = data;
       const options = {
         margin: {
@@ -701,8 +703,8 @@ export class ViewSingleProformaComponent implements OnInit {
           top: 80
         },
       };
-      for (let i = 0; i <= this.proformaInvoice.requirements.length - 1; i++) {
-        this.allValues.push(this.proformaInvoice.requirements[i]);
+      for (let i = 0; i <= this.proformaInvoice[0].requirements.length - 1; i++) {
+        this.allValues.push(this.proformaInvoice[0].requirements[i]);
       }
       for (let i = 0; i <= this.allValues.length - 1; i++) {
         this.tempArray[i] = new Array();
@@ -747,9 +749,9 @@ export class ViewSingleProformaComponent implements OnInit {
       this.doc.setFontType('bold');
       this.doc.text(10, 75, 'ProformaInvoice Details');
       this.doc.setFontType('normal');
-      this.doc.text(10, 80, 'ProformaInvoice ID :' + this.proformaInvoice.proformaInvoiceID);
-      this.doc.text(10, 85, ' Date :' + this.proformaInvoice.date);
-      this.doc.text(10, 90, ' Expiry Date :' + this.proformaInvoice.expiryDate);
+      this.doc.text(10, 80, 'ProformaInvoice ID :' + this.proformaInvoice[0].proformaInvoiceID);
+      this.doc.text(10, 85, ' Date :' + this.proformaInvoice[0].date);
+      this.doc.text(10, 90, ' Expiry Date :' + this.proformaInvoice[0].expiryDate);
       this.doc.setFontType('bold');
       this.doc.text(130, 75, 'Bank Details');
       this.doc.setFontType('normal');
@@ -778,9 +780,9 @@ export class ViewSingleProformaComponent implements OnInit {
       }
       );
       this.doc.setFontType('normal');
-      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.proformaInvoice.subTotal.toString());
-      this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.proformaInvoice.tax);
-      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.proformaInvoice.allTotal);
+      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.proformaInvoice[0].subTotal.toString());
+      this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.proformaInvoice[0].tax);
+      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.proformaInvoice[0].allTotal);
       this.doc.save('proper.pdf');
       this.router.navigate(['/lead']);
     }, err => {
@@ -789,7 +791,7 @@ export class ViewSingleProformaComponent implements OnInit {
   }
   savePDFWithDiscountDigtalTerms() {
     this.viewCompanyDetails();
-    this.proformaInvoiceService.singleCustomerDetails(this.proformaInvoice.customerID).subscribe(data => {
+    this.proformaInvoiceService.singleCustomerDetails(this.proformaInvoice[0].customerID).subscribe(data => {
       this.customerModel = data;
       const options = {
         margin: {
@@ -801,8 +803,8 @@ export class ViewSingleProformaComponent implements OnInit {
           top: 80
         },
       };
-      for (let i = 0; i <= this.proformaInvoice.requirements.length - 1; i++) {
-        this.allValues.push(this.proformaInvoice.requirements[i]);
+      for (let i = 0; i <= this.proformaInvoice[0].requirements.length - 1; i++) {
+        this.allValues.push(this.proformaInvoice[0].requirements[i]);
       }
       for (let i = 0; i <= this.allValues.length - 1; i++) {
         this.tempArray[i] = new Array();
@@ -847,9 +849,9 @@ export class ViewSingleProformaComponent implements OnInit {
       this.doc.setFontType('bold');
       this.doc.text(10, 75, 'ProformaInvoice Details');
       this.doc.setFontType('normal');
-      this.doc.text(10, 80, 'ProformaInvoice ID :' + this.proformaInvoice.proformaInvoiceID);
-      this.doc.text(10, 85, ' Date :' + this.proformaInvoice.date);
-      this.doc.text(10, 90, ' Expiry Date :' + this.proformaInvoice.expiryDate);
+      this.doc.text(10, 80, 'ProformaInvoice ID :' + this.proformaInvoice[0].proformaInvoiceID);
+      this.doc.text(10, 85, ' Date :' + this.proformaInvoice[0].date);
+      this.doc.text(10, 90, ' Expiry Date :' + this.proformaInvoice[0].expiryDate);
       this.doc.setFontType('bold');
       this.doc.text(130, 75, 'Bank Details');
       this.doc.setFontType('normal');
@@ -878,9 +880,9 @@ export class ViewSingleProformaComponent implements OnInit {
       }
       );
       this.doc.setFontType('normal');
-      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.proformaInvoice.subTotal.toString());
-      this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.proformaInvoice.tax);
-      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.proformaInvoice.allTotal);
+      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.proformaInvoice[0].subTotal.toString());
+      this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.proformaInvoice[0].tax);
+      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.proformaInvoice[0].allTotal);
       this.doc.save('proper.pdf');
       this.router.navigate(['/lead']);
     }, err => {
@@ -889,7 +891,7 @@ export class ViewSingleProformaComponent implements OnInit {
   }
   savePDFWithoutDiscountDigtalTerms() {
     this.viewCompanyDetails();
-    this.proformaInvoiceService.singleCustomerDetails(this.proformaInvoice.customerID).subscribe(data => {
+    this.proformaInvoiceService.singleCustomerDetails(this.proformaInvoice[0].customerID).subscribe(data => {
       this.customerModel = data;
       const options = {
         margin: {
@@ -901,8 +903,8 @@ export class ViewSingleProformaComponent implements OnInit {
           top: 80
         },
       };
-      for (let i = 0; i <= this.proformaInvoice.requirements.length - 1; i++) {
-        this.allValues.push(this.proformaInvoice.requirements[i]);
+      for (let i = 0; i <= this.proformaInvoice[0].requirements.length - 1; i++) {
+        this.allValues.push(this.proformaInvoice[0].requirements[i]);
       }
       for (let i = 0; i <= this.allValues.length - 1; i++) {
         this.tempArray[i] = new Array();
@@ -947,9 +949,9 @@ export class ViewSingleProformaComponent implements OnInit {
       this.doc.setFontType('bold');
       this.doc.text(10, 75, 'ProformaInvoice Details');
       this.doc.setFontType('normal');
-      this.doc.text(10, 80, 'ProformaInvoice ID :' + this.proformaInvoice.proformaInvoiceID);
-      this.doc.text(10, 85, ' Date :' + this.proformaInvoice.date);
-      this.doc.text(10, 90, ' Expiry Date :' + this.proformaInvoice.expiryDate);
+      this.doc.text(10, 80, 'ProformaInvoice ID :' + this.proformaInvoice[0].proformaInvoiceID);
+      this.doc.text(10, 85, ' Date :' + this.proformaInvoice[0].date);
+      this.doc.text(10, 90, ' Expiry Date :' + this.proformaInvoice[0].expiryDate);
       this.doc.setFontType('bold');
       this.doc.text(130, 75, 'Bank Details');
       this.doc.setFontType('normal');
@@ -978,9 +980,9 @@ export class ViewSingleProformaComponent implements OnInit {
       }
       );
       this.doc.setFontType('normal');
-      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.proformaInvoice.subTotal.toString());
-      this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.proformaInvoice.tax);
-      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.proformaInvoice.allTotal);
+      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.proformaInvoice[0].subTotal.toString());
+      this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.proformaInvoice[0].tax);
+      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.proformaInvoice[0].allTotal);
       this.doc.save('proper.pdf');
       this.router.navigate(['/lead']);
     }, err => {

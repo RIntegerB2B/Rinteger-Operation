@@ -21,7 +21,7 @@ export class Customer {
         city?: string,
         state?: string,
         pincode?: string,
-           companyName?: string,
+        companyName?: string,
         companyAddress?: string,
         gstNumber?: string,
         brandName?: string,
@@ -34,8 +34,8 @@ export class Customer {
         this.state = state;
         this.pincode = pincode;
         this.companyName = companyName;
-                this.companyAddress = companyAddress;
-         this.gstNumber = gstNumber;
-         this.brandName = brandName;
+        this.companyAddress = companyAddress;
+        this.gstNumber = gstNumber;
+        this.brandName = brandName;
     }
 }

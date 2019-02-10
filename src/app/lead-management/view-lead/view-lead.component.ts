@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { Lead } from './../../shared/lead.model';
 import { LeadAddComponent } from './../lead-add/lead-add.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { WorkOrder } from './../../shared/workorder.model';
+import { Quotation } from './../../shared/quotation.model';
 
 @Component({
   selector: 'app-view-lead',
@@ -17,6 +19,8 @@ export class ViewLeadComponent implements OnInit {
   leadDetailsForm: FormGroup;
   leadModel: Lead;
   leadModelCheck: Lead;
+  workOrder: WorkOrder[];
+  quotation: Quotation[];
   constructor(private fb: FormBuilder,
     private leadManagementService: LeadManagementService,
     private createCustomerService: CreateCustomerService, private dialog: MatDialog,
@@ -90,20 +94,32 @@ export class ViewLeadComponent implements OnInit {
       console.log(error);
     });
   }
-  viewWorkOrder(data)   {
-    if (data.workOrder.length !== 0)     {
-    this.router.navigate(['workorder/viewworkorder', data.leadID]);
-    } else     {
-      this.createWorkOrder(data);
-    }
+  viewWorkOrder(id)   {
+    this.leadManagementService.viewAllWorkOrder(id.leadID).subscribe(data => {
+      this.workOrder = data;
+      if (this.workOrder.length !== 0)     {
+        this.router.navigate(['workorder/viewworkorder', id.leadID]);
+        } else     {
+          this.createWorkOrder(id);
+        }
+      /* console.log('leads', this.leadModel); */
+    }, error => {
+      console.log(error);
+    });
   }
-  viewQuotation(data)   {
-    if (data.quotation.length !== 0)     {
-      this.router.navigate(['quotation/viewquotation', data._id]);
-      } else     {
-        this.createQuotation(data);
+  viewQuotation(id)   {
+    this.leadManagementService.viewAllQuotation(id.leadID).subscribe(data => {
+      this.quotation = data;
+      if (this.quotation.length !== 0)     {
+        this.router.navigate(['quotation/viewquotation', id.leadID]);
+        } else     {
+          this.createWorkOrder(id);
+        }
+      /* console.log('leads', this.leadModel); */
+    }, error => {
+      console.log(error);
+    });
   }
-}
   getAllLeads() {
     this.leadManagementService.allLead().subscribe(data => {
       this.leadModel = data;

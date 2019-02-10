@@ -34,25 +34,25 @@ export class ViewWorkorderComponent implements OnInit {
   getSingleLeads() {
     this.workOrderService.viewAllWorkOrder(this.leadId).subscribe(data => {
       this.workOrder = data;
-      console.log('all work order', this.workOrder);
     }, error => {
       console.log(error);
     });
   }
   viewInvoice(row) {
-    this.router.navigate(['invoice/viewinvoice', this.leadId, row]);
+    this.router.navigate(['invoice/viewinvoice',
+    row.workOrderID]);
   }
   createProfomaInvoice(row) {
-    this.router.navigate(['proformainvoice/createproformainvoice', this.leadId, row._id]);
+    this.router.navigate(['proformainvoice/createproformainvoice'
+    , this.leadId, row._id]);
   }
   viewProfomaInvoice(row) {
-    this.router.navigate(['proformainvoice/viewproformainvoice', this.leadId, row]);
+    this.router.navigate(['proformainvoice/viewproformainvoice', row.workOrderID]);
   }
   createInvoice(row) {
     this.router.navigate(['invoice/createinvoice', this.leadId, row._id]);
   }
   getViewWorkOrder(data) {
-    console.log('dataData', data);
     this.router.navigate(['workorder/viewsingleworkorder', data._id]);
   }
   getInvoice(data) {

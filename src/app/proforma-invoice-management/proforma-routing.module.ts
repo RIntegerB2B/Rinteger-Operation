@@ -10,15 +10,14 @@ const routes: Routes = [
     path: 'createproformainvoice/:leadId/:workId',
     component: CreateProformaComponent
   },
-{
-  path: 'viewsingleproformainvoice/:leadId/:pinvId',
-  component: ViewSingleProformaComponent
-},
-{
-  path: 'viewproformainvoice/:leadId/:workId',
-  component: ViewProformaComponent
-}
-];
+  {
+    path: 'viewsingleproformainvoice/:pinvId',
+    component: ViewSingleProformaComponent
+  },
+  {
+    path: 'viewproformainvoice/:workId',
+    component: ViewProformaComponent
+  }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

@@ -2,23 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { ProformaInvoice } from './../../shared/proformaInvoice.model';
 import { ProformaInvoiceService } from './../proforma-invoice.service';
-import { ActivatedRoute } from '@angular/router';
-import { LeadManagementService } from './../../lead-management/lead-management.service';
-import { WorkOrderService } from './../../work-order-management/work-order.service';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { WorkOrder } from './../../shared/workorder.model';
 import { WorkOrderPdf } from '../../shared/workorderpdf.model';
 
 @Component({
   selector: 'app-create-proforma',
   templateUrl: './create-proforma.component.html',
-  styleUrls: ['./create-proforma.component.css'],
-  providers: [LeadManagementService, WorkOrderService  ]
+  styleUrls: ['./create-proforma.component.css']
 })
 export class CreateProformaComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private proformaInvoiceService: ProformaInvoiceService
-    , private route: ActivatedRoute, private leadManagementService: LeadManagementService,
-    private workOrderService: WorkOrderService
+    , private route: ActivatedRoute, private router: Router
     ) { }
   requirements: FormArray;
   proformaInvoiceDetailsForm: FormGroup;
@@ -33,8 +29,12 @@ export class CreateProformaComponent implements OnInit {
   gstVal;
   workOrderPDFModel: WorkOrderPdf;
   ngOnInit() {
-    this.leadId = this.route.snapshot.params.leadId;
-    this.workId = this.route.snapshot.params.workId;
+    this.route.paramMap.subscribe(
+      (params: ParamMap) => {
+        this.leadId = params.get('leadId');
+        this.workId = params.get('workId');
+      }
+    );
     this.createForm();
     this.viewWorkOrder();
   }
@@ -57,7 +57,7 @@ export class CreateProformaComponent implements OnInit {
     });
   }
   viewCompanyDetails() {
-    this.workOrderService.workorderPDFDetails().subscribe(data => {
+    this.proformaInvoiceService.workorderPDFDetails().subscribe(data => {
       this.workOrderPDFModel = data;
       this.gstVal = this.workOrderPDFModel[0].gst;
     }, error => {
@@ -81,9 +81,9 @@ export class CreateProformaComponent implements OnInit {
       proformaInvoiceDetailsForm.controls.subTotal.value,
       proformaInvoiceDetailsForm.controls.tax.value
     );
-    this.proformaInvoiceService.createProformaInvoice(this.proformaInvoice, this.leadId).subscribe(data => {
+    this.proformaInvoiceService.createProformaInvoice(this.proformaInvoice).subscribe(data => {
       this.proformaInvoice = data;
-      console.log('singlePerformaInvoice', this.proformaInvoice);
+      this.router.navigate(['proformainvoice/viewproformainvoice', data.workOrderID]);
     }, error => {
       console.log(error);
     });
@@ -100,9 +100,8 @@ export class CreateProformaComponent implements OnInit {
     this.requirementsForms.push(requirements);
   }
   viewWorkOrder()   {
-    this.workOrderService.viewSingleWorkOrder(this.workId).subscribe(data => {
+    this.proformaInvoiceService.viewSingleWorkOrder(this.workId).subscribe(data => {
       this.workOrder = data;
-      console.log('single Work Order Id', this.workOrder);
       this.addForm();
       this.getTotal();
       this.viewCompanyDetails();
@@ -111,15 +110,15 @@ export class CreateProformaComponent implements OnInit {
     });
   }
   addForm() {
-      for (let i = 0; i <= this.workOrder.requirements.length - 1; i++)     {
+      for (let i = 0; i <= this.workOrder[0].requirements.length - 1; i++)     {
         this.requirementsData = this.fb.group({
-          id: [this.workOrder.requirements[i]._id],
-          item: [this.workOrder.requirements[i].item],
-          quantity: [this.workOrder.requirements[i].quantity],
-          price: [this.workOrder.requirements[i].price],
-          discount: [this.workOrder.requirements[i].discount],
-          description: [this.workOrder.requirements[i].description],
-          total: [this.workOrder.requirements[i].total]
+          id: [this.workOrder[0].requirements[i]._id],
+          item: [this.workOrder[0].requirements[i].item],
+          quantity: [this.workOrder[0].requirements[i].quantity],
+          price: [this.workOrder[0].requirements[i].price],
+          discount: [this.workOrder[0].requirements[i].discount],
+          description: [this.workOrder[0].requirements[i].description],
+          total: [this.workOrder[0].requirements[i].total]
         });
         this.requirementsForms.push(this.requirementsData);
       }
