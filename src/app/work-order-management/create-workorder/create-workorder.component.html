@@ -254,7 +254,7 @@
             <mat-form-field class="full-width">
               <input matInput formControlName="allTotal" [readonly]="true"
                placeholder="Total" [ngModel]="(workOrderDetailsForm.controls.tax.value
-                + workOrderDetailsForm.controls.subTotal.value | number )">
+                + workOrderDetailsForm.controls.subTotal.value)">
             </mat-form-field>
           </div>
         </div>

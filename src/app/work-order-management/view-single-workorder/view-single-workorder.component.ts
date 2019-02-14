@@ -105,7 +105,7 @@ export class ViewSingleWorkorderComponent implements OnInit {
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Discount %', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      /* this.doc.addImage(this.imgData, 'JPEG', 140, 5, 15, 15); */
+      this.doc.addImage(this.imgData, 'JPEG', 140, 5, 15, 15);
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');
@@ -181,7 +181,7 @@ export class ViewSingleWorkorderComponent implements OnInit {
     this.viewCompanyDetails();
     this.workOrderService.singleCustomerDetails(this.workOrder[0].customerID).subscribe(data => {
       this.customerModel = data;
-      console.log(this.customerModel);
+      
       const options = {
         margin: {
           top: 120

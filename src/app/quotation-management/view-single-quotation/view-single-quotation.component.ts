@@ -170,7 +170,7 @@ export class ViewSingleQuotationComponent implements OnInit {
       this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.quotation[0].tax);
       this.doc.text(140, 190, 'Total :Rs' + ' ' + this.quotation[0].allTotal);
       this.doc.save('proper.pdf');
-      this.router.navigate(['/lead']);
+      /* this.router.navigate(['/lead']); */
     }, err => {
       console.log(err);
     });
@@ -370,7 +370,7 @@ export class ViewSingleQuotationComponent implements OnInit {
       this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.quotation[0].tax);
       this.doc.text(140, 190, 'Total :Rs' + ' ' + this.quotation[0].allTotal);
       this.doc.save('proper.pdf');
-      this.router.navigate(['/lead']);
+      /* this.router.navigate(['/lead']); */
     }, err => {
       console.log(err);
     });
@@ -470,7 +470,7 @@ export class ViewSingleQuotationComponent implements OnInit {
       this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.quotation[0].tax);
       this.doc.text(140, 190, 'Total :Rs' + ' ' + this.quotation[0].allTotal);
       this.doc.save('proper.pdf');
-      this.router.navigate(['/lead']);
+      /* this.router.navigate(['/lead']); */
     }, err => {
       console.log(err);
     });
