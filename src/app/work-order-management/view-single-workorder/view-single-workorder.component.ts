@@ -30,7 +30,7 @@ export class ViewSingleWorkorderComponent implements OnInit {
   selected = 'withDiscount';
   TypesOfTerms = ['Production Terms', 'Digital Marketing Terms'];
   templates = ['With Discount + GST', 'Without Discount + GST'];
-  imgData = './../../../assets/images/logo.jpg';
+  /* imgData = './../../../assets/images/logo.jpg'; */
   constructor(private workOrderService: WorkOrderService, private route: ActivatedRoute,
     private router: Router, private fb: FormBuilder) { }
   ngOnInit() {
@@ -105,7 +105,7 @@ export class ViewSingleWorkorderComponent implements OnInit {
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Discount %', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      this.doc.addImage(this.imgData, 'JPEG', 140, 5, 15, 15);
+      /* this.doc.addImage(this.imgData, 'JPEG', 140, 5, 15, 15); */
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');

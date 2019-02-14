@@ -45,6 +45,10 @@ body {
   color: #ffffff !important;
 }
 
+.textMenu li a {
+  color: #ffff;
+}
+
 .labelHeader {
   background: lightslategray;
   color: white;

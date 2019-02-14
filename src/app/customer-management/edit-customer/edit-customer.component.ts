@@ -60,6 +60,7 @@ export class EditCustomerComponent implements OnInit {
   updateCustomer(customerDetailsForm: FormGroup, row) {
     this.customerManagementService.editCustomer(row).subscribe(data => {
       this.customerModel = data;
+      this.router.navigate(['customers/viewcustomer']);
     }, error => {
       console.log(error);
     });

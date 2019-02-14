@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, Optional } from '@angular/core';
+import { Component, OnInit, Inject, Optional, Input } from '@angular/core';
 import { Customer } from './customer.model';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -14,6 +14,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class CreateCustomerComponent implements OnInit {
   customerDetailsForm: FormGroup;
   customerModel: Customer;
+  editable = true;
   constructor(private fb: FormBuilder,
     @Optional() public dialogRef: MatDialogRef<CreateCustomerComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,

@@ -1,11 +1,11 @@
 <div fxLayout="row wrap">
   <div fxFlex="100" fxFlex.gt-sm="20" fxFlex.sm="50" class="p-2">
-    <mat-card>
+    <mat-card class="pointer" [routerLink]="['/customers/viewcustomer']">
       <mat-card-title fxLayoutAlign="start center">
         <small class="text-muted">Leads</small>
         <span fxFlex></span>
       </mat-card-title>
-      <mat-card-content>
+      <mat-card-content >
         <h3 class="m-0 font-normal">{{leadModel?.length}}</h3>
         <!-- <small class="text-muted">Monthly</small> -->
       </mat-card-content>
@@ -13,7 +13,7 @@
   </div>
   <div fxFlex="100" fxFlex.gt-sm="20" fxFlex.sm="50" class="p-2">
 
-    <mat-card>
+    <mat-card  [routerLink]="['/workorder/viewworkorder']">
       <mat-card-title>
         <small class="text-muted">Work Order</small>
         <span fxFlex></span>

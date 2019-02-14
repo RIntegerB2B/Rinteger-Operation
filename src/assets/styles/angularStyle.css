@@ -3,3 +3,7 @@
     position: relative;
     text-align: left;
   }
+  .textMenu li a {
+    color: #ffff;
+  }
+  

@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class ViewWorkorderComponent implements OnInit {
   workOrder: WorkOrder[] = [];
+  workOrderModel: WorkOrder[] = [];
   leadId;
   constructor(private workOrderService: WorkOrderService,
     private route: ActivatedRoute,
@@ -30,6 +31,7 @@ export class ViewWorkorderComponent implements OnInit {
     }
   );
   this.getSingleLeads();
+  this.getAllWorkOrder();
   }
   getSingleLeads() {
     this.workOrderService.viewAllWorkOrder(this.leadId).subscribe(data => {
@@ -68,12 +70,12 @@ export class ViewWorkorderComponent implements OnInit {
       console.log(error);
     });
   }
-  /* getAllWorkOrder() {
-    this.workOrderService.allAllWorkOrder().subscribe(data => {
-      const allWorkOrder = data.map().workOrder;
-      this.workOrder = allWorkOrder;
+  getAllWorkOrder() {
+    this.workOrderService.allWorkOrder().subscribe(data => {
+      this.workOrderModel = data;
     }, error => {
       console.log(error);
-    });
-  } */
+    }
+    );
+  }
 }

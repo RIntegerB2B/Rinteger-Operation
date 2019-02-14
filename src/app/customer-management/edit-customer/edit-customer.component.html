@@ -1,137 +1,128 @@
 <div class="container topAlignContainer">
-<form [formGroup]="customerDetailsForm">
-  <div fxLayout="row wrap" fxLayout.lt-sm="column">
+  <form [formGroup]="customerDetailsForm">
+    <div fxLayout="row wrap" fxLayout.lt-sm="column">
       <div fxFlex="100">
-          <label class="pageBoxLg-label">Create Customer</label>
-        </div>
-    <div fxFlex="50" class="pr-1">
-      <mat-form-field class="full-width">
-        <input matInput formControlName="customerID" 
-        placeholder="Customer ID"
-        [readonly]="true"
-         [ngModel]=" customerEdit.customerID"
-          (ngModelChange)=" customerEdit.customerID=$event">
-       
-      </mat-form-field>
-    </div>
-    <div fxFlex="50" class="pr-1">
-      <mat-form-field class="full-width">
-        <input matInput formControlName="mobileNumber" 
-        [readonly]="true" placeholder="Mobile Number" 
-        [ngModel]="customerEdit.mobileNumber"
-          (ngModelChange)="customerEdit.mobileNumber=$event" required>
-       
-      </mat-form-field>
-    </div>
-    <div fxFlex="50" class="pr-1">
-      <mat-form-field class="full-width">
-        <input matInput formControlName="name" [ngModel]="customerEdit.name"
-         (ngModelChange)="customerEdit.name=$event" placeholder="Name">
-       
-      </mat-form-field>
-    </div>
-    <div fxFlex="50" class="pr-1">
-      <mat-form-field class="full-width">
-        <input matInput formControlName="emailId" [ngModel]="customerEdit.emailId"
-         (ngModelChange)="customerEdit.emailId=$event"
-          placeholder="Email Id">
-    
-      </mat-form-field>
-    </div>
-    <div fxFlex="50" class="pr-1">
-      <mat-form-field class="full-width">
-        <input matInput formControlName="location" [ngModel]="customerEdit.location"
-         (ngModelChange)="customerEdit.location=$event"
-          placeholder="Location">
-        <!--  <mat-error *ngIf="customerDetailsForm.controls['location'].errors?.required">
+        <label class="pageBoxLg-label">Create Customer</label>
+      </div>
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="customerID" placeholder="Customer ID" [readonly]="true" [value]="customerEdit?.customerID"
+            (ngModelChange)=" customerEdit.customerID=$event">
+
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="mobileNumber" [readonly]="true" placeholder="Mobile Number" [value]="customerEdit?.mobileNumber"
+            (ngModelChange)="customerEdit.mobileNumber=$event">
+
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="name" [value]="customerEdit?.name" (ngModelChange)="customerEdit.name=$event"
+            placeholder="Name">
+
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="emailId" [value]="customerEdit?.emailId" (ngModelChange)="customerEdit.emailId=$event"
+            placeholder="Email Id">
+
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="location" [value]="customerEdit?.location" (ngModelChange)="customerEdit.location=$event"
+            placeholder="Location">
+          <!--  <mat-error *ngIf="customerDetailsForm.controls['location'].errors?.required">
                     Enter Location
                     <strong>required</strong>
                   </mat-error> -->
-      </mat-form-field>
-    </div>
-    <div fxFlex="50" class="pr-1">
-      <mat-form-field class="full-width">
-        <input matInput formControlName="city" [ngModel]="customerEdit.city"
-         (ngModelChange)="customerEdit.city=$event" placeholder="City">
-        <!--    <mat-error *ngIf="leadDetailsForm.controls['city'].errors?.required">
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="city" [value]="customerEdit?.city" (ngModelChange)="customerEdit.city=$event"
+            placeholder="City">
+          <!--    <mat-error *ngIf="leadDetailsForm.controls['city'].errors?.required">
                     Enter City 
                     <strong>required</strong>
                   </mat-error> -->
-      </mat-form-field>
-    </div>
-    <div fxFlex="50" class="pr-1">
-      <mat-form-field class="full-width">
-        <input matInput formControlName="state" [ngModel]="customerEdit.state"
-         (ngModelChange)="customerEdit.state=$event" placeholder="State">
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="state" [value]="customerEdit?.state" (ngModelChange)="customerEdit.state=$event"
+            placeholder="State">
 
-        <!--      <mat-error *ngIf="customerDetailsForm.controls['state'].errors?.required">
+          <!--      <mat-error *ngIf="customerDetailsForm.controls['state'].errors?.required">
                     Enter State
                     <strong>required</strong>
                   </mat-error> -->
-      </mat-form-field>
-    </div>
-    <div fxFlex="50" class="pr-1">
-      <mat-form-field class="full-width">
-        <input matInput formControlName="pincode" [ngModel]="customerEdit.pincode" (ngModelChange)="customerEdit.pincode=$event"
-          placeholder="PIN">
-        <!--  <mat-error *ngIf="customerDetailsForm.controls['pincode'].errors?.required">
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="pincode" [value]="customerEdit?.pincode" (ngModelChange)="customerEdit.pincode=$event"
+            placeholder="PIN">
+          <!--  <mat-error *ngIf="customerDetailsForm.controls['pincode'].errors?.required">
                     Enter PIN
                     <strong>required</strong>
                   </mat-error> -->
-      </mat-form-field>
-    </div>
-    <div fxFlex="50" class="pr-1">
-      <mat-form-field class="full-width">
-        <input matInput formControlName="companyName"
-         [ngModel]="customerEdit.companyName"
-          (ngModelChange)="customerEdit.companyName=$event"
-          placeholder="Company Name">
-        <!--  <mat-error *ngIf="customerDetailsForm.controls['companyName'].errors?.required">
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="companyName" [value]="customerEdit?.companyName" (ngModelChange)="customerEdit.companyName=$event"
+            placeholder="Company Name">
+          <!--  <mat-error *ngIf="customerDetailsForm.controls['companyName'].errors?.required">
                     Enter Company Name
                     <strong>required</strong>
                   </mat-error> -->
-      </mat-form-field>
-    </div>
+        </mat-form-field>
+      </div>
 
-    <div fxFlex="50" class="pr-1">
-      <mat-form-field class="full-width">
-        <input matInput formControlName="companyAddress"
-         formControlName="companyAddress" [ngModel]="customerEdit.companyAddress"
-          (ngModelChange)="customerEdit.companyAddress=$event"
-           placeholder="Company Address">
-        <!--  <mat-error *ngIf="customerDetailsForm.controls['companyAddress'].errors?.required">
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="companyAddress" formControlName="companyAddress" [value]="customerEdit?.companyAddress"
+            (ngModelChange)="customerEdit.companyAddress=$event" placeholder="Company Address">
+          <!--  <mat-error *ngIf="customerDetailsForm.controls['companyAddress'].errors?.required">
                     Enter Company Address
                     <strong>required</strong>
                   </mat-error> -->
-      </mat-form-field>
-    </div>
-    <div fxFlex="50" class="pr-1">
-      <mat-form-field class="full-width">
-        <input matInput formControlName="gstNumber" [ngModel]="customerEdit.gstNumber" (ngModelChange)="customerEdit.gstNumber=$event"
-          placeholder="GST Number">
-        <!--   <mat-error *ngIf="customerDetailsForm.controls['gstNumber'].errors?.required">
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="gstNumber" [value]="customerEdit?.gstNumber" (ngModelChange)="customerEdit.gstNumber=$event"
+            placeholder="GST Number">
+          <!--   <mat-error *ngIf="customerDetailsForm.controls['gstNumber'].errors?.required">
                         Enter GST Number
                         <strong>required</strong>
                       </mat-error> -->
-      </mat-form-field>
-    </div>
-    <div fxFlex="50" class="pr-1">
-      <mat-form-field class="full-width">
-        <input matInput formControlName="brandName"
-         [ngModel]="customerEdit.brandName" (ngModelChange)="customerEdit.brandName=$event"
-          placeholder="Brand Name">
-        <!--    <mat-error *ngIf="customerDetailsForm.controls['brandName'].errors?.required">
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="brandName"
+           [value]="customerEdit?.brandName"
+            (ngModelChange)="customerEdit.brandName=$event"
+            placeholder="Brand Name">
+          <!--    <mat-error *ngIf="customerDetailsForm.controls['brandName'].errors?.required">
                             Enter Brand Name
                             <strong>required</strong>
                           </mat-error> -->
-      </mat-form-field>
+        </mat-form-field>
+      </div>
+      <div fxFlex="100" class="mt-1">
+        <button mat-raised-button mat-button color="accent"
+         type="button" (click)="cancel()">Cancel</button>
+        <span fxFlex></span>
+        <span fxFlex></span>
+        <button mat-raised-button type="button" color="primary" (click)="updateCustomer(customerDetailsForm, customerEdit)">Save</button>
+      </div>
     </div>
-    <div fxFlex="100" class="mt-1">
-      <button mat-raised-button color="primary" (click)="updateCustomer(customerDetailsForm, customerEdit)">Save</button>
-      <span fxFlex></span>
-      <span fxFlex></span>
-      <button mat-raised-button mat-button color="accent" type="button" (click)="cancel()">Cancel</button>
-    </div>
-  </div>
-</form>
+  </form>
 </div>
