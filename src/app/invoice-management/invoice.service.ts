@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Invoice } from './../shared/invoice.model';
@@ -49,27 +48,27 @@ export class InvoiceService {
   viewSingleInvoice(invid): Observable<any> {
     const addUrl = 'viewsingleinvoice/';
     /* const singleUrl = '/single/'; */
-    const url: string = this.serviceUrl + addUrl  + invid;
+    const url: string = this.serviceUrl + addUrl + invid;
     return this.httpClient.get<Invoice[]>(url);
   }
   viewSingleWorkOrder(workid): Observable<any> {
     const addUrl = 'viewsingleworkorder/';
-    const url: string = this.serviceUrl + addUrl  + workid;
+    const url: string = this.serviceUrl + addUrl + workid;
     return this.httpClient.get<WorkOrder[]>(url);
   }
-  deleteSingleInvoice(invid)   {
+  deleteSingleInvoice(invid) {
     const addUrl = 'deleteinvoice/';
-    const url: string = this.serviceUrl + addUrl + + invid;
+    const url: string = this.serviceUrl + addUrl + invid;
     return this.httpClient.delete<Invoice[]>(url);
   }
   workorderPDFDetails(): Observable<any> {
     const addUrl = 'workorderpdfdetails/';
-    const url: string = this.serviceUrl + addUrl ;
+    const url: string = this.serviceUrl + addUrl;
     return this.httpClient.get<Customer[]>(url);
   }
   singleCustomerDetails(id): Observable<any> {
     const addUrl = 'customerdetails/';
-    const url: string = this.serviceUrl + addUrl + id ;
+    const url: string = this.serviceUrl + addUrl + id;
     return this.httpClient.get<Customer[]>(url);
   }
 }

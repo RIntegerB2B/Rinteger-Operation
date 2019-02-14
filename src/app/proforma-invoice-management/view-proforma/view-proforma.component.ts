@@ -44,8 +44,7 @@ export class ViewProformaComponent implements OnInit {
     });
   }
   getDeleteSingleProformaInvoice(row)   {
-    this.proformaInvoiceService.deleteSingleProformaInvoice(this.leadId,
-       row._id).subscribe(data => {
+    this.proformaInvoiceService.deleteSingleProformaInvoice(row._id).subscribe(data => {
       this.proformaInvoice = data;
       console.log('all view', this.proformaInvoice);
     }, error => {

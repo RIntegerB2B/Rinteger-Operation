@@ -41,9 +41,10 @@ export class ViewInvoiceComponent implements OnInit {
     });
   }
   getDeleteSingleInvoice(row)   {
-    this.invoiceService.deleteSingleInvoice(this.workId).subscribe(data => {
+
+    this.invoiceService.deleteSingleInvoice(row._id).subscribe(data => {
       this.invoice = data;
-      console.log('all view', this.invoice);
+
     }, error => {
       console.log(error);
     });

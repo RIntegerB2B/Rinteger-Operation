@@ -27,6 +27,7 @@ export class MainmenuComponent implements OnInit {
     this.viewAllinvoice();
     this.getAllWorkOrder();
     this.getAllQuotation();
+    this.getAllProformaInvoice();
   }
   viewAllinvoice() {
     this.dashboardService.allAllInvoice().subscribe(data => {
@@ -55,6 +56,14 @@ export class MainmenuComponent implements OnInit {
   getAllQuotation() {
     this.dashboardService.allQuotation().subscribe(data => {
       this.quotationModel = data;
+    }, error => {
+      console.log(error);
+    }
+    );
+  }
+  getAllProformaInvoice() {
+    this.dashboardService.allAllProfomaInvoice().subscribe(data => {
+      this.proformaInvoice = data;
     }, error => {
       console.log(error);
     }

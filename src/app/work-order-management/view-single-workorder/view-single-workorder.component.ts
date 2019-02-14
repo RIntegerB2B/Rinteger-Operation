@@ -49,9 +49,8 @@ export class ViewSingleWorkorderComponent implements OnInit {
   }
   viewWorkOrder() {
     this.workOrderService.viewSingleWorkOrder(this.workId).subscribe(data => {
-      console.log('work order details', data);
       this.workOrder = data;
-      this.customerID = this.workOrder.customerID;
+      this.customerID = this.workOrder[0].customerID;
     }, error => {
       console.log(error);
     });
@@ -137,8 +136,8 @@ export class ViewSingleWorkorderComponent implements OnInit {
       this.doc.setFontType('bold');
       this.doc.text(10, 75, 'Work Order Details');
       this.doc.setFontType('normal');
-      this.doc.text(10, 80, 'Work Order ID :' + this.workOrder.workOrderID);
-      this.doc.text(10, 85, ' Date :' + this.workOrder.date);
+      this.doc.text(10, 80, 'Work Order ID :' + this.workOrder[0].workOrderID);
+      this.doc.text(10, 85, ' Date :' + this.workOrder[0].date);
       this.doc.setFontType('bold');
       this.doc.text(130, 75, 'Bank Details');
       this.doc.setFontType('normal');
@@ -169,9 +168,9 @@ export class ViewSingleWorkorderComponent implements OnInit {
       this.doc.setFontType('normal');
       this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.workOrder[0].subTotal.toString());
       this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.workOrder.tax);
-      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.workOrder.allTotal);
+      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.workOrder[0].allTotal);
       this.doc.save('proper.pdf');
-      this.router.navigate(['/lead']);
+      
     }, err => {
       console.log(err);
     });
@@ -367,9 +366,8 @@ export class ViewSingleWorkorderComponent implements OnInit {
       this.doc.setFontType('normal');
       this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.workOrder[0].subTotal.toString());
       this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.workOrder.tax);
-      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.workOrder.allTotal);
+      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.workOrder[0].allTotal);
       this.doc.save('proper.pdf');
-      this.router.navigate(['/lead']);
     }, err => {
       console.log(err);
     });
@@ -435,8 +433,8 @@ export class ViewSingleWorkorderComponent implements OnInit {
       this.doc.setFontType('bold');
       this.doc.text(10, 75, 'Work Order Details');
       this.doc.setFontType('normal');
-      this.doc.text(10, 80, 'Work Order ID :' + this.workOrder.workOrderID);
-      this.doc.text(10, 85, ' Date :' + this.workOrder.date);
+      this.doc.text(10, 80, 'Work Order ID :' + this.workOrder[0].workOrderID);
+      this.doc.text(10, 85, ' Date :' + this.workOrder[0].date);
       this.doc.setFontType('bold');
       this.doc.text(130, 75, 'Bank Details');
       this.doc.setFontType('normal');
@@ -465,11 +463,11 @@ export class ViewSingleWorkorderComponent implements OnInit {
       }
       );
       this.doc.setFontType('normal');
-      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.workOrder.subTotal.toString());
+      this.doc.text(140, 180, 'Sub Total :Rs' + ' ' + this.workOrder[0].subTotal.toString());
       this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.workOrder.tax);
-      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.workOrder.allTotal);
+      this.doc.text(140, 190, 'Total :Rs' + ' ' + this.workOrder[0].allTotal);
       this.doc.save('proper.pdf');
-      this.router.navigate(['/lead']);
+      /* this.router.navigate(['/lead']); */
     }, err => {
       console.log(err);
     });

@@ -94,6 +94,9 @@ export class CreateQuotationComponent implements OnInit {
       console.log(error);
     });
   }
+  cancelQutotation()   {
+    this.router.navigate(['lead/leadview']);
+  }
   addNewForm() {
     const requirements = this.fb.group({
       item: [''],

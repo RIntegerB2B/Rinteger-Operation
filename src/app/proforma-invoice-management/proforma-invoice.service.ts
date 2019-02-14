@@ -52,10 +52,9 @@ export class ProformaInvoiceService {
     const url: string = this.serviceUrl + addUrl + pinvid;
     return this.httpClient.get<ProformaInvoice[]>(url);
   }
-  deleteSingleProformaInvoice(leadid, invid)   {
+  deleteSingleProformaInvoice(pinvid)   {
     const addUrl = 'proforma/';
-    const subUrl = '/onedelete/';
-    const url: string = this.serviceUrl + addUrl + leadid + subUrl + invid;
+    const url: string = this.serviceUrl + addUrl + pinvid;
     return this.httpClient.delete<ProformaInvoice[]>(url);
   }
   workorderPDFDetails(): Observable<any> {
