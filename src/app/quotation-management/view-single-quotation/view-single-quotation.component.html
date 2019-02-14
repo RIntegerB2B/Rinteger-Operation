@@ -1,4 +1,5 @@
-<form novalidate style="padding-top:20px" [formGroup]="singleQuotationDetailsForm">
+<form novalidate style="padding-top:20px" 
+[formGroup]="singleQuotationDetailsForm">
   <label class="pageBoxLg-label">Quotation Details</label>
   <div class="pageBoxLg" *ngFor="let data of quotation">
     <div class="row">
@@ -99,7 +100,7 @@
           </div>
         </div>
       </div>
-      <div class="row gridRow" *ngFor="let dataReq of quotation?.requirements; let i = index">
+      <div class="row gridRow" *ngFor="let dataReq of data?.requirements; let i = index">
         <div class="display-none-large col-6">
           <label class="gridLabel">Item:</label>
         </div>

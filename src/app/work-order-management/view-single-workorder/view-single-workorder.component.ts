@@ -81,6 +81,7 @@ export class ViewSingleWorkorderComponent implements OnInit {
     this.viewCompanyDetails();
     this.workOrderService.singleCustomerDetails(this.workOrder[0].customerID).subscribe(data => {
       this.customerModel = data;
+      console.log(this.customerModel);
       const options = {
         margin: {
           top: 120
@@ -180,6 +181,7 @@ export class ViewSingleWorkorderComponent implements OnInit {
     this.viewCompanyDetails();
     this.workOrderService.singleCustomerDetails(this.workOrder[0].customerID).subscribe(data => {
       this.customerModel = data;
+      console.log(this.customerModel);
       const options = {
         margin: {
           top: 120
