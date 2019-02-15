@@ -19,18 +19,11 @@ export class ViewWorkorderComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-   /*  if (typeof this.leadId !== 'undefined')     {
-    this.leadId = this.route.snapshot.params.leadId;
-    this.getSingleLeads();
-  } else   {
-    this.getAllWorkOrder();
-  } */
   this.route.paramMap.subscribe(
     (params: ParamMap) => {
       this.leadId = params.get('leadId');
     }
   );
-  this.getSingleLeads();
   this.getAllWorkOrder();
   }
   getSingleLeads() {

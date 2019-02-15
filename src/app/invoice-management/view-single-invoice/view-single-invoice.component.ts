@@ -40,6 +40,10 @@ export class ViewSingleInvoiceComponent implements OnInit {
     this.viewSingleInvoice();
     this.createForm();
   }
+
+  cancelInvoice()   {
+    this.router.navigate(['invoice/viewinvoice', this.invoice[0].workOrderID]);
+  }
   viewSingleInvoice() {
     this.invoiceService.viewSingleInvoice(
       this.invId).subscribe(data => {
@@ -181,12 +185,12 @@ export class ViewSingleInvoiceComponent implements OnInit {
       'CGST (' + this.workOrderPDFModel[0].cgst + '%) : Rs' + ' ' + this.invoice[0].tax.toString());
       this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice[0].allTotal);
       this.doc.save('proper.pdf');
-      this.router.navigate(['/lead']);
+      /* this.router.navigate(['/lead']); */
     }, err => {
       console.log(err);
     });
-
   }
+  
   pdfGSTWithDiscountDigitalTerms() {
     this.viewCompanyDetails();
     this.invoiceService.singleCustomerDetails(this.invoice[0].customerID).subscribe(data => {
@@ -283,7 +287,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
       'CGST (' + this.workOrderPDFModel[0].cgst + '%) : Rs' + ' ' + this.invoice[0].tax.toString());
       this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice[0].allTotal);
       this.doc.save('proper.pdf');
-      this.router.navigate(['/lead']);
+      /* this.router.navigate(['/lead']); */
     }, err => {
       console.log(err);
     });
@@ -385,7 +389,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
       'CGST (' + this.workOrderPDFModel[0].cgst + '%) : Rs' + ' ' + this.invoice[0].tax.toString());
       this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice[0].allTotal);
       this.doc.save('proper.pdf');
-      this.router.navigate(['/lead']);
+      /* this.router.navigate(['/lead']); */
     }, err => {
       console.log(err);
     });
@@ -487,7 +491,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
       'CGST (' + this.workOrderPDFModel[0].cgst + '%) : Rs' + ' ' + this.invoice[0].tax.toString());
       this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice[0].allTotal);
       this.doc.save('proper.pdf');
-      this.router.navigate(['/lead']);
+      /* this.router.navigate(['/lead']); */
     }, err => {
       console.log(err);
     });
@@ -584,7 +588,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
       'CGST (' + this.workOrderPDFModel[0].cgst + '%) : Rs' + ' ' + this.invoice[0].tax.toString());
       this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice[0].allTotal);
       this.doc.save('proper.pdf');
-      this.router.navigate(['/lead']);
+      /* this.router.navigate(['/lead']); */
     }, err => {
       console.log(err);
     });
@@ -685,7 +689,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
       this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.invoice[0].tax);
       this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice[0].allTotal);
       this.doc.save('proper.pdf');
-      this.router.navigate(['/lead']);
+      /* this.router.navigate(['/lead']); */
     }, err => {
       console.log(err);
     });
@@ -785,7 +789,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
       this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.invoice.tax);
       this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice[0].allTotal);
       this.doc.save('proper.pdf');
-      this.router.navigate(['/lead']);
+      /* this.router.navigate(['/lead']); */
     }, err => {
       console.log(err);
     });
@@ -885,7 +889,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
       this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.invoice.tax);
       this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice[0].allTotal);
       this.doc.save('proper.pdf');
-      this.router.navigate(['/lead']);
+      /* this.router.navigate(['/lead']); */
     }, err => {
       console.log(err);
     });
@@ -980,7 +984,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
       this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.invoice[0].tax);
       this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice[0].allTotal);
       this.doc.save('proper.pdf');
-      this.router.navigate(['/lead']);
+      /* this.router.navigate(['/lead']); */
     }, err => {
       console.log(err);
     });

@@ -176,6 +176,18 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <button (click)="templateType(tempVal.value)">Save as PDF</button>
+    <div class="row">
+      <div class="col-md-10">
+        <button mat-raised-button
+         (click)="templateType(tempVal.value)"
+         color="primary"
+          type="button"> Save as PDF</button>
+      </div>
+      <div class="col-md-2">
+        <button mat-raised-button  type="button"
+        color="accent"
+         (click)="cancelProfomaInvoice(data)">Cancel</button>
+      </div>
+    </div>
   </div>
 </form>

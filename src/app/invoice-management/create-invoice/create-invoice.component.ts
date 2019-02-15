@@ -80,6 +80,9 @@ export class CreateInvoiceComponent implements OnInit {
       console.log(error);
     });
   }
+  cancelInvoice() {
+    this.router.navigate(['workorder/viewworkorder', this.leadId]);
+  }
   addNewForm() {
     const requirements = this.fb.group({
       item: [''],

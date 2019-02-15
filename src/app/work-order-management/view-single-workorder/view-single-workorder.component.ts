@@ -65,6 +65,9 @@ export class ViewSingleWorkorderComponent implements OnInit {
   showTemplate() {
     this.templateOption = true;
   }
+  cancelWorkorder(data)   {
+    this.router.navigate(['workorder/viewworkorder', data.leadID]);
+  }
   templateType(val) {
     const TYPE = this.singleWorkorderDetailsForm.controls.termsType.value;
     if (val === 'With Discount + GST' && TYPE === 'Production Terms') {

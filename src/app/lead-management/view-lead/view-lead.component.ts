@@ -55,7 +55,6 @@ export class ViewLeadComponent implements OnInit {
   createWorkOrder(row) {
     this.leadManagementService.checkWorkOrder(row).subscribe(data => {
       this.leadModelCheck = data;
-      console.log('check', this.leadModelCheck);
       if (data.length === 0) {
         this.createCustomerService.openCustomer(row);
       } else {

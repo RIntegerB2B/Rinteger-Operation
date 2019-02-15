@@ -230,7 +230,13 @@ style="padding-top:20px">
         </div>
       </div>
     </div>
-    <button type="button"
-     (click)="createLeadProformaInvoice(proformaInvoiceDetailsForm)" mat-raised-button color="primary">Save</button>
+    <div class="row">
+      <div class="col-md-10">
+        <button mat-raised-button (click)="cancelInvoice()" type="button" color="accent">Cancel</button>
+      </div>
+      <div class="col-md-2">
+        <button mat-raised-button color="primary" type="button" (click)="createLeadProformaInvoice(proformaInvoiceDetailsForm)">Save</button>
+      </div>
+    </div>
   </div>
 </form>

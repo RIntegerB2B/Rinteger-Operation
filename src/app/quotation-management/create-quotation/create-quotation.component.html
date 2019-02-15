@@ -1,4 +1,4 @@
-<form novalidate [formGroup]="quotationDetailsForm"
+<form novalidate [formGroup]="quotationDetailsForm" (ngSubmit)="createQuotation(quotationDetailsForm)"
  style="padding-top:20px">
   <label class="pageBoxLg-label">Create Quotation</label>
   <div class="pageBoxLg" *ngFor="let leadData of leadModel; let i = index">

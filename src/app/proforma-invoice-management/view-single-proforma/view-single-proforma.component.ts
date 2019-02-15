@@ -83,6 +83,9 @@ export class ViewSingleProformaComponent implements OnInit {
       console.log(error);
     });
   }
+  cancelProfomaInvoice(data)   {
+    this.router.navigate(['/proformainvoice/viewproformainvoice', data.workOrderID]);
+  }
   pdfGSTDiscountTerms() {
     this.viewCompanyDetails();
     this.proformaInvoiceService.singleCustomerDetails(this.proformaInvoice[0].customerID).subscribe(data => {

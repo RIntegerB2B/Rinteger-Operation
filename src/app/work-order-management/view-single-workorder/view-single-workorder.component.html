@@ -1,4 +1,5 @@
-<form novalidate style="padding-top:20px"  [formGroup]="singleWorkorderDetailsForm" >
+<form novalidate style="padding-top:20px" 
+ [formGroup]="singleWorkorderDetailsForm" >
   <label class="pageBoxLg-label">Work Order Details</label>
   <div class="pageBoxLg" *ngFor="let data of workOrder; let i = index">
     <div class="row">
@@ -189,7 +190,20 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <button (click)="templateType(tempVal.value)">Save as PDF</button>
+    
+    </div>
+    <div class="row">
+      <div class="col-md-10">
+        <button mat-raised-button
+         (click)="templateType(tempVal.value)"
+         color="primary"
+          type="button"> Save as PDF</button>
+      </div>
+      <div class="col-md-2">
+        <button mat-raised-button  type="button"
+        color="accent"
+         (click)="cancelWorkorder(data)">Cancel</button>
+      </div>
     </div>
 
   </div>

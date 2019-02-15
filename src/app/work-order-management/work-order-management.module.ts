@@ -35,12 +35,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ViewAllWorkorderComponent } from './view-all-workorder/view-all-workorder.component';
 
 @NgModule({
   declarations: [CreateWorkorderComponent,
     ViewSingleWorkorderComponent,
     EditWorkorderComponent,
-    ViewWorkorderComponent],
+    ViewWorkorderComponent,
+    ViewAllWorkorderComponent],
     imports: [
       HttpClientModule,
       HttpModule,

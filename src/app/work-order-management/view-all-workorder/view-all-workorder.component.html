@@ -1,5 +1,5 @@
 <form style="padding-top:20px">
-  <label class="pageBoxLg-label">View work Orders</label>
+  <label class="pageBoxLg-label">View All work Orders</label>
   <div class="pageBoxLg">
     <div class="row gridRowHeader display-none-small">
       <div class="col-md-2 vcenterHeader">
@@ -33,8 +33,7 @@
         </div>
       </div>
     </div>
-    <div *ngFor="let data of workOrder">
-      <div *ngIf="data.leadID === leadId;">
+    <div *ngFor="let data of workOrderModel">
       <div class="row gridRow">
         <div class="display-none-large col-6">
           <label class="gridLabel">Work Order ID:</label>
@@ -103,8 +102,8 @@
             </a> -->
           </mat-menu>
         </div>
-      </div>
     </div>
+    
     </div>
   </div>
 </form>
