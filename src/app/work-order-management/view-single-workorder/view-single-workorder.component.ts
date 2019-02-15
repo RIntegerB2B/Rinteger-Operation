@@ -30,7 +30,7 @@ export class ViewSingleWorkorderComponent implements OnInit {
   selected = 'withDiscount';
   TypesOfTerms = ['Production Terms', 'Digital Marketing Terms'];
   templates = ['With Discount + GST', 'Without Discount + GST'];
-  /* imgData = './../../../assets/images/logo.jpg'; */
+  imgData = './../../../assets/images/logo.jpg';
   constructor(private workOrderService: WorkOrderService, private route: ActivatedRoute,
     private router: Router, private fb: FormBuilder) { }
   ngOnInit() {
@@ -84,7 +84,6 @@ export class ViewSingleWorkorderComponent implements OnInit {
     this.viewCompanyDetails();
     this.workOrderService.singleCustomerDetails(this.workOrder[0].customerID).subscribe(data => {
       this.customerModel = data;
-      console.log(this.customerModel);
       const options = {
         margin: {
           top: 120
@@ -108,7 +107,7 @@ export class ViewSingleWorkorderComponent implements OnInit {
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Discount %', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      /* this.doc.addImage(this.imgData, 'JPEG', 140, 5, 15, 15); */
+    /*   this.doc.addImage(this.imgData, 'JPEG', 140, 5, 15, 15); */
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');
@@ -174,7 +173,6 @@ export class ViewSingleWorkorderComponent implements OnInit {
       this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.workOrder.tax);
       this.doc.text(140, 190, 'Total :Rs' + ' ' + this.workOrder[0].allTotal);
       this.doc.save('proper.pdf');
-      
     }, err => {
       console.log(err);
     });
@@ -184,7 +182,6 @@ export class ViewSingleWorkorderComponent implements OnInit {
     this.viewCompanyDetails();
     this.workOrderService.singleCustomerDetails(this.workOrder[0].customerID).subscribe(data => {
       this.customerModel = data;
-      
       const options = {
         margin: {
           top: 120
