@@ -1,10 +1,10 @@
 <form style="padding-top:20px">
-  <label class="pageBoxLg-label">View work Orders</label>
+  <label class="pageBoxLg-label">View Proforma Invoice</label>
   <div class="pageBoxLg">
     <div class="row gridRowHeader display-none-small">
       <div class="col-md-2 vcenterHeader">
         <div class="form-group">
-          <label>Work Order ID</label>
+          <label>Proforma Invoice ID</label>
         </div>
       </div>
       <div class="col-md-2 vcenterHeader">
@@ -24,7 +24,7 @@
       </div>
       <div class="col-md-2 vcenterHeader">
         <div class="form-group">
-          <!-- <label>Lead Status</label> -->
+          <label>Expiry Date</label>
         </div>
       </div>
       <div class="col-md-2 vcenterHeader">
@@ -33,38 +33,40 @@
         </div>
       </div>
     </div>
-    <div *ngFor="let data of workOrder">
-      <div *ngIf="data.leadID === leadId;">
+    <div *ngFor="let data of proformaInvoice">
+      
       <div class="row gridRow">
         <div class="display-none-large col-6">
-          <label class="gridLabel">Work Order ID:</label>
+          <label class="gridLabel">Proforma Invoice ID:</label>
         </div>
         <div class="col-md-2 col-6 vcenter form-group">
-          {{data.workOrderID}}
+          {{data.proformaInvoiceID}}
         </div>
         <div class="display-none-large col-6">
           <label class="gridLabel">Company Name:</label>
         </div>
         <div class="col-md-2 col-6 vcenter form-group">
-          {{data.companyName}}
+          {{data?.companyName}}
         </div>
         <div class="display-none-large col-6">
           <label class="gridLabel">Mobile Number:</label>
         </div>
         <div class="col-md-2 col-6 vcenter form-group">
-          {{data.mobileNumber}}
+          {{data?.mobileNumber}}
         </div>
         <div class="display-none-large col-6">
           <label class="gridLabel">Date:</label>
         </div>
         <div class="col-md-2 col-6 vcenter form-group">
-          {{data.date | date: 'dd/MM/yyyy' }}
+          {{data?.date | date: 'dd/MM/yyyy' }}
         </div>
         <div class="display-none-large col-6">
-          <!--   <label class="gridLabel">Lead Status:</label> -->
+          <label class="gridLabel">Expiry Date:</label>
         </div>
         <div class="col-md-2 col-6 vcenter form-group">
-          <!-- {{data.leadStatus}} -->
+          <div class="col-md-2 col-6 vcenter form-group">
+            {{data?.expiryDate | date: 'dd/MM/yyyy' }}
+          </div>
         </div>
         <div class="display-none-large col-6">
           <label class="gridLabel">Action:</label>
@@ -74,28 +76,13 @@
             <mat-icon>more_vert</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
-            <a class="nav-link" (click)="getViewWorkOrder(data)">
+            <a class="nav-link" (click)="getViewProformaInvoice(data)">
               View
             </a>
-            <a class="nav-link"(click)="createInvoice(data)">
-              Create Invoice
-            </a>
-            <a class="nav-link"
-             (click)="viewInvoice(data)">
-              view Invoice
-            </a>
-            <a class="nav-link"
-             (click)="createProfomaInvoice(data)">
-                Create ProformaInvoice
-              </a>
-              <a class="nav-link"
-               (click)="viewProfomaInvoice(data)">
-                view ProformaInvoice
-              </a>
-            <a class="nav-link" (click)="getEditWorkOrder(data)">
+            <a class="nav-link" (click)="getEditInvoice(data)">
               Edit
             </a>
-            <a class="nav-link" (click)="getDeleteSingleWorkOrder(data)">
+            <a class="nav-link" (click)="getDeleteSingleProformaInvoice(data)">
               Delete
             </a>
            <!--  <a class="nav-link" (click)="createWorkOrder(data)">
@@ -103,9 +90,7 @@
             </a> -->
           </mat-menu>
         </div>
-      </div>
     </div>
-
     </div>
   </div>
 </form>

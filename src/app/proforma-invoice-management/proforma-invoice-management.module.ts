@@ -35,10 +35,11 @@ import {
   MatNativeDateModule
 } from '@angular/material';
 import { ProformaRoutingModule } from './proforma-routing.module';
+import { ViewAllProformaComponent } from './view-all-proforma/view-all-proforma.component';
 
 @NgModule({
   declarations: [CreateProformaComponent,
-    ViewSingleProformaComponent, ViewProformaComponent],
+    ViewSingleProformaComponent, ViewProformaComponent, ViewAllProformaComponent],
     imports: [
       ProformaRoutingModule,
       HttpClientModule,

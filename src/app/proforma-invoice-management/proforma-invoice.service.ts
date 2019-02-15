@@ -62,6 +62,11 @@ export class ProformaInvoiceService {
     const url: string = this.serviceUrl + addUrl ;
     return this.httpClient.get<Customer[]>(url);
   }
+  allAllProfomaInvoice(): Observable<any> {
+    const addUrl = 'viewallprofomainvoice';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<ProformaInvoice[]>(url);
+  }
   singleCustomerDetails(id): Observable<any> {
     const addUrl = 'customerdetails/';
     const url: string = this.serviceUrl + addUrl + id ;

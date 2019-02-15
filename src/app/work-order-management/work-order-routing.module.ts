@@ -5,6 +5,7 @@ import { CreateWorkorderComponent } from './create-workorder/create-workorder.co
 import { ViewSingleWorkorderComponent } from './view-single-workorder/view-single-workorder.component';
 import { EditWorkorderComponent } from './edit-workorder/edit-workorder.component';
 import { ViewWorkorderComponent } from './view-workorder/view-workorder.component';
+import { ViewAllWorkorderComponent } from './view-all-workorder/view-all-workorder.component';
 
 const routes: Routes = [
   {
@@ -23,8 +24,8 @@ const routes: Routes = [
   path: 'viewworkorder/:leadId',
   component: ViewWorkorderComponent
 }, {
-  path: 'viewworkorder',
-  component: ViewWorkorderComponent
+  path: 'viewallworkorder',
+  component: ViewAllWorkorderComponent
 }
 ];
 @NgModule({

@@ -45,6 +45,11 @@ export class InvoiceService {
     const url: string = this.serviceUrl + addUrl + id;
     return this.httpClient.get<Invoice[]>(url);
   }
+  allAllInvoice(): Observable<any> {
+    const addUrl = 'viewallinvoice';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<Invoice[]>(url);
+  }
   viewSingleInvoice(invid): Observable<any> {
     const addUrl = 'viewsingleinvoice/';
     /* const singleUrl = '/single/'; */

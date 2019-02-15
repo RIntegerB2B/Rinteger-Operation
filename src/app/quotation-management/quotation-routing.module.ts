@@ -4,6 +4,7 @@ import { CreateQuotationComponent } from './create-quotation/create-quotation.co
 import { ViewQuotationComponent } from './view-quotation/view-quotation.component';
 import { ViewSingleQuotationComponent } from './view-single-quotation/view-single-quotation.component';
 import { Routes, RouterModule } from '@angular/router';
+import { ViewAllQuotationComponent } from './view-all-quotation/view-all-quotation.component';
 const routes: Routes = [
   {
     path: 'createquotation/:id/:leadId',
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: 'viewsinglequotation/:quoId',
     component: ViewSingleQuotationComponent
+  },
+  {
+    path: 'viewallquotation',
+    component: ViewAllQuotationComponent
   }
 ];
 

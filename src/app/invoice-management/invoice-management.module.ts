@@ -35,11 +35,13 @@ import { CreateInvoiceComponent } from './create-invoice/create-invoice.componen
 import { ViewInvoiceComponent } from './view-invoice/view-invoice.component';
 import { ViewSingleInvoiceComponent } from './view-single-invoice/view-single-invoice.component';
 import { InvoiceRoutingModule } from './invoice-routing.module';
+import { ViewAllInvoiceComponent } from './view-all-invoice/view-all-invoice.component';
 
 @NgModule({
   declarations: [CreateInvoiceComponent,
      ViewInvoiceComponent,
-      ViewSingleInvoiceComponent],
+      ViewSingleInvoiceComponent,
+      ViewAllInvoiceComponent],
   imports: [
     HttpClientModule,
     HttpModule,

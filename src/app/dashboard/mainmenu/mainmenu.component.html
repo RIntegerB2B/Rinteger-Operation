@@ -13,7 +13,8 @@
   </div>
   <div fxFlex="100" fxFlex.gt-sm="20" fxFlex.sm="50" class="p-2">
 
-    <mat-card  [routerLink]="['/workorder/viewworkorder']">
+    <mat-card  class="pointer" 
+    [routerLink]="['/workorder/viewallworkorder']">
       <mat-card-title>
         <small class="text-muted">Work Order</small>
         <span fxFlex></span>
@@ -24,9 +25,20 @@
       </mat-card-content>
     </mat-card>
   </div>
-
   <div fxFlex="100" fxFlex.gt-sm="20" fxFlex.sm="50" class="p-2">
-    <mat-card>
+    <mat-card class="pointer" [routerLink]="['/quotation/viewallquotation']" >
+      <mat-card-title>
+        <small class="text-muted">Quotation</small>
+        <span fxFlex></span>
+      </mat-card-title>
+      <mat-card-content>
+         <h3 class="m-0 font-normal">{{quotationModel?.length}}</h3>
+        <!--   <small class="text-muted">Monthly</small> -->
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div fxFlex="100" fxFlex.gt-sm="20" fxFlex.sm="50" class="p-2">
+    <mat-card class="pointer"  [routerLink]="['/invoice/viewallinvoice']">
       <mat-card-title>
         <small class="text-muted">Invoice</small>
         <span fxFlex></span>
@@ -38,9 +50,10 @@
     </mat-card>
   </div>
   <div fxFlex="100" fxFlex.gt-sm="20" fxFlex.sm="50" class="p-2">
-    <mat-card>
+    <mat-card class="pointer"
+     [routerLink]="['/proformainvoice/viewallproformainvoice']">
       <mat-card-title>
-        <small class="text-muted">Performa Invoice</small>
+        <small class="text-muted">profoma Invoice</small>
         <span fxFlex></span>
       </mat-card-title>
       <mat-card-content>
@@ -49,16 +62,5 @@
       </mat-card-content>
     </mat-card>
   </div>
-  <div fxFlex="100" fxFlex.gt-sm="20" fxFlex.sm="50" class="p-2">
-      <mat-card>
-        <mat-card-title>
-          <small class="text-muted">Quotation</small>
-          <span fxFlex></span>
-        </mat-card-title>
-        <mat-card-content>
-           <h3 class="m-0 font-normal">{{quotationModel?.length}}</h3>
-          <!--   <small class="text-muted">Monthly</small> -->
-        </mat-card-content>
-      </mat-card>
-    </div>
+  
 </div>

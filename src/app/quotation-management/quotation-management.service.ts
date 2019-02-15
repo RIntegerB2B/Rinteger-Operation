@@ -74,4 +74,9 @@ export class QuotationManagementService {
     const url: string = this.serviceUrl + addUrl + id ;
     return this.httpClient.get<Customer[]>(url);
   }
+  allQuotation(): Observable<any> {
+    const addUrl = 'viewallquotation';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<Quotation[]>(url);
+  }
 }

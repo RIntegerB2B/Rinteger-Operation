@@ -35,10 +35,11 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { QuotationRoutingModule  } from './quotation-routing.module';
+import { ViewAllQuotationComponent } from './view-all-quotation/view-all-quotation.component';
 
 
 @NgModule({
-  declarations: [CreateQuotationComponent, ViewQuotationComponent, ViewSingleQuotationComponent],
+  declarations: [CreateQuotationComponent, ViewQuotationComponent, ViewSingleQuotationComponent, ViewAllQuotationComponent],
   imports: [
     HttpClientModule,
     HttpModule,

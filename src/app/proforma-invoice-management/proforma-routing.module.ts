@@ -4,6 +4,7 @@ import { CreateProformaComponent } from './create-proforma/create-proforma.compo
 import { ViewSingleProformaComponent } from './view-single-proforma/view-single-proforma.component';
 import { ViewProformaComponent } from './view-proforma/view-proforma.component';
 import { Routes, RouterModule } from '@angular/router';
+import { ViewAllProformaComponent } from './view-all-proforma/view-all-proforma.component';
 
 const routes: Routes = [
   {
@@ -17,7 +18,12 @@ const routes: Routes = [
   {
     path: 'viewproformainvoice/:workId',
     component: ViewProformaComponent
-  }];
+  },
+  {
+    path: 'viewallproformainvoice',
+    component: ViewAllProformaComponent
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

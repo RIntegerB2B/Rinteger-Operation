@@ -24,6 +24,7 @@ export class ViewWorkorderComponent implements OnInit {
       this.leadId = params.get('leadId');
     }
   );
+  this.getSingleLeads();
   this.getAllWorkOrder();
   }
   getSingleLeads() {
