@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 import { Lead } from './../shared/lead.model';
 import { WorkOrder } from './../shared/workorder.model';
 import { Quotation } from './../shared/quotation.model';
-import { Customer } from './../customer-management/create-customer/customer.model';
+import { Customer } from './../shared/customer.model';
 import { AppSetting } from './../config/appSetting';
 import { HttpClient, HttpHeaders, HttpEvent } from '@angular/common/http';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
@@ -135,5 +135,10 @@ export class LeadManagementService {
     const addUrl = 'viewquotation/';
     const url: string = this.serviceUrl + addUrl + id;
     return this.httpClient.get<Quotation[]>(url);
+  }
+  allCustomer(): Observable<any> {
+    const addUrl = 'viewcustomer';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<Customer[]>(url);
   }
 }

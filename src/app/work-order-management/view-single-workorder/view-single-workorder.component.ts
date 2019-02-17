@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import * as  jspdf from 'jspdf';
 import 'jspdf-autotable';
 import { WorkOrderService } from './../work-order.service';
@@ -33,7 +33,7 @@ export class ViewSingleWorkorderComponent implements OnInit {
   imgData = './../../../assets/images/logo.jpg';
   constructor(private workOrderService: WorkOrderService, private route: ActivatedRoute,
     private router: Router, private fb: FormBuilder) { }
-  ngOnInit() {
+      ngOnInit() {
     this.route.paramMap.subscribe(
       (params: ParamMap) => {
         this.workId = params.get('workId');
@@ -62,6 +62,8 @@ export class ViewSingleWorkorderComponent implements OnInit {
       console.log(error);
     });
   }
+
+  
   showTemplate() {
     this.templateOption = true;
   }
@@ -80,6 +82,7 @@ export class ViewSingleWorkorderComponent implements OnInit {
       this.savePDFWithoutDiscountDigtalTerms();
     }
   }
+
   savePDFWithDiscountTerms() {
     this.viewCompanyDetails();
     this.workOrderService.singleCustomerDetails(this.workOrder[0].customerID).subscribe(data => {

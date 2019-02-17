@@ -35,9 +35,10 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CreateCustomerService } from './../customer-management/create-customer/create-customer.service';
+import { UploadCustomerComponent } from './upload-customer/upload-customer.component';
 @NgModule({
   declarations: [
-     ViewCustomerComponent, CreateCustomerComponent , EditCustomerComponent],
+     ViewCustomerComponent, CreateCustomerComponent , EditCustomerComponent, UploadCustomerComponent],
   imports: [
     HttpClientModule,
     HttpModule,

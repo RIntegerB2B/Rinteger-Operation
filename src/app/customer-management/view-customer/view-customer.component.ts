@@ -57,7 +57,6 @@ export class ViewCustomerComponent implements OnInit {
   getAllCustomer() {
     this.customerManagementService.allCustomer().subscribe(data => {
       this.customerModel = data;
-      console.log('customers', this.customerModel);
     }, error => {
       console.log(error);
     });

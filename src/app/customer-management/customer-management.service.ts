@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Customer } from './../customer-management/create-customer/customer.model';
+import { Customer } from './../shared/customer.model';
 import { AppSetting } from './../config/appSetting';
 import { HttpClient, HttpHeaders, HttpEvent } from '@angular/common/http';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
@@ -49,6 +49,11 @@ export class CustomerManagementService {
 
     const url: string = this.serviceUrl + addUrl + id;
     return this.httpClient.get<Customer[]>(url);
+  }
+  createNewCustomer(customer): Observable<any>   {
+    const addUrl = 'multiplecustomer';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<Customer[]>(url, customer);
   }
   /* openCustomer(data: Customer): Observable<boolean> {
     this.dialogRefCusomer = this.dialog.open(CreateCustomerComponent,

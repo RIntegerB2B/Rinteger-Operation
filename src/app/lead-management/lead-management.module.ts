@@ -41,6 +41,8 @@ import { LeadManagementService } from './../lead-management/lead-management.serv
 import { CustomersModule } from './../customer-management/customer.module';
 import { CustomerManagementService } from './../customer-management/customer-management.service';
 import { ViewSingleLeadComponent } from './view-single-lead/view-single-lead.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { ExistingCustomerComponent } from './existing-customer/existing-customer.component';
 
 @NgModule({
   declarations: [SampleComponent,
@@ -49,7 +51,8 @@ import { ViewSingleLeadComponent } from './view-single-lead/view-single-lead.com
     ViewRequirementsComponent,
     ViewLeadComponent,
     ViewFollowupComponent,
-    ViewSingleLeadComponent],
+    ViewSingleLeadComponent,
+    ExistingCustomerComponent],
   imports: [
     CommonModule,
     CustomersModule,
@@ -84,7 +87,8 @@ import { ViewSingleLeadComponent } from './view-single-lead/view-single-lead.com
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    LeadManagementRoutingModule
+    LeadManagementRoutingModule,
+    MatAutocompleteModule
   ],
   providers: [LeadManagementService]
 })
