@@ -48,7 +48,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
     this.invoiceService.viewSingleInvoice(
       this.invId).subscribe(data => {
         this.invoice = data;
-        console.log('single View', this.invoice);
+       /*  console.log('single View', this.invoice); */
       }, error => {
         console.log(error);
       });
@@ -190,7 +190,6 @@ export class ViewSingleInvoiceComponent implements OnInit {
       console.log(err);
     });
   }
-  
   pdfGSTWithDiscountDigitalTerms() {
     this.viewCompanyDetails();
     this.invoiceService.singleCustomerDetails(this.invoice[0].customerID).subscribe(data => {
@@ -722,7 +721,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
       const columns = ['Item', 'Description', 'Quantity', 'Price',  'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      /* this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15) */;
+      /* this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15) */
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');
