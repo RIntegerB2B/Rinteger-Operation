@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Lead } from './../../shared/lead.model';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { LeadManagementService } from './../lead-management.service';
@@ -21,20 +22,20 @@ export class LeadEditComponent implements OnInit {
   fullLeadSource;
   fullLeadStatus;
   fullLeadService;
+  leadID;
+  id;
   constructor(private fb: FormBuilder, private leadManagementService: LeadManagementService
-    , public dialogRef: MatDialogRef<LeadEditComponent>,
-    @Inject(MAT_DIALOG_DATA) public data) {
-    console.log('single Lead', data.details);
-    this.leadModel = data;
-    console.log(data);
-  }
-  cancel(): void {
-    this.dialogRef.close();
+    , private route: ActivatedRoute) {
+    this.route.paramMap.subscribe(
+      (params: ParamMap) => {
+        this.id = params.get('id');
+      });
   }
 
   ngOnInit() {
-    this.createForm();
     this.viewLeadSettings();
+    this.getSingleLead();
+    this.createForm();
   }
 
   createForm() {
@@ -51,11 +52,10 @@ export class LeadEditComponent implements OnInit {
       requirements: this.fb.array([]),
       followUp: this.fb.array([])
     });
-    this.addForm();
-    this.followUpForm();
   }
   addForm() {
     const requirements = this.fb.group({
+      id: [''],
       item: [''],
       quantity: [''],
       price: [''],
@@ -67,7 +67,8 @@ export class LeadEditComponent implements OnInit {
   }
   followUpForm() {
     const followUp = this.fb.group({
-      date: [''],
+      id: [''],
+      followUpDate: [''],
       upcomingDate: [''],
       remarks: [''],
     });
@@ -75,6 +76,40 @@ export class LeadEditComponent implements OnInit {
   }
   get requirementsForms() {
     return this.leadDetailsForm.get('requirements') as FormArray;
+  }
+  getSingleLead() {
+    this.leadManagementService.singleLead(this.id).subscribe(data => {
+      this.leadModel = data[0];
+      this.addNewForm();
+      this.addFollowUpForm();
+    }, error => {
+      console.log(error);
+    });
+  }
+  addNewForm() {
+    for (let i = 0; i <= this.leadModel.requirements.length - 1; i++) {
+      const requirements = this.fb.group({
+        id: [this.leadModel.requirements[i]._id],
+        item: [this.leadModel.requirements[i].item],
+        quantity: [this.leadModel.requirements[i].quantity],
+        price: [this.leadModel.requirements[i].price],
+        discount: [this.leadModel.requirements[i].discount],
+        description: [this.leadModel.requirements[i].description],
+        total: [this.leadModel.requirements[i].total]
+      });
+      this.requirementsForms.push(requirements);
+    }
+  }
+  addFollowUpForm() {
+    for (let i = 0; i <= this.leadModel.followUp.length - 1; i++) {
+      const followUp = this.fb.group({
+        id: [this.leadModel.followUp[i]._id],
+        followUpDate: [this.leadModel.followUp[i].date],
+        upcomingDate: [this.leadModel.followUp[i].upcomingDate],
+        remarks: [this.leadModel.followUp[i].remarks],
+      });
+      this.followUpForms.push(followUp);
+    }
   }
   deleteRequirements(i) {
     this.requirementsForms.removeAt(i);
@@ -86,13 +121,11 @@ export class LeadEditComponent implements OnInit {
     this.followUpForms.removeAt(i);
   }
   updateLeads(leadDetailsForm: FormGroup, id) {
-    console.log('test', leadDetailsForm.value);
     this.leadManagementService.editLead(leadDetailsForm.value, id).subscribe(data => {
       this.leadModel = data;
     }, error => {
       console.log(error);
     });
-    this.dialogRef.close();
   }
   viewLeadSettings() {
     this.leadManagementService.leadSource().subscribe(data => {
@@ -110,16 +143,14 @@ export class LeadEditComponent implements OnInit {
     }, err => {
       console.log(err);
     });
-    this.dialogRef.close();
   }
-  deleteFollowUps(id) {
-    console.log(this.leadModel._id);
-    this.leadManagementService.deleteFollowUps(this.leadModel._id, id).subscribe(data => {
+  deleteFollowUps(i) {
+    console.log(i);
+    /* this.leadManagementService.deleteFollowUps(this.leadModel._id, id).subscribe(data => {
       this.leadModel = data;
     }, err => {
       console.log(err);
-    });
-    this.dialogRef.close();
+    }); */
   }
 }
 

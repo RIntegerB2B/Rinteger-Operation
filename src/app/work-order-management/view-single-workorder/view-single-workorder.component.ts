@@ -62,8 +62,6 @@ export class ViewSingleWorkorderComponent implements OnInit {
       console.log(error);
     });
   }
-
-  
   showTemplate() {
     this.templateOption = true;
   }

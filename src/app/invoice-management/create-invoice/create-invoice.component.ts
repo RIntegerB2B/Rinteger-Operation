@@ -103,6 +103,7 @@ export class CreateInvoiceComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+    this.addForm();
   }
   addForm() {
     for (let i = 0; i <= this.workOrder[0].requirements.length - 1; i++) {
