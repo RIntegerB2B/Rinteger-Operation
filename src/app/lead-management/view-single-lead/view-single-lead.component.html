@@ -44,6 +44,16 @@
               : <label class="itemLable">{{leadData.date | date: 'dd/MM/yyyy'}}</label>
             </div>
           </div>
+          <div class="col-md-4  col-6">
+              <div class="form-group">
+                <label class="divLable">Remarks</label>
+              </div>
+            </div>
+            <div class="col-md-8  col-6">
+                <div class="form-group">
+                  : <label class="itemLable">{{leadData.remarks}}</label>
+                </div>
+              </div>
         </div>
       </div>
       <div class="col-md-6">
@@ -80,14 +90,24 @@
           </div>
           <div class="col-md-4  col-6">
             <div class="form-group">
-              <label class="divLable">Remarks</label>
+              <label class="divLable">Lead Source</label>
             </div>
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              : <label class="itemLable">{{remarks}}</label>
+              : <label class="itemLable">{{leadData.leadSource}}</label>
             </div>
           </div>
+          <div class="col-md-4  col-6">
+              <div class="form-group">
+                <label class="divLable">Lead Type</label>
+              </div>
+            </div>
+            <div class="col-md-8  col-6">
+                <div class="form-group">
+                  : <label class="itemLable">{{leadData.leadType}}</label>
+                </div>
+              </div>
         </div>
       </div>
     </div>

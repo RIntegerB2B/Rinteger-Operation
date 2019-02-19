@@ -17,7 +17,7 @@ const routes: Routes = [
   component: ViewSingleWorkorderComponent
 },
 {
-  path: 'editworkorder/:leadId/:workId',
+  path: 'editworkorder/:workId',
   component: EditWorkorderComponent
 },
 {

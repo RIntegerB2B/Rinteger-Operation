@@ -1,5 +1,6 @@
 import { Detail } from './detail.model';
 export class Invoice {
+    invoiceID: string;
     _id: string;
     customerID: string;
     customerName: string;
@@ -10,7 +11,6 @@ export class Invoice {
     leadID: string;
     requirements: [Detail];
     workOrderID: string;
-    invoiceID: string;
     date: Date;
     expiryDate: Date;
     allTotal: number;

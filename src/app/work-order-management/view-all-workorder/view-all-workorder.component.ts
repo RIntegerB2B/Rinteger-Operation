@@ -43,7 +43,7 @@ export class ViewAllWorkorderComponent implements OnInit {
     this.router.navigate(['createinvoice', data.leadID, data._id]);
   }
   getEditWorkOrder(data) {
-    this.router.navigate(['editworkorder', data.leadID, data._id]);
+    this.router.navigate(['workorder/editworkorder', data._id]);
   }
   getDeleteSingleWorkOrder(row) {
     this.workOrderService.deleteSingleWorkOrder(row._id).subscribe(data => {

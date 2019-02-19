@@ -29,7 +29,8 @@ import {
   MatChipsModule,
   MatInputModule,
   MatStepperModule,
-  MatDatepickerModule
+  MatDatepickerModule,
+  MatNativeDateModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -75,7 +76,8 @@ import { GeneratePdfComponent } from './generate-pdf/generate-pdf.component';
       MatDatepickerModule,
       FormsModule,
       ReactiveFormsModule,
-      FlexLayoutModule
+      FlexLayoutModule,
+      MatNativeDateModule
     ],
     providers: [WorkOrderService]
 })

@@ -30,8 +30,8 @@ export class ViewInvoiceComponent implements OnInit {
   getViewInvoice(data)   {
     this.router.navigate(['invoice/viewsingleinvoice', data._id]);
   }
-  getEditQuotation(data)   {
-    this.router.navigate(['editworkorder', this.leadId, data._id]);
+  getEditInvoice(data)   {
+    this.router.navigate(['invoice/editinvoice', data._id]);
   }
   getAllInvoice() {
     this.invoiceService.viewAllInvoice(this.workId).subscribe(data => {

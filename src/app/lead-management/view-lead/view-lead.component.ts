@@ -82,7 +82,7 @@ export class ViewLeadComponent implements OnInit {
   }
   getEditLead(leadDetailsForm: FormGroup, id) {
      console.log('edit the row', id);
-     this.router.navigate(['leadedit', id]);
+     this.router.navigate(['lead/leadedit', id]);
   }
   getDeleteLead(leadDetailsForm: FormGroup, row) {
     row.editing = false;

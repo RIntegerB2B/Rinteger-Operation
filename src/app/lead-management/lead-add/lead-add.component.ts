@@ -38,6 +38,7 @@ export class LeadAddComponent implements OnInit {
   fullLeadSource;
   fullLeadStatus;
   fullLeadService;
+  fullLeadType;
   arryValue: any = [];
   sum = 0;
   constructor(private fb: FormBuilder,
@@ -91,6 +92,7 @@ export class LeadAddComponent implements OnInit {
       service: ['', Validators.required],
       date: ['', Validators.required],
       remarks: [''],
+      leadType: [''],
       requirements: this.fb.array([]),
       subTotal: [this.sum],
       allTotal: [this.sum],
@@ -134,6 +136,7 @@ export class LeadAddComponent implements OnInit {
       leadDetailsForm.controls.mobileNumber.value,
       leadDetailsForm.controls.name.value,
       leadDetailsForm.controls.leadOwner.value,
+      leadDetailsForm.controls.leadType.value,
       leadDetailsForm.controls.leadSource.value,
       leadDetailsForm.controls.leadStatus.value,
       leadDetailsForm.controls.service.value,
@@ -157,6 +160,7 @@ export class LeadAddComponent implements OnInit {
       customer.mobileNumber,
       customer.name,
       leadDetailsForm.controls.leadOwner.value,
+      leadDetailsForm.controls.leadType.value,
       leadDetailsForm.controls.leadSource.value,
       leadDetailsForm.controls.leadStatus.value,
       leadDetailsForm.controls.service.value,
@@ -182,6 +186,7 @@ export class LeadAddComponent implements OnInit {
       this.fullLeadSource = data[0].leadSource;
       this.fullLeadService = data[0].service;
       this.fullLeadStatus = data[0].leadStatus;
+      this.fullLeadType = data[0].type;
     }, err => {
       console.log(err);
     });

@@ -80,7 +80,7 @@
           </div>
           <div fxFlex="50" class="pr-1">
             <mat-form-field class="full-width">
-              <mat-select placeholder="Lead Service" formControlName="service">
+              <mat-select placeholder="Lead Service" formControlName="service" multiple>
                 <mat-option *ngFor="let data of fullLeadService" [value]="data">
                   {{data}}
                 </mat-option>
@@ -92,6 +92,15 @@
               <input matInput formControlName="date" [matDatepicker]="picker" placeholder="Choose a date">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div fxFlex="50" class="pr-1">
+            <mat-form-field class="full-width">
+                <mat-select placeholder="Lead Type" formControlName="leadType" >
+                    <mat-option *ngFor="let data of fullLeadType" [value]="data">
+                      {{data}}
+                    </mat-option>
+                  </mat-select>
             </mat-form-field>
           </div>
           <div fxFlex="50" class="pr-1">
@@ -239,7 +248,7 @@
                 </div>
                 <div fxFlex="50" class="pr-1">
                   <mat-form-field class="full-width">
-                    <mat-select placeholder="Lead Service" formControlName="service">
+                    <mat-select placeholder="Lead Service" formControlName="service" multiple>
                       <mat-option *ngFor="let data of fullLeadService" [value]="data">
                         {{data}}
                       </mat-option>
@@ -253,6 +262,15 @@
                     <mat-datepicker #picker></mat-datepicker>
                   </mat-form-field>
                 </div>
+                <div fxFlex="50" class="pr-1">
+                    <mat-form-field class="full-width">
+                        <mat-select placeholder="Lead Type" formControlName="leadType" >
+                            <mat-option *ngFor="let data of fullLeadType" [value]="data">
+                              {{data}}
+                            </mat-option>
+                          </mat-select>
+                    </mat-form-field>
+                  </div>
                 <div fxFlex="50" class="pr-1">
                   <mat-form-field class="full-width">
                     <input matInput formControlName="remarks" placeholder="Remarks">

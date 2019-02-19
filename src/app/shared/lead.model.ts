@@ -9,7 +9,8 @@ export class Lead {
     leadOwner: string;
     leadSource: string;
     leadStatus: string;
-    service: string;
+    leadType: string;
+    leadService: [string];
     requirements: [Detail];
     workOrder?: [string];
     invoice?: [string];
@@ -26,9 +27,10 @@ export class Lead {
         mobileNumber: number,
         name: string,
         leadOwner: string,
+        leadType: string,
         leadSource: string,
         leadStatus: string,
-        service: string,
+        leadService: [string],
         requirements: [Detail],
         date: Date,
         remarks: string,
@@ -40,9 +42,10 @@ export class Lead {
         this.mobileNumber = mobileNumber;
         this.name = name;
         this.leadOwner = leadOwner;
+        this.leadType = leadType;
         this.leadSource = leadSource;
         this.leadStatus = leadStatus;
-        this.service = service;
+        this.leadService = leadService;
         this.requirements = requirements;
         this.date = date;
         this.remarks = remarks;

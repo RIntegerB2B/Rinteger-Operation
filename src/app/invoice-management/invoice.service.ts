@@ -56,6 +56,11 @@ export class InvoiceService {
     const url: string = this.serviceUrl + addUrl + invid;
     return this.httpClient.get<Invoice[]>(url);
   }
+  updateSingleInvoice(row,  id)   {
+    const addUrl = 'invoice/';
+    const url: string = this.serviceUrl + addUrl + id;
+    return this.httpClient.put<Invoice[]>(url, row);
+  }
   viewSingleWorkOrder(workid): Observable<any> {
     const addUrl = 'viewsingleworkorder/';
     const url: string = this.serviceUrl + addUrl + workid;
