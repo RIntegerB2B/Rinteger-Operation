@@ -176,7 +176,7 @@
     </div>
     <!-- <app-view-requirements [requirementsData]="workOrder?.requirements" [subTotal]="workOrder?.subTotal" [allTotal]="workOrder?.allTotal"
       [tax]="workOrder?.tax"></app-view-requirements> -->
-      <div class="col-md-6" >
+    <!--   <div class="col-md-6" >
    
     <div class="col-md-6" >
         <label class="pr-2 " *ngFor="let terms of TypesOfTerms">
@@ -191,18 +191,21 @@
       </mat-form-field>
     </div>
     
-    </div>
+    </div> -->
     <div class="row">
       <div class="col-md-10">
-        <button mat-raised-button
-         (click)="templateType(tempVal.value)"
-         color="primary"
-          type="button"> Save as PDF</button>
+        <app-generate-pdf
+      [workOrderDetails]="workOrder"
+      [companyDetails]="workOrderPDFModel"
+      [customer]="customerModel"
+      ></app-generate-pdf>
       </div>
       <div class="col-md-2">
+        <div class="mt-5 pt-5">
         <button mat-raised-button  type="button"
         color="accent"
          (click)="cancelWorkorder(data)">Cancel</button>
+        </div>
       </div>
     </div>
 

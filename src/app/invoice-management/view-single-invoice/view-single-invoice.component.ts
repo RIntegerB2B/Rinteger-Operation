@@ -15,7 +15,8 @@ import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@ang
 })
 export class ViewSingleInvoiceComponent implements OnInit {
   constructor(private route: ActivatedRoute,
-    private router: Router, private invoiceService: InvoiceService, private fb: FormBuilder) { }
+    private router: Router, private invoiceService: InvoiceService,
+     private fb: FormBuilder) { }
   singleInvoiceForm: FormGroup;
   leadId;
   invId;
@@ -48,7 +49,6 @@ export class ViewSingleInvoiceComponent implements OnInit {
     this.invoiceService.viewSingleInvoice(
       this.invId).subscribe(data => {
         this.invoice = data;
-       /*  console.log('single View', this.invoice); */
       }, error => {
         console.log(error);
       });
@@ -69,7 +69,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
       termsType: [''],
     });
   }
-  templateType(val) {
+  /* templateType(val) {
     const TYPE = this.singleInvoiceForm.controls.termsType.value;
     if (val === 'With Discount + GST' && TYPE === 'Production Terms') {
       this.savePDFWithDiscountTerms();
@@ -117,7 +117,6 @@ export class ViewSingleInvoiceComponent implements OnInit {
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Discount %', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      /* this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15); */
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');
@@ -185,7 +184,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
       'CGST (' + this.workOrderPDFModel[0].cgst + '%) : Rs' + ' ' + this.invoice[0].tax.toString());
       this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice[0].allTotal);
       this.doc.save('proper.pdf');
-      /* this.router.navigate(['/lead']); */
+      
     }, err => {
       console.log(err);
     });
@@ -218,7 +217,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Discount %', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      /* this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15); */
+      
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');
@@ -286,7 +285,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
       'CGST (' + this.workOrderPDFModel[0].cgst + '%) : Rs' + ' ' + this.invoice[0].tax.toString());
       this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice[0].allTotal);
       this.doc.save('proper.pdf');
-      /* this.router.navigate(['/lead']); */
+      
     }, err => {
       console.log(err);
     });
@@ -320,7 +319,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
       const columns = ['Item', 'Description', 'Quantity', 'Price',  'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      /* this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15); */
+      
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');
@@ -388,7 +387,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
       'CGST (' + this.workOrderPDFModel[0].cgst + '%) : Rs' + ' ' + this.invoice[0].tax.toString());
       this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice[0].allTotal);
       this.doc.save('proper.pdf');
-      /* this.router.navigate(['/lead']); */
+      
     }, err => {
       console.log(err);
     });
@@ -422,7 +421,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
       const columns = ['Item', 'Description', 'Quantity', 'Price',  'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      /* this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15); */
+      
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');
@@ -490,7 +489,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
       'CGST (' + this.workOrderPDFModel[0].cgst + '%) : Rs' + ' ' + this.invoice[0].tax.toString());
       this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice[0].allTotal);
       this.doc.save('proper.pdf');
-      /* this.router.navigate(['/lead']); */
+      
     }, err => {
       console.log(err);
     });
@@ -519,7 +518,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Discount %', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      /* this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15); */
+      
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');
@@ -587,7 +586,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
       'CGST (' + this.workOrderPDFModel[0].cgst + '%) : Rs' + ' ' + this.invoice[0].tax.toString());
       this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice[0].allTotal);
       this.doc.save('proper.pdf');
-      /* this.router.navigate(['/lead']); */
+      
     }, err => {
       console.log(err);
     });
@@ -621,7 +620,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Discount %', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      /* this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15); */
+      
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');
@@ -688,7 +687,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
       this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.invoice[0].tax);
       this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice[0].allTotal);
       this.doc.save('proper.pdf');
-      /* this.router.navigate(['/lead']); */
+      
     }, err => {
       console.log(err);
     });
@@ -721,7 +720,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
       const columns = ['Item', 'Description', 'Quantity', 'Price',  'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      /* this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15) */
+      
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');
@@ -788,7 +787,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
       this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.invoice.tax);
       this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice[0].allTotal);
       this.doc.save('proper.pdf');
-      /* this.router.navigate(['/lead']); */
+      
     }, err => {
       console.log(err);
     });
@@ -821,7 +820,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Discount %', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      /* this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15); */
+      
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');
@@ -888,7 +887,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
       this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.invoice.tax);
       this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice[0].allTotal);
       this.doc.save('proper.pdf');
-      /* this.router.navigate(['/lead']); */
+      
     }, err => {
       console.log(err);
     });
@@ -916,7 +915,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
       const columns = ['Item', 'Description', 'Quantity', 'Price',  'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      /* this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15); */
+      
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');
@@ -983,9 +982,8 @@ export class ViewSingleInvoiceComponent implements OnInit {
       this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.invoice[0].tax);
       this.doc.text(140, 190, 'Total :Rs' + ' ' + this.invoice[0].allTotal);
       this.doc.save('proper.pdf');
-      /* this.router.navigate(['/lead']); */
     }, err => {
       console.log(err);
     });
-  }
+  } */
 }

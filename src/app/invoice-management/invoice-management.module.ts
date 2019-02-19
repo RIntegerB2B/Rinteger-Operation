@@ -36,12 +36,14 @@ import { ViewInvoiceComponent } from './view-invoice/view-invoice.component';
 import { ViewSingleInvoiceComponent } from './view-single-invoice/view-single-invoice.component';
 import { InvoiceRoutingModule } from './invoice-routing.module';
 import { ViewAllInvoiceComponent } from './view-all-invoice/view-all-invoice.component';
+import { InvoiceGeneratePdfComponent } from './invoice-generate-pdf/invoice-generate-pdf.component';
 
 @NgModule({
   declarations: [CreateInvoiceComponent,
      ViewInvoiceComponent,
       ViewSingleInvoiceComponent,
-      ViewAllInvoiceComponent],
+      ViewAllInvoiceComponent,
+      InvoiceGeneratePdfComponent],
   imports: [
     HttpClientModule,
     HttpModule,

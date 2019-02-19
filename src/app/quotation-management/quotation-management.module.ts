@@ -36,10 +36,12 @@ import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { QuotationRoutingModule  } from './quotation-routing.module';
 import { ViewAllQuotationComponent } from './view-all-quotation/view-all-quotation.component';
+import { GeneratePdfQuotationComponent } from './generate-pdf-quotation/generate-pdf-quotation.component';
 
 
 @NgModule({
-  declarations: [CreateQuotationComponent, ViewQuotationComponent, ViewSingleQuotationComponent, ViewAllQuotationComponent],
+  declarations: [CreateQuotationComponent, ViewQuotationComponent, ViewSingleQuotationComponent, ViewAllQuotationComponent,
+     GeneratePdfQuotationComponent],
   imports: [
     HttpClientModule,
     HttpModule,

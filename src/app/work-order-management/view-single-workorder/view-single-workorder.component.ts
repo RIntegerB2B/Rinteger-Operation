@@ -51,6 +51,8 @@ export class ViewSingleWorkorderComponent implements OnInit {
     this.workOrderService.viewSingleWorkOrder(this.workId).subscribe(data => {
       this.workOrder = data;
       this.customerID = this.workOrder[0].customerID;
+      this.viewCompanyDetails();
+      this.customerDetails();
     }, error => {
       console.log(error);
     });
@@ -81,6 +83,13 @@ export class ViewSingleWorkorderComponent implements OnInit {
     } else if (val === 'Without Discount + GST' && TYPE === 'Digital Marketing Terms') {
       this.savePDFWithoutDiscountDigtalTerms();
     }
+  }
+
+  customerDetails() {
+    this.workOrderService.singleCustomerDetails(this.workOrder[0].customerID).subscribe(data => {
+      this.customerModel = data; }, error => {
+        console.log(error);
+      });
   }
 
   savePDFWithDiscountTerms() {

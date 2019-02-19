@@ -140,7 +140,7 @@
       </div>
   
     </div>
-    <div class="row">
+   <div class="row">
       <div class="col-md-8 col-4  form-group">
         
       </div>
@@ -154,7 +154,8 @@
            <div class="col-md-6 col-6 form-group">: {{data?.allTotal}}</div>
         </div>
       </div>
-      <div class="col-md-4" *ngIf="templateOption">
+    </div>
+     <!--   <div class="col-md-4" *ngIf="templateOption">
           <mat-form-field>
             <mat-select [(value)]="selected" placeholder="Select the template">
               <mat-option value="withDiscount">
@@ -172,8 +173,8 @@
             </mat-select>
           </mat-form-field>
         </div>
-    </div>
-    <div class="col-md-5" >
+    </div> -->
+    <!-- <div class="col-md-5" >
       <label class="pr-2 " *ngFor="let terms of TypesOfTerms">
           <input type="radio" formControlName="termsType" [value]="terms">&nbsp;&nbsp;{{ terms}}
         </label>
@@ -184,7 +185,12 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-  </div>
-  <button (click)="templateType(tempVal.value)">Save as PDF</button>
+  </div> -->
+  <app-generate-pdf-quotation
+  [quotationDetails]="quotation"
+  [companyDetails]="workOrderPDFModel"
+  [customer]="customerModel"
+  ></app-generate-pdf-quotation>
+  <!-- <button (click)="templateType(tempVal.value)">Save as PDF</button> -->
   </div>
 </form>
