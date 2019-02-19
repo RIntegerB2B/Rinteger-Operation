@@ -19,8 +19,9 @@ this.getAllInvoice();
 getViewInvoice(data)   {
 this.router.navigate(['invoice/viewsingleinvoice', data._id]);
 }
-getEditQuotation(data)   {
-this.router.navigate(['editworkorder', data.leadID, data._id]);
+getEditInvoice(data)   {
+  console.log('invoice data', data);
+  this.router.navigate(['invoice/editinvoice', data._id]);
 }
 getAllInvoice() {
 this.invoiceService.allAllInvoice().subscribe(data => {

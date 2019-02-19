@@ -9,6 +9,7 @@ export class Lead {
     leadOwner: string;
     leadSource: string;
     leadStatus: string;
+    leadType: string;
     leadService: [string];
     requirements: [Detail];
     workOrder?: [string];
@@ -26,6 +27,7 @@ export class Lead {
         mobileNumber: number,
         name: string,
         leadOwner: string,
+        leadType: string,
         leadSource: string,
         leadStatus: string,
         leadService: [string],
@@ -40,6 +42,7 @@ export class Lead {
         this.mobileNumber = mobileNumber;
         this.name = name;
         this.leadOwner = leadOwner;
+        this.leadType = leadType;
         this.leadSource = leadSource;
         this.leadStatus = leadStatus;
         this.leadService = leadService;

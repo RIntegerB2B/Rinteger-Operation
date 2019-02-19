@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { WorkOrderService } from './../work-order.service';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { WorkOrder } from './../../shared/workorder.model';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 @Component({
   selector: 'app-edit-workorder',
   templateUrl: './edit-workorder.component.html',
@@ -35,11 +37,14 @@ export class EditWorkorderComponent implements OnInit {
     this.workOrderDetailsForm = this.fb.group({
       customerID: [''],
       companyName: [''],
+      address: [''],
+      customerName: [''],
       workOrderID: [''],
+      emailId: [''],
       leadID: ['', Validators.required],
       name: ['', Validators.required],
       mobileNumber: ['', Validators.required],
-      date: ['', Validators.required],
+      date: [''],
       requirements: this.fb.array([]),
       allTotal: ['', Validators.required],
       subTotal: ['', Validators.required],
@@ -48,24 +53,36 @@ export class EditWorkorderComponent implements OnInit {
   }
   viewWorkOrder()   {
     this.workOrderService.viewSingleWorkOrder(this.workId).subscribe(data => {
-      this.workOrder = data;
-      console.log('single Work Order Id', this.workOrder);
+      this.workOrder = data[0];
+      console.log(this.workOrder);
       this.addForm();
       this.getTotal();
     }, error => {
       console.log(error);
     });
   }
-   /* editRequirements(account)    {
-    account.readInput = true;
-  } */
+  addForm() {
+    for (let i = 0; i <= this.workOrder.requirements.length - 1; i++)     {
+      this.requirementsData = this.fb.group({
+        id: [this.workOrder.requirements[i]._id],
+        item: [this.workOrder.requirements[i].item],
+        quantity: [this.workOrder.requirements[i].quantity],
+        price: [this.workOrder.requirements[i].price],
+        discount: [this.workOrder.requirements[i].discount],
+        description: [this.workOrder.requirements[i].description],
+        total: [this.workOrder.requirements[i].total]
+      });
+      this.requirementsForms.push(this.requirementsData);
+    }
+}
   updateWorkOrder(workOrderDetailsForm: FormGroup)   {
+    console.log(workOrderDetailsForm.value);
     this.workOrder = new WorkOrder(
       workOrderDetailsForm.controls.customerID.value,
+      workOrderDetailsForm.controls.customerName.value,
       workOrderDetailsForm.controls.companyName.value,
-      workOrderDetailsForm.controls.workOrderID.value,
+      workOrderDetailsForm.controls.address.value,
       workOrderDetailsForm.controls.leadID.value,
-      workOrderDetailsForm.controls.name.value,
       workOrderDetailsForm.controls.mobileNumber.value,
       workOrderDetailsForm.controls.emailId.value,
       workOrderDetailsForm.controls.date.value,
@@ -74,9 +91,9 @@ export class EditWorkorderComponent implements OnInit {
       workOrderDetailsForm.controls.subTotal.value,
       workOrderDetailsForm.controls.tax.value
     );
-    this.workOrderService.updateSingleWorkOrder(this.workOrder, this.leadId, this.workId).subscribe(data => {
-      this.workOrderData = data;
-      console.log('singleWorkUpdate', this.workOrder);
+    this.workOrder.workOrderID =  workOrderDetailsForm.controls.workOrderID.value;
+    this.workOrderService.updateSingleWorkOrder(this.workOrder, this.workId).subscribe(data => {
+      this.workOrderData = data[0];
     }, error => {
       console.log(error);
     });
@@ -92,34 +109,7 @@ export class EditWorkorderComponent implements OnInit {
     });
     this.requirementsForms.push(requirements);
   }
-  addForm() {
-    /* for (let j = 0;  j <= this.leadModel.length - 1; j++)     {
-      for (let i = 0; i <= this.leadModel[j].requirements.length - 1; i++)     {
-        this.requirementsData = this.fb.group({
-          id: [this.leadModel[j].requirements[i]._id],
-          item: [this.leadModel[j].requirements[i].item],
-          quantity: [this.leadModel[j].requirements[i].quantity],
-          price: [this.leadModel[j].requirements[i].price],
-          discount: [this.leadModel[j].requirements[i].discount],
-          description: [this.leadModel[j].requirements[i].description],
-          total: [this.leadModel[j].requirements[i].total]
-        });
-        this.requirementsForms.push(this.requirementsData);
-      }
-    } */
-      for (let i = 0; i <= this.workOrder.requirements.length - 1; i++)     {
-        this.requirementsData = this.fb.group({
-         /*  id: [this.workOrder.requirements[i]._id], */
-          item: [this.workOrder.requirements[i].item],
-          quantity: [this.workOrder.requirements[i].quantity],
-          price: [this.workOrder.requirements[i].price],
-          discount: [this.workOrder.requirements[i].discount],
-          description: [this.workOrder.requirements[i].description],
-          total: [this.workOrder.requirements[i].total]
-        });
-        this.requirementsForms.push(this.requirementsData);
-      }
-  }
+
   get requirementsForms() {
     return this.workOrderDetailsForm.get('requirements') as FormArray;
   }

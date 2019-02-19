@@ -42,7 +42,7 @@
           </div>
           <div fxFlex="50" class="pr-1">
               <mat-form-field class="full-width">
-                  <mat-select placeholder="Select Service" [(value)]="leadModel.leadService"    formControlName="service" multiple>
+                  <mat-select placeholder="Select Service"     formControlName="service" multiple>
                       <mat-option *ngFor="let lead of fullLeadService" [value]="lead">
                         {{lead}}
                       </mat-option>
@@ -74,6 +74,18 @@
                 placeholder="Remarks">
             </mat-form-field>
           </div>
+          <div fxFlex="50" class="pr-1">
+              <mat-form-field class="full-width">
+                  <mat-select placeholder="Lead Type" [(ngModel)]="leadModel.leadType"    formControlName="leadType" >
+                      <mat-option *ngFor="let lead of fullLeadType" [value]="lead">
+                        {{lead}}
+                      </mat-option>
+                    </mat-select>
+              </mat-form-field>
+            </div>
+            <div fxFlex="100" class="textHeader">
+                <h5>Requirements</h5>
+              </div>
           <div fxFlex="100" formArrayName="requirements"  >
             <div *ngFor="let account of requirementsForms.controls; let i=index" [formGroupName]="i">
                 <div fxFlex="20" class="pr-1"   >
@@ -104,20 +116,30 @@
                 <div fxFlex="20" class="pr-1">
                   <mat-form-field class="full-width">
                     <!-- {{qty*price}} -->
-                    <input matInput formControlName="total"  placeholder="Total"  >
+                    <input matInput formControlName="total"  placeholder="Total" 
+                    [ngModel]="(leadDetailsForm.controls['requirements'].controls[i].controls.quantity.value *
+                      leadDetailsForm.controls['requirements'].controls[i].controls.price.value
+                        ) - (leadDetailsForm.controls['requirements'].controls[i].controls.quantity.value *
+                        leadDetailsForm.controls['requirements'].controls[i].controls.price.value)/100*leadDetailsForm.controls['requirements'].controls[i].controls.discount.value" >
                   </mat-form-field>
                 </div>
+                
                 <a (click)="deleteRequirements(i)"><mat-icon>clear</mat-icon></a>
               </div>
           </div>
+          
           <div class="btn">
     <a (click)="addForm()">
                 <mat-icon class="gridEdit">add_box</mat-icon>Add Requirements
               </a>
             </div>
+            <div fxFlex="100" class="textHeader">
+                <h5>Follow Up</h5>
+              </div>
             <div fxFlex="100" formArrayName="followUp"  >
                 <div *ngFor="let phone of followUpForms.controls; let i=index" [formGroupName]="i">
                     <div fxFlex="20" class="pr-1"   >
+                      <input type="text" hidden formControlName="id" #id> 
                         <mat-form-field>
                             <input matInput formControlName="followUpDate"    [matDatepicker]="picker1"
                               placeholder="Choose a date">
@@ -138,7 +160,8 @@
                         <input matInput formControlName="remarks"   placeholder="Remarks" #remarks >
                       </mat-form-field>
                     </div>
-                    <a (click)="deleteFollowUps(i)"><mat-icon>clear</mat-icon></a>
+                    <a (click)="addFollowUps(i)"><mat-icon>save</mat-icon></a>
+                    <a (click)="deleteFollowUps(id.value)"><mat-icon>clear</mat-icon></a>
                   </div>
               </div>
               <div class="btn">
@@ -147,9 +170,10 @@
                   </a>
                 </div>
           <div fxFlex="100" class="mt-1">
-            <button mat-raised-button color="primary" >Save</button>
+              <button mat-raised-button mat-button color="accent" type="button" (click)="cancel()">Cancel</button>
             <span fxFlex></span>
-            <button mat-raised-button mat-button color="accent" type="button" (click)="cancel()">Cancel</button>
+            <button mat-raised-button color="primary" >Update</button>
+           
           </div>
         </div>
       </form>

@@ -62,10 +62,9 @@ workorderPDFDetails(): Observable<any> {
   const url: string = this.serviceUrl + addUrl ;
   return this.httpClient.get<Customer[]>(url);
 }
-  updateSingleWorkOrder(row, leadid, workid)   {
+  updateSingleWorkOrder(row,  workid)   {
     const addUrl = 'workorder/';
-    const subUrl = '/oneupdate/';
-    const url: string = this.serviceUrl + addUrl + leadid + subUrl + workid;
+    const url: string = this.serviceUrl + addUrl + workid;
     return this.httpClient.put<WorkOrder>(url, row);
   }
   deleteSingleWorkOrder(workid)   {

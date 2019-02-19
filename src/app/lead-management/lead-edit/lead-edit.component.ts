@@ -10,6 +10,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { SettingsServiceService } from '../../settings-management/settings-service.service';
 import { LeadSettings } from '../../shared/lead-settings.model';
+import {FollowUp} from '../../shared/follow-up.model';
 
 @Component({
   selector: 'app-lead-edit',
@@ -17,6 +18,7 @@ import { LeadSettings } from '../../shared/lead-settings.model';
   styleUrls: ['./lead-edit.component.css']
 })
 export class LeadEditComponent implements OnInit {
+  fullLeadType;
   leadDetailsForm: FormGroup;
   leadModel: Lead;
   fullLeadSource;
@@ -24,7 +26,7 @@ export class LeadEditComponent implements OnInit {
   fullLeadService;
   leadID;
   id;
-  constructor(private fb: FormBuilder, private leadManagementService: LeadManagementService
+  constructor(private fb: FormBuilder, private leadManagementService: LeadManagementService,  private router: Router
     , private route: ActivatedRoute) {
     this.route.paramMap.subscribe(
       (params: ParamMap) => {
@@ -49,6 +51,7 @@ export class LeadEditComponent implements OnInit {
       service: [''],
       date: [''],
       remarks: [''],
+      leadType: [''],
       requirements: this.fb.array([]),
       followUp: this.fb.array([])
     });
@@ -121,8 +124,10 @@ export class LeadEditComponent implements OnInit {
     this.followUpForms.removeAt(i);
   }
   updateLeads(leadDetailsForm: FormGroup, id) {
+    console.log('form value', this.followUpForms.value);
     this.leadManagementService.editLead(leadDetailsForm.value, id).subscribe(data => {
       this.leadModel = data;
+      this.router.navigate(['lead/leadview']);
     }, error => {
       console.log(error);
     });
@@ -132,25 +137,37 @@ export class LeadEditComponent implements OnInit {
       this.fullLeadSource = data[0].leadSource;
       this.fullLeadService = data[0].service;
       this.fullLeadStatus = data[0].leadStatus;
+      this.fullLeadType = data[0].type;
     }, err => {
       console.log(err);
     });
   }
   deleteRequirement(id) {
-    console.log(this.leadModel._id);
     this.leadManagementService.deleteLeadRequirements(this.leadModel._id, id).subscribe(data => {
       this.leadModel = data;
     }, err => {
       console.log(err);
     });
   }
-  deleteFollowUps(i) {
-    console.log(i);
-    /* this.leadManagementService.deleteFollowUps(this.leadModel._id, id).subscribe(data => {
+  addFollowUps(i) {
+    this.leadManagementService.addFollowUp(this.leadModel._id, this.followUpForms.value).subscribe(data => {
       this.leadModel = data;
     }, err => {
       console.log(err);
-    }); */
+    });
+  }
+  editFollowUps(id) {
+  }
+  deleteFollowUps(id) {
+    this.leadManagementService.deleteFollowUps(this.leadModel._id, id).subscribe(data => {
+      this.leadModel = data[0];
+      console.log(this.leadModel);
+    }, err => {
+      console.log(err);
+    });
+  }
+  cancel() {
+    this.router.navigate(['lead/leadview']);
   }
 }
 

@@ -46,6 +46,11 @@ export class SettingsServiceService {
       const url: string = this.serviceUrl + addUrl;
       return this.httpClient.post<LeadSettings[]>(url, data);
     }
+    addLeadType(data: any): Observable<any> {
+      const addUrl = 'type';
+      const url: string = this.serviceUrl + addUrl;
+      return this.httpClient.post<LeadSettings[]>(url, data);
+    }
     leadSource(): Observable<any> {
       const addUrl = 'leadsources';
       const url: string = this.serviceUrl + addUrl;
@@ -63,6 +68,11 @@ export class SettingsServiceService {
     }
     deleteLeadStatus(val): Observable<any> {
       const addUrl = 'leadstatus/';
+      const url: string = this.serviceUrl + addUrl + val;
+      return this.httpClient.delete<LeadSettings[]>(url);
+    }
+    deleteLeadType(val): Observable<any> {
+      const addUrl = 'leadtype/';
       const url: string = this.serviceUrl + addUrl + val;
       return this.httpClient.delete<LeadSettings[]>(url);
     }

@@ -5,6 +5,7 @@ import { ViewInvoiceComponent } from './view-invoice/view-invoice.component';
 import { ViewSingleInvoiceComponent } from './view-single-invoice/view-single-invoice.component';
 import { Routes, RouterModule } from '@angular/router';
 import { ViewAllInvoiceComponent } from './view-all-invoice/view-all-invoice.component';
+import {EditInvoiceComponent} from './edit-invoice/edit-invoice.component';
 const routes: Routes = [
   {
     path: 'createinvoice/:leadId/:workId',
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'viewallinvoice',
     component: ViewAllInvoiceComponent
+  },
+  {
+    path: 'editinvoice/:id',
+    component: EditInvoiceComponent
   }
 ];
 @NgModule({

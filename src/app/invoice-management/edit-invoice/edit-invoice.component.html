@@ -1,7 +1,7 @@
-<form novalidate [formGroup]="workOrderDetailsForm"
- (ngSubmit)="updateWorkOrder(workOrderDetailsForm)" 
+<form novalidate [formGroup]="invoiceDetailsForm"
+ (ngSubmit)="updateInvoice(invoiceDetailsForm)" 
 style="padding-top:20px">
-  <label class="pageBoxLg-label">Edit Work Order</label>
+  <label class="pageBoxLg-label">Edit Invoice</label>
   <div class="pageBoxLg">
     <div class="row">
       <div class="col-md-6">
@@ -15,8 +15,8 @@ style="padding-top:20px">
             <div class="form-group">
               : <label class="itemLable">
                 <input hidden formControlName="customerID"
-                 [ngModel]="workOrder?.customerID">
-                {{workOrder?.customerID}}
+                 [ngModel]="invoice?.customerID">
+                {{invoice?.customerID}}
               </label>
             </div>
           </div>
@@ -27,8 +27,8 @@ style="padding-top:20px">
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              <input hidden  formControlName="companyName" [ngModel]="workOrder?.companyName">
-              : <label class="itemLable">{{workOrder?.companyName}}</label>
+              <input hidden  formControlName="companyName" [ngModel]="invoice?.companyName">
+              : <label class="itemLable">{{invoice?.companyName}}</label>
             </div>
           </div>
           <div class="col-md-4  col-6">
@@ -38,8 +38,8 @@ style="padding-top:20px">
             </div>
             <div class="col-md-8  col-6">
                 <div class="form-group">
-      <input hidden  formControlName="address" [ngModel]="workOrder?.companyAddress">
-                  : <label class="itemLable">{{workOrder?.companyAddress}}</label>
+                  <input hidden  formControlName="companyAddress" [ngModel]="invoice?.companyAddress">
+                  : <label class="itemLable">{{invoice?.companyAddress}}</label>
                 </div>
               </div>
           <div class="col-md-4  col-6">
@@ -49,8 +49,8 @@ style="padding-top:20px">
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              <input  hidden formControlName="customerName" [ngModel]="workOrder?.customerName">
-              : <label class="itemLable">{{workOrder?.customerName}}</label>
+              <input hidden formControlName="customerName" [ngModel]="invoice?.customerName">
+              : <label class="itemLable">{{invoice?.customerName}}</label>
             </div>
           </div>
 
@@ -61,8 +61,8 @@ style="padding-top:20px">
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              : <label class="itemLable">{{workOrder?.mobileNumber}}</label>
-              <input hidden  formControlName="mobileNumber" [ngModel]="workOrder?.mobileNumber">
+              : <label class="itemLable">{{invoice?.mobileNumber}}</label>
+              <input hidden  formControlName="mobileNumber" [ngModel]="invoice?.mobileNumber">
             </div>
           </div>
           <div class="col-md-4  col-6">
@@ -72,8 +72,8 @@ style="padding-top:20px">
             </div>
           <div class="col-md-8  col-6">
               <div class="form-group">
-                : <label class="itemLable">{{workOrder?.emailId}}</label>
-                <input hidden  formControlName="emailId" [ngModel]="workOrder?.emailId">
+                : <label class="itemLable">{{invoice?.emailId}}</label>
+                <input hidden formControlName="emailId" [ngModel]="invoice?.emailId">
               </div>
             </div>
 
@@ -88,8 +88,8 @@ style="padding-top:20px">
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              <input  hidden formControlName="workOrderID" [ngModel]="workOrder?.workOrderID">
-              : <label class="itemLable">{{workOrder?.workOrderID}}</label>
+              <input  hidden formControlName="workOrderID" [ngModel]="invoice?.workOrderID">
+              : <label class="itemLable">{{invoice?.workOrderID}}</label>
             </div>
           </div>
           <div class="col-md-4  col-6">
@@ -100,15 +100,31 @@ style="padding-top:20px">
           <div class="col-md-8  col-6">
             <div class="form-group">
               <mat-form-field>
-                <input matInput formControlName="date" [matDatepicker]="picker" [ngModel]="workOrder?.date" 
+                <input matInput formControlName="date" [matDatepicker]="picker" [ngModel]="invoice?.date" 
                  placeholder="Choose a date">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
             </div>
           </div>
-          <input hidden formControlName="date" [ngModel]="workOrder?.date" placeholder="item">
-          <input hidden formControlName="leadID" [ngModel]="workOrder?.leadID" placeholder="item">
+          <div class="col-md-4  col-6">
+              <div class="form-group">
+                <label class="divLable">Expiry Date</label>
+              </div>
+            </div>
+            <div class="col-md-8  col-6">
+                <div class="form-group">
+                  <mat-form-field>
+                    <input matInput formControlName="expiryDate" [matDatepicker]="picker1" [ngModel]="invoice?.expiryDate" 
+                     placeholder="Choose a date">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+          <input hidden formControlName="date" [ngModel]="invoice?.date" placeholder="item">
+          <input hidden formControlName="date" [ngModel]="invoice?.date" placeholder="item">
+          <input hidden formControlName="invoiceID" [ngModel]="invoice?.invoiceID" placeholder="item">
         </div>
       </div>
     </div>
@@ -147,10 +163,10 @@ style="padding-top:20px">
         </div>
         <div class="col-md-2 col-4">
           <mat-form-field class="full-width">
-            <input matInput formControlName="total" [ngModel]="(workOrderDetailsForm.controls['requirements'].controls[i].controls.quantity.value *
-            workOrderDetailsForm.controls['requirements'].controls[i].controls.price.value
-              ) - (workOrderDetailsForm.controls['requirements'].controls[i].controls.quantity.value *
-              workOrderDetailsForm.controls['requirements'].controls[i].controls.price.value)/100*workOrderDetailsForm.controls['requirements'].controls[i].controls.discount.value"
+            <input matInput formControlName="total" [ngModel]="(invoiceDetailsForm.controls['requirements'].controls[i].controls.quantity.value *
+            invoiceDetailsForm.controls['requirements'].controls[i].controls.price.value
+              ) - (invoiceDetailsForm.controls['requirements'].controls[i].controls.quantity.value *
+              invoiceDetailsForm.controls['requirements'].controls[i].controls.price.value)/100*invoiceDetailsForm.controls['requirements'].controls[i].controls.discount.value"
               placeholder="Total">
           </mat-form-field>
         </div>

@@ -19,6 +19,7 @@ export class LeadSettingsComponent implements OnInit {
   showService: boolean;
   showStatus: boolean;
   showSource: boolean;
+  showType: boolean;
   settingModel: LeadSettings;
   message;
   action;
@@ -34,23 +35,33 @@ export class LeadSettingsComponent implements OnInit {
     this.leadSettingsForm = this.fb.group({
       status: [''],
       service: [''],
-      source: ['']
+      source: [''],
+      type: ['']
     });
   }
   showServiceForm() {
     this.showService = true;
     this.showSource = false;
     this.showStatus = false;
+    this.showType = false;
   }
   showStatusForm() {
     this.showService = false;
     this.showSource = false;
     this.showStatus = true;
+    this.showType = false;
   }
   showSourceForm() {
     this.showService = false;
     this.showSource = true;
     this.showStatus = false;
+    this.showType = false;
+  }
+  showTypeForm() {
+    this.showService = false;
+    this.showSource = false;
+    this.showStatus = false;
+    this.showType = true;
   }
   addLeadSource() {
     this.message = 'source added successfully';
@@ -128,6 +139,32 @@ export class LeadSettingsComponent implements OnInit {
   deleteLeadStatus(value) {
     this.message = 'status deleted successfully';
     this.settingService.deleteLeadStatus(value).subscribe(data => {
+      this.settingModel = data;
+      this.snackBar.open(this.message, this.action, {
+        duration: 3000,
+      });
+    }, err => {
+      console.log(err);
+    });
+    console.log(value);
+  }
+  addLeadType() {
+    this.message = 'Lead Type added successfully';
+    this.settingModel = new LeadSettings();
+    this.settingModel.type = this.leadSettingsForm.controls.type.value;
+    this.settingService.addLeadType(this.settingModel).subscribe(data => {
+      this.settingModel = data;
+      this.snackBar.open(this.message, this.action, {
+        duration: 3000,
+      });
+      this.leadSettingsForm.reset();
+    }, err => {
+      console.log(err);
+    });
+  }
+  deleteLeadType(value) {
+    this.message = 'Lead Type deleted successfully';
+    this.settingService.deleteLeadType(value).subscribe(data => {
       this.settingModel = data;
       this.snackBar.open(this.message, this.action, {
         duration: 3000,

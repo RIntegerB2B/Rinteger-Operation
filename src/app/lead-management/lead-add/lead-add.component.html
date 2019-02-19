@@ -96,6 +96,15 @@
           </div>
           <div fxFlex="50" class="pr-1">
             <mat-form-field class="full-width">
+                <mat-select placeholder="Lead Type" formControlName="leadType" >
+                    <mat-option *ngFor="let data of fullLeadType" [value]="data">
+                      {{data}}
+                    </mat-option>
+                  </mat-select>
+            </mat-form-field>
+          </div>
+          <div fxFlex="50" class="pr-1">
+            <mat-form-field class="full-width">
               <input matInput formControlName="remarks" placeholder="Remarks">
             </mat-form-field>
           </div>
@@ -253,6 +262,15 @@
                     <mat-datepicker #picker></mat-datepicker>
                   </mat-form-field>
                 </div>
+                <div fxFlex="50" class="pr-1">
+                    <mat-form-field class="full-width">
+                        <mat-select placeholder="Lead Type" formControlName="leadType" >
+                            <mat-option *ngFor="let data of fullLeadType" [value]="data">
+                              {{data}}
+                            </mat-option>
+                          </mat-select>
+                    </mat-form-field>
+                  </div>
                 <div fxFlex="50" class="pr-1">
                   <mat-form-field class="full-width">
                     <input matInput formControlName="remarks" placeholder="Remarks">
