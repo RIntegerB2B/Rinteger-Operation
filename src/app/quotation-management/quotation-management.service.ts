@@ -55,7 +55,7 @@ export class QuotationManagementService {
     return this.httpClient.get<Quotation[]>(url);
   }
   updateSingleQuotation(row, quoid)   {
-    const addUrl = 'workorder/';
+    const addUrl = 'quotation/';
     const url: string = this.serviceUrl + addUrl  + quoid;
     return this.httpClient.put<Quotation>(url, row);
   }
