@@ -164,7 +164,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4" >
+    <!-- <div class="col-md-4" >
         <label class="pr-2 " *ngFor="let terms of TypesOfTerms">
             <input type="radio" formControlName="termsType" [value]="terms">&nbsp;&nbsp;{{ terms}}
           </label>
@@ -175,19 +175,23 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-    </div>
+    </div> -->
     <div class="row">
       <div class="col-md-10">
-        <button mat-raised-button
-         (click)="templateType(tempVal.value)"
-         color="primary"
-          type="button"> Save as PDF</button>
+        <app-invoice-generate-pdf
+        [invoiceDetails]="invoice"
+        [companyDetails]="workOrderPDFModel"
+        [customer]="customerModel"
+        ></app-invoice-generate-pdf>
       </div>
       <div class="col-md-2">
+          <div class="mt-5">
         <button mat-raised-button  type="button"
         color="accent"
          (click)="cancelInvoice()">Cancel</button>
+         </div>
       </div>
     </div>
+    
   </div>
 </form>

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
-import { Quotation } from './../../shared/quotation.model';
+import { Invoice } from './../../shared/invoice.model';
 import { WorkOrderPdf } from './../../shared/workorderpdf.model';
 import { Detail } from './../../shared/detail.model';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
@@ -12,19 +12,20 @@ import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@ang
   styleUrls: ['./invoice-generate-pdf.component.css']
 })
 export class InvoiceGeneratePdfComponent implements OnInit {
-  @Input() quotationDetails: any;
+  @Input() invoiceDetails: any;
   @Input() customer: any;
   @Input() companyDetails: any;
   noRequirementError = false;
   singleInvoiceDetailsForm: FormGroup;
   arrayNew;
-  quotationReq: Detail[];
-  quotation: Quotation[];
+  invoiceReq: Detail[];
+  invoice: Invoice[];
   workOrderPdf: WorkOrderPdf[];
   customerData;
   companyData;
-  TypesOfTerms = ['Production Terms', 'Digital Marketing Terms'];
-  templates = ['With Discount + GST', 'Without Discount + GST'];
+  templates = ['With Discount + GST', 'Without Discount + GST',
+   'With Discount + SGST + CGST' ,
+    'Without Discount + SGST + CGST'];
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -37,14 +38,16 @@ export class InvoiceGeneratePdfComponent implements OnInit {
     const newTestArray = [];
     const headerArray = [{ text: 'Item', style: 'tableHeaderRow' },
     { text: 'Quantity', style: 'tableHeaderRow' },
-    { text: 'Price', style: 'tableHeaderRow' }, { text: 'Discount (%)', style: 'tableHeaderRow' },
+    { text: 'Price', style: 'tableHeaderRow' }, { text: 'Discount (%)',
+     style: 'tableHeaderRow' },
     { text: 'Total', style: 'tableHeaderTotal' }];
     newTestArray.push(headerArray);
-    for (let i = 0; i < this.quotationReq.length; i++) {
-      newTestArray.push([{ text: this.quotationReq[i].item, style: 'rowStyle' }, { text: this.quotationReq[i].quantity, style: 'rowStyle' },
-      { text: this.quotationReq[i].price.toFixed(2), style: 'rowStyle' },
-      { text: this.quotationReq[i].discount, style: 'rowStyle' },
-      { text: this.quotationReq[i].total.toFixed(2), style: 'rowTotal' }]);
+    for (let i = 0; i < this.invoiceReq.length; i++) {
+      newTestArray.push([{ text: this.invoiceReq[i].item, style: 'rowStyle' },
+      { text: this.invoiceReq[i].quantity, style: 'rowStyle' },
+      { text: this.invoiceReq[i].price.toFixed(2), style: 'rowStyle' },
+      { text: this.invoiceReq[i].discount, style: 'rowStyle' },
+      { text: this.invoiceReq[i].total.toFixed(2), style: 'rowTotal' }]);
     }
     return newTestArray;
   }
@@ -56,32 +59,40 @@ export class InvoiceGeneratePdfComponent implements OnInit {
     { text: 'Price', style: 'tableHeaderRow' },
     { text: 'Total', style: 'tableHeaderTotal' }];
     newTestArray.push(headerArray);
-    for (let i = 0; i < this.quotationReq.length; i++) {
-      newTestArray.push([{ text: this.quotationReq[i].item, style: 'rowStyle' }, { text: this.quotationReq[i].quantity, style: 'rowStyle' },
-      { text: this.quotationReq[i].price.toFixed(2), style: 'rowStyle' },
-      { text: this.quotationReq[i].total.toFixed(2), style: 'rowTotal' }]);
+    for (let i = 0; i < this.invoiceReq.length; i++) {
+      newTestArray.push([{ text: this.invoiceReq[i].item, style: 'rowStyle' },
+       { text: this.invoiceReq[i].quantity, style: 'rowStyle' },
+      { text: this.invoiceReq[i].price.toFixed(2), style: 'rowStyle' },
+      { text: this.invoiceReq[i].total.toFixed(2), style: 'rowTotal' }]);
     }
     return newTestArray;
   }
 
 
-  viewSingleQuotationPdf(work, customer, company, temp) {
-    this.quotation = work;
-    this.quotationReq = work[0].requirements;
+  viewSingleInvoicePdf(invoice, customer, company, temp) {
+    this.invoice = invoice;
+    this.invoiceReq = invoice[0].requirements;
     this.customerData = customer;
     this.companyData = company;
     this.workOrderPdf = company;
-    if (temp === 'With Discount + GST') {
-      this.pdfWithDiscountandProduct();
-    } else if (temp === 'With Discount + GST') {
-      this.pdfWithDiscountDigtalTerms();
-    } else if (temp === 'Without Discount + GST') {
-      this.pdfWithoutDiscountTerms();
-    } else if (temp === 'Without Discount + GST') {
-      this.pdfWithoutDiscountDigtalTerms();
+        if (temp === 'With Discount + GST') {
+          this.pdfWithDiscountGst();
+      } else if (temp === 'With Discount + GST') {
+            /* this.pdfWithDiscountDigtalTerms(); */
+          }  else if (temp === 'Without Discount + GST') {
+            this.pdfWithoutDiscountTerms();
+          } else if (temp === 'Without Discount + GST') {
+            this.pdfWithoutDiscountDigtalTerms();
+          } else  if (temp === 'With Discount + SGST + CGST') {
+          } else  if (temp === 'Without Discount + SGST + CGST') {
+
+          } else  if (temp === 'With Discount + SGST + CGST') {
+
+          } else  if (temp === 'Without Discount + SGST + CGST') {
+
+          }
     }
-  }
-  pdfWithDiscountDigtalTerms() {
+    pdfWithDiscountGst() {
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
     const dd = {
       footer: {
@@ -143,10 +154,11 @@ export class InvoiceGeneratePdfComponent implements OnInit {
               type: 'none',
               width: 350,
               ul: [
-                { text: 'QUOTATION DETAILS', style: 'orderStyle' },
-                { text: 'Quotation ID:  ' + this.quotation[0].quotationID.toUpperCase(), style: 'textGst' },
-                { text: 'Quotation Date: ' + this.quotation[0].date, style: 'address' },
-                { text: 'Total Amount: ' + this.quotation[0].allTotal.toFixed(2), style: 'address' }
+                { text: 'INVOICE DETAILS', style: 'orderStyle' },
+                { text: 'Invoice ID:  ' + this.invoice[0].invoiceID.toUpperCase(), style: 'textGst' },
+                { text: 'Invoice Date: ' + this.invoice[0].date, style: 'address' },
+                { text: 'Invoice Expiry Date: ' + this.invoice[0].expiryDate, style: 'address' },
+                { text: 'Total Amount: ' + this.invoice[0].allTotal.toFixed(2), style: 'address' }
               ]
             },
             {
@@ -187,26 +199,13 @@ export class InvoiceGeneratePdfComponent implements OnInit {
               text: '',
               style: 'rowStyle', border: [false, false, false, false]
             }, { text: 'GST ( ' + this.workOrderPdf[0].gst + ' % )', style: 'rowStyle' },
-            { text: this.quotation[0].tax.toFixed(2), style: 'rowTotal' }],
+            { text: this.invoice[0].tax.toFixed(2), style: 'rowTotal' }],
             [{ text: '', style: 'rowStyle', border: [false, false, false, false] },
             { text: '', style: 'rowStyle', border: [false, false, false, false] }, {
               text: '',
               style: 'rowStyle', border: [false, false, false, false]
             }, { text: 'Amount', style: 'rowStyle' },
-            { text: this.quotation[0].allTotal.toFixed(2), style: 'rowTotal' }]
-            ]
-          },
-        }, {
-          style: 'tableExample',
-          table: {
-            headerRows: 1,
-            widths: ['*', '*', '200'],
-            body: [
-              [{ text: this.workOrderPdf[0].digitalterms, style: 'termsStyle', border: [false, false, false, false] },
-              {
-                text: '',
-                style: 'rowStyle', border: [false, false, false, false]
-              }]
+            { text: this.invoice[0].allTotal.toFixed(2), style: 'rowTotal' }]
             ]
           },
         }
@@ -288,7 +287,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
 
       }
     };
-    pdfMake.createPdf(dd).download(this.quotation[0].quotationID);
+    pdfMake.createPdf(dd).download(this.invoice[0].invoiceID);
   }
 
   pdfWithDiscountandProduct() {
@@ -353,10 +352,11 @@ export class InvoiceGeneratePdfComponent implements OnInit {
               type: 'none',
               width: 325,
               ul: [
-                { text: 'QUOTATION DETAILS', style: 'orderStyle' },
-                { text: 'Quotation ID:  ' + this.quotation[0].quotationID.toUpperCase(), style: 'textGst' },
-                { text: 'Quotation Date: ' + this.quotation[0].date, style: 'address' },
-                { text: 'Total Amount: ' + this.quotation[0].allTotal.toFixed(2), style: 'address' }
+                { text: 'INVOICE DETAILS', style: 'orderStyle' },
+                { text: 'Invoice ID:  ' + this.invoice[0].invoiceID.toUpperCase(), style: 'textGst' },
+                { text: 'Invoice Date: ' + this.invoice[0].date, style: 'address' },
+                { text: 'Invoice Expiry Date: ' + this.invoice[0].date, style: 'address' },
+                { text: 'Total Amount: ' + this.invoice[0].allTotal.toFixed(2), style: 'address' }
               ]
             },
             {
@@ -397,13 +397,13 @@ export class InvoiceGeneratePdfComponent implements OnInit {
               text: '',
               style: 'rowStyle', border: [false, false, false, false]
             }, { text: 'GST ( ' + this.workOrderPdf[0].gst + ' % )', style: 'rowStyle' },
-            { text: this.quotation[0].tax.toFixed(2), style: 'rowTotal' }],
+            { text: this.invoice[0].tax.toFixed(2), style: 'rowTotal' }],
             [{ text: '', style: 'rowStyle', border: [false, false, false, false] },
             { text: '', style: 'rowStyle', border: [false, false, false, false] }, {
               text: '',
               style: 'rowStyle', border: [false, false, false, false]
             }, { text: 'Amount', style: 'rowStyle' },
-            { text: this.quotation[0].allTotal.toFixed(2), style: 'rowTotal' }]
+            { text: this.invoice[0].allTotal.toFixed(2), style: 'rowTotal' }]
             ]
           },
         }, {
@@ -498,7 +498,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
 
       }
     };
-    pdfMake.createPdf(dd).download(this.quotation[0].quotationID);
+    pdfMake.createPdf(dd).download(this.invoice[0].invoiceID);
   }
 
   pdfWithoutDiscountTerms() {
@@ -563,10 +563,11 @@ export class InvoiceGeneratePdfComponent implements OnInit {
               type: 'none',
               width: 350,
               ul: [
-                { text: 'QUOTATION DETAILS', style: 'orderStyle' },
-                { text: 'Quotation ID:  ' + this.quotation[0].quotationID.toUpperCase(), style: 'textGst' },
-                { text: 'Quotation Date: ' + this.quotation[0].date, style: 'address' },
-                { text: 'Total Amount: ' + this.quotation[0].allTotal.toFixed(2), style: 'address' }
+                { text: 'INVOICE DETAILS', style: 'orderStyle' },
+                { text: 'Invoice ID:  ' + this.invoice[0].invoiceID.toUpperCase(), style: 'textGst' },
+                { text: 'Invoice Date: ' + this.invoice[0].date, style: 'address' },
+                { text: 'Invoice Expiry Date: ' + this.invoice[0].expiryDate, style: 'address' },
+                { text: 'Total Amount: ' + this.invoice[0].allTotal.toFixed(2), style: 'address' }
               ]
             },
             {
@@ -607,13 +608,13 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 text: '',
                 style: 'rowStyle', border: [false, false, false, false]
               }, { text: 'GST ( ' + this.workOrderPdf[0].gst + ' % )', style: 'rowStyle' },
-              { text: this.quotation[0].tax.toFixed(2), style: 'rowTotal' }],
+              { text: this.invoice[0].tax.toFixed(2), style: 'rowTotal' }],
             [
               { text: '', style: 'rowStyle', border: [false, false, false, false] }, {
                 text: '',
                 style: 'rowStyle', border: [false, false, false, false]
               }, { text: 'Amount', style: 'rowStyle' },
-              { text: this.quotation[0].allTotal.toFixed(2), style: 'rowTotal' }]
+              { text: this.invoice[0].allTotal.toFixed(2), style: 'rowTotal' }]
             ]
           },
         }, {
@@ -708,7 +709,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
 
       }
     };
-    pdfMake.createPdf(dd).download(this.quotation[0].quotationID);
+    pdfMake.createPdf(dd).download(this.invoice[0].invoiceID);
 
   }
 
@@ -776,9 +777,9 @@ export class InvoiceGeneratePdfComponent implements OnInit {
               width: 350,
               ul: [
                 { text: 'Quotation Details', style: 'orderStyle' },
-                { text: 'Quotation ID:  ' + this.quotation[0].quotationID.toUpperCase(), style: 'textGst' },
-                { text: 'Quotation Date: ' + this.quotation[0].date, style: 'address' },
-                { text: 'Total Amount: ' + this.quotation[0].allTotal.toFixed(2), style: 'address' }
+                { text: 'Quotation ID:  ' + this.invoice[0].invoiceID.toUpperCase(), style: 'textGst' },
+                { text: 'Quotation Date: ' + this.invoice[0].date, style: 'address' },
+                { text: 'Total Amount: ' + this.invoice[0].allTotal.toFixed(2), style: 'address' }
               ]
             },
             {
@@ -819,13 +820,13 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 text: '',
                 style: 'rowStyle', border: [false, false, false, false]
               }, { text: 'GST ( ' + this.workOrderPdf[0].gst + ' % )', style: 'rowStyle' },
-              { text: this.quotation[0].tax.toFixed(2), style: 'rowTotal' }],
+              { text: this.invoice[0].tax.toFixed(2), style: 'rowTotal' }],
             [
               { text: '', style: 'rowStyle', border: [false, false, false, false] }, {
                 text: '',
                 style: 'rowStyle', border: [false, false, false, false]
               }, { text: 'Amount', style: 'rowStyle' },
-              { text: this.quotation[0].allTotal.toFixed(2), style: 'rowTotal' }]
+              { text: this.invoice[0].allTotal.toFixed(2), style: 'rowTotal' }]
             ]
           },
         }, {
@@ -920,6 +921,6 @@ export class InvoiceGeneratePdfComponent implements OnInit {
 
       }
     };
-    pdfMake.createPdf(dd).download(this.quotation[0].quotationID);
+    pdfMake.createPdf(dd).download(this.invoice[0].invoiceID);
   }
 }

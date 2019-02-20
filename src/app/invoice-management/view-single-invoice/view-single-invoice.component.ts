@@ -43,13 +43,22 @@ export class ViewSingleInvoiceComponent implements OnInit {
   }
 
   cancelInvoice()   {
-    this.router.navigate(['invoice/viewinvoice', this.invoice[0].workOrderID]);
+    this.router.navigate(['invoice/viewinvoice',
+     this.invoice[0].workOrderID]);
   }
   viewSingleInvoice() {
     this.invoiceService.viewSingleInvoice(
       this.invId).subscribe(data => {
         this.invoice = data;
+        this.customerDetails();
+        this.viewCompanyDetails();
       }, error => {
+        console.log(error);
+      });
+  }
+  customerDetails() {
+    this.invoiceService.singleCustomerDetails(this.invoice[0].customerID).subscribe(data => {
+      this.customerModel = data; }, error => {
         console.log(error);
       });
   }
