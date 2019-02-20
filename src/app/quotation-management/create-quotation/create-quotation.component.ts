@@ -19,8 +19,7 @@ import {WorkOrderPdf} from '../../shared/workorderpdf.model';
 export class CreateQuotationComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private quotationManagementService: QuotationManagementService
-    , private route: ActivatedRoute, private leadManagementService: LeadManagementService,
-    private customerManagementService: CustomerManagementService, private router: Router
+    , private route: ActivatedRoute, private router: Router
   ) { }
   requirements: FormArray;
   quotationDetailsForm: FormGroup;
@@ -140,7 +139,7 @@ export class CreateQuotationComponent implements OnInit {
     this.getTotal();
   }
   getSingleCustomer() {
-    this.customerManagementService.singleCustomer(this.id).subscribe(data => {
+    this.quotationManagementService.singleCustomer(this.id).subscribe(data => {
       this.customerModel = data;
       console.log('customers', this.customerModel);
     }, error => {
@@ -148,7 +147,7 @@ export class CreateQuotationComponent implements OnInit {
     });
   }
   getSingleLeads() {
-    this.leadManagementService.singleLead(this.leadId).subscribe(data => {
+    this.quotationManagementService.singleLead(this.leadId).subscribe(data => {
       this.leadModel = data;
       this.addForm();
       this.getTotal();

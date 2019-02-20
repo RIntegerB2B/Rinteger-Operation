@@ -5,7 +5,8 @@ import { AppSetting } from './../config/appSetting';
 import { HttpClient, HttpHeaders, HttpEvent } from '@angular/common/http';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { MatDialog, MatDialogRef } from '@angular/material';
-import {Customer} from '../customer-management/create-customer/customer.model';
+import {Customer} from './../shared/customer.model';
+import { Lead } from './../shared/lead.model';
 
 
 @Injectable({
@@ -78,5 +79,17 @@ export class QuotationManagementService {
     const addUrl = 'viewallquotation';
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.get<Quotation[]>(url);
+  }
+  singleCustomer(id): Observable<any> {
+
+    const addUrl = 'singlecustomer/';
+
+    const url: string = this.serviceUrl + addUrl + id;
+    return this.httpClient.get<Customer[]>(url);
+  }
+  singleLead(id): Observable<any> {
+    const addUrl = 'lead/';
+    const url: string = this.serviceUrl + addUrl + id;
+    return this.httpClient.get<Lead[]>(url);
   }
 }

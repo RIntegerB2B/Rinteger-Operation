@@ -89,7 +89,7 @@ export class GeneratePdfQuotationComponent implements OnInit {
         columns: [
           {
             text: this.companyData[0].footerdetails[0].companyName.toUpperCase() + ' \n '
-              + this.companyData[0].footerdetails[0].address + ' | ' +
+              + this.companyData[0].footerdetails[0].address + ' | '
               + this.companyData[0].footerdetails[0].email + ' | '
               + this.companyData[0].footerdetails[0].phNo + ' | '
               + this.companyData[0].footerdetails[0].website, style: 'footerHeader'
@@ -299,7 +299,7 @@ export class GeneratePdfQuotationComponent implements OnInit {
         columns: [
           {
             text: this.companyData[0].footerdetails[0].companyName.toUpperCase() + ' \n '
-              + this.companyData[0].footerdetails[0].address + ' | ' +
+              + this.companyData[0].footerdetails[0].address + ' | '
               + this.companyData[0].footerdetails[0].email + ' | '
               + this.companyData[0].footerdetails[0].phNo + ' | '
               + this.companyData[0].footerdetails[0].website, style: 'footerHeader'
@@ -509,7 +509,7 @@ export class GeneratePdfQuotationComponent implements OnInit {
         columns: [
           {
             text: this.companyData[0].footerdetails[0].companyName.toUpperCase() + ' \n '
-              + this.companyData[0].footerdetails[0].address + ' | ' +
+              + this.companyData[0].footerdetails[0].address + ' | '
               + this.companyData[0].footerdetails[0].email + ' | '
               + this.companyData[0].footerdetails[0].phNo + ' | '
               + this.companyData[0].footerdetails[0].website, style: 'footerHeader'
@@ -721,7 +721,7 @@ export class GeneratePdfQuotationComponent implements OnInit {
         columns: [
           {
             text: this.companyData[0].footerdetails[0].companyName.toUpperCase() + ' \n '
-              + this.companyData[0].footerdetails[0].address + ' | ' +
+              + this.companyData[0].footerdetails[0].address + ' | '
               + this.companyData[0].footerdetails[0].email + ' | '
               + this.companyData[0].footerdetails[0].phNo + ' | '
               + this.companyData[0].footerdetails[0].website, style: 'footerHeader'
