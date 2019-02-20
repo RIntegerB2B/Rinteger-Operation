@@ -9,7 +9,7 @@ export class Lead {
     leadOwner: string;
     leadSource: string;
     leadStatus: string;
-    leadType: string;
+    leadType: [string];
     leadService: [string];
     requirements: [Detail];
     workOrder?: [string];
@@ -27,7 +27,7 @@ export class Lead {
         mobileNumber: number,
         name: string,
         leadOwner: string,
-        leadType: string,
+        leadType: [string],
         leadSource: string,
         leadStatus: string,
         leadService: [string],

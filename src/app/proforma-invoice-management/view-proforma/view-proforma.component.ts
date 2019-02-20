@@ -31,8 +31,8 @@ export class ViewProformaComponent implements OnInit {
     this.router.navigate(['proformainvoice/viewsingleproformainvoice',
     data._id]);
   }
-  getEditQuotation(data)   {
-    this.router.navigate(['editworkorder', this.leadId, data._id]);
+  getEditProfomaInvoice(data)   {
+    this.router.navigate(['proformainvoice/editprofomainvoice',  data._id]);
   }
 
   getAllProformaInvoice() {

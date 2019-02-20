@@ -36,10 +36,11 @@ import {
 } from '@angular/material';
 import { ProformaRoutingModule } from './proforma-routing.module';
 import { ViewAllProformaComponent } from './view-all-proforma/view-all-proforma.component';
+import { EditProfomaInvoiceComponent } from './edit-profoma-invoice/edit-profoma-invoice.component';
 
 @NgModule({
   declarations: [CreateProformaComponent,
-    ViewSingleProformaComponent, ViewProformaComponent, ViewAllProformaComponent],
+    ViewSingleProformaComponent, ViewProformaComponent, ViewAllProformaComponent, EditProfomaInvoiceComponent],
     imports: [
       ProformaRoutingModule,
       HttpClientModule,

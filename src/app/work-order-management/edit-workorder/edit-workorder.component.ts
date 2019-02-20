@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Lead } from './../../shared/lead.model';
 import { Customer } from './../../customer-management/create-customer/customer.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { WorkOrderService } from './../work-order.service';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { WorkOrder } from './../../shared/workorder.model';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import {MatSnackBar} from '@angular/material';
 @Component({
   selector: 'app-edit-workorder',
   templateUrl: './edit-workorder.component.html',
@@ -24,8 +25,10 @@ export class EditWorkorderComponent implements OnInit {
   sum = 0;
   leadId: string;
   workId: string;
+  message;
+  action;
   constructor(private fb: FormBuilder, private workOrderService: WorkOrderService
-    , private route: ActivatedRoute) { }
+    , private route: ActivatedRoute,  private snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit() {
     this.leadId = this.route.snapshot.params.leadId;
@@ -76,6 +79,7 @@ export class EditWorkorderComponent implements OnInit {
     }
 }
   updateWorkOrder(workOrderDetailsForm: FormGroup)   {
+    this.message = 'WorkOrder Updated Successfully';
     console.log(workOrderDetailsForm.value);
     this.workOrder = new WorkOrder(
       workOrderDetailsForm.controls.customerID.value,
@@ -94,6 +98,10 @@ export class EditWorkorderComponent implements OnInit {
     this.workOrder.workOrderID =  workOrderDetailsForm.controls.workOrderID.value;
     this.workOrderService.updateSingleWorkOrder(this.workOrder, this.workId).subscribe(data => {
       this.workOrderData = data[0];
+      this.snackBar.open(this.message, this.action, {
+        duration: 3000,
+      });
+      this.router.navigate(['workorder/viewallworkorder']);
     }, error => {
       console.log(error);
     });

@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Lead } from './../../shared/lead.model';
 import { Customer } from './../../customer-management/create-customer/customer.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { Invoice } from './../../shared/invoice.model';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import {InvoiceService} from '../invoice.service';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-edit-invoice',
@@ -26,8 +27,10 @@ export class EditInvoiceComponent implements OnInit {
   sum = 0;
   leadId: string;
   invoiceId: string;
+  message;
+  action;
   constructor(private fb: FormBuilder, private invoiceService: InvoiceService
-    , private route: ActivatedRoute) { }
+    , private route: ActivatedRoute, private snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit() {
     this.invoiceId = this.route.snapshot.params.id;
@@ -107,20 +110,7 @@ deleteRequirements(i) {
   this.getTotal();
 }
 updateInvoice(invoiceDetailsForm: FormGroup)   {
- /*  customerID: string,
-        customerName: string,
-        companyName: string,
-        companyAddress: string,
-        mobileNumber: string,
-        emailId: string,
-        leadID: string,
-        requirements: [Detail],
-        workOrderID: string,
-        date: Date,
-        expiryDate: Date,
-        allTotal: number,
-        subTotal: number,
-        tax?: number, */
+  this.message = 'Invoice Updated Successfully';
   this.invoice = new Invoice(
     invoiceDetailsForm.controls.customerID.value,
     invoiceDetailsForm.controls.customerName.value,
@@ -138,9 +128,12 @@ updateInvoice(invoiceDetailsForm: FormGroup)   {
     invoiceDetailsForm.controls.tax.value
   );
   this.invoice.invoiceID = this.invoiceDetailsForm.controls.invoiceID.value;
-  console.log('updated invoice', this.invoice);
     this.invoiceService.updateSingleInvoice(this.invoice, this.invoiceId).subscribe(data => {
     this.invoiceData = data[0];
+    this.snackBar.open(this.message, this.action, {
+      duration: 3000,
+    });
+    this.router.navigate(['invoice/viewallinvoice']);
   }, error => {
     console.log(error);
   });

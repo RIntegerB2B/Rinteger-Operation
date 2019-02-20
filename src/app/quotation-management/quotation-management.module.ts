@@ -37,11 +37,13 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { QuotationRoutingModule  } from './quotation-routing.module';
 import { ViewAllQuotationComponent } from './view-all-quotation/view-all-quotation.component';
 import { GeneratePdfQuotationComponent } from './generate-pdf-quotation/generate-pdf-quotation.component';
+import { EditQuotationComponent } from './edit-quotation/edit-quotation.component';
 
 
 @NgModule({
   declarations: [CreateQuotationComponent, ViewQuotationComponent, ViewSingleQuotationComponent, ViewAllQuotationComponent,
-     GeneratePdfQuotationComponent],
+     GeneratePdfQuotationComponent,
+     EditQuotationComponent],
   imports: [
     HttpClientModule,
     HttpModule,
@@ -73,6 +75,7 @@ import { GeneratePdfQuotationComponent } from './generate-pdf-quotation/generate
     ReactiveFormsModule,
     FlexLayoutModule,
     QuotationRoutingModule,
+    MatDatepickerModule,
     MatNativeDateModule
   ],
   providers: [QuotationManagementService]

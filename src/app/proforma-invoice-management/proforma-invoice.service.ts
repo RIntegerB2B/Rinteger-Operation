@@ -57,6 +57,11 @@ export class ProformaInvoiceService {
     const url: string = this.serviceUrl + addUrl + pinvid;
     return this.httpClient.delete<ProformaInvoice[]>(url);
   }
+  updateSingleProfomaInvoice(row,  id)   {
+    const addUrl = 'profomainvoice/';
+    const url: string = this.serviceUrl + addUrl + id;
+    return this.httpClient.put<ProformaInvoice[]>(url, row);
+  }
   workorderPDFDetails(): Observable<any> {
     const addUrl = 'workorderpdfdetails/';
     const url: string = this.serviceUrl + addUrl ;

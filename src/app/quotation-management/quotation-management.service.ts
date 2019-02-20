@@ -55,8 +55,7 @@ export class QuotationManagementService {
   }
   updateSingleQuotation(row, quoid)   {
     const addUrl = 'workorder/';
-    const subUrl = '/oneupdate/';
-    const url: string = this.serviceUrl + addUrl  + subUrl + quoid;
+    const url: string = this.serviceUrl + addUrl  + quoid;
     return this.httpClient.put<Quotation>(url, row);
   }
   deleteSingleQuotation(quoid)   {

@@ -8,6 +8,7 @@ import { LeadManagementService } from './../lead-management.service';
 import { CustomerManagementService } from './../../customer-management/customer-management.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import {MatSnackBar} from '@angular/material';
 import { SettingsServiceService } from '../../settings-management/settings-service.service';
 import { LeadSettings } from '../../shared/lead-settings.model';
 import {FollowUp} from '../../shared/follow-up.model';
@@ -26,8 +27,10 @@ export class LeadEditComponent implements OnInit {
   fullLeadService;
   leadID;
   id;
+  message;
+  action;
   constructor(private fb: FormBuilder, private leadManagementService: LeadManagementService,  private router: Router
-    , private route: ActivatedRoute) {
+    , private route: ActivatedRoute,  private snackBar: MatSnackBar) {
     this.route.paramMap.subscribe(
       (params: ParamMap) => {
         this.id = params.get('id');
@@ -71,7 +74,7 @@ export class LeadEditComponent implements OnInit {
   followUpForm() {
     const followUp = this.fb.group({
       id: [''],
-      followUpDate: [''],
+      date: [''],
       upcomingDate: [''],
       remarks: [''],
     });
@@ -107,7 +110,7 @@ export class LeadEditComponent implements OnInit {
     for (let i = 0; i <= this.leadModel.followUp.length - 1; i++) {
       const followUp = this.fb.group({
         id: [this.leadModel.followUp[i]._id],
-        followUpDate: [this.leadModel.followUp[i].date],
+        date: [this.leadModel.followUp[i].date],
         upcomingDate: [this.leadModel.followUp[i].upcomingDate],
         remarks: [this.leadModel.followUp[i].remarks],
       });
@@ -124,9 +127,13 @@ export class LeadEditComponent implements OnInit {
     this.followUpForms.removeAt(i);
   }
   updateLeads(leadDetailsForm: FormGroup, id) {
+    this.message = 'Lead Updated Successfully';
     console.log('form value', this.followUpForms.value);
     this.leadManagementService.editLead(leadDetailsForm.value, id).subscribe(data => {
       this.leadModel = data;
+      this.snackBar.open(this.message, this.action, {
+        duration: 3000,
+      });
       this.router.navigate(['lead/leadview']);
     }, error => {
       console.log(error);
@@ -158,13 +165,8 @@ export class LeadEditComponent implements OnInit {
   }
   editFollowUps(id) {
   }
-  deleteFollowUps(id) {
-    this.leadManagementService.deleteFollowUps(this.leadModel._id, id).subscribe(data => {
-      this.leadModel = data[0];
-      console.log(this.leadModel);
-    }, err => {
-      console.log(err);
-    });
+  deleteFollowUps(i) {
+    this.followUpForms.removeAt(i);
   }
   cancel() {
     this.router.navigate(['lead/leadview']);

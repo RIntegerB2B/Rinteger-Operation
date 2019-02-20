@@ -21,9 +21,9 @@ export class ViewAllQuotationComponent implements OnInit {
   getViewQuotation(data)   {
     this.router.navigate(['quotation/viewsinglequotation', data._id]);
   }
-  /* getEditQuotation(data)   {
-    this.router.navigate(['editworkorder', this.leadId, data._id]);
-  } */
+  getEditQuotation(data)   {
+    this.router.navigate(['quotation/editquotation',  data._id]);
+  }
   getAllQuotation() {
     this.quotationManagementService.allQuotation().subscribe(data => {
       this.quotation = data;

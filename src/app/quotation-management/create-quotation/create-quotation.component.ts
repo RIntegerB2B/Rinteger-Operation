@@ -9,6 +9,8 @@ import { CustomerManagementService } from './../../customer-management/customer-
 import { Lead } from './../../shared/lead.model';
 import { Customer } from './../../customer-management/create-customer/customer.model';
 import {WorkOrderPdf} from '../../shared/workorderpdf.model';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 
 
 @Component({
@@ -80,8 +82,6 @@ export class CreateQuotationComponent implements OnInit {
       quotationDetailsForm.controls.emailId.value,
       quotationDetailsForm.controls.leadID.value,
       quotationDetailsForm.controls.date.value,
-      quotationDetailsForm.controls.expiryDate.value,
-      quotationDetailsForm.controls.status.value,
       quotationDetailsForm.controls.requirements.value,
       quotationDetailsForm.controls.subTotal.value,
       quotationDetailsForm.controls.allTotal.value,
