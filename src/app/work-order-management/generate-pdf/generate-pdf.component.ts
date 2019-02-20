@@ -158,8 +158,8 @@ export class GeneratePdfComponent implements OnInit {
               width: 350,
               ul: [
                 { text: 'WORK ORDER DETAILS', style: 'orderStyle' },
-                { text: 'Workorder ID:  ' + this.workOrder[0].workOrderID.toUpperCase(), style: 'textGst' },
-                { text: 'Workorder Date: ' + this.workOrder[0].date, style: 'address' },
+                { text: 'Workorder ID:  ' +  this.workOrder[0].workOrderID.toUpperCase(), style: 'textGst' },
+                { text: 'Workorder Date: ' + new Date(this.workOrder[0].date).toLocaleDateString(), style: 'address' },
                 { text: 'Total Amount: ' + this.workOrder[0].allTotal.toFixed(2), style: 'address' }
               ]
             },
@@ -369,7 +369,7 @@ export class GeneratePdfComponent implements OnInit {
               ul: [
                 { text: 'WORK ORDER DETAILS', style: 'orderStyle' },
                 { text: 'Workorder ID:  ' + this.workOrder[0].workOrderID.toUpperCase(), style: 'textGst' },
-                { text: 'Workorder Date: ' + this.workOrder[0].date, style: 'address' },
+                { text: 'Workorder Date: ' + new Date(this.workOrder[0].date).toLocaleDateString(), style: 'address' },
                 { text: 'Total Amount: ' + this.workOrder[0].allTotal.toFixed(2), style: 'address' }
               ]
             },
@@ -579,7 +579,7 @@ export class GeneratePdfComponent implements OnInit {
               ul: [
                 { text: 'WORK ORDER DETAILS', style: 'orderStyle' },
                 { text: 'Workorder ID:  ' + this.workOrder[0].workOrderID.toUpperCase(), style: 'textGst' },
-                { text: 'Workorder Date: ' + this.workOrder[0].date, style: 'address' },
+                { text: 'Workorder Date: ' + new Date(this.workOrder[0].date).toLocaleDateString(), style: 'address' },
                 { text: 'Total Amount: ' + this.workOrder[0].allTotal.toFixed(2), style: 'address' }
               ]
             },
@@ -791,7 +791,7 @@ export class GeneratePdfComponent implements OnInit {
               ul: [
                 { text: 'WORK ORDER DETAILS', style: 'orderStyle' },
                 { text: 'Workorder ID:  ' + this.workOrder[0].workOrderID.toUpperCase(), style: 'textGst' },
-                { text: 'Workorder Date: ' + this.workOrder[0].date, style: 'address' },
+                { text: 'Workorder Date: ' + new Date(this.workOrder[0].date).toLocaleDateString(), style: 'address' },
                 { text: 'Total Amount: ' + this.workOrder[0].allTotal.toFixed(2), style: 'address' }
               ]
             },

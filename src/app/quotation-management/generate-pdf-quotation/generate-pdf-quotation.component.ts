@@ -147,7 +147,8 @@ export class GeneratePdfQuotationComponent implements OnInit {
               ul: [
                 { text: 'QUOTATION DETAILS', style: 'orderStyle' },
                 { text: 'Quotation ID:  ' + this.quotation[0].quotationID.toUpperCase(), style: 'textGst' },
-                { text: 'Quotation Date: ' + this.quotation[0].date, style: 'address' },
+                { text: 'Quotation Date: ' +
+                new Date(this.quotation[0].date).toLocaleDateString(), style: 'address' },
                 { text: 'Total Amount: ' + this.quotation[0].allTotal.toFixed(2), style: 'address' }
               ]
             },
@@ -358,7 +359,7 @@ export class GeneratePdfQuotationComponent implements OnInit {
               ul: [
                 { text: 'QUOTATION DETAILS', style: 'orderStyle' },
                 { text: 'Quotation ID:  ' + this.quotation[0].quotationID.toUpperCase(), style: 'textGst' },
-                { text: 'Quotation Date: ' + this.quotation[0].date, style: 'address' },
+                { text: 'Quotation Date: ' + new Date(this.quotation[0].date).toLocaleDateString(), style: 'address' },
                 { text: 'Total Amount: ' + this.quotation[0].allTotal.toFixed(2), style: 'address' }
               ]
             },
@@ -569,7 +570,7 @@ export class GeneratePdfQuotationComponent implements OnInit {
               ul: [
                 { text: 'QUOTATION DETAILS', style: 'orderStyle' },
                 { text: 'Quotation ID:  ' + this.quotation[0].quotationID.toUpperCase(), style: 'textGst' },
-                { text: 'Quotation Date: ' + this.quotation[0].date, style: 'address' },
+                { text: 'Quotation Date: ' + new Date(this.quotation[0].date).toLocaleDateString(), style: 'address' },
                 { text: 'Total Amount: ' + this.quotation[0].allTotal.toFixed(2), style: 'address' }
               ]
             },
@@ -782,7 +783,7 @@ export class GeneratePdfQuotationComponent implements OnInit {
               ul: [
                 { text: 'Quotation Details', style: 'orderStyle' },
                 { text: 'Quotation ID:  ' + this.quotation[0].quotationID.toUpperCase(), style: 'textGst' },
-                { text: 'Quotation Date: ' + this.quotation[0].date, style: 'address' },
+                { text: 'Quotation Date: ' + new Date(this.quotation[0].date).toLocaleDateString(), style: 'address' },
                 { text: 'Total Amount: ' + this.quotation[0].allTotal.toFixed(2), style: 'address' }
               ]
             },

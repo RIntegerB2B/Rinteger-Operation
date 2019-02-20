@@ -150,7 +150,7 @@ image: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAMDAwMDAwQEBAQFB
               ul: [
                 { text: 'INVOICE DETAILS', style: 'orderStyle' },
                 { text: 'Invoice ID:  ' + this.invoice[0].invoiceID.toUpperCase(), style: 'textGst' },
-                { text: 'Date: ' + this.invoice[0].date, style: 'address' },
+                { text: 'Date: ' + new Date(this.invoice[0].date).toLocaleDateString(), style: 'address' },
                 { text: 'Expiry Date: ' + this.invoice[0].expiryDate, style: 'address' },
                 { text: 'Total Amount: ' + this.invoice[0].allTotal.toFixed(2), style: 'address' }
               ]
@@ -349,7 +349,7 @@ image: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAMDAwMDAwQEBAQFB
               ul: [
                 { text: 'INVOICE DETAILS', style: 'orderStyle' },
                 { text: 'Invoice ID:  ' + this.invoice[0].invoiceID.toUpperCase(), style: 'textGst' },
-                { text: 'Date: ' + this.invoice[0].date, style: 'address' },
+                { text: 'Date: ' + new Date(this.invoice[0].date).toLocaleDateString(), style: 'address' },
                 { text: 'Expiry Date: ' + this.invoice[0].date, style: 'address' },
                 { text: 'Total Amount: ' + this.invoice[0].allTotal.toFixed(2), style: 'address' }
               ]
@@ -574,7 +574,7 @@ image: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAMDAwMDAwQEBAQFB
               ul: [
                 { text: 'INVOICE DETAILS', style: 'orderStyle' },
                 { text: 'Invoice ID:  ' + this.invoice[0].invoiceID.toUpperCase(), style: 'textGst' },
-                { text: 'Date: ' + this.invoice[0].date, style: 'address' },
+                { text: 'Date: ' + new Date(this.invoice[0].date).toLocaleDateString(), style: 'address' },
                 { text: 'Expiry Date: ' + this.invoice[0].expiryDate, style: 'address' },
                 { text: 'Total Amount: ' + this.invoice[0].allTotal.toFixed(2), style: 'address' }
               ]
@@ -786,9 +786,9 @@ image: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAMDAwMDAwQEBAQFB
               type: 'none',
               width: 350,
               ul: [
-                { text: 'Invoice Details', style: 'orderStyle' },
+                { text: 'INVOICE DETAILS', style: 'orderStyle' },
                 { text: 'Invoice ID:  ' + this.invoice[0].invoiceID.toUpperCase(), style: 'textGst' },
-                { text: 'Date: ' + this.invoice[0].date, style: 'address' },
+                { text: 'Date: ' + new Date(this.invoice[0].date).toLocaleDateString(), style: 'address' },
                 { text: 'Expiry Date: ' + this.invoice[0].expiryDate, style: 'address' },
                 { text: 'Total Amount: ' + this.invoice[0].allTotal.toFixed(2), style: 'address' }
               ]
