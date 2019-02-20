@@ -77,19 +77,12 @@ export class InvoiceGeneratePdfComponent implements OnInit {
     this.workOrderPdf = company;
         if (temp === 'With Discount + GST') {
           this.pdfWithDiscountGst();
-      } else if (temp === 'With Discount + GST') {
-            /* this.pdfWithDiscountDigtalTerms(); */
-          }  else if (temp === 'Without Discount + GST') {
-            this.pdfWithoutDiscountTerms();
-          } else if (temp === 'Without Discount + GST') {
-            this.pdfWithoutDiscountDigtalTerms();
+      }  else if (temp === 'Without Discount + GST') {
+            this.pdfWithoutDiscountGst();
           } else  if (temp === 'With Discount + SGST + CGST') {
+            this.pdfWithDiscountSgstCgst();
           } else  if (temp === 'Without Discount + SGST + CGST') {
-
-          } else  if (temp === 'With Discount + SGST + CGST') {
-
-          } else  if (temp === 'Without Discount + SGST + CGST') {
-
+            this.pdfWithoutDiscountSgstCgst();
           }
     }
     pdfWithDiscountGst() {
@@ -157,8 +150,8 @@ image: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAMDAwMDAwQEBAQFB
               ul: [
                 { text: 'INVOICE DETAILS', style: 'orderStyle' },
                 { text: 'Invoice ID:  ' + this.invoice[0].invoiceID.toUpperCase(), style: 'textGst' },
-                { text: 'Invoice Date: ' + this.invoice[0].date, style: 'address' },
-                { text: 'Invoice Expiry Date: ' + this.invoice[0].expiryDate, style: 'address' },
+                { text: 'Date: ' + this.invoice[0].date, style: 'address' },
+                { text: 'Expiry Date: ' + this.invoice[0].expiryDate, style: 'address' },
                 { text: 'Total Amount: ' + this.invoice[0].allTotal.toFixed(2), style: 'address' }
               ]
             },
@@ -291,7 +284,7 @@ image: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAMDAwMDAwQEBAQFB
     pdfMake.createPdf(dd).download(this.invoice[0].invoiceID);
   }
 
-  pdfWithDiscountandProduct() {
+  pdfWithDiscountSgstCgst() {
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
     const dd = {
       footer: {
@@ -356,8 +349,8 @@ image: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAMDAwMDAwQEBAQFB
               ul: [
                 { text: 'INVOICE DETAILS', style: 'orderStyle' },
                 { text: 'Invoice ID:  ' + this.invoice[0].invoiceID.toUpperCase(), style: 'textGst' },
-                { text: 'Invoice Date: ' + this.invoice[0].date, style: 'address' },
-                { text: 'Invoice Expiry Date: ' + this.invoice[0].date, style: 'address' },
+                { text: 'Date: ' + this.invoice[0].date, style: 'address' },
+                { text: 'Expiry Date: ' + this.invoice[0].date, style: 'address' },
                 { text: 'Total Amount: ' + this.invoice[0].allTotal.toFixed(2), style: 'address' }
               ]
             },
@@ -394,18 +387,31 @@ image: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAMDAwMDAwQEBAQFB
           table: {
             headerRows: 1,
             widths: ['*', '*', '*', '*', '*'],
-            body: [[{ text: '', style: 'rowStyle', border: [false, false, false, false] },
-            { text: '', style: 'rowStyle', border: [false, false, false, false] }, {
-              text: '',
-              style: 'rowStyle', border: [false, false, false, false]
-            }, { text: 'GST ( ' + this.workOrderPdf[0].gst + ' % )', style: 'rowStyle' },
-            { text: this.invoice[0].tax.toFixed(2), style: 'rowTotal' }],
-            [{ text: '', style: 'rowStyle', border: [false, false, false, false] },
-            { text: '', style: 'rowStyle', border: [false, false, false, false] }, {
-              text: '',
-              style: 'rowStyle', border: [false, false, false, false]
-            }, { text: 'Amount', style: 'rowStyle' },
-            { text: this.invoice[0].allTotal.toFixed(2), style: 'rowTotal' }]
+            body: [[
+              { text: '', style: 'rowStyle', border: [false, false, false, false] }, {
+                text: '',
+                style: 'rowStyle', border: [false, false, false, false]
+              }, { text: '', style: 'rowStyle', border: [false, false, false, false] },
+              { text: 'SGST ( ' + this.workOrderPdf[0].sgst + ' % )', style: 'rowStyle' }
+              ,
+              { text: ((100 / this.workOrderPdf[0].gst * this.invoice[0].tax) *
+                (this.workOrderPdf[0].sgst / 100 )).toFixed(2), style: 'rowTotal' }],
+              [
+                { text: '', style: 'rowStyle', border: [false, false, false, false] }, {
+                  text: '',
+                  style: 'rowStyle', border: [false, false, false, false]
+                },
+                { text: '', style: 'rowStyle', border: [false, false, false, false] }
+                , { text: 'CGST ( ' + this.workOrderPdf[0].cgst + ' % )', style: 'rowStyle' },
+                { text: ((100 / this.workOrderPdf[0].gst * this.invoice[0].tax) *
+                   (this.workOrderPdf[0].cgst / 100 )).toFixed(2), style: 'rowTotal' }],
+            [
+              { text: '', style: 'rowStyle', border: [false, false, false, false] },
+              { text: '', style: 'rowStyle', border: [false, false, false, false] }, {
+                text: '',
+                style: 'rowStyle', border: [false, false, false, false]
+              }, { text: 'Amount', style: 'rowStyle' },
+              { text: this.invoice[0].allTotal.toFixed(2), style: 'rowTotal' }]
             ]
           },
         }, {
@@ -503,7 +509,7 @@ image: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAMDAwMDAwQEBAQFB
     pdfMake.createPdf(dd).download(this.invoice[0].invoiceID);
   }
 
-  pdfWithoutDiscountTerms() {
+  pdfWithoutDiscountGst() {
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
     const dd = {
       footer: {
@@ -568,8 +574,8 @@ image: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAMDAwMDAwQEBAQFB
               ul: [
                 { text: 'INVOICE DETAILS', style: 'orderStyle' },
                 { text: 'Invoice ID:  ' + this.invoice[0].invoiceID.toUpperCase(), style: 'textGst' },
-                { text: 'Invoice Date: ' + this.invoice[0].date, style: 'address' },
-                { text: 'Invoice Expiry Date: ' + this.invoice[0].expiryDate, style: 'address' },
+                { text: 'Date: ' + this.invoice[0].date, style: 'address' },
+                { text: 'Expiry Date: ' + this.invoice[0].expiryDate, style: 'address' },
                 { text: 'Total Amount: ' + this.invoice[0].allTotal.toFixed(2), style: 'address' }
               ]
             },
@@ -717,7 +723,7 @@ image: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAMDAwMDAwQEBAQFB
   }
 
   /* pdf with discount digital */
-  pdfWithoutDiscountDigtalTerms() {
+  pdfWithoutDiscountSgstCgst() {
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
     const dd = {
       footer: {
@@ -780,9 +786,10 @@ image: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAMDAwMDAwQEBAQFB
               type: 'none',
               width: 350,
               ul: [
-                { text: 'Quotation Details', style: 'orderStyle' },
-                { text: 'Quotation ID:  ' + this.invoice[0].invoiceID.toUpperCase(), style: 'textGst' },
-                { text: 'Quotation Date: ' + this.invoice[0].date, style: 'address' },
+                { text: 'Invoice Details', style: 'orderStyle' },
+                { text: 'Invoice ID:  ' + this.invoice[0].invoiceID.toUpperCase(), style: 'textGst' },
+                { text: 'Date: ' + this.invoice[0].date, style: 'address' },
+                { text: 'Expiry Date: ' + this.invoice[0].expiryDate, style: 'address' },
                 { text: 'Total Amount: ' + this.invoice[0].allTotal.toFixed(2), style: 'address' }
               ]
             },
@@ -823,8 +830,16 @@ image: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAMDAwMDAwQEBAQFB
               { text: '', style: 'rowStyle', border: [false, false, false, false] }, {
                 text: '',
                 style: 'rowStyle', border: [false, false, false, false]
-              }, { text: 'GST ( ' + this.workOrderPdf[0].gst + ' % )', style: 'rowStyle' },
-              { text: this.invoice[0].tax.toFixed(2), style: 'rowTotal' }],
+              }, { text: 'SGST ( ' + this.workOrderPdf[0].sgst + ' % )', style: 'rowStyle' },
+              { text: ((100 / this.workOrderPdf[0].gst * this.invoice[0].tax) *
+                (this.workOrderPdf[0].sgst / 100 )).toFixed(2), style: 'rowTotal' }],
+              [
+                { text: '', style: 'rowStyle', border: [false, false, false, false] }, {
+                  text: '',
+                  style: 'rowStyle', border: [false, false, false, false]
+                }, { text: 'CGST ( ' + this.workOrderPdf[0].cgst + ' % )', style: 'rowStyle' },
+                { text: ((100 / this.workOrderPdf[0].gst * this.invoice[0].tax) *
+                   (this.workOrderPdf[0].cgst / 100 )).toFixed(2), style: 'rowTotal' }],
             [
               { text: '', style: 'rowStyle', border: [false, false, false, false] }, {
                 text: '',

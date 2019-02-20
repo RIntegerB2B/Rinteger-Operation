@@ -3,9 +3,9 @@ import { CompanyDetails } from './companydetails.model';
 import { FooterDetails } from './footerdetails.model';
 
 export class WorkOrderPdf {
-    gst: String;
-    sgst: String;
-    cgst: String;
+    gst: number;
+    sgst: number;
+    cgst: number;
     terms: String;
     digitalterms: String;
     bankdetails: BankDetails;
