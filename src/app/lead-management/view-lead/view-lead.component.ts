@@ -81,7 +81,6 @@ export class ViewLeadComponent implements OnInit {
     this.router.navigate(['lead/leadadd']);
   }
   getEditLead(leadDetailsForm: FormGroup, id) {
-     console.log('edit the row', id);
      this.router.navigate(['lead/leadedit', id]);
   }
   getDeleteLead(leadDetailsForm: FormGroup, row) {

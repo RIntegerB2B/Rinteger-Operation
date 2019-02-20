@@ -5,6 +5,7 @@ import { ViewQuotationComponent } from './view-quotation/view-quotation.componen
 import { ViewSingleQuotationComponent } from './view-single-quotation/view-single-quotation.component';
 import { Routes, RouterModule } from '@angular/router';
 import { ViewAllQuotationComponent } from './view-all-quotation/view-all-quotation.component';
+import {EditQuotationComponent} from './edit-quotation/edit-quotation.component';
 const routes: Routes = [
   {
     path: 'createquotation/:id/:leadId',
@@ -25,7 +26,11 @@ const routes: Routes = [
   {
     path: 'viewallquotation',
     component: ViewAllQuotationComponent
-  }
+  },
+  {
+    path: 'editquotation/:id',
+    component: EditQuotationComponent
+  },
 ];
 
 @NgModule({

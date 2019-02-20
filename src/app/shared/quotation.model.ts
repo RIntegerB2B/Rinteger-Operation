@@ -24,8 +24,6 @@ export class Quotation {
         emailId: string,
         leadID: string,
         date: Date,
-        expiryDate: Date,
-        status: string,
         requirements: [Detail],
         subTotal: number,
         allTotal: number,
@@ -39,8 +37,6 @@ export class Quotation {
         this.emailId = emailId;
         this.leadID = leadID;
         this.date = date;
-        this.expiryDate = expiryDate;
-        this.status = status;
         this.requirements = requirements;
         this.subTotal = subTotal;
         this.allTotal = allTotal;

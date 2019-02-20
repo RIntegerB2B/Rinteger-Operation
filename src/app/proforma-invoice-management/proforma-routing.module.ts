@@ -5,6 +5,7 @@ import { ViewSingleProformaComponent } from './view-single-proforma/view-single-
 import { ViewProformaComponent } from './view-proforma/view-proforma.component';
 import { Routes, RouterModule } from '@angular/router';
 import { ViewAllProformaComponent } from './view-all-proforma/view-all-proforma.component';
+import {EditProfomaInvoiceComponent} from './edit-profoma-invoice/edit-profoma-invoice.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'viewallproformainvoice',
     component: ViewAllProformaComponent
+  },
+  {
+    path: 'editprofomainvoice/:id',
+    component: EditProfomaInvoiceComponent
   }
 ];
 
