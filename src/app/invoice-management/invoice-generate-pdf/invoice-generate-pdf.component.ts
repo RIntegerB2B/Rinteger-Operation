@@ -77,19 +77,12 @@ export class InvoiceGeneratePdfComponent implements OnInit {
     this.workOrderPdf = company;
         if (temp === 'With Discount + GST') {
           this.pdfWithDiscountGst();
-      } else if (temp === 'With Discount + GST') {
-            /* this.pdfWithDiscountDigtalTerms(); */
-          }  else if (temp === 'Without Discount + GST') {
-            this.pdfWithoutDiscountTerms();
-          } else if (temp === 'Without Discount + GST') {
-            this.pdfWithoutDiscountDigtalTerms();
+      }  else if (temp === 'Without Discount + GST') {
+            this.pdfWithoutDiscountGst();
           } else  if (temp === 'With Discount + SGST + CGST') {
+            this.pdfWithDiscountSgstCgst();
           } else  if (temp === 'Without Discount + SGST + CGST') {
-
-          } else  if (temp === 'With Discount + SGST + CGST') {
-
-          } else  if (temp === 'Without Discount + SGST + CGST') {
-
+            this.pdfWithoutDiscountSgstCgst();
           }
     }
     pdfWithDiscountGst() {
@@ -111,6 +104,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           stack: [
             { text: 'This is a subheader', style: 'subheader' },
             {
+              // tslint:disable-next-line:max-line-length
               image: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAMDAwMDAwQEBAQFBQUFBQcHBgYHBwsICQgJCAsRCwwLCwwLEQ8SDw4PEg8bFRMTFRsfGhkaHyYiIiYwLTA+PlQBAwMDAwMDBAQEBAUFBQUFBwcGBgcHCwgJCAkICxELDAsLDAsRDxIPDg8SDxsVExMVGx8aGRofJiIiJjAtMD4+VP/AABEIADIAMgMBIgACEQEDEQH/xAB5AAEAAwEBAQEAAAAAAAAAAAAABggJBwMKBBAAAAUCBAEJBwUBAAAAAAAAAQIDBAUABgcREhMIFBghMTI3QXWxCRUjVleTlRc2UYGy1AEBAQEAAAAAAAAAAAAAAAAAAAIBEQEBAQADAAAAAAAAAAAAAAAAARECMkH/2gAMAwEAAhEDEQA/ANPbmuu2bLjfeE9LMotpukTFy6VKknrP2S6jeI1z3nAYJ/UG2fyCVcW46u44/n8Z6nrIFpCTcgjvNIx+5S1CXcRaqqlzDrDUQohRUmt5+cBgn9QbZ/IJVMLRxBsa+BdhbdxRkuLPQLjkbgq21uZ6denqzyr533jF/HqAk8auGxxDMCLJHSMIfyAHAK0F4CEJ1dW/fdj9m0yLFbm+0O51dK2WWlVKheORqHSoqDW+xH9wxH4hT/qrzt6XuE9xTUPKuWTnkbSPXSWbtjtxydboGKYplFc8tqiUupSlBT7jq7jj+fxnqeq4cHt1X8ewMU4OAcqnXjYYXkI2TSTExX7rc6S6u0JhIXoNVj+OruOP5/Gep6rFwlWney2HOLknDsnYGlYAWUQ5RVKmdR6iCuZEzagEpyicKKnVIsRpXEJ1wzXIGNqKCU+pMtQtYHBEE3pxKJBVHQh4AGdfs9nwUp/1HJ4GSigH+9+o9Gtr/wAQ+EW+I6YB7NTNuXZkQXSoLOGybPbUcBuHHqTDXUi9nqbvFN4bUSOf3qN8r34ZcK7XgeJ7FNJoZ/osxZBKIBR2c+kr0h01dzPt1fGJ7xLm8phP9Oqplw4XlaUnxR43izm49wE66YnihTXIcHpUAOZUUMu3oq5sT3iXN5TCf6dURE3pSlBT7jq7jj+fxnqesjoy67shW3JoyclmKGsT7LZ6sgTUbrNpTMAZjX0K3bZVrX5EDFXHFNJRiKya2w4LqJrT7JsujpDOuZc2PAb5AgfsDRUskYaN7muho3dN281KIouzqHcpJu1iEWMoGRzKFKbI4m8RHrq9vAa/lGJ7+KzhlpIFSRYKARZFLQHxuveEtXd5seA3yBA/YGpvZeF9gYci8NbFvsIkXu3yjkyejd2s9Grp8NVC2WOa25h7Z1oSyExAYNR0XIoAcEnbY8ekqQFC6DZGKfxAa6JbLabWuadln8YaOSdM41BEh10ljmFsKwnMO0JgAPihlU6pRJSlKBSlKBSlKBSlKBSlKD//2Q==',
               width: 100
             }
@@ -156,8 +150,8 @@ export class InvoiceGeneratePdfComponent implements OnInit {
               ul: [
                 { text: 'INVOICE DETAILS', style: 'orderStyle' },
                 { text: 'Invoice ID:  ' + this.invoice[0].invoiceID.toUpperCase(), style: 'textGst' },
-                { text: 'Invoice Date: ' + this.invoice[0].date, style: 'address' },
-                { text: 'Invoice Expiry Date: ' + this.invoice[0].expiryDate, style: 'address' },
+                { text: 'Date: ' + this.invoice[0].date, style: 'address' },
+                { text: 'Expiry Date: ' + this.invoice[0].expiryDate, style: 'address' },
                 { text: 'Total Amount: ' + this.invoice[0].allTotal.toFixed(2), style: 'address' }
               ]
             },
@@ -290,7 +284,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
     pdfMake.createPdf(dd).download(this.invoice[0].invoiceID);
   }
 
-  pdfWithDiscountandProduct() {
+  pdfWithDiscountSgstCgst() {
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
     const dd = {
       footer: {
@@ -354,8 +348,8 @@ export class InvoiceGeneratePdfComponent implements OnInit {
               ul: [
                 { text: 'INVOICE DETAILS', style: 'orderStyle' },
                 { text: 'Invoice ID:  ' + this.invoice[0].invoiceID.toUpperCase(), style: 'textGst' },
-                { text: 'Invoice Date: ' + this.invoice[0].date, style: 'address' },
-                { text: 'Invoice Expiry Date: ' + this.invoice[0].date, style: 'address' },
+                { text: 'Date: ' + this.invoice[0].date, style: 'address' },
+                { text: 'Expiry Date: ' + this.invoice[0].date, style: 'address' },
                 { text: 'Total Amount: ' + this.invoice[0].allTotal.toFixed(2), style: 'address' }
               ]
             },
@@ -392,18 +386,31 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           table: {
             headerRows: 1,
             widths: ['*', '*', '*', '*', '*'],
-            body: [[{ text: '', style: 'rowStyle', border: [false, false, false, false] },
-            { text: '', style: 'rowStyle', border: [false, false, false, false] }, {
-              text: '',
-              style: 'rowStyle', border: [false, false, false, false]
-            }, { text: 'GST ( ' + this.workOrderPdf[0].gst + ' % )', style: 'rowStyle' },
-            { text: this.invoice[0].tax.toFixed(2), style: 'rowTotal' }],
-            [{ text: '', style: 'rowStyle', border: [false, false, false, false] },
-            { text: '', style: 'rowStyle', border: [false, false, false, false] }, {
-              text: '',
-              style: 'rowStyle', border: [false, false, false, false]
-            }, { text: 'Amount', style: 'rowStyle' },
-            { text: this.invoice[0].allTotal.toFixed(2), style: 'rowTotal' }]
+            body: [[
+              { text: '', style: 'rowStyle', border: [false, false, false, false] }, {
+                text: '',
+                style: 'rowStyle', border: [false, false, false, false]
+              }, { text: '', style: 'rowStyle', border: [false, false, false, false] },
+              { text: 'SGST ( ' + this.workOrderPdf[0].sgst + ' % )', style: 'rowStyle' }
+              ,
+              { text: ((100 / this.workOrderPdf[0].gst * this.invoice[0].tax) *
+                (this.workOrderPdf[0].sgst / 100 )).toFixed(2), style: 'rowTotal' }],
+              [
+                { text: '', style: 'rowStyle', border: [false, false, false, false] }, {
+                  text: '',
+                  style: 'rowStyle', border: [false, false, false, false]
+                },
+                { text: '', style: 'rowStyle', border: [false, false, false, false] }
+                , { text: 'CGST ( ' + this.workOrderPdf[0].cgst + ' % )', style: 'rowStyle' },
+                { text: ((100 / this.workOrderPdf[0].gst * this.invoice[0].tax) *
+                   (this.workOrderPdf[0].cgst / 100 )).toFixed(2), style: 'rowTotal' }],
+            [
+              { text: '', style: 'rowStyle', border: [false, false, false, false] },
+              { text: '', style: 'rowStyle', border: [false, false, false, false] }, {
+                text: '',
+                style: 'rowStyle', border: [false, false, false, false]
+              }, { text: 'Amount', style: 'rowStyle' },
+              { text: this.invoice[0].allTotal.toFixed(2), style: 'rowTotal' }]
             ]
           },
         }, {
@@ -501,7 +508,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
     pdfMake.createPdf(dd).download(this.invoice[0].invoiceID);
   }
 
-  pdfWithoutDiscountTerms() {
+  pdfWithoutDiscountGst() {
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
     const dd = {
       footer: {
@@ -520,6 +527,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           stack: [
             { text: 'This is a subheader', style: 'subheader' },
             {
+              // tslint:disable-next-line:max-line-length
               image: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAMDAwMDAwQEBAQFBQUFBQcHBgYHBwsICQgJCAsRCwwLCwwLEQ8SDw4PEg8bFRMTFRsfGhkaHyYiIiYwLTA+PlQBAwMDAwMDBAQEBAUFBQUFBwcGBgcHCwgJCAkICxELDAsLDAsRDxIPDg8SDxsVExMVGx8aGRofJiIiJjAtMD4+VP/AABEIADIAMgMBIgACEQEDEQH/xAB5AAEAAwEBAQEAAAAAAAAAAAAABggJBwMKBBAAAAUCBAEJBwUBAAAAAAAAAQIDBAUABgcREhMIFBghMTI3QXWxCRUjVleTlRc2UYGy1AEBAQEAAAAAAAAAAAAAAAAAAAIBEQEBAQADAAAAAAAAAAAAAAAAARECMkH/2gAMAwEAAhEDEQA/ANPbmuu2bLjfeE9LMotpukTFy6VKknrP2S6jeI1z3nAYJ/UG2fyCVcW46u44/n8Z6nrIFpCTcgjvNIx+5S1CXcRaqqlzDrDUQohRUmt5+cBgn9QbZ/IJVMLRxBsa+BdhbdxRkuLPQLjkbgq21uZ6denqzyr533jF/HqAk8auGxxDMCLJHSMIfyAHAK0F4CEJ1dW/fdj9m0yLFbm+0O51dK2WWlVKheORqHSoqDW+xH9wxH4hT/qrzt6XuE9xTUPKuWTnkbSPXSWbtjtxydboGKYplFc8tqiUupSlBT7jq7jj+fxnqeq4cHt1X8ewMU4OAcqnXjYYXkI2TSTExX7rc6S6u0JhIXoNVj+OruOP5/Gep6rFwlWney2HOLknDsnYGlYAWUQ5RVKmdR6iCuZEzagEpyicKKnVIsRpXEJ1wzXIGNqKCU+pMtQtYHBEE3pxKJBVHQh4AGdfs9nwUp/1HJ4GSigH+9+o9Gtr/wAQ+EW+I6YB7NTNuXZkQXSoLOGybPbUcBuHHqTDXUi9nqbvFN4bUSOf3qN8r34ZcK7XgeJ7FNJoZ/osxZBKIBR2c+kr0h01dzPt1fGJ7xLm8phP9Oqplw4XlaUnxR43izm49wE66YnihTXIcHpUAOZUUMu3oq5sT3iXN5TCf6dURE3pSlBT7jq7jj+fxnqesjoy67shW3JoyclmKGsT7LZ6sgTUbrNpTMAZjX0K3bZVrX5EDFXHFNJRiKya2w4LqJrT7JsujpDOuZc2PAb5AgfsDRUskYaN7muho3dN281KIouzqHcpJu1iEWMoGRzKFKbI4m8RHrq9vAa/lGJ7+KzhlpIFSRYKARZFLQHxuveEtXd5seA3yBA/YGpvZeF9gYci8NbFvsIkXu3yjkyejd2s9Grp8NVC2WOa25h7Z1oSyExAYNR0XIoAcEnbY8ekqQFC6DZGKfxAa6JbLabWuadln8YaOSdM41BEh10ljmFsKwnMO0JgAPihlU6pRJSlKBSlKBSlKBSlKBSlKD//2Q==',
               width: 100
             }
@@ -565,8 +573,8 @@ export class InvoiceGeneratePdfComponent implements OnInit {
               ul: [
                 { text: 'INVOICE DETAILS', style: 'orderStyle' },
                 { text: 'Invoice ID:  ' + this.invoice[0].invoiceID.toUpperCase(), style: 'textGst' },
-                { text: 'Invoice Date: ' + this.invoice[0].date, style: 'address' },
-                { text: 'Invoice Expiry Date: ' + this.invoice[0].expiryDate, style: 'address' },
+                { text: 'Date: ' + this.invoice[0].date, style: 'address' },
+                { text: 'Expiry Date: ' + this.invoice[0].expiryDate, style: 'address' },
                 { text: 'Total Amount: ' + this.invoice[0].allTotal.toFixed(2), style: 'address' }
               ]
             },
@@ -714,7 +722,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
   }
 
   /* pdf with discount digital */
-  pdfWithoutDiscountDigtalTerms() {
+  pdfWithoutDiscountSgstCgst() {
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
     const dd = {
       footer: {
@@ -733,6 +741,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           stack: [
             { text: 'This is a subheader', style: 'subheader' },
             {
+              // tslint:disable-next-line:max-line-length
               image: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAMDAwMDAwQEBAQFBQUFBQcHBgYHBwsICQgJCAsRCwwLCwwLEQ8SDw4PEg8bFRMTFRsfGhkaHyYiIiYwLTA+PlQBAwMDAwMDBAQEBAUFBQUFBwcGBgcHCwgJCAkICxELDAsLDAsRDxIPDg8SDxsVExMVGx8aGRofJiIiJjAtMD4+VP/AABEIADIAMgMBIgACEQEDEQH/xAB5AAEAAwEBAQEAAAAAAAAAAAAABggJBwMKBBAAAAUCBAEJBwUBAAAAAAAAAQIDBAUABgcREhMIFBghMTI3QXWxCRUjVleTlRc2UYGy1AEBAQEAAAAAAAAAAAAAAAAAAAIBEQEBAQADAAAAAAAAAAAAAAAAARECMkH/2gAMAwEAAhEDEQA/ANPbmuu2bLjfeE9LMotpukTFy6VKknrP2S6jeI1z3nAYJ/UG2fyCVcW46u44/n8Z6nrIFpCTcgjvNIx+5S1CXcRaqqlzDrDUQohRUmt5+cBgn9QbZ/IJVMLRxBsa+BdhbdxRkuLPQLjkbgq21uZ6denqzyr533jF/HqAk8auGxxDMCLJHSMIfyAHAK0F4CEJ1dW/fdj9m0yLFbm+0O51dK2WWlVKheORqHSoqDW+xH9wxH4hT/qrzt6XuE9xTUPKuWTnkbSPXSWbtjtxydboGKYplFc8tqiUupSlBT7jq7jj+fxnqeq4cHt1X8ewMU4OAcqnXjYYXkI2TSTExX7rc6S6u0JhIXoNVj+OruOP5/Gep6rFwlWney2HOLknDsnYGlYAWUQ5RVKmdR6iCuZEzagEpyicKKnVIsRpXEJ1wzXIGNqKCU+pMtQtYHBEE3pxKJBVHQh4AGdfs9nwUp/1HJ4GSigH+9+o9Gtr/wAQ+EW+I6YB7NTNuXZkQXSoLOGybPbUcBuHHqTDXUi9nqbvFN4bUSOf3qN8r34ZcK7XgeJ7FNJoZ/osxZBKIBR2c+kr0h01dzPt1fGJ7xLm8phP9Oqplw4XlaUnxR43izm49wE66YnihTXIcHpUAOZUUMu3oq5sT3iXN5TCf6dURE3pSlBT7jq7jj+fxnqesjoy67shW3JoyclmKGsT7LZ6sgTUbrNpTMAZjX0K3bZVrX5EDFXHFNJRiKya2w4LqJrT7JsujpDOuZc2PAb5AgfsDRUskYaN7muho3dN281KIouzqHcpJu1iEWMoGRzKFKbI4m8RHrq9vAa/lGJ7+KzhlpIFSRYKARZFLQHxuveEtXd5seA3yBA/YGpvZeF9gYci8NbFvsIkXu3yjkyejd2s9Grp8NVC2WOa25h7Z1oSyExAYNR0XIoAcEnbY8ekqQFC6DZGKfxAa6JbLabWuadln8YaOSdM41BEh10ljmFsKwnMO0JgAPihlU6pRJSlKBSlKBSlKBSlKBSlKD//2Q==',
               width: 100
             }
@@ -776,9 +785,10 @@ export class InvoiceGeneratePdfComponent implements OnInit {
               type: 'none',
               width: 350,
               ul: [
-                { text: 'Quotation Details', style: 'orderStyle' },
-                { text: 'Quotation ID:  ' + this.invoice[0].invoiceID.toUpperCase(), style: 'textGst' },
-                { text: 'Quotation Date: ' + this.invoice[0].date, style: 'address' },
+                { text: 'Invoice Details', style: 'orderStyle' },
+                { text: 'Invoice ID:  ' + this.invoice[0].invoiceID.toUpperCase(), style: 'textGst' },
+                { text: 'Date: ' + this.invoice[0].date, style: 'address' },
+                { text: 'Expiry Date: ' + this.invoice[0].expiryDate, style: 'address' },
                 { text: 'Total Amount: ' + this.invoice[0].allTotal.toFixed(2), style: 'address' }
               ]
             },
@@ -819,8 +829,16 @@ export class InvoiceGeneratePdfComponent implements OnInit {
               { text: '', style: 'rowStyle', border: [false, false, false, false] }, {
                 text: '',
                 style: 'rowStyle', border: [false, false, false, false]
-              }, { text: 'GST ( ' + this.workOrderPdf[0].gst + ' % )', style: 'rowStyle' },
-              { text: this.invoice[0].tax.toFixed(2), style: 'rowTotal' }],
+              }, { text: 'SGST ( ' + this.workOrderPdf[0].sgst + ' % )', style: 'rowStyle' },
+              { text: ((100 / this.workOrderPdf[0].gst * this.invoice[0].tax) *
+                (this.workOrderPdf[0].sgst / 100 )).toFixed(2), style: 'rowTotal' }],
+              [
+                { text: '', style: 'rowStyle', border: [false, false, false, false] }, {
+                  text: '',
+                  style: 'rowStyle', border: [false, false, false, false]
+                }, { text: 'CGST ( ' + this.workOrderPdf[0].cgst + ' % )', style: 'rowStyle' },
+                { text: ((100 / this.workOrderPdf[0].gst * this.invoice[0].tax) *
+                   (this.workOrderPdf[0].cgst / 100 )).toFixed(2), style: 'rowTotal' }],
             [
               { text: '', style: 'rowStyle', border: [false, false, false, false] }, {
                 text: '',
