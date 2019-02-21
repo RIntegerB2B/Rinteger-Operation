@@ -83,13 +83,13 @@ style="padding-top:20px">
         <div class="row">
           <div class="col-md-4  col-6">
             <div class="form-group">
-              <label class="divLable">WorkOrder ID</label>
+              <label class="divLable">Profoma Invoice ID</label>
             </div>
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              <input  hidden formControlName="workOrderID" [ngModel]="profomaInvoice?.workOrderID">
-              : <label class="itemLable">{{profomaInvoice?.workOrderID}}</label>
+              <input  hidden formControlName="proformaInvoiceID" [ngModel]="profomaInvoice?.proformaInvoiceID">
+              : <label class="itemLable">{{profomaInvoice?.proformaInvoiceID}}</label>
             </div>
           </div>
           <div class="col-md-4  col-6">
@@ -124,7 +124,6 @@ style="padding-top:20px">
               </div>
           <input hidden formControlName="date" [ngModel]="profomaInvoice?.date" placeholder="item">
           <input hidden formControlName="date" [ngModel]="profomaInvoice?.date" placeholder="item">
-          <input hidden formControlName="proformaInvoiceID" [ngModel]="profomaInvoice?.proformaInvoiceID" placeholder="item">
         </div>
       </div>
     </div>

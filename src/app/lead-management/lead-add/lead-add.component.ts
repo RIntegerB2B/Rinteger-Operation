@@ -92,7 +92,7 @@ export class LeadAddComponent implements OnInit {
       service: ['', Validators.required],
       date: ['', Validators.required],
       remarks: [''],
-      leadType: [''],
+      leadType: ['', Validators.required],
       requirements: this.fb.array([]),
       subTotal: [this.sum],
       allTotal: [this.sum],
