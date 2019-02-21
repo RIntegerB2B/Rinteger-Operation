@@ -1,4 +1,3 @@
-<form [formGroup]="singleInvoiceDetailsForm">
     <div class="col-md-6">
       <mat-form-field>
         <mat-select #tempVal placeholder="Select the template">
@@ -8,7 +7,6 @@
         </mat-select>
       </mat-form-field>
     </div>
-  </form>
   <button mat-raised-button 
-  (click)="viewSingleInvoicePdf(invoiceDetails, customer, companyDetails, tempVal.value)"
+  (click)="viewSingleProInvoicePdf(invoiceDetails, customer, companyDetails, tempVal.value)"
     color="accent" type="button">Download PDF</button>

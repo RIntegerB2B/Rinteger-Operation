@@ -37,10 +37,12 @@ import {
 import { ProformaRoutingModule } from './proforma-routing.module';
 import { ViewAllProformaComponent } from './view-all-proforma/view-all-proforma.component';
 import { EditProfomaInvoiceComponent } from './edit-profoma-invoice/edit-profoma-invoice.component';
+import { GenerateProfomaPdfComponent } from './generate-profoma-pdf/generate-profoma-pdf.component';
 
 @NgModule({
   declarations: [CreateProformaComponent,
-    ViewSingleProformaComponent, ViewProformaComponent, ViewAllProformaComponent, EditProfomaInvoiceComponent],
+    ViewSingleProformaComponent, ViewProformaComponent, ViewAllProformaComponent, EditProfomaInvoiceComponent, GenerateProfomaPdfComponent
+  ],
     imports: [
       ProformaRoutingModule,
       HttpClientModule,

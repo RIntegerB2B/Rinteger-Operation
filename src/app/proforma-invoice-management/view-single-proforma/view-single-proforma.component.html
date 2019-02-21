@@ -1,4 +1,4 @@
-<form novalidate style="padding-top:20px" [formGroup]="singleProfomoInvoiceForm">
+<form novalidate style="padding-top:20px">
   <label class="pageBoxLg-label">Proforma Invoice Details</label>
   <div class="pageBoxLg" *ngFor="let data of proformaInvoice">
     <div class="row">
@@ -164,7 +164,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4" >
+    <!-- <div class="col-md-4" >
         <label class="pr-2 " *ngFor="let terms of TypesOfTerms">
             <input type="radio" formControlName="termsType" [value]="terms">&nbsp;&nbsp;{{ terms}}
           </label>
@@ -175,8 +175,8 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-    </div>
-    <div class="row">
+    </div> -->
+    <!-- <div class="row">
       <div class="col-md-10">
         <button mat-raised-button
          (click)="templateType(tempVal.value)"
@@ -187,6 +187,22 @@
         <button mat-raised-button  type="button"
         color="accent"
          (click)="cancelProfomaInvoice(data)">Cancel</button>
+      </div>
+    </div> -->
+    <div class="row">
+      <div class="col-md-10">
+        <app-generate-profoma-pdf
+        [proformaInvoiceDetails]="proformaInvoice"
+        [companyDetails]="workOrderPDFModel"
+        [customer]="customerModel"
+        ></app-generate-profoma-pdf>
+      </div>
+      <div class="col-md-2">
+          <div class="mt-5">
+        <button mat-raised-button  type="button"
+        color="accent"
+         (click)="cancelProfomaInvoice(data)">Cancel</button>
+         </div>
       </div>
     </div>
   </div>

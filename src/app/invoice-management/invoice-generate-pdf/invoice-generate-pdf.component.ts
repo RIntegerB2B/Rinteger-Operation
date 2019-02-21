@@ -69,7 +69,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
   }
 
 
-  viewSingleInvoicePdf(invoice, customer, company, temp) {
+  viewSingleProInvoicePdf(invoice, customer, company, temp) {
     this.invoice = invoice;
     this.invoiceReq = invoice[0].requirements;
     this.customerData = customer;
@@ -147,7 +147,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
               type: 'none',
               width: 350,
               ul: [
-                { text: 'INVOICE DETAILS', style: 'orderStyle' },
+                { text: 'PRODOMA INVOICE DETAILS', style: 'orderStyle' },
                 { text: 'Invoice ID:  ' + this.invoice[0].invoiceID.toUpperCase(), style: 'textGst' },
                 { text: 'Date: ' + new Date(this.invoice[0].date).toLocaleDateString(), style: 'address' },
                 { text: 'Expiry Date: ' + this.invoice[0].expiryDate, style: 'address' },
