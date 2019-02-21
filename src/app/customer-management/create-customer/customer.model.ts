@@ -2,6 +2,7 @@ export class Customer {
     _id?: string;
     customerID?: string;
     mobileNumber?: number;
+    altMobileNumber?: number;
     name?: string;
     emailId?: string;
     location?: String;
@@ -15,6 +16,7 @@ export class Customer {
     constructor(
         /*  customerID?: string, */
         mobileNumber?: number,
+        altMobileNumber?: number,
         name?: string,
         emailId?: string,
         location?: string,
@@ -27,6 +29,7 @@ export class Customer {
         brandName?: string,
     ) {
         this.mobileNumber = mobileNumber;
+        this.altMobileNumber = altMobileNumber;
         this.name = name;
         this.emailId = emailId;
         this.location = location;

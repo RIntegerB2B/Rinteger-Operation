@@ -87,6 +87,11 @@
       </div>
       <div fxFlex="50" class="p-2">
         <mat-form-field class="full-width">
+          <input matInput formControlName="altMobileNumber" placeholder="Alternate Mobile Number">
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="p-2">
+        <mat-form-field class="full-width">
           <input matInput formControlName="companyName" placeholder="Company Name">
           <mat-error *ngIf="customerDetailsForm.controls['companyName'].errors?.required">
             Enter Company Name

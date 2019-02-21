@@ -32,6 +32,7 @@ export class CreateCustomerComponent implements OnInit {
     this.customerDetailsForm = this.fb.group({
       customerID: ['', Validators.required],
       mobileNumber: ['', Validators.required],
+      altMobileNumber: [''],
       name: ['', Validators.required],
       emailId: ['', Validators.required],
       location: ['', Validators.required],
@@ -50,6 +51,7 @@ export class CreateCustomerComponent implements OnInit {
   addSingleCustomer(customerDetailsForm: FormGroup) {
     this.customerModel = new Customer(
       customerDetailsForm.controls.mobileNumber.value,
+      customerDetailsForm.controls.altMobileNumber.value,
       customerDetailsForm.controls.name.value,
       customerDetailsForm.controls.emailId.value,
       customerDetailsForm.controls.location.value,
