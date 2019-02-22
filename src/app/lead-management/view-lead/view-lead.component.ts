@@ -19,11 +19,17 @@ import { Quotation } from './../../shared/quotation.model';
 export class ViewLeadComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   leadDetailsForm: FormGroup;
-  leadModel: Lead;
+  leadModel: any;
   leadModelCheck: Lead;
   workOrder: WorkOrder[];
   quotation: Quotation[];
   leadModeldata;
+  public pageSize = 10;
+  public currentPage = 0;
+  public totalSize = 0;
+  public array: any;
+  public displayedColumns = ['', '', '', '', ''];
+  public dataSource: any;
 matdatasource = new MatTableDataSource([]);
   constructor(private fb: FormBuilder,
     private leadManagementService: LeadManagementService,
@@ -91,9 +97,12 @@ matdatasource = new MatTableDataSource([]);
     row.editing = false;
     leadDetailsForm.reset();
     this.leadManagementService.deleteLead(row).subscribe(data => {
+      this.leadModel = new MatTableDataSource<Lead>(data);
+      this.leadModel.paginator = this.paginator;
       this.leadModel = data;
-      this.matdatasource.data = data;
-      this.matdatasource.paginator = this.paginator;
+      this.array = data;
+      this.totalSize = this.array.length;
+      this.iterator();
     }, error => {
       console.log(error);
     });
@@ -126,12 +135,25 @@ matdatasource = new MatTableDataSource([]);
   }
   getAllLeads() {
     this.leadManagementService.allLead().subscribe(data => {
+      this.leadModel = new MatTableDataSource<Lead>(data);
+      this.leadModel.paginator = this.paginator;
       this.leadModel = data;
-      this.matdatasource.data = data;
-      this.matdatasource.paginator = this.paginator;
-      /* console.log('leads', this.leadModel); */
+      this.array = data;
+      this.totalSize = this.array.length;
+      this.iterator();
     }, error => {
       console.log(error);
     });
+  }
+  public handlePage(e: any) {
+    this.currentPage = e.pageIndex;
+    this.pageSize = e.pageSize;
+    this.iterator();
+  }
+  private iterator() {
+    const end = (this.currentPage + 1) * this.pageSize;
+    const start = this.currentPage * this.pageSize;
+    const part = this.array.slice(start, end);
+    this.leadModel = part;
   }
 }

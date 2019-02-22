@@ -12,7 +12,13 @@ import { MatPaginator, MatTableDataSource , MatSort} from '@angular/material';
 })
 export class ViewAllQuotationComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  quotation: Quotation[];
+  quotation: any;
+  public pageSize = 10;
+  public currentPage = 0;
+  public totalSize = 0;
+  public array: any;
+  public displayedColumns = ['', '', '', '', ''];
+  public dataSource: any;
   matdatasource = new MatTableDataSource([]);
   constructor(private quotationManagementService: QuotationManagementService,
     private route: ActivatedRoute,
@@ -29,20 +35,35 @@ export class ViewAllQuotationComponent implements OnInit {
   }
   getAllQuotation() {
     this.quotationManagementService.allQuotation().subscribe(data => {
+      this.quotation = new MatTableDataSource<Quotation>(data);
+      this.quotation.paginator = this.paginator;
       this.quotation = data;
-      this.matdatasource.data = data;
-      this.matdatasource.paginator = this.paginator;
-      console.log('all work order', this.quotation);
+      this.array = data;
+      this.totalSize = this.array.length;
+      this.iterator();
     }, error => {
       console.log(error);
     });
   }
+  public handlePage(e: any) {
+    this.currentPage = e.pageIndex;
+    this.pageSize = e.pageSize;
+    this.iterator();
+  }
+  private iterator() {
+    const end = (this.currentPage + 1) * this.pageSize;
+    const start = this.currentPage * this.pageSize;
+    const part = this.array.slice(start, end);
+    this.quotation = part;
+  }
   getDeleteSingleQuotation(row)   {
     this.quotationManagementService.deleteSingleQuotation(row._id).subscribe(data => {
+      this.quotation = new MatTableDataSource<Quotation>(data);
+      this.quotation.paginator = this.paginator;
       this.quotation = data;
-      this.matdatasource.data = data;
-      this.matdatasource.paginator = this.paginator;
-      console.log('all view', this.quotation);
+      this.array = data;
+      this.totalSize = this.array.length;
+      this.iterator();
     }, error => {
       console.log(error);
     });

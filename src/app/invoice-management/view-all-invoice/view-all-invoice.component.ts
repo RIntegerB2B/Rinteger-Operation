@@ -11,7 +11,13 @@ import { MatPaginator, MatTableDataSource , MatSort} from '@angular/material';
 })
 export class ViewAllInvoiceComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  invoice: Invoice[];
+  invoice: any;
+  public pageSize = 10;
+  public currentPage = 0;
+  public totalSize = 0;
+  public array: any;
+  public displayedColumns = ['', '', '', '', ''];
+  public dataSource: any;
   matdatasource = new MatTableDataSource([]);
   constructor(private invoiceService: InvoiceService, private route: ActivatedRoute,
     private router: Router) { }
@@ -28,19 +34,36 @@ getEditInvoice(data)   {
 }
 getAllInvoice() {
 this.invoiceService.allAllInvoice().subscribe(data => {
+  this.invoice = new MatTableDataSource<Invoice>(data);
+  this.invoice.paginator = this.paginator;
   this.invoice = data;
-  this.matdatasource.data = data;
-  this.matdatasource.paginator = this.paginator;
+  this.array = data;
+  this.totalSize = this.array.length;
+  this.iterator();
 }, error => {
   console.log(error);
 });
 }
+public handlePage(e: any) {
+  this.currentPage = e.pageIndex;
+  this.pageSize = e.pageSize;
+  this.iterator();
+}
+private iterator() {
+  const end = (this.currentPage + 1) * this.pageSize;
+  const start = this.currentPage * this.pageSize;
+  const part = this.array.slice(start, end);
+  this.invoice = part;
+}
 getDeleteSingleInvoice(row)   {
 
 this.invoiceService.deleteSingleInvoice(row._id).subscribe(data => {
+  this.invoice = new MatTableDataSource<Invoice>(data);
+  this.invoice.paginator = this.paginator;
   this.invoice = data;
-  this.matdatasource.data = data;
-  this.matdatasource.paginator = this.paginator;
+  this.array = data;
+  this.totalSize = this.array.length;
+  this.iterator();
 }, error => {
   console.log(error);
 });

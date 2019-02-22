@@ -10,8 +10,14 @@ import { MatPaginator, MatTableDataSource , MatSort} from '@angular/material';
 })
 export class ViewAllWorkorderComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  workOrder: WorkOrder[] = [];
+  workOrder: any;
   matdatasource = new MatTableDataSource([]);
+  public pageSize = 10;
+  public currentPage = 0;
+  public totalSize = 0;
+  public array: any;
+  public displayedColumns = ['', '', '', '', ''];
+  public dataSource: any;
   constructor(private workOrderService: WorkOrderService,  private router: Router) { }
 
   ngOnInit() {
@@ -19,13 +25,27 @@ export class ViewAllWorkorderComponent implements OnInit {
   }
   getAllWorkOrder() {
     this.workOrderService.allWorkOrder().subscribe(data => {
+      this.workOrder = new MatTableDataSource<WorkOrder>(data);
+      this.workOrder.paginator = this.paginator;
       this.workOrder = data;
-      this.matdatasource.data = data;
-      this.matdatasource.paginator = this.paginator;
+      this.array = data;
+      this.totalSize = this.array.length;
+      this.iterator();
     }, error => {
       console.log(error);
     }
     );
+  }
+  public handlePage(e: any) {
+    this.currentPage = e.pageIndex;
+    this.pageSize = e.pageSize;
+    this.iterator();
+  }
+  private iterator() {
+    const end = (this.currentPage + 1) * this.pageSize;
+    const start = this.currentPage * this.pageSize;
+    const part = this.array.slice(start, end);
+    this.workOrder = part;
   }
   createProfomaInvoice(row) {
     this.router.navigate(['proformainvoice/createproformainvoice'
@@ -52,9 +72,12 @@ export class ViewAllWorkorderComponent implements OnInit {
   }
   getDeleteSingleWorkOrder(row) {
     this.workOrderService.deleteSingleWorkOrder(row._id).subscribe(data => {
+      this.workOrder = new MatTableDataSource<WorkOrder>(data);
+      this.workOrder.paginator = this.paginator;
       this.workOrder = data;
-      this.matdatasource.data = data;
-      this.matdatasource.paginator = this.paginator;
+      this.array = data;
+      this.totalSize = this.array.length;
+      this.iterator();
     }, error => {
       console.log(error);
     });
