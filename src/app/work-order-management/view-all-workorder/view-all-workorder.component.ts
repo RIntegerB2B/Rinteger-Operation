@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { WorkOrder } from './../../shared/workorder.model';
 import { WorkOrderService } from './../work-order.service';
 import { Router } from '@angular/router';
+import { MatPaginator, MatTableDataSource , MatSort} from '@angular/material';
 @Component({
   selector: 'app-view-all-workorder',
   templateUrl: './view-all-workorder.component.html',
   styleUrls: ['./view-all-workorder.component.css']
 })
 export class ViewAllWorkorderComponent implements OnInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   workOrder: WorkOrder[] = [];
+  matdatasource = new MatTableDataSource([]);
   constructor(private workOrderService: WorkOrderService,  private router: Router) { }
 
   ngOnInit() {
@@ -17,6 +20,8 @@ export class ViewAllWorkorderComponent implements OnInit {
   getAllWorkOrder() {
     this.workOrderService.allWorkOrder().subscribe(data => {
       this.workOrder = data;
+      this.matdatasource.data = data;
+      this.matdatasource.paginator = this.paginator;
     }, error => {
       console.log(error);
     }
@@ -48,6 +53,8 @@ export class ViewAllWorkorderComponent implements OnInit {
   getDeleteSingleWorkOrder(row) {
     this.workOrderService.deleteSingleWorkOrder(row._id).subscribe(data => {
       this.workOrder = data;
+      this.matdatasource.data = data;
+      this.matdatasource.paginator = this.paginator;
     }, error => {
       console.log(error);
     });

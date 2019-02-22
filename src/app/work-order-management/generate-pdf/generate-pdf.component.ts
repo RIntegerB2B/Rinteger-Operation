@@ -284,10 +284,10 @@ export class GeneratePdfComponent implements OnInit {
           fontSize: 14
         },
         orderStyle:
-        {
-          fontSize: 9,
-          margin: [0, 20, 0, 0],
-        },
+          {
+            fontSize: 9,
+            margin: [0, 20, 0, 0],
+          },
         rowStyle: {
           fontSize: 8,
           alignment: 'center'
@@ -494,10 +494,10 @@ export class GeneratePdfComponent implements OnInit {
           fontSize: 14
         },
         orderStyle:
-        {
-          fontSize: 9,
-          margin: [0, 20, 0, 0],
-        },
+          {
+            fontSize: 9,
+            margin: [0, 20, 0, 0],
+          },
         rowStyle: {
           fontSize: 8,
           alignment: 'center'
@@ -710,10 +710,10 @@ export class GeneratePdfComponent implements OnInit {
           fontSize: 14
         },
         orderStyle:
-        {
-          fontSize: 9,
-          margin: [0, 20, 0, 0],
-        },
+          {
+            fontSize: 9,
+            margin: [0, 20, 0, 0],
+          },
         rowStyle: {
           fontSize: 8,
           alignment: 'center'
@@ -922,10 +922,10 @@ export class GeneratePdfComponent implements OnInit {
           fontSize: 14
         },
         orderStyle:
-        {
-          fontSize: 9,
-          margin: [0, 20, 0, 0],
-        },
+          {
+            fontSize: 9,
+            margin: [0, 20, 0, 0],
+          },
         rowStyle: {
           fontSize: 8,
           alignment: 'center'

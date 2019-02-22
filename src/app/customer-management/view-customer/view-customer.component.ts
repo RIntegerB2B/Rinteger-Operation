@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomerManagementService } from './../customer-management.service';
 import { Customer } from './../create-customer/customer.model';
 import { Router } from '@angular/router';
 import { CreateCustomerService } from './../../customer-management/create-customer/create-customer.service';
+import { MatPaginator, MatTableDataSource , MatSort} from '@angular/material';
 @Component({
   selector: 'app-view-customer',
   templateUrl: './view-customer.component.html',
@@ -12,6 +13,8 @@ import { CreateCustomerService } from './../../customer-management/create-custom
   providers: [CreateCustomerService]
 })
 export class ViewCustomerComponent implements OnInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  matdatasource = new MatTableDataSource([]);
   customerDetailsForm: FormGroup;
   customerModel: Customer;
   constructor(private fb: FormBuilder,
@@ -47,6 +50,8 @@ export class ViewCustomerComponent implements OnInit {
     customerDetailsForm.reset();
     this.customerManagementService.deleteCustomer(row).subscribe(data => {
       this.customerModel = data;
+      this.matdatasource.data = data;
+      this.matdatasource.paginator = this.paginator;
     }, error => {
       console.log(error);
     });
@@ -57,6 +62,8 @@ export class ViewCustomerComponent implements OnInit {
   getAllCustomer() {
     this.customerManagementService.allCustomer().subscribe(data => {
       this.customerModel = data;
+      this.matdatasource.data = data;
+      this.matdatasource.paginator = this.paginator;
     }, error => {
       console.log(error);
     });

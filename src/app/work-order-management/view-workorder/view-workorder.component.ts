@@ -5,6 +5,7 @@ import { WorkOrder } from './../../shared/workorder.model';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatPaginator, MatTableDataSource , MatSort} from '@angular/material';
 @Component({
   selector: 'app-view-workorder',
   templateUrl: './view-workorder.component.html',
