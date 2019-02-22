@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , ViewChild} from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { LeadManagementService } from './../lead-management.service';
 import { CreateCustomerService } from './../../customer-management/create-customer/create-customer.service';
 import { Router } from '@angular/router';
 import { Lead } from './../../shared/lead.model';
 import { LeadAddComponent } from './../lead-add/lead-add.component';
+import { MatPaginator, MatTableDataSource , MatSort} from '@angular/material';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { WorkOrder } from './../../shared/workorder.model';
 import { Quotation } from './../../shared/quotation.model';
@@ -16,11 +17,14 @@ import { Quotation } from './../../shared/quotation.model';
   providers: [CreateCustomerService, LeadManagementService]
 })
 export class ViewLeadComponent implements OnInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   leadDetailsForm: FormGroup;
   leadModel: Lead;
   leadModelCheck: Lead;
   workOrder: WorkOrder[];
   quotation: Quotation[];
+  leadModeldata;
+matdatasource = new MatTableDataSource([]);
   constructor(private fb: FormBuilder,
     private leadManagementService: LeadManagementService,
     private createCustomerService: CreateCustomerService, private dialog: MatDialog,
@@ -88,6 +92,8 @@ export class ViewLeadComponent implements OnInit {
     leadDetailsForm.reset();
     this.leadManagementService.deleteLead(row).subscribe(data => {
       this.leadModel = data;
+      this.matdatasource.data = data;
+      this.matdatasource.paginator = this.paginator;
     }, error => {
       console.log(error);
     });
@@ -121,6 +127,8 @@ export class ViewLeadComponent implements OnInit {
   getAllLeads() {
     this.leadManagementService.allLead().subscribe(data => {
       this.leadModel = data;
+      this.matdatasource.data = data;
+      this.matdatasource.paginator = this.paginator;
       /* console.log('leads', this.leadModel); */
     }, error => {
       console.log(error);

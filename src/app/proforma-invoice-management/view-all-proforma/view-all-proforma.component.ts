@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { ProformaInvoiceService } from './../proforma-invoice.service';
 import { ProformaInvoice } from './../../shared/proformaInvoice.model';
+import { MatPaginator, MatTableDataSource , MatSort} from '@angular/material';
 
 @Component({
   selector: 'app-view-all-proforma',
@@ -10,7 +11,9 @@ import { ProformaInvoice } from './../../shared/proformaInvoice.model';
   styleUrls: ['./view-all-proforma.component.css']
 })
 export class ViewAllProformaComponent implements OnInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   proformaInvoice: ProformaInvoice[];
+  matdatasource = new MatTableDataSource([]);
   constructor(private proformaInvoiceService: ProformaInvoiceService, private route: ActivatedRoute,
     private router: Router) { }
 
@@ -20,6 +23,8 @@ export class ViewAllProformaComponent implements OnInit {
   getAllProformaInvoice() {
     this.proformaInvoiceService.allAllProfomaInvoice().subscribe(data => {
       this.proformaInvoice = data;
+      this.matdatasource.data = data;
+      this.matdatasource.paginator = this.paginator;
     }, error => {
       console.log(error);
     }
@@ -36,6 +41,8 @@ export class ViewAllProformaComponent implements OnInit {
   getDeleteSingleProformaInvoice(row)   {
     this.proformaInvoiceService.deleteSingleProformaInvoice(row._id).subscribe(data => {
       this.proformaInvoice = data;
+      this.matdatasource.data = data;
+      this.matdatasource.paginator = this.paginator;
       console.log('all view', this.proformaInvoice);
     }, error => {
       console.log(error);

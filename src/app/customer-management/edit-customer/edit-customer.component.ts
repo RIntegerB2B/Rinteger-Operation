@@ -32,6 +32,7 @@ export class EditCustomerComponent implements OnInit {
     this.customerDetailsForm = this.fb.group({
       customerID: ['', Validators.required],
       mobileNumber: ['', Validators.required],
+      altMobileNumber: [''],
       name: ['', Validators.required],
       emailId: ['', Validators.required],
       location: ['', Validators.required],
