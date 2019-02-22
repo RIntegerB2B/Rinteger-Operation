@@ -51,7 +51,7 @@ export class CustomerManagementService {
     return this.httpClient.get<Customer[]>(url);
   }
   createNewCustomer(customer): Observable<any>   {
-    const addUrl = 'multiplecustomer';
+    const addUrl = 'multiplecustomertest';
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.post<Customer[]>(url, customer);
   }
