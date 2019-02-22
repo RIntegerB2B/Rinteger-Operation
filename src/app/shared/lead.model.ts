@@ -5,6 +5,7 @@ export class Lead {
     _id: string;
     leadID: string;
     mobileNumber: number;
+    emailId: string;
     name: string;
     leadOwner: string;
     leadSource: string;
@@ -25,6 +26,7 @@ export class Lead {
     constructor(
         leadID: string,
         mobileNumber: number,
+        emailId: string,
         name: string,
         leadOwner: string,
         leadType: [string],
@@ -40,6 +42,7 @@ export class Lead {
 ) {
         this.leadID = leadID;
         this.mobileNumber = mobileNumber;
+        this.emailId = emailId;
         this.name = name;
         this.leadOwner = leadOwner;
         this.leadType = leadType;

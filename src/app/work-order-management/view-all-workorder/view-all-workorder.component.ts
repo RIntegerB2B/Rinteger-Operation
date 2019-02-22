@@ -12,7 +12,7 @@ export class ViewAllWorkorderComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   workOrder: any;
   matdatasource = new MatTableDataSource([]);
-  public pageSize = 10;
+  public pageSize = 50;
   public currentPage = 0;
   public totalSize = 0;
   public array: any;

@@ -24,7 +24,7 @@ export class ViewLeadComponent implements OnInit {
   workOrder: WorkOrder[];
   quotation: Quotation[];
   leadModeldata;
-  public pageSize = 10;
+  public pageSize = 50;
   public currentPage = 0;
   public totalSize = 0;
   public array: any;

@@ -13,7 +13,7 @@ import { MatPaginator, MatTableDataSource , MatSort} from '@angular/material';
 export class ViewAllProformaComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   proformaInvoice: any;
-  public pageSize = 10;
+  public pageSize = 50;
   public currentPage = 0;
   public totalSize = 0;
   public array: any;

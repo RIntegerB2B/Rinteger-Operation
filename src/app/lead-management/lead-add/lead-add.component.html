@@ -51,6 +51,15 @@
             </mat-form-field>
           </div>
           <div fxFlex="50" class="pr-1">
+              <mat-form-field class="full-width">
+                <input matInput formControlName="emailId" placeholder="Email ID">
+                <mat-error *ngIf="leadDetailsForm.controls['emailId'].errors?.required">
+                  Enter Email ID
+                  <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          <div fxFlex="50" class="pr-1">
             <mat-form-field class="full-width">
               <input matInput formControlName="leadOwner" placeholder="Lead Owner">
               <mat-error *ngIf="leadDetailsForm.controls['leadOwner'].errors?.required">
@@ -218,6 +227,15 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
+                <div fxFlex="50" class="pr-1">
+                    <mat-form-field class="full-width">
+                      <input matInput formControlName="emailId" placeholder="Email ID" [value]="customer.emailId">
+                      <mat-error *ngIf="leadDetailsForm.controls['emailId'].errors?.required">
+                        Enter Email ID
+                        <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
                 <div fxFlex="50" class="pr-1">
                   <mat-form-field class="full-width">
                     <input matInput formControlName="leadOwner" placeholder="Lead Owner">

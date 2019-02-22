@@ -17,7 +17,7 @@ export class ViewCustomerComponent implements OnInit {
   matdatasource = new MatTableDataSource([]);
   customerDetailsForm: FormGroup;
   customerModel: any;
-  public pageSize = 10;
+  public pageSize = 50;
 public currentPage = 0;
 public totalSize = 0;
 

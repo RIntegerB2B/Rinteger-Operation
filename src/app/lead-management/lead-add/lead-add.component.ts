@@ -85,6 +85,7 @@ export class LeadAddComponent implements OnInit {
       leadID: [''],
       checkMobileNumber: ['', Validators.maxLength(10)],
       mobileNumber: ['', Validators.required],
+      emailId: [''],
       name: ['', Validators.required],
       leadOwner: ['', Validators.required],
       leadSource: ['', Validators.required],
@@ -134,6 +135,7 @@ export class LeadAddComponent implements OnInit {
     this.leadModel = new Lead(
       leadDetailsForm.controls.leadID.value,
       leadDetailsForm.controls.mobileNumber.value,
+      leadDetailsForm.controls.emailId.value,
       leadDetailsForm.controls.name.value,
       leadDetailsForm.controls.leadOwner.value,
       leadDetailsForm.controls.leadType.value,
@@ -159,6 +161,7 @@ export class LeadAddComponent implements OnInit {
       leadDetailsForm.controls.leadID.value,
       customer.mobileNumber,
       customer.name,
+      customer.emailId ,
       leadDetailsForm.controls.leadOwner.value,
       leadDetailsForm.controls.leadType.value,
       leadDetailsForm.controls.leadSource.value,

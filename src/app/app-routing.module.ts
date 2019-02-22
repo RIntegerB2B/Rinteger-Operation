@@ -36,7 +36,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'lead/leadview',
+    redirectTo: 'dashboard/menu',
     pathMatch: 'full'
   }];
 

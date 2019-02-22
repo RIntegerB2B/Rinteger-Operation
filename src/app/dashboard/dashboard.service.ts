@@ -41,6 +41,11 @@ export class DashboardService {
     return this.httpClient.post<Customer[]>(url, data);
   } */
   // all customer details
+  allCustomers(): Observable<any> {
+    const addUrl = 'viewcustomer';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<Customer[]>(url);
+  }
   allLead(): Observable<any> {
     const addUrl = 'viewleads';
     const url: string = this.serviceUrl + addUrl;

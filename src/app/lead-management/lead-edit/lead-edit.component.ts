@@ -47,6 +47,7 @@ export class LeadEditComponent implements OnInit {
     this.leadDetailsForm = this.fb.group({
       leadID: [''],
       mobileNumber: [''],
+      emailId: [''],
       name: [''],
       leadOwner: [''],
       leadSource: [''],

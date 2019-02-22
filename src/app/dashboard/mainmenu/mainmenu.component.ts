@@ -5,6 +5,7 @@ import { Invoice } from '../../shared/invoice.model';
 import { WorkOrder } from '../../shared/workorder.model';
 import { Quotation } from '../../shared/quotation.model';
 import { ProformaInvoice } from '../../shared/proformaInvoice.model';
+import {Customer} from '../../shared/customer.model';
 @Component({
   selector: 'app-mainmenu',
   templateUrl: './mainmenu.component.html',
@@ -12,6 +13,7 @@ import { ProformaInvoice } from '../../shared/proformaInvoice.model';
 })
 export class MainmenuComponent implements OnInit {
   leadModel: Lead[] = [];
+  customerModel: Customer[] = [];
   invoiceModel: Invoice[] = [];
   workOrderModel: WorkOrder[] = [];
   quotationModel: Quotation[] = [];
@@ -28,6 +30,7 @@ export class MainmenuComponent implements OnInit {
     this.getAllWorkOrder();
     this.getAllQuotation();
     this.getAllProformaInvoice();
+    this.viewAllCustomers();
   }
   viewAllinvoice() {
     this.dashboardService.allAllInvoice().subscribe(data => {
@@ -36,6 +39,15 @@ export class MainmenuComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+  }
+  viewAllCustomers() {
+    this.dashboardService.allCustomers().subscribe(data => {
+      this.customerModel = data;
+      console.log('customer data',  data);
+    }, error => {
+      console.log(error);
+    }
+    );
   }
   getAllLeads() {
     this.dashboardService.allLead().subscribe(data => {
