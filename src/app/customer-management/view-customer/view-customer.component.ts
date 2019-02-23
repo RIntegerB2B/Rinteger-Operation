@@ -5,7 +5,7 @@ import { CustomerManagementService } from './../customer-management.service';
 import { Customer } from './../create-customer/customer.model';
 import { Router } from '@angular/router';
 import { CreateCustomerService } from './../../customer-management/create-customer/create-customer.service';
-import { MatPaginator, MatTableDataSource , MatSort} from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 @Component({
   selector: 'app-view-customer',
   templateUrl: './view-customer.component.html',
@@ -17,13 +17,19 @@ export class ViewCustomerComponent implements OnInit {
   matdatasource = new MatTableDataSource([]);
   customerDetailsForm: FormGroup;
   customerModel: any;
+  customerValue: Customer[];
   public pageSize = 50;
-public currentPage = 0;
-public totalSize = 0;
+  public currentPage = 0;
+  public totalSize = 0;
 
-public array: any;
-public displayedColumns = ['', '', '', '', ''];
-public dataSource: any;
+  public array: any;
+  public displayedColumns = ['', '', '', '', ''];
+  public dataSource: any;
+  mobileValue;
+  emailValue;
+  nameValue;
+  cityValue;
+  searchType = ['MobileNumber', 'Name', 'Email ID',  'City'];
 
   constructor(private fb: FormBuilder,
     private customerManagementService:
@@ -36,6 +42,7 @@ public dataSource: any;
   }
   createForm() {
     this.customerDetailsForm = this.fb.group({
+      srchterm: [''],
       customerID: [''],
       mobileNumber: ['', Validators.required],
       name: ['', Validators.required],
@@ -50,7 +57,7 @@ public dataSource: any;
       brandName: ['', Validators.required]
     });
   }
-  addCustomer()   {
+  addCustomer() {
     this.createCustomerService.openCustomer();
   }
   getDeleteCustomer(customerDetailsForm: FormGroup, row) {
@@ -69,6 +76,7 @@ public dataSource: any;
   }
   getAllCustomer() {
     this.customerManagementService.allCustomer().subscribe(data => {
+      this.customerValue = data;
       this.customerModel = new MatTableDataSource<Customer>(data);
       this.customerModel.paginator = this.paginator;
       this.customerModel = data;
@@ -89,6 +97,9 @@ public dataSource: any;
     const start = this.currentPage * this.pageSize;
     const part = this.array.slice(start, end);
     this.customerModel = part;
+  }
+  searchBy(type, value) {
+    this.nameValue = value;
   }
   updateCustomer(customerDetailsForm: FormGroup, row) {
     this.customerManagementService.editCustomer(row).subscribe(data => {

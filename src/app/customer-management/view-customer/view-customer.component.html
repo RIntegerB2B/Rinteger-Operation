@@ -1,4 +1,4 @@
-<form [formGroup]="customerDetailsForm">
+<form [formGroup]="customerDetailsForm" >
   <div class="pageBoxLg">
     <div class="container-fluid">
       <div class="row">
@@ -6,6 +6,16 @@
           <a (click)="addCustomer()">
             <mat-icon class="gridEdit">add_box</mat-icon>
           </a>
+        </div>
+        
+        <div class="btn">
+          <div class="input-group ">
+              <select #selectElem >
+                  <option *ngFor="let data of searchType">{{data}}</option>
+                </select>
+              <input type="text" class="form-control" placeholder="Search" formControlName="srchterm" #search/>
+                  <button mat-button (click)="searchBy(selectElem.value, search.value)" type="submit"><mat-icon>search</mat-icon></button>
+          </div>
         </div>
       </div>
       <div class="row gridRowHeader display-none-small">
@@ -60,7 +70,7 @@
           </div>
         </div>
       </div>
-      <div *ngFor="let data of customerModel" >
+<div *ngFor="let data of customerModel | name:nameValue : selectElem.value" >
         <div class="row gridRow">
           <div class="display-none-large col-6">
             <label class="gridLabel">Customer ID:</label>
