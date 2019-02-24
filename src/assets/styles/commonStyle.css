@@ -13,7 +13,12 @@ body {
 .pointerDiv {
   cursor: pointer;
 }
-
+.searchHeader
+{
+  background-color: lightslategray;
+  color: #ffff;
+  padding: 2px;
+}
 .pageBox {
   width: 70%;
   background: #FFF;

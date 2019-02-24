@@ -9,6 +9,7 @@ import { MatPaginator, MatTableDataSource , MatSort} from '@angular/material';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { WorkOrder } from './../../shared/workorder.model';
 import { Quotation } from './../../shared/quotation.model';
+import { LeadSettings } from './../../shared/lead-settings.model';
 
 @Component({
   selector: 'app-view-lead',
@@ -18,11 +19,11 @@ import { Quotation } from './../../shared/quotation.model';
 })
 export class ViewLeadComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  leadDetailsForm: FormGroup;
   leadModel: any;
   leadModelCheck: Lead;
   workOrder: WorkOrder[];
   quotation: Quotation[];
+  leadStatusModel: LeadSettings;
   leadModeldata;
   public pageSize = 50;
   public currentPage = 0;
@@ -30,35 +31,33 @@ export class ViewLeadComponent implements OnInit {
   public array: any;
   public displayedColumns = ['', '', '', '', ''];
   public dataSource: any;
-matdatasource = new MatTableDataSource([]);
+  matdatasource = new MatTableDataSource([]);
   constructor(private fb: FormBuilder,
     private leadManagementService: LeadManagementService,
     private createCustomerService: CreateCustomerService, private dialog: MatDialog,
     private router: Router) {
    }
   ngOnInit() {
-    this.createForm();
     this.getAllLeads();
   }
-  createForm() {
-    this.leadDetailsForm = this.fb.group({
-      leadID: [''],
-      mobileNumber: ['', Validators.required],
-      name: ['', Validators.required],
-      leadOwner: ['', Validators.required],
-      leadSource: ['', Validators.required],
-      leadStatus: ['', Validators.required],
-      service: ['', Validators.required],
-      date: ['', Validators.required],
-      requirements: this.fb.array([{
-        item: [''],
-        quantity: [''],
-        price: [''],
-        discount: [''],
-        description: ['']
-      }]),
+
+  getSearch(data)   {
+  this.leadModel = new MatTableDataSource<Lead>(data);
+  this.leadModel.paginator = this.paginator;
+  this.leadModel = data;
+  }
+  leadStatus() {
+    this.leadManagementService.leadSource().subscribe(data => {
+      this.leadStatusModel = data;
+    }, error => {
+      console.log(error);
     });
   }
+  selectedSource(source)   {
+    const filterData = this.leadModel.filter(data => data.leadSource === source);
+    return filterData;
+  }
+
   getViewLead(data) {
     this.router.navigate(['lead/viewsinglelead', data._id]);
   }
@@ -90,12 +89,10 @@ matdatasource = new MatTableDataSource([]);
   addLead() {
     this.router.navigate(['lead/leadadd']);
   }
-  getEditLead(leadDetailsForm: FormGroup, id) {
+  getEditLead(id) {
      this.router.navigate(['lead/leadedit', id]);
   }
-  getDeleteLead(leadDetailsForm: FormGroup, row) {
-    row.editing = false;
-    leadDetailsForm.reset();
+  getDeleteLead(row) {
     this.leadManagementService.deleteLead(row).subscribe(data => {
       this.leadModel = new MatTableDataSource<Lead>(data);
       this.leadModel.paginator = this.paginator;
@@ -137,10 +134,10 @@ matdatasource = new MatTableDataSource([]);
     this.leadManagementService.allLead().subscribe(data => {
       this.leadModel = new MatTableDataSource<Lead>(data);
       this.leadModel.paginator = this.paginator;
-      this.leadModel = data;
       this.array = data;
       this.totalSize = this.array.length;
       this.iterator();
+      this.leadStatus();
     }, error => {
       console.log(error);
     });

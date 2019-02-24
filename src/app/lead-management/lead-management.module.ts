@@ -43,6 +43,8 @@ import { CustomerManagementService } from './../customer-management/customer-man
 import { ViewSingleLeadComponent } from './view-single-lead/view-single-lead.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { ExistingCustomerComponent } from './existing-customer/existing-customer.component';
+import { SearchComponent } from './search/search.component';
+
 
 @NgModule({
   declarations: [SampleComponent,
@@ -52,7 +54,8 @@ import { ExistingCustomerComponent } from './existing-customer/existing-customer
     ViewLeadComponent,
     ViewFollowupComponent,
     ViewSingleLeadComponent,
-    ExistingCustomerComponent],
+    ExistingCustomerComponent,
+    SearchComponent],
   imports: [
     CommonModule,
     CustomersModule,
