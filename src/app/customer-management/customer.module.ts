@@ -36,9 +36,15 @@ import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CreateCustomerService } from './../customer-management/create-customer/create-customer.service';
 import { UploadCustomerComponent } from './upload-customer/upload-customer.component';
+import {MobileNumberPipe} from './pipe/mobile-number.pipe';
+import { EmailidPipe } from './pipe/emailid.pipe';
+import { NamePipe } from './pipe/name.pipe';
+import { CityPipe } from './pipe/city.pipe';
 @NgModule({
   declarations: [
-     ViewCustomerComponent, CreateCustomerComponent , EditCustomerComponent, UploadCustomerComponent],
+     ViewCustomerComponent, CreateCustomerComponent , EditCustomerComponent, UploadCustomerComponent,
+      MobileNumberPipe, EmailidPipe, NamePipe, CityPipe
+    ],
   imports: [
     HttpClientModule,
     HttpModule,

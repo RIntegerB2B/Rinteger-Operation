@@ -11,7 +11,7 @@ import { NavheaderComponent } from './home/navheader/navheader.component';
 @NgModule({
   declarations: [
     AppComponent,
-    NavheaderComponent
+    NavheaderComponent,
   ],
   imports: [
     BrowserModule,
