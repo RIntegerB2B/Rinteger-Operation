@@ -22,7 +22,7 @@ export class MainmenuComponent implements OnInit {
   sumInvoice = 0;
   sumPerformaInvoice = 0;
   sumQuotation = 0;
-  workOrderTotalAmount: number;
+  workOrderTotalAmount: WorkOrder;
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit() {

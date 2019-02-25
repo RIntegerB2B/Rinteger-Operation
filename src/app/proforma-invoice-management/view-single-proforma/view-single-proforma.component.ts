@@ -3,8 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { ProformaInvoiceService } from './../proforma-invoice.service';
 import { ProformaInvoice } from './../../shared/proformaInvoice.model';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
-import * as  jspdf from 'jspdf';
-import 'jspdf-autotable';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { WorkOrderPdf } from './../../shared/workorderpdf.model';
 import { Customer } from './../../customer-management/create-customer/customer.model';
@@ -57,7 +55,7 @@ export class ViewSingleProformaComponent implements OnInit {
         console.log(error);
       });
   }
-  templateType(val) {
+ /*  templateType(val) {
     const TYPE = this.singleProfomoInvoiceForm.controls.termsType.value;
     if (val === 'With Discount + GST' && TYPE === 'Production Terms') {
       this.savePDFWithDiscountTerms();
@@ -76,7 +74,7 @@ export class ViewSingleProformaComponent implements OnInit {
     } else if (val === 'Without Discount + SGST + CGST' && TYPE === 'Digital Marketing Terms') {
       this.pdfGSTWitouthDiscountDigitalTerms();
     }
-  }
+  } */
   viewCompanyDetails() {
     this.proformaInvoiceService.workorderPDFDetails().subscribe(data => {
       this.workOrderPDFModel = data;
@@ -94,7 +92,7 @@ export class ViewSingleProformaComponent implements OnInit {
   cancelProfomaInvoice(data)   {
     this.router.navigate(['/proformainvoice/viewproformainvoice', data.workOrderID]);
   }
-  pdfGSTDiscountTerms() {
+  /* pdfGSTDiscountTerms() {
     this.viewCompanyDetails();
     this.proformaInvoiceService.singleCustomerDetails(this.proformaInvoice[0].customerID).subscribe(data => {
       this.customerModel = data;
@@ -122,7 +120,6 @@ export class ViewSingleProformaComponent implements OnInit {
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Discount %', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      /* this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15); */
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');
@@ -224,7 +221,6 @@ export class ViewSingleProformaComponent implements OnInit {
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Discount %', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      /* this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15); */
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');
@@ -326,7 +322,6 @@ export class ViewSingleProformaComponent implements OnInit {
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      /* this.doc.addImage(imgData, 'JPEG', 140, 5, 15, 15); */
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');
@@ -994,5 +989,5 @@ export class ViewSingleProformaComponent implements OnInit {
     }, err => {
       console.log(err);
     });
-  }
+  } */
 }

@@ -37,7 +37,7 @@ export class SearchComponent implements OnInit {
         this.selectedType(selectedValue, leadData);
         break;
       }
-      default : {
+      case 'All': {
         this.selectedAll(selectedValue, leadData);
         break;
       }

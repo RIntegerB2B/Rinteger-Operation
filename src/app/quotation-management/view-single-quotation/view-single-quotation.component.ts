@@ -4,8 +4,6 @@ import { Quotation } from './../../shared/quotation.model';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { WorkOrderPdf } from '../../shared/workorderpdf.model';
 import { Customer } from './../../customer-management/create-customer/customer.model';
-import * as  jspdf from 'jspdf';
-import 'jspdf-autotable';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 
 @Component({

@@ -2,7 +2,7 @@
   <div class="col-md-2 col">
     <label class="searchHeader">Lead Search</label>
     <select class="form-control input-sm" (change)="selected($event, leadModel)">
-      <option [value]="All">
+      <option value="All">
         All
       </option>
       <optgroup label='Lead Source' *ngFor="let data of searchDetails">

@@ -14,7 +14,7 @@
   <div fxFlex="100" fxFlex.gt-sm="16" fxFlex.sm="50" class="p-2">
     <mat-card class="pointer" [routerLink]="['/lead/leadview']">
       <mat-card-title fxLayoutAlign="start center">
-        <small class="text-muted">Leads</small>
+        <small class="text-muted">Lead</small>
         <span fxFlex></span>
       </mat-card-title>
       <mat-card-content >
@@ -82,7 +82,8 @@
           <span fxFlex></span>
         </mat-card-title>
         <mat-card-content>
-           <h3 class="m-0 font-normal">{{workOrderTotalAmount[0].totalAmount}}</h3>
+           <h3 class="m-0 font-normal"><small class="text-muted">Billing Value:</small>
+            {{workOrderTotalAmount[0].totalAmount}}</h3>
           <!--   <small class="text-muted">Monthly</small> -->
         </mat-card-content>
       </mat-card>
