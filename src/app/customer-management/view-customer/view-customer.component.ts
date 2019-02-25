@@ -29,7 +29,7 @@ export class ViewCustomerComponent implements OnInit {
   emailValue;
   nameValue;
   cityValue;
-  searchType = ['MobileNumber', 'Name', 'Email ID',  'City'];
+  searchType = ['MobileNumber', 'Name',  'City'];
 
   constructor(private fb: FormBuilder,
     private customerManagementService:
