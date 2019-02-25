@@ -81,4 +81,10 @@ export class DashboardService {
     const url: string = this.serviceUrl + addUrl + id;
     return this.httpClient.get<Invoice[]>(url);
   }
+  workOrderTotalAmount(): Observable<any>    {
+    const addUrl = 'allworkordertotal/';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<Invoice[]>(url);
+
+  }
 }

@@ -14,6 +14,7 @@ export class WorkOrder {
     allTotal: number;
     subTotal: number;
     tax: number;
+    totalAmount: number;
     constructor(
         customerID: string,
         customerName: string,

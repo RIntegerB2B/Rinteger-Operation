@@ -22,6 +22,7 @@ export class MainmenuComponent implements OnInit {
   sumInvoice = 0;
   sumPerformaInvoice = 0;
   sumQuotation = 0;
+  workOrderTotalAmount: number;
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit() {
@@ -31,6 +32,7 @@ export class MainmenuComponent implements OnInit {
     this.getAllQuotation();
     this.getAllProformaInvoice();
     this.viewAllCustomers();
+    this.getWorkOrderAmount();
   }
   viewAllinvoice() {
     this.dashboardService.allAllInvoice().subscribe(data => {
@@ -76,6 +78,14 @@ export class MainmenuComponent implements OnInit {
   getAllProformaInvoice() {
     this.dashboardService.allAllProfomaInvoice().subscribe(data => {
       this.proformaInvoice = data;
+    }, error => {
+      console.log(error);
+    }
+    );
+  }
+  getWorkOrderAmount() {
+    this.dashboardService.workOrderTotalAmount().subscribe(data => {
+      this.workOrderTotalAmount = data;
     }, error => {
       console.log(error);
     }

@@ -5,5 +5,5 @@ export const AppSetting: AppSettingType = {
     /* serviceUrl: environment.serviceUrl */
     // serviceUrl: 'https://rinteger.com/adminservice/'
     serviceUrl: 'http://localhost:3041/'
-  /*  serviceUrl: 'http://ec2-13-233-199-18.ap-south-1.compute.amazonaws.com/service/' */
+   /* serviceUrl: 'http://ec2-13-233-199-18.ap-south-1.compute.amazonaws.com/service/' */
 };
