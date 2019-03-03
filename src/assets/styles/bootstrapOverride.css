@@ -1,4 +1,6 @@
 .textMenu li a {
     color: #ffff;
   }
-  
+  .menuTransparent {
+    background-color: transparent !important;
+  }

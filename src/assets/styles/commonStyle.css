@@ -13,6 +13,11 @@ body {
 .pointerDiv {
   cursor: pointer;
 }
+
+
+.menuTransparent {
+  display: none;
+}
 .searchHeader
 {
   background-color: lightslategray;
@@ -58,6 +63,15 @@ body {
   transition: padding 3s;
   -moz-transition: padding 3s;
   -webkit-transition: padding 3s;
+}
+
+.gridSign {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.19);
+  margin: 12px 0px;
+  background-color: #fff;
+  border-radius: 3px;
+  font-size: .8rem !important;
+  padding: 40px;
 }
 
 .gridRow {

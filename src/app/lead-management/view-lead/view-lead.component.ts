@@ -1,6 +1,7 @@
 import { Component, OnInit , ViewChild} from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { LeadManagementService } from './../lead-management.service';
+import { NavheaderService } from './../../shared/navheader/navheader.service';
 import { CreateCustomerService } from './../../customer-management/create-customer/create-customer.service';
 import { Router } from '@angular/router';
 import { Lead } from './../../shared/lead.model';
@@ -34,11 +35,13 @@ export class ViewLeadComponent implements OnInit {
   matdatasource = new MatTableDataSource([]);
   constructor(private fb: FormBuilder,
     private leadManagementService: LeadManagementService,
+    private navheaderService: NavheaderService,
     private createCustomerService: CreateCustomerService, private dialog: MatDialog,
     private router: Router) {
    }
   ngOnInit() {
     this.getAllLeads();
+    this.navheaderService.hideMenuTrans();
   }
 
   getSearch(data)   {

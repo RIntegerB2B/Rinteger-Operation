@@ -1,42 +1,58 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {  AuthGuard } from './shared/authguard/auth.guard';
 
 const routes: Routes = [
   {
     path: 'customers',
+    canActivate: [AuthGuard],
     loadChildren: './customer-management/customer.module#CustomersModule'
   },
   {
     path: 'lead',
-    loadChildren: './lead-management/lead-management.module#LeadManagementModule'
+    canActivate: [AuthGuard],
+    loadChildren: './lead-management/lead-management.module#LeadManagementModule',
   },
   {
     path: 'workorder',
+    canActivate: [AuthGuard],
     loadChildren: './work-order-management/work-order-management.module#WorkOrderManagementModule'
   },
   {
     path: 'quotation',
-    loadChildren: './quotation-management/quotation-management.module#QuotationManagementModule'
+    canActivate: [AuthGuard],
+    loadChildren: './quotation-management/quotation-management.module#QuotationManagementModule',
   },
   {
     path: 'invoice',
-    loadChildren: './invoice-management/invoice-management.module#InvoiceManagementModule'
+    canActivate: [AuthGuard],
+    loadChildren: './invoice-management/invoice-management.module#InvoiceManagementModule',
+    
   },
   {
     path: 'proformainvoice',
-    loadChildren: './proforma-invoice-management/proforma-invoice-management.module#ProformaInvoiceManagementModule'
+    canActivate: [AuthGuard],
+    loadChildren: './proforma-invoice-management/proforma-invoice-management.module#ProformaInvoiceManagementModule',
+    
   },
   {
     path: 'settings',
-    loadChildren: './settings-management/settings-management.module#SettingsManagementModule'
+    canActivate: [AuthGuard],
+    loadChildren: './settings-management/settings-management.module#SettingsManagementModule',
+    
   },
   {
     path: 'dashboard',
+    canActivate: [AuthGuard],
     loadChildren: './dashboard/dashboard.module#DashboardModule'
   },
   {
+    path: 'account',
+    loadChildren: './account/account.module#AccountModule',
+  },
+  {
     path: '',
-    redirectTo: 'dashboard/menu',
+    redirectTo: 'account/login',
     pathMatch: 'full'
   }];
 

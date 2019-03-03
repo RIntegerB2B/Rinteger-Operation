@@ -17,9 +17,11 @@
           <label class="labelHeader">Existing Customer</label>
         </div>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Existing Customer Mobile Number" formControlName="checkMobileNumber" #mobi
-            (keyup)="selectedCustomer(mobi.value)">
+          <input matInput placeholder="Existing Customer Mobile Number"
+           formControlName="checkMobileNumber" #mobi>
         </mat-form-field>
+        <button (click)="selectedCustomer(mobi.value)" 
+        mat-raised-button color="primary">Click</button>
         <div *ngIf="exitsCustomerCheck">
           <div class="alert alert-success">
             <strong>Existing Customer</strong>
