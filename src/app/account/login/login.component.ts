@@ -11,7 +11,7 @@ import { LogIn } from './login.model';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  loginFailed = false;
   constructor(public navheaderService: NavheaderService, private accountService: AccountService, private fb: FormBuilder,
     private router: Router) {
       this.navheaderService.makeMenuTrans();
@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('loginUser', 'true');
         this.router.navigate(['./lead/leadview']);
       } else {
+        this.loginFailed  = true;
       }
     });
   }
