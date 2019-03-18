@@ -1,16 +1,18 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomerManagementService } from './../customer-management.service';
 import { Customer } from './../create-customer/customer.model';
 import { Router } from '@angular/router';
 import { CreateCustomerService } from './../../customer-management/create-customer/create-customer.service';
+import { AlertDeleteService } from './../../customer-management/alert-delete/alert-delete.service';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
+
 @Component({
   selector: 'app-view-customer',
   templateUrl: './view-customer.component.html',
   styleUrls: ['./view-customer.component.css'],
-  providers: [CreateCustomerService]
+  providers: [CreateCustomerService, AlertDeleteService]
 })
 export class ViewCustomerComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -34,7 +36,8 @@ export class ViewCustomerComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private customerManagementService:
       CustomerManagementService,
-    private dialog: MatDialog, private router: Router, private createCustomerService: CreateCustomerService) { }
+    private dialog: MatDialog, private router: Router, private snack: MatSnackBar,
+     private createCustomerService: CreateCustomerService, private alertDeleteService: AlertDeleteService) { }
 
   ngOnInit() {
     this.createForm();
@@ -60,18 +63,8 @@ export class ViewCustomerComponent implements OnInit {
   addCustomer() {
     this.createCustomerService.openCustomer();
   }
-  getDeleteCustomer(customerDetailsForm: FormGroup, row) {
-    row.editing = false;
-    customerDetailsForm.reset();
-    this.customerManagementService.deleteCustomer(row).subscribe(data => {
-      this.customerModel = data;
-      this.matdatasource.data = data;
-      this.matdatasource.paginator = this.paginator;
-    }, error => {
-      console.log(error);
-    });
-  }
-  getEditCustomer(customerDetailsForm: FormGroup, row) {
+  
+  getEditCustomer(row) {
     this.router.navigate(['customers/editcustomer', row._id]);
   }
   getAllCustomer() {
@@ -107,5 +100,31 @@ export class ViewCustomerComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+  }
+  /* getDeleteCustomer(row) {
+    this.customerManagementService.deleteCustomer(row).subscribe(data => {
+      this.customerModel = data;
+      this.matdatasource.data = data;
+      this.matdatasource.paginator = this.paginator;
+    }, error => {
+      console.log(error);
+    });
+  } */
+  getDeleteCustomer(row) {
+    this.alertDeleteService.confirm()
+      .subscribe(res => {
+        if (res) {
+          this.customerManagementService.deleteCustomer(row)
+            .subscribe(data => {
+              this.customerModel = data;
+              this.matdatasource.data = data;
+              this.matdatasource.paginator = this.paginator;
+              this.snack.open('Successfully Deleted!', 'OK', { duration: 4000, panelClass: ['blue-snackbar'] });
+            }, error => {
+              console.log(error);
+            }
+            );
+        }
+      });
   }
 }

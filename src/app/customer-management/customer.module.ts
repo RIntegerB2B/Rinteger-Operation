@@ -36,15 +36,17 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CreateCustomerService } from './../customer-management/create-customer/create-customer.service';
+import { AlertDeleteService } from './../customer-management/alert-delete/alert-delete.service';
 import { UploadCustomerComponent } from './upload-customer/upload-customer.component';
 import {MobileNumberPipe} from './pipe/mobile-number.pipe';
 import { EmailidPipe } from './pipe/emailid.pipe';
 import { NamePipe } from './pipe/name.pipe';
 import { CityPipe } from './pipe/city.pipe';
+import { AlertDeleteComponent } from './alert-delete/alert-delete.component';
 @NgModule({
   declarations: [
      ViewCustomerComponent, CreateCustomerComponent , EditCustomerComponent, UploadCustomerComponent,
-      MobileNumberPipe, EmailidPipe, NamePipe, CityPipe
+      MobileNumberPipe, EmailidPipe, NamePipe, CityPipe, AlertDeleteComponent
     ],
   imports: [
     HttpClientModule,
@@ -80,8 +82,8 @@ import { CityPipe } from './pipe/city.pipe';
     FlexLayoutModule
   ],
   providers: [
-    CustomerManagementService, CreateCustomerService
+    CustomerManagementService, CreateCustomerService, AlertDeleteService
   ],
-  entryComponents: [CreateCustomerComponent]
+  entryComponents: [CreateCustomerComponent, AlertDeleteComponent]
 })
 export class CustomersModule { }
