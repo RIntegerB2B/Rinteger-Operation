@@ -19,7 +19,7 @@ export class ViewCustomerComponent implements OnInit {
   matdatasource = new MatTableDataSource([]);
   customerDetailsForm: FormGroup;
   customerModel: any;
-  customerValue: Customer[];
+  customerValue: Customer;
   public pageSize = 50;
   public currentPage = 0;
   public totalSize = 0;
@@ -31,17 +31,23 @@ export class ViewCustomerComponent implements OnInit {
   emailValue;
   nameValue;
   cityValue;
-  searchType = ['MobileNumber', 'Name',  'City'];
+  searchType = ['MobileNumber', 'Name', 'City'];
 
   constructor(private fb: FormBuilder,
     private customerManagementService:
       CustomerManagementService,
     private dialog: MatDialog, private router: Router, private snack: MatSnackBar,
-     private createCustomerService: CreateCustomerService, private alertDeleteService: AlertDeleteService) { }
+    private createCustomerService: CreateCustomerService, private alertDeleteService: AlertDeleteService) { }
 
   ngOnInit() {
     this.createForm();
     this.getAllCustomer();
+  }
+  filterCustomer(data) {
+    this.customerModel = new MatTableDataSource<Customer>(data);
+    this.customerModel.paginator = this.paginator;
+    this.customerModel = data;
+
   }
   createForm() {
     this.customerDetailsForm = this.fb.group({
@@ -63,7 +69,7 @@ export class ViewCustomerComponent implements OnInit {
   addCustomer() {
     this.createCustomerService.openCustomer();
   }
-  
+
   getEditCustomer(row) {
     this.router.navigate(['customers/editcustomer', row._id]);
   }
@@ -90,9 +96,6 @@ export class ViewCustomerComponent implements OnInit {
     const start = this.currentPage * this.pageSize;
     const part = this.array.slice(start, end);
     this.customerModel = part;
-  }
-  searchBy(type, value) {
-    this.nameValue = value;
   }
   updateCustomer(customerDetailsForm: FormGroup, row) {
     this.customerManagementService.editCustomer(row).subscribe(data => {

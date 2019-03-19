@@ -43,10 +43,11 @@ import { EmailidPipe } from './pipe/emailid.pipe';
 import { NamePipe } from './pipe/name.pipe';
 import { CityPipe } from './pipe/city.pipe';
 import { AlertDeleteComponent } from './alert-delete/alert-delete.component';
+import { SearchCustomerComponent } from './search-customer/search-customer.component';
 @NgModule({
   declarations: [
      ViewCustomerComponent, CreateCustomerComponent , EditCustomerComponent, UploadCustomerComponent,
-      MobileNumberPipe, EmailidPipe, NamePipe, CityPipe, AlertDeleteComponent
+      MobileNumberPipe, EmailidPipe, NamePipe, CityPipe, AlertDeleteComponent, SearchCustomerComponent
     ],
   imports: [
     HttpClientModule,

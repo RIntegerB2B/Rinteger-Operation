@@ -1,4 +1,4 @@
-<form [formGroup]="customerDetailsForm" >
+<form [formGroup]="customerDetailsForm">
   <div class="pageBoxLg">
     <div class="container-fluid">
       <div class="row">
@@ -7,17 +7,10 @@
             <mat-icon class="gridEdit">add_box</mat-icon>
           </a>
         </div>
-        
-        <div class="btn">
-          <div class="input-group ">
-              <select #selectElem >
-                  <option *ngFor="let data of searchType">{{data}}</option>
-                </select>
-              <input type="text" class="form-control" placeholder="Search" formControlName="srchterm" #search/>
-                  <button mat-button (click)="searchBy(selectElem.value, search.value)" type="submit"><mat-icon>search</mat-icon></button>
-          </div>
-        </div>
       </div>
+      <app-search-customer [customerModel]="customerValue" 
+      (searchCustomer)="filterCustomer($event)"
+      ></app-search-customer>
       <div class="row gridRowHeader display-none-small">
         <div class="col-md-2 vcenterHeader">
           <div class="form-group">
@@ -25,7 +18,7 @@
           </div>
         </div>
         <div class="col-md-1 vcenterHeader">
-          <div>
+          <div class="form-group">
             <label>Mobile Number</label>
           </div>
         </div>
@@ -50,52 +43,55 @@
           </div>
         </div>
         <div class="col-md-1 vcenterHeader">
-          <div>
+          <div class="form-group">
             <label>Company Address</label>
           </div>
         </div>
         <div class="col-md-1 vcenterHeader">
-          <div>
+          <div class="form-group">
             <label>Gst Number</label>
           </div>
         </div>
         <div class="col-md-1 vcenterHeader">
-          <div>
+          <div class="form-group">
             <label>Brand Name</label>
           </div>
         </div>
         <div class="col-md-1 vcenterHeader">
-          <div>
+          <div class="form-group">
             <label>Edit/Delete</label>
           </div>
         </div>
       </div>
-<div *ngFor="let data of customerModel">
+      <div *ngIf="customerModel?.length === 0">
+          No Customer
+        </div>
+      <div *ngFor="let data of customerModel">
         <div class="row gridRow">
           <div class="display-none-large col-6">
             <label class="gridLabel">Customer ID:</label>
           </div>
           <div class="col-md-2 col-6 vcenter form-group">
-              {{data.customerID}}
+            {{data.customerID}}
           </div>
           <div class="display-none-large col-6">
             <label class="gridLabel">Mobile Number:</label>
           </div>
           <div class="col-md-1 col-6 vcenter form-group">
-              {{data.mobileNumber}}
-            
+            {{data.mobileNumber}}
+
           </div>
           <div class="display-none-large col-6">
             <label class="gridLabel">Name:</label>
           </div>
           <div class="col-md-1 col-6 vcenter form-group">
-              {{data.name}}
+            {{data.name}}
           </div>
           <div class="display-none-large col-6">
             <label class="gridLabel">Email ID:</label>
           </div>
-          <div class="col-md-2 col-6 vcenter form-group">
-              {{data.emailId}}
+          <div class="col-md-2 col-6 vcenter wordWrap form-group">
+            {{data.emailId}}
           </div>
           <!-- <div class="display-none-large col-6">
             <label class="gridLabel">Address:</label>
@@ -112,7 +108,7 @@
             </label>
           </div>
           <div class="col-md-1 col-6 vcenter form-group">
-              &nbsp;{{data.companyName}}
+            &nbsp;{{data.companyName}}
 
           </div>
           <div class="display-none-large col-6">
@@ -120,8 +116,8 @@
               Company Address:
             </label>
           </div>
-          <div class="col-md-1 col-6 vcenter form-group">
-              &nbsp;{{data.companyAddress}}
+          <div class="col-md-1 col-6 vcenter form-group wordWrap">
+            &nbsp;{{data.companyAddress}}
           </div>
           <div class="display-none-large col-6">
             <label class="gridLabel">
@@ -129,13 +125,13 @@
             </label>
           </div>
           <div class="col-md-1 col-6 vcenter form-group">
-              &nbsp;{{data.gstNumber}}
+            &nbsp;{{data.gstNumber}}
           </div>
           <div class="display-none-large col-6">
             <label class="gridLabel">Brand Name</label>
           </div>
           <div class="col-md-1  col-6 vcenter form-group">
-              &nbsp;{{data.brandName}}
+            &nbsp;{{data.brandName}}
           </div>
           <div class="col-md-1  col-6 vcenter form-group">
             <a (click)="getEditCustomer(data)">
@@ -149,7 +145,7 @@
         </div>
       </div>
     </div>
-    <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true" [length]="totalSize"
-  [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>
+    <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true"
+      [length]="totalSize" [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>
   </div>
 </form>
