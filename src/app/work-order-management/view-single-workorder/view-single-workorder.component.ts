@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { WorkOrderService } from './../work-order.service';
 import { WorkOrder } from './../../shared/workorder.model';
 import { WorkOrderPdf } from './../../shared/workorderpdf.model';
-import { Customer } from './../../customer-management/create-customer/customer.model';
+import { Customer } from './../../shared/customer.model';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';

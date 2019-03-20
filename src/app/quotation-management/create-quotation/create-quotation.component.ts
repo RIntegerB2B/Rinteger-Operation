@@ -4,13 +4,9 @@ import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@ang
 import { Quotation } from './../../shared/quotation.model';
 import { QuotationManagementService } from './../quotation-management.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LeadManagementService } from './../../lead-management/lead-management.service';
-import { CustomerManagementService } from './../../customer-management/customer-management.service';
 import { Lead } from './../../shared/lead.model';
-import { Customer } from './../../customer-management/create-customer/customer.model';
+import { Customer } from './../../shared/customer.model';
 import {WorkOrderPdf} from '../../shared/workorderpdf.model';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 
 
 @Component({

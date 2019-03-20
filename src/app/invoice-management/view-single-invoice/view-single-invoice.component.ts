@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { InvoiceService } from './../invoice.service';
 import { Invoice } from './../../shared/invoice.model';
 import { WorkOrderPdf } from '../../shared/workorderpdf.model';
-import { Customer } from './../../customer-management/create-customer/customer.model';
+import { Customer } from './../../shared/customer.model';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 

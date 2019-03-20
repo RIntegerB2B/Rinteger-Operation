@@ -2,7 +2,7 @@ import { Component, OnInit , ViewChild} from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { LeadManagementService } from './../lead-management.service';
 import { NavheaderService } from './../../shared/navheader/navheader.service';
-import { CreateCustomerService } from './../../customer-management/create-customer/create-customer.service';
+import { CreateCustomerService } from './../../customer-management/customer/create-customer/create-customer.service';
 import { Router } from '@angular/router';
 import { Lead } from './../../shared/lead.model';
 import { LeadAddComponent } from './../lead-add/lead-add.component';

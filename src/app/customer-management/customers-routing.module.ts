@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CreateCustomerComponent } from './create-customer/create-customer.component';
-import { ViewCustomerComponent } from './view-customer/view-customer.component';
-import { EditCustomerComponent } from './edit-customer/edit-customer.component';
-import { UploadCustomerComponent } from './upload-customer/upload-customer.component';
+import { CreateCustomerComponent } from './customer/create-customer/create-customer.component';
+import { ViewCustomerComponent } from './customer/view-customer/view-customer.component';
+import { EditCustomerComponent } from './customer/edit-customer/edit-customer.component';
+import { UploadCustomerComponent } from './shared/upload-customer/upload-customer.component';
 
 const routes: Routes = [
   /* {

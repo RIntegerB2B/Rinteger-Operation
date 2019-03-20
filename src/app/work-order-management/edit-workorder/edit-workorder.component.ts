@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Lead } from './../../shared/lead.model';
-import { Customer } from './../../customer-management/create-customer/customer.model';
+import { Customer } from './../../shared/customer.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WorkOrderService } from './../work-order.service';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';

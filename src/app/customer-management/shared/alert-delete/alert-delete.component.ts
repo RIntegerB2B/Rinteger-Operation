@@ -2,8 +2,8 @@
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LogIn } from './../../shared/login.model';
-import { CustomerManagementService } from './../customer-management.service';
+import { LogIn } from './../../../shared/login.model';
+import { CustomerManagementService } from './../../customer-management.service';
 
 
 @Component({

@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Customer } from './../create-customer/customer.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CustomerManagementService } from './../customer-management.service';
+import { CustomerManagementService } from './../../customer-management.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 

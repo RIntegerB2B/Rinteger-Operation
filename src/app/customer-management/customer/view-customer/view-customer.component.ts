@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CustomerManagementService } from './../customer-management.service';
+import { CustomerManagementService } from './../../customer-management.service';
 import { Customer } from './../create-customer/customer.model';
 import { Router } from '@angular/router';
-import { CreateCustomerService } from './../../customer-management/create-customer/create-customer.service';
-import { AlertDeleteService } from './../../customer-management/alert-delete/alert-delete.service';
+import { CreateCustomerService } from './../../customer/create-customer/create-customer.service';
+import { AlertDeleteService } from './../../shared/alert-delete/alert-delete.service';
+import { ViewsinglecustomerService } from '../view-singlecustomer/viewsinglecustomer.service';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 
 @Component({
@@ -37,7 +38,8 @@ export class ViewCustomerComponent implements OnInit {
     private customerManagementService:
       CustomerManagementService,
     private dialog: MatDialog, private router: Router, private snack: MatSnackBar,
-    private createCustomerService: CreateCustomerService, private alertDeleteService: AlertDeleteService) { }
+    private createCustomerService: CreateCustomerService, private alertDeleteService: AlertDeleteService,
+     private singlecustomerService: ViewsinglecustomerService) { }
 
   ngOnInit() {
     this.createForm();
@@ -65,6 +67,9 @@ export class ViewCustomerComponent implements OnInit {
       gstNumber: ['', Validators.required],
       brandName: ['', Validators.required]
     });
+  }
+  getViewSingleCustomer(data)   {
+    this.singlecustomerService.openSingleCustomer(data);
   }
   addCustomer() {
     this.createCustomerService.openCustomer()

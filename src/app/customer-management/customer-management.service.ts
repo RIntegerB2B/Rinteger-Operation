@@ -5,7 +5,7 @@ import { AppSetting } from './../config/appSetting';
 import { HttpClient, HttpHeaders, HttpEvent } from '@angular/common/http';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { MatDialog, MatDialogRef } from '@angular/material';
-import { CreateCustomerComponent } from './create-customer/create-customer.component';
+import { CreateCustomerComponent } from './customer/create-customer/create-customer.component';
 import { LogIn  } from './../shared/login.model';
 
 @Injectable({

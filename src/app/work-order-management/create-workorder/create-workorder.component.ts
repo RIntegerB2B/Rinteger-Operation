@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { LeadManagementService } from './../../lead-management/lead-management.service';
 import { CustomerManagementService } from './../../customer-management/customer-management.service';
 import { Lead } from './../../shared/lead.model';
-import { Customer } from './../../customer-management/create-customer/customer.model';
+import { Customer } from './../../shared/customer.model';
 import {WorkOrderPdf} from '../../shared/workorderpdf.model';
 import { Router } from '@angular/router';
 

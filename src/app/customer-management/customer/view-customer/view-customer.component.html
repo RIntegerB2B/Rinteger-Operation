@@ -8,26 +8,24 @@
           </a>
         </div>
       </div>
-      <app-search-customer [customerModel]="customerValue" 
-      (searchCustomer)="filterCustomer($event)"
-      ></app-search-customer>
+      <app-search-customer [customerModel]="customerValue" (searchCustomer)="filterCustomer($event)"></app-search-customer>
       <div class="row gridRowHeader display-none-small">
         <div class="col-md-2 vcenterHeader">
           <div class="form-group">
             <label>Customer ID</label>
           </div>
         </div>
-        <div class="col-md-1 vcenterHeader">
+        <div class="col-md-2 vcenterHeader">
           <div class="form-group">
             <label>Mobile Number</label>
           </div>
         </div>
-        <div class="col-md-1 vcenterHeader">
+        <div class="col-md-3 vcenterHeader">
           <div class="form-group">
             <label>Name</label>
           </div>
         </div>
-        <div class="col-md-2 vcenterHeader">
+        <div class="col-md-3 vcenterHeader">
           <div class="form-group">
             <label>Email Id</label>
           </div>
@@ -37,7 +35,7 @@
             <label>Address</label>
           </div>
         </div> -->
-        <div class="col-md-1 vcenterHeader">
+        <!--  <div class="col-md-1 vcenterHeader">
           <div class="form-group">
             <label>Company Name</label>
           </div>
@@ -51,21 +49,21 @@
           <div class="form-group">
             <label>Gst Number</label>
           </div>
-        </div>
-        <div class="col-md-1 vcenterHeader">
+        </div> -->
+        <!-- <div class="col-md-1 vcenterHeader">
           <div class="form-group">
             <label>Brand Name</label>
           </div>
-        </div>
-        <div class="col-md-1 vcenterHeader">
+        </div> -->
+        <div class="col-md-2 vcenterHeader">
           <div class="form-group">
-            <label>Edit/Delete</label>
+            <label>Action</label>
           </div>
         </div>
       </div>
       <div *ngIf="customerModel?.length === 0">
-          No Customer
-        </div>
+        No Customer
+      </div>
       <div *ngFor="let data of customerModel">
         <div class="row gridRow">
           <div class="display-none-large col-6">
@@ -77,20 +75,20 @@
           <div class="display-none-large col-6">
             <label class="gridLabel">Mobile Number:</label>
           </div>
-          <div class="col-md-1 col-6 vcenter form-group">
+          <div class="col-md-2 col-6 vcenter form-group">
             {{data.mobileNumber}}
 
           </div>
           <div class="display-none-large col-6">
             <label class="gridLabel">Name:</label>
           </div>
-          <div class="col-md-1 col-6 vcenter form-group">
+          <div class="col-md-3 col-6 vcenter form-group">
             {{data.name}}
           </div>
           <div class="display-none-large col-6">
             <label class="gridLabel">Email ID:</label>
           </div>
-          <div class="col-md-2 col-6 vcenter wordWrap form-group">
+          <div class="col-md-3 col-6 vcenter wordWrap form-group">
             {{data.emailId}}
           </div>
           <!-- <div class="display-none-large col-6">
@@ -102,16 +100,15 @@
               {{data.state}},
               {{data.pincode}}
           </div> -->
-          <div class="display-none-large col-6">
+          <!-- <div class="display-none-large col-6">
             <label class="gridLabel">
               Company Name:
             </label>
           </div>
-          <div class="col-md-1 col-6 vcenter form-group">
+          <div class="col-md-2 col-6 vcenter form-group">
             &nbsp;{{data.companyName}}
-
-          </div>
-          <div class="display-none-large col-6">
+          </div> -->
+          <!--           <div class="display-none-large col-6">
             <label class="gridLabel">
               Company Address:
             </label>
@@ -129,8 +126,8 @@
           </div>
           <div class="display-none-large col-6">
             <label class="gridLabel">Brand Name</label>
-          </div>
-          <div class="col-md-1  col-6 vcenter form-group">
+          </div> -->
+          <!-- <div class="col-md-1  col-6 vcenter form-group">
             &nbsp;{{data.brandName}}
           </div>
           <div class="col-md-1  col-6 vcenter form-group">
@@ -140,6 +137,25 @@
             <a (click)="getDeleteCustomer(data)">
               <mat-icon class="gridEdit">delete</mat-icon>
             </a>
+          </div> -->
+          <div class="col-md-2 col-6 vcenter form-group">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <a class="nav-link" (click)="getViewSingleCustomer(data)">
+                View
+              </a>
+              <a class="nav-link" (click)="getEditCustomer(data)">
+                Edit
+              </a>
+              <a class="nav-link" (click)="getDeleteCustomer(data)">
+                Delete
+              </a>
+              <!--  <a class="nav-link" (click)="createWorkOrder(data)">
+                Work order
+              </a> -->
+            </mat-menu>
           </div>
 
         </div>

@@ -37,7 +37,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { CreateCustomerService } from './../customer-management/create-customer/create-customer.service';
 import { ViewSingleExpenseComponent } from './view-single-expense/view-single-expense.component';
 /* import { UploadCustomerComponent } from './upload-customer/upload-customer.component'; */
 /* import {MobileNumberPipe} from './pipe/mobile-number.pipe';
@@ -84,7 +83,7 @@ import { CityPipe } from './pipe/city.pipe'; */
     FlexLayoutModule
   ],
   providers: [
-    ExpenseManagementService, CreateCustomerService
+    ExpenseManagementService
   ],
   entryComponents: []
 })

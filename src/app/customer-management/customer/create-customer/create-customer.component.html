@@ -5,13 +5,22 @@
         <label class="pageBoxLg-label">Create Customer</label>
       </div>
       <div fxFlex="50" class="p-2">
+          
         <div *ngIf="!data">
           <mat-form-field class="full-width">
-            <input matInput formControlName="mobileNumber" placeholder="Mobile Number" required>
-            <mat-error *ngIf="customerDetailsForm.controls['mobileNumber'].errors?.required">
-              Enter Mobile Number
-              <strong>required</strong>
-            </mat-error>
+            <input matInput formControlName="mobileNumber"
+             placeholder="Mobile Number" maxlength="10" minlength="10"
+             required>
+             <mat-error *ngIf="customerDetailsForm.controls['mobileNumber'].errors?.required"
+          >
+          Enter Mobile Number
+          <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="!customerDetailsForm.controls['mobileNumber'].errors?.required"
+          >
+          Enter Valid Mobile Number
+          <strong>required</strong>
+          </mat-error>
           </mat-form-field>
         </div>
         <div *ngIf="data">
@@ -37,8 +46,10 @@
       </div>
       <div fxFlex="50" class="p-2">
         <mat-form-field class="full-width">
-          <input matInput formControlName="emailId" placeholder="Email Id" required>
-          <mat-error *ngIf="customerDetailsForm.controls['emailId'].errors?.required">
+          <input matInput formControlName="emailId" placeholder="Email Id" 
+          required>
+          
+          <mat-error *ngIf="customerDetailsForm.controls['emailId'].errors?.email">
             Enter Email ID
             <strong>required</strong>
           </mat-error>
@@ -124,9 +135,9 @@
         </mat-form-field>
       </div>
       <div fxFlex="100" class="mt-1">
-        <button mat-raised-button type="submit" color="primary">Save</button>
+          <button mat-raised-button mat-button color="accent" type="button" (click)="cancel()">Cancel</button>
         <span fxFlex></span>
-        <button mat-raised-button mat-button color="accent" type="button" (click)="cancel()">Cancel</button>
+        <button mat-raised-button type="submit" color="primary">Save</button>
       </div>
     </div>
   </form>

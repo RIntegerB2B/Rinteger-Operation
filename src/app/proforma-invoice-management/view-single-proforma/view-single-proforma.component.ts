@@ -5,7 +5,7 @@ import { ProformaInvoice } from './../../shared/proformaInvoice.model';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { WorkOrderPdf } from './../../shared/workorderpdf.model';
-import { Customer } from './../../customer-management/create-customer/customer.model';
+import { Customer } from './../../shared/customer.model';
 
 @Component({
   selector: 'app-view-single-proforma',

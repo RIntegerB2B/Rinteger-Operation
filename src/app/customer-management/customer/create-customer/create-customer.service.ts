@@ -15,7 +15,7 @@ export class CreateCustomerService {
   openCustomer(data?: Customer): Observable<boolean> {
     this.dialogRef = this.dialog.open(CreateCustomerComponent,
        { disableClose: true, backdropClass: 'light-backdrop',
-      data: data
+         data: data
     });
     return this.dialogRef.afterClosed();
   }

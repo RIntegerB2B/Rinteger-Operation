@@ -3,7 +3,7 @@ import { QuotationManagementService } from './../quotation-management.service';
 import { Quotation } from './../../shared/quotation.model';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { WorkOrderPdf } from '../../shared/workorderpdf.model';
-import { Customer } from './../../customer-management/create-customer/customer.model';
+import { Customer } from './../../shared/customer.model';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 
 @Component({

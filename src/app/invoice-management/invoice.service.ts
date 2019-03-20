@@ -5,7 +5,7 @@ import { WorkOrder } from './../shared/workorder.model';
 import { AppSetting } from './../config/appSetting';
 import { HttpClient, HttpHeaders, HttpEvent } from '@angular/common/http';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
-import { Customer } from '../customer-management/create-customer/customer.model';
+import { Customer } from './../shared/customer.model';
 
 @Injectable({
   providedIn: 'root'

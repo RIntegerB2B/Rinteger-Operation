@@ -1,8 +1,9 @@
 import { Component, OnInit, Inject, Optional, Input } from '@angular/core';
 import { Customer } from './customer.model';
+import { mobileNumberValidation } from './mobileNumberValidation';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CustomerManagementService } from './../customer-management.service';
+import { CustomerManagementService } from './../../customer-management.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 
@@ -28,13 +29,18 @@ export class CreateCustomerComponent implements OnInit {
     this.createForm();
   }
 
+
+
   createForm() {
     this.customerDetailsForm = this.fb.group({
       customerID: [''],
-      mobileNumber: ['', Validators.required],
+      mobileNumber: ['', mobileNumberValidation],
       altMobileNumber: [''],
       name: ['', Validators.required],
-      emailId: ['', Validators.required],
+      emailId: ['', [
+        Validators.required,
+        Validators.email
+      ]],
       location: ['', Validators.required],
       city: ['', Validators.required],
       state: ['', Validators.required],
@@ -47,12 +53,6 @@ export class CreateCustomerComponent implements OnInit {
   }
   cancel() {
     this.dialogRef.close();
-  }
-
-  touchAllElements(formGroup: FormGroup) {
-    Object.keys(formGroup['controls']).forEach(element => {
-      console.log(formGroup.get(element).markAsTouched());
-    });
   }
   addSingleCustomer(customerDetailsForm: FormGroup) {
     this.customerModel = new Customer(

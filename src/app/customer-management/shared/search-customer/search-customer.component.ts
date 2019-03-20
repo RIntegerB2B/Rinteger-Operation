@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Customer } from './../create-customer/customer.model';
+import { Customer } from './../../customer/create-customer/customer.model';
 @Component({
   selector: 'app-search-customer',
   templateUrl: './search-customer.component.html',
