@@ -14,8 +14,8 @@ export class CreateExpenseComponent implements OnInit {
   customerDetailsForm: FormGroup;
   customerModel: Expense;
   editable = true;
-  ExpenseType = ['Shoot','Others'];
-  Paymode = ['Cash','Check'];
+  ExpenseType =  ['Shoot', 'Others'];
+  Paymode = ['Cash', 'Check'];
   constructor(private fb: FormBuilder,
     @Optional() public dialogRef: MatDialogRef<CreateExpenseComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
@@ -31,13 +31,12 @@ export class CreateExpenseComponent implements OnInit {
 
   createForm() {
     this.customerDetailsForm = this.fb.group({
-      
       mobileNumber: ['', Validators.required],
       name: ['', Validators.required],
       companyName: ['', Validators.required],
       expenseType: [''],
-      modeOfPayment: [''],     
-      location:[''],
+      modeOfPayment: [''],
+      location: [''],
       date: [''],
       totalAmount: ['', Validators.required],
       paid: ['', Validators.required],
@@ -57,13 +56,12 @@ export class CreateExpenseComponent implements OnInit {
       customerDetailsForm.controls.expenseType.value,
       customerDetailsForm.controls.modeOfPayment.value,
       customerDetailsForm.controls.location.value,
-      customerDetailsForm.controls.date.value,            
+      customerDetailsForm.controls.date.value,
       customerDetailsForm.controls.totalAmount.value,
       customerDetailsForm.controls.paid.value,
       customerDetailsForm.controls.totalAmount.value - customerDetailsForm.controls.paid.value,
       customerDetailsForm.controls.vouNo.value,
       customerDetailsForm.controls.expensesDescription.value
-     
     );
     this.expenseManagementService.addSingleExpense(this.customerModel).subscribe(data => {
       this.customerModel = data;

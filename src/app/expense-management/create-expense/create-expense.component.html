@@ -7,16 +7,15 @@
       </div>
       <div fxFlex="50" class="p-2">
         <div>
-        <mat-form-field class="full-width">
-          <input matInput formControlName="mobileNumber" placeholder="Mobile Number"
-           required>
-          <mat-error *ngIf="customerDetailsForm.controls['mobileNumber'].errors?.required" required>
-            Enter Mobile Number
-            <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-      </div>
-      
+          <mat-form-field class="full-width">
+            <input matInput formControlName="mobileNumber" placeholder="Mobile Number" required>
+            <mat-error *ngIf="customerDetailsForm.controls['mobileNumber'].errors?.required" required>
+              Enter Mobile Number
+              <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
       </div>
       <div fxFlex="50" class="p-2">
         <mat-form-field class="full-width">
@@ -38,38 +37,40 @@
       </div>
       <div fxFlex="50" class="pr-1">
         <mat-form-field class="full-width">
-            <mat-select placeholder="Select Expense Type"   [(ngModel)]="customerDetailsForm.expenseType"  formControlName="expenseType">
-                <mat-option *ngFor="let expense of ExpenseType" [value]="expense">
-                  {{expense}}
-                </mat-option>
-              </mat-select>
+          <mat-select placeholder="Select Expense Type" formControlName="expenseType"
+           >
+            <mat-option *ngFor="let expense of ExpenseType" [value]="expense">
+              {{expense}}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
       <div fxFlex="50" class="pr-1">
         <mat-form-field class="full-width">
-            <mat-select placeholder="Select Mode of payments"   [(ngModel)]="customerDetailsForm.modeOfPayment"  formControlName="modeOfPayment">
-                <mat-option *ngFor="let expense of Paymode" [value]="expense">
-                  {{expense}}
-                </mat-option>
-              </mat-select>
+          <mat-select placeholder="Select Mode of payments"
+           formControlName="modeOfPayment">
+            <mat-option *ngFor="let expense of Paymode" [value]="expense">
+              {{expense}}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
       <div fxFlex="50" class="pr-1">
         <mat-form-field>
-          <input matInput formControlName="location"  [ngModel]="customerDetailsForm.location" (ngModelChange)="customerDetailsForm.location=$event"
-            placeholder="location">
-         <!--  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <input matInput formControlName="location" placeholder="location">
+          <!--  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker> -->
         </mat-form-field>
       </div>
       <div fxFlex="50" class="pr-1">
         <mat-form-field>
-          <input matInput formControlName="date" [matDatepicker]="picker" [ngModel]="customerDetailsForm.date" (ngModelChange)="customerDetailsForm.date=$event"
-            placeholder="Choose a date">
+          <input matInput formControlName="date" [matDatepicker]="picker"
+           placeholder="Choose a date">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
-      </div> <div fxFlex="50" class="p-2">
+      </div>
+      <div fxFlex="50" class="p-2">
         <mat-form-field class="full-width">
           <input matInput formControlName="totalAmount" placeholder="TotalAmount">
 
@@ -88,8 +89,8 @@
           </mat-error>
         </mat-form-field>
       </div>
-     
-      
+
+
       <div fxFlex="50" class="p-2">
         <mat-form-field class="full-width">
           <input matInput formControlName="vouNo" placeholder="Voucher.No">
@@ -99,10 +100,10 @@
           </mat-error>
         </mat-form-field>
       </div>
-     
-      
-     
-     
+
+
+
+
       <div fxFlex="50" class="p-2">
         <mat-form-field class="full-width">
           <input matInput formControlName="expensesDescription" placeholder="Expense Description">
@@ -113,8 +114,8 @@
         </mat-form-field>
       </div>
 
-      
-     
+
+
       <div fxFlex="100" class="mt-1">
         <button mat-raised-button color="primary">Save</button>
         <span fxFlex></span>
