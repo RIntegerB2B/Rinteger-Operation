@@ -1,0 +1,146 @@
+<form [formGroup]="customerDetailsForm">
+  <div class="pageBoxLg">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="btn">
+          <a (click)="addExpense()">
+            <mat-icon class="gridEdit">add_box</mat-icon>
+          </a>
+        </div>
+
+
+        <!--     <div class="btn">
+          <div class="input-group ">
+              <select #selectElem >
+                  <option *ngFor="let data of ExpenseType" >{{data}}</option>
+                </select>
+              <input type="text" class="form-control" placeholder="Search" formControlName="srchterm" #search/>
+                  <button mat-button (click)="searchBy(selectElem.value, search.value)" type="submit"><mat-icon>search</mat-icon></button>
+          </div>
+        </div> -->
+      </div>
+      <div class="row gridRowHeader display-none-small">
+
+        <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label>Name</label>
+          </div>
+        </div>
+        <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label>companyName</label>
+          </div>
+        </div>
+        <div class="col-md-2 vcenterHeader">
+          <div class="form-group">
+            <label>Expense Type</label>
+          </div>
+        </div>
+
+        <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label>Date of Expense</label>
+          </div>
+        </div>
+        <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label>Total Amount</label>
+          </div>
+        </div>
+        <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label>Paid</label>
+          </div>
+        </div>
+        <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label>Balance</label>
+          </div>
+        </div>
+        <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label>Action</label>
+          </div>
+        </div>
+      </div>
+      <div *ngFor="let data of customerModel">
+        <div class="row gridRow">
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Name:</label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group">
+            {{data.name}}
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Company Name:</label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group">
+            {{data.companyName}}
+
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">expenseType:</label>
+          </div>
+          <div class="col-md-2 col-6 vcenter form-group">
+            {{data.expenseType}}
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Date of Expense:</label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group">
+            {{data.date | date: 'dd/MM/yyyy'}}
+          </div>
+
+          <div class="display-none-large col-6">
+            <label class="gridLabel">
+              Total Amount:
+            </label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group">
+            &nbsp;{{data.totalAmount}}
+
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">
+              Paid:
+            </label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group">
+            &nbsp;{{data.paid}}
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">
+              Balance
+            </label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group">
+            &nbsp;{{data.balance}}
+          </div>
+
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Action:</label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <a class="nav-link" (click)="getViewExpense(data)">
+                View
+              </a>
+              <a class="nav-link" (click)="getEditExpense(data)">
+                Edit
+              </a>
+              <a class="nav-link" (click)="getDeleteExpense(data)">
+                Delete
+              </a>
+
+            </mat-menu>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true"
+    [length]="totalSize" [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>
+</form>

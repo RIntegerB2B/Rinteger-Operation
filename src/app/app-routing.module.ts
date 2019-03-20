@@ -27,7 +27,6 @@ const routes: Routes = [
     path: 'invoice',
     canActivate: [AuthGuard],
     loadChildren: './invoice-management/invoice-management.module#InvoiceManagementModule',
-    
   },
   {
     path: 'proformainvoice',
@@ -49,6 +48,10 @@ const routes: Routes = [
   {
     path: 'account',
     loadChildren: './account/account.module#AccountModule',
+  },
+  {
+    path: 'expense',
+    loadChildren: './expense-management/expense.module#ExpenseModule',
   },
   {
     path: '',

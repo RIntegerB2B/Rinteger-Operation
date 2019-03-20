@@ -1,57 +1,54 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-dark" [ngClass]="this.navheaderService?.menuHide">
+  <a class="navbar-brand" [routerLink]="['/dashboard/menu']">
+    <img class="image-fluid" src="../../../assets/images/logo.jpg">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-dark" 
-[ngClass]="this.navheaderService?.menuHide">
-    <a class="navbar-brand" [routerLink]="['/dashboard/menu']">
-      <img class="image-fluid" src="../../../assets/images/logo.jpg">
-    </a>
-    <button class="navbar-toggler" type="button"
-     data-toggle="collapse" data-target="#navbarSupportedContent" 
-     aria-controls="navbarSupportedContent" aria-expanded="false"
-      aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
 
-          </ul>
-      <ul class="navbar-nav">
-        <li class="nav-item active">
-            <a class="nav-link textMenu" [routerLink]="['/customers/viewcustomer']">Customers</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link textMenu" [routerLink]="['/lead/leadview']">Leads</a>
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link textMenu" [routerLink]="['/customers/viewcustomer']">Customers</a>
       </li>
-        <li class="nav-item">
-            <a class="nav-link textMenu" [routerLink]="['/workorder/viewallworkorder']">WorkOrders</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link textMenu" [routerLink]="['/quotation/viewallquotation']">Quotation</a>
+      <li class="nav-item">
+        <a class="nav-link textMenu" [routerLink]="['/lead/leadview']">Leads</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link textMenu" [routerLink]="['/workorder/viewallworkorder']">WorkOrders</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link textMenu" [routerLink]="['/quotation/viewallquotation']">Quotation</a>
       </li>
       <li class="nav-item">
         <a class="nav-link textMenu" [routerLink]="['/invoice/viewallinvoice']">Invoice</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link textMenu" [routerLink]="['/proformainvoice/viewallproformainvoice']">Profoma Invoice</a>
-  </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle textMenu" 
-          id="navbarDropdown"
-           role="button" data-toggle="dropdown" 
-           aria-haspopup="true" aria-expanded="false">
-            Settings
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" [routerLink]="['/settings/leadsettings']">Lead Settings</a>
-            <a class="dropdown-item" [routerLink]="['/settings/workorderpdf']">PDF Settings</a>
-          </div>
-        </li>
-        <li class="nav-item ">
-          <a class="nav-link textMenu" [routerLink]="['/customers/upload']">Upload</a>
-        </li>
-        <li class="nav-item ">
-            <a class="nav-link textMenu" (click)="logOutSession()">LogOut</a>
-          </li>
-      </ul>
-    </div>
-  </nav>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link textMenu" [routerLink]="['/expense/viewExpense']">Expense</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link textMenu" [routerLink]="['/proformainvoice/viewallproformainvoice']">Profoma Invoice</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle textMenu" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Settings
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" [routerLink]="['/settings/leadsettings']">Lead Settings</a>
+          <a class="dropdown-item" [routerLink]="['/settings/workorderpdf']">PDF Settings</a>
+        </div>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link textMenu" [routerLink]="['/customers/upload']">Upload</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link textMenu" (click)="logOutSession()">LogOut</a>
+      </li>
+    </ul>
+  </div>
+</nav>

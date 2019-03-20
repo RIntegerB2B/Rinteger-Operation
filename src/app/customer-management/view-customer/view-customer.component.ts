@@ -67,9 +67,13 @@ export class ViewCustomerComponent implements OnInit {
     });
   }
   addCustomer() {
-    this.createCustomerService.openCustomer();
+    this.createCustomerService.openCustomer()
+      .subscribe(res => {
+        if (res) {
+        this.getAllCustomer();
+        }
+      });
   }
-
   getEditCustomer(row) {
     this.router.navigate(['customers/editcustomer', row._id]);
   }

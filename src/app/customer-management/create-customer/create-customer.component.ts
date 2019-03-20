@@ -30,7 +30,7 @@ export class CreateCustomerComponent implements OnInit {
 
   createForm() {
     this.customerDetailsForm = this.fb.group({
-      customerID: ['', Validators.required],
+      customerID: [''],
       mobileNumber: ['', Validators.required],
       altMobileNumber: [''],
       name: ['', Validators.required],
@@ -47,6 +47,12 @@ export class CreateCustomerComponent implements OnInit {
   }
   cancel() {
     this.dialogRef.close();
+  }
+
+  touchAllElements(formGroup: FormGroup) {
+    Object.keys(formGroup['controls']).forEach(element => {
+      console.log(formGroup.get(element).markAsTouched());
+    });
   }
   addSingleCustomer(customerDetailsForm: FormGroup) {
     this.customerModel = new Customer(
@@ -65,9 +71,10 @@ export class CreateCustomerComponent implements OnInit {
     );
     this.customerManagementService.addSingleCustomer(this.customerModel).subscribe(data => {
       this.customerModel = data;
+      this.dialogRef.close(true);
     }, error => {
+      this.dialogRef.close(false);
       console.log(error);
     });
-    this.dialogRef.close();
   }
 }
