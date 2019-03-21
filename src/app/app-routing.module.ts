@@ -11,7 +11,7 @@ const routes: Routes = [
   {
     path: 'lead',
     canActivate: [AuthGuard],
-    loadChildren: './lead-management/lead-management.module#LeadManagementModule',
+    loadChildren: './lead-management/lead-management.module#LeadManagementModule'
   },
   {
     path: 'workorder',
@@ -21,24 +21,22 @@ const routes: Routes = [
   {
     path: 'quotation',
     canActivate: [AuthGuard],
-    loadChildren: './quotation-management/quotation-management.module#QuotationManagementModule',
+    loadChildren: './quotation-management/quotation-management.module#QuotationManagementModule'
   },
   {
     path: 'invoice',
     canActivate: [AuthGuard],
-    loadChildren: './invoice-management/invoice-management.module#InvoiceManagementModule',
+    loadChildren: './invoice-management/invoice-management.module#InvoiceManagementModule'
   },
   {
     path: 'proformainvoice',
     canActivate: [AuthGuard],
-    loadChildren: './proforma-invoice-management/proforma-invoice-management.module#ProformaInvoiceManagementModule',
-    
+    loadChildren: './proforma-invoice-management/proforma-invoice-management.module#ProformaInvoiceManagementModule'
   },
   {
     path: 'settings',
     canActivate: [AuthGuard],
-    loadChildren: './settings-management/settings-management.module#SettingsManagementModule',
-    
+    loadChildren: './settings-management/settings-management.module#SettingsManagementModule'
   },
   {
     path: 'dashboard',

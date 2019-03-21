@@ -7,17 +7,50 @@
             <mat-icon class="gridEdit">add_box</mat-icon>
           </a>
         </div>
+        <div class="col-4">
+          <div class="btn pr-1" fxFlex="50">
+            <div class="input-group ">
+              <select #selectElem placeholder="Expense Type" (change)=SearchByType($event.target.value)>
+                <option *ngFor="let data of ExpenseType" [value]="data">{{data}}</option>
+              </select></div>
+            <div class="btn">
+              <div class="input-group ">
+                <input mat-input type="text" class="form-control" placeholder="Search" formControlName="srchterm" #searchText/>
+                <button mat-button (click)="searchBy( searchText.value)" type="submit"><mat-icon>search</mat-icon></button>
+              </div>
+            </div>
 
-
-        <!--     <div class="btn">
-          <div class="input-group ">
-              <select #selectElem >
-                  <option *ngFor="let data of ExpenseType" >{{data}}</option>
-                </select>
-              <input type="text" class="form-control" placeholder="Search" formControlName="srchterm" #search/>
-                  <button mat-button (click)="searchBy(selectElem.value, search.value)" type="submit"><mat-icon>search</mat-icon></button>
           </div>
-        </div> -->
+        </div>
+        <div class="col-4">
+          <div fxFlex="50" class="pr-1">
+            <mat-form-field>
+              <input matInput formControlName="fromDate" [matDatepicker]="picker" placeholder="Starting Date">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput formControlName="toDate" [matDatepicker]="picker1" placeholder="Ending Date">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-4">
+
+            <button mat-button (click)="searchByDate(customerDetailsForm)" type="submit"><mat-icon>search</mat-icon></button>
+          </div>
+        </div>
+        <div class="col">
+          <button mat-button class="primary"  type="submit">TDS</button>
+        </div>
+        <div class="bor col">
+
+          Total : {{getTotal()}}
+          <br> Paid : {{getPaid()}}
+          <br> Balance : {{getBalance()}}
+
+        </div>
       </div>
       <div class="row gridRowHeader display-none-small">
 
@@ -36,7 +69,6 @@
             <label>Expense Type</label>
           </div>
         </div>
-
         <div class="col-md-1 vcenterHeader">
           <div class="form-group">
             <label>Date of Expense</label>
@@ -63,7 +95,7 @@
           </div>
         </div>
       </div>
-      <div *ngFor="let data of customerModel">
+      <div *ngFor="let data of customerModel | name : nameValue ">
         <div class="row gridRow">
           <div class="display-none-large col-6">
             <label class="gridLabel">Name:</label>
@@ -134,13 +166,12 @@
               <a class="nav-link" (click)="getDeleteExpense(data)">
                 Delete
               </a>
-
             </mat-menu>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true"
-    [length]="totalSize" [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>
+  <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true" [length]="totalSize"
+    [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>
 </form>

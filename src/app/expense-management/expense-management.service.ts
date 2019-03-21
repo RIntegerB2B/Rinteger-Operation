@@ -57,4 +57,24 @@ export class ExpenseManagementService {
     return this.httpClient.post<Expense[]>(url, customer);
   }
    */
+  typeFilter(data):Observable<any>{
+    const addUrl = 'typefilter';
+
+    const url: string = this.serviceUrl + addUrl ;
+    return this.httpClient.post<Expense[]>(url, data);
+  }
+  dateFilter(data):Observable<any>{
+    const addUrl = 'datefilter/';
+
+    const url: string = this.serviceUrl + addUrl  ;
+    return this.httpClient.post<Expense[]>(url, data);
+  }
+  tdsFind(): Observable<any> {
+    const addUrl ='tdsfind';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<Expense[]>(url);
+  }
+  
+
+  
 }

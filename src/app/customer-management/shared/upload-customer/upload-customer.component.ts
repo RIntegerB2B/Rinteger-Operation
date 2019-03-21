@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from './../../customer/create-customer/customer.model';
+import { MarketCustomer } from './../../marketcustomer/create-marketcustomer/marketCustomer.model';
 import * as XLSX from 'xlsx';
 import { CustomerManagementService } from './../../customer-management.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-upload-customer',
@@ -12,8 +14,9 @@ export class UploadCustomerComponent implements OnInit {
   arrayBuffer: any;
   file: File;
   newCustomer: Customer[];
-  newMarketCustomer: Customer[];
-  constructor(private customerManagementService: CustomerManagementService) { }
+  newMarketCustomer: MarketCustomer[];
+  constructor(private customerManagementService: CustomerManagementService,
+     private router: Router) { }
 
   ngOnInit() {
   }
@@ -34,6 +37,7 @@ export class UploadCustomerComponent implements OnInit {
       this.customerManagementService.createNewCustomer(this.newCustomer)
         .subscribe(detail => {
           this.newCustomer = detail;
+          this.router.navigate(['customers/viewcustomer']);
           if (detail.length > 0) {
           }
         }, error => {
@@ -62,9 +66,10 @@ export class UploadCustomerComponent implements OnInit {
       const first_sheet_name = workbook.SheetNames[0];
       const worksheet = workbook.Sheets[first_sheet_name];
       this.newMarketCustomer = XLSX.utils.sheet_to_json(worksheet);
-      this.customerManagementService.createNewCustomer(this.newMarketCustomer)
+      this.customerManagementService.createNewMulitpleCustomer(this.newMarketCustomer)
         .subscribe(detail => {
           this.newMarketCustomer = detail;
+          this.router.navigate(['customers/viewmarket']);
         });
     };
     fileReader.readAsArrayBuffer(this.file);

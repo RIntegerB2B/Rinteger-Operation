@@ -4,6 +4,7 @@ import { CreateExpenseComponent } from './create-expense/create-expense.componen
 import { ViewExpenseComponent } from './view-expense/view-expense.component';
 import { EditExpenseComponent } from './edit-expense/edit-expense.component';
 import { ViewSingleExpenseComponent } from './view-single-expense/view-single-expense.component';
+import { AmountDetailsComponent } from './amount-details/amount-details.component';
 /* import { UploadCustomerComponent } from './upload-customer/upload-customer.component'; */
 
 const routes: Routes = [
@@ -23,6 +24,10 @@ const routes: Routes = [
     path: 'singleViewExpense/:id',
     component: ViewSingleExpenseComponent
   },
+  {
+    path: 'amountDetail',
+    component: AmountDetailsComponent
+  }
  /*  {
     path: 'upload',
     component: UploadCustomerComponent

@@ -17,6 +17,10 @@ export class ViewExpenseComponent implements OnInit {
   matdatasource = new MatTableDataSource([]);
   customerDetailsForm: FormGroup;
   customerModel: any;
+  expenseValue: Expense;
+
+
+  expenseModel: any;
   customerValue: Expense[];
   public pageSize = 50;
   public currentPage = 0;
@@ -29,11 +33,12 @@ export class ViewExpenseComponent implements OnInit {
   emailValue;
   nameValue;
   cityValue;
-  ExpenseType = ['Shoot','Others'];
+  ExpenseType = ['Shoot', 'Others'];
+
 
   constructor(private fb: FormBuilder,
     private expenseManagementService:
-    ExpenseManagementService,
+      ExpenseManagementService,
     private dialog: MatDialog, private router: Router) { }
 
   ngOnInit() {
@@ -42,15 +47,18 @@ export class ViewExpenseComponent implements OnInit {
   }
   createForm() {
     this.customerDetailsForm = this.fb.group({
+
       srchterm: [''],
-     
+      fromDate: [''],
+      toDate: [''],
+
       mobileNumber: ['', Validators.required],
       name: ['', Validators.required],
       companyName: ['', Validators.required],
       expenseType: ['', Validators.required],
       modeOfPayment: ['', Validators.required],
       location: ['', Validators.required],
-      date: ['', Validators.required],      
+      date: ['', Validators.required],
       totalAmount: ['', Validators.required],
       paid: ['', Validators.required],
       balance: ['', Validators.required],
@@ -62,8 +70,8 @@ export class ViewExpenseComponent implements OnInit {
     this.router.navigate(['expense/createExpense']);
   }
   getDeleteExpense(row) {
-   /*  row.editing = false;
-    customerDetailsForm.reset(); */
+    /*  row.editing = false;
+     customerDetailsForm.reset(); */
     this.expenseManagementService.deleteExpense(row).subscribe(data => {
       this.customerModel = data;
       this.matdatasource.data = data;
@@ -86,6 +94,7 @@ export class ViewExpenseComponent implements OnInit {
       this.customerModel = new MatTableDataSource<Expense>(data);
       this.customerModel.paginator = this.paginator;
       this.customerModel = data;
+      this.getTotal();
       this.array = data;
       this.totalSize = this.array.length;
       this.iterator();
@@ -104,14 +113,70 @@ export class ViewExpenseComponent implements OnInit {
     const part = this.array.slice(start, end);
     this.customerModel = part;
   }
-  searchBy(type, value) {
+  searchBy(value) {
     this.nameValue = value;
   }
   updateExpense(customerDetailsForm: FormGroup, row) {
     this.expenseManagementService.editExpense(row).subscribe(data => {
       this.customerModel = data;
+      this.customerValue = data;
+      this.getTotal();
     }, error => {
       console.log(error);
     });
+  }
+  SearchByType(row) {
+    this.customerModel = new Expense();
+    this.customerModel.expenseType = row;
+    console.log(this.customerModel);
+    this.expenseManagementService.typeFilter(this.customerModel).subscribe(data => {
+      this.customerModel = data;
+      this.customerValue = data;
+      this.getTotal();
+    }, error => {
+      console.log(error);
+    });
+
+  }
+
+
+
+  searchByDate(customerDetailsForm: FormGroup) {
+
+    this.customerModel = new Expense();
+    this.customerModel.fromDate = customerDetailsForm.controls.fromDate.value;
+    this.customerModel.toDate = customerDetailsForm.controls.toDate.value;
+
+    this.expenseManagementService.dateFilter(this.customerModel).subscribe(data => {
+      this.customerModel = data;
+      this.customerValue = data;
+      this.getTotal();
+
+    }, error => {
+      console.log(error);
+    });
+  }
+  getTotal() {
+    let tot = 0;
+    this.customerValue.forEach(element => {
+      tot += element.totalAmount;
+    });
+    this.getBalance();
+    this.getPaid();
+    return tot;
+  }
+  getPaid() {
+    let paid = 0;
+    this.customerValue.forEach(element => {
+      paid += element.paid;
+    });
+    return paid;
+  }
+  getBalance() {
+    let bal = 0;
+    this.customerValue.forEach(element => {
+      bal += element.balance;
+    });
+    return bal;
   }
 }

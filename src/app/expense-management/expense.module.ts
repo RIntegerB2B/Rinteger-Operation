@@ -5,6 +5,7 @@ import { ExpenseManagementService } from './expense-management.service';
 import { CreateExpenseComponent } from './create-expense/create-expense.component';
 import { ViewExpenseComponent } from './view-expense/view-expense.component';
 import { EditExpenseComponent } from './edit-expense/edit-expense.component';
+import { AmountDetailsComponent } from './amount-details/amount-details.component';
 import {
   MatSidenavModule,
   MatListModule,
@@ -38,15 +39,12 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ViewSingleExpenseComponent } from './view-single-expense/view-single-expense.component';
-/* import { UploadCustomerComponent } from './upload-customer/upload-customer.component'; */
-/* import {MobileNumberPipe} from './pipe/mobile-number.pipe';
-import { EmailidPipe } from './pipe/emailid.pipe';
-import { NamePipe } from './pipe/name.pipe';
-import { CityPipe } from './pipe/city.pipe'; */
+import { NamePipe } from './view-expense/name.pipe';
+
 @NgModule({
   declarations: [
-    ViewExpenseComponent, CreateExpenseComponent , EditExpenseComponent, ViewSingleExpenseComponent,
-    /*   MobileNumberPipe, EmailidPipe, NamePipe, CityPipe */
+    ViewExpenseComponent, CreateExpenseComponent , EditExpenseComponent, ViewSingleExpenseComponent, NamePipe,
+    AmountDetailsComponent
     ],
   imports: [
     HttpClientModule,

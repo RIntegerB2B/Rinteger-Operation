@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, Optional, Input } from '@angular/core';
 import { Customer } from './customer.model';
-import { mobileNumberValidation } from './mobileNumberValidation';
+import { mobileNumberValidation } from '../../shared/mobileNumberValidation';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomerManagementService } from './../../customer-management.service';

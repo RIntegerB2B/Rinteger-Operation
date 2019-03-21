@@ -15,7 +15,7 @@ export class ViewSingleExpenseComponent implements OnInit {
   leadModel: Expense;
   id;
   constructor(private expenseManagementService: ExpenseManagementService,
-     private route: ActivatedRoute, private router: Router, private fb: FormBuilder) {
+    private route: ActivatedRoute, private router: Router, private fb: FormBuilder) {
   }
   ngOnInit() {
     /* this.createForm(); */
@@ -29,6 +29,7 @@ export class ViewSingleExpenseComponent implements OnInit {
   }
   createForm() {
     this.expenseDetailsForm = this.fb.group({
+
       mobileNumber: ['', Validators.required],
       name: ['', Validators.required],
       companyName: ['', Validators.required],
@@ -38,9 +39,10 @@ export class ViewSingleExpenseComponent implements OnInit {
       date: ['', Validators.required],
       totalAmount: ['', Validators.required],
       paid: [''],
-      vouNo : [''],
-      expensesDescription : ['']
+      vouNo: [''],
+      expensesDescription: ['']
     });
+
   }
   getSingleLeads() {
     this.expenseManagementService.singleExpense(this.id).subscribe(data => {
@@ -50,14 +52,12 @@ export class ViewSingleExpenseComponent implements OnInit {
       console.log(error);
     });
   }
-  cancel(){
+  cancel() {
 
     this.router.navigate(['expense/viewExpense']);
   }
-  getEdit( row){
+  getEdit(row) {
 
     this.router.navigate(['expense/editExpense', row._id]);
   }
-  
-  
 }

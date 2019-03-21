@@ -41,7 +41,7 @@ export class EditExpenseComponent implements OnInit {
       companyName: ['', Validators.required],
       expenseType: ['', Validators.required],
       modeOfPayment: ['', Validators.required],
-      location: ['', Validators.required],      
+      location: ['', Validators.required],
       date: ['', Validators.required],
       totalAmount: ['', Validators.required],
       paid: ['', Validators.required],

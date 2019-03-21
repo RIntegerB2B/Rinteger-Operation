@@ -46,11 +46,23 @@ import { AlertDeleteComponent } from './shared/alert-delete/alert-delete.compone
 import { SearchCustomerComponent } from './shared/search-customer/search-customer.component';
 import { ViewSinglecustomerComponent } from './customer/view-singlecustomer/view-singlecustomer.component';
 import { ViewsinglecustomerService } from './customer/view-singlecustomer/viewsinglecustomer.service';
+import { ViewMarketcustomerComponent } from './marketcustomer/view-marketcustomer/view-marketcustomer.component';
+import { EditMarketcustomerComponent } from './marketcustomer/edit-marketcustomer/edit-marketcustomer.component';
+import { ViewsinglemarketcustomerService  } from './marketcustomer/view-singlemarketcustomer/viewsinglemarketcustomer.service';
+import { CreateMarketcustomerService  } from './marketcustomer/create-marketcustomer/create-marketcustomer.service';
+import { CreateMarketcustomerComponent } from './marketcustomer/create-marketcustomer/create-marketcustomer.component';
+import { ViewSinglemarketcustomerComponent } from './marketcustomer/view-singlemarketcustomer/view-singlemarketcustomer.component';
+import { ViewSingleSubscribecustomerService } from './subscribecustomer/view-single-subcribecustomer/view-single-subscribecustomer.service';
+import { ViewSubcribecustomerComponent } from './subscribecustomer/view-subcribecustomer/view-subcribecustomer.component';
+import { ViewSingleSubcribecustomerComponent
+ } from './subscribecustomer/view-single-subcribecustomer/view-single-subcribecustomer.component';
 
 @NgModule({
   declarations: [
     ViewCustomerComponent, CreateCustomerComponent, EditCustomerComponent, UploadCustomerComponent,
-    MobileNumberPipe, EmailidPipe, NamePipe, CityPipe, AlertDeleteComponent, SearchCustomerComponent, ViewSinglecustomerComponent
+    MobileNumberPipe, EmailidPipe, NamePipe, CityPipe, AlertDeleteComponent, SearchCustomerComponent, ViewSinglecustomerComponent,
+    ViewMarketcustomerComponent, EditMarketcustomerComponent,
+    CreateMarketcustomerComponent, ViewSinglemarketcustomerComponent, ViewSubcribecustomerComponent, ViewSingleSubcribecustomerComponent
   ],
   imports: [
     HttpClientModule,
@@ -87,8 +99,12 @@ import { ViewsinglecustomerService } from './customer/view-singlecustomer/viewsi
   ],
   providers: [
     CustomerManagementService, CreateCustomerService, AlertDeleteService,
-    ViewsinglecustomerService
+    ViewsinglecustomerService, CreateMarketcustomerService,
+     ViewsinglemarketcustomerService,
+     ViewSingleSubscribecustomerService
   ],
-  entryComponents: [CreateCustomerComponent, AlertDeleteComponent, ViewSinglecustomerComponent]
+  entryComponents: [CreateCustomerComponent, AlertDeleteComponent,
+     CreateMarketcustomerComponent,
+     ViewSinglecustomerComponent, ViewSinglemarketcustomerComponent, ViewSingleSubcribecustomerComponent ]
 })
 export class CustomersModule { }

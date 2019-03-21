@@ -1,6 +1,5 @@
 <div class="container topAlignContainer">
-  <form [formGroup]="customerDetailsForm"
-   (ngSubmit)="addSingleExpense(customerDetailsForm)">
+  <form [formGroup]="customerDetailsForm" (ngSubmit)="addSingleExpense(customerDetailsForm)">
     <div fxLayout="row wrap" fxLayout.lt-sm="column">
       <div fxFlex="100">
         <label class="pageBoxLg-label">Create Expense</label>
@@ -37,8 +36,7 @@
       </div>
       <div fxFlex="50" class="pr-1">
         <mat-form-field class="full-width">
-          <mat-select placeholder="Select Expense Type" formControlName="expenseType"
-           >
+          <mat-select placeholder="Select Expense Type" formControlName="expenseType">
             <mat-option *ngFor="let expense of ExpenseType" [value]="expense">
               {{expense}}
             </mat-option>
@@ -47,8 +45,7 @@
       </div>
       <div fxFlex="50" class="pr-1">
         <mat-form-field class="full-width">
-          <mat-select placeholder="Select Mode of payments"
-           formControlName="modeOfPayment">
+          <mat-select placeholder="Select Mode of payments" formControlName="modeOfPayment">
             <mat-option *ngFor="let expense of Paymode" [value]="expense">
               {{expense}}
             </mat-option>
@@ -64,8 +61,7 @@
       </div>
       <div fxFlex="50" class="pr-1">
         <mat-form-field>
-          <input matInput formControlName="date" [matDatepicker]="picker"
-           placeholder="Choose a date">
+          <input matInput formControlName="date" [matDatepicker]="picker" placeholder="Choose a date">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
@@ -114,11 +110,12 @@
         </mat-form-field>
       </div>
 
+
+
       <div fxFlex="100" class="mt-1">
         <button mat-raised-button color="primary">Save</button>
         <span fxFlex></span>
-        <button mat-raised-button mat-button color="accent" type="button"
-         (click)="cancel()">Cancel</button>
+        <button mat-raised-button mat-button color="accent" type="button" (click)="cancel()">Cancel</button>
       </div>
     </div>
   </form>

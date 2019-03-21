@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Customer } from './../shared/customer.model';
+import { Customer } from './../customer-management/customer/create-customer/customer.model';
+import { MarketCustomer } from './../customer-management/marketcustomer/create-marketcustomer/marketCustomer.model';
 import { AppSetting } from './../config/appSetting';
 import { HttpClient, HttpHeaders, HttpEvent } from '@angular/common/http';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
@@ -74,4 +75,51 @@ export class CustomerManagementService {
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.post<LogIn>(url, data);
   }
+
+  allMarketCustomer(): Observable<any> {
+    const addUrl = 'allmarketcustomers';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<MarketCustomer[]>(url);
+  }
+  addSingleMarketCustomer(data: any): Observable<any> {
+    const addUrl = 'singlemarketcustomers';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<MarketCustomer[]>(url, data);
+  }
+ /*  workorderPDFDetails(): Observable<any> {
+    const addUrl = 'workorderpdfdetails/';
+    const url: string = this.serviceUrl + addUrl ;
+    return this.httpClient.get<MarketDB[]>(url);
+  } */
+  editMarketCustomer(edit): Observable<any> {
+    const addUrl = 'marketcustomers/';
+    const url: string = this.serviceUrl + addUrl + edit._id;
+    return this.httpClient.put<MarketCustomer[]>(url, edit);
+  }
+  deleteMarketCustomer(edit): Observable<any> {
+
+    const addUrl = 'marketcustomersdelete/';
+
+    const url: string = this.serviceUrl + addUrl + edit._id;
+    return this.httpClient.delete<MarketCustomer[]>(url);
+  }
+  createNewMulitpleCustomer(customer): Observable<any>   {
+    const addUrl = 'marketcustomers';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<Customer[]>(url, customer);
+  }
+  allSubscribeCustomer(): Observable<any> {
+    const addUrl = 'subscribedcustomers';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<Customer[]>(url);
+  }
+
+  deleteSubscribeCustomer(row): Observable<any> {
+
+    const addUrl = 'subscribednumber/';
+
+    const url: string = this.serviceUrl + addUrl + row._id;
+    return this.httpClient.delete<Customer[]>(url);
+  }
+
 }

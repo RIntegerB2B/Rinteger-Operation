@@ -49,20 +49,19 @@ export class CreateExpenseComponent implements OnInit {
     this.router.navigate(['expense/viewExpense']);
   }
   addSingleExpense(customerDetailsForm: FormGroup) {
-    this.customerModel = new Expense(
-      customerDetailsForm.controls.mobileNumber.value,
-      customerDetailsForm.controls.name.value,
-      customerDetailsForm.controls.companyName.value,
-      customerDetailsForm.controls.expenseType.value,
-      customerDetailsForm.controls.modeOfPayment.value,
-      customerDetailsForm.controls.location.value,
-      customerDetailsForm.controls.date.value,
-      customerDetailsForm.controls.totalAmount.value,
-      customerDetailsForm.controls.paid.value,
-      customerDetailsForm.controls.totalAmount.value - customerDetailsForm.controls.paid.value,
-      customerDetailsForm.controls.vouNo.value,
-      customerDetailsForm.controls.expensesDescription.value
-    );
+    this.customerModel = new Expense();
+     this.customerModel.mobileNumber = customerDetailsForm.controls.mobileNumber.value,
+     this.customerModel.name = customerDetailsForm.controls.name.value,
+     this.customerModel.companyName = customerDetailsForm.controls.companyName.value,
+     this.customerModel.expenseType = customerDetailsForm.controls.expenseType.value,
+     this.customerModel.modeOfPayment = customerDetailsForm.controls.modeOfPayment.value,
+     this.customerModel.location = customerDetailsForm.controls.location.value,
+     this.customerModel.date = customerDetailsForm.controls.date.value,
+     this.customerModel.totalAmount = customerDetailsForm.controls.totalAmount.value,
+     this.customerModel.paid = customerDetailsForm.controls.paid.value,
+     this.customerModel.vouNo = customerDetailsForm.controls.vouNo.value,
+     this.customerModel.expensesDescription = customerDetailsForm.controls.expensesDescription.value
+
     this.expenseManagementService.addSingleExpense(this.customerModel).subscribe(data => {
       this.customerModel = data;
       this.router.navigate(['expense/viewExpense']);
