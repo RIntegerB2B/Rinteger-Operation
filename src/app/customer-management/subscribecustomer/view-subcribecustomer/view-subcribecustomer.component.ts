@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Customer } from './../../customer/create-customer/customer.model';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { CustomerManagementService } from './../../customer-management.service';
-import { ViewSingleSubscribecustomerService  } from './../view-single-subcribecustomer/view-single-subscribecustomer.service';
+import { ViewSingleSubscribecustomerService } from './../view-single-subcribecustomer/view-single-subscribecustomer.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { AlertDeleteService } from './../../shared/alert-delete/alert-delete.service';
@@ -23,14 +23,13 @@ export class ViewSubcribecustomerComponent implements OnInit {
   public pageSize = 50;
   public currentPage = 0;
   public totalSize = 0;
-
   public array: any;
   public displayedColumns = ['', '', '', '', ''];
   public dataSource: any;
   constructor(private fb: FormBuilder,
     private customerManagementService:
       CustomerManagementService, private snack: MatSnackBar, private alertDeleteService: AlertDeleteService,
-      private viewSingleSubscribecustomerService: ViewSingleSubscribecustomerService) { }
+    private viewSingleSubscribecustomerService: ViewSingleSubscribecustomerService) { }
 
   ngOnInit() {
     this.getSubscribeCustomer();
@@ -41,7 +40,7 @@ export class ViewSubcribecustomerComponent implements OnInit {
     this.customerModel = data;
 
   }
-  getViewSingleCustomer(data)   {
+  getViewSingleCustomer(data) {
     this.viewSingleSubscribecustomerService.openSingleSubscribeCustomer(data);
   }
   getSubscribeCustomer() {
