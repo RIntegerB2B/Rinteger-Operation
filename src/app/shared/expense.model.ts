@@ -12,4 +12,5 @@ export class Expense {
     balance?: number;
     vouNo?: string;
     expensesDescription?: string;
+    gst: string;
 }

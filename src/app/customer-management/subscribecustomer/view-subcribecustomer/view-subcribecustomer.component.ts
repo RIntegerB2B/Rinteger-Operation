@@ -89,8 +89,7 @@ export class ViewSubcribecustomerComponent implements OnInit {
               this.snack.open('Successfully Deleted!', 'OK', { duration: 4000, panelClass: ['blue-snackbar'] });
             }, error => {
               console.log(error);
-            }
-            );
+            });
         }
       });
   }
