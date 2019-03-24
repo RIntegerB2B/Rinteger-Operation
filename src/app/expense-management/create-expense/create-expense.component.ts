@@ -14,9 +14,10 @@ export class CreateExpenseComponent implements OnInit {
   expenseDetailsForm: FormGroup;
   expenseModel: Expense;
   editable = true;
-  ExpenseType =  ['Shoot', 'Others'];
-  Paymode = ['Cash', 'Cheque'];
-  gst = ['With GST','Non GST'];
+  expenseType;
+  modeOfPayment;
+  Paymode;
+  gstType;
   constructor(private fb: FormBuilder,
     @Optional() public dialogRef: MatDialogRef<CreateExpenseComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
@@ -26,8 +27,18 @@ export class CreateExpenseComponent implements OnInit {
   ) {
   }
 
+
   ngOnInit() {
     this.createForm();
+    this.getExpense();
+  }
+  getExpense(){
+    this.expenseManagementService.allsttExpense().subscribe(data =>{
+      this.expenseModel = data;
+      this.expenseType = this.expenseModel[0].expenseType;
+      this.modeOfPayment = this.expenseModel[0].modeOfPayment;
+      this.gstType = this.expenseModel[0].gst;
+    });
   }
 
   createForm() {

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {  AuthGuard } from './shared/authguard/auth.guard';
+import { AuthGuard } from './shared/authguard/auth.guard';
 
 const routes: Routes = [
   {
@@ -51,6 +51,11 @@ const routes: Routes = [
     path: 'expense',
     loadChildren: './expense-management/expense.module#ExpenseModule',
   },
+  {
+    path: 'ticket',
+    loadChildren: './ticket/ticket.module#TicketModule',
+  },
+
   {
     path: '',
     redirectTo: 'account/login',

@@ -18,7 +18,7 @@ export class ViewExpenseComponent implements OnInit {
   expenseDetailsForm: FormGroup;  
   expenseValue: Expense[]=[];
   expenseval: Expense;
-  expenseModel: any;  
+  expenseModel: any;
   public pageSize = 50;
   public currentPage = 0;
   public totalSize = 0;
@@ -81,7 +81,7 @@ export class ViewExpenseComponent implements OnInit {
       this.expenseValue = data;
       this.expenseModel = new MatTableDataSource<Expense>(data);
       this.expenseModel.paginator = this.paginator;
-      this.expenseModel = data;     
+      this.expenseModel = data;
       this.array = data;
       this.totalSize = this.array.length;
       this.iterator();

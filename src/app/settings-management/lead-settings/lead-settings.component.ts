@@ -20,6 +20,7 @@ export class LeadSettingsComponent implements OnInit {
   showStatus: boolean;
   showSource: boolean;
   showType: boolean;
+  showLeadUnit: boolean;
   settingModel: LeadSettings;
   message;
   action;
@@ -36,7 +37,8 @@ export class LeadSettingsComponent implements OnInit {
       status: [''],
       service: [''],
       source: [''],
-      type: ['']
+      type: [''],
+      leadUnit: []
     });
   }
   showServiceForm() {
@@ -44,24 +46,35 @@ export class LeadSettingsComponent implements OnInit {
     this.showSource = false;
     this.showStatus = false;
     this.showType = false;
+    this.showLeadUnit = false;
   }
   showStatusForm() {
     this.showService = false;
     this.showSource = false;
     this.showStatus = true;
     this.showType = false;
+    this.showLeadUnit = false;
   }
   showSourceForm() {
     this.showService = false;
     this.showSource = true;
     this.showStatus = false;
     this.showType = false;
+    this.showLeadUnit = false;
   }
   showTypeForm() {
     this.showService = false;
     this.showSource = false;
     this.showStatus = false;
+    this.showLeadUnit = false;
     this.showType = true;
+  }
+  showLeadUnitForm()   {
+    this.showService = false;
+    this.showSource = false;
+    this.showStatus = false;
+    this.showLeadUnit = true;
+    this.showType = false;
   }
   addLeadSource() {
     this.message = 'source added successfully';
@@ -161,6 +174,32 @@ export class LeadSettingsComponent implements OnInit {
     }, err => {
       console.log(err);
     });
+  }
+  addLeadUnit() {
+    this.message = 'Lead Unit added successfully';
+    this.settingModel = new LeadSettings();
+    this.settingModel.leadUnit = this.leadSettingsForm.controls.leadUnit.value;
+    this.settingService.addLeadUnit(this.settingModel).subscribe(data => {
+      this.settingModel = data;
+      this.snackBar.open(this.message, this.action, {
+        duration: 3000,
+      });
+      this.leadSettingsForm.reset();
+    }, err => {
+      console.log(err);
+    });
+  }
+  deleteLeadUnit(value) {
+    this.message = 'Lead Unit deleted successfully';
+    this.settingService.deleteLeadUnit(value).subscribe(data => {
+      this.settingModel = data;
+      this.snackBar.open(this.message, this.action, {
+        duration: 3000,
+      });
+    }, err => {
+      console.log(err);
+    });
+    console.log(value);
   }
   deleteLeadType(value) {
     this.message = 'Lead Type deleted successfully';

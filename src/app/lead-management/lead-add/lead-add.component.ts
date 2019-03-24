@@ -39,19 +39,35 @@ export class LeadAddComponent implements OnInit {
   fullLeadStatus;
   fullLeadService;
   fullLeadType;
+  fullLeadUnit;
   arryValue: any = [];
   sum = 0;
+  existingMobileNumber: number;
+  existingName: string;
+  showMobileNumber: boolean;
   constructor(private fb: FormBuilder,
-    private leadManagementService: LeadManagementService, private router: Router
+    private leadManagementService: LeadManagementService, private router: Router,
+     private existingService: ExistingService
   ) {
   }
 
   ngOnInit() {
     this.createForm();
     this.viewLeadSettings();
-    this.getAllCustomer();
+    /* this.getAllCustomer(); */
   }
-
+existingCustomer() {
+  this.existingService.viewCustomer().subscribe(res =>   {
+    if (res) {
+      this.showMobileNumber = true;
+      this.customerModel = res;
+     this.existingMobileNumber = this.customerModel[0].mobileNumber;
+     this.existingName = this.customerModel[0].name;
+    } else {
+      this.showMobileNumber = false;
+    }
+  });
+}
 
   /* private _filter(value: string): any[] {
     const filterValue = value.toLowerCase();
@@ -90,6 +106,7 @@ export class LeadAddComponent implements OnInit {
       leadOwner: ['', Validators.required],
       leadSource: ['', Validators.required],
       leadStatus: ['', Validators.required],
+      leadUnit: ['', Validators.required],
       service: ['', Validators.required],
       date: ['', Validators.required],
       remarks: [''],
@@ -142,6 +159,7 @@ export class LeadAddComponent implements OnInit {
       leadDetailsForm.controls.leadSource.value,
       leadDetailsForm.controls.leadStatus.value,
       leadDetailsForm.controls.service.value,
+      leadDetailsForm.controls.leadUnit.value,
       leadDetailsForm.controls.requirements.value,
       leadDetailsForm.controls.date.value,
       leadDetailsForm.controls.remarks.value,
@@ -167,6 +185,7 @@ export class LeadAddComponent implements OnInit {
       leadDetailsForm.controls.leadSource.value,
       leadDetailsForm.controls.leadStatus.value,
       leadDetailsForm.controls.service.value,
+      leadDetailsForm.controls.leadUnit.value,
       leadDetailsForm.controls.requirements.value,
       leadDetailsForm.controls.date.value,
       leadDetailsForm.controls.remarks.value,
@@ -190,6 +209,7 @@ export class LeadAddComponent implements OnInit {
       this.fullLeadService = data[0].service;
       this.fullLeadStatus = data[0].leadStatus;
       this.fullLeadType = data[0].type;
+      this.fullLeadUnit = data[0].leadUnit;
     }, err => {
       console.log(err);
     });

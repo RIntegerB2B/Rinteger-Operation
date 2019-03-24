@@ -141,4 +141,14 @@ export class LeadManagementService {
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.get<Customer[]>(url);
   }
+  leadDateSearch(dateSearch): Observable<any> {
+    const addUrl = 'leaddate';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<Lead[]>(url, dateSearch);
+  }
+  leadMonthSearch(dateSearch): Observable<any> {
+    const addUrl = 'leadmonth';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<Lead[]>(url, dateSearch);
+  }
 }

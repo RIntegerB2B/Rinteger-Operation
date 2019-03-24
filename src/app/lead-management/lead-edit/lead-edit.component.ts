@@ -8,10 +8,10 @@ import { LeadManagementService } from './../lead-management.service';
 import { CustomerManagementService } from './../../customer-management/customer-management.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { SettingsServiceService } from '../../settings-management/settings-service.service';
 import { LeadSettings } from '../../shared/lead-settings.model';
-import {FollowUp} from '../../shared/follow-up.model';
+import { FollowUp } from '../../shared/follow-up.model';
 
 @Component({
   selector: 'app-lead-edit',
@@ -25,12 +25,13 @@ export class LeadEditComponent implements OnInit {
   fullLeadSource;
   fullLeadStatus;
   fullLeadService;
+  fullLeadUnit;
   leadID;
   id;
   message;
   action;
-  constructor(private fb: FormBuilder, private leadManagementService: LeadManagementService,  private router: Router
-    , private route: ActivatedRoute,  private snackBar: MatSnackBar) {
+  constructor(private fb: FormBuilder, private leadManagementService: LeadManagementService, private router: Router
+    , private route: ActivatedRoute, private snackBar: MatSnackBar) {
     this.route.paramMap.subscribe(
       (params: ParamMap) => {
         this.id = params.get('id');
@@ -53,6 +54,7 @@ export class LeadEditComponent implements OnInit {
       leadSource: [''],
       leadStatus: [''],
       service: [''],
+      leadUnit: [''],
       date: [''],
       remarks: [''],
       leadType: [''],
@@ -127,18 +129,31 @@ export class LeadEditComponent implements OnInit {
   deleteFollowUp(i) {
     this.followUpForms.removeAt(i);
   }
-  updateLeads(leadDetailsForm: FormGroup, id) {
-    this.message = 'Lead Updated Successfully';
-    console.log('form value', this.followUpForms.value);
-    this.leadManagementService.editLead(leadDetailsForm.value, id).subscribe(data => {
-      this.leadModel = data;
-      this.snackBar.open(this.message, this.action, {
-        duration: 3000,
+  updateLeads(leadDetailsForm: FormGroup, lead) {
+    if (leadDetailsForm.controls.leadStatus.value !== 'NOT INTRESTED') {
+      this.message = 'Lead Updated Successfully';
+      console.log('form value', this.followUpForms.value);
+      this.leadManagementService.editLead(leadDetailsForm.value, lead._id).subscribe(data => {
+        this.leadModel = data;
+        this.snackBar.open(this.message, this.action, {
+          duration: 3000,
+        });
+        this.router.navigate(['lead/leadview']);
+      }, error => {
+        console.log(error);
       });
-      this.router.navigate(['lead/leadview']);
-    }, error => {
-      console.log(error);
-    });
+    } else {
+      this.leadManagementService.deleteLead(lead).subscribe(data => {
+        this.leadModel = data;
+        this.message = 'Lead Delete Successfully';
+        this.snackBar.open(this.message, this.action, {
+          duration: 3000,
+        });
+        this.router.navigate(['lead/leadview']);
+      }, error => {
+        console.log(error);
+      });
+    }
   }
   viewLeadSettings() {
     this.leadManagementService.leadSource().subscribe(data => {
@@ -146,6 +161,7 @@ export class LeadEditComponent implements OnInit {
       this.fullLeadService = data[0].service;
       this.fullLeadStatus = data[0].leadStatus;
       this.fullLeadType = data[0].type;
+      this.fullLeadUnit = data[0].leadUnit;
     }, err => {
       console.log(err);
     });

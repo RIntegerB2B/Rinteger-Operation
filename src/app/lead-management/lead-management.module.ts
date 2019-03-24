@@ -43,6 +43,7 @@ import { CustomerManagementService } from './../customer-management/customer-man
 import { ViewSingleLeadComponent } from './view-single-lead/view-single-lead.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { ExistingCustomerComponent } from './existing-customer/existing-customer.component';
+import { ExistingService } from './existing-customer/existing.service';
 import { SearchComponent } from './search/search.component';
 
 
@@ -93,7 +94,8 @@ import { SearchComponent } from './search/search.component';
     LeadManagementRoutingModule,
     MatAutocompleteModule
   ],
-  providers: [LeadManagementService]
+  providers: [LeadManagementService, ExistingService],
+  entryComponents: [ExistingCustomerComponent]
 })
 export class LeadManagementModule { }
 

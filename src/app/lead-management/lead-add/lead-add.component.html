@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <form [formGroup]="leadDetailsForm">
+  <!-- <form [formGroup]="leadDetailsForm">
     <div fxLayout="row wrap" fxLayout.lt-sm="column">
       <div fxFlex="25">
         <div class="mt-5">
@@ -29,23 +29,51 @@
         </div>
       </div>
     </div>
-  </form>
-  <div *ngIf="!exitsCustomerCheck">
+  </form> -->
     <div class="pageBoxLg">
       <form [formGroup]="leadDetailsForm" (ngSubmit)="addSingleLead(leadDetailsForm)">
         <div fxLayout="row wrap" fxLayout.lt-sm="column">
-          <div fxFlex="50" class="pr-1">
+          <div fxFlex="50" class="pr-1" *ngIf="!showMobileNumber">
             <mat-form-field class="full-width">
               <input matInput formControlName="mobileNumber" placeholder="Mobile Number">
               <mat-error *ngIf="leadDetailsForm.controls['mobileNumber'].errors?.required">
-                Enter Mobile No
+                Enter Mobile No 
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            <a (click)="existingCustomer()">
+              <mat-icon class="gridEdit">add_box</mat-icon>
+            </a>
+          </div>
+          <div fxFlex="50" class="pr-1" *ngIf="!showMobileNumber">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="name" placeholder="Name">
+              <mat-error *ngIf="leadDetailsForm.controls['name'].errors?.required">
+                Enter Name
                 <strong>required</strong>
               </mat-error>
             </mat-form-field>
           </div>
-          <div fxFlex="50" class="pr-1">
+          <div fxFlex="50" class="pr-1" *ngIf="showMobileNumber">
             <mat-form-field class="full-width">
-              <input matInput formControlName="name" placeholder="Name">
+              <input matInput formControlName="mobileNumber"
+              (ngModelChange)="existingMobileNumber=$event"
+              [ngModel]="existingMobileNumber" placeholder="Mobile Number">
+              <mat-error *ngIf="leadDetailsForm.controls['mobileNumber'].errors?.required">
+                Enter Mobile No 
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            <a (click)="existingCustomer()">
+              <mat-icon class="gridEdit">add_box</mat-icon>
+            </a>
+          </div>
+          <div fxFlex="50" class="pr-1" *ngIf="showMobileNumber">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="name" 
+              (ngModelChange)="existingName=$event" placeholder="Name" 
+              [ngModel]="existingName"
+              >
               <mat-error *ngIf="leadDetailsForm.controls['name'].errors?.required">
                 Enter Name
                 <strong>required</strong>
@@ -60,6 +88,16 @@
                   <strong>required</strong>
                 </mat-error>
               </mat-form-field>
+            </div>
+            <div fxFlex="50" class="pr-1">
+              <mat-form-field class="full-width">
+                <mat-select placeholder="Lead Unit" formControlName="leadUnit">
+                  <mat-option *ngFor="let data of fullLeadUnit" [value]="data">
+                    {{data}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              
             </div>
           <div fxFlex="50" class="pr-1">
             <mat-form-field class="full-width">
@@ -186,7 +224,8 @@
                   </div>
                   <div class="col-md-12 col-12">
                     <mat-form-field class="full-width">
-                      <input matInput formControlName="allTotal" [readonly]="true" placeholder="Total" [ngModel]="sum">
+                      <input matInput formControlName="allTotal"
+                       [readonly]="true" placeholder="Total" [ngModel]="sum">
                     </mat-form-field>
                   </div>
                 </div>
@@ -202,8 +241,7 @@
         </div>
       </form>
     </div>
-  </div>
-  <div *ngIf="exitsCustomerCheck">
+  <!-- <div *ngIf="exitsCustomerCheck">
     <div *ngFor="let customer of customerModel;">
       <div [hidden]="!customer?.showDetail">
         <div class="col-xs-12 col-md-12">
@@ -330,9 +368,6 @@
                         leadDetailsForm.controls['requirements'].controls[i].controls.price.value)/100*leadDetailsForm.controls['requirements'].controls[i].controls.discount.value"
                           placeholder="Total">
                       </mat-form-field>
-                      <!--             [ngModel]="(leadDetailsForm.controls['requirements'].controls[i].controls.item.value * leadDetailsForm.controls['requirements'].controls[i].controls.quantity.value) -
-                      (leadDetailsForm.controls['requirements'].controls[i].controls.item.value * leadDetailsForm.controls['requirements'].controls[i].controls.quantity.value)/100*leadDetailsForm.controls['requirements'].controls[i].controls.discount.value"
-           -->
                     </div>
                     <div fxFlex="25" class="pr-1">
                       <mat-form-field class="full-width">
@@ -386,4 +421,4 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->

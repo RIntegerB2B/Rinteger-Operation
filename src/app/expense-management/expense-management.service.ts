@@ -61,5 +61,20 @@ export class ExpenseManagementService {
     const addUrl = 'gstfind';
     const url:string = this.serviceUrl + addUrl;
     return this.httpClient.get<Expense[]>(url);
-  }  
+  } 
+  allsttExpense(): Observable<any> {
+    const addUrl = 'expense';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<Expense[]>(url);
+  } 
+  allsttPayment(): Observable<any> {
+    const addUrl = 'expense';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<Expense[]>(url);
+  } 
+  allsttGst(): Observable<any> {
+    const addUrl = 'expense';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<Expense[]>(url);
+  } 
 }

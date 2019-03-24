@@ -33,8 +33,10 @@ import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SettingsServiceService } from './settings-service.service';
 import { SettingsRoutingModule } from './settings-routing.module';
+import { ExpenseSettingsComponent } from './expense-settings/expense-settings.component';
+import { TicketSettingComponent } from './ticket-setting/ticket-setting.component';
 @NgModule({
-  declarations: [LeadSettingsComponent, WorkorderPdfTemplateComponent],
+  declarations: [LeadSettingsComponent, WorkorderPdfTemplateComponent, ExpenseSettingsComponent, TicketSettingComponent],
   imports: [
     HttpClientModule,
     HttpModule,

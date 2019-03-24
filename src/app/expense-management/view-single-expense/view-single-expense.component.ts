@@ -56,6 +56,7 @@ export class ViewSingleExpenseComponent implements OnInit {
     this.router.navigate(['expense/viewExpense']);
   }
   getEdit(row) {
+
     this.router.navigate(['expense/editExpense', row._id]);
   }
 }

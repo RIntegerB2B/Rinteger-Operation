@@ -4,9 +4,11 @@ import { Observable, of } from 'rxjs';
 import { AppSetting } from './../config/appSetting';
 import { HttpClient, HttpHeaders, HttpEvent } from '@angular/common/http';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
-import {LeadSettings} from './../shared/lead-settings.model';
-import {WorkOrderPdf} from './../shared/workorderpdf.model';
-import {BankDetails} from './../shared/bankdetails.model';
+import { LeadSettings } from './../shared/lead-settings.model';
+import { WorkOrderPdf } from './../shared/workorderpdf.model';
+import { BankDetails } from './../shared/bankdetails.model';
+import { ExpenseSetting } from './../shared/expense-settings.model';
+import { TicketsettingsModel } from './ticket-setting/ticket-settings.model';
 
 @Injectable({
   providedIn: 'root'
@@ -29,96 +31,201 @@ export class SettingsServiceService {
     };
   }
   constructor(private http: Http, private httpClient: HttpClient
-    ) { }
+  ) { }
 
-    addLeadSource(data: any): Observable<any> {
-      const addUrl = 'leadsource';
-      const url: string = this.serviceUrl + addUrl;
-      return this.httpClient.post<LeadSettings[]>(url, data);
-    }
-    addLeadService(data: any): Observable<any> {
-      const addUrl = 'services';
-      const url: string = this.serviceUrl + addUrl;
-      return this.httpClient.post<LeadSettings[]>(url, data);
-    }
-    addLeadStatus(data: any): Observable<any> {
-      const addUrl = 'leadstatus';
-      const url: string = this.serviceUrl + addUrl;
-      return this.httpClient.post<LeadSettings[]>(url, data);
-    }
-    addLeadType(data: any): Observable<any> {
-      const addUrl = 'type';
-      const url: string = this.serviceUrl + addUrl;
-      return this.httpClient.post<LeadSettings[]>(url, data);
-    }
-    leadSource(): Observable<any> {
-      const addUrl = 'leadsources';
-      const url: string = this.serviceUrl + addUrl;
-      return this.httpClient.get<LeadSettings[]>(url);
-    }
-    deleteLeadSource(val): Observable<any> {
-      const addUrl = 'leadsources/';
-      const url: string = this.serviceUrl + addUrl + val;
-      return this.httpClient.delete<LeadSettings[]>(url);
-    }
-    deleteLeadServices(val): Observable<any> {
-      const addUrl = 'leadservices/';
-      const url: string = this.serviceUrl + addUrl + val;
-      return this.httpClient.delete<LeadSettings[]>(url);
-    }
-    deleteLeadStatus(val): Observable<any> {
-      const addUrl = 'leadstatus/';
-      const url: string = this.serviceUrl + addUrl + val;
-      return this.httpClient.delete<LeadSettings[]>(url);
-    }
-    deleteLeadType(val): Observable<any> {
-      const addUrl = 'leadtype/';
-      const url: string = this.serviceUrl + addUrl + val;
-      return this.httpClient.delete<LeadSettings[]>(url);
-    }
-    addGST(data: any): Observable<any> {
-      const addUrl = 'workordergst';
-      const url: string = this.serviceUrl + addUrl;
-      return this.httpClient.post<WorkOrderPdf[]>(url, data);
-    }
-    addSGST(data: any): Observable<any> {
-      const addUrl = 'workordersgst';
-      const url: string = this.serviceUrl + addUrl;
-      return this.httpClient.post<WorkOrderPdf[]>(url, data);
-    }
-    addCGST(data: any): Observable<any> {
-      const addUrl = 'workordercgst';
-      const url: string = this.serviceUrl + addUrl;
-      return this.httpClient.post<WorkOrderPdf[]>(url, data);
-    }
-    addTerms(data: any): Observable<any> {
-      const addUrl = 'workorderterms';
-      const url: string = this.serviceUrl + addUrl;
-      return this.httpClient.post<WorkOrderPdf[]>(url, data);
-    }
-    addDigitalTerms(data: any): Observable<any> {
-      const addUrl = 'workorderdigitalterms';
-      const url: string = this.serviceUrl + addUrl;
-      return this.httpClient.post<WorkOrderPdf[]>(url, data);
-    }
-    addBankDetails(data: any): Observable<any> {
-      const addUrl = 'bankdetails';
-      const url: string = this.serviceUrl + addUrl;
-      return this.httpClient.post<BankDetails[]>(url, data);
-    }
-    addCompanyDetails(data: any): Observable<any> {
-      const addUrl = 'companydetails';
-      const url: string = this.serviceUrl + addUrl;
-      return this.httpClient.post<BankDetails[]>(url, data);
-    }
-    addFooterDetails(data: any): Observable<any> {
-      const addUrl = 'footerdetails';
-      const url: string = this.serviceUrl + addUrl;
-      return this.httpClient.post<BankDetails[]>(url, data);
-    }
-    getPdfWorkOrderDetails(): Observable<any> {
-      const addUrl = 'pdfworkorder';
-      const url: string = this.serviceUrl + addUrl;
-      return this.httpClient.get<LeadSettings[]>(url);
-    }
+  addLeadSource(data: any): Observable<any> {
+    const addUrl = 'leadsource';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<LeadSettings[]>(url, data);
+  }
+  addLeadService(data: any): Observable<any> {
+    const addUrl = 'services';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<LeadSettings[]>(url, data);
+  }
+  addLeadStatus(data: any): Observable<any> {
+    const addUrl = 'leadstatus';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<LeadSettings[]>(url, data);
+  }
+  addLeadType(data: any): Observable<any> {
+    const addUrl = 'type';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<LeadSettings[]>(url, data);
+  }
+  addLeadUnit(data: any): Observable<any> {
+    const addUrl = 'leadunitadd';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<LeadSettings[]>(url, data);
+  }
+
+  deleteLeadUnit(val): Observable<any> {
+    const addUrl = 'leadunit/';
+    const url: string = this.serviceUrl + addUrl + val;
+    return this.httpClient.delete<LeadSettings[]>(url);
+  }
+  leadSource(): Observable<any> {
+    const addUrl = 'leadsources';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<LeadSettings[]>(url);
+  }
+  deleteLeadSource(val): Observable<any> {
+    const addUrl = 'leadsources/';
+    const url: string = this.serviceUrl + addUrl + val;
+    return this.httpClient.delete<LeadSettings[]>(url);
+  }
+  deleteLeadServices(val): Observable<any> {
+    const addUrl = 'leadservices/';
+    const url: string = this.serviceUrl + addUrl + val;
+    return this.httpClient.delete<LeadSettings[]>(url);
+  }
+  deleteLeadStatus(val): Observable<any> {
+    const addUrl = 'leadstatus/';
+    const url: string = this.serviceUrl + addUrl + val;
+    return this.httpClient.delete<LeadSettings[]>(url);
+  }
+  deleteLeadType(val): Observable<any> {
+    const addUrl = 'leadtype/';
+    const url: string = this.serviceUrl + addUrl + val;
+    return this.httpClient.delete<LeadSettings[]>(url);
+  }
+  addGST(data: any): Observable<any> {
+    const addUrl = 'workordergst';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<WorkOrderPdf[]>(url, data);
+  }
+  addSGST(data: any): Observable<any> {
+    const addUrl = 'workordersgst';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<WorkOrderPdf[]>(url, data);
+  }
+  addCGST(data: any): Observable<any> {
+    const addUrl = 'workordercgst';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<WorkOrderPdf[]>(url, data);
+  }
+  addTerms(data: any): Observable<any> {
+    const addUrl = 'workorderterms';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<WorkOrderPdf[]>(url, data);
+  }
+  addDigitalTerms(data: any): Observable<any> {
+    const addUrl = 'workorderdigitalterms';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<WorkOrderPdf[]>(url, data);
+  }
+  addBankDetails(data: any): Observable<any> {
+    const addUrl = 'bankdetails';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<BankDetails[]>(url, data);
+  }
+  addCompanyDetails(data: any): Observable<any> {
+    const addUrl = 'companydetails';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<BankDetails[]>(url, data);
+  }
+  addFooterDetails(data: any): Observable<any> {
+    const addUrl = 'footerdetails';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<BankDetails[]>(url, data);
+  }
+  getPdfWorkOrderDetails(): Observable<any> {
+    const addUrl = 'pdfworkorder';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<LeadSettings[]>(url);
+  }
+
+  ExpensePayment(): Observable<any> {
+    const addUrl = 'expense';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<ExpenseSetting[]>(url);
+  }
+  ExpenseAddPayment(data): Observable<any> {
+    const addUrl = 'addexpensepayment';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<ExpenseSetting[]>(url, data);
+  }
+  ExpenseDeletePayment(data): Observable<any> {
+    const addUrl = 'deleteexpensepayment/';
+    const url: string = this.serviceUrl + addUrl + data;
+    return this.httpClient.delete<ExpenseSetting[]>(url, data);
+  }
+  expenseAddType(data): Observable<any> {
+    const addUrl = 'addexpensetype';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<ExpenseSetting[]>(url, data);
+  }
+  expenseDeleteType(data): Observable<any> {
+    const addUrl = 'deleteexpensetype/';
+    const url: string = this.serviceUrl + addUrl + data;
+    return this.httpClient.delete<ExpenseSetting[]>(url, data);
+  }
+  expenseAddGst(data): Observable<any> {
+    const addUrl = 'addexpensegst';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<ExpenseSetting[]>(url, data);
+  }
+  expenseDeleteGst(data): Observable<any> {
+    const addUrl = 'deleteexpensegst/';
+    const url: string = this.serviceUrl + addUrl + data;
+    return this.httpClient.delete<ExpenseSetting[]>(url, data);
+  }
+
+
+  addDepartment(data: any): Observable<any> {
+    const addUrl = 'department';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<TicketsettingsModel[]>(url, data);
+  }
+
+  viewDepartment(): Observable<any> {
+    const addUrl = 'departments';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<TicketsettingsModel[]>(url);
+  }
+
+
+  deleteDepartment(val): Observable<any> {
+    const addUrl = 'departments/';
+    const url: string = this.serviceUrl + addUrl + val;
+    return this.httpClient.delete<TicketsettingsModel[]>(url);
+  }
+
+
+  addAssignedto(data: any): Observable<any> {
+    const addUrl = 'assignedto';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<TicketsettingsModel[]>(url, data);
+  }
+
+  viewAssignedto(): Observable<any> {
+    const addUrl = 'multiassignedto';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<TicketsettingsModel[]>(url);
+  }
+
+
+  deleteAssignedto(val): Observable<any> {
+    const addUrl = 'multiassignedto/';
+    const url: string = this.serviceUrl + addUrl + val;
+    return this.httpClient.delete<TicketsettingsModel[]>(url);
+  }
+
+  addAssignedby(data: any): Observable<any> {
+    const addUrl = 'assignedby';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<TicketsettingsModel[]>(url, data);
+  }
+
+  viewAssignedby(): Observable<any> {
+    const addUrl = 'multiassignedby';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<TicketsettingsModel[]>(url);
+  }
+  deleteAssignedby(val): Observable<any> {
+    const addUrl = 'multiassignedby/';
+    const url: string = this.serviceUrl + addUrl + val;
+    return this.httpClient.delete<TicketsettingsModel[]>(url);
+  }
+
 }

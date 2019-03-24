@@ -15,9 +15,9 @@ export class EditExpenseComponent implements OnInit {
   expenseModel: Expense[];  
   expenseEdit: Expense;
   id;
-  ExpenseType = ['Shoot','Others'];
-  Paymode = ['Cash','Cheque'];
-  gst = ['With GST','Non GST'];
+  expenseType;
+  modeOfPayment;
+  gstType;
   constructor(private fb: FormBuilder,
      private expenseManagementService: ExpenseManagementService,
      private route: ActivatedRoute,
@@ -25,12 +25,22 @@ export class EditExpenseComponent implements OnInit {
      ) {
   }
   ngOnInit() {
-    this.route.paramMap.subscribe((params: ParamMap) => {this.id = params.get('id');})  
+    this.route.paramMap.subscribe((params: ParamMap) => {this.id = params.get('id');
+  });
     this.getAllExpense();
-    this.createForm();    
+    this.createForm();
+    this.getExpense();
+  }
+  getExpense() {
+    this.expenseManagementService.allsttExpense().subscribe(data =>{
+      this.expenseModel = data;
+      this.expenseType = this.expenseModel[0].expenseType;
+      this.modeOfPayment = this.expenseModel[0].modeOfPayment;
+      this.gstType = this.expenseModel[0].gst;
+    });
   }
   createForm() {
-    this.expenseForm = this.fb.group({      
+    this.expenseForm = this.fb.group({
       mobileNumber: ['', Validators.required],
       name: ['', Validators.required],
       companyName: ['', Validators.required],
@@ -58,7 +68,7 @@ export class EditExpenseComponent implements OnInit {
       console.log(error);
     });
   }  
-  updateExpense(row) {
+  updateExpense( row) {
     this.expenseManagementService.editExpense(row).subscribe(data => {
       this.expenseModel = data;
       this.router.navigate(['expense/viewExpense']);

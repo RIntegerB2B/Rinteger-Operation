@@ -13,7 +13,7 @@ export class ExistingService {
   public viewCustomer(): Observable<any> {
     let dialogRef: MatDialogRef<ExistingCustomerComponent>;
       dialogRef = this.dialog.open(ExistingCustomerComponent, {
-      width: '240px',
+      width: '360px',
       disableClose: true
     });
     return dialogRef.afterClosed();

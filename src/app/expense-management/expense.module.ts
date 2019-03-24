@@ -37,10 +37,12 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ViewSingleExpenseComponent } from './view-single-expense/view-single-expense.component';
+import { AmountDetailsComponent } from './amount-details/amount-details.component';
 import { SearchComponent } from './search/search.component';
 @NgModule({
   declarations: [
-    ViewExpenseComponent, CreateExpenseComponent , EditExpenseComponent, ViewSingleExpenseComponent, SearchComponent
+    ViewExpenseComponent, CreateExpenseComponent , EditExpenseComponent, ViewSingleExpenseComponent, SearchComponent,
+    AmountDetailsComponent
     ],
   imports: [
     HttpClientModule,

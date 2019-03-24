@@ -12,6 +12,7 @@ export class Lead {
     leadStatus: string;
     leadType: [string];
     leadService: [string];
+    leadUnit: string;
     requirements: [Detail];
     workOrder?: [string];
     invoice?: [string];
@@ -33,6 +34,7 @@ export class Lead {
         leadSource: string,
         leadStatus: string,
         leadService: [string],
+        leadUnit: string,
         requirements: [Detail],
         date: Date,
         remarks: string,
@@ -49,6 +51,7 @@ export class Lead {
         this.leadSource = leadSource;
         this.leadStatus = leadStatus;
         this.leadService = leadService;
+        this.leadUnit = leadUnit;
         this.requirements = requirements;
         this.date = date;
         this.remarks = remarks;
