@@ -1,6 +1,49 @@
 <form style="padding-top:20px">
   <label class="pageBoxLg-label">All work Orders</label>
   <div class="pageBoxLg">
+    <div class="row" [formGroup]="workOrderForm">
+      <div class="col-md-2">
+        <mat-form-field>
+          <input matInput [matDatepicker]="fromDate" formControlName="fromDate" placeholder="From Date" required>
+          <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+          <mat-datepicker #fromDate></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-md-2">
+        <mat-form-field>
+          <input matInput [matDatepicker]="toDate" formControlName="toDate" placeholder="To Date" required>
+          <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+          <mat-datepicker #toDate></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-md-2">
+          <button type="submit" (click)="searchDate(workOrderForm)" 
+          mat-raised-button color="warn">Search</button>
+        </div>
+        <div class="col-md-2">
+            <mat-form-field>
+              <mat-select formControlName="monthData"  placeholder="Select Month">
+                <mat-option *ngFor="let day of allMonth; let i = index" [value]="i+1">
+                  {{day.month}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-2">
+            <mat-form-field>
+              <mat-select formControlName="yearData" placeholder="Select Year">
+                <mat-option *ngFor="let yrs of allYear" [value]="yrs.year">
+                  {{yrs.year}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-2">
+              <button type="button"
+               (click)="searchMonth(workOrderForm)" 
+               mat-raised-button color="warn">Search</button>
+            </div>
+    </div>
     <div class="row gridRowHeader display-none-small">
       <div class="col-md-2 vcenterHeader">
         <div class="form-group">
@@ -32,6 +75,10 @@
           <label>Action</label>
         </div>
       </div>
+    </div>
+    
+  <div *ngIf="workOrder?.length === 0 ">
+      No Work Order
     </div>
     <div *ngFor="let data of workOrder">
       <div class="row gridRow">
@@ -76,36 +123,33 @@
             <a class="nav-link" (click)="getViewWorkOrder(data)">
               View
             </a>
-            <a class="nav-link"(click)="createInvoice(data)">
+            <a class="nav-link" (click)="createInvoice(data)">
               Create Invoice
             </a>
-            <a class="nav-link"
-             (click)="viewInvoice(data)">
+            <a class="nav-link" (click)="viewInvoice(data)">
               view Invoice
             </a>
-            <a class="nav-link"
-             (click)="createProfomaInvoice(data)">
-                Create ProformaInvoice
-              </a>
-              <a class="nav-link"
-               (click)="viewProfomaInvoice(data)">
-                view ProformaInvoice
-              </a>
+            <a class="nav-link" (click)="createProfomaInvoice(data)">
+              Create ProformaInvoice
+            </a>
+            <a class="nav-link" (click)="viewProfomaInvoice(data)">
+              view ProformaInvoice
+            </a>
             <a class="nav-link" (click)="getEditWorkOrder(data)">
               Edit
             </a>
             <a class="nav-link" (click)="getDeleteSingleWorkOrder(data)">
               Delete
             </a>
-           <!--  <a class="nav-link" (click)="createWorkOrder(data)">
+            <!--  <a class="nav-link" (click)="createWorkOrder(data)">
               Work order
             </a> -->
           </mat-menu>
         </div>
+      </div>
+
     </div>
-    
-    </div>
+    <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true" [length]="totalSize"
+    [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>
   </div>
-  <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true" [length]="totalSize"
-  [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>
 </form>

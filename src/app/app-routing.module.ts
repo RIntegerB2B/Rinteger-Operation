@@ -52,6 +52,10 @@ const routes: Routes = [
     loadChildren: './expense-management/expense.module#ExpenseModule',
   },
   {
+    path: 'income',
+    loadChildren: './income-management/income.module#IncomeModule',
+  },
+  {
     path: 'ticket',
     loadChildren: './ticket/ticket.module#TicketModule',
   },

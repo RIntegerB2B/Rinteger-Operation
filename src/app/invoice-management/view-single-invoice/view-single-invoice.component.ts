@@ -30,6 +30,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
   allValues = new Array;
   TypesOfTerms = ['Production Terms', 'Digital Marketing Terms'];
   templates = ['With Discount + GST', 'Without Discount + GST' , 'With Discount + SGST + CGST' , 'Without Discount + SGST + CGST'];
+  
   ngOnInit() {
     this.route.paramMap.subscribe(
       (params: ParamMap) => {

@@ -9,6 +9,7 @@ import { WorkOrderPdf } from './../shared/workorderpdf.model';
 import { BankDetails } from './../shared/bankdetails.model';
 import { ExpenseSetting } from './../shared/expense-settings.model';
 import { TicketsettingsModel } from './ticket-setting/ticket-settings.model';
+import { IncomeSetting } from '../shared/income-setting.model';
 
 @Injectable({
   providedIn: 'root'
@@ -226,6 +227,31 @@ export class SettingsServiceService {
     const addUrl = 'multiassignedby/';
     const url: string = this.serviceUrl + addUrl + val;
     return this.httpClient.delete<TicketsettingsModel[]>(url);
+  }
+  addIncomePaymentMode(data: any): Observable<any> {
+    const addUrl = 'addincomepaymentmode';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<IncomeSetting[]>(url, data);
+  }
+  getIncomePaymentMode(): Observable<any> {
+    const addUrl = 'viewincomepaymentmode';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<IncomeSetting[]>(url);
+  }
+  deleteIncomePaymentMode(val): Observable<any> {
+    const addUrl = 'deleteincomepaymentmode/';
+    const url: string = this.serviceUrl + addUrl + val;
+    return this.httpClient.delete<IncomeSetting[]>(url);
+  }
+  addIncomeGst(data: any): Observable<any> {
+    const addUrl = 'addincomegst';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<IncomeSetting[]>(url, data);
+  }
+  deleteIncomeGst(val): Observable<any> {
+    const addUrl = 'deleteincomegst/';
+    const url: string = this.serviceUrl + addUrl + val;
+    return this.httpClient.delete<IncomeSetting[]>(url);
   }
 
 }

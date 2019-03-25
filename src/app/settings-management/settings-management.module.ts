@@ -34,9 +34,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { SettingsServiceService } from './settings-service.service';
 import { SettingsRoutingModule } from './settings-routing.module';
 import { ExpenseSettingsComponent } from './expense-settings/expense-settings.component';
+import { IncomeSettingsComponent } from './income-settings/income-settings.component';
 import { TicketSettingComponent } from './ticket-setting/ticket-setting.component';
 @NgModule({
-  declarations: [LeadSettingsComponent, WorkorderPdfTemplateComponent, ExpenseSettingsComponent, TicketSettingComponent],
+  declarations: [LeadSettingsComponent, WorkorderPdfTemplateComponent, ExpenseSettingsComponent, TicketSettingComponent,
+    IncomeSettingsComponent],
   imports: [
     HttpClientModule,
     HttpModule,

@@ -18,7 +18,7 @@ export class TicketComponent implements OnInit {
   assignedto;
   assignedby;
   customerdetail;
-  units = ['studio', 'Business Support Services', 'technology'];
+  units = ['studio', 'BSS', 'technology'];
   priority = ['low', 'medium', 'high', 'critical'];
   ticketform: FormGroup;
   ticketholder: TicketModel;

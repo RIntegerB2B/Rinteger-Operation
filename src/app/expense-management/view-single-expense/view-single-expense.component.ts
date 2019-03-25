@@ -12,7 +12,7 @@ import { Router, ParamMap } from '@angular/router';
 export class ViewSingleExpenseComponent implements OnInit {
   /* fb: FormBuilder; */
   expenseDetailsForm: FormGroup;
-  expenseModel: Expense;
+  leadModel: Expense;
   id;
   constructor(private expenseManagementService: ExpenseManagementService,
     private route: ActivatedRoute, private router: Router, private fb: FormBuilder) {
@@ -29,6 +29,7 @@ export class ViewSingleExpenseComponent implements OnInit {
   }
   createForm() {
     this.expenseDetailsForm = this.fb.group({
+
       mobileNumber: ['', Validators.required],
       name: ['', Validators.required],
       companyName: ['', Validators.required],
@@ -39,14 +40,14 @@ export class ViewSingleExpenseComponent implements OnInit {
       totalAmount: ['', Validators.required],
       paid: [''],
       vouNo: [''],
-      expensesDescription: [''],
-      gst: ['']
+      expensesDescription: ['']
     });
+
   }
   getSingleLeads() {
     this.expenseManagementService.singleExpense(this.id).subscribe(data => {
-      this.expenseModel = data;
-      console.log('expense', this.expenseModel);
+      this.leadModel = data;
+      console.log('expense', this.leadModel);
     }, error => {
       console.log(error);
     });

@@ -81,4 +81,14 @@ export class InvoiceService {
     const url: string = this.serviceUrl + addUrl + id;
     return this.httpClient.get<Customer[]>(url);
   }
+  invoiceDateSearch(dateSearch): Observable<any> {
+    const addUrl = 'invoicedate';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<Invoice[]>(url, dateSearch);
+  }
+  invoiceMonthSearch(dateSearch): Observable<any> {
+    const addUrl = 'invoicemonth';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<Invoice[]>(url, dateSearch);
+  }
 }

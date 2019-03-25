@@ -10,7 +10,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
   styleUrls: ['./unique-ticket.component.css']
 })
 export class UniqueTicketComponent implements OnInit {
-  ticketholder: TicketModel;
+  ticketholder: TicketModel[];
   id: string;
   constructor(private ts: TicketService, private route: ActivatedRoute,
     private router: Router) {

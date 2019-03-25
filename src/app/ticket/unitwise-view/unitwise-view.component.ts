@@ -9,7 +9,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
   styleUrls: ['./unitwise-view.component.css']
 })
 export class UnitwiseViewComponent implements OnInit {
-  ticketholder: TicketModel;
+  ticketholder: TicketModel[];
   id: string;
   constructor(private ts: TicketService, private route: ActivatedRoute,
     private router: Router) {
@@ -22,32 +22,14 @@ export class UnitwiseViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getStudioTicket();
-    this.getBssTicket();
-    this.getTechTicket();
   }
 
-  getStudioTicket() {
-    this.ts.getStudioTicket().subscribe(data => {
+  getunitwiseTicket(units) {
+    this.ts.getunitwiseTicket(units).subscribe(data => {
       this.ticketholder = data;
     }, error => {
       console.log(error);
     }
     );
   }
-
-  getBssTicket() {
-    this.ts.getBssTicket().subscribe(data => {
-    this.ticketholder = data;
-    }, error => { console.log(error); }
-    );
-  }
-
-  getTechTicket() {
-    this.ts.getTechTicket().subscribe(data => {
-    this.ticketholder = data;
-    }, error => { console.log(error); }
-    );
-  }
-
 }

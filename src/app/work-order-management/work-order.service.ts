@@ -83,4 +83,14 @@ workorderPDFDetails(): Observable<any> {
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.get<WorkOrder[]>(url);
   }
+workOrderDateSearch(dateSearch): Observable<any> {
+    const addUrl = 'workorderdate';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<WorkOrder[]>(url, dateSearch);
+  }
+  workOrderMonthSearch(dateSearch): Observable<any> {
+    const addUrl = 'workordermonth';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<WorkOrder[]>(url, dateSearch);
+  }
 }

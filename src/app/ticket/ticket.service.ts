@@ -13,28 +13,28 @@ export class TicketService {
   constructor(private http: HttpClient) { }
 
 
-  getfieldValue(ticketholder): Observable<TicketModel> {
+  getfieldValue(ticketholder): Observable<any> {
     const urlway = this.baseurl + 'createticket';
 
     return this.http.post<TicketModel>(urlway, ticketholder);
   }
 
-  retriveTicket(): Observable<TicketModel[]> {
+  retriveTicket(): Observable<any> {
     const urlway = this.baseurl + 'retriveticket';
 
     return this.http.get<TicketModel[]>(urlway);
   }
 
-  getDepartment(): Observable<TicketModel> {
+  getDepartment(): Observable<any> {
     const urlway = this.baseurl + 'departments';
 
-    return this.http.get<TicketModel>(urlway);
+    return this.http.get<TicketModel[]>(urlway);
   }
 
 
-  uniqTicket(id): Observable<TicketModel> {
+  uniqTicket(id): Observable<TicketModel[]> {
     const urlway = this.baseurl + 'unique/' + id;
-    return this.http.get<TicketModel>(urlway);
+    return this.http.get<TicketModel[]>(urlway);
   }
 
   allCustomer(): Observable<any> {
@@ -43,22 +43,16 @@ export class TicketService {
     return this.http.get<Customer[]>(url);
   }
 
-  getStudioTicket(): Observable<TicketModel> {
-    const urlway = this.baseurl + 'studioticket';
+  getunitwiseTicket(name): Observable<TicketModel[]> {
+    const urlway = this.baseurl + 'unitwiseticket/'+ name;
 
-    return this.http.get<TicketModel>(urlway);
+    return this.http.get<TicketModel[]>(urlway);
   }
 
-  getBssTicket(): Observable<TicketModel> {
-    const urlway = this.baseurl + 'bssticket';
+  deadlinedTicket(): Observable<TicketModel[]> {
+    const urlway = this.baseurl + 'deadlinedTicket';
 
-    return this.http.get<TicketModel>(urlway);
-  }
-
-  getTechTicket(): Observable<TicketModel> {
-    const urlway = this.baseurl + 'techticket';
-
-    return this.http.get<TicketModel>(urlway);
+    return this.http.get<TicketModel[]>(urlway);
   }
 
 }

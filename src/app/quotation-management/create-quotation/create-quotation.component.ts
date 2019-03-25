@@ -83,7 +83,7 @@ export class CreateQuotationComponent implements OnInit {
       quotationDetailsForm.controls.tax.value
     );
     this.quotationManagementService.createQuotation(this.quotation).subscribe(data => {
-      this.router.navigate(['quotation/viewquotation', this.quotation.leadID]);
+      this.router.navigate(['quotation/viewallquotation']);
     }, error => {
       console.log(error);
     });

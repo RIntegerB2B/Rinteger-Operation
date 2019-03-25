@@ -5,6 +5,8 @@ import { LeadSettingsComponent } from './lead-settings/lead-settings.component';
 import { WorkorderPdfTemplateComponent } from './workorder-pdf-template/workorder-pdf-template.component';
 import { ExpenseSettingsComponent } from './expense-settings/expense-settings.component';
 import { TicketSettingComponent } from './ticket-setting/ticket-setting.component';
+import { IncomeSettingsComponent } from './income-settings/income-settings.component';
+
 const routes: Routes = [
   {
     path: 'leadsettings',
@@ -21,6 +23,10 @@ const routes: Routes = [
   {
     path: 'ticketsetting',
     component: TicketSettingComponent
+  },
+  {
+    path: 'incomesetting',
+    component: IncomeSettingsComponent
   }
 ];
 

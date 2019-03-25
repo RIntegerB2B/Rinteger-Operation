@@ -1,26 +1,25 @@
 <div class="container topAlignContainer">
-  <form [formGroup]="expenseDetailsForm" (ngSubmit)="addSingleExpense(expenseDetailsForm)">
+  <form [formGroup]="customerDetailsForm" (ngSubmit)="addSingleExpense(customerDetailsForm)">
     <div fxLayout="row wrap" fxLayout.lt-sm="column">
       <div fxFlex="100">
         <label class="pageBoxLg-label">Create Expense</label>
       </div>
       <div fxFlex="50" class="p-2">
         <div>
-        <mat-form-field class="full-width">
-          <input matInput formControlName="mobileNumber" placeholder="Mobile Number"
-           required>
-          <mat-error *ngIf="expenseDetailsForm.controls['mobileNumber'].errors?.required" required>
-            Enter Mobile Number
-            <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-      </div>
-      
+          <mat-form-field class="full-width">
+            <input matInput formControlName="mobileNumber" placeholder="Mobile Number" required>
+            <mat-error *ngIf="customerDetailsForm.controls['mobileNumber'].errors?.required" required>
+              Enter Mobile Number
+              <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
       </div>
       <div fxFlex="50" class="p-2">
         <mat-form-field class="full-width">
           <input matInput formControlName="name" placeholder="Name">
-          <mat-error *ngIf="expenseDetailsForm.controls['name'].errors?.required" required>
+          <mat-error *ngIf="customerDetailsForm.controls['name'].errors?.required" required>
             Enter Name
             <strong>required</strong>
           </mat-error>
@@ -29,7 +28,7 @@
       <div fxFlex="50" class="p-2">
         <mat-form-field class="full-width">
           <input matInput formControlName="companyName" placeholder="Company Name">
-          <mat-error *ngIf="expenseDetailsForm.controls['companyName'].errors?.required">
+          <mat-error *ngIf="customerDetailsForm.controls['companyName'].errors?.required">
             Enter Company Name
             <strong>required</strong>
           </mat-error>
@@ -38,7 +37,7 @@
       <div fxFlex="50" class="pr-1">
         <mat-form-field class="full-width">
           <mat-select placeholder="Select Expense Type" formControlName="expenseType">
-            <mat-option *ngFor="let expense of expenseType" [value]="expense">
+            <mat-option *ngFor="let expense of ExpenseType" [value]="expense">
               {{expense}}
             </mat-option>
           </mat-select>
@@ -47,7 +46,7 @@
       <div fxFlex="50" class="pr-1">
         <mat-form-field class="full-width">
           <mat-select placeholder="Select Mode of payments" formControlName="modeOfPayment">
-            <mat-option *ngFor="let expense of modeOfPayment" [value]="expense">
+            <mat-option *ngFor="let expense of Paymode" [value]="expense">
               {{expense}}
             </mat-option>
           </mat-select>
@@ -56,7 +55,8 @@
       <div fxFlex="50" class="pr-1">
         <mat-form-field>
           <input matInput formControlName="location" placeholder="location">
-        
+          <!--  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker> -->
         </mat-form-field>
       </div>
       <div fxFlex="50" class="pr-1">
@@ -70,7 +70,7 @@
         <mat-form-field class="full-width">
           <input matInput formControlName="totalAmount" placeholder="TotalAmount">
 
-          <mat-error *ngIf="expenseDetailsForm.controls['totalAmount'].errors?.required">
+          <mat-error *ngIf="customerDetailsForm.controls['totalAmount'].errors?.required">
             Enter Total Amount
             <strong>required</strong>
           </mat-error>
@@ -79,7 +79,7 @@
       <div fxFlex="50" class="p-2">
         <mat-form-field class="full-width">
           <input matInput formControlName="paid" placeholder="Paid">
-          <mat-error *ngIf="expenseDetailsForm.controls['paid'].errors?.required">
+          <mat-error *ngIf="customerDetailsForm.controls['paid'].errors?.required">
             Enter paid Amount
             <strong>required</strong>
           </mat-error>
@@ -90,7 +90,7 @@
       <div fxFlex="50" class="p-2">
         <mat-form-field class="full-width">
           <input matInput formControlName="vouNo" placeholder="Voucher.No">
-          <mat-error *ngIf="expenseDetailsForm.controls['vouNo'].errors?.required">
+          <mat-error *ngIf="customerDetailsForm.controls['vouNo'].errors?.required">
             Enter Voucher.no
             <strong>required</strong>
           </mat-error>
@@ -103,19 +103,10 @@
       <div fxFlex="50" class="p-2">
         <mat-form-field class="full-width">
           <input matInput formControlName="expensesDescription" placeholder="Expense Description">
-          <mat-error *ngIf="expenseDetailsForm.controls['expensesDescription'].errors?.required">
+          <mat-error *ngIf="customerDetailsForm.controls['expensesDescription'].errors?.required">
             Enter Expense Description
             <strong>required</strong>
           </mat-error>
-        </mat-form-field>
-      </div>
-      <div fxFlex="50" class="pr-1">
-        <mat-form-field class="full-width">
-          <mat-select placeholder="Select GST option" formControlName="gst">
-            <mat-option *ngFor="let gs of gstType" [value]="gs">
-              {{gs}}
-            </mat-option>
-          </mat-select>
         </mat-form-field>
       </div>
 

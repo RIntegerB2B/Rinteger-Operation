@@ -91,4 +91,14 @@ export class QuotationManagementService {
     const url: string = this.serviceUrl + addUrl + id;
     return this.httpClient.get<Lead[]>(url);
   }
+  quotationDateSearch(dateSearch): Observable<any> {
+    const addUrl = 'quotationdate';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<Quotation[]>(url, dateSearch);
+  }
+  quotationMonthSearch(dateSearch): Observable<any> {
+    const addUrl = 'quotationmonth';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<Quotation[]>(url, dateSearch);
+  }
 }

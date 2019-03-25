@@ -82,4 +82,14 @@ export class ProformaInvoiceService {
     const url: string = this.serviceUrl + addUrl  + workid;
     return this.httpClient.get<WorkOrder[]>(url);
   }
+  proformaInvoiceDateSearch(dateSearch): Observable<any> {
+    const addUrl = 'profomadate';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<ProformaInvoice[]>(url, dateSearch);
+  }
+  proformaInvoiceMonthSearch(dateSearch): Observable<any> {
+    const addUrl = 'profomamonth';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<ProformaInvoice[]>(url, dateSearch);
+  }
 }

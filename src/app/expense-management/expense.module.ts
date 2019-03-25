@@ -5,6 +5,7 @@ import { ExpenseManagementService } from './expense-management.service';
 import { CreateExpenseComponent } from './create-expense/create-expense.component';
 import { ViewExpenseComponent } from './view-expense/view-expense.component';
 import { EditExpenseComponent } from './edit-expense/edit-expense.component';
+import { AmountDetailsComponent } from './amount-details/amount-details.component';
 import {
   MatSidenavModule,
   MatListModule,
@@ -29,7 +30,8 @@ import {
   MatChipsModule,
   MatInputModule,
   MatStepperModule,
-  MatDatepickerModule, 
+  MatDatepickerModule,
+ 
   MatNativeDateModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -37,12 +39,13 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ViewSingleExpenseComponent } from './view-single-expense/view-single-expense.component';
-import { AmountDetailsComponent } from './amount-details/amount-details.component';
+import { NamePipe } from './view-expense/name.pipe';
 import { SearchComponent } from './search/search.component';
+
 @NgModule({
   declarations: [
-    ViewExpenseComponent, CreateExpenseComponent , EditExpenseComponent, ViewSingleExpenseComponent, SearchComponent,
-    AmountDetailsComponent
+    ViewExpenseComponent, CreateExpenseComponent , EditExpenseComponent, ViewSingleExpenseComponent, NamePipe,
+    AmountDetailsComponent, SearchComponent
     ],
   imports: [
     HttpClientModule,

@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TicketRoutingModule } from './ticket-routing.module';
 import { TicketComponent } from './ticket/ticket.component';
 import {TicketService} from './ticket.service';
-
+import {MatBadgeModule} from '@angular/material/badge';
 import {
   MatSidenavModule,
   MatListModule,
@@ -42,7 +42,7 @@ import { UnitwiseViewComponent } from './unitwise-view/unitwise-view.component';
      TicketcustomersearchComponent, UnitwiseViewComponent],
   imports: [
     CommonModule,HttpModule,
-    TicketRoutingModule,FormsModule,ReactiveFormsModule,
+    TicketRoutingModule,FormsModule,ReactiveFormsModule,MatBadgeModule,
     MatSidenavModule,
     MatListModule,
     MatTooltipModule,

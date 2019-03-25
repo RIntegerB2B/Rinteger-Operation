@@ -13,6 +13,7 @@ import { Quotation } from './../../shared/quotation.model';
 export class ViewQuotationComponent implements OnInit {
   leadId;
   quotation: Quotation[];
+  
   constructor(
     private quotationManagementService: QuotationManagementService,
      private route: ActivatedRoute,
@@ -23,10 +24,10 @@ export class ViewQuotationComponent implements OnInit {
     this.route.paramMap.subscribe(
       (params: ParamMap) => {
         this.leadId = params.get('leadId');
-      }
-    );
+      });
     this.getAllQuotation();
   }
+  
   getViewQuotation(data)   {
     this.router.navigate(['quotation/viewsinglequotation', data._id]);
   }
