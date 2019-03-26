@@ -22,6 +22,7 @@ export class ViewAllInvoiceComponent implements OnInit {
   public array: any;
   public displayedColumns = ['', '', '', '', ''];
   public dataSource: any;
+  invoiceModel: Invoice;
   matdatasource = new MatTableDataSource([]);
   allMonth = [{ month: 'January' }, { month: 'February' }, { month: 'March' }, { month: 'April' },
   { month: 'May' }, { month: 'June' }, { month: 'July' }, { month: 'August' },
@@ -51,7 +52,11 @@ export class ViewAllInvoiceComponent implements OnInit {
   getViewInvoice(data) {
     this.router.navigate(['invoice/viewsingleinvoice', data._id]);
   }
-
+  filterInvoice(data) {
+    this.invoice = new MatTableDataSource<Invoice>(data);
+    this.invoice.paginator = this.paginator;
+    this.invoice = data;
+  }
   createForm() {
     this.invoiceDetailsForm = this.fb.group({
       fromDate: ['', Validators.required],
@@ -69,6 +74,7 @@ export class ViewAllInvoiceComponent implements OnInit {
       this.invoice = new MatTableDataSource<Invoice>(data);
       this.invoice.paginator = this.paginator;
       this.invoice = data;
+      this.invoiceModel = data;
       this.array = data;
       this.totalSize = this.array.length;
       this.iterator();
@@ -94,6 +100,7 @@ export class ViewAllInvoiceComponent implements OnInit {
     this.dateSearch.toDate = leadForm.controls.toDate.value;
     this.invoiceService.invoiceDateSearch(this.dateSearch).subscribe(data => {
       this.invoice = new MatTableDataSource<Invoice>(data);
+      this.invoiceModel = data;
       this.invoice.paginator = this.paginator;
       this.invoice = data;
     }, error => {
@@ -108,6 +115,7 @@ export class ViewAllInvoiceComponent implements OnInit {
       this.invoice = new MatTableDataSource<Invoice>(data);
       this.invoice.paginator = this.paginator;
       this.invoice = data;
+      this.invoiceModel = data;
       this.array = data;
       this.totalSize = this.array.length;
       this.iterator();
@@ -121,6 +129,7 @@ export class ViewAllInvoiceComponent implements OnInit {
       this.invoice = new MatTableDataSource<Invoice>(data);
       this.invoice.paginator = this.paginator;
       this.invoice = data;
+      this.invoiceModel = data;
       this.array = data;
       this.totalSize = this.array.length;
       this.iterator();

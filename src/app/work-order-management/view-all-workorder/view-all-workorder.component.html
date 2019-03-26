@@ -1,6 +1,8 @@
 <form style="padding-top:20px">
   <label class="pageBoxLg-label">All work Orders</label>
   <div class="pageBoxLg">
+      <app-search-workorder [workOrderModel]="workOrderModel"
+      (searchWorkOrder)="filterWorkOrder($event)"></app-search-workorder>
     <div class="row" [formGroup]="workOrderForm">
       <div class="col-md-2">
         <mat-form-field>

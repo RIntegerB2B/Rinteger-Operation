@@ -8,7 +8,9 @@
           </a>
         </div>
       </div>
-      <app-search-customer [customerModel]="customerValue" (searchCustomer)="filterCustomer($event)"></app-search-customer>
+      <app-search-customer
+       [customerModel]="customerValue"
+        (searchCustomer)="filterCustomer($event)"></app-search-customer>
       <div class="row gridRowHeader display-none-small">
         <div class="col-md-2 vcenterHeader">
           <div class="form-group">

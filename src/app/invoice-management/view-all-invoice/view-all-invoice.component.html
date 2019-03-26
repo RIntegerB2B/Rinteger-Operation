@@ -1,5 +1,6 @@
 <form style="padding-top:20px">
   <div class="pageBoxLg">
+    <app-search-invoice [invoiceModel]="invoiceModel" (searchInvoice)="filterInvoice($event)"></app-search-invoice>
     <div class="row" [formGroup]="invoiceDetailsForm">
       <div class="col-md-2">
         <mat-form-field>
@@ -73,8 +74,8 @@
       </div>
     </div>
     <div *ngIf="invoice?.length === 0">
-        No Invoice
-      </div>
+      No Invoice
+    </div>
     <div *ngFor="let data of invoice">
       <div class="row gridRow">
         <div class="display-none-large col-6">
@@ -105,8 +106,8 @@
           <label class="gridLabel">Expiry Date:</label>
         </div>
         <div class="col-md-2 col-6 vcenter form-group">
-          
-            {{data?.expiryDate | date: 'dd/MM/yyyy' }}
+
+          {{data?.expiryDate | date: 'dd/MM/yyyy' }}
 
         </div>
         <div class="display-none-large col-6">
@@ -134,6 +135,6 @@
       </div>
     </div>
     <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true" [length]="totalSize"
-    [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>
+      [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>
   </div>
 </form>

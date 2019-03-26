@@ -43,17 +43,32 @@ export class ViewIncomeComponent implements OnInit {
 
     });
   }
-  searchByDate(incomeDetailsForm: FormGroup) {
+  public handlePage(e: any) {
+    this.currentPage = e.pageIndex;
+    this.pageSize = e.pageSize;
+    this.iterator();
+  }
+  private iterator() {
+    const end = (this.currentPage + 1) * this.pageSize;
+    const start = this.currentPage * this.pageSize;
+    const part = this.arry.slice(start, end);
+    this.incomeModel = part;
+  }
+  searchByDate(incomeDetailsForm: FormGroup){
     this.incomeModel = new IncomeModel();
     this.incomeModel.fromDate = incomeDetailsForm.controls.fromDate.value;
     this.incomeModel.toDate = incomeDetailsForm.controls.toDate.value;
     this.incomemanagementservice.getByDate(this.incomeModel).subscribe(data => {
       this.incomeModel = data;
+       this.incomeModel = new MatTableDataSource<IncomeModel>(data);
+      this.incomeModel.paginator = this.paginator;
+      this.incomeModel = data;
+      this.arry = data;
+      this.totalSize = this.arry.length;
     }, error => {
       console.log(error);
     });
   }
-  
   getEditIncome(data) {
     this.router.navigate(['income/editincome', data._id]);
   }

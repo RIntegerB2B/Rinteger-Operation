@@ -1,46 +1,48 @@
 <form style="padding-top:20px">
   <label class="pageBoxLg-label">View Proforma Invoice</label>
   <div class="pageBoxLg">
-      <div class="row" [formGroup]="proformaDetailsForm">
-          <div class="col-md-2">
-            <mat-form-field>
-              <input matInput [matDatepicker]="fromDate" formControlName="fromDate" placeholder="From Date" required>
-              <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
-              <mat-datepicker #fromDate></mat-datepicker>
-            </mat-form-field>
-          </div>
-          <div class="col-md-2">
-            <mat-form-field>
-              <input matInput [matDatepicker]="toDate" formControlName="toDate" placeholder="To Date" required>
-              <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
-              <mat-datepicker #toDate></mat-datepicker>
-            </mat-form-field>
-          </div>
-          <div class="col-md-2">
-            <button type="submit" (click)="searchDate(proformaDetailsForm)" mat-raised-button color="warn">Search</button>
-          </div>
-          <div class="col-md-2">
-            <mat-form-field>
-              <mat-select formControlName="monthData" placeholder="Select Month">
-                <mat-option *ngFor="let day of allMonth; let i = index" [value]="i+1">
-                  {{day.month}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <div class="col-md-2">
-            <mat-form-field>
-              <mat-select formControlName="yearData" placeholder="Select Year">
-                <mat-option *ngFor="let yrs of allYear" [value]="yrs.year">
-                  {{yrs.year}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <div class="col-md-2">
-            <button type="button" (click)="searchMonth(proformaDetailsForm)" mat-raised-button color="warn">Search</button>
-          </div>
-        </div>
+      <app-search-proforma-invoice [proformaInvoiceModel]="proformaInvoiceModel"
+       (searchProformaInvoice)="filterProformaInvoice($event)"></app-search-proforma-invoice>
+    <div class="row" [formGroup]="proformaDetailsForm">
+      <div class="col-md-2">
+        <mat-form-field>
+          <input matInput [matDatepicker]="fromDate" formControlName="fromDate" placeholder="From Date" required>
+          <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+          <mat-datepicker #fromDate></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-md-2">
+        <mat-form-field>
+          <input matInput [matDatepicker]="toDate" formControlName="toDate" placeholder="To Date" required>
+          <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+          <mat-datepicker #toDate></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-md-2">
+        <button type="submit" (click)="searchDate(proformaDetailsForm)" mat-raised-button color="warn">Search</button>
+      </div>
+      <div class="col-md-2">
+        <mat-form-field>
+          <mat-select formControlName="monthData" placeholder="Select Month">
+            <mat-option *ngFor="let day of allMonth; let i = index" [value]="i+1">
+              {{day.month}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-2">
+        <mat-form-field>
+          <mat-select formControlName="yearData" placeholder="Select Year">
+            <mat-option *ngFor="let yrs of allYear" [value]="yrs.year">
+              {{yrs.year}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-2">
+        <button type="button" (click)="searchMonth(proformaDetailsForm)" mat-raised-button color="warn">Search</button>
+      </div>
+    </div>
     <div class="row gridRowHeader display-none-small">
       <div class="col-md-2 vcenterHeader">
         <div class="form-group">
@@ -74,10 +76,10 @@
       </div>
     </div>
     <div *ngIf="proformaInvoice?.length === 0">
-        No Proforma Invoice
-      </div>
+      No Proforma Invoice
+    </div>
     <div *ngFor="let data of proformaInvoice">
-      
+
       <div class="row gridRow">
         <div class="display-none-large col-6">
           <label class="gridLabel">Proforma Invoice ID:</label>
@@ -128,12 +130,12 @@
             <a class="nav-link" (click)="getDeleteSingleProformaInvoice(data)">
               Delete
             </a>
-           <!--  <a class="nav-link" (click)="createWorkOrder(data)">
+            <!--  <a class="nav-link" (click)="createWorkOrder(data)">
               Work order
             </a> -->
           </mat-menu>
         </div>
-    </div>
+      </div>
     </div>
   </div>
   <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true" [length]="totalSize"

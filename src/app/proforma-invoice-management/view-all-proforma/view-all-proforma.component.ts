@@ -15,6 +15,7 @@ import { DateSearch} from './dateSearch.model';
 export class ViewAllProformaComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   proformaInvoice: any;
+  proformaInvoiceModel: ProformaInvoice;
   public pageSize = 50;
   public currentPage = 0;
   public totalSize = 0;
@@ -57,6 +58,12 @@ export class ViewAllProformaComponent implements OnInit {
       yearData: ['', Validators.required]
     });
   }
+  filterProformaInvoice(data) {
+    this.proformaInvoice = new MatTableDataSource<ProformaInvoice>(data);
+    this.proformaInvoice.paginator = this.paginator;
+    this.proformaInvoice = data;
+  }
+
   searchDate(leadForm) {
     this.dateSearch = new DateSearch();
     this.dateSearch.fromDate = leadForm.controls.fromDate.value;
@@ -64,6 +71,7 @@ export class ViewAllProformaComponent implements OnInit {
     this.proformaInvoiceService.proformaInvoiceDateSearch(this.dateSearch).subscribe(data => {
       this.proformaInvoice = new MatTableDataSource<ProformaInvoice>(data);
       this.proformaInvoice.paginator = this.paginator;
+      this.proformaInvoiceModel = data;
       this.proformaInvoice = data;
     }, error => {
       console.log(error);
@@ -77,6 +85,7 @@ export class ViewAllProformaComponent implements OnInit {
       this.proformaInvoice = new MatTableDataSource<ProformaInvoice>(data);
       this.proformaInvoice.paginator = this.paginator;
       this.proformaInvoice = data;
+      this.proformaInvoiceModel = data;
       this.array = data;
       this.totalSize = this.array.length;
       this.iterator();
@@ -89,6 +98,7 @@ export class ViewAllProformaComponent implements OnInit {
       this.proformaInvoice = new MatTableDataSource<ProformaInvoice>(data);
       this.proformaInvoice.paginator = this.paginator;
       this.proformaInvoice = data;
+      this.proformaInvoiceModel = data;
       this.array = data;
       this.totalSize = this.array.length;
       this.iterator();
@@ -120,6 +130,7 @@ export class ViewAllProformaComponent implements OnInit {
     this.proformaInvoiceService.deleteSingleProformaInvoice(row._id).subscribe(data => {
       this.proformaInvoice.paginator = this.paginator;
       this.proformaInvoice = data;
+      this.proformaInvoiceModel = data;
       this.array = data;
       this.totalSize = this.array.length;
       this.iterator();

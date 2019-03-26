@@ -54,12 +54,12 @@ export class QuotationManagementService {
     const url: string = this.serviceUrl + addUrl  + quoid;
     return this.httpClient.get<Quotation[]>(url);
   }
-  updateSingleQuotation(row, quoid)   {
+  updateSingleQuotation(row, quoid): Observable<any>    {
     const addUrl = 'quotation/';
     const url: string = this.serviceUrl + addUrl  + quoid;
     return this.httpClient.put<Quotation>(url, row);
   }
-  deleteSingleQuotation(quoid)   {
+  deleteSingleQuotation(quoid): Observable<any>    {
     const addUrl = 'deletequotation/';
     const url: string = this.serviceUrl + addUrl  + quoid;
     return this.httpClient.delete<Quotation[]>(url);

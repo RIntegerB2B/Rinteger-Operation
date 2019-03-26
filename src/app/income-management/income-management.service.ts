@@ -15,12 +15,12 @@ serviceUrl: string = AppSetting.serviceUrl;
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.post<IncomeModel[]>(url, data);
   }
-  getFindAll(): Observable<any>{
+  getFindAll(): Observable<any> {
     const addUrl = 'findall';
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.get<IncomeModel[]>(url);
   }
-  getFindAllwork(): Observable<any>{
+  getFindAllwork(): Observable<any> {
     const addUrl = 'findallwork';
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.get<IncomeModel[]>(url);
@@ -51,7 +51,7 @@ serviceUrl: string = AppSetting.serviceUrl;
     return this.httpClient.get<IncomeSetting[]>(url);
   }
 
-  getTDS(): Observable<any>{
+  getTDS(): Observable<any> {
     const addUrl = 'findtds';
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.get<IncomeModel[]>(url);

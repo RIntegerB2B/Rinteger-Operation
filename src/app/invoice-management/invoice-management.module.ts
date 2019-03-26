@@ -38,13 +38,14 @@ import { InvoiceRoutingModule } from './invoice-routing.module';
 import { ViewAllInvoiceComponent } from './view-all-invoice/view-all-invoice.component';
 import { InvoiceGeneratePdfComponent } from './invoice-generate-pdf/invoice-generate-pdf.component';
 import { EditInvoiceComponent } from './edit-invoice/edit-invoice.component';
+import { SearchInvoiceComponent } from './search-invoice/search-invoice.component';
 
 @NgModule({
   declarations: [CreateInvoiceComponent,
      ViewInvoiceComponent,
       ViewSingleInvoiceComponent,
       ViewAllInvoiceComponent,
-      InvoiceGeneratePdfComponent, EditInvoiceComponent],
+      InvoiceGeneratePdfComponent, EditInvoiceComponent, SearchInvoiceComponent],
   imports: [
     HttpClientModule,
     HttpModule,

@@ -66,7 +66,7 @@ export class InvoiceService {
     const url: string = this.serviceUrl + addUrl + workid;
     return this.httpClient.get<WorkOrder[]>(url);
   }
-  deleteSingleInvoice(invid) {
+  deleteSingleInvoice(invid): Observable<any> {
     const addUrl = 'deleteinvoice/';
     const url: string = this.serviceUrl + addUrl + invid;
     return this.httpClient.delete<Invoice[]>(url);

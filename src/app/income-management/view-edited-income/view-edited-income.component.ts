@@ -62,21 +62,38 @@ export class ViewEditedIncomeComponent implements OnInit {
   getEditIncome(data) {
     this.router.navigate(['income/editincomesheet', data._id]);
   }
-  getDeleteIncome(data) {
-    this.incomemanagementservice.DeleteIncomeSheet(data).subscribe(data => {
+  getDeleteIncome(id) {
+    this.incomemanagementservice.DeleteIncomeSheet(id).subscribe(data => {
       this.incomeModel = data;
-    })
+    }, error => {
+      console.log(error);
+    });
   }
   getTds() {
     this.incomemanagementservice.getTDS().subscribe(data => {
       this.incomeModel = data;
       this.incomeValue = data;
-    })
+    }, error => {
+      console.log(error);
+    });
   }
   getAll() {
     this.incomemanagementservice.getFindAll().subscribe(data => {
       this.incomeModel = data;
       this.incomeValue = data;
-    })
+    }, error => {
+      console.log(error);
+    });
+  }
+  public handlePage(e: any) {
+    this.currentPage = e.pageIndex;
+    this.pageSize = e.pageSize;
+    this.iterator();
+  }
+  private iterator() {
+    const end = (this.currentPage + 1) * this.pageSize;
+    const start = this.currentPage * this.pageSize;
+    const part = this.arry.slice(start, end);
+    this.incomeModel = part;
   }
 }

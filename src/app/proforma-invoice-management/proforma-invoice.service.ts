@@ -52,12 +52,12 @@ export class ProformaInvoiceService {
     const url: string = this.serviceUrl + addUrl + pinvid;
     return this.httpClient.get<ProformaInvoice[]>(url);
   }
-  deleteSingleProformaInvoice(pinvid)   {
+  deleteSingleProformaInvoice(pinvid): Observable<any>    {
     const addUrl = 'proforma/';
     const url: string = this.serviceUrl + addUrl + pinvid;
     return this.httpClient.delete<ProformaInvoice[]>(url);
   }
-  updateSingleProfomaInvoice(row,  id)   {
+  updateSingleProfomaInvoice(row,  id): Observable<any>   {
     const addUrl = 'profomainvoice/';
     const url: string = this.serviceUrl + addUrl + id;
     return this.httpClient.put<ProformaInvoice[]>(url, row);

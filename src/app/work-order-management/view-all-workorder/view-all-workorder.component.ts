@@ -13,6 +13,7 @@ import { DateSearch } from './search.model';
 export class ViewAllWorkorderComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   workOrder: any;
+  workOrderModel: WorkOrder;
   matdatasource = new MatTableDataSource([]);
   public pageSize = 50;
   public currentPage = 0;
@@ -50,6 +51,7 @@ export class ViewAllWorkorderComponent implements OnInit {
       this.workOrder = new MatTableDataSource<WorkOrder>(data);
       this.workOrder.paginator = this.paginator;
       this.workOrder = data;
+      this.workOrderModel = data;
       this.array = data;
       this.totalSize = this.array.length;
       this.iterator();
@@ -65,6 +67,11 @@ export class ViewAllWorkorderComponent implements OnInit {
       monthData: ['', Validators.required],
       yearData: ['', Validators.required]
     });
+  }
+  filterWorkOrder(data)  {
+    this.workOrder = new MatTableDataSource<WorkOrder>(data);
+    this.workOrder.paginator = this.paginator;
+    this.workOrder = data;
   }
   searchDate(workOrderForm) {
     this.dateSearch = new DateSearch();

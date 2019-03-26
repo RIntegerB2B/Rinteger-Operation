@@ -14,7 +14,7 @@
                 <option *ngFor="let data of ExpenseType" [value]="data">{{data}}</option>
               </select></div>
             <div class="btn">
-              <div class="input-group ">
+              <div class="input-group">
                 <input mat-input type="text" class="form-control" placeholder="Search" formControlName="srchterm" #searchText/>
                 <button mat-button (click)="searchBy( searchText.value)" type="submit"><mat-icon>search</mat-icon></button>
               </div>
@@ -45,7 +45,6 @@
           <button mat-button class="primary"  type="submit">TDS</button>
         </div>
         <div class="bor col">
-
           Total : {{getTotal()}}
           <br> Paid : {{getPaid()}}
           <br> Balance : {{getBalance()}}

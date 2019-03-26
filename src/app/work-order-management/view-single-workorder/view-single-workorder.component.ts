@@ -49,8 +49,8 @@ export class ViewSingleWorkorderComponent implements OnInit {
     this.workOrderService.viewSingleWorkOrder(this.workId).subscribe(data => {
       this.workOrder = data;
       this.customerID = this.workOrder[0].customerID;
-      this.viewCompanyDetails();
       this.customerDetails();
+      this.viewCompanyDetails();
     }, error => {
       console.log(error);
     });

@@ -38,12 +38,14 @@ import { QuotationRoutingModule  } from './quotation-routing.module';
 import { ViewAllQuotationComponent } from './view-all-quotation/view-all-quotation.component';
 import { GeneratePdfQuotationComponent } from './generate-pdf-quotation/generate-pdf-quotation.component';
 import { EditQuotationComponent } from './edit-quotation/edit-quotation.component';
+import { SearchQuotationComponent } from './search-quotation/search-quotation.component';
 
 
 @NgModule({
   declarations: [CreateQuotationComponent, ViewQuotationComponent, ViewSingleQuotationComponent, ViewAllQuotationComponent,
      GeneratePdfQuotationComponent,
-     EditQuotationComponent],
+     EditQuotationComponent,
+     SearchQuotationComponent],
   imports: [
     HttpClientModule,
     HttpModule,

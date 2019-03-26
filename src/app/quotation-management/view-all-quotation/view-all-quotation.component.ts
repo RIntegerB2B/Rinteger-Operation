@@ -15,6 +15,7 @@ import { DateSearch} from './dateSearch.model';
 export class ViewAllQuotationComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   quotation: any;
+  quotationModel: Quotation;
   quotationDetailsForm: FormGroup;
   dateSearch: DateSearch;
   public pageSize = 50;
@@ -61,6 +62,7 @@ export class ViewAllQuotationComponent implements OnInit {
     this.dateSearch.toDate = leadForm.controls.toDate.value;
     this.quotationManagementService.quotationDateSearch(this.dateSearch).subscribe(data => {
       this.quotation = new MatTableDataSource<Quotation>(data);
+      this.quotationModel = data;
       this.quotation.paginator = this.paginator;
       this.quotation = data;
     }, error => {
@@ -75,6 +77,7 @@ export class ViewAllQuotationComponent implements OnInit {
       this.quotation = new MatTableDataSource<Quotation>(data);
       this.quotation.paginator = this.paginator;
       this.quotation = data;
+      this.quotationModel = data;
       this.array = data;
       this.totalSize = this.array.length;
       this.iterator();
@@ -95,6 +98,7 @@ export class ViewAllQuotationComponent implements OnInit {
       this.quotation = new MatTableDataSource<Quotation>(data);
       this.quotation.paginator = this.paginator;
       this.quotation = data;
+      this.quotationModel = data;
       this.array = data;
       this.totalSize = this.array.length;
       this.iterator();
@@ -119,6 +123,7 @@ export class ViewAllQuotationComponent implements OnInit {
       this.quotation = new MatTableDataSource<Quotation>(data);
       this.quotation.paginator = this.paginator;
       this.quotation = data;
+      this.quotationModel = data;
       this.array = data;
       this.totalSize = this.array.length;
       this.iterator();
@@ -126,4 +131,10 @@ export class ViewAllQuotationComponent implements OnInit {
       console.log(error);
     });
   }
+  filterQuotation(data) {
+    this.quotation = new MatTableDataSource<Quotation>(data);
+    this.quotation.paginator = this.paginator;
+    this.quotation = data;
+  }
+
 }

@@ -38,10 +38,11 @@ import { ProformaRoutingModule } from './proforma-routing.module';
 import { ViewAllProformaComponent } from './view-all-proforma/view-all-proforma.component';
 import { EditProfomaInvoiceComponent } from './edit-profoma-invoice/edit-profoma-invoice.component';
 import { GenerateProfomaPdfComponent } from './generate-profoma-pdf/generate-profoma-pdf.component';
+import { SearchProformaInvoiceComponent } from './search-proforma-invoice/search-proforma-invoice.component';
 
 @NgModule({
   declarations: [CreateProformaComponent,
-    ViewSingleProformaComponent, ViewProformaComponent, ViewAllProformaComponent, EditProfomaInvoiceComponent, GenerateProfomaPdfComponent
+    ViewSingleProformaComponent, ViewProformaComponent, ViewAllProformaComponent, EditProfomaInvoiceComponent, GenerateProfomaPdfComponent, SearchProformaInvoiceComponent
   ],
     imports: [
       ProformaRoutingModule,

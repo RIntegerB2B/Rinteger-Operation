@@ -126,7 +126,7 @@ export class GeneratePdfComponent implements OnInit {
               type: 'none',
               width: 350,
               ul: [
-                { text: this.customerData[0].companyName.toUpperCase(), style: 'textHeader' },
+                { text: this.customerData[0].name.toUpperCase(), style: 'textHeader' },
                 { text: 'GST : ' + this.customerData[0].gstNumber.toUpperCase(), style: 'textGst' },
                 { text: this.customerData[0].companyAddress.toUpperCase(), style: 'address' },
                 { text: this.customerData[0].location.toUpperCase(), style: 'address' },
@@ -337,7 +337,7 @@ export class GeneratePdfComponent implements OnInit {
               type: 'none',
               width: 325,
               ul: [
-                { text: this.customerData[0].companyName.toUpperCase(), style: 'textHeader' },
+                { text: this.customerData[0].name.toUpperCase(), style: 'textHeader' },
                 { text: 'GST : ' + this.customerData[0].gstNumber.toUpperCase(), style: 'textGst' },
                 { text: this.customerData[0].companyAddress.toUpperCase(), style: 'address' },
                 { text: this.customerData[0].location.toUpperCase(), style: 'address' },
@@ -547,7 +547,7 @@ export class GeneratePdfComponent implements OnInit {
               type: 'none',
               width: 350,
               ul: [
-                { text: this.customerData[0].companyName.toUpperCase(), style: 'textHeader' },
+                { text: this.customerData[0].name.toUpperCase(), style: 'textHeader' },
                 { text: 'GST : ' + this.customerData[0].gstNumber.toUpperCase(), style: 'textGst' },
                 { text: this.customerData[0].companyAddress.toUpperCase(), style: 'address' },
                 { text: this.customerData[0].location.toUpperCase(), style: 'address' },
@@ -765,7 +765,7 @@ export class GeneratePdfComponent implements OnInit {
               type: 'none',
               width: 350,
               ul: [
-                { text: this.customerData[0].companyName.toUpperCase(), style: 'textHeader' },
+                { text: this.customerData[0].name.toUpperCase(), style: 'textHeader' },
                 { text: 'GST : ' + this.customerData[0].gstNumber.toUpperCase(), style: 'textGst' },
                 { text: this.customerData[0].companyAddress.toUpperCase(), style: 'address' },
                 { text: this.customerData[0].location.toUpperCase(), style: 'address' },

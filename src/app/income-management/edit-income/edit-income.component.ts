@@ -10,24 +10,25 @@ import { Router, ParamMap } from '@angular/router';
   styleUrls: ['./edit-income.component.css']
 })
 export class EditIncomeComponent implements OnInit {
-id;
-incomeModel: IncomeModel[];
-incomeValue: IncomeModel;
-incomeForm: FormGroup;
-incomeEdit: any;
-Paymode;
-gstOption;
-  constructor(private incomeMangementService: IncomeManagementService, 
-    private router: Router, private route: ActivatedRoute,private fb: FormBuilder) { }
+  id;
+  incomeModel: IncomeModel[];
+  incomeValue: IncomeModel;
+  incomeForm: FormGroup;
+  incomeEdit: any;
+  Paymode;
+  gstOption;
+  constructor(private incomeMangementService: IncomeManagementService,
+    private router: Router, private route: ActivatedRoute, private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe((params: ParamMap)=> {this.id = params.get('id');})
+    this.route.paramMap.subscribe((params: ParamMap) =>      { this.id = params.get('id'); }
+    );
     this.createForm();
     this.getAllIncome();
     this.getPaymode();
     this.getGst();
   }
-  createForm(){
+  createForm() {
     this.incomeForm = this.fb.group({
       workOrderID: ['', Validators.required],
       customerName: ['', Validators.required],
@@ -36,20 +37,20 @@ gstOption;
       modeOfPayment: [''],
       allTotal: [''],
       paidAmount: [''],
-      tds: [''],    
-      gst: ['']     
+      tds: [''],
+      gst: ['']
     });
   }
-  getAllIncome(){
-    this.incomeMangementService.getFindAllwork().subscribe(data =>{
+  getAllIncome() {
+    this.incomeMangementService.getFindAllwork().subscribe(data => {
       this.incomeModel = data;
       this.incomeModel.forEach(element => {
-        if(this.id === element._id){
-          this.incomeValue = element;   
-          console.log(this.incomeValue);       
-        }        
+        if (this.id === element._id) {
+          this.incomeValue = element;
+          console.log(this.incomeValue);
+        }
       });
-    },error=>{
+    }, error => {
       console.log(error);
     })
   }
@@ -61,17 +62,17 @@ gstOption;
       console.log(error);
     });
   }
-  cancel(){
+  cancel() {
     this.router.navigate(['income/viewincome']);
   }
-  getPaymode(){
+  getPaymode() {
     this.incomeMangementService.getincomesetting().subscribe(data => {
       this.incomeEdit = data[0].modeOfPayment;
       console.log(this.incomeValue);
       this.Paymode = this.incomeEdit;
     })
   }
-  getGst(){
+  getGst() {
     this.incomeMangementService.getincomesetting().subscribe(data => {
       this.incomeEdit = data[0].gst;
       this.gstOption = this.incomeEdit;

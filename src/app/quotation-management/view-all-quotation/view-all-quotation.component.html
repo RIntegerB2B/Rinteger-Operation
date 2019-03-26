@@ -1,7 +1,7 @@
 <form style="padding-top:20px">
   <label class="pageBoxLg-label">View Quotation</label>
   <div class="pageBoxLg">
-
+    <app-search-quotation [quotationModel]="quotationModel" (searchQuotation)="filterQuotation($event)"></app-search-quotation>
     <div class="row" [formGroup]="quotationDetailsForm">
       <div class="col-md-2">
         <mat-form-field>
@@ -73,6 +73,9 @@
           <label>Action</label>
         </div>
       </div>
+    </div>
+    <div *ngIf="quotation.length === 0">
+      No quotation
     </div>
     <div *ngFor="let data of quotation">
 

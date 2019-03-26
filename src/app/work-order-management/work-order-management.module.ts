@@ -38,6 +38,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ViewAllWorkorderComponent } from './view-all-workorder/view-all-workorder.component';
 import { GeneratePdfComponent } from './generate-pdf/generate-pdf.component';
+import { SearchWorkorderComponent } from './search-workorder/search-workorder.component';
 
 @NgModule({
   declarations: [CreateWorkorderComponent,
@@ -45,7 +46,8 @@ import { GeneratePdfComponent } from './generate-pdf/generate-pdf.component';
     EditWorkorderComponent,
     ViewWorkorderComponent,
     GeneratePdfComponent,
-    ViewAllWorkorderComponent],
+    ViewAllWorkorderComponent,
+    SearchWorkorderComponent],
     imports: [
       HttpClientModule,
       HttpModule,
