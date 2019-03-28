@@ -44,6 +44,7 @@ export class LeadAddComponent implements OnInit {
   sum = 0;
   existingMobileNumber: number;
   existingName: string;
+  existingEmail: string;
   showMobileNumber: boolean;
   constructor(private fb: FormBuilder,
     private leadManagementService: LeadManagementService, private router: Router,
@@ -63,6 +64,7 @@ existingCustomer() {
       this.customerModel = res;
      this.existingMobileNumber = this.customerModel[0].mobileNumber;
      this.existingName = this.customerModel[0].name;
+     this.existingEmail = this.customerModel[0].emailId;
     } else {
       this.showMobileNumber = false;
     }

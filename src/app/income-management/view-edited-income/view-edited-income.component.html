@@ -6,8 +6,16 @@
            <button mat-raised-button (click)="getTds()" color="success" type="submit">TDS</button>
            <button mat-raised-button (click)="getAll()" color="success" type="submit">ALL</button>
          </div>
-         <div class="col-4">
+         <div class="col-5">
          <app-search-income [incomeModel]='incomeValue' (searchIncome)='filterIncome($event)'></app-search-income>
+        </div>
+        <div class="bor col">
+
+          Total : {{getTotal()}}
+          <br> Paid : {{getPaid()}}
+          <br> Balance : {{getBalance()}}
+          <br> TDS : {{getTdsTotal()}}
+
         </div>
         </div>
       <div class="row gridRowHeader display-none-small">
@@ -157,4 +165,6 @@
       </div>
     </div>
   </div>
+  <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true" [length]="totalSize"
+    [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>
 </form>

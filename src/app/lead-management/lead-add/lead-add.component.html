@@ -80,7 +80,7 @@
               </mat-error>
             </mat-form-field>
           </div>
-          <div fxFlex="50" class="pr-1">
+          <div fxFlex="50" class="pr-1"  *ngIf="!showMobileNumber">
               <mat-form-field class="full-width">
                 <input matInput formControlName="emailId" placeholder="Email ID">
                 <mat-error *ngIf="leadDetailsForm.controls['emailId'].errors?.required">
@@ -89,6 +89,18 @@
                 </mat-error>
               </mat-form-field>
             </div>
+            <div fxFlex="50" class="pr-1" *ngIf="showMobileNumber">
+                <mat-form-field class="full-width">
+                  <input matInput formControlName="emailId" 
+                  (ngModelChange)="existingEmail=$event" placeholder="emailId" 
+                  [ngModel]="existingEmail"
+                  >
+                  <mat-error *ngIf="leadDetailsForm.controls['emailId'].errors?.required">
+                    Enter Name
+                    <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
             <div fxFlex="50" class="pr-1">
               <mat-form-field class="full-width">
                 <mat-select placeholder="Lead Unit" formControlName="leadUnit">

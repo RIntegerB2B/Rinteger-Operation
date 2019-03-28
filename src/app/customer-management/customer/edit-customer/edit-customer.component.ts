@@ -36,7 +36,7 @@ export class EditCustomerComponent implements OnInit {
       name: ['', Validators.required],
       emailId: ['', Validators.required],
       location: ['', Validators.required],
-      city: ['', Validators.required],
+  /*     city: ['', Validators.required], */
       state: ['', Validators.required],
       pincode: ['', Validators.required],
       companyName: ['', Validators.required],

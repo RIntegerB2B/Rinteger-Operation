@@ -83,6 +83,7 @@ export class GeneratePdfComponent implements OnInit {
     this.workOrderReq = work[0].requirements;
     this.customerData = customer;
     this.companyData = company;
+    console.log(this.companyData);
     this.workOrderPdf = company;
     const type = this.singleWorkorderDetailsForm.controls.termsType.value;
     if (temp === 'With Discount + GST' && type === 'Production Terms') {
@@ -126,6 +127,7 @@ export class GeneratePdfComponent implements OnInit {
               type: 'none',
               width: 350,
               ul: [
+                
                 { text: this.customerData[0].name.toUpperCase(), style: 'textHeader' },
                 { text: 'GST : ' + this.customerData[0].gstNumber.toUpperCase(), style: 'textGst' },
                 { text: this.customerData[0].companyAddress.toUpperCase(), style: 'address' },
@@ -136,6 +138,7 @@ export class GeneratePdfComponent implements OnInit {
               ]
             },
             {
+              
               type: 'none',
               width: '*',
               ul: [
@@ -341,7 +344,7 @@ export class GeneratePdfComponent implements OnInit {
                 { text: 'GST : ' + this.customerData[0].gstNumber.toUpperCase(), style: 'textGst' },
                 { text: this.customerData[0].companyAddress.toUpperCase(), style: 'address' },
                 { text: this.customerData[0].location.toUpperCase(), style: 'address' },
-                { text: this.customerData[0].state.toUpperCase(), style: 'address' },
+                { text: this.customerData[0].state.toUpperCase() || {}, style: 'address' },
                 { text: this.customerData[0].pincode, style: 'address' },
                 { text: 'Phone: ' + this.customerData[0].mobileNumber, style: 'phone' },
               ]

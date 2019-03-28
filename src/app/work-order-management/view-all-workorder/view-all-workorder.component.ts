@@ -13,7 +13,10 @@ import { DateSearch } from './search.model';
 export class ViewAllWorkorderComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   workOrder: any;
-  workOrderModel: WorkOrder;
+  gstValue = [{ text: 'withGST' }, { text: 'withoutGST ' }]
+  workOrderModel: WorkOrder[] =[];
+  totalAmount = 0;
+  totalTax = 0;
   matdatasource = new MatTableDataSource([]);
   public pageSize = 50;
   public currentPage = 0;
@@ -53,6 +56,7 @@ export class ViewAllWorkorderComponent implements OnInit {
       this.workOrder = data;
       this.workOrderModel = data;
       this.array = data;
+      console.log(this.workOrderModel);
       this.totalSize = this.array.length;
       this.iterator();
     }, error => {
@@ -72,6 +76,7 @@ export class ViewAllWorkorderComponent implements OnInit {
     this.workOrder = new MatTableDataSource<WorkOrder>(data);
     this.workOrder.paginator = this.paginator;
     this.workOrder = data;
+    this.workOrderModel = data;
   }
   searchDate(workOrderForm) {
     this.dateSearch = new DateSearch();
@@ -80,7 +85,10 @@ export class ViewAllWorkorderComponent implements OnInit {
     this.workOrderService.workOrderDateSearch(this.dateSearch).subscribe(data => {
       this.workOrder = new MatTableDataSource<WorkOrder> (data);
       this.workOrder.paginator = this.paginator;
+      this.workOrderModel = data;
       this.workOrder = data;
+      
+      
     }, error => {
       console.log(error);
     });
@@ -98,6 +106,7 @@ export class ViewAllWorkorderComponent implements OnInit {
       this.workOrder = new MatTableDataSource<WorkOrder>(data);
       this.workOrder.paginator = this.paginator;
       this.workOrder = data;
+      this.workOrderModel = data;
       this.array = data;
       this.totalSize = this.array.length;
       this.iterator();
@@ -105,6 +114,54 @@ export class ViewAllWorkorderComponent implements OnInit {
       console.log(error);
     });
   }
+  searchWithoutGST() {
+    this.workOrderService.workOrderWithOutGST().subscribe(data => {
+      this.workOrder = new MatTableDataSource<WorkOrder>(data);
+      this.workOrder.paginator = this.paginator;
+      this.workOrder = data;
+      this.workOrderModel = data;
+      this.array = data;
+      this.totalSize = this.array.length;
+      
+      this.iterator();
+    }, error => {
+      console.log(error);
+    });
+  }
+  searchWithGST() {
+    this.workOrderService.workOrderWithGST().subscribe(data => {
+      this.workOrder = new MatTableDataSource<WorkOrder>(data);
+      this.workOrder.paginator = this.paginator;
+      this.workOrder = data;
+      this.workOrderModel = data;
+      this.array = data;
+      this.totalSize = this.array.length;
+      this.iterator();
+    }, error => {
+      console.log(error);
+    });
+  }
+  getTotal() {
+    let total = 0;
+    for (let i = 0; i < this.workOrderModel.length; i++) {
+      console.log(this.workOrderModel[i].allTotal);
+        if (this.workOrderModel[i].allTotal) {
+            total += this.workOrderModel[i].allTotal;
+            this.totalAmount = total;
+        }
+    }
+    return total;
+}
+getTax() {
+  let tax = 0;
+  for (let i = 0; i < this.workOrderModel.length; i++) {
+      if (this.workOrderModel[i].tax) {
+        tax += this.workOrderModel[i].tax;
+          this.totalTax = tax;
+      }
+  }
+  return tax;
+}
   private iterator() {
     const end = (this.currentPage + 1) * this.pageSize;
     const start = this.currentPage * this.pageSize;

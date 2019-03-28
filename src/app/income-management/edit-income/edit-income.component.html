@@ -77,12 +77,13 @@
           </mat-form-field>
         </div>        
         <div fxFlex="100" class="mt-1">
-            <button mat-raised-button type="button" color="primary" 
+            <button mat-raised-button mat-button color="accent"
+            type="button" (click)="cancel()">Cancel</button>
+            
+          <span fxFlex></span>
+          <span fxFlex></span>
+          <button mat-raised-button type="button" color="primary" 
             (click)=updateIncome(incomeValue)>Save</button>          
-          <span fxFlex></span>
-          <span fxFlex></span>
-          <button mat-raised-button mat-button color="accent"
-           type="button" (click)="cancel()">Cancel</button>
         </div>
       </div>
     </form>

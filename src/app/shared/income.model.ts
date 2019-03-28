@@ -1,6 +1,6 @@
-export class IncomeModel{
+export class IncomeModel {
     _id: string;
-    workOrderID: string;   
+    workOrderID: string;
     customerName: string;
     date: Date;
     companyName: string;
@@ -9,5 +9,5 @@ export class IncomeModel{
     paidAmount: number;
     tds: number;
     balanceAmount: number;
-    gst: string;       
+    gst: string;
 }

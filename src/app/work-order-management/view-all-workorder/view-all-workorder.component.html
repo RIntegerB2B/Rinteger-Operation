@@ -1,50 +1,70 @@
 <form style="padding-top:20px">
   <label class="pageBoxLg-label">All work Orders</label>
   <div class="pageBoxLg">
-      <app-search-workorder [workOrderModel]="workOrderModel"
-      (searchWorkOrder)="filterWorkOrder($event)"></app-search-workorder>
-    <div class="row" [formGroup]="workOrderForm">
-      <div class="col-md-2">
-        <mat-form-field>
-          <input matInput [matDatepicker]="fromDate" formControlName="fromDate" placeholder="From Date" required>
-          <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
-          <mat-datepicker #fromDate></mat-datepicker>
-        </mat-form-field>
-      </div>
-      <div class="col-md-2">
-        <mat-form-field>
-          <input matInput [matDatepicker]="toDate" formControlName="toDate" placeholder="To Date" required>
-          <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
-          <mat-datepicker #toDate></mat-datepicker>
-        </mat-form-field>
-      </div>
-      <div class="col-md-2">
-          <button type="submit" (click)="searchDate(workOrderForm)" 
-          mat-raised-button color="warn">Search</button>
+    <app-search-workorder [workOrderModel]="workOrderModel" (searchWorkOrder)="filterWorkOrder($event)">
+    </app-search-workorder>
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="row" [formGroup]="workOrderForm">
+          <div class="col-sm-4">
+            <mat-form-field>
+              <input matInput [matDatepicker]="fromDate" formControlName="fromDate" placeholder="From Date" required>
+              <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+              <mat-datepicker #fromDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-4">
+            <mat-form-field>
+              <input matInput [matDatepicker]="toDate" formControlName="toDate" placeholder="To Date" required>
+              <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+              <mat-datepicker #toDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-4">
+            <button type="submit" (click)="searchDate(workOrderForm)" mat-raised-button color="warn">Search</button>
+          </div>
+          <!--    <div class="col-md-2">
+                <mat-form-field>
+                  <mat-select formControlName="monthData"  placeholder="Select Month">
+                    <mat-option *ngFor="let day of allMonth; let i = index" [value]="i+1">
+                      {{day.month}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-2">
+                <mat-form-field>
+                  <mat-select formControlName="yearData" placeholder="Select Year">
+                    <mat-option *ngFor="let yrs of allYear" [value]="yrs.year">
+                      {{yrs.year}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div> 
+              <div class="col-md-2">
+                  <button type="button"
+                   (click)="searchMonth(workOrderForm)" 
+                   mat-raised-button color="warn">Search</button>
+                </div>-->
+          <div class="col-md-4">
+            <button type="button" (click)="searchWithoutGST()" mat-raised-button color="accent">Without GST</button>
+          </div>
+          <div class="col-md-4">
+            <button type="button" (click)="searchWithGST()" mat-raised-button color="accent">GST</button>
+          </div>
+
         </div>
-        <div class="col-md-2">
-            <mat-form-field>
-              <mat-select formControlName="monthData"  placeholder="Select Month">
-                <mat-option *ngFor="let day of allMonth; let i = index" [value]="i+1">
-                  {{day.month}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
+      </div>
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Account Summary</h5>
+            <p class="card-text">Number of Work Order : <b>{{workOrder?.length}}</b></p>
+            <p class="card-text">GST : <b>{{getTax() }}</b></p>
+            <p class="card-text">Total : <b>{{this.getTotal()}}</b></p>
           </div>
-          <div class="col-md-2">
-            <mat-form-field>
-              <mat-select formControlName="yearData" placeholder="Select Year">
-                <mat-option *ngFor="let yrs of allYear" [value]="yrs.year">
-                  {{yrs.year}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <div class="col-md-2">
-              <button type="button"
-               (click)="searchMonth(workOrderForm)" 
-               mat-raised-button color="warn">Search</button>
-            </div>
+        </div>
+      </div>
     </div>
     <div class="row gridRowHeader display-none-small">
       <div class="col-md-2 vcenterHeader">
@@ -69,7 +89,7 @@
       </div>
       <div class="col-md-2 vcenterHeader">
         <div class="form-group">
-          <!-- <label>Lead Status</label> -->
+          <label>Total</label>
         </div>
       </div>
       <div class="col-md-2 vcenterHeader">
@@ -78,8 +98,8 @@
         </div>
       </div>
     </div>
-    
-  <div *ngIf="workOrder?.length === 0 ">
+
+    <div *ngIf="workOrder?.length === 0 ">
       No Work Order
     </div>
     <div *ngFor="let data of workOrder">
@@ -109,10 +129,10 @@
           {{data.date | date: 'dd/MM/yyyy' }}
         </div>
         <div class="display-none-large col-6">
-          <!--   <label class="gridLabel">Lead Status:</label> -->
+          <label class="gridLabel">Total:</label>
         </div>
         <div class="col-md-2 col-6 vcenter form-group">
-          <!-- {{data.leadStatus}} -->
+          {{data.allTotal}}
         </div>
         <div class="display-none-large col-6">
           <label class="gridLabel">Action:</label>
@@ -151,7 +171,7 @@
       </div>
 
     </div>
-    <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true" [length]="totalSize"
-    [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>
+    <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true"
+      [length]="totalSize" [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>
   </div>
 </form>

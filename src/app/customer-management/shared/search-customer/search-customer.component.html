@@ -10,6 +10,10 @@
           <button mat-button type="submit" (click)="searchBy(customerModel, selectElem.value, searchValue.value)">
             <mat-icon>search</mat-icon>
           </button>
+          <button matTooltip="Refresh" mat-icon-button 
+          (click)="searchAll(customerModel)">
+            <mat-icon>refresh</mat-icon>
+          </button>
         </div>
       </div>
     </div>

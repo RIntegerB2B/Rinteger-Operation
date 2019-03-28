@@ -1,4 +1,5 @@
-<form novalidate [formGroup]="workOrderDetailsForm" (ngSubmit)="createLeadWorkOrder(workOrderDetailsForm)" style="padding-top:20px">
+<form novalidate [formGroup]="workOrderDetailsForm" (ngSubmit)="createLeadWorkOrder(workOrderDetailsForm)"
+  style="padding-top:20px">
   <label class="pageBoxLg-label">Create Work Order</label>
   <div class="pageBoxLg" *ngFor="let leadData of leadModel; let i = index">
     <div class="row" *ngFor="let customerData of customerModel">
@@ -12,7 +13,8 @@
           <div class="col-md-8  col-6">
             <div class="form-group">
               : <label class="itemLable">
-                <input hidden formControlName="customerID" [ngModel]="customerData.customerID"> {{customerData.customerID}}
+                <input hidden formControlName="customerID" [ngModel]="customerData.customerID">
+                {{customerData.customerID}}
               </label>
             </div>
           </div>
@@ -23,7 +25,8 @@
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              <input hidden formControlName="customerName" [ngModel]="customerData.name"> : <label class="itemLable">{{customerData.name}}</label>
+              <input hidden formControlName="customerName" [ngModel]="customerData.name"> : <label
+                class="itemLable">{{customerData.name}}</label>
             </div>
           </div>
           <div class="col-md-4  col-6">
@@ -33,7 +36,8 @@
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              <input hidden formControlName="companyName" [ngModel]="customerData.companyName"> : <label class="itemLable">{{customerData.companyName}}</label>
+              <input hidden formControlName="companyName" [ngModel]="customerData.companyName"> : <label
+                class="itemLable">{{customerData.companyName}}</label>
             </div>
           </div>
           <div class="col-md-4  col-6">
@@ -43,7 +47,8 @@
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              <input hidden formControlName="companyAddress" [ngModel]="customerData.companyAddress"> : <label class="itemLable">{{customerData.companyAddress}}</label>
+              <input hidden formControlName="companyAddress" [ngModel]="customerData.companyAddress"> : <label
+                class="itemLable">{{customerData.companyAddress}}</label>
             </div>
           </div>
           <div class="col-md-4  col-6">
@@ -53,7 +58,8 @@
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              <input hidden formControlName="emailId" [ngModel]="customerData.emailId"> : <label class="itemLable">{{customerData.emailId}}</label>
+              <input hidden formControlName="emailId" [ngModel]="customerData.emailId"> : <label
+                class="itemLable">{{customerData.emailId}}</label>
             </div>
           </div>
         </div>
@@ -204,7 +210,8 @@
         <div class="col-md-2 col-4">
           <div class="form-group">
             <mat-form-field class="full-width">
-              <input matInput formControlName="total" [ngModel]="(workOrderDetailsForm.controls['requirements'].controls[i].controls.quantity.value *
+              <input matInput formControlName="total"
+                [ngModel]="(workOrderDetailsForm.controls['requirements'].controls[i].controls.quantity.value *
             workOrderDetailsForm.controls['requirements'].controls[i].controls.price.value
               ) - (workOrderDetailsForm.controls['requirements'].controls[i].controls.quantity.value *
               workOrderDetailsForm.controls['requirements'].controls[i].controls.price.value)/100*workOrderDetailsForm.controls['requirements'].controls[i].controls.discount.value"
@@ -233,6 +240,10 @@
         <mat-icon class="gridEdit">add_box</mat-icon>
       </a>
     </div>
+    <div class="col-md-12">
+      <mat-checkbox (change)="checkGst($event)">Without Gst</mat-checkbox>
+    </div>
+
     <div class="offset-md-6 col-md-6">
       <div class="pageBoxLg">
         <div class="row">
@@ -243,7 +254,8 @@
           </div>
           <div class="col-md-6 col-6">
             <mat-form-field class="full-width">
-              <input matInput formControlName="tax" [ngModel]="(workOrderDetailsForm.controls.subTotal.value * this?.gstVal / 100)" [readonly]="true"
+              <input matInput formControlName="tax"
+                [ngModel]="(workOrderDetailsForm.controls.subTotal.value * this?.gstVal / 100)" [readonly]="true"
                 placeholder="Tax">
             </mat-form-field>
           </div>

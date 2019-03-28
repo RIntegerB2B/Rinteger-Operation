@@ -6,6 +6,7 @@ import { WorkorderPdfTemplateComponent } from './workorder-pdf-template/workorde
 import { ExpenseSettingsComponent } from './expense-settings/expense-settings.component';
 import { TicketSettingComponent } from './ticket-setting/ticket-setting.component';
 import { IncomeSettingsComponent } from './income-settings/income-settings.component';
+import { MaterialSettingsComponent } from './material-settings/material-settings.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,9 @@ const routes: Routes = [
   {
     path: 'incomesetting',
     component: IncomeSettingsComponent
+  }, {
+    path: 'materialsetting',
+    component: MaterialSettingsComponent
   }
 ];
 

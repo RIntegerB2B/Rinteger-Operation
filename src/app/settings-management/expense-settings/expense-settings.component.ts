@@ -22,16 +22,11 @@ export class ExpenseSettingsComponent implements OnInit {
   message;
   constructor(private fb: FormBuilder, private dialog: MatDialog, private settingsService: SettingsServiceService,
     private snackbar: MatSnackBar) { }
-
-  ngOnInit() {
-      this.createForm();
-      this.viewExpensePayment();
-    }
   createForm() {
     this.expenseSettingsForm = this.fb.group({
-      modeOfPayment: ['', Validators.required],
-      expenseType: ['', Validators.required],
-      gst: ['', Validators.required]
+      modeOfPayment: [''],
+      expenseType: [''],
+      gst: ['']
     });
   }
   showPaymentForm() {
@@ -79,7 +74,7 @@ export class ExpenseSettingsComponent implements OnInit {
       });
     }, error => {
       console.log(error);
-    })
+    });
   }
   addExpenseType() {
     this.message = 'Expense Type added Successfully';
@@ -130,6 +125,12 @@ export class ExpenseSettingsComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+  }
+
+
+  ngOnInit() {
+    this.createForm();
+    this.viewExpensePayment();
   }
 
 }

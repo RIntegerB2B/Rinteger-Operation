@@ -21,7 +21,13 @@
         </div>
         <div>
           <button mat-raised-button (click)="getIncomeSheet()" type="submit">IncomeSheet</button>
+          <button mat-raised-button (click)="getAllWorkoreder()" type="submit">Refresh</button>
+        </div>
+        <div class="col-5">
+          <app-search-income [incomeModel]='incomeValue' (searchIncome)='filterIncome($event)'></app-search-income>
+          
         </div>       
+        
       </div>
       <div class="row gridRowHeader display-none-small">
         <div class="col-md-2 vcenterHeader">
@@ -98,7 +104,7 @@
             </button>
             <mat-menu #menu="matMenu">             
               <a class="nav-link" (click)="getEditIncome(data)">
-                Edit
+                Create IncomeSheet
               </a>
               <a class="nav-link" (click)="getDeleteIncome(data)">
                 Delete
@@ -110,5 +116,5 @@
     </div>
   </div>
   <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true" [length]="totalSize"
-    [pageIndex]="currentPage"></mat-paginator>
+    [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>
 </form>

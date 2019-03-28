@@ -16,6 +16,7 @@ export class EditIncomeSheetComponent implements OnInit {
   incomeModel: IncomeModel[];
   incomeValue: IncomeModel;
   incomeEdit: any;
+  
   id;
   paymode;
   gstOption;
@@ -56,8 +57,10 @@ export class EditIncomeSheetComponent implements OnInit {
     })
   }
   updateIncomeSheet(data){
+  
     this.incomemagagementservice.EditIncomeSheet(data).subscribe(data =>{
       this.incomeValue = data;
+
       this.router.navigate(['income/viewincomesheet']);
     })
   }

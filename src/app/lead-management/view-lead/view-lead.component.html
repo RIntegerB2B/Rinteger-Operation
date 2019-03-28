@@ -2,7 +2,7 @@
   <app-search [searchDetails]="leadStatusModel" [leadModel]="array" (searchFilter)="getSearch($event)">
   </app-search>
   <!-- <div class="container-fluid"> -->
-     
+
   <div class="row" [formGroup]="leadForm">
     <div class="col-md-2">
       <mat-form-field>
@@ -19,10 +19,9 @@
       </mat-form-field>
     </div>
     <div class="col-md-2">
-      <button type="submit" (click)="searchDate(leadForm)" 
-      mat-raised-button color="warn">Search</button>
+      <button type="submit" (click)="searchDate(leadForm)" mat-raised-button color="warn">Search</button>
     </div>
-    <div class="col-md-2">
+    <!--   <div class="col-md-2">
       <mat-form-field>
         <mat-select formControlName="monthData"  placeholder="Select Month">
           <mat-option *ngFor="let day of allMonth; let i = index" [value]="i+1">
@@ -31,7 +30,7 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <div class="col-md-2">
+  <div class="col-md-2">
       <mat-form-field>
         <mat-select formControlName="yearData" placeholder="Select Year">
           <mat-option *ngFor="let yrs of allYear" [value]="yrs.year">
@@ -44,7 +43,7 @@
         <button type="button"
          (click)="searchMonth(leadForm)" 
          mat-raised-button color="warn">Search</button>
-      </div>
+      </div> -->
   </div>
   <div class="row">
     <div class="btn">
@@ -70,7 +69,7 @@
       </div>
     </div>
     <div class="col-md-2 vcenterHeader">
-      <div>
+      <div class="form-group">
         <label>Date</label>
       </div>
     </div>
@@ -85,7 +84,7 @@
       </div>
     </div>
   </div>
-  
+
   <div *ngIf="leadModel?.length === 0 ">
     No Leads
   </div>

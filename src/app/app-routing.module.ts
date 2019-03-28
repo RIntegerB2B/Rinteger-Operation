@@ -59,7 +59,10 @@ const routes: Routes = [
     path: 'ticket',
     loadChildren: './ticket/ticket.module#TicketModule',
   },
-
+  {
+    path: 'material',
+    loadChildren: './material-management/material-management.module#MaterialModule',
+  },
   {
     path: '',
     redirectTo: 'account/login',

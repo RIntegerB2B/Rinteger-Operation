@@ -26,46 +26,29 @@ export class ExpenseManagementService {
     const addUrl = 'createexpense';
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.post<Expense[]>(url, data);
-  }
- /*  workorderPDFDetails(): Observable<any> {
-    const addUrl = 'workorderpdfdetails/';
-    const url: string = this.serviceUrl + addUrl ;
-    return this.httpClient.get<Expense[]>(url);
-  } */
+  } 
   editExpense(edit): Observable<any> {
     const addUrl = 'editexpense/';
     const url: string = this.serviceUrl + addUrl + edit._id;
     return this.httpClient.put<Expense[]>(url, edit);
   }
   deleteExpense(edit): Observable<any> {
-
     const addUrl = 'deleteexpense/';
-
     const url: string = this.serviceUrl + addUrl + edit._id;
     return this.httpClient.delete<Expense[]>(url);
   }
   singleExpense(id): Observable<any> {
-
     const addUrl = 'singleexpense/';
-
     const url: string = this.serviceUrl + addUrl + id;
     return this.httpClient.get<Expense[]>(url);
-  }
-  /* createNewCustomer(customer): Observable<any>   {
-    const addUrl = 'multiplecustomertest';
-    const url: string = this.serviceUrl + addUrl;
-    return this.httpClient.post<Expense[]>(url, customer);
-  }
-   */
+  }  
   typeFilter(data):Observable<any>{
     const addUrl = 'typefilter';
-
     const url: string = this.serviceUrl + addUrl ;
     return this.httpClient.post<Expense[]>(url, data);
   }
   dateFilter(data):Observable<any>{
     const addUrl = 'datefilter/';
-
     const url: string = this.serviceUrl + addUrl  ;
     return this.httpClient.post<Expense[]>(url, data);
   }
@@ -74,7 +57,24 @@ export class ExpenseManagementService {
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.get<Expense[]>(url);
   }
-  
-
-  
+  gstFind(): Observable<any> {
+    const addUrl = 'gstfind';
+    const url:string = this.serviceUrl + addUrl;
+    return this.httpClient.get<Expense[]>(url);
+  } 
+  allsttExpense(): Observable<any> {
+    const addUrl = 'expense';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<Expense[]>(url);
+  } 
+  allsttPayment(): Observable<any> {
+    const addUrl = 'expense';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<Expense[]>(url);
+  } 
+  allsttGst(): Observable<any> {
+    const addUrl = 'expense';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<Expense[]>(url);
+  } 
 }

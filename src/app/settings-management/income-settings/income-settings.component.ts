@@ -54,7 +54,7 @@ export class IncomeSettingsComponent implements OnInit {
       this.incomeSettingsForm.reset();
     }, error => {
       console.log(error);
-    })
+    });
   }
   viewIncomeSetting() {
     this.settingsService.getIncomePaymentMode().subscribe(data => {
@@ -62,7 +62,7 @@ export class IncomeSettingsComponent implements OnInit {
       this.settingValue = data;
     }, error => {
       console.log(error);
-    })
+    });
   }
   deletePaymentMode(data) {
     this.message = 'Payment mode deleted successfully';
@@ -75,7 +75,7 @@ export class IncomeSettingsComponent implements OnInit {
       this.incomeSettingsForm.reset();
     }, error => {
       console.log(error);
-    })
+    });
   }
   addGst() {
     this.message = 'Gst Option added successfully';
@@ -90,10 +90,10 @@ export class IncomeSettingsComponent implements OnInit {
       this.incomeSettingsForm.reset();
     }, error => {
       console.log(error);
-    })
+    });
   }
   deleteGst(test) {
-    this.message = 'Gst option deleted successfully'
+    this.message = 'Gst option deleted successfully';
     this.settingsService.deleteIncomeGst(test).subscribe(data => {
       this.settingModel = data;
       this.settingValue = data;
@@ -103,6 +103,6 @@ export class IncomeSettingsComponent implements OnInit {
       this.incomeSettingsForm.reset();
     }, error => {
       console.log(error);
-    })
+    });
   }
 }

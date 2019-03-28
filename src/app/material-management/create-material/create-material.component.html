@@ -1,0 +1,115 @@
+<div class="pageBoxLg">
+    <div class="container topAlignContainer ">
+      <form [formGroup]="materialDetailsForm" >
+        <div fxLayout="row wrap" fxLayout.lt-sm="column">
+          <div fxFlex="100">
+            <label class="pageBoxLg-label">Edit Material</label>
+          </div>       
+          <div fxFlex="50" class="pr-1">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="workOrderID" [readonly]="true" placeholder="WorkOrderID" 
+              [value]="materialValue?.workOrderID"
+                (ngModelChange)="materialValue.workOrderID=$event">  
+            </mat-form-field>
+          </div>
+          <div fxFlex="50" class="pr-1">
+              <mat-form-field>
+                <input matInput formControlName="date" [matDatepicker]="picker" 
+                [value]="materialValue?.date" 
+                (ngModelChange)="materialValue.date=$event"
+                 placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+          <div fxFlex="50" class="pr-1">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="customerName" [value]="materialValue?.customerName" 
+              (ngModelChange)="materialValue.customerName=$event"
+                placeholder="customerName">  
+            </mat-form-field>
+          </div>          
+          <div fxFlex="50" class="pr-1">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="receivedBy"
+               (ngModelChange)="materialValue.receivedBy=$event"
+                placeholder="Received By">  
+            </mat-form-field>
+          </div>        
+          <div fxFlex="50" class="pr-1">
+              <mat-form-field class="full-width">
+                <input matInput formControlName="productType" 
+                 (ngModelChange)="materialValue.productType=$event"
+                  placeholder="Product Type">  
+              </mat-form-field>
+            </div>  
+            <div fxFlex="50" class="pr-1">
+                <mat-form-field class="full-width">
+                  <input matInput formControlName="noOfProduct"
+                   (ngModelChange)="materialValue.noOfProduct=$event"
+                    placeholder="No. of Product">  
+                </mat-form-field>
+              </div> 
+          <div fxFlex="50" class="pr-1">
+            <mat-form-field class="full-width">
+                <mat-select placeholder="Select Shoot Type" 
+                (ngModelChange)="materialValue.shootType=$event" formControlName="shootType">
+                    <mat-option *ngFor="let shoot of shootType" [value]="shoot">
+                      {{shoot}}
+                    </mat-option>
+                  </mat-select>
+            </mat-form-field>
+          </div>       
+          <div fxFlex="50" class="pr-1">
+              <mat-form-field class="full-width">
+                  <mat-select placeholder="Select Shoot Status" 
+                  (ngModelChange)="materialValue.shootStatus=$event" formControlName="shootStatus">
+                      <mat-option *ngFor="let shoot of shootStatus" [value]="shoot">
+                        {{shoot}}
+                      </mat-option>
+                    </mat-select>
+              </mat-form-field>
+            </div> 
+            <div fxFlex="50" class="pr-1">
+                <mat-form-field class="full-width">
+                    <mat-select placeholder="Select Payment Status" 
+                    (ngModelChange)="materialValue.paymentStatus=$event" formControlName="paymentStatus">
+                        <mat-option *ngFor="let pay of paymentStatus" [value]="pay">
+                          {{pay}}
+                        </mat-option>
+                      </mat-select>
+                </mat-form-field>
+              </div> 
+          <div fxFlex="50" class="pr-1">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="dispatchType"
+               (ngModelChange)="materialValue.dispatchType=$event"
+                placeholder="Dispatch Type">
+            </mat-form-field>
+          </div>
+          <div fxFlex="50" class="pr-1">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="materialStatus"  
+              (ngModelChange)="materialValue.materialStatus=$event"
+                placeholder="Material Status">          
+            </mat-form-field>
+          </div>
+          <div fxFlex="50" class="pr-1">
+            <mat-form-field class="full-width">
+              <textarea matInput formControlName="remark" 
+              (ngModelChange)="materialValue.remark=$event"
+                placeholder="Remark">          </textarea>
+            </mat-form-field>
+          </div>                     
+          <div fxFlex="100" class="mt-1">
+              <button mat-raised-button mat-button color="accent"
+              type="button" (click)="cancel()">Cancel</button>
+            <span fxFlex></span>
+            <span fxFlex></span>           
+             <button mat-raised-button type="button" color="primary" 
+              (click)=updateMaterial(materialValue)>Save</button> 
+          </div>
+        </div>
+      </form>
+    </div>
+    </div>

@@ -42,7 +42,7 @@ export class CreateCustomerComponent implements OnInit {
         Validators.email
       ]],
       location: ['', Validators.required],
-      city: ['', Validators.required],
+      /* city: ['', Validators.required], */
       state: ['', Validators.required],
       pincode: ['', Validators.required],
       companyName: ['', Validators.required],
@@ -61,7 +61,7 @@ export class CreateCustomerComponent implements OnInit {
       customerDetailsForm.controls.name.value,
       customerDetailsForm.controls.emailId.value,
       customerDetailsForm.controls.location.value,
-      customerDetailsForm.controls.city.value,
+      /* customerDetailsForm.controls.city.value, */
       customerDetailsForm.controls.state.value,
       customerDetailsForm.controls.pincode.value,
       customerDetailsForm.controls.companyName.value,

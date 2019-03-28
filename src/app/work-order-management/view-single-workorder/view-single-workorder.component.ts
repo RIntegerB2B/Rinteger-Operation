@@ -212,7 +212,6 @@ export class ViewSingleWorkorderComponent implements OnInit {
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Discount %', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-    
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');
@@ -278,7 +277,6 @@ export class ViewSingleWorkorderComponent implements OnInit {
       this.doc.text(140, 185, 'GST (' + this.workOrderPDFModel[0].gst + '%) :' + ' ' + this.workOrder[0].tax);
       this.doc.text(140, 190, 'Total :Rs' + ' ' + this.workOrder[0].allTotal);
       this.doc.save('proper.pdf');
-      
     }, err => {
       console.log(err);
     });
@@ -311,7 +309,6 @@ export class ViewSingleWorkorderComponent implements OnInit {
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');
@@ -406,11 +403,9 @@ export class ViewSingleWorkorderComponent implements OnInit {
           this.allValues[i].price, this.allValues[i].discount, this.allValues[i].total);
           this.printArray.push(this.tempArray[i]);
       }
-      
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');

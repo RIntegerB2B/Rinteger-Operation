@@ -10,6 +10,7 @@ import { BankDetails } from './../shared/bankdetails.model';
 import { ExpenseSetting } from './../shared/expense-settings.model';
 import { TicketsettingsModel } from './ticket-setting/ticket-settings.model';
 import { IncomeSetting } from '../shared/income-setting.model';
+import { MaterialSetting } from '../shared/material-settings.model';
 
 @Injectable({
   providedIn: 'root'
@@ -252,6 +253,41 @@ export class SettingsServiceService {
     const addUrl = 'deleteincomegst/';
     const url: string = this.serviceUrl + addUrl + val;
     return this.httpClient.delete<IncomeSetting[]>(url);
+  }
+  addShootType(data): Observable<any> {
+    const addUrl = 'addshoottype';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<MaterialSetting[]>(url, data);
+  }
+  getMaterial(): Observable<any> {
+    const addUrl = 'getmaterial';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<MaterialSetting[]>(url);
+  }
+  deleteShootType(val): Observable<any> {
+    const addUrl = 'deleteshoottype/';
+    const url: string = this.serviceUrl + addUrl + val;
+    return this.httpClient.delete<MaterialSetting[]>(url);
+  }
+  addDispatchType(data): Observable<any> {
+    const addUrl = 'adddispatchtype';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<MaterialSetting[]>(url, data);
+  }
+  deleteDispatchType(val): Observable<any> {
+    const addUrl = 'deletedispatchtype/';
+    const url: string = this.serviceUrl + addUrl + val;
+    return this.httpClient.delete<MaterialSetting[]>(url);
+  }
+  addMaterialStatus(data): Observable<any> {
+    const addUrl = 'addmaterialstauts';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<MaterialSetting[]>(url, data);
+  }
+  deleteMaterialStatus(val): Observable<any> {
+    const addUrl = 'deletematerialstatus/';
+    const url: string = this.serviceUrl + addUrl + val;
+    return this.httpClient.delete<MaterialSetting[]>(url);
   }
 
 }

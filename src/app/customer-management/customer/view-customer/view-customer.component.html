@@ -8,23 +8,22 @@
           </a>
         </div>
       </div>
-      <app-search-customer
-       [customerModel]="customerValue"
-        (searchCustomer)="filterCustomer($event)"></app-search-customer>
+      <app-search-customer [customerModel]="customerValue" 
+      (searchCustomer)="filterCustomer($event)"></app-search-customer>
       <div class="row gridRowHeader display-none-small">
         <div class="col-md-2 vcenterHeader">
           <div class="form-group">
             <label>Customer ID</label>
           </div>
         </div>
-        <div class="col-md-2 vcenterHeader">
-          <div class="form-group">
-            <label>Mobile Number</label>
-          </div>
-        </div>
         <div class="col-md-3 vcenterHeader">
           <div class="form-group">
             <label>Name</label>
+          </div>
+        </div>
+        <div class="col-md-2 vcenterHeader">
+          <div class="form-group">
+            <label>Mobile Number</label>
           </div>
         </div>
         <div class="col-md-3 vcenterHeader">
@@ -75,17 +74,17 @@
             {{data.customerID}}
           </div>
           <div class="display-none-large col-6">
+            <label class="gridLabel">Name:</label>
+          </div>
+          <div class="col-md-3 col-6 vcenter form-group">
+            {{data.name}}
+          </div>
+          <div class="display-none-large col-6">
             <label class="gridLabel">Mobile Number:</label>
           </div>
           <div class="col-md-2 col-6 vcenter form-group">
             {{data.mobileNumber}}
 
-          </div>
-          <div class="display-none-large col-6">
-            <label class="gridLabel">Name:</label>
-          </div>
-          <div class="col-md-3 col-6 vcenter form-group">
-            {{data.name}}
           </div>
           <div class="display-none-large col-6">
             <label class="gridLabel">Email ID:</label>
@@ -163,7 +162,7 @@
         </div>
       </div>
     </div>
-    <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true"
-      [length]="totalSize" [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>
+    <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true" [length]="totalSize"
+      [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>
   </div>
 </form>

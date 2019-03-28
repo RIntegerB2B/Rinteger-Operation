@@ -49,7 +49,6 @@ export class ViewCustomerComponent implements OnInit {
     this.customerModel = new MatTableDataSource<Customer>(data);
     this.customerModel.paginator = this.paginator;
     this.customerModel = data;
-
   }
   createForm() {
     this.customerDetailsForm = this.fb.group({

@@ -27,6 +27,7 @@ import {
   MatStepperModule,
   MatDatepickerModule
 } from '@angular/material';
+import { MaterialSettingsComponent } from './material-settings/material-settings.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
@@ -36,9 +37,11 @@ import { SettingsRoutingModule } from './settings-routing.module';
 import { ExpenseSettingsComponent } from './expense-settings/expense-settings.component';
 import { IncomeSettingsComponent } from './income-settings/income-settings.component';
 import { TicketSettingComponent } from './ticket-setting/ticket-setting.component';
+
 @NgModule({
   declarations: [LeadSettingsComponent, WorkorderPdfTemplateComponent, ExpenseSettingsComponent, TicketSettingComponent,
-    IncomeSettingsComponent],
+    IncomeSettingsComponent,MaterialSettingsComponent
+  ],
   imports: [
     HttpClientModule,
     HttpModule,

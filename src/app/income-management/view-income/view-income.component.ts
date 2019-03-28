@@ -15,6 +15,8 @@ export class ViewIncomeComponent implements OnInit {
   matdatasource = new MatTableDataSource([]);
   incomeDetailsForm: FormGroup;
   incomeModel: any;
+  incomeValue: IncomeModel[];
+  
 
 
   public pageSize = 50;
@@ -23,25 +25,75 @@ export class ViewIncomeComponent implements OnInit {
   public arry: any;
 
   public displayedColumns = ['', '', '', '', ''];
-  public dataSource: any;
-  constructor(private fb: FormBuilder, private router: Router,
-    private incomemanagementservice: IncomeManagementService, private dialog: MatDialog) { }
+  public dataSource: any; 
+  constructor(private fb: FormBuilder,private router: Router,
+    private incomemanagementservice : IncomeManagementService,private dialog: MatDialog) { }
 
   ngOnInit() {
     this.createForm();
+    this.getAllWorkoreder();
     /* this.findall(); */
   }
-  createForm() {
+  createForm(){
     this.incomeDetailsForm = this.fb.group({
       fromDate: [''],
       toDate: [''],
       workOrderID: ['', Validators.required],
       customerName: ['', Validators.required],
       date: ['', Validators.required],
-      companyName: ['', Validators.required],
+      companyName: ['', Validators.required],     
       allTotal: ['', Validators.required]
-
+     
     });
+  }
+  filterIncome(data){
+    this.incomeModel = new MatTableDataSource<IncomeModel>(data);
+    this.incomeModel.paginator = this.paginator;
+    this.incomeModel = data;
+    this.arry = data;
+    this.totalSize = this.arry.length;
+    this.iterator();
+  }
+  getAllWorkoreder(){
+    this.incomemanagementservice.getFindAllwork().subscribe(data => {
+      this.incomeValue = data;
+      this.incomeModel=data;
+       this.incomeModel = new MatTableDataSource<IncomeModel>(data);
+      this.incomeModel.paginator = this.paginator;
+      this.incomeModel = data;
+      this.arry = data;
+      this.totalSize = this.arry.length;
+      this.iterator();
+    })
+  }
+  searchByDate(incomeDetailsForm: FormGroup){
+    this.incomeModel = new IncomeModel();
+    this.incomeModel.fromDate = incomeDetailsForm.controls.fromDate.value;
+    this.incomeModel.toDate = incomeDetailsForm.controls.toDate.value;
+    this.incomemanagementservice.getByDate(this.incomeModel).subscribe(data => {
+      this.incomeModel=data;
+       this.incomeModel = new MatTableDataSource<IncomeModel>(data);
+      this.incomeModel.paginator = this.paginator;
+      this.incomeModel = data;
+      this.arry = data;
+      this.totalSize = this.arry.length;
+      this.iterator();
+    },error =>{
+      console.log(error);
+    })
+  }
+  
+  getEditIncome(data){
+    this.router.navigate(['income/editincome',data._id]);
+  }
+
+  getDeleteIncome(data){
+    this.incomemanagementservice.DeleteIncome(data).subscribe(data => {
+      this.incomeModel = data;
+    })
+  }
+  getIncomeSheet(){
+    this.router.navigate(['income/viewincomesheet']);
   }
   public handlePage(e: any) {
     this.currentPage = e.pageIndex;
@@ -53,33 +105,6 @@ export class ViewIncomeComponent implements OnInit {
     const start = this.currentPage * this.pageSize;
     const part = this.arry.slice(start, end);
     this.incomeModel = part;
-  }
-  searchByDate(incomeDetailsForm: FormGroup){
-    this.incomeModel = new IncomeModel();
-    this.incomeModel.fromDate = incomeDetailsForm.controls.fromDate.value;
-    this.incomeModel.toDate = incomeDetailsForm.controls.toDate.value;
-    this.incomemanagementservice.getByDate(this.incomeModel).subscribe(data => {
-      this.incomeModel = data;
-       this.incomeModel = new MatTableDataSource<IncomeModel>(data);
-      this.incomeModel.paginator = this.paginator;
-      this.incomeModel = data;
-      this.arry = data;
-      this.totalSize = this.arry.length;
-    }, error => {
-      console.log(error);
-    });
-  }
-  getEditIncome(data) {
-    this.router.navigate(['income/editincome', data._id]);
-  }
-
-  getDeleteIncome(test) {
-    this.incomemanagementservice.DeleteIncome(test).subscribe(data => {
-      this.incomeModel = data;
-    });
-  }
-  getIncomeSheet() {
-    this.router.navigate(['income/viewincomesheet']);
   }
 
 }

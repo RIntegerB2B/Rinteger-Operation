@@ -93,4 +93,14 @@ workOrderDateSearch(dateSearch): Observable<any> {
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.post<WorkOrder[]>(url, dateSearch);
   }
+  workOrderWithOutGST(): Observable<any> {
+    const addUrl = 'workorwithoutgst';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<WorkOrder[]>(url);
+  }
+  workOrderWithGST(): Observable<any> {
+    const addUrl = 'workorwithgst';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<WorkOrder[]>(url);
+  }
 }

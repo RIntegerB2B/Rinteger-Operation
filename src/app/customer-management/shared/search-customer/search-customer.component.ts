@@ -7,7 +7,7 @@ import { Customer } from './../../customer/create-customer/customer.model';
   styleUrls: ['./search-customer.component.css']
 })
 export class SearchCustomerComponent implements OnInit {
-  searchType = ['MobileNumber', 'Name', 'EmailId', 'City', 'Location'];
+  searchType = ['MobileNumber', 'Name', 'EmailId', 'Location'];
   customerDetailsForm: FormGroup;
   @Input() customerModel: Customer;
   @Output() searchCustomer = new EventEmitter<any>();
@@ -18,27 +18,35 @@ export class SearchCustomerComponent implements OnInit {
       srchterm: [''],
     });
   }
+  searchAll(filterData) {
+    this.searchCustomer.emit(filterData);
+  }
   searchBy(customerData, selectType, filter) {
     switch (selectType) {
       case 'Name': {
+        customerData.forEach(data => {
+          if (!data.name) {
+            data.name = '';
+          }
+        });
         const filterData = customerData.filter(data => data.name.toUpperCase().indexOf(filter.toUpperCase()) > -1);
         this.searchCustomer.emit(filterData);
         break;
       }
       case 'MobileNumber': {
         customerData.forEach(data => {
-          if (!data.mobileNumber)           {
+          if (!data.mobileNumber) {
             data.mobileNumber = '';
           }
         });
         const filterData = customerData.filter(data =>
           data.mobileNumber.toString().indexOf(filter.toString()) > -1);
-          this.searchCustomer.emit(filterData);
+        this.searchCustomer.emit(filterData);
         break;
       }
       case 'EmailId': {
         customerData.forEach(data => {
-          if (!data.emailId)           {
+          if (!data.emailId) {
             data.emailId = '';
           }
         });
@@ -49,7 +57,7 @@ export class SearchCustomerComponent implements OnInit {
       }
       case 'City': {
         customerData.forEach(data => {
-          if (!data.city)           {
+          if (!data.city) {
             data.city = '';
           }
         });
@@ -60,7 +68,7 @@ export class SearchCustomerComponent implements OnInit {
       }
       case 'Location': {
         customerData.forEach(data => {
-          if (!data.location)           {
+          if (!data.location) {
             data.location = '';
           }
         });

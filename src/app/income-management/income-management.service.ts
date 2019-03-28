@@ -8,9 +8,9 @@ import { IncomeSetting } from './../shared/income-setting.model';
   providedIn: 'root'
 })
 export class IncomeManagementService {
-serviceUrl: string = AppSetting.serviceUrl;
+  serviceUrl: string = AppSetting.serviceUrl;
   constructor(private httpClient: HttpClient) { }
-  getByDate(data): Observable<any>{
+  getByDate(data): Observable<any> {
     const addUrl = 'findbydate';
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.post<IncomeModel[]>(url, data);
@@ -25,27 +25,27 @@ serviceUrl: string = AppSetting.serviceUrl;
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.get<IncomeModel[]>(url);
   }
-  EditIncome(data): Observable<any>{
+  EditIncome(data): Observable<any> {
     const addUrl = 'editincome/';
     const url: string = this.serviceUrl + addUrl + data._id;
-    return this.httpClient.put<IncomeModel[]>(url,data);
+    return this.httpClient.put<IncomeModel[]>(url, data);
   }
-  DeleteIncome(data): Observable<any>{
+  DeleteIncome(data): Observable<any> {
     const addUrl = 'delete/';
     const url: string = this.serviceUrl + addUrl + data._id;
     return this.httpClient.delete<IncomeModel[]>(url);
   }
-  DeleteIncomeSheet(data): Observable<any>{
+  DeleteIncomeSheet(data): Observable<any> {
     const addUrl = 'deleteincome/';
     const url: string = this.serviceUrl + addUrl + data._id;
     return this.httpClient.delete<IncomeModel[]>(url);
   }
-  EditIncomeSheet(data): Observable<any>{
+  EditIncomeSheet(data): Observable<any> {
     const addUrl = 'editincomesheet/';
     const url: string = this.serviceUrl + addUrl + data._id;
-    return this.httpClient.put<IncomeModel[]>(url,data);
+    return this.httpClient.put<IncomeModel[]>(url, data);
   }
-  getincomesetting(): Observable<any>{
+  getincomesetting(): Observable<any> {
     const addUrl = 'viewincomepaymentmode';
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.get<IncomeSetting[]>(url);

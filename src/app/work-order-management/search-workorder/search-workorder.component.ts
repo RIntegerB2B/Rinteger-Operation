@@ -8,7 +8,7 @@ import { WorkOrder } from './../../shared/workorder.model';
   styleUrls: ['./search-workorder.component.css']
 })
 export class SearchWorkorderComponent implements OnInit {
-  searchType = ['MobileNumber', 'Company Name'];
+  searchType = ['MobileNumber', 'Name'];
   workOrderDetailsForm: FormGroup;
   @Input() workOrderModel: WorkOrder;
   @Output() searchWorkOrder = new EventEmitter<any>();
@@ -19,10 +19,13 @@ export class SearchWorkorderComponent implements OnInit {
       srchterm: [''],
     });
   }
+  searchAll(filterData) {
+    this.searchWorkOrder.emit(filterData);
+  }
   searchBy(workOrderData, selectType, filter) {
     switch (selectType) {
-      case 'Company Name': {
-        const filterData = workOrderData.filter(data => data.companyName.toUpperCase().indexOf(filter.toUpperCase()) > -1);
+      case 'Name': {
+        const filterData = workOrderData.filter(data => data.customerName.toUpperCase().indexOf(filter.toUpperCase()) > -1);
         this.searchWorkOrder.emit(filterData);
         break;
       }

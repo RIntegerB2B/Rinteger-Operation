@@ -1,4 +1,5 @@
-export class IncomeSetting {
+
+  export class IncomeSetting {
     modeOfPayment: [String];
     gst: [String];
 }

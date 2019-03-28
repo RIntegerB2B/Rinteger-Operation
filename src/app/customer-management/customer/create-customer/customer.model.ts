@@ -6,7 +6,7 @@ export class Customer {
     name?: string;
     emailId?: string;
     location?: String;
-    city?: string;
+    /* city?: string; */
     state?: string;
     pincode?: string;
     companyName?: string;
@@ -20,7 +20,7 @@ export class Customer {
         name?: string,
         emailId?: string,
         location?: string,
-        city?: string,
+        /* city?: string, */
         state?: string,
         pincode?: string,
         companyName?: string,
@@ -33,7 +33,7 @@ export class Customer {
         this.name = name;
         this.emailId = emailId;
         this.location = location;
-        this.city = city;
+        /* this.city = city; */
         this.state = state;
         this.pincode = pincode;
         this.companyName = companyName;

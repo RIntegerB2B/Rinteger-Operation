@@ -4,6 +4,7 @@
       <div fxFlex="100">
         <label class="pageBoxLg-label">Create Customer</label>
       </div>
+      
       <div fxFlex="50" class="p-2">
           
         <div *ngIf="!data">
@@ -35,16 +36,30 @@
         </div>
       </div>
       <div fxFlex="50" class="p-2">
-        <mat-form-field class="full-width">
-          <input matInput formControlName="name" placeholder="Name" required>
-          <!-- <mat-error *ngIf="customerDetailsForm.controls['name'].errors?.required">
-            Enter Name
-            <strong>required</strong>
-          </mat-error> -->
-
-        </mat-form-field>
+        
+        <div *ngIf="!data">
+            <mat-form-field class="full-width">
+                <input matInput formControlName="name" placeholder="Name" required>
+                <!-- <mat-error *ngIf="customerDetailsForm.controls['name'].errors?.required">
+                  Enter Name
+                  <strong>required</strong>
+                </mat-error> -->
+      
+              </mat-form-field>
+          </div>
+        <div *ngIf="data">
+            <mat-form-field class="full-width">
+                <input matInput [readonly]="true" formControlName="name" [(ngModel)]="data.name"
+                  placeholder="Name" required>
+                <mat-error *ngIf="customerDetailsForm.controls['name'].errors?.required">
+                  Enter Name
+                  <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+          </div>
       </div>
       <div fxFlex="50" class="p-2">
+          <div *ngIf="!data">
         <mat-form-field class="full-width">
           <input matInput formControlName="emailId" placeholder="Email Id" 
           required>
@@ -54,6 +69,18 @@
             <strong>required</strong>
           </mat-error>
         </mat-form-field>
+        </div>
+        <div *ngIf="data">
+          
+            <mat-form-field class="full-width">
+                <input matInput [readonly]="true" formControlName="emailId" [(ngModel)]="data.emailId"
+                  placeholder="Email Id" required>
+                <mat-error *ngIf="customerDetailsForm.controls['emailId'].errors?.required">
+                  Enter Email
+                  <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+          </div>
       </div>
       <div fxFlex="50" class="p-2">
         <mat-form-field class="full-width">
@@ -63,6 +90,7 @@
             <strong>required</strong>
           </mat-error>
         </mat-form-field>
+      
       </div>
       <div fxFlex="50" class="p-2">
         <mat-form-field class="full-width">

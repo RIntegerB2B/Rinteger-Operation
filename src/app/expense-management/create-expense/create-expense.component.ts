@@ -11,11 +11,12 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./create-expense.component.css']
 })
 export class CreateExpenseComponent implements OnInit {
-  customerDetailsForm: FormGroup;
-  customerModel: Expense;
+  expenseDetailsForm: FormGroup;
+  expenseModel: Expense;
   editable = true;
-  ExpenseType =  ['Shoot', 'Others'];
-  Paymode = ['Cash', 'Check'];
+  ExpenseType;
+  Paymode;
+  gst = ['With GST','Non GST'];
   constructor(private fb: FormBuilder,
     @Optional() public dialogRef: MatDialogRef<CreateExpenseComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
@@ -25,12 +26,37 @@ export class CreateExpenseComponent implements OnInit {
   ) {
   }
 
+
   ngOnInit() {
     this.createForm();
+    this.getExpense();
+    this.getPaymode();
+    /* this.getGst() */
   }
+  getExpense(){
+    this.expenseManagementService.allsttExpense().subscribe(data =>{
+      this.expenseModel = data;
+      console.log(this.expenseModel);
+      this.ExpenseType = this.expenseModel;
+    })
+  }
+  getPaymode(){
+    this.expenseManagementService.allsttPayment().subscribe(data =>{
+      this.expenseModel = data;
+      console.log(this.expenseModel);
+      this.Paymode = this.expenseModel;
+  })
+}
+/* getGst(){
+  this.expenseManagementService.allsttGst().subscribe(data =>{
+    this.expenseModel = data;
+    console.log(this.expenseModel);
+    this.gst = this.expenseModel;
+})
+} */
 
   createForm() {
-    this.customerDetailsForm = this.fb.group({
+    this.expenseDetailsForm = this.fb.group({
       mobileNumber: ['', Validators.required],
       name: ['', Validators.required],
       companyName: ['', Validators.required],
@@ -39,31 +65,31 @@ export class CreateExpenseComponent implements OnInit {
       location: [''],
       date: [''],
       totalAmount: ['', Validators.required],
-      paid: ['', Validators.required],
-      /* balance: ['', Validators.required], */
+      paid: ['', Validators.required],     
       vouNo: ['', Validators.required],
-      expensesDescription: ['', Validators.required]
+      expensesDescription: ['', Validators.required],
+      gst: ['', Validators.required]
     });
   }
   cancel() {
     this.router.navigate(['expense/viewExpense']);
   }
-  addSingleExpense(customerDetailsForm: FormGroup) {
-    this.customerModel = new Expense();
-     this.customerModel.mobileNumber = customerDetailsForm.controls.mobileNumber.value,
-     this.customerModel.name = customerDetailsForm.controls.name.value,
-     this.customerModel.companyName = customerDetailsForm.controls.companyName.value,
-     this.customerModel.expenseType = customerDetailsForm.controls.expenseType.value,
-     this.customerModel.modeOfPayment = customerDetailsForm.controls.modeOfPayment.value,
-     this.customerModel.location = customerDetailsForm.controls.location.value,
-     this.customerModel.date = customerDetailsForm.controls.date.value,
-     this.customerModel.totalAmount = customerDetailsForm.controls.totalAmount.value,
-     this.customerModel.paid = customerDetailsForm.controls.paid.value,
-     this.customerModel.vouNo = customerDetailsForm.controls.vouNo.value,
-     this.customerModel.expensesDescription = customerDetailsForm.controls.expensesDescription.value
-
-    this.expenseManagementService.addSingleExpense(this.customerModel).subscribe(data => {
-      this.customerModel = data;
+  addSingleExpense(expenseDetailsForm: FormGroup) {
+    this.expenseModel = new Expense();
+     this.expenseModel.mobileNumber = expenseDetailsForm.controls.mobileNumber.value,
+     this.expenseModel.name = expenseDetailsForm.controls.name.value,
+     this.expenseModel.companyName = expenseDetailsForm.controls.companyName.value,
+     this.expenseModel.expenseType = expenseDetailsForm.controls.expenseType.value,
+     this.expenseModel.modeOfPayment = expenseDetailsForm.controls.modeOfPayment.value,
+     this.expenseModel.location = expenseDetailsForm.controls.location.value,
+     this.expenseModel.date = expenseDetailsForm.controls.date.value,
+     this.expenseModel.totalAmount = expenseDetailsForm.controls.totalAmount.value,
+     this.expenseModel.paid = expenseDetailsForm.controls.paid.value,
+     this.expenseModel.vouNo = expenseDetailsForm.controls.vouNo.value,
+     this.expenseModel.expensesDescription = expenseDetailsForm.controls.expensesDescription.value,
+     this.expenseModel.gst = expenseDetailsForm.controls.gst.value
+    this.expenseManagementService.addSingleExpense(this.expenseModel).subscribe(data => {
+      this.expenseModel = data;
       this.router.navigate(['expense/viewExpense']);
     }, error => {
       console.log(error);

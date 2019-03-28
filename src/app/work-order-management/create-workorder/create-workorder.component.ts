@@ -37,6 +37,7 @@ export class CreateWorkorderComponent implements OnInit {
   requirementsData;
   taxVal;
   gstVal;
+  gstEnabled: boolean;
   ngOnInit() {
     this.id = this.route.snapshot.params.id;
     this.leadId = this.route.snapshot.params.leadId;
@@ -73,6 +74,13 @@ export class CreateWorkorderComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+  }
+  checkGst(event){
+    if(event.checked) {
+      this.gstVal = 0;
+    } else {
+      this.gstVal = this.workOrderPDFModel[0].gst;
+    }
   }
   cancelWorkOrder()   {
     this.router.navigate(['lead/leadview']);
