@@ -40,13 +40,13 @@ export class ViewMaterialComponent implements OnInit {
     this.materialManagementService.getMaterialSetting().subscribe(data => {
       this.materialType = data[0].shootType;
       this.shootType = this.materialType;
-    })
+    });
   }
   getDispatchType() {
     this.materialManagementService.getMaterialSetting().subscribe(data => {
       this.materialType = data[0].dispatchType;
       this.dispatchType = this.materialType;
-    })
+    });
   }
   getMaterialStatus() {
     this.materialManagementService.getMaterialSetting().subscribe(data => {
@@ -79,7 +79,7 @@ export class ViewMaterialComponent implements OnInit {
       this.array = data;
       this.totalSize = this.array.length;
       this.iterator();
-    })
+    });
   }
   addNewMaterial() {
     this.router.navigate(['material/creatematerial']);
@@ -100,7 +100,7 @@ export class ViewMaterialComponent implements OnInit {
       this.iterator();
     }, error => {
       console.log(error);
-    })
+    });
   }
   getEditMaterial(data) {
     this.router.navigate(['material/editmaterial', data._id])

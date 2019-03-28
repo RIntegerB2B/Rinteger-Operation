@@ -11,28 +11,28 @@ import { Router, ParamMap } from '@angular/router';
   styleUrls: ['./edit-expense.component.css']
 })
 export class EditExpenseComponent implements OnInit {
-  expenseForm: FormGroup; 
-  expenseModel: Expense[];  
+  expenseForm: FormGroup;
+  expenseModel: Expense[];
   expenseEdit: Expense;
   id;
   ExpenseType;
   Paymode;
-  gst = ['With GST','Non GST'];
+  gst = ['With GST', 'Non GST'];
   constructor(private fb: FormBuilder,
-     private expenseManagementService: ExpenseManagementService,
-     private route: ActivatedRoute,
+    private expenseManagementService: ExpenseManagementService,
+    private route: ActivatedRoute,
     private router: Router
-     ) {
+  ) {
   }
   ngOnInit() {
-    this.route.paramMap.subscribe((params: ParamMap) => {this.id = params.get('id');})  
+    this.route.paramMap.subscribe((params: ParamMap) => { this.id = params.get('id'); })
     this.getAllExpense();
-    this.createForm();   
+    this.createForm();
     this.getExpense();
-     this.getPaymode();
+    this.getPaymode();
   }
   createForm() {
-    this.expenseForm = this.fb.group({      
+    this.expenseForm = this.fb.group({
       mobileNumber: ['', Validators.required],
       name: ['', Validators.required],
       companyName: ['', Validators.required],
@@ -44,37 +44,37 @@ export class EditExpenseComponent implements OnInit {
       paid: ['', Validators.required],
       vouNo: ['', Validators.required],
       expensesDescription: ['', Validators.required],
-      gst: ['',Validators.required]
+      gst: ['', Validators.required]
     });
   }
-  getExpense(){
-    this.expenseManagementService.allsttExpense().subscribe(data =>{
+  getExpense() {
+    this.expenseManagementService.allsttExpense().subscribe(data => {
       this.expenseModel = data;
       console.log(this.expenseModel);
       this.ExpenseType = this.expenseModel;
-    })
+    });
   }
-  getPaymode(){
-    this.expenseManagementService.allsttPayment().subscribe(data =>{
+  getPaymode() {
+    this.expenseManagementService.allsttPayment().subscribe(data => {
       this.expenseModel = data;
       console.log(this.expenseModel);
       this.Paymode = this.expenseModel;
-  })
-}
+    });
+  }
   getAllExpense() {
     this.expenseManagementService.allExpense().subscribe(data => {
       this.expenseModel = data;
       this.expenseModel.forEach((customer) => {
-        if (this.id === customer._id)       {
+        if (this.id === customer._id) {
           this.expenseEdit = customer;
           console.log(this.expenseEdit);
         }
-    });
+      });
     }, error => {
       console.log(error);
     });
-  }  
-  updateExpense( row) {
+  }
+  updateExpense(row) {
     this.expenseManagementService.editExpense(row).subscribe(data => {
       this.expenseModel = data;
       this.router.navigate(['expense/viewExpense']);

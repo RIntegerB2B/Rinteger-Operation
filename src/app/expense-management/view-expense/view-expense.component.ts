@@ -15,10 +15,10 @@ import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 export class ViewExpenseComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   matdatasource = new MatTableDataSource([]);
-  expenseDetailsForm: FormGroup;  
-  expenseValue: Expense[]=[];
+  expenseDetailsForm: FormGroup;
+  expenseValue: Expense[] = [];
   expenseval: Expense;
-  expenseModel: any;  
+  expenseModel: any;
   public pageSize = 50;
   public currentPage = 0;
   public totalSize = 0;
@@ -35,7 +35,7 @@ export class ViewExpenseComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
-    this.getAllExpense();   
+    this.getAllExpense();
   }
   createForm() {
     this.expenseDetailsForm = this.fb.group({
@@ -60,7 +60,7 @@ export class ViewExpenseComponent implements OnInit {
   addExpense() {
     this.router.navigate(['expense/createExpense']);
   }
-  getDeleteExpense(row) {    
+  getDeleteExpense(row) {
     this.expenseManagementService.deleteExpense(row).subscribe(data => {
       this.expenseModel = data;
       this.matdatasource.data = data;
@@ -81,7 +81,7 @@ export class ViewExpenseComponent implements OnInit {
       this.expenseValue = data;
       this.expenseModel = new MatTableDataSource<Expense>(data);
       this.expenseModel.paginator = this.paginator;
-      this.expenseModel = data;     
+      this.expenseModel = data;
       this.array = data;
       this.totalSize = this.array.length;
       this.iterator();
@@ -101,9 +101,9 @@ export class ViewExpenseComponent implements OnInit {
     const part = this.array.slice(start, end);
     this.expenseModel = part;
   }
- /*  searchBy(value) {
-    this.nameValue = value;
-  } */
+  /*  searchBy(value) {
+     this.nameValue = value;
+   } */
   updateExpense(expenseDetailsForm: FormGroup, row) {
     this.expenseManagementService.editExpense(row).subscribe(data => {
       this.expenseModel = data;
@@ -120,7 +120,7 @@ export class ViewExpenseComponent implements OnInit {
     this.expenseManagementService.typeFilter(this.expenseModel).subscribe(data => {
       this.expenseModel = new MatTableDataSource<Expense>(data);
       this.expenseModel.paginator = this.paginator;
-      this.expenseModel = data;     
+      this.expenseModel = data;
       this.array = data;
       this.totalSize = this.array.length;
       this.iterator();
@@ -130,7 +130,18 @@ export class ViewExpenseComponent implements OnInit {
       console.log(error);
     });
   }
-    filterExpense(data) {
+  filterExpense(data) {
+    this.expenseModel = new MatTableDataSource<Expense>(data);
+    this.expenseModel.paginator = this.paginator;
+    this.expenseModel = data;
+    this.array = data;
+    this.totalSize = this.array.length;
+    this.iterator();
+    this.expenseValue = data;
+    this.getTotal();
+  }
+  findTDS() {
+    this.expenseManagementService.tdsFind().subscribe(data => {
       this.expenseModel = new MatTableDataSource<Expense>(data);
       this.expenseModel.paginator = this.paginator;
       this.expenseModel = data;
@@ -139,32 +150,21 @@ export class ViewExpenseComponent implements OnInit {
       this.iterator();
       this.expenseValue = data;
       this.getTotal();
-  }
-  findTDS(){
-    this.expenseManagementService.tdsFind().subscribe(data =>{
-      this.expenseModel = new MatTableDataSource<Expense>(data);
-      this.expenseModel.paginator = this.paginator;
-      this.expenseModel = data;     
-      this.array = data;
-      this.totalSize = this.array.length;
-      this.iterator();
-      this.expenseValue = data;
-      this.getTotal();
-    },error =>{
+    }, error => {
       console.log(error);
     });
   }
-  findGST(){
-    this.expenseManagementService.gstFind().subscribe(data =>{
+  findGST() {
+    this.expenseManagementService.gstFind().subscribe(data => {
       this.expenseModel = new MatTableDataSource<Expense>(data);
       this.expenseModel.paginator = this.paginator;
-      this.expenseModel = data;     
+      this.expenseModel = data;
       this.array = data;
       this.totalSize = this.array.length;
       this.iterator();
       this.expenseValue = data;
       this.getTotal();
-    },error =>{
+    }, error => {
       console.log(error);
     })
   }
@@ -179,7 +179,7 @@ export class ViewExpenseComponent implements OnInit {
     this.expenseManagementService.dateFilter(this.expenseModel).subscribe(data => {
       this.expenseModel = new MatTableDataSource<Expense>(data);
       this.expenseModel.paginator = this.paginator;
-      this.expenseModel = data;     
+      this.expenseModel = data;
       this.array = data;
       this.totalSize = this.array.length;
       this.iterator();
@@ -190,25 +190,25 @@ export class ViewExpenseComponent implements OnInit {
     });
   }
   getTotal() {
-    let tot = 0;    
-    for (var i = 0; i <= this.expenseValue.length-1; i++){
-      tot += this.expenseValue[i].totalAmount;      
-    }    
+    let tot = 0;
+    for (var i = 0; i <= this.expenseValue.length - 1; i++) {
+      tot += this.expenseValue[i].totalAmount;
+    }
     this.getBalance();
     this.getPaid();
     return tot;
   }
   getPaid() {
     let paid = 0;
-    for (var i = 0; i <= this.expenseValue.length-1; i++){
+    for (var i = 0; i <= this.expenseValue.length - 1; i++) {
       paid += this.expenseValue[i].paid;
     }
     return paid;
   }
   getBalance() {
     let bal = 0;
-    
-    for (var i = 0; i <= this.expenseValue.length-1; i++){
+
+    for (var i = 0; i <= this.expenseValue.length - 1; i++) {
       bal += this.expenseValue[i].balance;
     }
     return bal;

@@ -21,22 +21,22 @@ export class FrontScreenComponent implements OnInit {
   public totalSize = 0;
   public array: any;
   constructor(private materialManagementService: MaterialManagementService, private router: Router,
-     private fb: FormBuilder) { }
+    private fb: FormBuilder) { }
   ngOnInit() {
     this.createForm();
     this.findAllWorkOrder();
   }
-  createForm(){
+  createForm() {
     this.materialDetailsForm = this.fb.group({
       fromDate: [''],
       toDate: [''],
       workOrderID: [''],
       customerName: [''],
       date: ['']
-    })
+    });
   }
-  findAllWorkOrder(){
-    this.materialManagementService.getAllWorkOrider().subscribe(data =>{
+  findAllWorkOrder() {
+    this.materialManagementService.getAllWorkOrider().subscribe(data => {
       this.materialModel = data;
       this.materialValue = data;
       this.materialModel = new MatTableDataSource<MaterialModel>(data);
@@ -45,18 +45,18 @@ export class FrontScreenComponent implements OnInit {
       this.array = data;
       this.totalSize = this.array.length;
       this.iterator();
-    },error => {
+    }, error => {
       console.log(error);
-    })
+    });
   }
-  getEditMaterial(data){
-    this.router.navigate(['material/creatematerial',data._id]);
+  getEditMaterial(data) {
+    this.router.navigate(['material/creatematerial', data._id]);
   }
-  getMaterialSheet(){
+  getMaterialSheet() {
     this.router.navigate(['material/viewmaterial']);
   }
-  getDeleteMaterial(data){
-    this.materialManagementService.deleteWorkorder(data).subscribe(data=>{
+  getDeleteMaterial(data) {
+    this.materialManagementService.deleteWorkorder(data).subscribe(data => {
       this.materialModel = data;
       this.materialValue = data;
       this.materialModel = new MatTableDataSource<MaterialModel>(data);
@@ -65,12 +65,12 @@ export class FrontScreenComponent implements OnInit {
       this.array = data;
       this.totalSize = this.array.length;
       this.iterator();
-    },error => {
+    }, error => {
       console.log(error);
-    })
+    });
   }
   filterMaterial(data) {
-    
+
     this.materialModel = data;
     this.materialValue = data;
     this.materialModel = new MatTableDataSource<MaterialModel>(data);
@@ -80,7 +80,7 @@ export class FrontScreenComponent implements OnInit {
     this.totalSize = this.array.length;
     this.iterator();
   }
-  searchByDate(materialDetailsForm: FormGroup){    
+  searchByDate(materialDetailsForm: FormGroup) {
     this.materialModel = new MaterialModel();
     this.materialModel.fromDate = materialDetailsForm.controls.fromDate.value;
     this.materialModel.toDate = materialDetailsForm.controls.toDate.value;
