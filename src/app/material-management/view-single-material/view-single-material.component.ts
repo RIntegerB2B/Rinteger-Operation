@@ -28,15 +28,30 @@ export class ViewSingleMaterialComponent implements OnInit {
       date: ['',Validators.required],
       customerName: ['',Validators.required],
       receivedBy: [''],
-      productType: [''],
+     /*  productType: [''],
       noOfProduct: [''],
-      shootType: [''],
+      shootType: [''], */
       shootStatus: [''],
       paymentStatus: [''],
+      modeOfInward: [''],
+      modeOfOutward: [''],
       dispatchType: [''],
       materialStatus: [''],
-      remark: ['']
-    })
+      remark: [''],
+      product: this.fb.array([])
+    });
+    this.addForm();
+  }
+  addForm() {
+    const product = this.fb.group({
+    productType: [''],
+    noOfProduct: ['']
+      });
+    this.productForms.push(product);
+  }
+
+  get productForms() {
+    return this.materialDetailsForm.get('product') as FormArray;
   }
   getSingleMaterial(){
     this.materialManagementService.getSingleMaterial(this.id).subscribe(data => {
@@ -48,5 +63,10 @@ export class ViewSingleMaterialComponent implements OnInit {
   }
   cancel(){
     this.router.navigate(['material/viewmaterial']);
+  }
+  findPaymentStatus(value){
+    this.materialManagementService.getPaymentStatus(value.workOrderID).subscribe(data => {
+      this.materialModel = data;
+    })
   }
 }

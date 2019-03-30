@@ -11,11 +11,11 @@
         <div class="col-1">
           <div class="btn pr-1 col-12" fxFlex="50">
             <div class="input-group ">
-              <select #selectElem placeholder="Expense Type" (change)=SearchByType($event.target.value)>
+              <select style="width: 150px;" #selectElem placeholder="Expense Type" (change)=SearchByType($event.target.value)>
                 <option *ngFor="let data of ExpenseType" [value]="data">{{data}}</option>
               </select></div>   
               <div>
-                <button color="primary" (click)="getAllExpense()" type="submit">Refresh</button>
+                <button mat-stroked-button color="primary" (click)="getAllExpense()" type="submit">Refresh</button>
               </div>            
           </div>
         </div>

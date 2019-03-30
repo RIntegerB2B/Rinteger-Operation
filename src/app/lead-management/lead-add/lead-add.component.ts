@@ -125,12 +125,12 @@ existingCustomer() {
   }
   addForm() {
     const requirements = this.fb.group({
-      item: [''],
-      quantity: [''],
-      price: [''],
+      item: ['', Validators.required],
+      quantity: ['', Validators.required],
+      price: ['', Validators.required],
       discount: [''],
-      description: [''],
-      total: ['']
+      description: ['', Validators.required],
+      total: ['', Validators.required]
     });
     this.requirementsForms.push(requirements);
   }

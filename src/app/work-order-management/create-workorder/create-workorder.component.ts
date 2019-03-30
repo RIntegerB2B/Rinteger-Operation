@@ -7,14 +7,14 @@ import { LeadManagementService } from './../../lead-management/lead-management.s
 import { CustomerManagementService } from './../../customer-management/customer-management.service';
 import { Lead } from './../../shared/lead.model';
 import { Customer } from './../../shared/customer.model';
-import {WorkOrderPdf} from '../../shared/workorderpdf.model';
+import { WorkOrderPdf } from '../../shared/workorderpdf.model';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-workorder',
   templateUrl: './create-workorder.component.html',
   styleUrls: ['./create-workorder.component.css'],
-  providers: [LeadManagementService, CustomerManagementService, WorkOrderService  ]
+  providers: [LeadManagementService, CustomerManagementService, WorkOrderService]
 })
 export class CreateWorkorderComponent implements OnInit {
 
@@ -22,7 +22,7 @@ export class CreateWorkorderComponent implements OnInit {
     , private route: ActivatedRoute, private leadManagementService: LeadManagementService,
     private customerManagementService: CustomerManagementService,
     private router: Router
-    ) { }
+  ) { }
   requirements: FormArray;
   workOrderDetailsForm: FormGroup;
   workOrderPDFModel: WorkOrderPdf;
@@ -55,6 +55,7 @@ export class CreateWorkorderComponent implements OnInit {
       companyAddress: ['', Validators.required],
       workOrderID: ['', Validators.required],
       leadID: ['', Validators.required],
+      leadUnit: ['', Validators.required],
       emailId: ['', Validators.required],
       name: ['', Validators.required],
       mobileNumber: ['', Validators.required],
@@ -67,7 +68,7 @@ export class CreateWorkorderComponent implements OnInit {
   }
   viewCompanyDetails() {
     this.workOrderService.workorderPDFDetails().subscribe(data => {
-      if (data.length !== 0)      {
+      if (data.length !== 0) {
         this.workOrderPDFModel = data;
         this.gstVal = this.workOrderPDFModel[0].gst;
       }
@@ -75,17 +76,17 @@ export class CreateWorkorderComponent implements OnInit {
       console.log(error);
     });
   }
-  checkGst(event){
-    if(event.checked) {
+  checkGst(event) {
+    if (event.checked) {
       this.gstVal = 0;
     } else {
       this.gstVal = this.workOrderPDFModel[0].gst;
     }
   }
-  cancelWorkOrder()   {
+  cancelWorkOrder() {
     this.router.navigate(['lead/leadview']);
   }
-  createLeadWorkOrder(workOrderDetailsForm: FormGroup)   {
+  createLeadWorkOrder(workOrderDetailsForm: FormGroup) {
     console.log('value', this.taxVal);
     this.workOrder = new WorkOrder(
       workOrderDetailsForm.controls.customerID.value,
@@ -93,6 +94,7 @@ export class CreateWorkorderComponent implements OnInit {
       workOrderDetailsForm.controls.companyName.value,
       workOrderDetailsForm.controls.companyAddress.value,
       workOrderDetailsForm.controls.leadID.value,
+      workOrderDetailsForm.controls.leadUnit.value,
       workOrderDetailsForm.controls.mobileNumber.value,
       workOrderDetailsForm.controls.emailId.value,
       workOrderDetailsForm.controls.date.value,
@@ -105,7 +107,7 @@ export class CreateWorkorderComponent implements OnInit {
       this.workOrder = data;
       this.router.navigate(['workorder/viewworkorder', this.workOrder.leadID]);
     }, error => {
-       console.log(error);
+      console.log(error);
     });
   }
   addNewForm() {
@@ -120,9 +122,9 @@ export class CreateWorkorderComponent implements OnInit {
     this.requirementsForms.push(requirements);
   }
   addForm() {
-    for (let j = 0;  j <= this.leadModel.length - 1; j++)     {
+    for (let j = 0; j <= this.leadModel.length - 1; j++) {
       console.log(' requirements length ', this.leadModel[j].requirements);
-      for (let i = 0; i <= this.leadModel[j].requirements.length - 1; i++)     {
+      for (let i = 0; i <= this.leadModel[j].requirements.length - 1; i++) {
         this.requirementsData = this.fb.group({
           id: [this.leadModel[j].requirements[i]._id],
           item: [this.leadModel[j].requirements[i].item],

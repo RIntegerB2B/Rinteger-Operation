@@ -3,11 +3,12 @@
     <form [formGroup]="customerDetailsForm">
       <div fxLayout="row wrap" fxLayout.lt-sm="column">
         <div fxFlex="100">
-          <label class="pageBoxLg-label">Create Customer</label>
+          <label class="pageBoxLg-label">Edit Customer</label>
         </div>
         <div fxFlex="50" class="pr-1">
           <mat-form-field class="full-width">
-            <input matInput formControlName="customerID" placeholder="Customer ID" [readonly]="true" [value]="customerEdit?.customerID"
+            <input matInput formControlName="customerID" placeholder="Customer ID"
+             [readonly]="true" [value]="customerEdit?.customerID"
               (ngModelChange)=" customerEdit.customerID=$event">
 
           </mat-form-field>
@@ -34,7 +35,8 @@
         </div>
         <div fxFlex="50" class="pr-1">
           <mat-form-field class="full-width">
-            <input matInput formControlName="location" [value]="customerEdit?.location" (ngModelChange)="customerEdit.location=$event"
+            <input matInput formControlName="location"
+             [value]="customerEdit?.location|| null" (ngModelChange)="customerEdit.location=$event"
               placeholder="Location">
             <!--  <mat-error *ngIf="customerDetailsForm.controls['location'].errors?.required">
                     Enter Location
@@ -89,7 +91,8 @@
 
         <div fxFlex="50" class="pr-1">
           <mat-form-field class="full-width">
-            <input matInput formControlName="companyAddress" formControlName="companyAddress" [value]="customerEdit?.companyAddress || null"
+            <input matInput formControlName="companyAddress" formControlName="companyAddress" 
+            [value]="customerEdit?.companyAddress || null"
               (ngModelChange)="customerEdit.companyAddress=$event" placeholder="Company Address">
             <!--  <mat-error *ngIf="customerDetailsForm.controls['companyAddress'].errors?.required">
                     Enter Company Address

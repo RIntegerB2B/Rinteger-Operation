@@ -18,7 +18,7 @@ export class ViewMaterialComponent implements OnInit {
   materialType: any;
   materialValue: MaterialModel;
   shootStatus = ['completed', 'not completed', 'partial'];
-  paymentStatus = ['yes', 'no'];
+  /*   paymentStatus = ['yes', 'no']; */
   productType = ['shirt', 'pant'];
   shootType;
   dispatchType;
@@ -63,22 +63,23 @@ export class ViewMaterialComponent implements OnInit {
       date: ['', Validators.required],
       customerName: ['', Validators.required],
       productType: [''],
-      shootType: [''],
-      noOfProduct: [''],
-      shootStatus: ['']
+      /*   shootType: [''], */
+      /*     noOfProduct: [''],
+          shootStatus: [''], */
     });
   }
   getAllMaterial() {
     this.materialManagementService.getAllMaterial().subscribe(data => {
       this.materialModel = data;
       this.materialValue = data;
-      this.getNoOfProduct();
+      /*      this.getNoOfProduct(); */
       this.materialModel = new MatTableDataSource<MaterialModel>(data);
       this.materialModel.paginator = this.paginator;
       this.materialModel = data;
       this.array = data;
       this.totalSize = this.array.length;
       this.iterator();
+
     });
   }
   addNewMaterial() {
@@ -91,7 +92,7 @@ export class ViewMaterialComponent implements OnInit {
     this.materialManagementService.deleteMaterial(test).subscribe(data => {
       this.materialModel = data;
       this.materialValue = data;
-      this.getNoOfProduct();
+      /*   this.getNoOfProduct(); */
       this.materialModel = new MatTableDataSource<MaterialModel>(data);
       this.materialModel.paginator = this.paginator;
       this.materialModel = data;
@@ -103,12 +104,11 @@ export class ViewMaterialComponent implements OnInit {
     });
   }
   getEditMaterial(data) {
-    this.router.navigate(['material/editmaterial', data._id])
+    this.router.navigate(['material/editmaterial', data._id]);
   }
   filterMaterial(data) {
     this.materialModel = data;
-    this.materialValue = data;
-    this.getNoOfProduct();
+    /* this.getNoOfProduct(); */
     this.materialModel = new MatTableDataSource<MaterialModel>(data);
     this.materialModel.paginator = this.paginator;
     this.materialModel = data;
@@ -122,13 +122,14 @@ export class ViewMaterialComponent implements OnInit {
     this.materialModel.toDate = materialDetailsForm.controls.toDate.value;
     this.materialManagementService.getByDateMaterial(this.materialModel).subscribe(data => {
       this.materialModel = data;
-      this.getNoOfProduct();
+      /* this.getNoOfProduct(); */
       this.materialModel = new MatTableDataSource<MaterialModel>(data);
       this.materialModel.paginator = this.paginator;
       this.materialModel = data;
       this.array = data;
       this.totalSize = this.array.length;
       this.iterator();
+
     }, error => {
       console.log(error);
     });
@@ -138,18 +139,19 @@ export class ViewMaterialComponent implements OnInit {
     this.materialModel.finddate = materialDetailsForm.controls.finddate.value;
     this.materialManagementService.getByDateSingleMaterial(this.materialModel).subscribe(data => {
       this.materialModel = data;
-      this.getNoOfProduct();
+      /*  this.getNoOfProduct(); */
       this.materialModel = new MatTableDataSource<MaterialModel>(data);
       this.materialModel.paginator = this.paginator;
       this.materialModel = data;
       this.array = data;
       this.totalSize = this.array.length;
       this.iterator();
+
     }, error => {
       console.log(error);
     });
   }
-  getNoOfProduct() {
+  /* getNoOfProduct() {
     let bal = 0;
     for (let i = 0; i < this.materialModel.length; i++) {
       if (this.materialModel[i].noOfProduct) {
@@ -157,7 +159,7 @@ export class ViewMaterialComponent implements OnInit {
       }
     }
     return bal;
-  }
+  } */
   SearchByShootStatus(row) {
     this.materialModel = new MaterialModel();
     this.materialModel.shootStatus = row;
@@ -169,7 +171,7 @@ export class ViewMaterialComponent implements OnInit {
       this.array = data;
       this.totalSize = this.array.length;
       this.iterator();
-      this.getNoOfProduct();
+      /*  this.getNoOfProduct(); */
     }, error => {
       console.log(error);
     });
@@ -181,7 +183,7 @@ export class ViewMaterialComponent implements OnInit {
     this.materialManagementService.paymentStatus(this.materialModel).subscribe(data => {
       this.materialModel = data;
       this.materialValue = data;
-      this.getNoOfProduct();
+      /*  this.getNoOfProduct(); */
       this.materialModel = new MatTableDataSource<MaterialModel>(data);
       this.materialModel.paginator = this.paginator;
       this.materialModel = data;
@@ -199,7 +201,7 @@ export class ViewMaterialComponent implements OnInit {
     this.materialManagementService.shootType(this.materialModel).subscribe(data => {
       this.materialModel = data;
       this.materialValue = data;
-      this.getNoOfProduct();
+      /* this.getNoOfProduct(); */
       this.materialModel = new MatTableDataSource<MaterialModel>(data);
       this.materialModel.paginator = this.paginator;
       this.materialModel = data;
@@ -217,7 +219,7 @@ export class ViewMaterialComponent implements OnInit {
     this.materialManagementService.dispatchType(this.materialModel).subscribe(data => {
       this.materialModel = data;
       this.materialValue = data;
-      this.getNoOfProduct();
+      /*   this.getNoOfProduct(); */
       this.materialModel = new MatTableDataSource<MaterialModel>(data);
       this.materialModel.paginator = this.paginator;
       this.materialModel = data;
@@ -256,4 +258,10 @@ export class ViewMaterialComponent implements OnInit {
     const part = this.array.slice(start, end);
     this.materialModel = part;
   }
+  /*  findPaymentStatus(value){
+     this.materialManagementService.getPaymentStatus(value.workOrderID).subscribe(data => {
+       this.materialModel = data;
+     })
+   } */
+
 }

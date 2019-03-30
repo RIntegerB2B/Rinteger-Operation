@@ -13,7 +13,8 @@
           <div class="col-md-8  col-6">
             <div class="form-group">
               : <label class="itemLable">
-                <input hidden formControlName="customerID" [ngModel]="customerData.customerID">
+                <input hidden formControlName="customerID"
+                 [ngModel]="customerData.customerID">
                 {{customerData.customerID}}
               </label>
             </div>
@@ -36,7 +37,8 @@
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              <input hidden formControlName="companyName" [ngModel]="customerData.companyName"> : <label
+              <input hidden formControlName="companyName" 
+              [ngModel]="customerData.companyName"> : <label
                 class="itemLable">{{customerData.companyName}}</label>
             </div>
           </div>
@@ -77,6 +79,18 @@
               <input hidden formControlName="mobileNumber" [ngModel]="customerData.mobileNumber">
             </div>
           </div>
+          <div class="col-md-4  col-6">
+              <div class="form-group">
+                <label class="divLable">Lead Unit</label>
+              </div>
+            </div>
+            <div class="col-md-8  col-6">
+              <div class="form-group">
+                : <label class="itemLable">{{customerData.mobileNumber}}</label>
+                <input hidden formControlName="leadUnit"
+                 [ngModel]="customerData.leadUnit">
+              </div>
+            </div>
           <div class="col-md-4  col-6">
             <div class="form-group">
               <label class="divLable">Date</label>

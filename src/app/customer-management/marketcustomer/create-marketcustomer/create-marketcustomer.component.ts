@@ -32,10 +32,13 @@ export class CreateMarketcustomerComponent implements OnInit {
 
   createForm() {
     this.marketCustomerDetailsForm = this.fb.group({
-      mobileNumber: ['', Validators.required],
+      mobileNumber: ['', mobileNumberValidation],
       name: ['', Validators.required],
-      emailId: [''],
-      location: [''],
+      emailId: ['', [
+        Validators.required,
+        Validators.email
+      ]],
+      location: ['', Validators.required],
       whatsAppNo: [''],
       landLine: ['']
     });

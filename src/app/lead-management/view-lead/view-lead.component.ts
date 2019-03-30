@@ -72,6 +72,11 @@ export class ViewLeadComponent implements OnInit {
       yearData: ['', Validators.required]
     });
   }
+  searchAll(data)   {
+    this.leadModel = new MatTableDataSource<Lead>(data);
+    this.leadModel.paginator = this.paginator;
+    this.leadModel = data;
+  }
   searchDate(leadForm) {
     this.dateSearch = new DateSearch();
     this.dateSearch.fromDate = leadForm.controls.fromDate.value;

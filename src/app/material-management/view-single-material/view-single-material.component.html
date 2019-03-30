@@ -45,41 +45,41 @@
                 : <label class="itemLable">{{data.receivedBy}}</label>
               </div>
             </div>
-            <div class="col-md-4  col-6">
+            <!-- <div class="col-md-4  col-6">
               <div class="form-group">
                 <label class="divLable">Product Type</label>
               </div>
-            </div>
-            <div class="col-md-8  col-6">
+            </div> -->
+            <!-- <div class="col-md-8  col-6">
               <div class="form-group">
                 : <label class="itemLable">{{data.productType}}</label>
               </div>
-            </div>
+            </div> -->
             
-            <div class="col-md-4  col-6">
+            <!-- <div class="col-md-4  col-6">
               <div class="form-group">
                 <label class="divLable">NO.of Product</label>
               </div>
-            </div>
-            <div class="col-md-8  col-6">
+            </div> -->
+           <!--  <div class="col-md-8  col-6">
               <div class="form-group">
                 : <label class="itemLable">{{data.noOfProduct}}</label>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="col-md-6">
           <div class="row">
-            <div class="col-md-4  col-6">
+            <!-- <div class="col-md-4  col-6">
               <div class="form-group">
                 <label class="divLable">Shoot Type</label>
               </div>
-            </div>
-            <div class="col-md-8  col-6">
+            </div> -->
+            <!-- <div class="col-md-8  col-6">
               <div class="form-group">
                 : <label class="itemLable">{{data.shootType}}</label>
               </div>
-            </div>
+            </div> -->
             <div class="col-md-4  col-6">
               <div class="form-group">
                 <label class="divLable">Shoot Status</label>
@@ -98,6 +98,26 @@
             <div class="col-md-8  col-6">
               <div class="form-group">
                 : <label class="itemLable">{{data.paymentStatus}}</label>
+              </div>
+            </div>
+            <div class="col-md-4  col-6">
+              <div class="form-group">
+                <label class="divLable">Mode of Inward</label>
+              </div>
+            </div>
+            <div class="col-md-8  col-6">
+              <div class="form-group">
+                : <label class="itemLable">{{data.modeOfInward}}</label>
+              </div>
+            </div>
+            <div class="col-md-4  col-6">
+              <div class="form-group">
+                <label class="divLable">Mode of Outward</label>
+              </div>
+            </div>
+            <div class="col-md-8  col-6">
+              <div class="form-group">
+                : <label class="itemLable">{{data.modeOfOutward}}</label>
               </div>
             </div>
             <div class="col-md-4  col-6">
@@ -130,7 +150,11 @@
                 : <label class="itemLable">{{data.remark}}</label>
               </div>
             </div>           
-          </div>
+          </div>          
+        </div>
+        <div>
+          <app-view-product [productData]="data.product"  
+    ></app-view-product>
         </div>
         <div fxFlex="100" class="mt-1">
           <button mat-raised-button mat-button color="accent" type="button" (click)="cancel()">Cancel</button>

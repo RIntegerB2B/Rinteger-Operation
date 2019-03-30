@@ -33,8 +33,8 @@ export class EditExpenseComponent implements OnInit {
   }
   createForm() {
     this.expenseForm = this.fb.group({
-      mobileNumber: ['', Validators.required],
-      name: ['', Validators.required],
+      mobileNumber: [''],
+      name: [''],
       companyName: ['', Validators.required],
       expenseType: ['', Validators.required],
       modeOfPayment: ['', Validators.required],

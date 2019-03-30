@@ -49,7 +49,7 @@
             </select>
           </div>
           </div>
-          <div class="row">
+         <!--  <div class="row">
             <div class="col-6">
             <label>PaymentStatus:</label></div>
             <div class="col-6">
@@ -57,15 +57,15 @@
                 <option *ngFor="let data of paymentStatus" [value]="data">{{data}}</option>
               </select>
             </div>
-            </div>
-            <div class="row">
+            </div> -->
+            <!-- <div class="row">
               <div class="col-6">
               <label>ShootType:</label></div>
               <div class="col-6">
             <select placeholder="shootType" (change)=SearchByShootType($event.target.value)>
                 <option *ngFor="let data of shootType" [value]="data">{{data}}</option>
               </select></div>
-            </div>
+            </div> -->
             <div class="row">
               <div class="col-6">
               <label>DispatchType:</label></div>
@@ -85,10 +85,10 @@
               </div>
           </div>          
           </div>        
-        <div class="bor col-1">
+        <!-- <div class="bor col-1">
           NO.of Product  
               {{getNoOfProduct() }}
-        </div>
+        </div> -->
       </div>
       <div class="row gridRowHeader display-none-small">
         <div class="col-md-2 vcenterHeader">
@@ -98,29 +98,20 @@
         </div>
         <div class="col-md-2 vcenterHeader">
           <div class="form-group">
-            <label><h6>companyName</h6></label>
+            <label><h6>Customer Name</h6></label>
           </div>
         </div>
         <div class="col-md-2 vcenterHeader">
           <div class="form-group">
-            <label><h6>Product Type</h6></label>
+            <label><h6>PaymentStatus</h6></label>
           </div>
         </div>
         <div class="col-md-2 vcenterHeader">
           <div class="form-group">
-            <label><h6>Shoot Type</h6></label>
+            <label><h6>Received By</h6></label>
           </div>
         </div>
-        <div class="col-md-1 vcenterHeader">
-          <div class="form-group">
-            <label><h6>No.of Product</h6></label>
-          </div>
-        </div>
-        <div class="col-md-2 vcenterHeader">
-          <div class="form-group">
-            <label><h6>Shoot Status</h6></label>
-          </div>
-        </div>        
+              
         <div class="col-md-1 vcenterHeader">
           <div class="form-group">
             <label><h6>Action</h6></label>
@@ -142,33 +133,18 @@
             {{data.customerName}}
           </div>
           <div class="display-none-large col-6">
-            <label class="gridLabel">Product Type:</label>
+            <label class="gridLabel">PaymentStatus:</label>
           </div>
           <div class="col-md-2 col-6 vcenter form-group">
-            {{data.productType}}
+            {{data.paymentStatus}}
           </div>
           <div class="display-none-large col-6">
-            <label class="gridLabel">Shoot Type:</label>
+            <label class="gridLabel">Received By:</label>
           </div>
           <div class="col-md-2 col-6 vcenter form-group">
-            {{data.shootType}}
-          </div>
-          <div class="display-none-large col-6">
-            <label class="gridLabel">
-              No.of Product:
-            </label>
-          </div>
-          <div class="col-md-1 col-6 vcenter form-group">
-            &nbsp;{{data.noOfProduct}}
-          </div>
-          <div class="display-none-large col-6">
-            <label class="gridLabel">
-              Shoot Status:
-            </label>
-          </div>
-          <div class="col-md-2 col-6 vcenter form-group">
-            &nbsp;{{data.shootStatus}}
-          </div>
+            {{data.receivedBy}}
+          </div>         
+          
           <div class="display-none-large col-6">
             <label class="gridLabel">Action:</label>
           </div>

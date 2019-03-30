@@ -5,3 +5,8 @@
 .vcenter {
   font-size: 12px;
 }
+label {
+  display: inline-block;
+  margin-bottom: .5rem;
+  font-size: 11px;
+}

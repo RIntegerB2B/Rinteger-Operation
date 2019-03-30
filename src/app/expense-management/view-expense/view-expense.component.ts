@@ -18,6 +18,7 @@ export class ViewExpenseComponent implements OnInit {
   expenseDetailsForm: FormGroup;
   expenseValue: Expense[] = [];
   expenseval: Expense;
+  expenseMod: Expense[];
   expenseModel: any;
   public pageSize = 50;
   public currentPage = 0;
@@ -29,13 +30,14 @@ export class ViewExpenseComponent implements OnInit {
   emailValue;
   nameValue;
   cityValue;
-  ExpenseType = ['Shoot', 'Others'];
+  ExpenseType;
   constructor(private fb: FormBuilder, private expenseManagementService: ExpenseManagementService,
     private dialog: MatDialog, private router: Router) { }
 
   ngOnInit() {
     this.createForm();
     this.getAllExpense();
+    this.getExpense();
   }
   createForm() {
     this.expenseDetailsForm = this.fb.group({
@@ -59,6 +61,14 @@ export class ViewExpenseComponent implements OnInit {
   }
   addExpense() {
     this.router.navigate(['expense/createExpense']);
+  }
+
+  getExpense() {
+    this.expenseManagementService.allsttExpense().subscribe(data => {
+      this.expenseMod = data[0].expenseType;
+      console.log(this.expenseMod);
+      this.ExpenseType = this.expenseMod;
+    });
   }
   getDeleteExpense(row) {
     this.expenseManagementService.deleteExpense(row).subscribe(data => {

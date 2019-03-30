@@ -38,7 +38,7 @@ vcenterHeader {
 .pageBoxLg-label {
   background: lightslategray;
   font-size: 14px;
-  padding: 2px 20px 2px 20px;
+  padding: 2px 2px 2px 2px;
   color: white;
   transition: padding 3s;
   -moz-transition: padding 3s;

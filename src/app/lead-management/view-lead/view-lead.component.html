@@ -21,6 +21,13 @@
     <div class="col-md-2">
       <button type="submit" (click)="searchDate(leadForm)" mat-raised-button color="warn">Search</button>
     </div>
+    <div class="col-md-2">
+      <button mat-button type="submit" (click)="searchAll(array)">
+        <mat-icon>refresh</mat-icon>
+      </button>
+
+    </div>
+
     <!--   <div class="col-md-2">
       <mat-form-field>
         <mat-select formControlName="monthData"  placeholder="Select Month">

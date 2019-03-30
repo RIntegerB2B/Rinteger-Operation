@@ -57,18 +57,18 @@ export class CreateExpenseComponent implements OnInit {
 
   createForm() {
     this.expenseDetailsForm = this.fb.group({
-      mobileNumber: ['', Validators.required],
-      name: ['', Validators.required],
-      companyName: ['', Validators.required],
-      expenseType: [''],
-      modeOfPayment: [''],
-      location: [''],
-      date: [''],
-      totalAmount: ['', Validators.required],
-      paid: ['', Validators.required],     
-      vouNo: ['', Validators.required],
-      expensesDescription: ['', Validators.required],
-      gst: ['', Validators.required]
+      mobileNumber: [''],
+      name: [''],
+      companyName: ['', [Validators.required]],
+      expenseType: ['', [Validators.required]],
+      modeOfPayment: ['', [Validators.required]],
+      location: ['', [Validators.required]],
+      date: ['', [Validators.required]],
+      totalAmount: ['', [Validators.required]],
+      paid: ['',[ Validators.required]],
+      vouNo: ['', [Validators.required]],
+      expensesDescription: ['',[ Validators.required]],
+      gst: ['', [Validators.required]]
     });
   }
   cancel() {

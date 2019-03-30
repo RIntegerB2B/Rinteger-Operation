@@ -19,7 +19,7 @@ export class SearchComponent implements OnInit {
   }
   searchBy(expenseData, search){
 
-    const filterData = expenseData.filter(data => data.name.toUpperCase().indexOf(search.toUpperCase()) > -1);
+    const filterData = expenseData.filter(data => data.companyName.toUpperCase().indexOf(search.toUpperCase()) > -1);
         this.searchCustomer.emit(filterData);
   }
 

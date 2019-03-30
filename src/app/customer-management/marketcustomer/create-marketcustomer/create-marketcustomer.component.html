@@ -7,10 +7,17 @@
       <div fxFlex="50" class="p-2">
         <div>
           <mat-form-field class="full-width">
-            <input matInput formControlName="mobileNumber" placeholder="Mobile Number" required>
+            <input matInput formControlName="mobileNumber" placeholder="Mobile Number"
+            maxlength="10" minlength="10"
+             required>
             <mat-error *ngIf="marketCustomerDetailsForm.controls['mobileNumber'].errors?.required" required>
               Enter Mobile Number
               <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="!marketCustomerDetailsForm.controls['mobileNumber'].errors?.required"
+            >
+            Enter Valid Mobile Number
+            <strong>required</strong>
             </mat-error>
           </mat-form-field>
         </div>
@@ -64,9 +71,10 @@
       </div>
 
       <div fxFlex="100" class="mt-1">
-        <button mat-raised-button color="primary">Save</button>
+          <button mat-raised-button mat-button color="accent" type="button" (click)="cancel()">Cancel</button>
+        
         <span fxFlex></span>
-        <button mat-raised-button mat-button color="accent" type="button" (click)="cancel()">Cancel</button>
+        <button mat-raised-button color="primary">Save</button>
       </div>
     </div>
   </form>

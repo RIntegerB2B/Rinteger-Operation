@@ -1,5 +1,5 @@
 <div class="container topAlignContainer">
-  <form [formGroup]="expenseDetailsForm" (ngSubmit)="addSingleExpense(expenseDetailsForm)">
+  <form [formGroup]="expenseDetailsForm" (ngSubmit)="expenseDetailsForm.valid && addSingleExpense(expenseDetailsForm)">
     <div fxLayout="row wrap" fxLayout.lt-sm="column">
       <div fxFlex="100">
         <label class="pageBoxLg-label">Create Expense</label>
@@ -7,8 +7,8 @@
       <div fxFlex="50" class="p-2">
         <div *ngIf="!data">
         <mat-form-field class="full-width">
-          <input matInput formControlName="mobileNumber" placeholder="Mobile Number" required>
-          <mat-error *ngIf="expenseDetailsForm.controls['mobileNumber'].errors?.required" required>
+          <input matInput formControlName="mobileNumber" type="tel" placeholder="Mobile Number" >
+          <mat-error *ngIf="expenseDetailsForm.controls['mobileNumber'].errors?.required" >
             Enter Mobile Number
             <strong>required</strong>
           </mat-error>
@@ -19,7 +19,7 @@
       <div fxFlex="50" class="p-2">
         <mat-form-field class="full-width">
           <input matInput formControlName="name" placeholder="Name">
-          <mat-error *ngIf="expenseDetailsForm.controls['name'].errors?.required" required>
+          <mat-error *ngIf="expenseDetailsForm.controls['name'].errors?.required" >
             Enter Name
             <strong>required</strong>
           </mat-error>
@@ -67,7 +67,7 @@
       </div>
       <div fxFlex="50" class="p-2">
         <mat-form-field class="full-width">
-          <input matInput formControlName="totalAmount" placeholder="TotalAmount">
+          <input matInput formControlName="totalAmount" type="number" placeholder="TotalAmount" required>
 
           <mat-error *ngIf="expenseDetailsForm.controls['totalAmount'].errors?.required">
             Enter Total Amount
@@ -77,7 +77,7 @@
       </div>
       <div fxFlex="50" class="p-2">
         <mat-form-field class="full-width">
-          <input matInput formControlName="paid" placeholder="Paid">
+          <input matInput formControlName="paid" type="number" placeholder="Paid" required>
           <mat-error *ngIf="expenseDetailsForm.controls['paid'].errors?.required">
             Enter paid Amount
             <strong>required</strong>
@@ -88,7 +88,7 @@
 
       <div fxFlex="50" class="p-2">
         <mat-form-field class="full-width">
-          <input matInput formControlName="vouNo" placeholder="Voucher.No">
+          <input matInput formControlName="vouNo" placeholder="Voucher.No" required>
           <mat-error *ngIf="expenseDetailsForm.controls['vouNo'].errors?.required">
             Enter Voucher.no
             <strong>required</strong>
@@ -101,7 +101,7 @@
 
       <div fxFlex="50" class="p-2">
         <mat-form-field class="full-width">
-          <input matInput formControlName="expensesDescription" placeholder="Expense Description">
+          <input matInput formControlName="expensesDescription" placeholder="Expense Description" required>
           <mat-error *ngIf="expenseDetailsForm.controls['expensesDescription'].errors?.required">
             Enter Expense Description
             <strong>required</strong>

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { MaterialManagementService } from '../material-management.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Product } from '../../shared/product.model';
 @Component({
   selector: 'app-front-screen',
   templateUrl: './front-screen.component.html',
@@ -55,8 +56,8 @@ export class FrontScreenComponent implements OnInit {
   getMaterialSheet() {
     this.router.navigate(['material/viewmaterial']);
   }
-  getDeleteMaterial(data) {
-    this.materialManagementService.deleteWorkorder(data).subscribe(data => {
+  getDeleteMaterial(value) {
+    this.materialManagementService.deleteWorkorder(value).subscribe(data => {
       this.materialModel = data;
       this.materialValue = data;
       this.materialModel = new MatTableDataSource<MaterialModel>(data);

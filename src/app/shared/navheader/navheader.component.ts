@@ -16,6 +16,7 @@ export class NavheaderComponent implements OnInit {
   logOutSession()   {
     localStorage.removeItem('loginUser');
     this.router.navigate(['/account/login']);
+    console.log(localStorage.removeItem('loginUser'));
   }
 
 }

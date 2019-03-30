@@ -39,6 +39,7 @@ import { ViewSingleMaterialComponent } from './view-single-material/view-single-
 import { EditMaterialComponent } from './edit-material/edit-material.component';
 import { FrontScreenComponent } from './front-screen/front-screen.component';
 import { SearchMaterialComponent } from './search-material/search-material.component';
+import { ViewProductComponent } from './view-product/view-product.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { SearchMaterialComponent } from './search-material/search-material.compo
     ViewSingleMaterialComponent,
     EditMaterialComponent,
     FrontScreenComponent,
-    SearchMaterialComponent
+    SearchMaterialComponent,
+    ViewProductComponent
   ],
   imports: [
     HttpClientModule,

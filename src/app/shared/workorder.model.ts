@@ -7,6 +7,7 @@ export class WorkOrder {
     companyName: string;
     companyAddress: string;
     leadID: number;
+    leadUnit: String;
     mobileNumber: string;
     emailId: string;
     date: Date;
@@ -21,6 +22,7 @@ export class WorkOrder {
         companyName: string,
         companyAddress: string,
         leadID: number,
+        leadUnit: String,
         mobileNumber: string,
         emailId: string,
         date: Date,
@@ -34,6 +36,7 @@ export class WorkOrder {
         this.companyName = companyName;
         this.companyAddress = companyAddress;
         this.leadID = leadID;
+        this.leadUnit = leadUnit;
         this.mobileNumber = mobileNumber;
         this.emailId = emailId;
         this.date = date;
