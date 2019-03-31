@@ -3,4 +3,5 @@ export class DateSearch {
     toDate?: string;
     month?: string;
     year?: string;
+    leadUnit: string;
 }

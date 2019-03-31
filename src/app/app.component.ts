@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NavheaderService } from './shared/navheader/navheader.service';
 
 
 @Component({
@@ -7,9 +8,12 @@ import { Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-constructor() {
-}
-
+export class AppComponent implements OnInit {
+  constructor(public navheaderService: NavheaderService) {
+  }
   title = 'rinteger-operation';
+  ngOnInit() {
+    this.navheaderService.menuItems();
+  }
+
 }

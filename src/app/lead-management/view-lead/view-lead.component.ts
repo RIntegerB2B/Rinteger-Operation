@@ -62,6 +62,7 @@ export class ViewLeadComponent implements OnInit {
   ngOnInit() {
     this.getAllLeads();
     this.navheaderService.hideMenuTrans();
+    this.navheaderService.menuItems();
     this.createForm();
   }
   createForm() {

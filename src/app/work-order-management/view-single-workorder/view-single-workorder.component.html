@@ -71,6 +71,16 @@
           </div>
           <div class="col-md-4  col-6">
             <div class="form-group">
+              <label class="divLable">Unit</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{data?.leadUnit}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
               <label class="divLable">Date</label>
             </div>
           </div>
@@ -204,7 +214,7 @@
         <div class="mt-5 pt-5">
         <button mat-raised-button  type="button"
         color="accent"
-         (click)="cancelWorkorder(data)">Cancel</button>
+         (click)="cancelWorkorder()">Cancel</button>
         </div>
       </div>
     </div>

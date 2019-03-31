@@ -6,13 +6,18 @@ import { Injectable } from '@angular/core';
 export class NavheaderService {
 
   menuHide: string;
-  constructor() { }
+  getItems: any;
+  constructor() {
+  }
 
-  makeMenuTrans()   {
+  makeMenuTrans() {
     this.menuHide = 'menuTransparent';
   }
 
-  hideMenuTrans()   {
+  hideMenuTrans() {
     this.menuHide = '';
+  }
+  menuItems() {
+    this.getItems = JSON.parse(localStorage.getItem('menus'));
   }
 }

@@ -3,7 +3,7 @@ import { WorkOrder } from './../../shared/workorder.model';
 import { WorkOrderService } from './../work-order.service';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MatPaginator, MatTableDataSource , MatSort} from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { DateSearch } from './search.model';
 @Component({
   selector: 'app-view-all-workorder',
@@ -13,10 +13,11 @@ import { DateSearch } from './search.model';
 export class ViewAllWorkorderComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   workOrder: any;
-  gstValue = [{ text: 'withGST' }, { text: 'withoutGST ' }]
-  workOrderModel: WorkOrder[] =[];
+  gstValue = [{ text: 'withGST' }, { text: 'withoutGST ' }];
+  workOrderModel: WorkOrder[] = [];
   totalAmount = 0;
   totalTax = 0;
+  fullLeadUnit: any;
   matdatasource = new MatTableDataSource([]);
   public pageSize = 50;
   public currentPage = 0;
@@ -26,6 +27,8 @@ export class ViewAllWorkorderComponent implements OnInit {
   public displayedColumns = ['', '', '', '', ''];
   public dataSource: any;
   workOrderForm: FormGroup;
+  selectedUnit;
+  dataSearchTagShow = false;
   allMonth = [{ month: 'January' }, { month: 'February' }, { month: 'March' }, { month: 'April' },
   { month: 'May' }, { month: 'June' }, { month: 'July' }, { month: 'August' },
   { month: 'September' }, { month: 'October' }, { month: 'November' }, { month: 'October' }
@@ -43,11 +46,12 @@ export class ViewAllWorkorderComponent implements OnInit {
     { year: 2027 },
     { year: 2028 },
   ];
-  constructor(private workOrderService: WorkOrderService,  private router: Router, private fb: FormBuilder) { }
+  constructor(private workOrderService: WorkOrderService, private router: Router, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.getAllWorkOrder();
     this.createForm();
+    this.viewLeadSettings();
   }
   getAllWorkOrder() {
     this.workOrderService.allWorkOrder().subscribe(data => {
@@ -56,7 +60,6 @@ export class ViewAllWorkorderComponent implements OnInit {
       this.workOrder = data;
       this.workOrderModel = data;
       this.array = data;
-      console.log(this.workOrderModel);
       this.totalSize = this.array.length;
       this.iterator();
     }, error => {
@@ -72,23 +75,26 @@ export class ViewAllWorkorderComponent implements OnInit {
       yearData: ['', Validators.required]
     });
   }
-  filterWorkOrder(data)  {
+  filterWorkOrder(data) {
+    this.dataSearchTagShow = false;
     this.workOrder = new MatTableDataSource<WorkOrder>(data);
     this.workOrder.paginator = this.paginator;
     this.workOrder = data;
-    this.workOrderModel = data;
   }
   searchDate(workOrderForm) {
+    this.dataSearchTagShow = false;
     this.dateSearch = new DateSearch();
     this.dateSearch.fromDate = workOrderForm.controls.fromDate.value;
     this.dateSearch.toDate = workOrderForm.controls.toDate.value;
     this.workOrderService.workOrderDateSearch(this.dateSearch).subscribe(data => {
-      this.workOrder = new MatTableDataSource<WorkOrder> (data);
+      this.selectedUnit = 'All';
+      this.dataSearchTagShow = true;
+      this.workOrder = new MatTableDataSource<WorkOrder>(data);
       this.workOrder.paginator = this.paginator;
-      this.workOrderModel = data;
       this.workOrder = data;
-      
-      
+      this.array = data;
+      this.totalSize = this.array.length;
+      this.iterator();
     }, error => {
       console.log(error);
     });
@@ -106,7 +112,23 @@ export class ViewAllWorkorderComponent implements OnInit {
       this.workOrder = new MatTableDataSource<WorkOrder>(data);
       this.workOrder.paginator = this.paginator;
       this.workOrder = data;
-      this.workOrderModel = data;
+      this.array = data;
+      this.totalSize = this.array.length;
+      this.iterator();
+    }, error => {
+      console.log(error);
+    });
+  }
+  searchUnit(e) {
+    this.dateSearch = new DateSearch();
+    this.dateSearch.fromDate = this.workOrderForm.controls.fromDate.value;
+    this.dateSearch.toDate = this.workOrderForm.controls.toDate.value;
+    this.dateSearch.leadUnit = e.value;
+    this.selectedUnit = e.value;
+    this.workOrderService.unitFilter(this.dateSearch).subscribe(data => {
+      this.workOrder = new MatTableDataSource<WorkOrder>(data);
+      this.workOrder.paginator = this.paginator;
+      this.workOrder = data;
       this.array = data;
       this.totalSize = this.array.length;
       this.iterator();
@@ -115,25 +137,31 @@ export class ViewAllWorkorderComponent implements OnInit {
     });
   }
   searchWithoutGST() {
-    this.workOrderService.workOrderWithOutGST().subscribe(data => {
+    this.dateSearch = new DateSearch();
+    this.dateSearch.fromDate = this.workOrderForm.controls.fromDate.value;
+    this.dateSearch.toDate = this.workOrderForm.controls.toDate.value;
+    this.workOrderService.workOrderWithOutGST(this.dateSearch).subscribe(data => {
       this.workOrder = new MatTableDataSource<WorkOrder>(data);
+      this.selectedUnit = 'All';
       this.workOrder.paginator = this.paginator;
       this.workOrder = data;
-      this.workOrderModel = data;
       this.array = data;
       this.totalSize = this.array.length;
-      
+
       this.iterator();
     }, error => {
       console.log(error);
     });
   }
   searchWithGST() {
-    this.workOrderService.workOrderWithGST().subscribe(data => {
+    this.dateSearch = new DateSearch();
+    this.dateSearch.fromDate = this.workOrderForm.controls.fromDate.value;
+    this.dateSearch.toDate = this.workOrderForm.controls.toDate.value;
+    this.workOrderService.workOrderWithGST(this.dateSearch).subscribe(data => {
       this.workOrder = new MatTableDataSource<WorkOrder>(data);
+      this.selectedUnit = 'All';
       this.workOrder.paginator = this.paginator;
       this.workOrder = data;
-      this.workOrderModel = data;
       this.array = data;
       this.totalSize = this.array.length;
       this.iterator();
@@ -143,25 +171,24 @@ export class ViewAllWorkorderComponent implements OnInit {
   }
   getTotal() {
     let total = 0;
-    for (let i = 0; i < this.workOrderModel.length; i++) {
-      console.log(this.workOrderModel[i].allTotal);
-        if (this.workOrderModel[i].allTotal) {
-            total += this.workOrderModel[i].allTotal;
-            this.totalAmount = total;
-        }
+    for (let i = 0; i < this.workOrder.length; i++) {
+      if (this.workOrder[i].allTotal) {
+        total += this.workOrder[i].allTotal;
+        this.totalAmount = total;
+      }
     }
     return total;
-}
-getTax() {
-  let tax = 0;
-  for (let i = 0; i < this.workOrderModel.length; i++) {
-      if (this.workOrderModel[i].tax) {
-        tax += this.workOrderModel[i].tax;
-          this.totalTax = tax;
-      }
   }
-  return tax;
-}
+  getTax() {
+    let tax = 0;
+    for (let i = 0; i < this.workOrder.length; i++) {
+      if (this.workOrder[i].tax) {
+        tax += this.workOrder[i].tax;
+        this.totalTax = tax;
+      }
+    }
+    return tax;
+  }
   private iterator() {
     const end = (this.currentPage + 1) * this.pageSize;
     const start = this.currentPage * this.pageSize;
@@ -170,14 +197,14 @@ getTax() {
   }
   createProfomaInvoice(row) {
     this.router.navigate(['proformainvoice/createproformainvoice'
-    , row.leadID, row._id]);
+      , row.leadID, row._id]);
   }
   viewProfomaInvoice(row) {
     this.router.navigate(['proformainvoice/viewproformainvoice', row.workOrderID]);
   }
   viewInvoice(row) {
     this.router.navigate(['invoice/viewinvoice',
-    row.workOrderID]);
+      row.workOrderID]);
   }
   createInvoice(row) {
     this.router.navigate(['invoice/createinvoice', row.leadID, row._id]);
@@ -201,6 +228,13 @@ getTax() {
       this.iterator();
     }, error => {
       console.log(error);
+    });
+  }
+  viewLeadSettings() {
+    this.workOrderService.leadUnit().subscribe(data => {
+      this.fullLeadUnit = data[0].leadUnit;
+    }, err => {
+      console.log(err);
     });
   }
 }

@@ -7,6 +7,7 @@ import { HttpClient, HttpHeaders, HttpEvent } from '@angular/common/http';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { Customer } from './../shared/customer.model';
+import { LeadSettings } from './../shared/lead-settings.model';
 
 @Injectable({
   providedIn: 'root'
@@ -49,27 +50,27 @@ export class WorkOrderService {
   }
   viewSingleWorkOrder(workid): Observable<any> {
     const addUrl = 'viewsingleworkorder/';
-    const url: string = this.serviceUrl + addUrl  + workid;
+    const url: string = this.serviceUrl + addUrl + workid;
     return this.httpClient.get<WorkOrder[]>(url);
   }
   singleCustomerDetails(id): Observable<any> {
     const addUrl = 'customerdetails/';
-    const url: string = this.serviceUrl + addUrl + id ;
+    const url: string = this.serviceUrl + addUrl + id;
     return this.httpClient.get<Customer[]>(url);
   }
-workorderPDFDetails(): Observable<any> {
-  const addUrl = 'workorderpdfdetails/';
-  const url: string = this.serviceUrl + addUrl ;
-  return this.httpClient.get<Customer[]>(url);
-}
-  updateSingleWorkOrder(row,  workid)   {
+  workorderPDFDetails(): Observable<any> {
+    const addUrl = 'workorderpdfdetails/';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<Customer[]>(url);
+  }
+  updateSingleWorkOrder(row, workid) {
     const addUrl = 'workorder/';
     const url: string = this.serviceUrl + addUrl + workid;
     return this.httpClient.put<WorkOrder>(url, row);
   }
-  deleteSingleWorkOrder(workid)   {
+  deleteSingleWorkOrder(workid) {
     const addUrl = 'workorder/';
-    const url: string = this.serviceUrl + addUrl +  workid;
+    const url: string = this.serviceUrl + addUrl + workid;
     return this.httpClient.delete<WorkOrder[]>(url);
   }
   viewCompanyDetails(leadid, workid): Observable<any> {
@@ -83,7 +84,7 @@ workorderPDFDetails(): Observable<any> {
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.get<WorkOrder[]>(url);
   }
-workOrderDateSearch(dateSearch): Observable<any> {
+  workOrderDateSearch(dateSearch): Observable<any> {
     const addUrl = 'workorderdate';
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.post<WorkOrder[]>(url, dateSearch);
@@ -93,14 +94,24 @@ workOrderDateSearch(dateSearch): Observable<any> {
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.post<WorkOrder[]>(url, dateSearch);
   }
-  workOrderWithOutGST(): Observable<any> {
+  workOrderWithOutGST(dateSearch): Observable<any> {
     const addUrl = 'workorwithoutgst';
     const url: string = this.serviceUrl + addUrl;
-    return this.httpClient.get<WorkOrder[]>(url);
+    return this.httpClient.post<WorkOrder[]>(url, dateSearch);
   }
-  workOrderWithGST(): Observable<any> {
+  workOrderWithGST(dateSearch): Observable<any> {
     const addUrl = 'workorwithgst';
     const url: string = this.serviceUrl + addUrl;
-    return this.httpClient.get<WorkOrder[]>(url);
+    return this.httpClient.post<WorkOrder[]>(url, dateSearch);
+  }
+  leadUnit(): Observable<any> {
+    const addUrl = 'leadsources';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<LeadSettings[]>(url);
+  }
+  unitFilter(dateSearch): Observable<any> {
+    const addUrl = 'workorderunit';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<WorkOrder[]>(url, dateSearch);
   }
 }

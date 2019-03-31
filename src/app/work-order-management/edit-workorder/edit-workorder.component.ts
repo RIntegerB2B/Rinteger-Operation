@@ -65,6 +65,9 @@ export class EditWorkorderComponent implements OnInit {
       console.log(error);
     });
   }
+  cancelWorkorder()   {
+    this.router.navigate(['workorder/viewallworkorder']);
+  }
   addForm() {
     for (let i = 0; i <= this.workOrder.requirements.length - 1; i++)     {
       this.requirementsData = this.fb.group({

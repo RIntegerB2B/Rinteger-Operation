@@ -7,7 +7,6 @@ import { NavheaderService } from './navheader.service';
   styleUrls: ['./navheader.component.css']
 })
 export class NavheaderComponent implements OnInit {
-
   constructor(public navheaderService: NavheaderService, private router: Router) {
    }
 
@@ -15,8 +14,8 @@ export class NavheaderComponent implements OnInit {
   }
   logOutSession()   {
     localStorage.removeItem('loginUser');
+    localStorage.removeItem('menus');
     this.router.navigate(['/account/login']);
-    console.log(localStorage.removeItem('loginUser'));
   }
 
 }

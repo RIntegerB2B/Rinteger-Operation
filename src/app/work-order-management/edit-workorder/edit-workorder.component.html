@@ -1,6 +1,4 @@
-<form novalidate [formGroup]="workOrderDetailsForm"
- (ngSubmit)="updateWorkOrder(workOrderDetailsForm)" 
-style="padding-top:20px">
+<form novalidate [formGroup]="workOrderDetailsForm" (ngSubmit)="updateWorkOrder(workOrderDetailsForm)" style="padding-top:20px">
   <label class="pageBoxLg-label">Edit Work Order</label>
   <div class="pageBoxLg">
     <div class="row">
@@ -14,9 +12,7 @@ style="padding-top:20px">
           <div class="col-md-8  col-6">
             <div class="form-group">
               : <label class="itemLable">
-                <input hidden formControlName="customerID"
-                 [ngModel]="workOrder?.customerID">
-                {{workOrder?.customerID}}
+                <input hidden formControlName="customerID" [ngModel]="workOrder?.customerID"> {{workOrder?.customerID}}
               </label>
             </div>
           </div>
@@ -27,21 +23,19 @@ style="padding-top:20px">
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              <input hidden  formControlName="companyName" [ngModel]="workOrder?.companyName">
-              : <label class="itemLable">{{workOrder?.companyName}}</label>
+              <input hidden formControlName="companyName" [ngModel]="workOrder?.companyName"> : <label class="itemLable">{{workOrder?.companyName}}</label>
             </div>
           </div>
           <div class="col-md-4  col-6">
-              <div class="form-group">
-                <label class="divLable">Company Address</label>
-              </div>
+            <div class="form-group">
+              <label class="divLable">Company Address</label>
             </div>
-            <div class="col-md-8  col-6">
-                <div class="form-group">
-      <input hidden  formControlName="address" [ngModel]="workOrder?.companyAddress">
-                  : <label class="itemLable">{{workOrder?.companyAddress}}</label>
-                </div>
-              </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              <input hidden formControlName="address" [ngModel]="workOrder?.companyAddress"> : <label class="itemLable">{{workOrder?.companyAddress}}</label>
+            </div>
+          </div>
           <div class="col-md-4  col-6">
             <div class="form-group">
               <label class="divLable">Customer Name</label>
@@ -49,8 +43,7 @@ style="padding-top:20px">
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              <input  hidden formControlName="customerName" [ngModel]="workOrder?.customerName">
-              : <label class="itemLable">{{workOrder?.customerName}}</label>
+              <input hidden formControlName="customerName" [ngModel]="workOrder?.customerName"> : <label class="itemLable">{{workOrder?.customerName}}</label>
             </div>
           </div>
 
@@ -62,21 +55,21 @@ style="padding-top:20px">
           <div class="col-md-8  col-6">
             <div class="form-group">
               : <label class="itemLable">{{workOrder?.mobileNumber}}</label>
-              <input hidden  formControlName="mobileNumber" [ngModel]="workOrder?.mobileNumber">
+              <input hidden formControlName="mobileNumber" [ngModel]="workOrder?.mobileNumber">
             </div>
           </div>
           <div class="col-md-4  col-6">
-              <div class="form-group">
-                <label class="divLable">Email ID</label>
-              </div>
+            <div class="form-group">
+              <label class="divLable">Email ID</label>
             </div>
+          </div>
           <div class="col-md-8  col-6">
-              <div class="form-group">
-                : <label class="itemLable">{{workOrder?.emailId}}</label>
-                <input hidden  formControlName="emailId" [ngModel]="workOrder?.emailId">
-              </div>
+            <div class="form-group">
+              : <label class="itemLable">{{workOrder?.emailId}}</label>
+              <input hidden formControlName="emailId" [ngModel]="workOrder?.emailId">
             </div>
-            
+          </div>
+
 
         </div>
       </div>
@@ -89,8 +82,17 @@ style="padding-top:20px">
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              <input  hidden formControlName="workOrderID" [ngModel]="workOrder?.workOrderID">
-              : <label class="itemLable">{{workOrder?.workOrderID}}</label>
+              <input hidden formControlName="workOrderID" [ngModel]="workOrder?.workOrderID"> : <label class="itemLable">{{workOrder?.workOrderID}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Lead Unit</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              <input hidden formControlName="leadUnit" [ngModel]="workOrder?.leadUnit"> : <label class="itemLable">{{workOrder?.leadUnit}}</label>
             </div>
           </div>
           <div class="col-md-4  col-6">
@@ -101,8 +103,7 @@ style="padding-top:20px">
           <div class="col-md-8  col-6">
             <div class="form-group">
               <mat-form-field>
-                <input matInput formControlName="date" [matDatepicker]="picker" [ngModel]="workOrder?.date" 
-                 placeholder="Choose a date">
+                <input matInput formControlName="date" [matDatepicker]="picker" [ngModel]="workOrder?.date" placeholder="Choose a date">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
@@ -129,10 +130,10 @@ style="padding-top:20px">
         </div>
         <div class="col-md-1 col-4">
           <div class="form-group">
-          <mat-form-field class="full-width">
-            <input matInput formControlName="quantity" placeholder="Quantity">
-          </mat-form-field>
-        </div>
+            <mat-form-field class="full-width">
+              <input matInput formControlName="quantity" placeholder="Quantity">
+            </mat-form-field>
+          </div>
         </div>
         <div class="col-md-2 col-4">
           <div class="form-group">
@@ -149,13 +150,15 @@ style="padding-top:20px">
           </div>
         </div>
         <div class="col-md-2 col-4">
-          <mat-form-field class="full-width">
-            <input matInput formControlName="total" [ngModel]="(workOrderDetailsForm.controls['requirements'].controls[i].controls.quantity.value *
+          <div class="form-group">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="total" [ngModel]="(workOrderDetailsForm.controls['requirements'].controls[i].controls.quantity.value *
             workOrderDetailsForm.controls['requirements'].controls[i].controls.price.value
               ) - (workOrderDetailsForm.controls['requirements'].controls[i].controls.quantity.value *
               workOrderDetailsForm.controls['requirements'].controls[i].controls.price.value)/100*workOrderDetailsForm.controls['requirements'].controls[i].controls.discount.value"
-              placeholder="Total">
-          </mat-form-field>
+                placeholder="Total">
+            </mat-form-field>
+          </div>
         </div>
         <div class="col-md-2 col-2">
           <div class="form-group">
@@ -199,6 +202,15 @@ style="padding-top:20px">
         </div>
       </div>
     </div>
-    <button mat-raised-button color="primary">Update</button>
+    <div class="row">
+      <div class="col-md-10">
+        <button mat-raised-button color="primary">Update</button>
+      </div>
+      <div class="col-md-2">
+        <div class="mt-5 pt-5">
+          <button mat-raised-button type="button" color="accent" (click)="cancelWorkorder()">Cancel</button>
+        </div>
+      </div>
+    </div>
   </div>
 </form>

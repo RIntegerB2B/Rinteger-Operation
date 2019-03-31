@@ -86,9 +86,9 @@
             </div>
             <div class="col-md-8  col-6">
               <div class="form-group">
-                : <label class="itemLable">{{customerData.mobileNumber}}</label>
+                : <label class="itemLable">{{leadData?.leadUnit}}</label>
                 <input hidden formControlName="leadUnit"
-                 [ngModel]="customerData.leadUnit">
+                 [ngModel]="leadData?.leadUnit">
               </div>
             </div>
           <div class="col-md-4  col-6">
@@ -101,8 +101,10 @@
               : <label class="itemLable">{{currentDate | date: 'dd/MM/yyyy'}}</label>
             </div>
           </div>
-          <input hidden formControlName="date" [ngModel]="currentDate" placeholder="item">
-          <input hidden formControlName="leadID" [ngModel]="leadData?.leadID" placeholder="item">
+          <input hidden formControlName="date" 
+          [ngModel]="currentDate" placeholder="item">
+          <input hidden formControlName="leadID" 
+          [ngModel]="leadData?.leadID" placeholder="item">
         </div>
       </div>
     </div>

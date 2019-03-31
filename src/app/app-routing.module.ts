@@ -64,6 +64,10 @@ const routes: Routes = [
     loadChildren: './material-management/material-management.module#MaterialModule',
   },
   {
+    path: 'user',
+    loadChildren: './user-management/user-management.module#UserManagementModule',
+  },
+  {
     path: '',
     redirectTo: 'account/login',
     pathMatch: 'full'

@@ -14,8 +14,8 @@ export class LoginComponent implements OnInit {
   loginFailed = false;
   constructor(public navheaderService: NavheaderService, private accountService: AccountService, private fb: FormBuilder,
     private router: Router) {
-      this.navheaderService.makeMenuTrans();
-     }
+    this.navheaderService.makeMenuTrans();
+  }
   onLoginForm: FormGroup;
   login: LogIn;
   ngOnInit() {
@@ -29,18 +29,21 @@ export class LoginComponent implements OnInit {
     });
   }
   loginSubmit() {
-    this.login = new LogIn(
-      this.onLoginForm.controls.userName.value,
-      this.onLoginForm.controls.password.value
-    );
+    this.login = new LogIn();
+    this.login.userName = this.onLoginForm.controls.userName.value;
+    this.login.password = this.onLoginForm.controls.password.value;
     this.accountService.logIn(this.login).subscribe(data => {
       if (data.length !== 0
       ) {
         localStorage.setItem('loginUser', 'true');
+        localStorage.setItem('menus', JSON.stringify(data[0].userdetails));
         this.router.navigate(['./lead/leadview']);
       } else {
-        this.loginFailed  = true;
+        this.loginFailed = true;
       }
+    }, error => {
+      this.loginFailed = true;
+      console.log(error);
     });
   }
 }
