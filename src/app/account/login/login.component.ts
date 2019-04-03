@@ -37,7 +37,13 @@ export class LoginComponent implements OnInit {
       ) {
         localStorage.setItem('loginUser', 'true');
         localStorage.setItem('menus', JSON.stringify(data[0].userdetails));
-        this.router.navigate(['./lead/leadview']);
+        localStorage.setItem('role', data[0].role);
+        localStorage.setItem('userId', data[0]._id);
+        if (localStorage.getItem('role') !== 'admin') {
+          this.router.navigate(['./task/viewtask', data[0]._id]);
+        } else {
+          this.router.navigate(['./lead/leadview']);
+        }
       } else {
         this.loginFailed = true;
       }

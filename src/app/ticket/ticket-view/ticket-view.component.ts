@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TicketModel } from './../ticket/ticket.Model';
 import { TicketService } from './../ticket.service';
+import { NavheaderService } from '../../shared/navheader/navheader.service';
 
 import { ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
@@ -8,7 +9,7 @@ import { MatTableDataSource } from '@angular/material';
 import { PageEvent } from '@angular/material';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { filter } from 'rxjs/operators';
-
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 @Component({
   selector: 'app-ticket-view',
   templateUrl: './ticket-view.component.html',
@@ -29,14 +30,31 @@ export class TicketViewComponent implements OnInit {
   units = [{ name: 'studio', counts: 0 }, { name: 'BSS', counts: 0 }, { name: 'technology', counts: 0 }];
   @ViewChild('MatPaginator') paginator: MatPaginator;
   matdatasource = new MatTableDataSource([]);
+  userid: any;
+  userRole: string;
 
 
 
 
-  constructor(private ts: TicketService) { }
+  constructor(private ts: TicketService, private router: Router, private route: ActivatedRoute,
+    private navheaderService: NavheaderService) { }
 
   ngOnInit() {
-    this.retriveTicket();
+
+    this.userRole = localStorage.getItem('role');
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.userid = params.get('id');
+      /* this.userRole = params.get ('role'); */
+    });
+
+    if (this.userRole === 'admin') {
+      this.retriveTicket();
+    } else {
+      this.CompareUserId();
+    }
+
+    this.navheaderService.hideMenuTrans();
+    this.navheaderService.menuItems();
   }
 
   retriveTicket() {
@@ -51,12 +69,13 @@ export class TicketViewComponent implements OnInit {
       this.totalSize = this.array.length;
       this.iterator();
       this.filterWiseTest();
+
     }, error => { console.log(error); }
     );
 
   }
 
-  getunitwiseTicket(name) {
+  /* getunitwiseTicket(name) {
     this.ts.getunitwiseTicket(name).subscribe(data => {
       this.ticketholder = data;
       this.ticketholder = new MatTableDataSource<any>(data);
@@ -70,7 +89,13 @@ export class TicketViewComponent implements OnInit {
       console.log(error);
     }
     );
+  } */
+  getunitwiseTicket(name) {
+    this.ticketholder = this.filterWise.filter(data =>
+      data.units === name
+    );
   }
+
 
   filterWiseTest() {
 
@@ -103,7 +128,7 @@ export class TicketViewComponent implements OnInit {
 
 
   /*  uniqTicket(data) {
- 
+
      this.ts.uniqTicket(data).subscribe(data =>{this.ticketholder=data;
        console.log(this.ticketholder);
    },error =>{console.log(error);}
@@ -121,4 +146,21 @@ export class TicketViewComponent implements OnInit {
     this.ticketholder = part;
   }
 
+
+  CompareUserId() {
+    this.ts.compareUserId(this.userid).subscribe(data => {
+      this.ticketholder = data;
+      this.deadcount = this.ticketholder.length;
+      this.ticketholder = new MatTableDataSource<any>(data);
+      this.ticketholder.paginator = this.paginator;
+      this.ticketholder = data;
+      this.filterWise = this.ticketholder;
+      this.array = data;
+      this.totalSize = this.array.length;
+      this.filterWiseTest();
+    }
+
+    );
+
+  }
 }

@@ -35,7 +35,7 @@ export class CreateRoleComponent implements OnInit {
         incomeNav: [false, Validators.required],
         expenseNav: [false, Validators.required],
         invoiceNav: [false, Validators.required],
-        profomaInvoiceNav: ['', Validators.required],
+        profomaInvoiceNav: [false, Validators.required],
       }),
       baseRole: this.fb.group({
         ticketNav: [false, Validators.required],

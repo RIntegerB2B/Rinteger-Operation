@@ -7,6 +7,7 @@ export class TicketModel {
     units: string;
     department: string;
     assignedto: string;
+    userId: string;
     assignedby: string;
     status: string;
     toclosedate: string;

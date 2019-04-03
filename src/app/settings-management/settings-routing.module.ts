@@ -7,6 +7,7 @@ import { ExpenseSettingsComponent } from './expense-settings/expense-settings.co
 import { TicketSettingComponent } from './ticket-setting/ticket-setting.component';
 import { IncomeSettingsComponent } from './income-settings/income-settings.component';
 import { MaterialSettingsComponent } from './material-settings/material-settings.component';
+import { TaskSettingsComponent } from './task-settings/task-settings.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   }, {
     path: 'materialsetting',
     component: MaterialSettingsComponent
+  },
+  {
+    path: 'tasksetting',
+    component: TaskSettingsComponent
   }
 ];
 

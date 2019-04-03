@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { AppSetting } from './../config/appSetting';
 import { Observable } from 'rxjs';
 import { Customer } from './../customer-management/customer/create-customer/customer.model';
+import {Register} from './../user-management/registration/register.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -44,13 +45,26 @@ export class TicketService {
   }
 
   getunitwiseTicket(name): Observable<TicketModel[]> {
-    const urlway = this.baseurl + 'unitwiseticket/'+ name;
+    const urlway = this.baseurl + 'unitwiseticket/' + name;
 
     return this.http.get<TicketModel[]>(urlway);
   }
 
   deadlinedTicket(): Observable<TicketModel[]> {
     const urlway = this.baseurl + 'deadlinedTicket';
+
+    return this.http.get<TicketModel[]>(urlway);
+  }
+
+
+  getAllRegisteres(): Observable<Register[]> {
+    const urlway = this.baseurl + 'allregister';
+
+    return this.http.get<Register[]>(urlway);
+  }
+
+  compareUserId(data): Observable<TicketModel[]> {
+    const urlway = this.baseurl + 'logerTicket/' + data;
 
     return this.http.get<TicketModel[]>(urlway);
   }

@@ -60,6 +60,10 @@ const routes: Routes = [
     loadChildren: './ticket/ticket.module#TicketModule',
   },
   {
+    path: 'task',
+    loadChildren: './task-management/task.module#TaskModule',
+  },
+  {
     path: 'material',
     loadChildren: './material-management/material-management.module#MaterialModule',
   },

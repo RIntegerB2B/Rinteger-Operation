@@ -1,21 +1,22 @@
-<span [routerLink]="['/ticket/create']">
+<span [routerLink]="['/task/create', userId]">
 
   <mat-icon class="gridEdit" *ngIf="this.userRole === 'admin'">add_box</mat-icon>
 </span>
 
 
-<div class="row">
-  <div class="col-md-2  m-3" *ngIf="this.userRole === 'admin'">
-    <button mat-raised-button color="accent" matBadge="{{deadcount}}" matBadgePosition="after" matBadgeColor="accent"
-      (click)="deadlinedTicket()"> DeadLine passed </button>
+<div class=row>
+  <div class="col-md-2 m-3" *ngIf="this.userRole === 'admin'">
+    <button mat-raised-button color="accent" matBadge="{{deadcount}}" 
+      matBadgePosition="after" matBadgeColor="accent" (click)="deadlinedTask()"> DeadLine passed </button>
   </div>
-  <div class="col-md-2  m-3" *ngIf="this.userRole === 'admin'">
-    <button mat-raised-button color="accent" (click)="retriveTicket()" matBadge="{{all}}" matBadgePosition="after"
-      matBadgeColor="accent">All Tickets </button>
+  <div class="col-md-2 m-3" *ngIf="this.userRole === 'admin'">
+    <button mat-raised-button color="accent" (click)="getAllTask()" matBadge="{{all}}"
+      matBadgePosition="after" matBadgeColor="accent">All Tickets </button>
   </div>
   <div class="col-md-2 m-3" *ngFor="let unit of units">
+    <!-- {{unit.counts | json}} -->
     <button mat-raised-button color="primary" matBadge="{{unit.counts}}" matBadgePosition="before"
-      matBadgeColor="primary" (click)="getunitwiseTicket(unit.name)">{{unit.name}}</button>
+      matBadgeColor="primary" (click)="getunitwiseTask(unit.name)">{{unit.name}}</button>
   </div>
 
 </div>
@@ -26,12 +27,12 @@
 <div class="row gridRowHeader display-none-small">
   <div class="col-md-2 vcenterHeader">
     <div class="form-group">
-      <label>Ticket No</label>
+      <label>Task No</label>
     </div>
   </div>
   <div class="col-md-2 vcenterHeader">
     <div class="form-group">
-      <label>Customer Name</label>
+      <label>Name</label>
     </div>
   </div>
   <div class="col-md-2 vcenterHeader">
@@ -46,7 +47,7 @@
   </div>
   <div class="col-md-2 vcenterHeader">
     <div class="form-group">
-      <label>Requirement</label>
+      <label>Task Title</label>
     </div>
   </div>
   <div class="col-md-2 vcenterHeader">
@@ -55,25 +56,25 @@
     </div>
   </div>
 </div>
-<div *ngFor="let data of ticketholder">
+<div *ngFor="let data of taskholder">
   <div class="row gridRow">
     <div class="display-none-large col-6">
       <label class="gridLabel">Ticket No</label>
     </div>
     <div class="col-md-2 col-6 vcenter form-group">
-      {{data.ticketno}}
+      {{data.taskNo}}
     </div>
     <div class="display-none-large col-6">
-      <label class="gridLabel">Customer Name:</label>
+      <label class="gridLabel">Name:</label>
     </div>
     <div class="col-md-2 col-6 vcenter form-group">
-      {{data.customername}}
+      {{data.assignedTo}}
     </div>
     <div class="display-none-large col-6">
       <label class="gridLabel">Date/Time:</label>
     </div>
     <div class="col-md-2 col-6 vcenter form-group">
-      {{data.datetime}}
+      {{data.dateTime}}
     </div>
     <div class="display-none-large col-6">
       <label class="gridLabel">Department:</label>
@@ -82,10 +83,10 @@
       {{data.department}}
     </div>
     <div class="display-none-large col-6">
-      <label class="gridLabel">Requirement:</label>
+      <label class="gridLabel">Task Title:</label>
     </div>
     <div class="col-md-2 col-6 vcenter form-group">
-      {{data.requirement}}
+      {{data.taskTitle}}
     </div>
     <div class="display-none-large col-6">
       <label class="gridLabel">Status:</label>
@@ -98,8 +99,10 @@
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <!-- <a class="nav-link" (click)="uniqTicket(data._id)">View</a> -->
-        <a class="nav-link" [routerLink]="['/ticket/uniqueview',data._id]">View</a>
+
+        <a class="nav-link" [routerLink]="['/task/viewsingle', data._id, userId ]">View</a>
+        <a class="nav-link" [routerLink]="['/task/edittask', data._id, userId ]">Update Status</a>
+        <a class="nav-link" *ngIf="this.userRole === 'admin'" (click)="delete(data)">Detele</a>
       </mat-menu>
     </div>
 

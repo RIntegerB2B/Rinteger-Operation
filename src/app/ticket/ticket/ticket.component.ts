@@ -5,9 +5,8 @@ import { TicketService } from './../ticket.service';
 import { from } from 'rxjs';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { Customer } from './../../customer-management/customer/create-customer/customer.model';
-import { Router } from '@angular/router';
-
-
+import {Register} from './../../user-management/registration/register.model';
+import { Router} from '@angular/router';
 @Component({
   selector: 'app-ticket',
   templateUrl: './ticket.component.html',
@@ -18,6 +17,7 @@ export class TicketComponent implements OnInit {
   assignedto;
   assignedby;
   customerdetail;
+  registerterdetail: Register[];
   units = ['studio', 'BSS', 'technology'];
   priority = ['low', 'medium', 'high', 'critical'];
   ticketform: FormGroup;
@@ -27,13 +27,18 @@ export class TicketComponent implements OnInit {
   departmentData;
   assignedBy;
   assignedTo;
+  taskname: Register[];
+  userId: string;
+  userRole: string;
   constructor(private ts: TicketService, private fb: FormBuilder, private router: Router) { }
 
   ngOnInit() {
     this.createticket();
     this.getAllCustomer();
     this.getDepartment();
-  }
+    this.getAllRegisteres();
+
+}
   createticket() {
     this.ticketform = this.fb.group({
       ticketno: [''],
@@ -44,6 +49,7 @@ export class TicketComponent implements OnInit {
       priority: [''],
       department: [''],
       assignedto: [''],
+      userId: [''],
       assignedby: [''],
       status: [''],
       toclosedate: [''],
@@ -61,7 +67,8 @@ export class TicketComponent implements OnInit {
     this.ticketholder.units = this.ticketform.controls.units.value;
     this.ticketholder.priority = this.ticketform.controls.priority.value;
     this.ticketholder.department = this.ticketform.controls.department.value;
-    this.ticketholder.assignedto = this.ticketform.controls.assignedto.value;
+    this.ticketholder.assignedto = this.ticketform.controls.assignedto.value.userName;
+    this.ticketholder.userId = this.ticketform.controls.assignedto.value._id;
     this.ticketholder.assignedby = this.ticketform.controls.assignedby.value;
     this.ticketholder.status = this.ticketform.controls.status.value;
     this.ticketholder.toclosedate = this.ticketform.controls.toclosedate.value;
@@ -102,5 +109,17 @@ export class TicketComponent implements OnInit {
   filterCustomer(data) {
     this.customerModel = data;
 
+  }
+  getAllRegisteres() {
+    this.ts.getAllRegisteres().subscribe(regdata => {
+      this.registerterdetail = regdata;
+    }, error => {
+      console.log(error);
+    });
+
+  }
+  changed(e) {
+    console.log(this.registerterdetail.filter(data => data.unit === e.value));
+     this.taskname = this.registerterdetail.filter(data => data.unit === e.value);
   }
 }

@@ -37,10 +37,10 @@ import { SettingsRoutingModule } from './settings-routing.module';
 import { ExpenseSettingsComponent } from './expense-settings/expense-settings.component';
 import { IncomeSettingsComponent } from './income-settings/income-settings.component';
 import { TicketSettingComponent } from './ticket-setting/ticket-setting.component';
-
+import { TaskSettingsComponent } from './task-settings/task-settings.component';
 @NgModule({
   declarations: [LeadSettingsComponent, WorkorderPdfTemplateComponent, ExpenseSettingsComponent, TicketSettingComponent,
-    IncomeSettingsComponent,MaterialSettingsComponent
+    IncomeSettingsComponent, MaterialSettingsComponent, TaskSettingsComponent
   ],
   imports: [
     HttpClientModule,

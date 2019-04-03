@@ -11,7 +11,7 @@ import { ExpenseSetting } from './../shared/expense-settings.model';
 import { TicketsettingsModel } from './ticket-setting/ticket-settings.model';
 import { IncomeSetting } from '../shared/income-setting.model';
 import { MaterialSetting } from '../shared/material-settings.model';
-
+import { TasksettingsModel } from '../shared/task-setting.module';
 @Injectable({
   providedIn: 'root'
 })
@@ -288,6 +288,41 @@ export class SettingsServiceService {
     const addUrl = 'deletematerialstatus/';
     const url: string = this.serviceUrl + addUrl + val;
     return this.httpClient.delete<MaterialSetting[]>(url);
+  }
+
+  addTaskDepartment(data: any): Observable<any> {
+    const addUrl = 'adddepartment';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<TasksettingsModel[]>(url, data);
+  }
+
+  viewTaskDepartment(): Observable<any> {
+    const addUrl = 'viewdepartments';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<TasksettingsModel[]>(url);
+  }
+
+
+  deleteTaskDepartment(val): Observable<any> {
+    const addUrl = 'deletedepartments/';
+    const url: string = this.serviceUrl + addUrl + val;
+    return this.httpClient.delete<TasksettingsModel[]>(url);
+  }
+  addTaskAssignedby(data: any): Observable<any> {
+    const addUrl = 'taskassignedby';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<TasksettingsModel[]>(url, data);
+  }
+
+  viewTaskAssignedby(): Observable<any> {
+    const addUrl = 'viewtaskassignedy';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<TasksettingsModel[]>(url);
+  }
+  deleteTaskAssignedby(val): Observable<any> {
+    const addUrl = 'deletetaskassiginedby/';
+    const url: string = this.serviceUrl + addUrl + val;
+    return this.httpClient.delete<TasksettingsModel[]>(url);
   }
 
 }
