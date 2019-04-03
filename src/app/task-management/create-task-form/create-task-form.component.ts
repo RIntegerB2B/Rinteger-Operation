@@ -25,9 +25,9 @@ export class CreateTaskFormComponent implements OnInit {
   taskholder: TaskModel;
   /*   customerModel: Customer; */
   /*   selectedData: Customer; */
-  departmentData = [];
-  assignedBy = [];
-  assignedTo = [];
+  departmentData;
+  assignedBy;
+  assignedTo;
   userId;
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router,
     private taskManagementService: TaskManagementService) { }
@@ -36,13 +36,12 @@ export class CreateTaskFormComponent implements OnInit {
     this.createtask();
     /*  this.getAllCustomer();
      this.getDepartment(); */
-
+    this.getUnitWiseName();
     this.getDepartment();
     this.route.paramMap.subscribe(
       (params: ParamMap) => {
         this.userId = params.get('id');
       });
-    this.getUnitWiseName();
   }
   createtask() {
     this.taskForm = this.fb.group({
@@ -109,7 +108,7 @@ export class CreateTaskFormComponent implements OnInit {
 
 
   cancel() {
-    this.router.navigate(['task/viewtask', this.userId]);
+    this.router.navigate(['task/viewtask',  this.userId]);
   }
 
 

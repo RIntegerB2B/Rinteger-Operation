@@ -5,7 +5,7 @@ import { TicketViewComponent } from './../ticket/ticket-view/ticket-view.compone
 import { UniqueTicketComponent } from './unique-ticket/unique-ticket.component';
 import { UnitwiseViewComponent } from './unitwise-view/unitwise-view.component';
 import { from } from 'rxjs';
-const routes: Routes = [{ path: 'create', component: TicketComponent },
+const routes: Routes = [{ path: 'create/:id', component: TicketComponent },
 { path: 'ticketview/:id', component: TicketViewComponent },
 { path: 'uniqueview/:id', component: UniqueTicketComponent },
 { path: 'unitwiseview', component: UnitwiseViewComponent }];

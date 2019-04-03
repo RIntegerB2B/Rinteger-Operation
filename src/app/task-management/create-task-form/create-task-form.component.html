@@ -1,5 +1,5 @@
 <div class="container topAlignContainer">
-  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="taskForm" (ngSubmit)="taskForm.valid && onSubmit()">
 
    <!--  <app-ticketcustomersearch [customerModel]="customerdetail" 
     (searchCustomer)="filterCustomer($event)"></app-ticketcustomersearch> -->
@@ -21,8 +21,7 @@
       </div> -->
       <div fxFlex="50" class="pr-1">
         <mat-form-field>
-          <mat-select placeholder="units" formControlName="units"
-           (selectionChange)="changed($event)">
+          <mat-select placeholder="units" formControlName="units" (selectionChange)="changed($event)" required>
             <mat-option *ngFor="let data of units"   [value]="data">
               {{data}}
             </mat-option>

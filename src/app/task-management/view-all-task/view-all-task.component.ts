@@ -25,6 +25,7 @@ export class ViewAllTaskComponent implements OnInit {
   public totalSize = 0;
   public array: any;
   private dataSource;
+  filterUnit;
   count;
   all;
   userid;
@@ -38,6 +39,7 @@ export class ViewAllTaskComponent implements OnInit {
 
 
   userId;
+  userUnit: any;
 
   constructor(private taskManagementService: TaskManagementService, private route: ActivatedRoute,
     private navheaderService: NavheaderService) { }
@@ -50,7 +52,9 @@ export class ViewAllTaskComponent implements OnInit {
     });
     if (this.userRole === 'admin') {
       this.getAllTask();
-    } else {
+    } else if (this.userRole === 'teamleader') {
+      this.getUnitWise();
+    }     else {
       this.CompareUserId();
     }
     this.navheaderService.hideMenuTrans();
@@ -74,6 +78,7 @@ export class ViewAllTaskComponent implements OnInit {
   }
   getRole() {
     this.userRole = localStorage.getItem('role');
+    console.log(this.userRole);
   }
 
   getUnitWiseName() {
@@ -81,21 +86,39 @@ export class ViewAllTaskComponent implements OnInit {
       this.UnitName = data;
     });
   }
-  /*
-    getunitwiseTask(name) {
-      this.taskManagementService.getunitwiseTask(name).subscribe(data => {
-        this.taskholder = data;
-        this.taskholder = new MatTableDataSource<any>(data);
-        this.taskholder.paginator = this.paginator;
-        this.taskholder = data;
-        this.filterWise = this.taskholder;
-        this.array = data;
-        this.totalSize = this.array.length;
-      }, error => {
-        console.log(error);
-      }
-      );
-    } */
+
+  getUnitWise() {
+    this.userUnit = localStorage.getItem('unit');
+    this.taskManagementService.compareUserUnits(this.userUnit).subscribe(data => {
+      this.taskholder = data;
+      this.taskholder = new MatTableDataSource<any>(data);
+      this.taskholder.paginator = this.paginator;
+      this.taskholder = data;
+      this.all = this.taskholder.length;
+      this.filterWise = this.taskholder;
+      this.array = data;
+      this.totalSize = this.array.length;
+      this.iterator();
+      this.filterWiseTest();
+    }, error => {
+      console.log(error);
+    });
+    /*  this.taskholder = this.filterWise.filter(data =>
+       data.units === this.userUnit); */
+    /*  this.taskManagementService.getunitwiseTask(name).subscribe(data => {
+       this.taskholder = data;
+       this.taskholder = new MatTableDataSource<any>(data);
+       this.taskholder.paginator = this.paginator;
+       this.taskholder = data;
+       this.filterWise = this.taskholder;
+       this.array = data;
+       this.totalSize = this.array.length;
+ 
+     }, error => {
+       console.log(error);
+     }
+     ); */
+  }
 
   getunitwiseTask(value) {
     this.taskholder = this.filterWise.filter(data =>

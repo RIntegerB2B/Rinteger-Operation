@@ -6,7 +6,7 @@ import { from } from 'rxjs';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { Customer } from './../../customer-management/customer/create-customer/customer.model';
 import {Register} from './../../user-management/registration/register.model';
-import { Router} from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 @Component({
   selector: 'app-ticket',
   templateUrl: './ticket.component.html',
@@ -30,14 +30,19 @@ export class TicketComponent implements OnInit {
   taskname: Register[];
   userId: string;
   userRole: string;
-  constructor(private ts: TicketService, private fb: FormBuilder, private router: Router) { }
+  constructor(private ts: TicketService, private fb: FormBuilder, private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
+
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.userId = params.get('id');
+      /* this.userRole = params.get ('role'); */
+    });
     this.createticket();
     this.getAllCustomer();
     this.getDepartment();
     this.getAllRegisteres();
-
 }
   createticket() {
     this.ticketform = this.fb.group({
@@ -75,7 +80,7 @@ export class TicketComponent implements OnInit {
     this.ticketholder.closeddate = this.ticketform.controls.closeddate.value;
     this.ts.getfieldValue(this.ticketholder).subscribe(data => {
       this.ticketholder = data;
-      this.router.navigate(['ticket/view']);
+      this.router.navigate(['ticket/ticketview', this.userId]);
     }, error => {
       console.log(error);
     });
@@ -94,7 +99,7 @@ export class TicketComponent implements OnInit {
 
 
   getReset() {
-    this.router.navigate(['ticket/view']);
+    this.router.navigate(['ticket/ticketview', this.userId]);
     this.ticketform.reset();
   }
 

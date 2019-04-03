@@ -1,5 +1,10 @@
 .textMenu li a {
   color: #ffff;
+  
+}
+.textMenu {
+  font-size: 11px;
+  
 }
 
 .vcenter {

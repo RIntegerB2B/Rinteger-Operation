@@ -32,7 +32,7 @@ export class ViewSingleTaskComponent implements OnInit {
   getSingleTask() {
 
     this.taskManagementService.getSingleData(this.id).subscribe(data => {
-      this.taskholder = data;
+    this.taskholder = data;
       console.log(this.taskholder);
     }, error => { console.log(error); }
     );

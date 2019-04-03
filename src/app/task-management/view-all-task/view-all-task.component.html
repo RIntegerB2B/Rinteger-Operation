@@ -1,23 +1,27 @@
 <span [routerLink]="['/task/create', userId]">
 
-  <mat-icon class="gridEdit" *ngIf="this.userRole === 'admin'">add_box</mat-icon>
+  <mat-icon class="gridEdit" *ngIf="this.userRole === 'admin' || this.userRole === 'teamleader'">add_box</mat-icon>
 </span>
 
 
 <div class=row>
-  <div class="col-md-2 m-3" *ngIf="this.userRole === 'admin'">
-    <button mat-raised-button color="accent" matBadge="{{deadcount}}" 
+  <div class="col-md-2">
+    <button mat-raised-button color="accent" matBadge="{{deadcount}}" *ngIf="this.userRole === 'admin'"
       matBadgePosition="after" matBadgeColor="accent" (click)="deadlinedTask()"> DeadLine passed </button>
   </div>
-  <div class="col-md-2 m-3" *ngIf="this.userRole === 'admin'">
-    <button mat-raised-button color="accent" (click)="getAllTask()" matBadge="{{all}}"
+  <div class="col-md-2">
+    <button mat-raised-button color="accent" (click)="getAllTask()" *ngIf="this.userRole === 'admin'" matBadge="{{all}}"
       matBadgePosition="after" matBadgeColor="accent">All Tickets </button>
   </div>
-  <div class="col-md-2 m-3" *ngFor="let unit of units">
+  <div class="col-md-2" *ngFor="let unit of units">
     <!-- {{unit.counts | json}} -->
     <button mat-raised-button color="primary" matBadge="{{unit.counts}}" matBadgePosition="before"
       matBadgeColor="primary" (click)="getunitwiseTask(unit.name)">{{unit.name}}</button>
   </div>
+  <!-- <div class="col-md-2">
+    <button mat-raised-button color="accent" (click)="getUnitWise()" *ngIf="this.userRole === 'teamleader'" matBadge="{{all}}"
+      matBadgePosition="after" matBadgeColor="accent">Unit Wise </button>
+  </div> -->
 
 </div>
 

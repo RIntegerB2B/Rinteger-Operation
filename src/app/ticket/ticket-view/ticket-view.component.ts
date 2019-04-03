@@ -30,7 +30,7 @@ export class TicketViewComponent implements OnInit {
   units = [{ name: 'studio', counts: 0 }, { name: 'BSS', counts: 0 }, { name: 'technology', counts: 0 }];
   @ViewChild('MatPaginator') paginator: MatPaginator;
   matdatasource = new MatTableDataSource([]);
-  userid: any;
+  userId: any;
   userRole: string;
 
 
@@ -43,7 +43,7 @@ export class TicketViewComponent implements OnInit {
 
     this.userRole = localStorage.getItem('role');
     this.route.paramMap.subscribe((params: ParamMap) => {
-      this.userid = params.get('id');
+      this.userId = params.get('id');
       /* this.userRole = params.get ('role'); */
     });
 
@@ -148,7 +148,7 @@ export class TicketViewComponent implements OnInit {
 
 
   CompareUserId() {
-    this.ts.compareUserId(this.userid).subscribe(data => {
+    this.ts.compareUserId(this.userId).subscribe(data => {
       this.ticketholder = data;
       this.deadcount = this.ticketholder.length;
       this.ticketholder = new MatTableDataSource<any>(data);

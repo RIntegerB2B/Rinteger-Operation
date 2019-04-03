@@ -24,8 +24,11 @@ export class NavheaderComponent implements OnInit {
     this.router.navigate(['/task/viewtask', this.userId]);
   }
   getTicket()   {
-    this.userId = localStorage.getItem('userId');
     this.router.navigate(['/ticket/ticketview', this.userId]);
+  }
+  getMaterial()   {
+    this.userId = localStorage.getItem('userId');
+    this.router.navigate(['/material/front']);
   }
 
 }

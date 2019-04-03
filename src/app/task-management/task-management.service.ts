@@ -65,4 +65,9 @@ compareUserId(data): Observable<any> {
 
   return this.http.get<TaskModel[]>(urlway);
 }
+compareUserUnits(data): Observable<any> {
+  const urlway = this.baseurl + 'finduserunit/' + data;
+
+  return this.http.get<TaskModel[]>(urlway);
+}
 }
