@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
-import { TicketModel } from './ticket.Model';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { TicketModel } from './../ticket/ticket.Model';
 import { TicketService } from './../ticket.service';
-import { from } from 'rxjs';
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import { Customer } from './../../customer-management/customer/create-customer/customer.model';
 import {Register} from './../../user-management/registration/register.model';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Customer } from './../../customer-management/customer/create-customer/customer.model';
 @Component({
-  selector: 'app-ticket',
-  templateUrl: './ticket.component.html',
-  styleUrls: ['./ticket.component.css']
+  selector: 'app-ticket-edit',
+  templateUrl: './ticket-edit.component.html',
+  styleUrls: ['./ticket-edit.component.css']
 })
-export class TicketComponent implements OnInit {
+export class TicketEditComponent implements OnInit {
+
   department;
   assignedto;
   assignedby;
@@ -21,7 +20,7 @@ export class TicketComponent implements OnInit {
   units = ['studio', 'BSS', 'technology'];
   priority = ['low', 'medium', 'high', 'critical'];
   ticketform: FormGroup;
-  ticketholder: TicketModel;
+  ticketholder: any;
   customerModel: Customer;
   selectedData: Customer;
   departmentData;
@@ -30,23 +29,21 @@ export class TicketComponent implements OnInit {
   taskname: Register[];
   userId: string;
   userRole: string;
+  id: any;
+  ticketEdit: any;
+  editview: string;
   constructor(private ts: TicketService, private fb: FormBuilder, private router: Router,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      this.userId = params.get('id');
-      /* this.userRole = params.get ('role'); */
-    });
-
-
-    this.createticket();
-    this.getAllCustomer();
-    this.getDepartment();
-    this.getAllRegisteres();
-
-}
+    this.route.paramMap.subscribe(
+      (params: ParamMap) => {
+        this.id = params.get('id');
+        this.editview = params.get('editview');
+      });
+      this.createticket();
+      this.getAllTicket();
+  }
   createticket() {
     this.ticketform = this.fb.group({
       ticketno: [''],
@@ -65,8 +62,7 @@ export class TicketComponent implements OnInit {
     });
   }
 
-
-  onSubmit() {
+  /* onSubmit(ticketform:FormGroup) {
     this.ticketholder = new TicketModel();
     this.ticketholder.ticketno = this.ticketform.controls.ticketno.value;
     this.ticketholder.datetime = this.ticketform.controls.datetime.value;
@@ -81,53 +77,44 @@ export class TicketComponent implements OnInit {
     this.ticketholder.status = this.ticketform.controls.status.value;
     this.ticketholder.toclosedate = this.ticketform.controls.toclosedate.value;
     this.ticketholder.closeddate = this.ticketform.controls.closeddate.value;
-    this.ts.getfieldValue(this.ticketholder).subscribe(data => {
+    this.ts.updateTicket(this.ticketholder).subscribe(data => {
       this.ticketholder = data;
-      this.router.navigate(['ticket/ticketview', this.userId]);
+      this.router.navigate(['ticket/ticketview', this.editview]);
     }, error => {
       console.log(error);
     });
-  }
-
-  getDepartment() {
-    this.ts.getDepartment().subscribe(data => {
-      this.ticketholder = data;
-      this.department = this.ticketholder;
-      this.departmentData = this.ticketholder[0].department;
-      this.assignedBy = this.ticketholder[0].assignedby;
-      this.assignedTo = this.ticketholder[0].assignedto;
-    });
-  }
+  } */
 
 
 
-  getReset() {
-    this.router.navigate(['ticket/ticketview', this.userId]);
-    this.ticketform.reset();
-  }
+  getAllTicket() {
 
+    this.ts.retriveTicket().subscribe(data => {
+    this.ticketholder = data;
+    this.ticketholder.forEach((customer) => {
+      if (this.id === customer._id) {
+        this.ticketEdit = customer;
 
-  getAllCustomer() {
-    this.ts.allCustomer().subscribe(data => {
-      this.customerdetail = data;
-    }, error => {
+      console.log(this.ticketEdit);
+// tslint:disable-next-line: no-unused-expression
+    } error => {
       console.log(error);
-    });
-  }
-  filterCustomer(data) {
-    this.customerModel = data;
+    };
 
-  }
-  getAllRegisteres() {
-    this.ts.getAllRegisteres().subscribe(regdata => {
-      this.registerterdetail = regdata;
-    }, error => {
-      console.log(error);
-    });
+  });
+});
+}
+onSubmit(value) {
+  this.ts.updateTicket(value).subscribe(data => {
+    this.ticketEdit = data;
+    this.router.navigate(['ticket/ticketview', this.editview]);
+  }, error => {
+    console.log(error);
+  });
+}
 
-  }
-  changed(e) {
-    console.log(this.registerterdetail.filter(data => data.unit === e.value));
-     this.taskname = this.registerterdetail.filter(data => data.unit === e.value);
-  }
+cancel() {
+  this.router.navigate(['ticket/ticketview', this.editview]);
+}
+
 }

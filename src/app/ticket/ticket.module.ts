@@ -36,10 +36,11 @@ import { TicketViewComponent } from './ticket-view/ticket-view.component';
 import { UniqueTicketComponent } from './unique-ticket/unique-ticket.component';
 import { TicketcustomersearchComponent } from './ticketcustomersearch/ticketcustomersearch.component';
 import { UnitwiseViewComponent } from './unitwise-view/unitwise-view.component';
+import { TicketEditComponent } from './ticket-edit/ticket-edit.component';
 
 @NgModule({
   declarations: [TicketComponent, TicketViewComponent, UniqueTicketComponent,
-     TicketcustomersearchComponent, UnitwiseViewComponent],
+     TicketcustomersearchComponent, UnitwiseViewComponent, TicketEditComponent],
   imports: [
     CommonModule,HttpModule,
     TicketRoutingModule,FormsModule,ReactiveFormsModule,MatBadgeModule,

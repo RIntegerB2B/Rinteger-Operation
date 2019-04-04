@@ -1,6 +1,6 @@
 <span [routerLink]="['/ticket/create',userId]">
 
-  <mat-icon class="gridEdit" *ngIf="this.userRole === 'admin'">add_box</mat-icon>
+  <mat-icon class="gridEdit" >add_box</mat-icon>
 </span>
 
 
@@ -100,6 +100,8 @@
       <mat-menu #menu="matMenu">
         <!-- <a class="nav-link" (click)="uniqTicket(data._id)">View</a> -->
         <a class="nav-link" [routerLink]="['/ticket/uniqueview',data._id]">View</a>
+        <a class="nav-link" [routerLink]="['/ticket/ticketedit', data._id, userId ]">Update Status</a>
+        <a class="nav-link" *ngIf="this.userRole === 'admin'" (click)=" deleteTicket(data)">Detele</a>
       </mat-menu>
     </div>
 

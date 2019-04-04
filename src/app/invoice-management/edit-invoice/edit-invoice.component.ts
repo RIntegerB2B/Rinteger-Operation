@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@ang
 import { Invoice } from './../../shared/invoice.model';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { WorkOrderPdf } from '../../shared/workorderpdf.model';
 import {InvoiceService} from '../invoice.service';
 import {MatSnackBar} from '@angular/material';
 
@@ -24,6 +25,8 @@ export class EditInvoiceComponent implements OnInit {
   customerModel: Customer;
   arryValue: any = [];
   requirementsData;
+  workOrderPDFModel: WorkOrderPdf;
+  gstVal;
   sum = 0;
   leadId: string;
   invoiceId: string;
@@ -37,6 +40,7 @@ export class EditInvoiceComponent implements OnInit {
     console.log('invoide id', this.invoiceId);
     this.viewInvoice();
     this.createForm();
+    this.viewCompanyDetails();
   }
   createForm() {
     this.invoiceDetailsForm = this.fb.group({
@@ -134,6 +138,14 @@ updateInvoice(invoiceDetailsForm: FormGroup)   {
       duration: 3000,
     });
     this.router.navigate(['invoice/viewallinvoice']);
+  }, error => {
+    console.log(error);
+  });
+}
+viewCompanyDetails() {
+  this.invoiceService.workorderPDFDetails().subscribe(data => {
+    this.workOrderPDFModel = data;
+    this.gstVal = this.workOrderPDFModel[0].gst;
   }, error => {
     console.log(error);
   });

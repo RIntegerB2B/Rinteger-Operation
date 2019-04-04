@@ -138,9 +138,11 @@
           </div>
         </div>
         <div class="col-md-1 col-4">
-          <mat-form-field class="full-width">
-            <input matInput formControlName="quantity" placeholder="Quantity">
-          </mat-form-field>
+          <div class="form-group">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="quantity" placeholder="Quantity">
+            </mat-form-field>
+          </div>
         </div>
         <div class="col-md-2 col-4">
           <div class="form-group">
@@ -157,13 +159,16 @@
           </div>
         </div>
         <div class="col-md-2 col-4">
-          <mat-form-field class="full-width">
-            <input matInput formControlName="total" [ngModel]="(invoiceDetailsForm.controls['requirements'].controls[i].controls.quantity.value *
+          <div class="form-group">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="total"
+                [ngModel]="(invoiceDetailsForm.controls['requirements'].controls[i].controls.quantity.value *
             invoiceDetailsForm.controls['requirements'].controls[i].controls.price.value
               ) - (invoiceDetailsForm.controls['requirements'].controls[i].controls.quantity.value *
               invoiceDetailsForm.controls['requirements'].controls[i].controls.price.value)/100*invoiceDetailsForm.controls['requirements'].controls[i].controls.discount.value"
-              placeholder="Total">
-          </mat-form-field>
+                placeholder="Total">
+            </mat-form-field>
+          </div>
         </div>
         <div class="col-md-2 col-2">
           <div class="form-group">
@@ -196,13 +201,15 @@
           </div>
           <div class="col-md-6 col-6">
             <mat-form-field class="full-width">
-              <input matInput formControlName="tax" [ngModel]="(invoiceDetailsForm.controls.subTotal.value * gstVal / 100)"
-                [readonly]="true" placeholder="Tax">
+              <input matInput formControlName="tax"
+                [ngModel]="(invoiceDetailsForm.controls.subTotal.value * gstVal / 100)" [readonly]="true"
+                placeholder="Tax">
             </mat-form-field>
           </div>
           <div class="col-md-12 col-12">
             <mat-form-field class="full-width">
-              <input matInput formControlName="allTotal" [readonly]="true" placeholder="Total" [ngModel]="(invoiceDetailsForm.controls.tax.value + invoiceDetailsForm.controls.subTotal.value )">
+              <input matInput formControlName="allTotal" [readonly]="true" placeholder="Total"
+                [ngModel]="(invoiceDetailsForm.controls.tax.value + invoiceDetailsForm.controls.subTotal.value )">
             </mat-form-field>
           </div>
         </div>
@@ -214,7 +221,7 @@
       </div>
       <div class="col-md-2">
         <button mat-raised-button color="primary" type="button"
-         (click)="createLeadInvoice(invoiceDetailsForm)">Save</button>
+          (click)="createLeadInvoice(invoiceDetailsForm)">Save</button>
       </div>
     </div>
 

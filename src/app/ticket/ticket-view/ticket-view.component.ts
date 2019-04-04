@@ -163,4 +163,9 @@ export class TicketViewComponent implements OnInit {
     );
 
   }
+  deleteTicket(value) {
+    this.ts.deleteTicket(value._id).subscribe(data => {
+      this.ticketholder = data;
+    });
+  }
 }

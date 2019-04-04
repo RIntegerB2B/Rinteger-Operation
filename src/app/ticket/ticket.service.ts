@@ -69,4 +69,15 @@ export class TicketService {
     return this.http.get<TicketModel[]>(urlway);
   }
 
+
+  updateTicket(data): Observable<any> {
+    const url: string = this.baseurl  + 'editTicket/' + data._id;
+    return this.http.put<any[]>(url, data);
+  }
+
+
+  deleteTicket(data): Observable<any> {
+    const url: string = this.baseurl  + 'deleteTicket/' + data;
+    return this.http.delete<any[]>(url);
+  }
 }

@@ -38,4 +38,13 @@ export class UserManagementService {
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.get<UserPermission[]>(url);
   }
+  updateRole(data, value): Observable<any> {
+    const addUrl = 'update/';
+    const url: string = this.serviceUrl + addUrl + value;
+    return this.httpClient.put<UserPermission[]>(url, data);
+  }
+  DeleteRole(data): Observable<any> {
+    const url: string = this.serviceUrl + 'deleterole/' + data;
+    return this.httpClient.delete<UserPermission[]>(url);
+  }
 }

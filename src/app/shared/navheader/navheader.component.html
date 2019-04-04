@@ -35,9 +35,6 @@
       <li class="nav-item" *ngFor="let fin of this.navheaderService?.getItems?.financialRole">
         <a class="nav-link textMenu" *ngIf="fin.invoiceNav" [routerLink]="['/invoice/viewallinvoice']">Invoice</a>
       </li>
-      <li class="nav-item" *ngFor="let fin of this.navheaderService?.getItems?.materialRole">
-        <a class="nav-link textMenu" *ngIf="fin.materialNav" [routerLink]="['/material/front']">Material</a>
-      </li>
       <li class="nav-item" *ngFor="let fin of this.navheaderService?.getItems?.financialRole">
         <a class="nav-link textMenu" *ngIf="fin.expenseNav" [routerLink]="['/expense/viewExpense']">Expense</a>
       </li>

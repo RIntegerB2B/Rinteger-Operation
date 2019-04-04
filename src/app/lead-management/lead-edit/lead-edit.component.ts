@@ -30,6 +30,8 @@ export class LeadEditComponent implements OnInit {
   id;
   message;
   action;
+  arryValue: any = [];
+  sum = 0;
   constructor(private fb: FormBuilder, private leadManagementService: LeadManagementService, private router: Router
     , private route: ActivatedRoute, private snackBar: MatSnackBar) {
     this.route.paramMap.subscribe(
@@ -171,6 +173,15 @@ export class LeadEditComponent implements OnInit {
       this.leadModel = data;
     }, err => {
       console.log(err);
+    });
+  }
+  getTotal() {
+    this.sum = 0;
+    this.arryValue = this.leadDetailsForm.controls.requirements;
+    this.arryValue.controls.forEach(x => {
+      const parsed = +x.get('total').value;
+      this.sum += parsed;
+      console.log(this.sum);
     });
   }
   addFollowUps(i) {

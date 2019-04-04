@@ -1,4 +1,5 @@
 export class UserPermission {
+    _id: String;
     role: String;
     currentDate: Date;
     marketingRole: [{

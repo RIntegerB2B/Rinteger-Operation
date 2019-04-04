@@ -1,5 +1,21 @@
-<div class="container-fluid">
-  <form [formGroup]="accessForm" class="p-3" novalidate style="padding-top:60px; padding-bottom:60px" (ngSubmit)="sendPermission(accessForm)">
+<div class="row">
+  <div class="col-md-4"></div>
+
+  <div class="col-md-4">
+    <mat-form-field>
+      <mat-select placeholder="Select role" formControlName='role' (selectionChange)="changed($event)">
+        <mat-option *ngFor="let data of roleNameValue;let i = index " [value]="data._id">
+          <a>{{data.role}}</a>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="col-md-4"></div>
+</div>
+<div class="container-fluid" *ngIf="!editingTrue">
+  <form [formGroup]="accessForm" class="p-3" novalidate style="padding-top:60px; padding-bottom:60px"
+    (ngSubmit)="sendPermission(accessForm)">
     <div class="row">
       <div class="col-md-4">
         <mat-form-field class="example-full-width">
@@ -77,27 +93,166 @@
         </mat-checkbox>
       </div>
     </div>
+    <div formGroupName="adminRole" class="pb-3" class="row">
+      <div class="col-md-12">Admin</div>
+      <div class="col-md-2">
+        <mat-checkbox formControlName="settingNav" class="mail-checkbox">
+          Setting
+        </mat-checkbox>
+      </div>
+      <div class="col-md-2">
+        <mat-checkbox formControlName="uploadNav" class="mail-checkbox">
+          upload
+        </mat-checkbox>
+      </div>
+    </div>
     <div formGroupName="materialRole" class="pb-3" class="row">
-      <div class="col-md-12">Material Management</div>
+      <div class="col-md-12">Material</div>
       <div class="col-md-2">
         <mat-checkbox formControlName="materialNav" class="mail-checkbox">
           Material
         </mat-checkbox>
       </div>
     </div>
-    <div formGroupName="adminRole" class="pb-3" class="row">
-        <div class="col-md-12">Admin</div>
-        <div class="col-md-2">
-          <mat-checkbox formControlName="settingNav" class="mail-checkbox">
-            Setting
-          </mat-checkbox>
-        </div>
-        <div class="col-md-2">
-          <mat-checkbox formControlName="uploadNav" class="mail-checkbox">
-            upload
-          </mat-checkbox>
-        </div>
+    <div formGroupName="workOrderRole" class="pb-3" class="row">
+      <div class="col-md-12">workOrder</div>
+      <div class="col-md-2">
+        <mat-checkbox formControlName="workOrderMenu" class="mail-checkbox">
+          workOrder
+        </mat-checkbox>
       </div>
+    </div>
     <button mat-raised-button color="accent">Submit</button>
+  </form>
+</div>
+
+<div class="container-fluid" *ngIf="editingTrue">
+  <form [formGroup]="editForm" class="p-3" novalidate style="padding-top:60px; padding-bottom:60px"
+    *ngFor="let data of roleholder; let i = index">
+    <div class="row">
+      <div class="col-md-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="role" [value]="data.role">
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+
+      </div>
+      <div class="col-md-4">
+
+      </div>
+    </div>
+    <div formGroupName="marketingRole" class="pb-3" class="row" *ngFor="let mark of data.marketingRole">
+      <div class="col-md-12">Marketing</div>
+      <div class="col-md-2">
+        <mat-checkbox class="mail-checkbox" formControlName='customerNav' #customerNav
+          (ngModelChange)="mark.customerNav=$event" [(ngModel)]="mark.customerNav" [checked]="mark?.customerNav">
+          customer
+        </mat-checkbox>
+      </div>
+      <div class="col-md-2">
+        <mat-checkbox class="mail-checkbox" formControlName='leadNav' #leadNav [(ngModel)]="mark.leadNav"
+          (ngModelChange)="mark.leadNav=$event" [checked]="mark.leadNav">
+          lead
+        </mat-checkbox>
+      </div>
+      <div class="col-md-2">
+        <mat-checkbox class="mail-checkbox" formControlName='bookingNav' #bookingNav
+          (ngModelChange)="mark.bookingNav=$event" [(ngModel)]="mark.bookingNav" [checked]="mark.bookingNav">
+          booking
+        </mat-checkbox>
+      </div>
+      <div class="col-md-2">
+        <mat-checkbox class="mail-checkbox" formControlName='quotationNav' #quotationNav
+          (ngModelChange)="mark.quotationNav=$event" [(ngModel)]="mark.quotationNav" [checked]="mark.quotationNav">
+          quotation
+        </mat-checkbox>
+      </div>
+      <div class="col-md-2">
+        <mat-checkbox class="mail-checkbox" formControlName='workOrderNav' #workOrderNav
+          (ngModelChange)="mark.workOrderNav=$event" [(ngModel)]="mark.workOrderNav" [checked]="mark.workOrderNav">
+          workOrder
+        </mat-checkbox>
+      </div>
+    </div>
+    <div formGroupName="financialRole" class="pb-3" class="row" *ngFor="let mark of data.financialRole">
+      <div class="col-md-12">Financial</div>
+      <div class="col-md-2">
+        <mat-checkbox class="mail-checkbox" #incomeNav formControlName='incomeNav'
+          (ngModelChange)="mark.incomeNav=$event" [(ngModel)]="mark.incomeNav" [checked]="mark.incomeNav">
+          income
+        </mat-checkbox>
+      </div>
+      <div class="col-md-2">
+        <mat-checkbox class="mail-checkbox" #expenseNav formControlName='expenseNav'
+          (ngModelChange)="mark.expenseNav=$event" [(ngModel)]="mark.expenseNav" [checked]="mark.expenseNav">
+          expense
+        </mat-checkbox>
+      </div>
+      <div class="col-md-2">
+        <mat-checkbox class="mail-checkbox" #invoiceNav formControlName='invoiceNav'
+          (ngModelChange)="mark.invoiceNav=$event" [(ngModel)]="mark.invoiceNav" [checked]="mark.invoiceNav">
+          invoice
+        </mat-checkbox>
+      </div>
+      <div class="col-md-2">
+        <mat-checkbox class="mail-checkbox" #profomaInvoiceNav formControlName='profomaInvoiceNav'
+          (ngModelChange)="mark.profomaInvoiceNav=$event" [(ngModel)]="mark.profomaInvoiceNav"
+          [checked]="mark.profomaInvoiceNav">
+          profoma
+        </mat-checkbox>
+      </div>
+    </div>
+    <div formGroupName="baseRole" class="pb-3" class="row" *ngFor="let mark of data.baseRole">
+      <div class="col-md-12">Base</div>
+      <div class="col-md-2">
+        <mat-checkbox class="mail-checkbox" #ticketNav formControlName='ticketNav'
+          (ngModelChange)="mark.ticketNav=$event" [(ngModel)]="mark.ticketNav" [checked]="mark.ticketNav">
+          Ticket
+        </mat-checkbox>
+      </div>
+      <div class="col-md-2">
+        <mat-checkbox class="mail-checkbox" #taskNav formControlName='taskNav' (ngModelChange)="mark.taskNav=$event"
+          [(ngModel)]="mark.taskNav" [checked]="mark.taskNav">
+          Task
+        </mat-checkbox>
+      </div>
+    </div>
+    <div formGroupName="adminRole" class="pb-3" class="row" *ngFor="let mark of data.adminRole">
+      <div class="col-md-12">Admin</div>
+      <div class="col-md-2">
+        <mat-checkbox class="mail-checkbox" #settingNav formControlName='settingNav'
+          (ngModelChange)="mark.settingNav=$event" [(ngModel)]="mark.settingNav" [checked]="mark.settingNav">
+          Setting
+        </mat-checkbox>
+      </div>
+      <div class="col-md-2">
+        <mat-checkbox class="mail-checkbox" #uploadNav formControlName='uploadNav'
+          (ngModelChange)="mark.uploadNav=$event" [(ngModel)]="mark.uploadNav" [checked]="mark.uploadNav">
+          upload
+        </mat-checkbox>
+      </div>
+    </div>
+    <div formGroupName="materialRole" class="pb-3" class="row" *ngFor="let material of data.materialRole">
+      <div class="col-md-12">Material</div>
+      <div class="col-md-2">
+        <mat-checkbox formControlName="materialNav" class="mail-checkbox" (ngModelChange)="material.materialNav=$event"
+          [(ngModel)]="material.materialNav" [checked]="material.materialNav">
+          Material
+        </mat-checkbox>
+      </div>
+    </div>
+    <div formGroupName="workOrderRole" class="pb-3" class="row" *ngFor="let work of data.workOrderMenu">
+      <div class="col-md-12">workOrder</div>
+      <div class="col-md-2">
+        <mat-checkbox formControlName="workOrderMenu" class="mail-checkbox" (ngModelChange)="work.workOrderMenu=$event"
+          [(ngModel)]="work.workOrderMenu" [checked]="work.workOrderMenu">
+          workOrder
+        </mat-checkbox>
+      </div>
+    </div>
+
+    <button mat-raised-button color="accent" (click)="updateRole(editForm,data._id)">update</button>
+    <button mat-raised-button color="accent" (click)="deleteRole(data._id)">Delete</button>
   </form>
 </div>

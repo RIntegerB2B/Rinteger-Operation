@@ -1,6 +1,5 @@
 <div class="container topAlignContainer">
-  <form [formGroup]="ticketform"
-   (ngSubmit)="ticketform.valid && onSubmit()">
+  <form [formGroup]="ticketform" (ngSubmit)="ticketform.valid && onSubmit()">
 
     <app-ticketcustomersearch [customerModel]="customerdetail" 
     (searchCustomer)="filterCustomer($event)"></app-ticketcustomersearch>
@@ -13,8 +12,8 @@
 
       <div fxFlex="50" class="p-2">
         <mat-form-field class="full-width">
-          <input matInput formControlName="customername" placeholder="customername" required>
-          <mat-error *ngIf="ticketform.controls['customername'].errors?.required">
+          <input matInput formControlName="customername" placeholder="customername"required>
+          <mat-error *ngIf="ticketform.controls['customername'].errors?.required" >
             Customer Name
             <strong>required</strong>
           </mat-error>
@@ -48,8 +47,7 @@
 
       <div fxFlex="50" class="pr-1">
         <mat-form-field>
-          <mat-select placeholder="units"  (selectionChange)="changed($event)" 
-          formControlName="units">
+          <mat-select placeholder="units"  (selectionChange)="changed($event)" formControlName="units">
             <mat-option *ngFor="let data of units" [value]="data">
               {{data}}
 
@@ -96,8 +94,8 @@
 
       <div fxFlex="50" class="p-2">
         <mat-form-field class="full-width">
-          <input matInput formControlName="status" placeholder="status"  required>
-          <mat-error *ngIf="ticketform.controls['status'].errors?.required">
+          <input matInput formControlName="status" placeholder="status">
+          <mat-error *ngIf="ticketform.controls['status'].errors?.required" required>
             Status
             <strong>required</strong>
           </mat-error>
