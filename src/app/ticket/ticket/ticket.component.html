@@ -21,7 +21,7 @@
       </div>
 
 
-      <div fxFlex="250" class="p-2">
+      <div fxFlex="50" class="p-2">
         <mat-form-field class="full-width">
           <input matInput formControlName="requirement" placeholder="requirement" required>
           <mat-error *ngIf="ticketform.controls['requirement'].errors?.required" >
@@ -112,11 +112,14 @@
       </div>
 
     </div>
-    <div fxFlex="100" class="mt-1">
+    <div fxFlex="50" class="mt-1">
       <button mat-raised-button color="primary">Create</button>
-      <span fxFlex></span>
+      </div>
+      <div fxFlex="50" class="mt-1">
+      
       <button mat-raised-button mat-button color="accent" type="button" 
       (click)="getReset()">Cancel</button>
-    </div>
+      </div>
+    
   </form>
 </div>

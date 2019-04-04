@@ -23,6 +23,11 @@ export class InvoiceGeneratePdfComponent implements OnInit {
   workOrderPdf: WorkOrderPdf[];
   customerData;
   companyData;
+  selectedValue;
+  selectTermsCondition = false;
+  selectedTermsPdf: any;
+  selectedTermsText: any;
+  terms = [{ term: 'No' }, { term: 'Product Terms' }, { term: 'Digital Terms' }];
   templates = ['With Discount + GST', 'Without Discount + GST',
     'With Discount + SGST + CGST',
     'Without Discount + SGST + CGST'];
@@ -34,6 +39,31 @@ export class InvoiceGeneratePdfComponent implements OnInit {
     });
   }
 
+  selectTerms(e, workOrderPdf) {
+    if (e.source.checked) {
+      this.selectedValue = e.value;
+      this.selectTermsCondition = false;
+      switch (this.selectedValue) {
+        case (this.terms[0].term): {
+          this.selectedTermsText = [];
+          this.selectedTermsPdf = [];
+          break;
+        }
+        case (this.terms[1].term): {
+          this.selectedTermsText = ['Production Terms & Condition : '];
+          this.selectedTermsPdf = workOrderPdf[0].terms.split(',');
+          break;
+        }
+        case (this.terms[2].term): {
+          this.selectedTermsText = ['Digital Marketing Terms & Condition : '];
+          this.selectedTermsPdf = workOrderPdf[0].digitalterms.split(',');
+          break;
+        }
+      }
+    } else {
+      this.selectTermsCondition = true;
+    }
+  }
   newValue() {
     const newTestArray = [];
     const headerArray = [{ text: 'Item', style: 'tableHeaderRow' },
@@ -46,12 +76,12 @@ export class InvoiceGeneratePdfComponent implements OnInit {
     { text: 'Total', style: 'tableHeaderTotal' }];
     newTestArray.push(headerArray);
     for (let i = 0; i < this.invoiceReq.length; i++) {
-      newTestArray.push([{ text: this.invoiceReq[i].item, style: 'rowStyle'},
+      newTestArray.push([{ text: this.invoiceReq[i].item, style: 'rowStyle' },
       { text: this.invoiceReq[i].description, style: 'rowStyle' },
       { text: this.invoiceReq[i].quantity, style: 'rowStyle' },
       { text: this.invoiceReq[i].price.toFixed(2), style: 'rowTotal', },
       { text: this.invoiceReq[i].discount, style: 'rowStyle' },
-      { text: this.invoiceReq[i].total.toFixed(2), style: 'rowTotal'}]);
+      { text: this.invoiceReq[i].total.toFixed(2), style: 'rowTotal' }]);
     }
     return newTestArray;
   }
@@ -61,14 +91,14 @@ export class InvoiceGeneratePdfComponent implements OnInit {
     const headerArray = [{ text: 'Item', style: 'tableHeaderRow' },
     { text: 'Description', style: 'tableHeaderRow' },
     { text: 'Quantity', style: 'tableHeaderRow' },
-    { text: 'Price', style: 'tableHeaderRow' },
+    { text: 'Price', style: 'tableHeaderTotal' },
     { text: 'Total', style: 'tableHeaderTotal' }];
     newTestArray.push(headerArray);
     for (let i = 0; i < this.invoiceReq.length; i++) {
       newTestArray.push([{ text: this.invoiceReq[i].item, style: 'rowStyle' },
       { text: this.invoiceReq[i].description, style: 'rowStyle' },
       { text: this.invoiceReq[i].quantity, style: 'rowStyle' },
-      { text: this.invoiceReq[i].price.toFixed(2), style: 'rowStyle' },
+      { text: this.invoiceReq[i].price.toFixed(2), style: 'rowTotal' },
       { text: this.invoiceReq[i].total.toFixed(2), style: 'rowTotal' }]);
     }
     return newTestArray;
@@ -77,18 +107,23 @@ export class InvoiceGeneratePdfComponent implements OnInit {
 
   viewSingleProInvoicePdf(invoice, customer, company, temp) {
     this.invoice = invoice;
-    this.invoiceReq = invoice[0].requirements;
-    this.customerData = customer;
-    this.companyData = company;
-    this.workOrderPdf = company;
-    if (temp === 'With Discount + GST') {
-      this.pdfWithDiscountGst();
-    } else if (temp === 'Without Discount + GST') {
-      this.pdfWithoutDiscountGst();
-    } else if (temp === 'With Discount + SGST + CGST') {
-      this.pdfWithDiscountSgstCgst();
-    } else if (temp === 'Without Discount + SGST + CGST') {
-      this.pdfWithoutDiscountSgstCgst();
+    if (!this.selectedValue) {
+      this.selectTermsCondition = true;
+    } else {
+      this.selectTermsCondition = false;
+      this.invoiceReq = invoice[0].requirements;
+      this.customerData = customer;
+      this.companyData = company;
+      this.workOrderPdf = company;
+      if (temp === 'With Discount + GST') {
+        this.pdfWithDiscountGst();
+      } else if (temp === 'Without Discount + GST') {
+        this.pdfWithoutDiscountGst();
+      } else if (temp === 'With Discount + SGST + CGST') {
+        this.pdfWithDiscountSgstCgst();
+      } else if (temp === 'Without Discount + SGST + CGST') {
+        this.pdfWithoutDiscountSgstCgst();
+      }
     }
   }
   pdfWithDiscountGst() {
@@ -120,7 +155,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           columns: [
             {
               type: 'none',
-              width: 350,
+              width: 320,
               ul: [
                 { text: this.customerData[0].companyName.toUpperCase(), style: 'textHeader' },
                 { text: 'GST : ' + this.customerData[0].gstNumber.toUpperCase(), style: 'textGst' },
@@ -151,7 +186,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           columns: [
             {
               type: 'none',
-              width: 350,
+              width: 320,
               ul: [
                 { text: 'BANK DETAILS', style: 'textHeader' },
                 { text: this.companyData[0].bankdetails[0].accName.toUpperCase(), style: 'textGst' },
@@ -170,7 +205,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 { text: 'INVOICE DETAILS', style: 'textHeader' },
                 { text: 'Invoice ID:  ' + this.invoice[0].invoiceID.toUpperCase(), style: 'textGst' },
                 { text: 'Date: ' + new Date(this.invoice[0].date).toLocaleDateString(), style: 'address' },
-                { text: 'Due Date: ' + this.invoice[0].expiryDate, style: 'address' },
+                { text: 'Due Date: ' + new Date(this.invoice[0].expiryDate).toLocaleDateString(), style: 'address' },
                 { text: 'Total Amount: ' + this.invoice[0].allTotal.toFixed(2), style: 'address' }
               ]
             },
@@ -185,26 +220,26 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           },
           layout: {
             hLineColor: function (i, node) {
-              return (i === 0 || i === node.table.body.length || i === 1  ) ? 'black' : 'white';
+              return (i === 0 || i === node.table.body.length || i === 1) ? 'black' : 'white';
             },
             fillColor: function (rowIndex, node, columnIndex) {
-              if (rowIndex === 0 ) {
-                return rowIndex  = '#CCCCCC';
+              if (rowIndex === 0) {
+                return rowIndex = '#CCCCCC';
               } else {
-              return (rowIndex % 2 === 0) ? '#EBECF0' : null;
+                return (rowIndex % 2 === 0) ? '#EBECF0' : null;
+              }
             }
           }
-        }
-        /*   layout: {
-            fillColor: function (rowIndex, node, columnIndex) {
-              if (rowIndex === 0 ) {
-                return rowIndex  = '#CCCCCC';
-              } else {
-              return (rowIndex % 2 === 0) ? '#EBECF0' : null;
-            }
-            },
-            'lightHorizontalLines',
-          } */
+          /*   layout: {
+              fillColor: function (rowIndex, node, columnIndex) {
+                if (rowIndex === 0 ) {
+                  return rowIndex  = '#CCCCCC';
+                } else {
+                return (rowIndex % 2 === 0) ? '#EBECF0' : null;
+              }
+              },
+              'lightHorizontalLines',
+            } */
         }, {
           style: 'tableExample',
           table: {
@@ -232,18 +267,19 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           },
         },
         {
-          style: 'tableExample',
-          table: {
-            headerRows: 1,
-            widths: ['*', '*', '200'],
-            body: [
-              [{ text: this.workOrderPdf[0].terms, style: 'termsStyle', border: [false, false, false, false] },
-              {
-                text: '',
-                style: 'rowStyle', border: [false, false, false, false]
-              }]
-            ]
-          }
+          type: 'none',
+          style: 'textHeaderTerms',
+          width: '*',
+          ul:  this.selectedTermsText
+        },
+        {
+          type: 'none',
+          style: 'termsStyle',
+          width: '*',
+          ul:  this.selectedTermsPdf/* [
+            { text: 'Terms and Conditions', style: 'textHeaderTerms' },
+            { text: this.selectedTermsPdf, style: 'termsStyle' },
+          ] */
         }
       ],
       styles: {
@@ -265,6 +301,11 @@ export class InvoiceGeneratePdfComponent implements OnInit {
         },
         tableExample: {
           margin: [10, 10, 10, 10]
+        },
+        textHeaderTerms: {
+          fontSize: 8,
+          bold: true,
+          margin: [0, 50, 0, 10]
         },
         tableHeader: {
           alignment: 'center'
@@ -340,7 +381,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           {
             text: this.companyData[0].footerdetails[0].companyName.toUpperCase() + ' \n '
               + this.companyData[0].footerdetails[0].address + ' | '
-              + this.companyData[0].footerdetails[0].email + ' | '
+              + this.companyData[0].footerdetails[0].emailId + ' | '
               + this.companyData[0].footerdetails[0].phNo + ' | '
               + this.companyData[0].footerdetails[0].website, style: 'footerHeader'
           },
@@ -361,7 +402,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           columns: [
             {
               type: 'none',
-              width: 350,
+              width: 320,
               ul: [
                 { text: this.customerData[0].companyName.toUpperCase(), style: 'textHeader' },
                 { text: 'GST : ' + this.customerData[0].gstNumber.toUpperCase(), style: 'textGst' },
@@ -392,7 +433,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           columns: [
             {
               type: 'none',
-              width: 350,
+              width: 320,
               ul: [
                 { text: 'BANK DETAILS', style: 'textHeader' },
                 { text: this.companyData[0].bankdetails[0].accName.toUpperCase(), style: 'textGst' },
@@ -411,7 +452,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 { text: 'INVOICE DETAILS', style: 'textHeader' },
                 { text: 'Invoice ID:  ' + this.invoice[0].invoiceID.toUpperCase(), style: 'textGst' },
                 { text: 'Date: ' + new Date(this.invoice[0].date).toLocaleDateString(), style: 'address' },
-                { text: 'Due Date: ' + this.invoice[0].expiryDate, style: 'address' },
+                { text: 'Due Date: ' + new Date(this.invoice[0].expiryDate).toLocaleDateString(), style: 'address' },
                 { text: 'Total Amount: ' + this.invoice[0].allTotal.toFixed(2), style: 'address' }
               ]
             },
@@ -421,21 +462,21 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           style: 'tableExample',
           table: {
             headerRows: 1,
-            widths: ['*', '*', '*', '*', '*' , '*'],
+            widths: ['*', '*', '*', '*', '*', '*'],
             body: this.newValue()
           },
           layout: {
             hLineColor: function (i, node) {
-              return (i === 0 || i === node.table.body.length || i === 1  ) ? 'black' : 'white';
+              return (i === 0 || i === node.table.body.length || i === 1) ? 'black' : 'white';
             },
             fillColor: function (rowIndex, node, columnIndex) {
-              if (rowIndex === 0 ) {
-                return rowIndex  = '#CCCCCC';
+              if (rowIndex === 0) {
+                return rowIndex = '#CCCCCC';
               } else {
-              return (rowIndex % 2 === 0) ? '#EBECF0' : null;
+                return (rowIndex % 2 === 0) ? '#EBECF0' : null;
+              }
             }
           }
-        }
         }, {
           style: 'tableExample',
           table: {
@@ -483,19 +524,21 @@ export class InvoiceGeneratePdfComponent implements OnInit {
               { text: this.invoice[0].allTotal.toFixed(2), style: 'rowTotal' }]
             ]
           },
-        }, {
-          style: 'tableExample',
-          table: {
-            headerRows: 1,
-            widths: ['*', '*', '200'],
-            body: [
-              [{ text: this.workOrderPdf[0].terms , style: 'termsStyle', border: [false, false, false, false] },
-              {
-                text: '',
-                style: 'rowStyle', border: [false, false, false, false]
-              }]
-            ]
-          },
+        },
+        {
+          type: 'none',
+          style: 'textHeaderTerms',
+          width: '*',
+          ul:  this.selectedTermsText
+        },
+        {
+          type: 'none',
+          style: 'termsStyle',
+          width: '*',
+          ul:  this.selectedTermsPdf/* [
+            { text: 'Terms and Conditions', style: 'textHeaderTerms' },
+            { text: this.selectedTermsPdf, style: 'termsStyle' },
+          ] */
         }
       ],
       styles: {
@@ -508,6 +551,11 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           bold: true,
           alignment: 'right',
           margin: [0, 50, 0, 80]
+        },
+        textHeaderTerms: {
+          fontSize: 8,
+          bold: true,
+          margin: [0, 50, 0, 10]
         },
         footer: {
           bold: true,
@@ -592,7 +640,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           {
             text: this.companyData[0].footerdetails[0].companyName.toUpperCase() + ' \n '
               + this.companyData[0].footerdetails[0].address + ' | '
-              + this.companyData[0].footerdetails[0].email + ' | '
+              + this.companyData[0].footerdetails[0].emailId + ' | '
               + this.companyData[0].footerdetails[0].phNo + ' | '
               + this.companyData[0].footerdetails[0].website, style: 'footerHeader'
           },
@@ -613,7 +661,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           columns: [
             {
               type: 'none',
-              width: 350,
+              width: 320,
               ul: [
                 { text: this.customerData[0].companyName.toUpperCase(), style: 'textHeader' },
                 { text: 'GST : ' + this.customerData[0].gstNumber.toUpperCase(), style: 'textGst' },
@@ -644,7 +692,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           columns: [
             {
               type: 'none',
-              width: 350,
+              width: 320,
               ul: [
                 { text: 'BANK DETAILS', style: 'textHeader' },
                 { text: this.companyData[0].bankdetails[0].accName.toUpperCase(), style: 'textGst' },
@@ -663,7 +711,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 { text: 'INVOICE DETAILS', style: 'textHeader' },
                 { text: 'Invoice ID:  ' + this.invoice[0].invoiceID.toUpperCase(), style: 'textGst' },
                 { text: 'Date: ' + new Date(this.invoice[0].date).toLocaleDateString(), style: 'address' },
-                { text: 'Due Date: ' + this.invoice[0].expiryDate, style: 'address' },
+                { text: 'Due Date: ' + new Date(this.invoice[0].expiryDate).toLocaleDateString(), style: 'address' },
                 { text: 'Total Amount: ' + this.invoice[0].allTotal.toFixed(2), style: 'address' }
               ]
             },
@@ -678,15 +726,15 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           },
           layout: {
             hLineColor: function (i, node) {
-              return (i === 0 || i === node.table.body.length || i === 1  ) ? 'black' : 'white';
+              return (i === 0 || i === node.table.body.length || i === 1) ? 'black' : 'white';
             },
             fillColor: function (rowIndex, node, columnIndex) {
-              if (rowIndex === 0 ) {
-                return rowIndex  = '#CCCCCC';
+              if (rowIndex === 0) {
+                return rowIndex = '#CCCCCC';
               } else {
-              return (rowIndex % 2 === 0) ? '#EBECF0' : null;
-            }
-          },
+                return (rowIndex % 2 === 0) ? '#EBECF0' : null;
+              }
+            },
           }
         }, {
           style: 'tableExample',
@@ -713,19 +761,20 @@ export class InvoiceGeneratePdfComponent implements OnInit {
             ]
           },
         }, {
-          style: 'tableExample',
-          table: {
-            headerRows: 1,
-            widths: ['*', '*', '200'],
-            body: [
-              [{ text: this.workOrderPdf[0].terms, style: 'termsStyle', border: [false, false, false, false] },
-              {
-                text: '',
-                style: 'rowStyle', border: [false, false, false, false]
-              }]
-            ]
-          },
-        }
+          type: 'none',
+          style: 'textHeaderTerms',
+          width: '*',
+          ul:  this.selectedTermsText
+        },
+        {
+          type: 'none',
+          style: 'termsStyle',
+          width: '*',
+          ul:  this.selectedTermsPdf/* [
+            { text: 'Terms and Conditions', style: 'textHeaderTerms' },
+            { text: this.selectedTermsPdf, style: 'termsStyle' },
+          ] */
+        },
       ],
       styles: {
         headerStyle: {
@@ -737,6 +786,11 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           bold: true,
           alignment: 'right',
           margin: [0, 50, 0, 80]
+        },
+        textHeaderTerms: {
+          fontSize: 8,
+          bold: true,
+          margin: [0, 50, 0, 10]
         },
         footer: {
           bold: true,
@@ -823,7 +877,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           {
             text: this.companyData[0].footerdetails[0].companyName.toUpperCase() + ' \n '
               + this.companyData[0].footerdetails[0].address + ' | '
-              + this.companyData[0].footerdetails[0].email + ' | '
+              + this.companyData[0].footerdetails[0].emailId + ' | '
               + this.companyData[0].footerdetails[0].phNo + ' | '
               + this.companyData[0].footerdetails[0].website, style: 'footerHeader'
           },
@@ -844,7 +898,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           columns: [
             {
               type: 'none',
-              width: 350,
+              width: 320,
               ul: [
                 { text: this.customerData[0].companyName.toUpperCase(), style: 'textHeader' },
                 { text: 'GST : ' + this.customerData[0].gstNumber.toUpperCase(), style: 'textGst' },
@@ -875,7 +929,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           columns: [
             {
               type: 'none',
-              width: 350,
+              width: 320,
               ul: [
                 { text: 'BANK DETAILS', style: 'textHeader' },
                 { text: this.companyData[0].bankdetails[0].accName.toUpperCase(), style: 'textGst' },
@@ -894,7 +948,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 { text: 'INVOICE DETAILS', style: 'textHeader' },
                 { text: 'Invoice ID:  ' + this.invoice[0].invoiceID.toUpperCase(), style: 'textGst' },
                 { text: 'Date: ' + new Date(this.invoice[0].date).toLocaleDateString(), style: 'address' },
-                { text: 'Due Date: ' + this.invoice[0].expiryDate, style: 'address' },
+                { text: 'Due Date: ' + new Date(this.invoice[0].expiryDate).toLocaleDateString(), style: 'address' },
                 { text: 'Total Amount: ' + this.invoice[0].allTotal.toFixed(2), style: 'address' }
               ]
             },
@@ -909,16 +963,16 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           },
           layout: {
             hLineColor: function (i, node) {
-              return (i === 0 || i === node.table.body.length || i === 1  ) ? 'black' : 'white';
+              return (i === 0 || i === node.table.body.length || i === 1) ? 'black' : 'white';
             },
             fillColor: function (rowIndex, node, columnIndex) {
-              if (rowIndex === 0 ) {
-                return rowIndex  = '#CCCCCC';
+              if (rowIndex === 0) {
+                return rowIndex = '#CCCCCC';
               } else {
-              return (rowIndex % 2 === 0) ? '#EBECF0' : null;
+                return (rowIndex % 2 === 0) ? '#EBECF0' : null;
+              }
             }
           }
-        }
         }, {
           style: 'tableExample',
           table: {
@@ -952,7 +1006,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
               { text: '', style: 'rowStyle', border: [false, false, false, false] }, {
                 text: '',
                 style: 'rowStyle', border: [false, false, false, false]
-              },{
+              }, {
                 text: '',
                 style: 'rowStyle', border: [false, false, false, false]
               }, { text: 'Amount', style: 'rowStyle' },
@@ -960,24 +1014,30 @@ export class InvoiceGeneratePdfComponent implements OnInit {
             ]
           },
         }, {
-          style: 'tableExample',
-          table: {
-            headerRows: 1,
-            widths: ['*', '*', '200'],
-            body: [
-              [{ text: this.workOrderPdf[0].digitalterms, style: 'termsStyle', border: [false, false, false, false] },
-              {
-                text: '',
-                style: 'rowStyle', border: [false, false, false, false]
-              }]
-            ]
-          },
+          type: 'none',
+          style: 'textHeaderTerms',
+          width: '*',
+          ul:  this.selectedTermsText
+        },
+        {
+          type: 'none',
+          style: 'termsStyle',
+          width: '*',
+          ul:  this.selectedTermsPdf/* [
+            { text: 'Terms and Conditions', style: 'textHeaderTerms' },
+            { text: this.selectedTermsPdf, style: 'termsStyle' },
+          ] */
         }
       ],
       styles: {
         headerStyle: {
           margin: [0, 0, 0, 0],
           alignment: 'center',
+        },
+        textHeaderTerms: {
+          fontSize: 8,
+          bold: true,
+          margin: [0, 50, 0, 10]
         },
         header: {
           fontSize: 18,

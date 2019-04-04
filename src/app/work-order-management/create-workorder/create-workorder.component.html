@@ -1,4 +1,5 @@
-<form novalidate [formGroup]="workOrderDetailsForm" (ngSubmit)="createLeadWorkOrder(workOrderDetailsForm)"
+<form novalidate [formGroup]="workOrderDetailsForm"
+ (ngSubmit)="createLeadWorkOrder(workOrderDetailsForm)"
   style="padding-top:20px">
   <label class="pageBoxLg-label">Create Work Order</label>
   <div class="pageBoxLg" *ngFor="let leadData of leadModel; let i = index">

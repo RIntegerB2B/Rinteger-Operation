@@ -37,7 +37,7 @@ import { UniqueTicketComponent } from './unique-ticket/unique-ticket.component';
 import { TicketcustomersearchComponent } from './ticketcustomersearch/ticketcustomersearch.component';
 import { UnitwiseViewComponent } from './unitwise-view/unitwise-view.component';
 import { TicketEditComponent } from './ticket-edit/ticket-edit.component';
-
+/* import { FlexLayoutModule } from '@angular/flex-layout'; */
 @NgModule({
   declarations: [TicketComponent, TicketViewComponent, UniqueTicketComponent,
      TicketcustomersearchComponent, UnitwiseViewComponent, TicketEditComponent],
@@ -55,6 +55,7 @@ import { TicketEditComponent } from './ticket-edit/ticket-edit.component';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
+    /* FlexLayoutModule, */
     MatRadioModule,
     MatCheckboxModule,
     MatCardModule,

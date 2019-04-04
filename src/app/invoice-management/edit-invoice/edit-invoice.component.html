@@ -200,7 +200,8 @@ style="padding-top:20px">
           </div>
           <div class="col-md-6 col-6">
             <mat-form-field class="full-width">
-              <input matInput formControlName="tax" [ngModel]="(invoiceDetailsForm.controls.subTotal.value * gstVal / 100)"
+              <input matInput formControlName="tax"
+               [ngModel]="(invoiceDetailsForm.controls.subTotal.value * gstVal / 100)"
                [readonly]="true" placeholder="Tax">
             </mat-form-field>
           </div>
