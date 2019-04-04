@@ -8,15 +8,15 @@
         <div fxFlex="50" class="pr-1">
           <mat-form-field class="full-width">
             <input matInput formControlName="customerID" placeholder="Customer ID"
-              [value]="customerEdit?.customerID || null"
+              [value]="customerEdit?.customerID"
               (ngModelChange)=" customerEdit.customerID=$event">
 
           </mat-form-field>
         </div>
         <div fxFlex="50" class="pr-1">
           <mat-form-field class="full-width">
-            <input matInput formControlName="mobileNumber" [readonly]="true"
-             placeholder="Mobile Number" [value]="customerEdit?.mobileNumber"
+            <input matInput formControlName="mobileNumber" 
+             placeholder="Mobile Number" [value]="customerEdit?.mobileNumber || null"
               (ngModelChange)="customerEdit.mobileNumber=$event">
 
           </mat-form-field>
@@ -37,8 +37,7 @@
         <div fxFlex="50" class="pr-1">
           <mat-form-field class="full-width">
             <input matInput formControlName="location"
-             [value]="customerEdit?.location
-             || null" (ngModelChange)="customerEdit.location=$event"
+             [value]="customerEdit?.location|| null" (ngModelChange)="customerEdit.location=$event"
               placeholder="Location">
             <!--  <mat-error *ngIf="customerDetailsForm.controls['location'].errors?.required">
                     Enter Location
