@@ -8,7 +8,7 @@ import { ProformaInvoice } from './../../shared/proformaInvoice.model';
   styleUrls: ['./search-proforma-invoice.component.css']
 })
 export class SearchProformaInvoiceComponent implements OnInit {
-  searchType = ['MobileNumber', 'Company Name'];
+  searchType = ['Name', 'MobileNumber',  'EmailId', 'Location'];
   proformaDetailsForm: FormGroup;
   @Input() proformaInvoiceModel: ProformaInvoice;
   @Output() searchProformaInvoice = new EventEmitter<any>();

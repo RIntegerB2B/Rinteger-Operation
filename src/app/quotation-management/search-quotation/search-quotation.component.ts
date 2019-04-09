@@ -8,7 +8,7 @@ import { Quotation } from './../../shared/quotation.model';
   styleUrls: ['./search-quotation.component.css']
 })
 export class SearchQuotationComponent implements OnInit {
-  searchType = ['MobileNumber', 'Customer Name'];
+  searchType = ['Name', 'MobileNumber',  'EmailId', 'Location'];
   quotationDetailsForm: FormGroup;
   @Input() quotationModel: Quotation;
   @Output() searchQuotation = new EventEmitter<any>();

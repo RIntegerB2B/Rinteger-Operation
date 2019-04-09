@@ -8,8 +8,8 @@ import { Expense } from '../../shared/expense.model';
 })
 export class SearchComponent implements OnInit {
   expenseDetailsForm: FormGroup;
-@Input() expenseModel: Expense;
-@Output() searchCustomer = new EventEmitter<any>();
+  @Input() expenseModel: Expense;
+  @Output() searchCustomer = new EventEmitter<any>();
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -17,10 +17,10 @@ export class SearchComponent implements OnInit {
       srchterm: [''],
     });
   }
-  searchBy(expenseData, search){
+  searchBy(expenseData, search) {
 
     const filterData = expenseData.filter(data => data.companyName.toUpperCase().indexOf(search.toUpperCase()) > -1);
-        this.searchCustomer.emit(filterData);
+    this.searchCustomer.emit(filterData);
   }
 
 }

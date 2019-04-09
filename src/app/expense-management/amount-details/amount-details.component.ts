@@ -16,7 +16,6 @@ export class AmountDetailsComponent implements OnInit {
   date;
   data;
 
-  
   constructor(private expenseManagementService: ExpenseManagementService,
     private route: ActivatedRoute, private router: Router, private fb: FormBuilder) {
   }

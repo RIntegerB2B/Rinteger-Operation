@@ -8,7 +8,7 @@ import { Invoice } from './../../shared/invoice.model';
   styleUrls: ['./search-invoice.component.css']
 })
 export class SearchInvoiceComponent implements OnInit {
-  searchType = ['MobileNumber', 'Customer Name'];
+  searchType = ['Name', 'MobileNumber',  'EmailId', 'Location'];
   invoiceDetailsForm: FormGroup;
   @Input() invoiceModel: Invoice;
   @Output() searchInvoice = new EventEmitter<any>();

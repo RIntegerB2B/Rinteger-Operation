@@ -12,25 +12,24 @@ import { Router, ParamMap } from '@angular/router';
 export class ViewSingleMaterialComponent implements OnInit {
   materialDetailsForm: FormGroup;
   materialModel: MaterialModel;
-  id; 
+  id;
   constructor(private materialManagementService: MaterialManagementService, private fb: FormBuilder,
     private router: Router, private route: ActivatedRoute) { }
   ngOnInit() {
-    this.route.paramMap.subscribe((params:ParamMap)=>
-    {
+    this.route.paramMap.subscribe((params: ParamMap) => {
       this.id = params.get('id');
-    })
+    });
     this.createForm();
-    this. getSingleMaterial();
+    this.getSingleMaterial();
   }
-  createForm(){
+  createForm() {
     this.materialDetailsForm = this.fb.group({
-      date: ['',Validators.required],
-      customerName: ['',Validators.required],
+      date: ['', Validators.required],
+      customerName: ['', Validators.required],
       receivedBy: [''],
-     /*  productType: [''],
-      noOfProduct: [''],
-      shootType: [''], */
+      /*  productType: [''],
+       noOfProduct: [''],
+       shootType: [''], */
       shootStatus: [''],
       paymentStatus: [''],
       modeOfInward: [''],
@@ -44,29 +43,33 @@ export class ViewSingleMaterialComponent implements OnInit {
   }
   addForm() {
     const product = this.fb.group({
-    productType: [''],
-    noOfProduct: ['']
-      });
+      productType: [''],
+      noOfProduct: ['']
+    });
     this.productForms.push(product);
   }
 
   get productForms() {
     return this.materialDetailsForm.get('product') as FormArray;
   }
-  getSingleMaterial(){
+  getSingleMaterial() {
     this.materialManagementService.getSingleMaterial(this.id).subscribe(data => {
       this.materialModel = data;
-    })
+    }, error => {
+      console.log(error);
+    });
   }
-  getEdit(data){
-    this.router.navigate(['material/editmaterial',data._id]);
+  getEdit(data) {
+    this.router.navigate(['material/editmaterial', data._id]);
   }
-  cancel(){
+  cancel() {
     this.router.navigate(['material/viewmaterial']);
   }
-  findPaymentStatus(value){
+  findPaymentStatus(value) {
     this.materialManagementService.getPaymentStatus(value.workOrderID).subscribe(data => {
       this.materialModel = data;
-    })
+    }, error => {
+      console.log(error);
+    });
   }
 }
