@@ -4,6 +4,7 @@ import { AppSetting } from './../config/appSetting';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IncomeSetting } from './../shared/income-setting.model';
+import { WorkOrder } from '../shared/workorder.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -55,5 +56,10 @@ export class IncomeManagementService {
     const addUrl = 'findtds';
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.get<IncomeModel[]>(url);
+  }
+  workOrderStatus(data): Observable<any> {
+    const addUrl = 'workorderstatus/';
+    const url: string = this.serviceUrl + addUrl + data.workOrderID;
+    return this.httpClient.put<WorkOrder[]>(url, data);
   }
 }

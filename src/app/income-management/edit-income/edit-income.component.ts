@@ -5,6 +5,7 @@ import { IncomeManagementService } from './../income-management.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router, ParamMap } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { WorkOrder } from '../../shared/workorder.model';
 
 @Component({
   selector: 'app-edit-income',
@@ -16,24 +17,25 @@ id;
 incomeModel: IncomeModel[];
 incomeValue: IncomeModel;
 incomeForm: FormGroup;
+workorder: WorkOrder;
 incomeEdit: any;
 Paymode;
 gstOption;
 message;
 action;
 
-  constructor(private incomeMangementService: IncomeManagementService, 
-    private router: Router, private route: ActivatedRoute,private fb: FormBuilder,
+  constructor(private incomeMangementService: IncomeManagementService,
+    private router: Router, private route: ActivatedRoute, private fb: FormBuilder,
     private snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe((params: ParamMap)=> {this.id = params.get('id');})
+    this.route.paramMap.subscribe((params: ParamMap) => {this.id = params.get('id'); });
     this.createForm();
     this.getAllIncome();
     this.getPaymode();
     this.getGst();
   }
-  createForm(){
+  createForm() {
     this.incomeForm = this.fb.group({
       workOrderID: ['', Validators.required],
       customerName: ['', Validators.required],
@@ -42,55 +44,63 @@ action;
       modeOfPayment: [''],
       allTotal: [''],
       paidAmount: [''],
-      tds: [''],    
-      gst: ['']     
+      tds: [''],
+      gst: ['']
     });
   }
-  getAllIncome(){
-    this.incomeMangementService.getFindAllwork().subscribe(data =>{
+  getAllIncome() {
+    this.incomeMangementService.getFindAllwork().subscribe(data => {
       this.incomeModel = data;
       this.incomeModel.forEach(element => {
-        if(this.id === element._id){
-          this.incomeValue = element;   
-          console.log(this.incomeValue);       
-        }        
+        if (this.id === element._id) {
+          this.incomeValue = element;
+          console.log(this.incomeValue);
+        }
       });
-    },error=>{
-      console.log(error);
-    })
-  }
-  updateIncome(row) {
-    this.message = "This file is already added "
-    this.incomeMangementService.EditIncome(row).subscribe(data => {
-      if(data === true ) 
-      {
-        this.snackBar.open(this.message,this.action,{
-          duration: 3000
-        })
-      }
-      else{
-      this.incomeValue = data;
-    }
-
-      this.router.navigate(['income/viewincome']);
     }, error => {
       console.log(error);
     });
   }
-  cancel(){
+  updateIncome(row) {
+    this.message = 'This file is already added';
+    this.incomeMangementService.EditIncome(row).subscribe(data => {
+      if (data === true) {
+        this.snackBar.open(this.message, this.action, {
+          duration: 3000
+        });
+      } else {
+      /* this.incomeValue = data; */
+      this.workorderStatus(data);
+    }
+
+      /* this.router.navigate(['income/viewincome']); */
+    }, error => {
+      console.log(error);
+    });
+  }
+  cancel() {
     this.router.navigate(['income/viewincome']);
   }
-  getPaymode(){
+  getPaymode() {
     this.incomeMangementService.getincomesetting().subscribe(data => {
       this.incomeEdit = data[0].modeOfPayment;
       console.log(this.incomeValue);
       this.Paymode = this.incomeEdit;
-    })
+    });
   }
-  getGst(){
+  getGst() {
     this.incomeMangementService.getincomesetting().subscribe(data => {
       this.incomeEdit = data[0].gst;
       this.gstOption = this.incomeEdit;
-    })
+    });
+  }
+  workorderStatus(value) {
+   /*  this.workorder.workOrderStatus = 'incomeSheetCreated'; */
+    this.incomeMangementService.workOrderStatus(value).subscribe(data => {
+      this.incomeValue = data;
+      this.router.navigate(['income/viewincome']);
+    }, error => {
+      console.log(error);
+    });
   }
 }

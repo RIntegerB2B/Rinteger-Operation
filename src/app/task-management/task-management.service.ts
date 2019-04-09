@@ -28,7 +28,11 @@ export class TaskManagementService {
     return this.http.get<TaskModel[]>(urlway);
   }
   UpdateTask(data): Observable<any> {
-    const url: string = this.baseurl  + 'updatetask/' + data._id;
+    const url: string = this.baseurl  + 'statusupdate/' + data._id;
+    return this.http.put<TaskModel[]>(url, data);
+  }
+  EditTask(data, id): Observable<any> {
+    const url: string = this.baseurl  + 'updatetask/' + id;
     return this.http.put<TaskModel[]>(url, data);
   }
   getunitwiseTask(name): Observable<TaskModel[]> {
@@ -36,7 +40,7 @@ export class TaskManagementService {
 
     return this.http.get<TaskModel[]>(urlway);
   }
-  deadlinedTask(): Observable<TaskModel[]> {
+  deadlinedTask(): Observable<any> {
     const urlway = this.baseurl + 'deadlinedTask';
 
     return this.http.get<TaskModel[]>(urlway);
@@ -70,4 +74,11 @@ compareUserUnits(data): Observable<any> {
 
   return this.http.get<TaskModel[]>(urlway);
 }
+getStatusWise(status): Observable<TaskModel[]> {
+  const urlway = this.baseurl + 'statusfitler' ;
+
+  return this.http.post<TaskModel[]>(urlway, status);
+}
+
+
 }

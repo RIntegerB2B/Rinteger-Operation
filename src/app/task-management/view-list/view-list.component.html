@@ -1,0 +1,44 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="form-group">
+      <label class="labelHeader">List Detail</label>
+    </div>
+  </div>
+  <div class="row gridRowHeader display-none-small">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>List Title</label>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>List Description</label>
+      </div>
+    </div>    
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>List Status</label>
+      </div>
+    </div>
+  </div>
+  <div class="row gridRow" *ngFor="let data of listData; let i = index">
+    <div class="display-none-large col-4">
+      <label class="gridLabel">List Title:</label>
+    </div>
+    <div class="col-md-4 col-4 vcenter form-group">
+      {{data.title}}
+    </div>
+    <div class="display-none-large col-4">
+      <label class="gridLabel">List Description:</label>
+    </div>
+    <div class="col-md-4 col-4 vcenter form-group">
+        {{data.listDescription}}
+    </div>    
+    <div class="display-none-large col-4">
+      <label class="gridLabel">List Status:</label>
+    </div>
+    <div class="col-md-4 col-4 vcenter form-group">
+        {{data.listStatus}}
+    </div>  
+  </div>  
+</div>

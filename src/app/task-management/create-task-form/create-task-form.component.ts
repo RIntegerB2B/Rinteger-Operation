@@ -19,7 +19,7 @@ export class CreateTaskFormComponent implements OnInit {
   /*  customerdetail; */
   unitName: Register[];
   taskname: any;
-  units = ['Studio', 'BSS', 'Technologies'];
+  units = ['Studios', 'BSS', 'Technologies'];
   priority = ['low', 'medium', 'high', 'critical'];
   taskForm: FormGroup;
   taskholder: TaskModel;
@@ -27,15 +27,20 @@ export class CreateTaskFormComponent implements OnInit {
   /*   selectedData: Customer; */
   departmentData;
   assignedBy;
+  product: FormArray;
+  task: FormArray;
   assignedTo;
   userId;
+  unitSort: string;
+  photoSort: string;
+  productSort: string;
+  roleSort: string;
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router,
     private taskManagementService: TaskManagementService) { }
 
   ngOnInit() {
     this.createtask();
-    /*  this.getAllCustomer();
-     this.getDepartment(); */
+    this.getUnit();
     this.getUnitWiseName();
     this.getDepartment();
     this.route.paramMap.subscribe(
@@ -47,8 +52,8 @@ export class CreateTaskFormComponent implements OnInit {
     this.taskForm = this.fb.group({
       taskNo: [''],
       dateTime: [''],
-
       taskTitle: [''],
+      clientName: [''],
       taskDescription: [''],
       priority: [''],
       units: [''],
@@ -57,20 +62,95 @@ export class CreateTaskFormComponent implements OnInit {
       assignedBy: [''],
       status: [''],
       toCloseDate: [''],
-      closedDate: ['']
+      toTime: [''],
+      closedDate: [''],
+      time: [''],
+      product: this.fb.array([]),
+      task: this.fb.array([]),
+      shoot: this.fb.array([]),
+      list: this.fb.array([])
     });
+    this.addForm();
+    this.addTaskForm();
+    this.addShootForm();
+    this.addListForm();
   }
+  addForm() {
+    const product = this.fb.group({
+    productName: [''],
+    productCount: [''],
+    imageCount: ['']
+      });
+    this.productForms.push(product);
+  }
+
+  get productForms() {
+    return this.taskForm.get('product') as FormArray;
+  }
+  deleteProducts(i) {
+    this.productForms.removeAt(i);
+  }
+  addTaskForm() {
+    const task = this.fb.group({
+      moduleName: [''],
+      moduleDescription: [''],
+      moduleStatus: ['']
+      });
+    this.moduleForms.push(task);
+  }
+
+  get moduleForms() {
+    return this.taskForm.get('task') as FormArray;
+  }
+  deleteModule(i) {
+    this.moduleForms.removeAt(i);
+  }
+  addShootForm() {
+    const shoot = this.fb.group({
+      customerName: [''],
+      productName: [''],
+      productCount: [''],
+      shootType: [''],
+      modeName: ['']
+      });
+    this.ShootForms.push(shoot);
+  }
+
+  get ShootForms() {
+    return this.taskForm.get('shoot') as FormArray;
+  }
+  deleteShoot(i) {
+    this.ShootForms.removeAt(i);
+  }
+
+  addListForm() {
+    const list = this.fb.group({
+      title: [''],
+      listDescription: [''],
+      listStatus: ['']
+      });
+    this.listForms.push(list);
+  }
+
+  get listForms() {
+    return this.taskForm.get('list') as FormArray;
+  }
+  deleteList(i) {
+    this.listForms.removeAt(i);
+  }
+
+
   changed(e) {
     console.log(this.unitName.filter(data => data.unit === e.value));
     this.taskname = this.unitName.filter(data => data.unit === e.value);
-    /*   this.taskholder = this.taskname.controls._id.value; */
   }
 
 
-  onSubmit() {
+  onSubmit(taskForm: FormGroup) {
     this.taskholder = new TaskModel();
-    this.taskholder.taskNo = this.taskForm.controls.taskNo.value;
+  /*   this.taskholder.taskNo = this.taskForm.controls.taskNo.value; */
     this.taskholder.userId = this.taskForm.controls.assignedTo.value._id;
+    this.taskholder.clientName = this.taskForm.controls.clientName.value;
     this.taskholder.dateTime = this.taskForm.controls.dateTime.value;
     this.taskholder.taskTitle = this.taskForm.controls.taskTitle.value;
     this.taskholder.taskDescription = this.taskForm.controls.taskDescription.value;
@@ -81,10 +161,15 @@ export class CreateTaskFormComponent implements OnInit {
     this.taskholder.assignedBy = this.taskForm.controls.assignedBy.value;
     this.taskholder.status = this.taskForm.controls.status.value;
     this.taskholder.toCloseDate = this.taskForm.controls.toCloseDate.value;
+    this.taskholder.toTime = this.taskForm.controls.toTime.value;
     this.taskholder.closedDate = this.taskForm.controls.closedDate.value;
+    this.taskholder.time = this.taskForm.controls.time.value;
+    this.taskholder.product = this.taskForm.controls.product.value;
+    this.taskholder.task = this.taskForm.controls.task.value;
+    this.taskholder.shoot = this.taskForm.controls.shoot.value;
+    this.taskholder.list = this.taskForm.controls.list.value;
     this.taskManagementService.createTask(this.taskholder).subscribe(data => {
       this.taskholder = data;
-      /*  this.router.navigate(['ticket/view']); */
       this.router.navigate(['task/viewtask', this.userId]);
     }, error => {
       console.log(error);
@@ -110,17 +195,9 @@ export class CreateTaskFormComponent implements OnInit {
   cancel() {
     this.router.navigate(['task/viewtask',  this.userId]);
   }
+getUnit() {
+  this.unitSort =  localStorage.getItem('unit');
+  this.roleSort = localStorage.getItem('role');
+}
 
-
-  /*  getAllCustomer() {
-     this.ts.allCustomer().subscribe(data => {
-       this.customerdetail = data;
-     }, error => {
-       console.log(error);
-     });
-   }
-   filterCustomer(data) {
-     this.customerModel = data;
- 
-   } */
 }

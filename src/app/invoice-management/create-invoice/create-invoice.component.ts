@@ -21,6 +21,7 @@ export class CreateInvoiceComponent implements OnInit {
   invoiceDetailsForm: FormGroup;
   invoice: Invoice;
   workOrder: WorkOrder;
+  workOrderData: WorkOrder[];
   arryValue: any = [];
   sum = 0;
   leadId;
@@ -75,6 +76,16 @@ export class CreateInvoiceComponent implements OnInit {
       invoiceDetailsForm.controls.tax.value
     );
     this.invoiceService.createInvoice(this.invoice).subscribe(data => {
+      /* this.router.navigate(['invoice/viewinvoice', data.workOrderID]); */
+      this.getInvoiceStatus(data);
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  getInvoiceStatus(value) {
+    this.invoiceService.setInvoiceStatus(value).subscribe(data => {
+      /* this.workOrderData = data; */
       this.router.navigate(['invoice/viewinvoice', data.workOrderID]);
     }, error => {
       console.log(error);

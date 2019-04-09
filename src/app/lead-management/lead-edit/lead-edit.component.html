@@ -100,32 +100,32 @@
       </div>
       <div fxFlex="100" formArrayName="requirements">
         <div *ngFor="let account of requirementsForms.controls; let i=index" [formGroupName]="i">
-          <div fxFlex="15" class="pr-1">
+          <div fxFlex="30" class="pr-1">
             <mat-form-field class="full-width">
               <input matInput formControlName="item" placeholder="item">
             </mat-form-field>
           </div>
-          <div fxFlex="15" class="pr-1">
+          <div fxFlex="5" class="pr-1">
             <mat-form-field class="full-width">
               <input matInput formControlName="quantity" placeholder="Quantity">
             </mat-form-field>
           </div>
-          <div fxFlex="15" class="pr-1">
+          <div fxFlex="10" class="pr-1">
             <mat-form-field class="full-width">
               <input matInput formControlName="price" placeholder="Price">
             </mat-form-field>
           </div>
-          <div fxFlex="15" class="pr-1">
+          <div fxFlex="10" class="pr-1">
             <mat-form-field class="full-width">
               <input matInput formControlName="discount" placeholder="Discount">
             </mat-form-field>
           </div>
-          <div fxFlex="15" class="pr-1">
+          <div fxFlex="10" class="pr-1">
             <mat-form-field class="full-width">
               <input matInput formControlName="description" placeholder="Description">
             </mat-form-field>
           </div>
-          <div fxFlex="20" class="pr-1">
+          <div fxFlex="25" class="pr-1">
             <mat-form-field class="full-width">
               <!-- {{qty*price}} -->
               <input matInput formControlName="total" placeholder="Total" [ngModel]="(leadDetailsForm.controls['requirements'].controls[i].controls.quantity.value *

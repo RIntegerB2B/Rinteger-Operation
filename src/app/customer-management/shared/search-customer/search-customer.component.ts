@@ -7,7 +7,7 @@ import { Customer } from './../../customer/create-customer/customer.model';
   styleUrls: ['./search-customer.component.css']
 })
 export class SearchCustomerComponent implements OnInit {
-  searchType = ['MobileNumber', 'Name', 'EmailId', 'Location'];
+  searchType = ['Name', 'MobileNumber', 'EmailId', 'Location'];
   customerDetailsForm: FormGroup;
   @Input() customerModel: Customer;
   @Output() searchCustomer = new EventEmitter<any>();
