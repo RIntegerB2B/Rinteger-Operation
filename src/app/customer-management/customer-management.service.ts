@@ -8,6 +8,7 @@ import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { CreateCustomerComponent } from './customer/create-customer/create-customer.component';
 import { LogIn  } from './../shared/login.model';
+import {CustomerData} from '../customer-management/customer/view-customer/customer.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class CustomerManagementService {
   allCustomer(): Observable<any> {
     const addUrl = 'viewcustomer';
     const url: string = this.serviceUrl + addUrl;
-    return this.httpClient.get<Customer[]>(url);
+    return this.httpClient.get<CustomerData[]>(url).pipe();
   }
   addSingleCustomer(data: any): Observable<any> {
     const addUrl = 'addcustomer';

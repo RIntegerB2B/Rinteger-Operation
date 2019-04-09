@@ -56,6 +56,7 @@ import { ViewSingleSubscribecustomerService } from './subscribecustomer/view-sin
 import { ViewSubcribecustomerComponent } from './subscribecustomer/view-subcribecustomer/view-subcribecustomer.component';
 import { ViewSingleSubcribecustomerComponent
  } from './subscribecustomer/view-single-subcribecustomer/view-single-subcribecustomer.component';
+ import {CustomerResolve} from './customer/view-customer/customer.resolve';
 
 @NgModule({
   declarations: [
@@ -101,7 +102,8 @@ import { ViewSingleSubcribecustomerComponent
     CustomerManagementService, CreateCustomerService, AlertDeleteService,
     ViewsinglecustomerService, CreateMarketcustomerService,
      ViewsinglemarketcustomerService,
-     ViewSingleSubscribecustomerService
+     ViewSingleSubscribecustomerService,
+     CustomerResolve
   ],
   entryComponents: [CreateCustomerComponent, AlertDeleteComponent,
      CreateMarketcustomerComponent,
