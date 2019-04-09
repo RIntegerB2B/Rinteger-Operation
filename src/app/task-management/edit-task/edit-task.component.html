@@ -120,6 +120,13 @@
           </mat-form-field>
         </div>
         <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="toTime" [value]="taskEdit?.toTime || null"
+             (ngModelChange)="taskEdit.toTime=$event" [readonly]=true
+              placeholder="toTime">
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
           <mat-form-field>
             <input matInput formControlName="closedDate" [matDatepicker]="picker2" [value]="taskEdit?.closedDate || null" 
             (ngModelChange)="taskEdit.closedDate=$event"

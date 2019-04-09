@@ -1,12 +1,24 @@
-    <div class="col-md-6">
-      <mat-form-field>
-        <mat-select #tempVal placeholder="Select the template">
-          <mat-option *ngFor="let val of templates" [value]="val">
-            {{val}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+<div class="col-md-6">
+    <div>Terms and condition</div>
+    <div *ngIf="selectTermsCondition">Please Select Terms and condition</div>
+    <div class="row">
+      <div class="col-md-4" *ngFor="let data of terms; let i = index">
+        <mat-radio-button  (change)="selectTerms($event, companyDetails)"
+        [value]="data.term">{{data.term}}</mat-radio-button>
+      </div>
+      
     </div>
-  <button mat-raised-button 
-  (click)="viewSingleProInvoicePdf(invoiceDetails, customer, companyDetails, tempVal.value)"
-    color="accent" type="button">Download PDF</button>
+  </div>
+<div class="col-md-6">
+  <mat-form-field>
+    <mat-select #tempVal placeholder="Select the template">
+      <mat-option *ngFor="let val of templates" [value]="val">
+        {{val}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+
+<button mat-raised-button (click)="viewSingleProInvoicePdf(invoiceDetails, customer, companyDetails, tempVal.value)"
+  color="accent" type="button">Download PDF</button>

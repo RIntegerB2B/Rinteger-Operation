@@ -170,7 +170,10 @@ export class EditTaskComponent implements OnInit {
     }
   }
 
-
+  /*     });
+      this.productForms.push(product);
+    }
+  } */
   getAllTask() {
 
     this.taskManagementService.getAllTaskData().subscribe(data => {

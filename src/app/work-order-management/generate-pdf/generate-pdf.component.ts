@@ -859,7 +859,14 @@ export class GeneratePdfComponent implements OnInit {
             { text: 'Terms and Conditions', style: 'textHeaderTerms' },
             { text: this.workOrderPdf[0].digitalterms, style: 'textTerms' },
           ]
-        }
+        },
+        { font: 'Fontello' },
+        {
+        text: [
+          { text: '', style: 'icon' }, //icon gift
+          ' my present'
+      ]
+    }
       ],
       styles: {
         headerStyle: {
