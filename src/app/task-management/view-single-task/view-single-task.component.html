@@ -27,6 +27,16 @@
         </div>
         <div class="col-md-4  col-6">
           <div class="form-group">
+            <label class="divLable">Client Name</label>
+          </div>
+        </div>
+        <div class="col-md-8  col-6">
+          <div class="form-group">
+            : <label class="itemLable">{{data.clientName}}</label>
+          </div>
+        </div>
+        <div class="col-md-4  col-6">
+          <div class="form-group">
             <label class="divLable">Task Title</label>
           </div>
         </div>
@@ -47,7 +57,7 @@
         </div>
         <div class="col-md-4  col-6">
             <div class="form-group">
-              <label class="divLable">Date/Time:</label>
+              <label class="divLable">Start Date:</label>
             </div>
           </div>
         <div class="col-md-8  col-6">
@@ -82,7 +92,16 @@
             : <label class="itemLable"> {{data.assignedBy}}</label>
           </div>
         </div>
-
+        <div class="col-md-4  col-6">
+          <div class="form-group">
+            <label class="divLable">Priority</label>
+          </div>
+        </div>
+        <div class="col-md-8  col-6">
+          <div class="form-group">
+            : <label class="itemLable"> {{data.priority}}</label>
+          </div>
+        </div>
 
         <div class="col-md-4  col-6">
           <div class="form-group">
@@ -98,7 +117,7 @@
 
         <div class="col-md-4  col-6">
           <div class="form-group">
-            <label class="divLable">To Close Date:</label>
+            <label class="divLable">Deadline Date:</label>
           </div>
         </div>
         <div class="col-md-8  col-6">
@@ -108,7 +127,7 @@
         </div>
         <div class="col-md-4  col-6">
             <div class="form-group">
-              <label class="divLable">To Close Time:</label>
+              <label class="divLable">Deadline Time:</label>
             </div>
           </div>
           <div class="col-md-8  col-6">
@@ -137,13 +156,35 @@
               : <label class="itemLable"> {{data.time}}</label>
             </div>
           </div>     
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Comment :</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable"> {{data.comment}}</label>
+            </div>
+          </div>   
            
       </div>    
   </div>
-  <div>
-      <app-view-product [productData]="data.product"  
+  <div  *ngIf= "(this.unitSort === 'Studios' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')">
+      <app-view-product [productData]="data.product" 
       ></app-view-product>
   </div>
+  <div  *ngIf = "(this.unitSort === 'Technologies' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')" > 
+      <app-view-module [moduleData]="data.task" 
+      ></app-view-module>
+  </div>
+  <div  *ngIf= "(this.unitSort === 'Studios' || this.roleSort === 'admin') && ((this.roleSort === 'teamleader' || this.roleSort === 'admin') || this.roleSort === 'photographer')"> 
+    <app-view-shoot [shootData]="data.shoot" 
+    ></app-view-shoot>
+</div>
+<div *ngIf = "(this.unitSort === 'BSS' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')"> 
+  <app-view-list [listData]="data.list" 
+  ></app-view-list>
+</div>
   <div fxFlex="100" class="mt-1">    
     <button mat-raised-button mat-button color="accent" type="button" (click)="Back()">Back</button>
   </div>

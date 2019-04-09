@@ -15,6 +15,8 @@ export class ViewSingleTaskComponent implements OnInit {
   single: string;
   product: FormArray;
   taskDetailsForm: FormGroup;
+  unitSort: string;
+  roleSort: string;
   constructor(private taskManagementService: TaskManagementService, private route: ActivatedRoute,
     private router: Router, private fb: FormBuilder) {
 
@@ -30,27 +32,35 @@ export class ViewSingleTaskComponent implements OnInit {
     );
     this.getSingleTask();
     this.createtask();
+    this.getUnit();
   }
   createtask() {
     this.taskDetailsForm = this.fb.group({
-     
       taskNo: [''],
       dateTime: [''],
       taskTitle: [''],
-      taskDescription: [''],   
+      clientName: [''],
+      taskDescription: [''],
       priority: [''],
       units: [''],
       department: [''],
       assignedTo: [''],
       assignedBy: [''],
+      comment: [''],
       status: [''],
       toCloseDate: [''],
       toTime: [''],
       closedDate: [''],
       time: [''],
-      product: this.fb.array([])
+      product: this.fb.array([]),
+      task: this.fb.array([]),
+      shoot: this.fb.array([]),
+      list: this.fb.array([])
     });
     this.addForm();
+    this.addTaskForm();
+    this.addShootForm();
+    this.addListForm();
   }
   addForm() {
     const product = this.fb.group({
@@ -63,6 +73,34 @@ export class ViewSingleTaskComponent implements OnInit {
 
   get productForms() {
     return this.taskDetailsForm.get('product') as FormArray;
+  }
+
+  addShootForm() {
+    const shoot = this.fb.group({
+      customerName: [''],
+      productName: [''],
+      productCount: [''],
+      shootType: [''],
+      modeName: ['']
+      });
+    this.ShootForms.push(shoot);
+  }
+
+  get ShootForms() {
+    return this.taskDetailsForm.get('shoot') as FormArray;
+  }
+
+  addListForm() {
+    const list = this.fb.group({
+      title: [''],
+      listDescription: [''],
+      listStatus: ['']
+      });
+    this.listForms.push(list);
+  }
+
+  get listForms() {
+    return this.taskDetailsForm.get('list') as FormArray;
   }
 
   getSingleTask() {
@@ -78,6 +116,23 @@ export class ViewSingleTaskComponent implements OnInit {
   }
   Back() {
     this.router.navigate(['task/viewtask', this.single]);
+  }
+
+  getUnit() {
+    this.unitSort =  localStorage.getItem('unit');
+    this.roleSort = localStorage.getItem('role');
+  }
+  addTaskForm() {
+    const task = this.fb.group({
+      moduleName: [''],
+      moduleDescription: [''],
+      moduleStatus: ['']
+      });
+    this.moduleForms.push(task);
+  }
+
+  get moduleForms() {
+    return this.taskDetailsForm.get('task') as FormArray;
   }
 
 }

@@ -1,0 +1,44 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="form-group">
+      <label class="labelHeader">Project Detail</label>
+    </div>
+  </div>
+  <div class="row gridRowHeader display-none-small">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>Module Name</label>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>Description</label>
+      </div>
+    </div>    
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>Status</label>
+      </div>
+    </div>
+  </div>
+  <div class="row gridRow" *ngFor="let data of moduleData; let i = index">
+    <div class="display-none-large col-4">
+      <label class="gridLabel">Module Name:</label>
+    </div>
+    <div class="col-md-4 col-4 vcenter form-group">
+      {{data.moduleName}}
+    </div>
+    <div class="display-none-large col-4">
+      <label class="gridLabel">Description:</label>
+    </div>
+    <div class="col-md-4 col-4 vcenter form-group">
+        {{data.moduleDescription}}
+    </div>    
+    <div class="display-none-large col-4">
+      <label class="gridLabel">Status:</label>
+    </div>
+    <div class="col-md-4 col-4 vcenter form-group">
+        {{data.moduleStatus}}
+    </div>  
+  </div>  
+</div>

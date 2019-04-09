@@ -38,10 +38,18 @@ import { ViewAllTaskComponent } from './view-all-task/view-all-task.component';
 import { ViewSingleTaskComponent } from './view-single-task/view-single-task.component';
 import { EditTaskComponent } from './edit-task/edit-task.component';
 import { ViewProductComponent } from './view-product/view-product.component';
+import { ReEditTaskComponent } from './re-edit-task/re-edit-task.component';
+import { ViewModuleComponent } from './view-module/view-module.component';
+import { ViewShootComponent } from './view-shoot/view-shoot.component';
+import { ViewListComponent } from './view-list/view-list.component';
+import { SearchTaskComponent } from './search-task/search-task.component';
 @NgModule({
-  declarations: [CreateTaskFormComponent, ViewAllTaskComponent, ViewSingleTaskComponent, EditTaskComponent, ViewProductComponent],
+  declarations: [CreateTaskFormComponent, ViewAllTaskComponent,
+     ViewSingleTaskComponent, EditTaskComponent, ViewProductComponent,
+      ReEditTaskComponent, ViewModuleComponent, ViewShootComponent, ViewListComponent, SearchTaskComponent],
   imports: [
-    CommonModule, HttpModule,
+    CommonModule,
+     HttpModule,
    FormsModule, ReactiveFormsModule, MatBadgeModule,
     MatSidenavModule,
     MatListModule,

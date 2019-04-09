@@ -80,12 +80,17 @@
         <label>Date</label>
       </div>
     </div>
+    <div class="col-md-1 vcenterHeader">
+        <div class="form-group">
+          <label>Quantity</label>
+        </div>
+      </div>
     <div class="col-md-2 vcenterHeader">
       <div class="form-group">
         <label>Lead Status</label>
       </div>
     </div>
-    <div class="col-md-2 vcenterHeader">
+    <div class="col-md-1 vcenterHeader">
       <div class="form-group">
         <label>Action</label>
       </div>
@@ -122,6 +127,12 @@
         {{data.date | date: 'MM/dd/yyyy'}}
       </div>
       <div class="display-none-large col-6">
+          <label class="gridLabel">Quantity:</label>
+        </div>
+        <div class="col-md-1 col-6 vcenter form-group">
+          {{data.quantity}}
+        </div>
+      <div class="display-none-large col-6">
         <label class="gridLabel">Lead Status:</label>
       </div>
       <div class="col-md-2 col-6 vcenter form-group">
@@ -130,7 +141,7 @@
       <div class="display-none-large col-6">
         <label class="gridLabel">Action:</label>
       </div>
-      <div class="col-md-2 col-6 vcenter form-group">
+      <div class="col-md-1 col-6 vcenter form-group">
         <button mat-icon-button [matMenuTriggerFor]="menu">
           <mat-icon>more_vert</mat-icon>
         </button>

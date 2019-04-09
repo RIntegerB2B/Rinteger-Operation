@@ -56,7 +56,7 @@ export class InvoiceService {
     const url: string = this.serviceUrl + addUrl + invid;
     return this.httpClient.get<Invoice[]>(url);
   }
-  updateSingleInvoice(row,  id)   {
+  updateSingleInvoice(row,  id) : Observable<any>  {
     const addUrl = 'invoice/';
     const url: string = this.serviceUrl + addUrl + id;
     return this.httpClient.put<Invoice[]>(url, row);
@@ -90,5 +90,10 @@ export class InvoiceService {
     const addUrl = 'invoicemonth';
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.post<Invoice[]>(url, dateSearch);
+  }
+  setInvoiceStatus(row): Observable<any>   {
+    const addUrl = 'invoicestatus/';
+    const url: string = this.serviceUrl + addUrl + row.workOrderID;
+    return this.httpClient.put<WorkOrder>(url, row);
   }
 }

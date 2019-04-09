@@ -22,7 +22,7 @@
       </div> -->
       <div fxFlex="50" class="pr-1">
         <mat-form-field>
-          <mat-select placeholder="units" formControlName="units" (selectionChange)="changed($event)" required>
+          <mat-select placeholder="Units" formControlName="units" (selectionChange)="changed($event)" required>
             <mat-option *ngFor="let data of units"   [value]="data">
               {{data}}
             </mat-option>
@@ -39,8 +39,20 @@
           </mat-select>
         </mat-form-field>
       </div>
+      <div fxFlex="50" class="p-2">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="clientName" placeholder="Client Name">
+          <mat-error *ngIf="taskForm.controls['clientName'].errors?.required" required>
+           Client Name
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 6f5e69c2844350c6ed58099a3c1688dfb6439275
       <div fxFlex="50" class="p-2">
         <mat-form-field class="full-width">
           <input matInput formControlName="taskTitle" placeholder="Task Title">
@@ -53,7 +65,7 @@
 
       <div fxFlex="50" class="p-2">
         <mat-form-field class="full-width">
-          <input matInput formControlName="taskDescription" placeholder="Task Descrition">
+          <textarea matInput formControlName="taskDescription" placeholder="Task Descrition"></textarea>
           <mat-error *ngIf="taskForm.controls['taskDescription'].errors?.required" required>
             Task Descrition
             <strong>required</strong>
@@ -67,7 +79,7 @@
 
       <div fxFlex="50" class="pr-1">
         <mat-form-field>
-          <mat-select placeholder="priority" formControlName="priority">
+          <mat-select placeholder="Priority" formControlName="priority">
             <mat-option *ngFor="let data of priority" [value]="data">
               {{data}}
             </mat-option>
@@ -85,7 +97,7 @@
 
       <div fxFlex="50" class="pr-1">
         <mat-form-field>
-          <mat-select placeholder="department" formControlName="department">
+          <mat-select placeholder="Department" formControlName="department">
             <mat-option *ngFor="let data of departmentData;let i = index " [value]="data">
               {{data}}
             </mat-option>
@@ -112,7 +124,7 @@
       <div fxFlex="50" class="pr-1">
         <mat-form-field>
           <input matInput formControlName="toCloseDate" [matDatepicker]="picker" ng-model-options="{timezone: 'utc'}"
-          placeholder="Choose a close date"> 
+          placeholder="Deadline Date"> 
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
@@ -120,17 +132,19 @@
 
       <div fxFlex="50" class="p-2">
         <mat-form-field class="full-width">
-          <input matInput formControlName="toTime" placeholder="To Time" type="time">
+          <input matInput formControlName="toTime" placeholder="Deadline Time" type="time">
           <mat-error *ngIf="taskForm.controls['toTime'].errors?.required" required>
            To Time
             <strong>required</strong>
           </mat-error>
         </mat-form-field>
       </div>
-      <div fxFlex="100" class="textHeader">
+     
+      <div fxFlex="100" class="textHeader"  *ngIf= "(this.unitSort === 'Studios' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')" >
         <h5>Product Details</h5>
       </div>
-      <div  fxLayout="column" fxFlex="100" formArrayName="product">
+      
+      <div  fxLayout="column" fxFlex="100" formArrayName="product"    *ngIf= "(this.unitSort === 'Studios' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')">
         <div *ngFor="let account of productForms.controls; let i=index" [formGroupName]="i">
           <div fxFlex="15" class="pr-1">
             <mat-form-field class="full-width">
@@ -139,14 +153,14 @@
               placeholder="productName">
             </mat-form-field>
           </div>
-          <div fxFlex="15" class="pr-1">
+          <div fxFlex="8" class="pr-1">
             <mat-form-field class="full-width">
               <input matInput formControlName="productCount"  
              
               placeholder="productCount">
             </mat-form-field>
           </div>
-          <div fxFlex="15" class="pr-1">
+          <div fxFlex="8" class="pr-1">
             <mat-form-field class="full-width">
               <input matInput formControlName="imageCount"  
              
@@ -154,21 +168,165 @@
             </mat-form-field>
           </div>
          
-          <a (click)="deleteProducts(i)">
+          <a (click)="deleteProducts(i)" >
             <mat-icon>clear</mat-icon>
           </a>
         </div>
       </div>
-
-        <div fxFlex="50">
+          
+     
+        <div fxFlex="100" fxLayout="row"   *ngIf= "(this.unitSort === 'Studios' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')">
           <a (click)="addForm()">
             <mat-icon class="gridEdit">add_box</mat-icon>
           </a>
           <p>Add New</p>
         </div>
+      
+     
+      <div fxFlex="100" class="textHeader" *ngIf = "(this.unitSort === 'Technologies' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')" >
+          <h5>Project Details</h5>
+        </div>
+        <div  fxLayout="column" fxFlex="100" formArrayName="task"  *ngIf = "(this.unitSort === 'Technologies' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')">
+          <div *ngFor="let account of moduleForms.controls; let i=index" [formGroupName]="i">
+            <div fxFlex="10" class="pr-1">
+              <mat-form-field class="full-width">
+                <input matInput formControlName="moduleName" 
+            
+                placeholder="Module Name">
+              </mat-form-field>
+            </div>
+            <div fxFlex="30" class="pr-1">
+              <mat-form-field class="full-width">
+                <input matInput formControlName="moduleDescription"  
+               
+                placeholder="moduleDescription">
+              </mat-form-field>
+            </div>
+            <div fxFlex="8" class="pr-1">
+              <mat-form-field class="full-width">
+                <input matInput formControlName="moduleStatus"  
+               
+                placeholder="moduleStatus">
+              </mat-form-field>
+            </div>
+           
+            <a (click)="deleteModule(i)" >
+              <mat-icon>clear</mat-icon>
+            </a>
+          </div>
+        </div>
+  
+          <div fxFlex="50" *ngIf = "(this.unitSort === 'Technologies' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')">
+            <a (click)="addTaskForm()">
+              <mat-icon class="gridEdit">add_box</mat-icon>
+            </a>
+            <p>Add New</p>
+          </div>
 
 
-   
+
+          <div fxFlex="100" class="textHeader"  *ngIf= "(this.unitSort === 'Studios' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin' || this.roleSort === 'photographer')" >
+              <h5>Shoot Details</h5>
+            </div>
+            
+            <div  fxLayout="column" fxFlex="100" formArrayName="shoot"   *ngIf= "(this.unitSort === 'Studios' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin' || this.roleSort === 'photographer')">
+              <div *ngFor="let account of ShootForms.controls; let i=index" [formGroupName]="i">
+                <div fxFlex="15" class="pr-1">
+                  <mat-form-field class="full-width">
+                    <input matInput formControlName="customerName" 
+                
+                    placeholder="customerName">
+                  </mat-form-field>
+                </div>
+
+                <div fxFlex="15" class="pr-1">
+                  <mat-form-field class="full-width">
+                    <input matInput formControlName="productName"  
+                   
+                    placeholder="productName">
+                  </mat-form-field>
+                </div>
+
+                <div fxFlex="15" class="pr-1">
+                  <mat-form-field class="full-width">
+                    <input matInput formControlName="productCount"  
+                   
+                    placeholder="productCount">
+                  </mat-form-field>
+                </div>
+
+                <div fxFlex="15" class="pr-1">
+                    <mat-form-field class="full-width">
+                      <input matInput formControlName="shootType"  
+                     
+                      placeholder="shootType">
+                    </mat-form-field>
+                  </div>
+
+                  <div fxFlex="15" class="pr-1">
+                      <mat-form-field class="full-width">
+                        <input matInput formControlName="modeName"  
+                       
+                        placeholder="modeName">
+                      </mat-form-field>
+                    </div>
+               
+                <a (click)="deleteShoot(i)" >
+                  <mat-icon>clear</mat-icon>
+                </a>
+              </div>
+            </div>
+                
+           
+              <div fxFlex="100" fxLayout="row"  *ngIf= "(this.unitSort === 'Studios' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin' || this.roleSort === 'photographer')">
+                <a (click)="addShootForm()">
+                  <mat-icon class="gridEdit">add_box</mat-icon>
+                </a>
+                <p>Add New</p>
+              </div>
+            
+     
+              <div fxFlex="100" class="textHeader" *ngIf = "(this.unitSort === 'BSS' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')" >
+                <h5>Listing Details</h5>
+              </div>
+              <div  fxLayout="column" fxFlex="100" formArrayName="list"  *ngIf = "(this.unitSort === 'BSS' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')" >
+                <div *ngFor="let account of listForms.controls; let i=index" [formGroupName]="i">
+                  <div fxFlex="10" class="pr-1">
+                    <mat-form-field class="full-width">
+                      <input matInput formControlName="title" 
+                  
+                      placeholder="List Title">
+                    </mat-form-field>
+                  </div>
+                  <div fxFlex="30" class="pr-1">
+                    <mat-form-field class="full-width">
+                      <input matInput formControlName="listDescription"  
+                     
+                      placeholder="listDescription">
+                    </mat-form-field>
+                  </div>
+                  <div fxFlex="8" class="pr-1">
+                    <mat-form-field class="full-width">
+                      <input matInput formControlName="listStatus"  
+                     
+                      placeholder="listStatus">
+                    </mat-form-field>
+                  </div>
+                 
+                  <a (click)="deleteList(i)" >
+                    <mat-icon>clear</mat-icon>
+                  </a>
+                </div>
+              </div>
+        
+                <div fxFlex="50" *ngIf = "(this.unitSort === 'BSS' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')" >
+                  <a (click)="addListForm()">
+                    <mat-icon class="gridEdit">add_box</mat-icon>
+                  </a>
+                  <p>Add New</p>
+                </div>
+      
+
     <div fxFlex="100" class="mt-1">
       <button mat-raised-button color="primary">Create</button>
       <span fxFlex></span>

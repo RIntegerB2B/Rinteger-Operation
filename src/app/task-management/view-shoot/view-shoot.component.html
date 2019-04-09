@@ -1,0 +1,66 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="form-group">
+      <label class="labelHeader">Shoot</label>
+    </div>
+  </div>
+  <div class="row gridRowHeader display-none-small">
+    <div class="col-md-2">
+      <div class="form-group">
+        <label>Customer Name</label>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <label>Product Name</label>
+      </div>
+    </div>    
+    <div class="col-md-2">
+      <div class="form-group">
+        <label>Product Count</label>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <label>Shoot Type</label>
+      </div>
+    </div>    
+    <div class="col-md-2">
+      <div class="form-group">
+        <label>Model Name</label>
+      </div>
+    </div>
+  </div>
+  <div class="row gridRow" *ngFor="let data of shootData; let i = index">
+    <div class="display-none-large col-4">
+      <label class="gridLabel">Customer Name:</label>
+    </div>
+    <div class="col-md-2 col-4 vcenter form-group">
+      {{data.customerName}}
+    </div>
+    <div class="display-none-large col-4">
+      <label class="gridLabel">Product Name:</label>
+    </div>
+    <div class="col-md-2 col-4 vcenter form-group">
+        {{data.productName}}
+    </div>    
+    <div class="display-none-large col-4">
+      <label class="gridLabel">Product Count:</label>
+    </div>
+    <div class="col-md-2 col-4 vcenter form-group">
+        {{data.productCount}}
+    </div> 
+    <div class="display-none-large col-4">
+      <label class="gridLabel">Shoot Type:</label>
+    </div>
+    <div class="col-md-2 col-4 vcenter form-group">
+        {{data.shootType}}
+    </div> 
+    <div class="display-none-large col-4">
+      <label class="gridLabel">Model Name:</label>
+    </div>
+    <div class="col-md-2 col-4 vcenter form-group">
+        {{data.modeName}}
+    </div>  
+  </div>  
+</div>

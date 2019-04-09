@@ -18,6 +18,7 @@ import { NavheaderService } from '../../shared/navheader/navheader.service';
 })
 export class ViewAllTaskComponent implements OnInit {
   taskholder: any;
+  taskValue: TaskModel;
   UnitName: any;
   taskRoleName: any;
   public pageSize = 50;
@@ -32,14 +33,18 @@ export class ViewAllTaskComponent implements OnInit {
   userRole;
   filterWise;
   deadcount;
+ /*  upname: boolean;
+  downname: boolean; */
+
   studios; BSSs; technologys;
-  units = [{ name: 'Studio', counts: 0 }, { name: 'BSS', counts: 0 }, { name: 'Technologies', counts: 0 }];
+  units = [{ name: 'Studios', counts: 0 }, { name: 'BSS', counts: 0 }, { name: 'Technologies', counts: 0 }];
   @ViewChild('MatPaginator') paginator: MatPaginator;
   matdatasource = new MatTableDataSource([]);
 
-
+  status = ['Started', 'In-Progress', 'Completed', 'Onhold', 'Stopped'];
   userId;
   userUnit: any;
+  taskModel: MatTableDataSource<any>;
 
   constructor(private taskManagementService: TaskManagementService, private route: ActivatedRoute,
     private navheaderService: NavheaderService) { }
@@ -61,9 +66,16 @@ export class ViewAllTaskComponent implements OnInit {
     this.navheaderService.menuItems();
   }
 
+  filterTask(data) {
+    this.taskholder = new MatTableDataSource<TaskModel>(data);
+    this.taskholder.paginator = this.paginator;
+    this.taskholder = data;
+  }
+
   getAllTask() {
     this.taskManagementService.getAllTaskData().subscribe(data => {
       this.taskholder = data;
+      this.taskValue = data;
       this.taskholder = new MatTableDataSource<any>(data);
       this.taskholder.paginator = this.paginator;
       this.taskholder = data;
@@ -91,6 +103,7 @@ export class ViewAllTaskComponent implements OnInit {
     this.userUnit = localStorage.getItem('unit');
     this.taskManagementService.compareUserUnits(this.userUnit).subscribe(data => {
       this.taskholder = data;
+      this.taskValue = data;
       this.taskholder = new MatTableDataSource<any>(data);
       this.taskholder.paginator = this.paginator;
       this.taskholder = data;
@@ -113,7 +126,6 @@ export class ViewAllTaskComponent implements OnInit {
        this.filterWise = this.taskholder;
        this.array = data;
        this.totalSize = this.array.length;
- 
      }, error => {
        console.log(error);
      }
@@ -127,7 +139,7 @@ export class ViewAllTaskComponent implements OnInit {
 
   filterWiseTest() {
 
-    this.studios = this.filterWise.filter(data => data.units === 'Studio');
+    this.studios = this.filterWise.filter(data => data.units === 'Studios');
     this.BSSs = this.filterWise.filter(data => data.units === 'BSS');
     this.technologys = this.filterWise.filter(data => data.units === 'Technologies');
     this.units[0].counts = this.studios.length;
@@ -138,6 +150,7 @@ export class ViewAllTaskComponent implements OnInit {
   deadlinedTask() {
     this.taskManagementService.deadlinedTask().subscribe(data => {
       this.taskholder = data;
+      this.taskValue = data;
       this.deadcount = this.taskholder.length;
       this.taskholder = new MatTableDataSource<any>(data);
       this.taskholder.paginator = this.paginator;
@@ -197,6 +210,17 @@ export class ViewAllTaskComponent implements OnInit {
       this.filterWiseTest();
     }, error => { console.log(error); }
     );
+  }
+
+  filterByStatus(row) {
+    this.taskholder = new TaskModel();
+    this.taskholder.status = row;
+    console.log(this.taskholder);
+    this.taskManagementService.getStatusWise(this.taskholder).subscribe( data => {
+      this.taskholder = data;
+    }, error => {
+      console.log(error);
+    });
   }
 
 }

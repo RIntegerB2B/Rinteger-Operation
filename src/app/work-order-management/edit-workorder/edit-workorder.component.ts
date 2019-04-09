@@ -98,7 +98,9 @@ export class EditWorkorderComponent implements OnInit {
       workOrderDetailsForm.controls.requirements.value,
       workOrderDetailsForm.controls.allTotal.value,
       workOrderDetailsForm.controls.subTotal.value,
-      workOrderDetailsForm.controls.tax.value
+      workOrderDetailsForm.controls.tax.value,
+      workOrderDetailsForm.controls.workOrderStatus.value,
+      workOrderDetailsForm.controls.invoiceStatus.value
     );
     this.workOrder.workOrderID =  workOrderDetailsForm.controls.workOrderID.value;
     this.workOrderService.updateSingleWorkOrder(this.workOrder, this.workId).subscribe(data => {
