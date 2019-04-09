@@ -27,6 +27,7 @@ export class CreateTaskFormComponent implements OnInit {
   /*   selectedData: Customer; */
   departmentData;
   assignedBy;
+  product: FormArray;
   assignedTo;
   userId;
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router,
@@ -34,8 +35,7 @@ export class CreateTaskFormComponent implements OnInit {
 
   ngOnInit() {
     this.createtask();
-    /*  this.getAllCustomer();
-     this.getDepartment(); */
+   
     this.getUnitWiseName();
     this.getDepartment();
     this.route.paramMap.subscribe(
@@ -45,11 +45,12 @@ export class CreateTaskFormComponent implements OnInit {
   }
   createtask() {
     this.taskForm = this.fb.group({
+     
       taskNo: [''],
       dateTime: [''],
-
       taskTitle: [''],
       taskDescription: [''],
+   
       priority: [''],
       units: [''],
       department: [''],
@@ -57,17 +58,35 @@ export class CreateTaskFormComponent implements OnInit {
       assignedBy: [''],
       status: [''],
       toCloseDate: [''],
-      closedDate: ['']
+      toTime: [''],
+      closedDate: [''],
+      time: [''],
+      product: this.fb.array([])
     });
+    this.addForm();
+  }
+  addForm() {
+    const product = this.fb.group({
+    productName: [''],
+    productCount: [''],
+    imageCount: ['']
+      });
+    this.productForms.push(product);
+  }
+
+  get productForms() {
+    return this.taskForm.get('product') as FormArray;
+  }
+  deleteProducts(i) {
+    this.productForms.removeAt(i);
   }
   changed(e) {
     console.log(this.unitName.filter(data => data.unit === e.value));
     this.taskname = this.unitName.filter(data => data.unit === e.value);
-    /*   this.taskholder = this.taskname.controls._id.value; */
   }
 
 
-  onSubmit() {
+  onSubmit(taskForm: FormGroup) {
     this.taskholder = new TaskModel();
     this.taskholder.taskNo = this.taskForm.controls.taskNo.value;
     this.taskholder.userId = this.taskForm.controls.assignedTo.value._id;
@@ -81,10 +100,12 @@ export class CreateTaskFormComponent implements OnInit {
     this.taskholder.assignedBy = this.taskForm.controls.assignedBy.value;
     this.taskholder.status = this.taskForm.controls.status.value;
     this.taskholder.toCloseDate = this.taskForm.controls.toCloseDate.value;
+    this.taskholder.toTime = this.taskForm.controls.toTime.value;
     this.taskholder.closedDate = this.taskForm.controls.closedDate.value;
+    this.taskholder.time = this.taskForm.controls.time.value;
+    this.taskholder.product = this.taskForm.controls.product.value;
     this.taskManagementService.createTask(this.taskholder).subscribe(data => {
       this.taskholder = data;
-      /*  this.router.navigate(['ticket/view']); */
       this.router.navigate(['task/viewtask', this.userId]);
     }, error => {
       console.log(error);

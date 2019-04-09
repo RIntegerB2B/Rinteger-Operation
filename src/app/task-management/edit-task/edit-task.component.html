@@ -44,6 +44,20 @@
               placeholder="Task Description">  
           </mat-form-field>
         </div>  
+       <!--  <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <textarea matInput formControlName="sizeColumn" [value]="taskEdit?.sizeColumn"
+             [readonly]=true
+              placeholder="sizeColumn">  </textarea>
+          </mat-form-field>
+        </div>   
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <textarea matInput formControlName="imageDetail" [value]="taskEdit?.imageDetail"
+             [readonly]=true
+              placeholder="imageDetail">  </textarea>
+          </mat-form-field>
+        </div>    -->
         <div fxFlex="50" class="pr-1">
           <mat-form-field class="full-width">
             <input matInput formControlName="priority" [value]="taskEdit?.priority"
@@ -88,13 +102,62 @@
           </mat-form-field>
         </div>
         <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="toTime" [value]="taskEdit?.toTime || null"
+             (ngModelChange)="taskEdit.toTime=$event" [readonly]=true
+              placeholder="toTime">
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
           <mat-form-field>
             <input matInput formControlName="closedDate" [matDatepicker]="picker2" [value]="taskEdit?.closedDate" 
             (ngModelChange)="taskEdit.closedDate=$event"
-             placeholder=" close date">
+             placeholder=" Completed Date">
             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
             <mat-datepicker #picker2></mat-datepicker>
           </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field>
+            <input matInput formControlName="time"  [value]="taskEdit?.time" 
+            (ngModelChange)="taskEdit.time=$event" type="time"
+             placeholder="Completed Time">            
+          </mat-form-field>
+        </div>
+              
+        <div fxFlex="100" class="textHeader">
+          <h5>Product Details</h5>
+        </div>
+        <div  fxLayout="column" fxFlex="100" formArrayName="product">
+          <div *ngFor="let account of productForms.controls; let i=index" [formGroupName]="i">
+            <div fxFlex="25" class="pr-1">
+              <mat-form-field class="full-width">
+                <input matInput formControlName="productName"    
+                (ngModelChange)="taskEdit.productName=$event"
+                [readonly]=true
+                placeholder="productName">
+              </mat-form-field>
+            </div>
+            <div fxFlex="25" class="pr-1">
+              <mat-form-field class="full-width">
+                <input matInput formControlName="productCount"                    
+                (ngModelChange)="taskEdit.productCount=$event"
+                [readonly]=true
+                placeholder="productCount">
+              </mat-form-field>
+            </div>
+            <div fxFlex="25" class="pr-1">
+              <mat-form-field class="full-width">
+                <input matInput formControlName="imageCount"                    
+                (ngModelChange)="taskEdit.imageCount=$event"
+                [readonly]=true
+                placeholder="imageCount">
+              </mat-form-field>
+            </div>
+                
+           
+            
+          </div>
         </div>
               
         <div fxFlex="100" class="mt-1">

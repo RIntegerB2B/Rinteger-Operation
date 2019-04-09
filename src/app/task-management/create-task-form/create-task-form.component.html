@@ -1,5 +1,6 @@
+<div class="pageBoxLg">
 <div class="container topAlignContainer">
-  <form [formGroup]="taskForm" (ngSubmit)="taskForm.valid && onSubmit()">
+  <form [formGroup]="taskForm" (ngSubmit)="taskForm.valid && onSubmit(taskForm)">
 
    <!--  <app-ticketcustomersearch [customerModel]="customerdetail" 
     (searchCustomer)="filterCustomer($event)"></app-ticketcustomersearch> -->
@@ -40,7 +41,7 @@
       </div>
 
 
-      <div fxFlex="250" class="p-2">
+      <div fxFlex="50" class="p-2">
         <mat-form-field class="full-width">
           <input matInput formControlName="taskTitle" placeholder="Task Title">
           <mat-error *ngIf="taskForm.controls['taskTitle'].errors?.required" required>
@@ -50,7 +51,7 @@
         </mat-form-field>
       </div>
 
-      <div fxFlex="250" class="p-2">
+      <div fxFlex="50" class="p-2">
         <mat-form-field class="full-width">
           <input matInput formControlName="taskDescription" placeholder="Task Descrition">
           <mat-error *ngIf="taskForm.controls['taskDescription'].errors?.required" required>
@@ -59,6 +60,9 @@
           </mat-error>
         </mat-form-field>
       </div>
+
+
+    
 
 
       <div fxFlex="50" class="pr-1">
@@ -102,33 +106,77 @@
 
 
 
-     <!--  <div fxFlex="50" class="p-2">
-        <mat-form-field class="full-width">
-          <input matInput formControlName="status" placeholder="status">
-          <mat-error *ngIf="taskForm.controls['status'].errors?.required" required>
-            Status
-            <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-      </div> -->
+     
 
 
       <div fxFlex="50" class="pr-1">
         <mat-form-field>
-          <input matInput formControlName="toCloseDate" [matDatepicker]="picker" 
-          placeholder="Choose a close date">
+          <input matInput formControlName="toCloseDate" [matDatepicker]="picker" ng-model-options="{timezone: 'utc'}"
+          placeholder="Choose a close date"> 
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
       </div>
 
-    </div>
+      <div fxFlex="50" class="p-2">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="toTime" placeholder="To Time" type="time">
+          <mat-error *ngIf="taskForm.controls['toTime'].errors?.required" required>
+           To Time
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div fxFlex="100" class="textHeader">
+        <h5>Product Details</h5>
+      </div>
+      <div  fxLayout="column" fxFlex="100" formArrayName="product">
+        <div *ngFor="let account of productForms.controls; let i=index" [formGroupName]="i">
+          <div fxFlex="15" class="pr-1">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="productName" 
+          
+              placeholder="productName">
+            </mat-form-field>
+          </div>
+          <div fxFlex="15" class="pr-1">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="productCount"  
+             
+              placeholder="productCount">
+            </mat-form-field>
+          </div>
+          <div fxFlex="15" class="pr-1">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="imageCount"  
+             
+              placeholder="imageCount">
+            </mat-form-field>
+          </div>
+         
+          <a (click)="deleteProducts(i)">
+            <mat-icon>clear</mat-icon>
+          </a>
+        </div>
+      </div>
+
+        <div fxFlex="50">
+          <a (click)="addForm()">
+            <mat-icon class="gridEdit">add_box</mat-icon>
+          </a>
+          <p>Add New</p>
+        </div>
+
+
+   
     <div fxFlex="100" class="mt-1">
       <button mat-raised-button color="primary">Create</button>
       <span fxFlex></span>
       <button mat-raised-button mat-button color="accent" type="button" 
       (click)="cancel()">Cancel</button>
     </div>
+  </div>
   </form>
 </div>
 
+</div>

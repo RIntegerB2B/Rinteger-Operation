@@ -4,6 +4,7 @@ import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TaskRoutingModule } from './task-routing.module';
 import {MatBadgeModule} from '@angular/material/badge';
+
 import {
   MatSidenavModule,
   MatListModule,
@@ -30,13 +31,15 @@ import {
   MatDatepickerModule,
   MatNativeDateModule
 } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { CreateTaskFormComponent } from './create-task-form/create-task-form.component';
 import { TaskManagementService } from './task-management.service';
 import { ViewAllTaskComponent } from './view-all-task/view-all-task.component';
 import { ViewSingleTaskComponent } from './view-single-task/view-single-task.component';
 import { EditTaskComponent } from './edit-task/edit-task.component';
+import { ViewProductComponent } from './view-product/view-product.component';
 @NgModule({
-  declarations: [CreateTaskFormComponent, ViewAllTaskComponent, ViewSingleTaskComponent, EditTaskComponent],
+  declarations: [CreateTaskFormComponent, ViewAllTaskComponent, ViewSingleTaskComponent, EditTaskComponent, ViewProductComponent],
   imports: [
     CommonModule, HttpModule,
    FormsModule, ReactiveFormsModule, MatBadgeModule,
@@ -45,6 +48,7 @@ import { EditTaskComponent } from './edit-task/edit-task.component';
     MatTooltipModule,
     MatOptionModule,
     MatSelectModule,
+    FlexLayoutModule,
     MatMenuModule,
     MatSnackBarModule,
     MatGridListModule,

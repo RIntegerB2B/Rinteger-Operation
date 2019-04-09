@@ -3,7 +3,7 @@ import { TaskModel } from '../../shared/task-management.model';
 import { TaskManagementService } from './../task-management.service';
 import { from } from 'rxjs';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-task',
@@ -22,6 +22,7 @@ export class EditTaskComponent implements OnInit {
   assignedTo = ['worker1', 'worker2'];
   userId: string;
   userRole: string;
+  product: FormArray;
   editview;
   constructor(private taskManagementService: TaskManagementService, private route: ActivatedRoute,
     private router: Router, private fb: FormBuilder) { }
@@ -43,6 +44,8 @@ export class EditTaskComponent implements OnInit {
     dateTime: [''],
     taskTitle: [''],
     taskDescription: [''],
+    sizeColumn: [''],
+    imageDetail: [''],
     priority: [''],
     units: [''],
     department: [''],
@@ -50,12 +53,35 @@ export class EditTaskComponent implements OnInit {
     assignedBy: [''],
     status: [''],
     toCloseDate: [''],
-    closedDate: ['']
+    toTime: [''],
+    closedDate: [''],
+    time: [''],
+    product: this.fb.array([])
     });
   }
 
+  addForm() {
+    const product = this.fb.group({
+      productName: [''],
+      productCount: [''],
+      imageCount: ['']
+    });
+    this.productForms.push(product);
+  }
+  get productForms() {
+    return this.taskForm.get('product') as FormArray;
+  }
+  addNewForm() {
+    for (let i = 0; i <= this.taskEdit.product.length - 1; i++) {
+      const product = this.fb.group({
+        productName: [this.taskEdit.product[i].productName],
+        productCount: [this.taskEdit.product[i].productCount],
+        imageCount: [this.taskEdit.product[i].imageCount]
 
-
+      });
+      this.productForms.push(product);
+    }
+  }
   getAllTask() {
 
     this.taskManagementService.getAllTaskData().subscribe(data => {
@@ -63,6 +89,7 @@ export class EditTaskComponent implements OnInit {
     this.taskholder.forEach((customer) => {
       if (this.id === customer._id) {
         this.taskEdit = customer;
+        this.addNewForm();
 
       console.log(this.taskEdit);
 // tslint:disable-next-line: no-unused-expression

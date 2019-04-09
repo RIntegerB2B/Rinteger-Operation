@@ -1,4 +1,7 @@
+<form novalidate style="padding-top:20px" [formGroup]="taskDetailsForm">
+    <div class="pageBoxLg">
 <div class="container-fluid">
+   
   <div class="row" *ngFor="let data of taskholder">
     <div class="col-md-6">
       <div class="row">
@@ -43,15 +46,17 @@
           </div>
         </div>
         <div class="col-md-4  col-6">
-          <div class="form-group">
-            <label class="divLable">Date/Time:</label>
+            <div class="form-group">
+              <label class="divLable">Date/Time:</label>
+            </div>
           </div>
-        </div>
         <div class="col-md-8  col-6">
           <div class="form-group">
             : <label class="itemLable"> {{data.dateTime}}</label>
           </div>
         </div>
+        
+        
         <div class="col-md-4  col-6">
           <div class="form-group">
             <label class="divLable">Department</label>
@@ -101,29 +106,48 @@
             : <label class="itemLable"> {{data.toCloseDate}}</label>
           </div>
         </div>
-
+        <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">To Close Time:</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable"> {{data.toTime}}</label>
+            </div>
+          </div>
 
         <div class="col-md-4  col-6">
           <div class="form-group">
-            <label class="divLable">Close Date:</label>
+            <label class="divLable">Compeleted Date:</label>
           </div>
         </div>
         <div class="col-md-8  col-6">
           <div class="form-group">
             : <label class="itemLable"> {{data.closedDate}}</label>
           </div>
-        </div>
-
-
-
-      </div>
-    </div>
+        </div>   
+        <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Compeleted Time:</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable"> {{data.time}}</label>
+            </div>
+          </div>     
+           
+      </div>    
   </div>
-  <div fxFlex="100" class="mt-1">
-    <!--   <button mat-raised-button type="button" color="primary" 
-    [routerLink]="['/task/edittask',taskholder._id]">Update Status</button>          
-  <span fxFlex></span>
-  <span fxFlex></span> -->
+  <div>
+      <app-view-product [productData]="data.product"  
+      ></app-view-product>
+  </div>
+  <div fxFlex="100" class="mt-1">    
     <button mat-raised-button mat-button color="accent" type="button" (click)="Back()">Back</button>
   </div>
 </div>
+</div>
+</div>
+</form>
