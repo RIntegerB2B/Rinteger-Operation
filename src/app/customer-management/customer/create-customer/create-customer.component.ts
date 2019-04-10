@@ -15,7 +15,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class CreateCustomerComponent implements OnInit {
   customerDetailsForm: FormGroup;
   customerModel: Customer;
-  editable = true;
   constructor(private fb: FormBuilder,
     @Optional() public dialogRef: MatDialogRef<CreateCustomerComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
@@ -71,6 +70,7 @@ export class CreateCustomerComponent implements OnInit {
     );
     this.customerManagementService.addSingleCustomer(this.customerModel).subscribe(data => {
       this.customerModel = data;
+      console.log(data.message);
       this.dialogRef.close(true);
     }, error => {
       this.dialogRef.close(false);

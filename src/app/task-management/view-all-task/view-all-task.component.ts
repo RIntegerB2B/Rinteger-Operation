@@ -33,11 +33,13 @@ export class ViewAllTaskComponent implements OnInit {
   userRole;
   filterWise;
   deadcount;
- /*  upname: boolean;
-  downname: boolean; */
+  /*  upname: boolean;
+   downname: boolean; */
 
-  studios; BSSs; technologys;
-  units = [{ name: 'Studios', counts: 0 }, { name: 'BSS', counts: 0 }, { name: 'Technologies', counts: 0 }];
+  studios;
+  BSSs;
+  technologys;
+  units = [{ name: 'Studio', counts: 0 }, { name: 'BSS', counts: 0 }, { name: 'Technologies', counts: 0 }];
   @ViewChild('MatPaginator') paginator: MatPaginator;
   matdatasource = new MatTableDataSource([]);
 
@@ -59,7 +61,7 @@ export class ViewAllTaskComponent implements OnInit {
       this.getAllTask();
     } else if (this.userRole === 'teamleader') {
       this.getUnitWise();
-    }     else {
+    } else {
       this.CompareUserId();
     }
     this.navheaderService.hideMenuTrans();
@@ -139,7 +141,7 @@ export class ViewAllTaskComponent implements OnInit {
 
   filterWiseTest() {
 
-    this.studios = this.filterWise.filter(data => data.units === 'Studios');
+    this.studios = this.filterWise.filter(data => data.units === 'Studio');
     this.BSSs = this.filterWise.filter(data => data.units === 'BSS');
     this.technologys = this.filterWise.filter(data => data.units === 'Technologies');
     this.units[0].counts = this.studios.length;
@@ -216,7 +218,7 @@ export class ViewAllTaskComponent implements OnInit {
     this.taskholder = new TaskModel();
     this.taskholder.status = row;
     console.log(this.taskholder);
-    this.taskManagementService.getStatusWise(this.taskholder).subscribe( data => {
+    this.taskManagementService.getStatusWise(this.taskholder).subscribe(data => {
       this.taskholder = data;
     }, error => {
       console.log(error);

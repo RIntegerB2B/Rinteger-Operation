@@ -169,7 +169,7 @@
            
       </div>    
   </div>
-  <div  *ngIf= "(this.unitSort === 'Studios' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')">
+  <div  *ngIf= "(this.unitSort === 'Studio' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')">
       <app-view-product [productData]="data.product" 
       ></app-view-product>
   </div>
@@ -177,7 +177,7 @@
       <app-view-module [moduleData]="data.task" 
       ></app-view-module>
   </div>
-  <div  *ngIf= "(this.unitSort === 'Studios' || this.roleSort === 'admin') && ((this.roleSort === 'teamleader' || this.roleSort === 'admin') || this.roleSort === 'photographer')"> 
+  <div  *ngIf= "(this.unitSort === 'Studio' || this.roleSort === 'admin') && ((this.roleSort === 'teamleader' || this.roleSort === 'admin') || this.roleSort === 'photographer')"> 
     <app-view-shoot [shootData]="data.shoot" 
     ></app-view-shoot>
 </div>

@@ -102,8 +102,8 @@ export class CreateWorkorderComponent implements OnInit {
       workOrderDetailsForm.controls.allTotal.value,
       workOrderDetailsForm.controls.subTotal.value,
       workOrderDetailsForm.controls.tax.value,
-      workOrderDetailsForm.controls.workOrderStatus.value,
-      workOrderDetailsForm.controls.invoiceStatus.value
+      '',
+      ''
     );
     this.workOrderService.createWorkOrder(this.workOrder).subscribe(data => {
       this.workOrder = data;

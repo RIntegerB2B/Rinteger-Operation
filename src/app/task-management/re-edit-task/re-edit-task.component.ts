@@ -21,7 +21,7 @@ editview: string;
   department;
   departmentData;
   assignedBy;
-  units = ['Studios', 'BSS', 'Technologies'];
+  units = ['Studio', 'BSS', 'Technologies'];
   priority = ['low', 'medium', 'high', 'critical'];
   unitName: any;
   taskname: any;

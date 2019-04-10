@@ -25,7 +25,6 @@ export class WorkOrder {
         companyAddress: string,
         leadID: number,
         leadUnit: String,
-        workOrderStatus: string,
         mobileNumber: string,
         emailId: string,
         date: Date,
@@ -33,6 +32,7 @@ export class WorkOrder {
         allTotal: number,
         subTotal: number,
         tax: number,
+        workOrderStatus: string,
         invoiceStatus: string
     ) {
         this.customerID = customerID;
@@ -41,7 +41,6 @@ export class WorkOrder {
         this.companyAddress = companyAddress;
         this.leadID = leadID;
         this.leadUnit = leadUnit;
-        this.workOrderStatus = workOrderStatus;
         this.mobileNumber = mobileNumber;
         this.emailId = emailId;
         this.date = date;
@@ -49,6 +48,7 @@ export class WorkOrder {
         this.allTotal = allTotal;
         this.subTotal = subTotal;
         this.tax = tax;
+        this.workOrderStatus = workOrderStatus;
         this.invoiceStatus = invoiceStatus;
     }
 }

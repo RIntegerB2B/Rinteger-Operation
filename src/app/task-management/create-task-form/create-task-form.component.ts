@@ -19,7 +19,7 @@ export class CreateTaskFormComponent implements OnInit {
   /*  customerdetail; */
   unitName: Register[];
   taskname: any;
-  units = ['Studios', 'BSS', 'Technologies'];
+  units = ['Studio', 'BSS', 'Technologies'];
   priority = ['low', 'medium', 'high', 'critical'];
   taskForm: FormGroup;
   taskholder: TaskModel;

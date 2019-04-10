@@ -86,6 +86,16 @@ export class EditInvoiceComponent implements OnInit {
       this.requirementsForms.push(this.requirementsData);
     }
 }
+cancelEdit() {
+  this.router.navigate(['invoice/viewallinvoice']);
+}
+checkGst(event) {
+  if (event.checked) {
+    this.gstVal = 0;
+  } else {
+    this.gstVal = this.workOrderPDFModel[0].gst;
+  }
+}
 addNewForm() {
   const requirements = this.fb.group({
     item: [''],

@@ -173,7 +173,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 { text: this.companyData[0].companydetails[0].companyName.toUpperCase(), style: 'textHeader' },
                 { text: 'GST : ' + this.companyData[0].companydetails[0].TAX.toUpperCase(), style: 'textGst' },
                 { text: 'PAN : ' + this.companyData[0].companydetails[0].PAN.toUpperCase(), style: 'textGst' },
-                /* { text: this.customerData[0].companydetails[0].companyAddress, style: 'address' }, */
+                { text: 'SAC : ' + this.companyData[0].companydetails[0].SAC.toUpperCase(), style: 'textGst' },
                 { text: this.companyData[0].companydetails[0].location, style: 'address' },
                 { text: this.companyData[0].companydetails[0].address.toUpperCase(), style: 'address' },
                 { text: this.companyData[0].companydetails[0].pincode, style: 'address' },
@@ -429,7 +429,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 { text: this.companyData[0].companydetails[0].companyName.toUpperCase(), style: 'textHeader' },
                 { text: 'GST : ' + this.companyData[0].companydetails[0].TAX.toUpperCase(), style: 'textGst' },
                 { text: 'PAN : ' + this.companyData[0].companydetails[0].PAN.toUpperCase(), style: 'textGst' },
-                /* { text: this.customerData[0].companydetails[0].address, style: 'address' }, */
+                { text: 'SAC : ' + this.companyData[0].companydetails[0].SAC.toUpperCase(), style: 'textGst' },
                 { text: this.companyData[0].companydetails[0].location, style: 'address' },
                 { text: this.companyData[0].companydetails[0].address.toUpperCase(), style: 'address' },
                 { text: this.companyData[0].companydetails[0].pincode, style: 'address' },
@@ -584,15 +584,6 @@ export class InvoiceGeneratePdfComponent implements OnInit {
         subheader: {
           fontSize: 14
         },
-        footerHeader: {
-          alignment: 'center',
-          fontSize: 8,
-          bold: true,
-          margin: [10, 10, 10, 10]
-        },
-        footerSub: {
-          alignment: 'center'
-        },
         tableHeaderTotal: {
           bold: true,
           fontSize: 8,
@@ -602,6 +593,15 @@ export class InvoiceGeneratePdfComponent implements OnInit {
         tableHeaderRow: {
           bold: true,
           fontSize: 8,
+          alignment: 'center'
+        },
+        footerHeader: {
+          alignment: 'center',
+          fontSize: 8,
+          bold: true,
+          margin: [10, 10, 10, 10]
+        },
+        footerSub: {
           alignment: 'center'
         },
         textHeader: {
@@ -696,7 +696,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 { text: this.companyData[0].companydetails[0].companyName.toUpperCase(), style: 'textHeader' },
                 { text: 'GST : ' + this.companyData[0].companydetails[0].TAX.toUpperCase(), style: 'textGst' },
                 { text: 'PAN : ' + this.companyData[0].companydetails[0].PAN.toUpperCase(), style: 'textGst' },
-                /* { text: this.customerData[0].companyAddress, style: 'address' }, */
+                { text: 'SAC : ' + this.companyData[0].companydetails[0].SAC.toUpperCase(), style: 'textGst' },
                 { text: this.companyData[0].companydetails[0].location, style: 'address' },
                 { text: this.companyData[0].companydetails[0].address.toUpperCase(), style: 'address' },
                 { text: this.companyData[0].companydetails[0].pincode, style: 'address' },
@@ -885,7 +885,6 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           fontSize: 8,
           alignment: 'right'
         }
-
       }
     };
     pdfMake.createPdf(dd).download(this.invoice[0].invoiceID);
@@ -941,7 +940,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 { text: this.companyData[0].companydetails[0].companyName.toUpperCase(), style: 'textHeader' },
                 { text: 'GST : ' + this.companyData[0].companydetails[0].TAX.toUpperCase(), style: 'textGst' },
                 { text: 'PAN : ' + this.companyData[0].companydetails[0].PAN.toUpperCase(), style: 'textGst' },
-                /* { text: this.customerData[0].companyAddress, style: 'address' }, */
+                { text: 'SAC : ' + this.companyData[0].companydetails[0].SAC.toUpperCase(), style: 'textGst' },
                 { text: this.companyData[0].companydetails[0].location, style: 'address' },
                 { text: this.companyData[0].companydetails[0].address.toUpperCase(), style: 'address' },
                 { text: this.companyData[0].companydetails[0].pincode, style: 'address' },
@@ -1062,16 +1061,16 @@ export class InvoiceGeneratePdfComponent implements OnInit {
         textTop: {
           margin: [0, 50, 0, 0]
         },
-        textHeaderTerms: {
-          fontSize: 8,
-          bold: true,
-          margin: [0, 50, 0, 10]
-        },
         header: {
           fontSize: 18,
           bold: true,
           alignment: 'right',
           margin: [0, 50, 0, 80]
+        },
+        textHeaderTerms: {
+          fontSize: 8,
+          bold: true,
+          margin: [0, 50, 0, 10]
         },
         footer: {
           bold: true,
@@ -1088,6 +1087,17 @@ export class InvoiceGeneratePdfComponent implements OnInit {
         subheader: {
           fontSize: 14
         },
+        tableHeaderTotal: {
+          bold: true,
+          fontSize: 8,
+          alignment: 'right',
+          margin: [0, 0, 10, 0],
+        },
+        tableHeaderRow: {
+          bold: true,
+          fontSize: 8,
+          alignment: 'center'
+        },
         footerHeader: {
           alignment: 'center',
           fontSize: 8,
@@ -1095,17 +1105,6 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           margin: [10, 10, 10, 10]
         },
         footerSub: {
-          alignment: 'center'
-        },
-        tableHeaderTotal: {
-          bold: true,
-          fontSize: 8,
-          alignment: 'right',
-          margin: [0, 0, 10, 0]
-        },
-        tableHeaderRow: {
-          bold: true,
-          fontSize: 8,
           alignment: 'center'
         },
         textHeader: {
@@ -1146,6 +1145,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           fontSize: 8,
           alignment: 'right'
         }
+
       }
     };
     pdfMake.createPdf(dd).download(this.invoice[0].invoiceID);
