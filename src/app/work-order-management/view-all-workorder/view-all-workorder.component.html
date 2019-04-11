@@ -1,7 +1,8 @@
 <form style="padding-top:20px">
   <label class="pageBoxLg-label">All work Orders</label>
   <div class="pageBoxLg">
-    <app-search-workorder [workOrderModel]="workOrderModel" (searchWorkOrder)="filterWorkOrder($event)">
+    <app-search-workorder [workOrderModel]="workOrderModel"
+     (searchWorkOrder)="filterWorkOrder($event)">
     </app-search-workorder>
     <div class="row">
       <div class="col-sm-8">
@@ -9,7 +10,8 @@
           <div class="row">
             <div class="col-sm-4">
               <mat-form-field>
-                <input matInput [matDatepicker]="fromDate" formControlName="fromDate" placeholder="From Date" required>
+                <input matInput [matDatepicker]="fromDate" 
+                formControlName="fromDate" placeholder="From Date" required>
                 <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
                 <mat-datepicker #fromDate></mat-datepicker>
               </mat-form-field>
@@ -22,7 +24,9 @@
               </mat-form-field>
             </div>
             <div class="col-sm-4">
-              <button type="button" (click)="searchDate(workOrderForm)" mat-raised-button color="warn">Search</button>
+              <button type="button"
+               (click)="searchDate(workOrderForm)"
+                mat-raised-button color="warn">Search</button>
             </div>
             <div class="col-sm-4" *ngIf="dataSearchTagShow">
               <mat-form-field>
@@ -95,17 +99,27 @@
           <label>Mobile Number</label>
         </div>
       </div>
-      <div class="col-md-2 vcenterHeader">
+      <div class="col-md-1 vcenterHeader">
+        <div class="form-group">
+          <label>Unit</label>
+        </div>
+      </div>
+      <div class="col-md-1 vcenterHeader">
         <div class="form-group">
           <label>Date</label>
         </div>
       </div>
-      <div class="col-md-2 vcenterHeader">
+      <div class="col-md-1 vcenterHeader">
         <div class="form-group">
           <label>Total</label>
         </div>
       </div>
       <div class="col-md-2 vcenterHeader">
+        <div class="form-group">
+          <label>Status</label>
+        </div>
+      </div>
+      <div class="col-md-1 vcenterHeader">
         <div class="form-group">
           <label>Action</label>
         </div>
@@ -124,10 +138,10 @@
           {{data.workOrderID}}
         </div>
         <div class="display-none-large col-6">
-          <label class="gridLabel">Company Name:</label>
+          <label class="gridLabel">Name:</label>
         </div>
         <div class="col-md-2 col-6 vcenter form-group">
-          {{data.companyName}}
+          {{data.customerName}}
         </div>
         <div class="display-none-large col-6">
           <label class="gridLabel">Mobile Number:</label>
@@ -136,21 +150,43 @@
           {{data.mobileNumber}}
         </div>
         <div class="display-none-large col-6">
+          <label class="gridLabel">Unit:</label>
+        </div>
+        <div class="col-md-1 col-6 vcenter form-group">
+          {{data.leadUnit }}
+        </div>
+        <div class="display-none-large col-6">
           <label class="gridLabel">Date:</label>
         </div>
-        <div class="col-md-2 col-6 vcenter form-group">
+        <div class="col-md-1 col-6 vcenter form-group">
           {{data.date | date: 'dd/MM/yyyy' }}
         </div>
         <div class="display-none-large col-6">
           <label class="gridLabel">Total:</label>
         </div>
-        <div class="col-md-2 col-6 vcenter form-group">
+        <div class="col-md-1 col-6 vcenter form-group">
           {{data.allTotal}}
         </div>
         <div class="display-none-large col-6">
+          <label class="gridLabel">Total:</label>
+        </div>
+        <div class="col-md-2 col-6  form-group">
+        <mat-form-field>
+          <mat-label>Select Status:</mat-label>
+          <mat-select (selectionChange)="workOrderStatusUpdate($event, data._id)"
+          [(value)]="data.workOrderStatus" >
+            <mat-option *ngFor="let status of workOrderSettingModel; let i = index"
+             [value]="status">
+                {{status}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      
+        <div class="display-none-large col-6">
           <label class="gridLabel">Action:</label>
         </div>
-        <div class="col-md-2 col-6 vcenter form-group">
+        <div class="col-md-1 col-6 vcenter form-group">
           <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>more_vert</mat-icon>
           </button>

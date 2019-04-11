@@ -7,7 +7,8 @@ import { UploadCustomerComponent } from './shared/upload-customer/upload-custome
 import { CreateMarketcustomerComponent } from './marketcustomer/create-marketcustomer/create-marketcustomer.component';
 import { ViewMarketcustomerComponent } from './marketcustomer/view-marketcustomer/view-marketcustomer.component';
 import { EditMarketcustomerComponent } from './marketcustomer/edit-marketcustomer/edit-marketcustomer.component';
-import { ViewSubcribecustomerComponent } from './../customer-management/subscribecustomer/view-subcribecustomer/view-subcribecustomer.component';
+import { ViewSubcribecustomerComponent
+ } from './../customer-management/subscribecustomer/view-subcribecustomer/view-subcribecustomer.component';
 
 
 const routes: Routes = [

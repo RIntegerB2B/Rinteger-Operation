@@ -1,0 +1,31 @@
+<div class="pageBoxLg">
+  <form [formGroup]="workOrderSettingForm" style="margin-top:20px;">
+    <div fxLayout="row wrap" fxLayout.lt-sm="column">
+      <div fxFlex="50" class="pr-1">
+        <a (click)="showWorkOrderStatus()">
+          <mat-icon class="gridEdit">add_box</mat-icon> WorkOrder Status
+        </a>
+      </div>
+    </div>
+    <div fxLayout="row wrap" fxLayout.lt-sm="column">
+      <div fxFlex="40" class="pr-1" *ngIf="workOrderStatusTrue">
+        <mat-form-field>
+          <mat-label>Work Order Status</mat-label>
+          <input matInput  formControlName="workOrderStatus" placeholder="Work Order Status" required>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="button"
+         (click)="addWorkOrderStatus()"
+          [disabled]="workOrderSettingForm.invalid">Add</button>
+        <h5>Work Order Status</h5>
+        <div *ngFor="let data of workOrderSettingModel">
+          <div *ngFor="let value of data.workOrderStatus">
+            <p><a (click)="deleteWorkOrderStatus(value)">
+                <mat-icon>clear</mat-icon>
+              </a>{{value}}</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

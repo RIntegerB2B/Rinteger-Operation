@@ -38,9 +38,10 @@ import { ExpenseSettingsComponent } from './expense-settings/expense-settings.co
 import { IncomeSettingsComponent } from './income-settings/income-settings.component';
 import { TicketSettingComponent } from './ticket-setting/ticket-setting.component';
 import { TaskSettingsComponent } from './task-settings/task-settings.component';
+import { WorkorderSettingComponent } from './workorder-setting/workorder-setting.component';
 @NgModule({
   declarations: [LeadSettingsComponent, WorkorderPdfTemplateComponent, ExpenseSettingsComponent, TicketSettingComponent,
-    IncomeSettingsComponent, MaterialSettingsComponent, TaskSettingsComponent
+    IncomeSettingsComponent, MaterialSettingsComponent, TaskSettingsComponent, WorkorderSettingComponent
   ],
   imports: [
     HttpClientModule,

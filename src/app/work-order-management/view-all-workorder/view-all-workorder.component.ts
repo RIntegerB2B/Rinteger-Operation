@@ -2,9 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { WorkOrder } from './../../shared/workorder.model';
 import { WorkOrderService } from './../work-order.service';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { DateSearch } from './search.model';
+import { WorkOrderSettingModel } from './../../shared/workorder-setting.model';
 @Component({
   selector: 'app-view-all-workorder',
   templateUrl: './view-all-workorder.component.html',
@@ -15,6 +16,7 @@ export class ViewAllWorkorderComponent implements OnInit {
   workOrder: any;
   gstValue = [{ text: 'withGST' }, { text: 'withoutGST ' }];
   workOrderModel: WorkOrder[] = [];
+  workOrderSettingModel: WorkOrderSettingModel;
   totalAmount = 0;
   totalTax = 0;
   fullLeadUnit: any;
@@ -33,6 +35,8 @@ export class ViewAllWorkorderComponent implements OnInit {
   { month: 'May' }, { month: 'June' }, { month: 'July' }, { month: 'August' },
   { month: 'September' }, { month: 'October' }, { month: 'November' }, { month: 'October' }
   ];
+  id: number;
+  viewCompleted = false;
   allYear = [
     { year: 2018 },
     { year: 2019 },
@@ -46,20 +50,31 @@ export class ViewAllWorkorderComponent implements OnInit {
     { year: 2027 },
     { year: 2028 },
   ];
-  constructor(private workOrderService: WorkOrderService, private router: Router, private fb: FormBuilder) { }
+  constructor(private workOrderService: WorkOrderService, private router: Router, private fb: FormBuilder,
+     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.getAllWorkOrder();
     this.createForm();
+    this.viewWorkOrderSetting();
     this.viewLeadSettings();
+
+    this.route.params.subscribe((params: Params) => {
+    this.id =  +params['id'];
+    this.viewCompleted =  params['id'] != null;
+    console.log(this.viewCompleted);
+    });
+    this.getAllWorkOrder();
   }
   getAllWorkOrder() {
-    this.workOrderService.allWorkOrder().subscribe(data => {
-      this.workOrder = new MatTableDataSource<WorkOrder>(data);
+      this.workOrderService.allWorkOrder().subscribe(data => {
+      const viewNotCompWorkOrder = data.filter(workorder => workorder.workOrderStatus !== 'Completed');
+      const viewCompWorkOrder = data.filter(workorder => workorder.workOrderStatus === 'Completed');
+      const viewWorkOrder  =  this.viewCompleted ? viewCompWorkOrder : viewNotCompWorkOrder;
+      this.workOrder = new MatTableDataSource<WorkOrder>(viewWorkOrder);
       this.workOrder.paginator = this.paginator;
-      this.workOrder = data;
-      this.workOrderModel = data;
-      this.array = data;
+      this.workOrder = viewWorkOrder;
+      this.workOrderModel = viewWorkOrder;
+      this.array = viewWorkOrder;
       this.totalSize = this.array.length;
       this.iterator();
     }, error => {
@@ -75,6 +90,14 @@ export class ViewAllWorkorderComponent implements OnInit {
       yearData: ['', Validators.required]
     });
   }
+  viewWorkOrderSetting() {
+    this.workOrderService.viewWorkOrderSetting().subscribe(data => {
+      this.workOrderSettingModel = data[0].workOrderStatus;
+    }, err => {
+      console.log(err);
+    });
+  }
+
   filterWorkOrder(data) {
     this.dataSearchTagShow = false;
     this.workOrder = new MatTableDataSource<WorkOrder>(data);
@@ -89,10 +112,14 @@ export class ViewAllWorkorderComponent implements OnInit {
     this.workOrderService.workOrderDateSearch(this.dateSearch).subscribe(data => {
       this.selectedUnit = 'All';
       this.dataSearchTagShow = true;
-      this.workOrder = new MatTableDataSource<WorkOrder>(data);
+      const viewNotCompWorkOrder = data.filter(workorder => workorder.workOrderStatus !== 'Completed');
+      const viewCompWorkOrder = data.filter(workorder => workorder.workOrderStatus === 'Completed');
+      const viewWorkOrder  =  this.viewCompleted ? viewCompWorkOrder : viewNotCompWorkOrder;
+      this.workOrder = new MatTableDataSource<WorkOrder>(viewWorkOrder);
       this.workOrder.paginator = this.paginator;
-      this.workOrder = data;
-      this.array = data;
+      this.workOrder = viewWorkOrder;
+      this.workOrderModel = viewWorkOrder;
+      this.array = viewWorkOrder;
       this.totalSize = this.array.length;
       this.iterator();
     }, error => {
@@ -108,11 +135,16 @@ export class ViewAllWorkorderComponent implements OnInit {
     this.dateSearch = new DateSearch();
     this.dateSearch.month = leadForm.controls.monthData.value;
     this.dateSearch.year = leadForm.controls.yearData.value;
+    
     this.workOrderService.workOrderMonthSearch(this.dateSearch).subscribe(data => {
-      this.workOrder = new MatTableDataSource<WorkOrder>(data);
+      const viewNotCompWorkOrder = data.filter(workorder => workorder.workOrderStatus !== 'Completed');
+      const viewCompWorkOrder = data.filter(workorder => workorder.workOrderStatus === 'Completed');
+      const viewWorkOrder  =  this.viewCompleted ? viewCompWorkOrder : viewNotCompWorkOrder;
+      this.workOrder = new MatTableDataSource<WorkOrder>(viewWorkOrder);
       this.workOrder.paginator = this.paginator;
-      this.workOrder = data;
-      this.array = data;
+      this.workOrder = viewWorkOrder;
+      this.workOrderModel = viewWorkOrder;
+      this.array = viewWorkOrder;
       this.totalSize = this.array.length;
       this.iterator();
     }, error => {
@@ -126,26 +158,54 @@ export class ViewAllWorkorderComponent implements OnInit {
     this.dateSearch.leadUnit = e.value;
     this.selectedUnit = e.value;
     this.workOrderService.unitFilter(this.dateSearch).subscribe(data => {
-      this.workOrder = new MatTableDataSource<WorkOrder>(data);
+      const viewNotCompWorkOrder = data.filter(workorder => workorder.workOrderStatus !== 'Completed');
+      const viewCompWorkOrder = data.filter(workorder => workorder.workOrderStatus === 'Completed');
+      const viewWorkOrder  =  this.viewCompleted ? viewCompWorkOrder : viewNotCompWorkOrder;
+      this.workOrder = new MatTableDataSource<WorkOrder>(viewWorkOrder);
       this.workOrder.paginator = this.paginator;
-      this.workOrder = data;
-      this.array = data;
+      this.workOrder = viewWorkOrder;
+      this.workOrderModel = viewWorkOrder;
+      this.array = viewWorkOrder;
       this.totalSize = this.array.length;
       this.iterator();
     }, error => {
       console.log(error);
     });
   }
+  workOrderStatusUpdate(statusValue, workId)   {
+    console.log(statusValue)
+    this.dateSearch = new DateSearch();
+    this.dateSearch.workOrderStatus = statusValue.value;
+    this.workOrderService.updateSingleWorkOrderStatus(this.dateSearch, workId).subscribe(data => {
+      this.workOrder = new MatTableDataSource<WorkOrder>(data);
+      const viewNotCompWorkOrder = data.filter(workorder => workorder.workOrderStatus !== 'Completed');
+      const viewCompWorkOrder = data.filter(workorder => workorder.workOrderStatus === 'Completed');
+      const viewWorkOrder  =  this.viewCompleted ? viewCompWorkOrder : viewNotCompWorkOrder;
+      this.workOrder.paginator = this.paginator;
+      this.workOrder = viewWorkOrder;
+      this.workOrderModel = viewWorkOrder;
+      this.array = viewWorkOrder;
+      this.totalSize = this.array.length;
+      this.iterator();
+    }, error => {
+      console.log(error);
+    }
+    );
+  }
   searchWithoutGST() {
     this.dateSearch = new DateSearch();
     this.dateSearch.fromDate = this.workOrderForm.controls.fromDate.value;
     this.dateSearch.toDate = this.workOrderForm.controls.toDate.value;
     this.workOrderService.workOrderWithOutGST(this.dateSearch).subscribe(data => {
-      this.workOrder = new MatTableDataSource<WorkOrder>(data);
+      const viewNotCompWorkOrder = data.filter(workorder => workorder.workOrderStatus !== 'Completed');
+      const viewCompWorkOrder = data.filter(workorder => workorder.workOrderStatus === 'Completed');
+      const viewWorkOrder  =  this.viewCompleted ? viewCompWorkOrder : viewNotCompWorkOrder;
+      this.workOrder = new MatTableDataSource<WorkOrder>(viewWorkOrder);
       this.selectedUnit = 'All';
       this.workOrder.paginator = this.paginator;
-      this.workOrder = data;
-      this.array = data;
+      this.workOrder = viewWorkOrder;
+      this.workOrderModel = viewWorkOrder;
+      this.array = viewWorkOrder;
       this.totalSize = this.array.length;
 
       this.iterator();
@@ -158,11 +218,15 @@ export class ViewAllWorkorderComponent implements OnInit {
     this.dateSearch.fromDate = this.workOrderForm.controls.fromDate.value;
     this.dateSearch.toDate = this.workOrderForm.controls.toDate.value;
     this.workOrderService.workOrderWithGST(this.dateSearch).subscribe(data => {
-      this.workOrder = new MatTableDataSource<WorkOrder>(data);
+      const viewNotCompWorkOrder = data.filter(workorder => workorder.workOrderStatus !== 'Completed');
+      const viewCompWorkOrder = data.filter(workorder => workorder.workOrderStatus === 'Completed');
+      const viewWorkOrder  =  this.viewCompleted ? viewCompWorkOrder : viewNotCompWorkOrder;
+      this.workOrder = new MatTableDataSource<WorkOrder>(viewWorkOrder);
       this.selectedUnit = 'All';
+      this.workOrderModel = viewWorkOrder;
       this.workOrder.paginator = this.paginator;
-      this.workOrder = data;
-      this.array = data;
+      this.workOrder = viewWorkOrder;
+      this.array = viewWorkOrder;
       this.totalSize = this.array.length;
       this.iterator();
     }, error => {
@@ -171,9 +235,9 @@ export class ViewAllWorkorderComponent implements OnInit {
   }
   getTotal() {
     let total = 0;
-    for (let i = 0; i < this.workOrder.length; i++) {
-      if (this.workOrder[i].allTotal) {
-        total += this.workOrder[i].allTotal;
+    for (let i = 0; i < this.workOrderModel.length; i++) {
+      if (this.workOrderModel[i].allTotal) {
+        total += this.workOrderModel[i].allTotal;
         this.totalAmount = total;
       }
     }
@@ -181,9 +245,9 @@ export class ViewAllWorkorderComponent implements OnInit {
   }
   getTax() {
     let tax = 0;
-    for (let i = 0; i < this.workOrder.length; i++) {
-      if (this.workOrder[i].tax) {
-        tax += this.workOrder[i].tax;
+    for (let i = 0; i < this.workOrderModel.length; i++) {
+      if (this.workOrderModel[i].tax) {
+        tax += this.workOrderModel[i].tax;
         this.totalTax = tax;
       }
     }
@@ -220,10 +284,13 @@ export class ViewAllWorkorderComponent implements OnInit {
   }
   getDeleteSingleWorkOrder(row) {
     this.workOrderService.deleteSingleWorkOrder(row._id).subscribe(data => {
-      this.workOrder = new MatTableDataSource<WorkOrder>(data);
+      const viewNotCompWorkOrder = data.filter(workorder => workorder.workOrderStatus !== 'Completed');
+      const viewCompWorkOrder = data.filter(workorder => workorder.workOrderStatus === 'Completed');
+      const viewWorkOrder  =  this.viewCompleted ? viewCompWorkOrder : viewNotCompWorkOrder;
+      this.workOrder = new MatTableDataSource<WorkOrder>(viewWorkOrder);
       this.workOrder.paginator = this.paginator;
-      this.workOrder = data;
-      this.array = data;
+      this.workOrder = viewWorkOrder;
+      this.array = viewWorkOrder;
       this.totalSize = this.array.length;
       this.iterator();
     }, error => {

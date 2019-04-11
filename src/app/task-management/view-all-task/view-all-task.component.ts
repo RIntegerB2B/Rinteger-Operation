@@ -47,6 +47,7 @@ export class ViewAllTaskComponent implements OnInit {
   userId;
   userUnit: any;
   taskModel: MatTableDataSource<any>;
+  taskEdit: any;
 
   constructor(private taskManagementService: TaskManagementService, private route: ActivatedRoute,
     private navheaderService: NavheaderService) { }
@@ -215,11 +216,17 @@ export class ViewAllTaskComponent implements OnInit {
   }
 
   filterByStatus(row) {
+    this.userUnit = localStorage.getItem('unit');
     this.taskholder = new TaskModel();
     this.taskholder.status = row;
     console.log(this.taskholder);
     this.taskManagementService.getStatusWise(this.taskholder).subscribe(data => {
-      this.taskholder = data;
+      this.taskEdit = data;
+      if (this.userRole !== 'admin') {
+        this.taskholder = this.taskEdit.filter(value => this.userUnit === value.units);
+      } else {
+        this.taskholder = this.taskEdit;
+      }
     }, error => {
       console.log(error);
     });

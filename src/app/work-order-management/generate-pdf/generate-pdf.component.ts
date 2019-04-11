@@ -127,7 +127,6 @@ export class GeneratePdfComponent implements OnInit {
               type: 'none',
               width: 350,
               ul: [
-                
                 { text: this.customerData[0].name.toUpperCase(), style: 'textHeader' },
                 { text: 'GST : ' + this.customerData[0].gstNumber.toUpperCase(), style: 'textGst' },
                 { text: this.customerData[0].companyAddress.toUpperCase(), style: 'address' },
@@ -138,7 +137,6 @@ export class GeneratePdfComponent implements OnInit {
               ]
             },
             {
-              
               type: 'none',
               width: '*',
               ul: [
@@ -860,13 +858,7 @@ export class GeneratePdfComponent implements OnInit {
             { text: this.workOrderPdf[0].digitalterms, style: 'textTerms' },
           ]
         },
-        { font: 'Fontello' },
-        {
-        text: [
-          { text: '', style: 'icon' }, //icon gift
-          ' my present'
-      ]
-    }
+        { font: 'Fontello' }
       ],
       styles: {
         headerStyle: {

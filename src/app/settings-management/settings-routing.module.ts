@@ -8,6 +8,7 @@ import { TicketSettingComponent } from './ticket-setting/ticket-setting.componen
 import { IncomeSettingsComponent } from './income-settings/income-settings.component';
 import { MaterialSettingsComponent } from './material-settings/material-settings.component';
 import { TaskSettingsComponent } from './task-settings/task-settings.component';
+import { WorkorderSettingComponent } from './workorder-setting/workorder-setting.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'tasksetting',
     component: TaskSettingsComponent
+  },
+  {
+    path: 'workordersetting',
+    component: WorkorderSettingComponent
   }
 ];
 

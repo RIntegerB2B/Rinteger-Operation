@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { QuotationManagementService } from './../quotation-management.service';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { Quotation } from './../../shared/quotation.model';
+import { WorkOrderPdf } from './../../shared/workorderpdf.model';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import {MatSnackBar} from '@angular/material';
@@ -18,6 +19,7 @@ export class EditQuotationComponent implements OnInit {
   requirements: FormArray;
   quotationDetailsForm: FormGroup;
   quotation: Quotation;
+  workOrderPDFModel: WorkOrderPdf;
   quotationData: Quotation;
   leadModel: Lead[] = [];
   customerModel: Customer;
@@ -28,6 +30,7 @@ export class EditQuotationComponent implements OnInit {
   quotationId: string;
   message;
   action;
+  gstVal;
   constructor(private fb: FormBuilder, private quotationService: QuotationManagementService
     , private route: ActivatedRoute,  private snackBar: MatSnackBar, private router: Router) { }
 
@@ -35,6 +38,23 @@ export class EditQuotationComponent implements OnInit {
     this.quotationId = this.route.snapshot.params.id;
     this.viewQuotation();
     this.createForm();
+    this.viewCompanyDetails();
+  }
+
+  checkGst(event) {
+    if (event.checked) {
+      this.gstVal = 0;
+    } else {
+      this.gstVal = this.workOrderPDFModel[0].gst;
+    }
+  }
+  viewCompanyDetails() {
+    this.quotationService.workorderPDFDetails().subscribe(data => {
+      this.workOrderPDFModel = data;
+      this.gstVal = this.workOrderPDFModel[0].gst;
+    }, error => {
+      console.log(error);
+    });
   }
   createForm() {
     this.quotationDetailsForm = this.fb.group({
@@ -105,6 +125,9 @@ export class EditQuotationComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+  }
+  cancelQutotation()   {
+    this.router.navigate(['quotation/viewallquotation']);
   }
   addNewForm() {
     const requirements = this.fb.group({

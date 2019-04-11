@@ -52,6 +52,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" [routerLink]="['/settings/leadsettings']">Lead Settings</a>
+          <a class="dropdown-item" [routerLink]="['/settings/workordersetting']">WorkOrder Settings</a>
           <a class="dropdown-item" [routerLink]="['/settings/workorderpdf']">PDF Settings</a>
           <a class="dropdown-item" [routerLink]="['/settings/expensesetting']">Expense Settings</a>
           <a class="dropdown-item" [routerLink]="['/settings/incomesetting']">Income Settings</a>
@@ -84,6 +85,9 @@
       <li class="nav-item" *ngFor="let base of this.navheaderService?.getItems?.baseRole">
         <a class="nav-link textMenu" *ngIf="base?.taskNav" (click)="getTask()">Task</a>
       </li>
+      <li class="nav-item" *ngFor="let base of this.navheaderService?.getItems?.marketingRole">
+          <a class="nav-link textMenu" *ngIf="base?.workOrderNav" (click)="getCompleted()">Completed</a>
+        </li>
       <li class="nav-item " *ngFor="let adm of this.navheaderService?.getItems?.adminRole">
         <a class="nav-link textMenu" *ngIf="adm?.uploadNav" [routerLink]="['/customers/upload']">Upload</a>
       </li>

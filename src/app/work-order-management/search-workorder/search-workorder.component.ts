@@ -8,7 +8,7 @@ import { WorkOrder } from './../../shared/workorder.model';
   styleUrls: ['./search-workorder.component.css']
 })
 export class SearchWorkorderComponent implements OnInit {
-  searchType = ['MobileNumber', 'Name'];
+  searchType = ['Name', 'MobileNumber' ];
   workOrderDetailsForm: FormGroup;
   @Input() workOrderModel: WorkOrder;
   @Output() searchWorkOrder = new EventEmitter<any>();

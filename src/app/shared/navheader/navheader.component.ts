@@ -23,6 +23,9 @@ export class NavheaderComponent implements OnInit {
     this.userId = localStorage.getItem('userId');
     this.router.navigate(['/task/viewtask', this.userId]);
   }
+  getCompleted()   {
+    this.router.navigate(['/workorder/viewallworkorder', 0]);
+  }
   getTicket()   {
     this.userId = localStorage.getItem('userId');
     this.router.navigate(['/ticket/ticketview', this.userId]);

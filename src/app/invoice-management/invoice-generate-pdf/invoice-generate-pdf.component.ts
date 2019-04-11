@@ -105,7 +105,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
   }
 
 
-  viewSingleProInvoicePdf(invoice, customer, company, temp) {
+  viewSingleInvoicePdf(invoice, customer, company, temp) {
     this.invoice = invoice;
     if (!this.selectedValue) {
       this.selectTermsCondition = true;
@@ -206,7 +206,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 { text: 'Invoice ID:  ' + this.invoice[0].invoiceID.toUpperCase(), style: 'textGst' },
                 { text: 'Date: ' + new Date(this.invoice[0].date).toLocaleDateString(), style: 'address' },
                 { text: 'Due Date: ' + new Date(this.invoice[0].expiryDate).toLocaleDateString(), style: 'address' },
-                { text: 'Total Amount: ' + this.invoice[0].allTotal.toFixed(2), style: 'address' }
+                { text: 'Total Amount: ' + Math.ceil(this.invoice[0].allTotal).toFixed(2), style: 'address' }
               ]
             },
           ],
@@ -263,7 +263,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
               text: '',
               style: 'rowStyle', border: [false, false, false, false]
             }, { text: 'Amount', style: 'rowStyle' },
-            { text: this.invoice[0].allTotal.toFixed(2), style: 'rowTotal' }]
+            { text: Math.ceil(this.invoice[0].allTotal).toFixed(2), style: 'rowTotal' }]
             ]
           },
         },
@@ -462,7 +462,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 { text: 'Invoice ID:  ' + this.invoice[0].invoiceID.toUpperCase(), style: 'textGst' },
                 { text: 'Date: ' + new Date(this.invoice[0].date).toLocaleDateString(), style: 'address' },
                 { text: 'Due Date: ' + new Date(this.invoice[0].expiryDate).toLocaleDateString(), style: 'address' },
-                { text: 'Total Amount: ' + this.invoice[0].allTotal.toFixed(2), style: 'address' }
+                { text: 'Total Amount: ' + Math.ceil(this.invoice[0].allTotal).toFixed(2), style: 'address' }
               ]
             },
           ],
@@ -530,7 +530,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 text: '',
                 style: 'rowStyle', border: [false, false, false, false]
               }, { text: 'Amount', style: 'rowStyle' },
-              { text: this.invoice[0].allTotal.toFixed(2), style: 'rowTotal' }]
+              { text: Math.ceil(this.invoice[0].allTotal).toFixed(2), style: 'rowTotal' }]
             ]
           },
         },
@@ -729,7 +729,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 { text: 'Invoice ID:  ' + this.invoice[0].invoiceID.toUpperCase(), style: 'textGst' },
                 { text: 'Date: ' + new Date(this.invoice[0].date).toLocaleDateString(), style: 'address' },
                 { text: 'Due Date: ' + new Date(this.invoice[0].expiryDate).toLocaleDateString(), style: 'address' },
-                { text: 'Total Amount: ' + this.invoice[0].allTotal.toFixed(2), style: 'address' }
+                { text: 'Total Amount: ' + Math.ceil(this.invoice[0].allTotal).toFixed(2), style: 'address' }
               ]
             },
           ],
@@ -774,7 +774,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 text: '',
                 style: 'rowStyle', border: [false, false, false, false]
               }, { text: 'Amount', style: 'rowStyle' },
-              { text: this.invoice[0].allTotal.toFixed(2), style: 'rowTotal' }]
+              { text: Math.ceil(this.invoice[0].allTotal).toFixed(2), style: 'rowTotal' }]
             ]
           },
         }, {
@@ -973,7 +973,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 { text: 'Invoice ID:  ' + this.invoice[0].invoiceID.toUpperCase(), style: 'textGst' },
                 { text: 'Date: ' + new Date(this.invoice[0].date).toLocaleDateString(), style: 'address' },
                 { text: 'Due Date: ' + new Date(this.invoice[0].expiryDate).toLocaleDateString(), style: 'address' },
-                { text: 'Total Amount: ' + this.invoice[0].allTotal.toFixed(2), style: 'address' }
+                { text: 'Total Amount: ' + Math.ceil(this.invoice[0].allTotal).toFixed(2), style: 'address' }
               ]
             },
           ],
@@ -1034,7 +1034,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 text: '',
                 style: 'rowStyle', border: [false, false, false, false]
               }, { text: 'Amount', style: 'rowStyle' },
-              { text: this.invoice[0].allTotal.toFixed(2), style: 'rowTotal' }]
+              { text: Math.ceil(this.invoice[0].allTotal).toFixed(2), style: 'rowTotal' }]
             ]
           },
         }, {
