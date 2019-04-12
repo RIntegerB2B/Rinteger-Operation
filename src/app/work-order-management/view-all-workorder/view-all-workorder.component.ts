@@ -31,6 +31,7 @@ export class ViewAllWorkorderComponent implements OnInit {
   workOrderForm: FormGroup;
   selectedUnit;
   dataSearchTagShow = false;
+  viewWorkOrderStatus: any;
   allMonth = [{ month: 'January' }, { month: 'February' }, { month: 'March' }, { month: 'April' },
   { month: 'May' }, { month: 'June' }, { month: 'July' }, { month: 'August' },
   { month: 'September' }, { month: 'October' }, { month: 'November' }, { month: 'October' }
@@ -51,7 +52,7 @@ export class ViewAllWorkorderComponent implements OnInit {
     { year: 2028 },
   ];
   constructor(private workOrderService: WorkOrderService, private router: Router, private fb: FormBuilder,
-     private route: ActivatedRoute) { }
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.createForm();
@@ -59,17 +60,16 @@ export class ViewAllWorkorderComponent implements OnInit {
     this.viewLeadSettings();
 
     this.route.params.subscribe((params: Params) => {
-    this.id =  +params['id'];
-    this.viewCompleted =  params['id'] != null;
-    console.log(this.viewCompleted);
+      this.id = +params['id'];
+      this.viewCompleted = params['id'] != null;
     });
     this.getAllWorkOrder();
   }
   getAllWorkOrder() {
-      this.workOrderService.allWorkOrder().subscribe(data => {
+    this.workOrderService.allWorkOrder().subscribe(data => {
       const viewNotCompWorkOrder = data.filter(workorder => workorder.workOrderStatus !== 'Completed');
       const viewCompWorkOrder = data.filter(workorder => workorder.workOrderStatus === 'Completed');
-      const viewWorkOrder  =  this.viewCompleted ? viewCompWorkOrder : viewNotCompWorkOrder;
+      const viewWorkOrder = this.viewCompleted ? viewCompWorkOrder : viewNotCompWorkOrder;
       this.workOrder = new MatTableDataSource<WorkOrder>(viewWorkOrder);
       this.workOrder.paginator = this.paginator;
       this.workOrder = viewWorkOrder;
@@ -100,9 +100,13 @@ export class ViewAllWorkorderComponent implements OnInit {
 
   filterWorkOrder(data) {
     this.dataSearchTagShow = false;
-    this.workOrder = new MatTableDataSource<WorkOrder>(data);
+    const viewNotCompWorkOrder = data.filter(workorder => workorder.workOrderStatus !== 'Completed');
+    const viewCompWorkOrder = data.filter(workorder => workorder.workOrderStatus === 'Completed');
+    const viewWorkOrder = this.viewCompleted ? viewCompWorkOrder : viewNotCompWorkOrder;
+    this.workOrder = new MatTableDataSource<WorkOrder>(viewWorkOrder);
     this.workOrder.paginator = this.paginator;
     this.workOrder = data;
+    this.workOrderModel = viewWorkOrder;
   }
   searchDate(workOrderForm) {
     this.dataSearchTagShow = false;
@@ -114,7 +118,7 @@ export class ViewAllWorkorderComponent implements OnInit {
       this.dataSearchTagShow = true;
       const viewNotCompWorkOrder = data.filter(workorder => workorder.workOrderStatus !== 'Completed');
       const viewCompWorkOrder = data.filter(workorder => workorder.workOrderStatus === 'Completed');
-      const viewWorkOrder  =  this.viewCompleted ? viewCompWorkOrder : viewNotCompWorkOrder;
+      const viewWorkOrder = this.viewCompleted ? viewCompWorkOrder : viewNotCompWorkOrder;
       this.workOrder = new MatTableDataSource<WorkOrder>(viewWorkOrder);
       this.workOrder.paginator = this.paginator;
       this.workOrder = viewWorkOrder;
@@ -135,11 +139,11 @@ export class ViewAllWorkorderComponent implements OnInit {
     this.dateSearch = new DateSearch();
     this.dateSearch.month = leadForm.controls.monthData.value;
     this.dateSearch.year = leadForm.controls.yearData.value;
-    
+
     this.workOrderService.workOrderMonthSearch(this.dateSearch).subscribe(data => {
       const viewNotCompWorkOrder = data.filter(workorder => workorder.workOrderStatus !== 'Completed');
       const viewCompWorkOrder = data.filter(workorder => workorder.workOrderStatus === 'Completed');
-      const viewWorkOrder  =  this.viewCompleted ? viewCompWorkOrder : viewNotCompWorkOrder;
+      const viewWorkOrder = this.viewCompleted ? viewCompWorkOrder : viewNotCompWorkOrder;
       this.workOrder = new MatTableDataSource<WorkOrder>(viewWorkOrder);
       this.workOrder.paginator = this.paginator;
       this.workOrder = viewWorkOrder;
@@ -160,7 +164,7 @@ export class ViewAllWorkorderComponent implements OnInit {
     this.workOrderService.unitFilter(this.dateSearch).subscribe(data => {
       const viewNotCompWorkOrder = data.filter(workorder => workorder.workOrderStatus !== 'Completed');
       const viewCompWorkOrder = data.filter(workorder => workorder.workOrderStatus === 'Completed');
-      const viewWorkOrder  =  this.viewCompleted ? viewCompWorkOrder : viewNotCompWorkOrder;
+      const viewWorkOrder = this.viewCompleted ? viewCompWorkOrder : viewNotCompWorkOrder;
       this.workOrder = new MatTableDataSource<WorkOrder>(viewWorkOrder);
       this.workOrder.paginator = this.paginator;
       this.workOrder = viewWorkOrder;
@@ -172,15 +176,14 @@ export class ViewAllWorkorderComponent implements OnInit {
       console.log(error);
     });
   }
-  workOrderStatusUpdate(statusValue, workId)   {
-    console.log(statusValue)
+  workOrderStatusUpdate(statusValue, workId) {
     this.dateSearch = new DateSearch();
     this.dateSearch.workOrderStatus = statusValue.value;
     this.workOrderService.updateSingleWorkOrderStatus(this.dateSearch, workId).subscribe(data => {
       this.workOrder = new MatTableDataSource<WorkOrder>(data);
       const viewNotCompWorkOrder = data.filter(workorder => workorder.workOrderStatus !== 'Completed');
       const viewCompWorkOrder = data.filter(workorder => workorder.workOrderStatus === 'Completed');
-      const viewWorkOrder  =  this.viewCompleted ? viewCompWorkOrder : viewNotCompWorkOrder;
+      const viewWorkOrder = this.viewCompleted ? viewCompWorkOrder : viewNotCompWorkOrder;
       this.workOrder.paginator = this.paginator;
       this.workOrder = viewWorkOrder;
       this.workOrderModel = viewWorkOrder;
@@ -199,7 +202,7 @@ export class ViewAllWorkorderComponent implements OnInit {
     this.workOrderService.workOrderWithOutGST(this.dateSearch).subscribe(data => {
       const viewNotCompWorkOrder = data.filter(workorder => workorder.workOrderStatus !== 'Completed');
       const viewCompWorkOrder = data.filter(workorder => workorder.workOrderStatus === 'Completed');
-      const viewWorkOrder  =  this.viewCompleted ? viewCompWorkOrder : viewNotCompWorkOrder;
+      const viewWorkOrder = this.viewCompleted ? viewCompWorkOrder : viewNotCompWorkOrder;
       this.workOrder = new MatTableDataSource<WorkOrder>(viewWorkOrder);
       this.selectedUnit = 'All';
       this.workOrder.paginator = this.paginator;
@@ -220,7 +223,7 @@ export class ViewAllWorkorderComponent implements OnInit {
     this.workOrderService.workOrderWithGST(this.dateSearch).subscribe(data => {
       const viewNotCompWorkOrder = data.filter(workorder => workorder.workOrderStatus !== 'Completed');
       const viewCompWorkOrder = data.filter(workorder => workorder.workOrderStatus === 'Completed');
-      const viewWorkOrder  =  this.viewCompleted ? viewCompWorkOrder : viewNotCompWorkOrder;
+      const viewWorkOrder = this.viewCompleted ? viewCompWorkOrder : viewNotCompWorkOrder;
       this.workOrder = new MatTableDataSource<WorkOrder>(viewWorkOrder);
       this.selectedUnit = 'All';
       this.workOrderModel = viewWorkOrder;
@@ -286,10 +289,11 @@ export class ViewAllWorkorderComponent implements OnInit {
     this.workOrderService.deleteSingleWorkOrder(row._id).subscribe(data => {
       const viewNotCompWorkOrder = data.filter(workorder => workorder.workOrderStatus !== 'Completed');
       const viewCompWorkOrder = data.filter(workorder => workorder.workOrderStatus === 'Completed');
-      const viewWorkOrder  =  this.viewCompleted ? viewCompWorkOrder : viewNotCompWorkOrder;
+      const viewWorkOrder = this.viewCompleted ? viewCompWorkOrder : viewNotCompWorkOrder;
       this.workOrder = new MatTableDataSource<WorkOrder>(viewWorkOrder);
       this.workOrder.paginator = this.paginator;
       this.workOrder = viewWorkOrder;
+      this.workOrderModel = viewWorkOrder;
       this.array = viewWorkOrder;
       this.totalSize = this.array.length;
       this.iterator();

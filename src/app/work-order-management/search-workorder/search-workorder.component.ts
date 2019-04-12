@@ -2,6 +2,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { WorkOrder } from './../../shared/workorder.model';
+import { WorkOrderSettingModel } from './../../shared/workorder-setting.model';
 @Component({
   selector: 'app-search-workorder',
   templateUrl: './search-workorder.component.html',
@@ -11,6 +12,8 @@ export class SearchWorkorderComponent implements OnInit {
   searchType = ['Name', 'MobileNumber' ];
   workOrderDetailsForm: FormGroup;
   @Input() workOrderModel: WorkOrder;
+  @Input() workOrderSettingModel: WorkOrderSettingModel;
+  @Input()  status: boolean;
   @Output() searchWorkOrder = new EventEmitter<any>();
   constructor(private fb: FormBuilder) { }
 
@@ -19,7 +22,8 @@ export class SearchWorkorderComponent implements OnInit {
       srchterm: [''],
     });
   }
-  searchAll(filterData) {
+  searchStatus(workOrderData, filter) {
+    const filterData = workOrderData.filter(data => data.workOrderStatus.toUpperCase().indexOf(filter.toUpperCase()) > -1);
     this.searchWorkOrder.emit(filterData);
   }
   searchBy(workOrderData, selectType, filter) {
