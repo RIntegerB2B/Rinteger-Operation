@@ -16,7 +16,7 @@ export class CreateExpenseComponent implements OnInit {
   editable = true;
   ExpenseType;
   Paymode;
-  gst = ['With GST','Non GST'];
+  gst = ['With GST', 'Non GST'];
   constructor(private fb: FormBuilder,
     @Optional() public dialogRef: MatDialogRef<CreateExpenseComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
@@ -87,7 +87,7 @@ export class CreateExpenseComponent implements OnInit {
      this.expenseModel.paid = expenseDetailsForm.controls.paid.value,
      this.expenseModel.vouNo = expenseDetailsForm.controls.vouNo.value,
      this.expenseModel.expensesDescription = expenseDetailsForm.controls.expensesDescription.value,
-     this.expenseModel.gst = expenseDetailsForm.controls.gst.value
+     this.expenseModel.gst = expenseDetailsForm.controls.gst.value;
     this.expenseManagementService.addSingleExpense(this.expenseModel).subscribe(data => {
       this.expenseModel = data;
       this.router.navigate(['expense/viewExpense']);

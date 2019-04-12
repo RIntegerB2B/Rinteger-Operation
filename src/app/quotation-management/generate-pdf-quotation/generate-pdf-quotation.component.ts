@@ -30,6 +30,7 @@ export class GeneratePdfQuotationComponent implements OnInit {
   selectedTermsText: any;
   selectedTermsPdf: any;
   totalAmountWithDiscount = 0;
+  workPrice = 0;
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -42,21 +43,28 @@ export class GeneratePdfQuotationComponent implements OnInit {
     const headerArray = [{ text: 'Item', style: 'tableHeaderRow' },
     { text: 'Description', style: 'tableHeaderRow' },
     { text: 'Quantity', style: 'tableHeaderRow' },
-    { text: 'Price', style: 'tableHeaderTotal' }, {
+    {
       text: 'Discount (%)',
       style: 'tableHeaderRow'
     },
+    { text: 'Price', style: 'tableHeaderTotal' },
     { text: 'Total', style: 'tableHeaderTotal' }];
     newTestArray.push(headerArray);
     for (let i = 0; i < this.quotationReq.length; i++) {
       newTestArray.push([{ text: this.quotationReq[i].item, style: 'rowStyle' },
       { text: this.quotationReq[i].description, style: 'rowStyle' },
       { text: this.quotationReq[i].quantity, style: 'rowStyle' },
-      { text: this.quotationReq[i].price.toFixed(2), style: 'rowTotal', },
       { text: this.quotationReq[i].discount, style: 'rowStyle' },
+      { text: this.quotationReq[i].price.toFixed(2), style: 'rowTotal', },
       { text: this.quotationReq[i].total.toFixed(2), style: 'rowTotal' }]);
     }
     return newTestArray;
+  }
+  totalAmountIn() {
+    this.workPrice = 0;
+    for (let i = 0; i < this.quotationReq.length; i++) {
+      this.workPrice += this.quotationReq[i].quantity * this.quotationReq[i].price;
+    }
   }
   discountNull() {
     this.totalAmountWithDiscount = 0;
@@ -94,6 +102,7 @@ export class GeneratePdfQuotationComponent implements OnInit {
       if (temp === 'With Discount + GST') {
         this.pdfWithDiscount();
       } else if (temp === 'Without Discount + GST') {
+        this.totalAmountIn();
         this.pdfWithoutDiscount();
       }
     }
@@ -212,7 +221,7 @@ export class GeneratePdfQuotationComponent implements OnInit {
           style: 'tableExample',
           table: {
             headerRows: 1,
-            widths: [125, 125, 50, 50, 50, 50],
+            widths: [125, 105, 50, 50, 60, 60],
             body: this.newValue()
           },
           layout: {
@@ -228,10 +237,10 @@ export class GeneratePdfQuotationComponent implements OnInit {
             }
           }
         }, {
-          style: 'tableExample',
+          style: 'tableBox',
           table: {
             headerRows: 1,
-            widths: [125, 125, 50, 50, 50, 50],
+            widths: [125, 105, 50, 50, 60, 60],
             /*  body: [[
                { text: '', style: 'rowStyle', border: [false, false, false, false] },
                { text: '', style: 'rowStyle', border: [false, false, false, false] }, {
@@ -273,7 +282,21 @@ export class GeneratePdfQuotationComponent implements OnInit {
                }, { text: 'Amount', style: 'rowStyle' },
                { text: this.quotation[0].allTotal.toFixed(2), style: 'rowTotal' }]
              ] */
-            body: [[{ text: '', style: 'rowStyle', border: [false, false, false, false] },
+            body: [
+              [{ text: '', style: 'rowStyle',
+             border: [false, false, false, false] },
+            { text: '', style: 'rowStyle',
+             border: [false, false, false, false] }, {
+              text: '',
+              style: 'rowStyle',  border: [false, false, false, false]
+            },
+            {
+              text: '',
+              style: 'rowStyle',  border: [false, false, false, false]
+            },
+            { text: 'Sub Total', style: 'rowStyle', border: [true, false, true, true]  },
+            { text: this.quotation[0].subTotal.toFixed(2), style: 'rowTotal', border: [false, false, true, true]  }],
+              [{ text: '', style: 'rowStyle', border: [false, false, false, false] },
             { text: '', style: 'rowStyle', border: [false, false, false, false] }, {
               text: '',
               style: 'rowStyle', border: [false, false, false, false]
@@ -337,7 +360,7 @@ export class GeneratePdfQuotationComponent implements OnInit {
           border: [1, 0, 0, 0]
         },
         tableExample: {
-          margin: [10, 10, 10, 10]
+          margin: [0, 10, 0, 0]
         },
         tableHeader: {
           alignment: 'center'
@@ -488,7 +511,7 @@ export class GeneratePdfQuotationComponent implements OnInit {
                 { text: 'QUOTATION DETAILS', style: 'textHeader' },
                 { text: 'Quotation ID:  ' + this.quotation[0].quotationID.toUpperCase(), style: 'textGst' },
                 { text: 'Quotation Date: ' + new Date(this.quotation[0].date).toLocaleDateString(), style: 'address' },
-                { text: 'Total Amount: ' + Math.ceil(this.quotation[0].allTotal).toFixed(2), style: 'address' }
+                { text: 'Total Amount: ' + Math.ceil(this.quotation[0].tax + this.workPrice).toFixed(2), style: 'address' }
               ]
             },
           ],
@@ -513,7 +536,7 @@ export class GeneratePdfQuotationComponent implements OnInit {
             }
           }
         }, {
-          style: 'tableExample',
+          style: 'tableBox',
           table: {
             headerRows: 1,
             widths: ['*', '*', '*', '*', '*'],
@@ -558,7 +581,17 @@ export class GeneratePdfQuotationComponent implements OnInit {
                }, { text: 'Amount', style: 'rowStyle' },
                { text: this.quotation[0].allTotal.toFixed(2), style: 'rowTotal' }]
              ] */
-            body: [[{ text: '', style: 'rowStyle', border: [false, false, false, false] },
+            body: [
+              [{ text: '', style: 'rowStyle',
+             border: [false, false, false, false] },
+            { text: '', style: 'rowStyle',
+             border: [false, false, false, false] }, {
+              text: '',
+              style: 'rowStyle',  border: [false, false, false, false]
+            },
+            { text: 'Sub Total', style: 'rowStyle', border: [true, false, true, true]  },
+            { text: this.totalAmountWithDiscount.toFixed(2), style: 'rowTotal', border: [false, false, true, true]  }],
+              [{ text: '', style: 'rowStyle', border: [false, false, false, false] },
             { text: '', style: 'rowStyle', border: [false, false, false, false] }, {
               text: '',
               style: 'rowStyle', border: [false, false, false, false]
@@ -616,7 +649,7 @@ export class GeneratePdfQuotationComponent implements OnInit {
           border: [1, 0, 0, 0]
         },
         tableExample: {
-          margin: [10, 10, 10, 10]
+          margin: [0, 10, 0, 0]
         },
         tableHeader: {
           alignment: 'center'
