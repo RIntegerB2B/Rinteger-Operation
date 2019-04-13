@@ -21,7 +21,7 @@ export class SearchInvoiceComponent implements OnInit {
   }
   searchBy(invoiceData, selectType, filter) {
     switch (selectType) {
-      case 'Customer Name': {
+      case 'Name': {
         const filterData = invoiceData.filter(data => data.customerName.toUpperCase().indexOf(filter.toUpperCase()) > -1);
         this.searchInvoice.emit(filterData);
         break;

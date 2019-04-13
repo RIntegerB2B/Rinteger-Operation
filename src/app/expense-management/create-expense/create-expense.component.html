@@ -37,7 +37,7 @@
       <div fxFlex="50" class="pr-1">
         <mat-form-field class="full-width">
           <mat-select placeholder="Select Expense Type" formControlName="expenseType">
-            <mat-option *ngFor="let expense of ExpenseType[0].expenseType" [value]="expense">
+            <mat-option *ngFor="let expense of ExpenseType[0]?.expenseType" [value]="expense">
               {{expense}}
             </mat-option>
           </mat-select>
@@ -46,7 +46,7 @@
       <div fxFlex="50" class="pr-1">
         <mat-form-field class="full-width">
           <mat-select placeholder="Select Mode of payments" formControlName="modeOfPayment">
-            <mat-option *ngFor="let expense of Paymode[0].modeOfPayment" [value]="expense">
+            <mat-option *ngFor="let expense of Paymode[0]?.modeOfPayment" [value]="expense">
               {{expense}}
             </mat-option>
           </mat-select>

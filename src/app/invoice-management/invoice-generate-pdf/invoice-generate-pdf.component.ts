@@ -18,7 +18,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
   noRequirementError = false;
   singleInvoiceDetailsForm: FormGroup;
   arrayNew;
-  invoiceReq: Detail[];
+  invoiceReq: any;
   invoice: Invoice[];
   workOrderPdf: WorkOrderPdf[];
   customerData;
@@ -27,6 +27,8 @@ export class InvoiceGeneratePdfComponent implements OnInit {
   selectTermsCondition = false;
   selectedTermsPdf: any;
   selectedTermsText: any;
+  totalAmountWithDiscount = 0;
+  workPrice = 0;
   terms = [{ term: 'No' }, { term: 'Product Terms' }, { term: 'Digital Terms' }];
   templates = ['With Discount + GST', 'Without Discount + GST',
     'With Discount + SGST + CGST',
@@ -79,14 +81,22 @@ export class InvoiceGeneratePdfComponent implements OnInit {
       newTestArray.push([{ text: this.invoiceReq[i].item, style: 'rowStyle' },
       { text: this.invoiceReq[i].description, style: 'rowStyle' },
       { text: this.invoiceReq[i].quantity, style: 'rowStyle' },
-      { text: this.invoiceReq[i].price.toFixed(2), style: 'rowTotal', },
       { text: this.invoiceReq[i].discount, style: 'rowStyle' },
+      { text: this.invoiceReq[i].price.toFixed(2), style: 'rowTotal', },
       { text: this.invoiceReq[i].total.toFixed(2), style: 'rowTotal' }]);
     }
     return newTestArray;
   }
+  totalAmountIn() {
+    this.workPrice = 0;
+    for (let i = 0; i < this.invoiceReq.length; i++) {
+      this.workPrice += this.invoiceReq[i].quantity * this.invoiceReq[i].price;
+    }
+    this.workPrice += this.invoice[0].tax;
+  }
 
   discountNull() {
+    this.totalAmountWithDiscount = 0;
     const newTestArray = [];
     const headerArray = [{ text: 'Item', style: 'tableHeaderRow' },
     { text: 'Description', style: 'tableHeaderRow' },
@@ -95,11 +105,15 @@ export class InvoiceGeneratePdfComponent implements OnInit {
     { text: 'Total', style: 'tableHeaderTotal' }];
     newTestArray.push(headerArray);
     for (let i = 0; i < this.invoiceReq.length; i++) {
+      const qty = this.invoiceReq[i].quantity;
+      const price = this.invoiceReq[i].price;
+      const priceResult = qty * price;
       newTestArray.push([{ text: this.invoiceReq[i].item, style: 'rowStyle' },
       { text: this.invoiceReq[i].description, style: 'rowStyle' },
       { text: this.invoiceReq[i].quantity, style: 'rowStyle' },
       { text: this.invoiceReq[i].price.toFixed(2), style: 'rowTotal' },
-      { text: this.invoiceReq[i].total.toFixed(2), style: 'rowTotal' }]);
+      { text: priceResult.toFixed(2), style: 'rowTotal' }]);
+      this.totalAmountWithDiscount += this.invoiceReq[i].quantity * this.invoiceReq[i].price;
     }
     return newTestArray;
   }
@@ -118,10 +132,12 @@ export class InvoiceGeneratePdfComponent implements OnInit {
       if (temp === 'With Discount + GST') {
         this.pdfWithDiscountGst();
       } else if (temp === 'Without Discount + GST') {
+        this.totalAmountIn();
         this.pdfWithoutDiscountGst();
       } else if (temp === 'With Discount + SGST + CGST') {
         this.pdfWithDiscountSgstCgst();
       } else if (temp === 'Without Discount + SGST + CGST') {
+        this.totalAmountIn();
         this.pdfWithoutDiscountSgstCgst();
       }
     }
@@ -215,7 +231,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           style: 'tableExample',
           table: {
             headerRows: 1,
-            widths: [125, 125, 50, 50, 50, 50],
+            widths: [125, 105, 50, 50, 60, 60],
             body: this.newValue()
           },
           layout: {
@@ -242,11 +258,27 @@ export class InvoiceGeneratePdfComponent implements OnInit {
               'lightHorizontalLines',
             } */
         }, {
-          style: 'tableExample',
+          style: 'tableBox',
           table: {
             headerRows: 1,
-            widths: [125, 125, 50, 50, 50, 50],
-            body: [[{ text: '', style: 'rowStyle', border: [false, false, false, false] },
+            widths: [125, 105, 50, 50, 60, 60],
+            body: [
+              [{ text: '', style: 'rowStyle',
+             border: [false, false, false, false] },
+            { text: '', style: 'rowStyle',
+             border: [false, false, false, false] }, {
+              text: '',
+              style: 'rowStyle',  border: [false, false, false, false]
+            },
+            {
+              text: '',
+              style: 'rowStyle',  border: [false, false, false, false]
+            },
+            { text: 'Sub Total', style: 'rowStyle', border: [true, false, true, true]  },
+            { text: this.invoice[0].subTotal.toFixed(2), style: 'rowTotal', border: [false, false, true, true]  }],
+
+              [
+              { text: '', style: 'rowStyle', border: [false, false, false, false] },
             { text: '', style: 'rowStyle', border: [false, false, false, false] }, {
               text: '',
               style: 'rowStyle', border: [false, false, false, false]
@@ -304,7 +336,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           border: [1, 0, 0, 0]
         },
         tableExample: {
-          margin: [10, 10, 10, 10]
+          margin: [0, 10, 0, 0]
         },
         /* pageMargins: [ 40, 60, 40, 60 ], */
         textHeaderTerms: {
@@ -471,7 +503,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           style: 'tableExample',
           table: {
             headerRows: 1,
-            widths: [125, 125, 50, 50, 50, 50],
+            widths: [125, 105, 50, 50, 60, 60],
             body: this.newValue()
           },
           layout: {
@@ -487,16 +519,24 @@ export class InvoiceGeneratePdfComponent implements OnInit {
             }
           }
         }, {
-          style: 'tableExample',
+          style: 'tableBox',
           table: {
             headerRows: 1,
-            widths: [125, 125, 50, 50, 50, 50],
-            body: [[
+            widths: [125, 105, 50, 50, 60, 60],
+            body: [[{ text: '', style: 'rowStyle',
+            border: [false, false, false, false] },
+            { text: '', style: 'rowStyle', border: [false, false, false, false] },
+           { text: '', style: 'rowStyle',
+            border: [false, false, false, false] }, {
+             text: '',
+             style: 'rowStyle',  border: [false, false, false, false]
+           },
+           { text: 'Sub Total', style: 'rowStyle', border: [true, false, true, true]  },
+           { text: this.invoice[0].subTotal.toFixed(2), style: 'rowTotal', border: [false, false, true, true]  }],
+              [
+                { text: '', style: 'rowStyle', border: [false, false, false, false] },
               { text: '', style: 'rowStyle', border: [false, false, false, false] },
               { text: '', style: 'rowStyle', border: [false, false, false, false] }, {
-                text: '',
-                style: 'rowStyle', border: [false, false, false, false]
-              }, {
                 text: '',
                 style: 'rowStyle', border: [false, false, false, false]
               },
@@ -576,7 +616,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           border: [1, 0, 0, 0]
         },
         tableExample: {
-          margin: [10, 10, 10, 10]
+          margin: [0, 10, 0, 0]
         },
         tableHeader: {
           alignment: 'center'
@@ -729,7 +769,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 { text: 'Invoice ID:  ' + this.invoice[0].invoiceID.toUpperCase(), style: 'textGst' },
                 { text: 'Date: ' + new Date(this.invoice[0].date).toLocaleDateString(), style: 'address' },
                 { text: 'Due Date: ' + new Date(this.invoice[0].expiryDate).toLocaleDateString(), style: 'address' },
-                { text: 'Total Amount: ' + Math.ceil(this.invoice[0].allTotal).toFixed(2), style: 'address' }
+                { text: 'Total Amount: ' + Math.ceil(this.workPrice).toFixed(2), style: 'address' }
               ]
             },
           ],
@@ -754,11 +794,19 @@ export class InvoiceGeneratePdfComponent implements OnInit {
             },
           }
         }, {
-          style: 'tableExample',
+          style: 'tableBox',
           table: {
             headerRows: 1,
             widths: ['*', '*', '*', '*', '*'],
-            body: [[
+            body: [[{ text: '', style: 'rowStyle',
+            border: [false, false, false, false] },
+           { text: '', style: 'rowStyle',
+            border: [false, false, false, false] }, {
+             text: '',
+             style: 'rowStyle',  border: [false, false, false, false]
+           },
+           { text: 'Sub Total', style: 'rowStyle', border: [true, false, true, true]  },
+           { text: this.totalAmountWithDiscount.toFixed(2), style: 'rowTotal', border: [false, false, true, true]  }], [
               { text: '', style: 'rowStyle', border: [false, false, false, false] }, {
                 text: '',
                 style: 'rowStyle', border: [false, false, false, false]
@@ -774,7 +822,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 text: '',
                 style: 'rowStyle', border: [false, false, false, false]
               }, { text: 'Amount', style: 'rowStyle' },
-              { text: Math.ceil(this.invoice[0].allTotal).toFixed(2), style: 'rowTotal' }]
+              { text: Math.ceil(this.totalAmountWithDiscount + this.invoice[0].tax).toFixed(2), style: 'rowTotal' }]
             ]
           },
         }, {
@@ -819,7 +867,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           border: [1, 0, 0, 0]
         },
         tableExample: {
-          margin: [10, 10, 10, 10]
+          margin: [0, 10, 0, 0]
         },
         tableHeader: {
           alignment: 'center'
@@ -973,7 +1021,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 { text: 'Invoice ID:  ' + this.invoice[0].invoiceID.toUpperCase(), style: 'textGst' },
                 { text: 'Date: ' + new Date(this.invoice[0].date).toLocaleDateString(), style: 'address' },
                 { text: 'Due Date: ' + new Date(this.invoice[0].expiryDate).toLocaleDateString(), style: 'address' },
-                { text: 'Total Amount: ' + Math.ceil(this.invoice[0].allTotal).toFixed(2), style: 'address' }
+                { text: 'Total Amount: ' + Math.ceil(this.workPrice).toFixed(2), style: 'address' }
               ]
             },
           ],
@@ -998,11 +1046,19 @@ export class InvoiceGeneratePdfComponent implements OnInit {
             }
           }
         }, {
-          style: 'tableExample',
+          style: 'tableBox',
           table: {
             headerRows: 1,
             widths: ['*', '*', '*', '*', '*'],
-            body: [[
+            body: [[{ text: '', style: 'rowStyle',
+            border: [false, false, false, false] },
+           { text: '', style: 'rowStyle',
+            border: [false, false, false, false] }, {
+             text: '',
+             style: 'rowStyle',  border: [false, false, false, false]
+           },
+           { text: 'Sub Total', style: 'rowStyle', border: [true, false, true, true]  },
+           { text: this.totalAmountWithDiscount.toFixed(2), style: 'rowTotal', border: [false, false, true, true]  }], [
               { text: '', style: 'rowStyle', border: [false, false, false, false] }, {
                 text: '',
                 style: 'rowStyle', border: [false, false, false, false]
@@ -1034,7 +1090,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 text: '',
                 style: 'rowStyle', border: [false, false, false, false]
               }, { text: 'Amount', style: 'rowStyle' },
-              { text: Math.ceil(this.invoice[0].allTotal).toFixed(2), style: 'rowTotal' }]
+              { text: Math.ceil (this.totalAmountWithDiscount + this.invoice[0].tax).toFixed(2), style: 'rowTotal' }]
             ]
           },
         }, {
@@ -1079,7 +1135,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           border: [1, 0, 0, 0]
         },
         tableExample: {
-          margin: [10, 10, 10, 10]
+          margin: [0, 10, 0, 0]
         },
         tableHeader: {
           alignment: 'center'

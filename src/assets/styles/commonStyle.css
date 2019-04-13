@@ -14,7 +14,9 @@ body {
   cursor: pointer;
 }
 
-
+.wordWrap {
+  word-wrap: break-word;
+}
 .menuTransparent {
   display: none;
 }

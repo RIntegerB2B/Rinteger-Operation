@@ -7,49 +7,50 @@
             <mat-icon class="gridEdit">add_box</mat-icon>
           </a>
         </div>
-        
+
         <div class="col-1">
           <div class="btn pr-1 col-12" fxFlex="50">
             <div class="input-group ">
-              <select style="width: 150px;" #selectElem placeholder="Expense Type" (change)=SearchByType($event.target.value)>
+              <select style="width: 150px;" #selectElem placeholder="Expense Type"
+                (change)=SearchByType($event.target.value)>
                 <option *ngFor="let data of ExpenseType" [value]="data">{{data}}</option>
-              </select></div>   
-              <div>
-                <button mat-stroked-button color="primary" (click)="getAllExpense()" type="submit">Refresh</button>
-              </div>            
+              </select></div>
+            <div>
+              <button mat-stroked-button color="primary" (click)="getAllExpense()" type="submit">Refresh</button>
+            </div>
           </div>
         </div>
-          <div class='col'>
-          <app-search [expenseModel]="expenseval"(searchCustomer)="filterExpense($event)"></app-search>
+        <div class='col'>
+          <app-search [expenseModel]="expenseval" (searchCustomer)="filterExpense($event)"></app-search>
         </div>
-      
-        
+
+
         <div class="col-4">
           <div fxFlex="50" class="pr-1">
             <mat-form-field>
-              <input matInput formControlName="fromDate" [matDatepicker]="picker" 
-              placeholder="Starting Date">
+              <input matInput formControlName="fromDate" [matDatepicker]="picker" placeholder="Starting Date">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
 
             <mat-form-field>
-              <input matInput formControlName="toDate" [matDatepicker]="picker1" 
-              placeholder="Ending Date">
+              <input matInput formControlName="toDate" [matDatepicker]="picker1" placeholder="Ending Date">
               <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
               <mat-datepicker #picker1></mat-datepicker>
             </mat-form-field>
           </div>
           <div class="col-1">
 
-            <button mat-button (click)="searchByDate(expenseDetailsForm)" type="submit"><mat-icon>search</mat-icon></button>
+            <button mat-button (click)="searchByDate(expenseDetailsForm)" type="submit">
+              <mat-icon>search</mat-icon>
+            </button>
           </div>
         </div>
         <div class="col-1">
           <button mat-button class="primary" (click)="findTDS()" type="submit">TDS</button>
           <button mat-button class="primary" (click)="findGST()" type="submit">GST</button>
         </div>
-       
+
         <div class="bor col-md-2">
 
           Total : {{getTotal()}}
@@ -59,15 +60,14 @@
         </div>
       </div>
       <div class="row gridRowHeader display-none-small">
-
-        <div class="col-md-1 vcenterHeader">
+       <div class="col-md-1 vcenterHeader">
           <div class="form-group">
             <label>Name</label>
           </div>
         </div>
-        <div class="col-md-1 vcenterHeader">
+        <div class="col-md-2 vcenterHeader">
           <div class="form-group">
-            <label>companyName</label>
+            <label>Company Name</label>
           </div>
         </div>
         <div class="col-md-2 vcenterHeader">
@@ -80,9 +80,14 @@
             <label>Date of Expense</label>
           </div>
         </div>
+        <div class="col-md-2 vcenterHeader">
+          <div class="form-group">
+            <label>Description</label>
+          </div>
+        </div>
         <div class="col-md-1 vcenterHeader">
           <div class="form-group">
-            <label>Total Amount</label>
+            <label>Amount</label>
           </div>
         </div>
         <div class="col-md-1 vcenterHeader">
@@ -112,7 +117,7 @@
           <div class="display-none-large col-6">
             <label class="gridLabel">Company Name:</label>
           </div>
-          <div class="col-md-1 col-6 vcenter form-group">
+          <div class="col-md-2 col-6 vcenter form-group">
             {{data.companyName}}
 
           </div>
@@ -128,10 +133,18 @@
           <div class="col-md-1 col-6 vcenter form-group">
             {{data.date | date: 'dd/MM/yyyy'}}
           </div>
-
           <div class="display-none-large col-6">
             <label class="gridLabel">
-              Total Amount:
+              Description:
+            </label>
+          </div>
+          <div class="col-md-2 col-6 vcenter form-group wordWrap">
+            {{data.expensesDescription}}
+
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">
+              Amount:
             </label>
           </div>
           <div class="col-md-1 col-6 vcenter form-group">
@@ -175,9 +188,10 @@
             </mat-menu>
           </div>
         </div>
+        
       </div>
     </div>
+    <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true"
+    [length]="totalSize" [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>
   </div>
-  <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true" [length]="totalSize"
-    [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>
 </form>
