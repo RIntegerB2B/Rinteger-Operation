@@ -26,7 +26,7 @@
       </li>
       <li class="nav-item" *ngFor="let cust of this.navheaderService?.getItems?.marketingRole">
         <a class="nav-link textMenu" [routerLink]="['/activity-log/viewallactivity']"
-         *ngIf="(cust.activitylogNav || this.navheaderService?.getRole()) && (this.navheaderService?.getUnit() === 'BSS' || this.navheaderService?.getUnit() === 'Technologies')">activity-log</a>
+         *ngIf="(cust.activitylogNav  && (this.navheaderService?.getUnit() === 'BSS' || this.navheaderService?.getUnit() === 'Technologies')) || this.navheaderService?.getRole() === 'admin' ">activity-log</a>
       </li>
       <li class="nav-item" *ngFor="let cust  of this.navheaderService?.getItems?.marketingRole">
         <a class="nav-link textMenu" [routerLink]="['/workorder/viewallworkorder']"
