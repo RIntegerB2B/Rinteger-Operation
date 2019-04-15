@@ -8,6 +8,7 @@ export class UserPermission {
         bookingNav: Boolean,
         quotationNav: Boolean,
         workOrderNav: Boolean,
+        activitylogNav: Boolean
     }];
     financialRole: [{
         incomeNav: Boolean,

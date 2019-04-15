@@ -4,9 +4,10 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class NavheaderService {
-
+  unit;
   menuHide: string;
   getItems: any;
+  role: string;
   constructor() {
   }
 
@@ -20,4 +21,10 @@ export class NavheaderService {
   menuItems() {
     this.getItems = JSON.parse(localStorage.getItem('menus'));
   }
+  getUnit() {
+       return localStorage.getItem('unit');
+      }
+      getRole() {
+        return localStorage.getItem('role');
+      }
 }

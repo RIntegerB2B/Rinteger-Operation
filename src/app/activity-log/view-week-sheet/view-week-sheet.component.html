@@ -1,0 +1,141 @@
+<form [formGroup]="ActivityDetailsForm">
+    <div class="pageBoxLg">
+      <div class="container-fluid">
+        <!-- <div class="row">       
+          <div class="col-4">
+            <div fxFlex="50" class="pr-1">
+              <mat-form-field>
+                <input matInput formControlName="fromDate" [matDatepicker]="picker" placeholder="Starting Date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput formControlName="toDate" [matDatepicker]="picker1" placeholder="Ending Date">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-4">
+              <button mat-button (click)="searchByDate(incomeDetailsForm)" type="submit"><mat-icon>search</mat-icon></button>
+            </div>
+          </div>
+          <div>
+            <button mat-raised-button (click)="getIncomeSheet()" type="submit">IncomeSheet</button>
+            <button mat-raised-button (click)="getAllWorkoreder()" type="submit">Refresh</button>
+          </div>
+          <div class="col-5">
+            <app-search-income [incomeModel]='incomeValue' (searchIncome)='filterIncome($event)'></app-search-income>
+            
+          </div>       
+          
+        </div> -->
+        <div>
+          <button mat-raised-button (click)="goToMonthlySheet()" type="submit">MonthlySheet</button>
+        </div>
+        <div class="row gridRowHeader display-none-small">
+         <!--  <div class="col-md-2 vcenterHeader">
+            <div class="form-group">
+              <label><h6>WorkOrder ID</h6></label>
+            </div>
+          </div> -->
+          <div class="col-md-2 vcenterHeader">
+            <div class="form-group">
+              <label><h6>Title</h6></label>
+            </div>
+          </div>
+          <div class="col-md-2 vcenterHeader">
+            <div class="form-group">
+              <label><h6>Description</h6></label>
+            </div>
+          </div>
+          <div class="col-md-2 vcenterHeader">
+            <div class="form-group">
+              <label><h6>Week</h6></label>
+            </div>
+          </div>
+          <div class="col-md-2 vcenterHeader">
+              <div class="form-group">
+                <label><h6>Assigined To</h6></label>
+              </div>
+            </div>
+                
+          <div class="col-md-2 vcenterHeader">
+            <div class="form-group">
+              <label><h6> Status</h6></label>
+            </div>
+          </div>
+          <div class="col-md-2 vcenterHeader">
+            <div class="form-group">
+              <label><h6>Action</h6></label>
+            </div>
+          </div>
+        </div>
+        <div *ngFor="let data of activityValue">
+          <div class="row gridRow">
+            <!-- <div class="display-none-large col-6">
+              <label class="gridLabel">WorkOrder ID:</label>
+            </div>
+            <div class="col-md-2 col-6 vcenter form-group">
+              {{data.workOrderID}}
+            </div> -->
+            <div class="display-none-large col-6">
+              <label class="gridLabel">Title:</label>
+            </div>
+            <div class="col-md-2 col-6 vcenter form-group">
+              {{data.planTitle}}
+            </div>
+            <div class="display-none-large col-6">
+              <label class="gridLabel">Description:</label>
+            </div>
+            <div class="col-md-2 col-6 vcenter form-group" >
+              {{data.planDescription}}
+            </div>
+            <div class="display-none-large col-6">
+                <label class="gridLabel">Week:</label>
+              </div>
+              <div class="col-md-2 col-6 vcenter form-group" >
+                {{data.week}}
+              </div>
+              <div class="col-md-2 col-6 vcenter form-group">    
+                  <mat-form-field>
+                    <mat-select placeholder="assignedTo" formControlName="assignedTo" (ngModelChange)="activityValue[0].assignedTo=$event" required>
+                      <mat-option *ngFor="let val of assignedTo" [value]="val.userName">
+                        {{val.userName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+          </div>
+            <div class="display-none-large col-6">
+              <label class="gridLabel">
+                Status:
+              </label>
+            </div>
+            <div class="col-md-2 col-6 vcenter form-group">
+              &nbsp;{{data.weekStatus}}
+            </div>          
+            <div class="display-none-large col-6">
+              <label class="gridLabel">Action:</label>
+            </div>
+            <div class="col-md-2 col-6 vcenter form-group">
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">    
+                  <a class="nav-link" (click) = 'assingToTask(data); assingedsave(ActivityDetailsForm, data)'>
+                      Assign Task
+                    </a>         
+                <a class="nav-link" (click) = 'deleteCompletely(data)'>
+                  Delete Complete Task
+                </a>
+                <a class="nav-link" (click) = 'deleteWeekly(data)'>
+                  Delete WeeklyPlan Only
+                </a>
+              </mat-menu>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true" [length]="totalSize"
+      [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>
+  </form>

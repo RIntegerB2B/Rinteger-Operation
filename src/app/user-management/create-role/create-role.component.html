@@ -56,6 +56,11 @@
           workOrder
         </mat-checkbox>
       </div>
+      <div class="col-md-2">
+        <mat-checkbox formControlName="activitylogNav" class="mail-checkbox">
+          Activity-log
+        </mat-checkbox>
+      </div>
     </div>
     <div formGroupName="financialRole" class="pb-3" class="row">
       <div class="col-md-12">Financial</div>
@@ -172,6 +177,12 @@
         <mat-checkbox class="mail-checkbox" formControlName='workOrderNav' #workOrderNav
           (ngModelChange)="mark.workOrderNav=$event" [(ngModel)]="mark.workOrderNav" [checked]="mark.workOrderNav">
           workOrder
+        </mat-checkbox>
+      </div>
+      <div class="col-md-2">
+        <mat-checkbox class="mail-checkbox" formControlName='activitylogNav' #activitylogNav
+          (ngModelChange)="mark.activitylogNav=$event" [(ngModel)]="mark.activitylogNav" [checked]="mark.activitylogNav">
+          Activity-log
         </mat-checkbox>
       </div>
     </div>

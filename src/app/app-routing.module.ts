@@ -14,6 +14,10 @@ const routes: Routes = [
     loadChildren: './lead-management/lead-management.module#LeadManagementModule'
   },
   {
+    path: 'activity-log',
+    loadChildren: './activity-log/activity-log.module#ActivityLogModule'
+  },
+  {
     path: 'workorder',
     canActivate: [AuthGuard],
     loadChildren: './work-order-management/work-order-management.module#WorkOrderManagementModule'

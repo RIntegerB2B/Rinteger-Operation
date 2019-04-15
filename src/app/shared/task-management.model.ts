@@ -14,6 +14,7 @@ export class TaskModel {
    /*  sizeColumn: string;
     imageDetail: string; */
     priority: string;
+    weekID: string;
     units: string;
     department: string;
     assignedTo: string;

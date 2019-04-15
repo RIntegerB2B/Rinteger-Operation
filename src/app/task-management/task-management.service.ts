@@ -18,6 +18,10 @@ export class TaskManagementService {
     const urlway = this.baseurl + 'createtask';
     return this.http.post<TaskModel[]>(urlway, data);
   }
+  createBssTask(data): Observable<any> {
+    const urlway = this.baseurl + 'createtask';
+    return this.http.post<TaskModel[]>(urlway, data);
+  }
   getAllTaskData(): Observable<any> {
     const urlway = this.baseurl + 'findalltask';
 

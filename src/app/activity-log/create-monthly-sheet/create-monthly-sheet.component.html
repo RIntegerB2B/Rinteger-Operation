@@ -1,0 +1,63 @@
+<div class="pageBoxLg">
+  <div class="container topAlignContainer">
+    <form [formGroup]="activityForm" (ngSubmit)="activityForm.valid && onSubmit(activityForm)">
+
+     
+
+      <div fxLayout="row wrap" fxLayout.lt-sm="column">
+        <div fxFlex="100">
+          <label class="pageBoxLg-label">Create Monthly Plan</label>
+        </div>
+        <div fxFlex="50" class="pr-2">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="workOrderID" [readonly]=true placeholder="workOrderID" 
+            [(ngModel)]="activeValue.workOrderID" >  
+          </mat-form-field>
+         
+        </div>
+
+        <div fxFlex="50" class="pr-2">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="customerName" [readonly]=true placeholder="customerName" 
+              [(ngModel)]="activeValue.customerName" >  
+            </mat-form-field>
+           
+          </div>
+
+        <div fxFlex="50" class="pr-2"> 
+            <mat-form-field>
+              <input matInput formControlName="monthName" [matDatepicker]="picker" 
+                placeholder="select month and year">
+              <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+     
+        <div fxLayout="row"   fxFlex="100" formArrayName="monthlyPlan" >
+          <div  *ngFor="let account of monthForms.controls; let i=index" [formGroupName]="i">
+          <div fxFlex="50" class="p-2">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="planTitle" placeholder="Title">
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="50" class="p-2">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="planDescription" placeholder="Descrition">
+          </mat-form-field>
+        </div>
+        
+ 
+        
+      </div>
+    </div>
+    <div fxFlex="100" class="mt-1">
+        <button mat-raised-button color="primary">Create</button>
+        <span fxFlex></span>
+        <button mat-raised-button mat-button color="accent" type="button" (click)="cancel()">Cancel</button>
+      </div>
+    </div>
+    </form>
+  </div>
+
+</div>

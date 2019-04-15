@@ -8,11 +8,12 @@ import { NavheaderService } from './navheader.service';
 })
 export class NavheaderComponent implements OnInit {
   userId;
+
   constructor(public navheaderService: NavheaderService, private router: Router) {
    }
 
   ngOnInit() {
-  
+ 
   }
   logOutSession()   {
     localStorage.removeItem('loginUser');
@@ -31,5 +32,6 @@ export class NavheaderComponent implements OnInit {
     this.userId = localStorage.getItem('userId');
     this.router.navigate(['/material/front']);
   }
+ 
 
 }
