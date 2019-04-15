@@ -176,8 +176,8 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 { text: this.customerData[0].companyName.toUpperCase(), style: 'textHeader' },
                 { text: 'GST : ' + this.customerData[0].gstNumber.toUpperCase(), style: 'textGst' },
                 { text: this.customerData[0].companyAddress.toUpperCase(), style: 'address' },
-                { text: this.customerData[0].location.toUpperCase(), style: 'address' },
-                { text: this.customerData[0].state.toUpperCase(), style: 'address' },
+                { text: this.customerData[0].location, style: 'address' },
+                { text: this.customerData[0].state, style: 'address' },
                 { text: this.customerData[0].pincode, style: 'address' },
                 { text: 'Phone: ' + this.customerData[0].mobileNumber, style: 'phone' },
               ]
@@ -448,8 +448,8 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 { text: this.customerData[0].companyName.toUpperCase(), style: 'textHeader' },
                 { text: 'GST : ' + this.customerData[0].gstNumber.toUpperCase(), style: 'textGst' },
                 { text: this.customerData[0].companyAddress.toUpperCase(), style: 'address' },
-                { text: this.customerData[0].location.toUpperCase(), style: 'address' },
-                { text: this.customerData[0].state.toUpperCase(), style: 'address' },
+                { text: this.customerData[0].location, style: 'address' },
+                { text: this.customerData[0].state, style: 'address' },
                 { text: this.customerData[0].pincode, style: 'address' },
                 { text: 'Phone: ' + this.customerData[0].mobileNumber, style: 'phone' },
               ]
@@ -723,8 +723,8 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 { text: this.customerData[0].companyName.toUpperCase(), style: 'textHeader' },
                 { text: 'GST : ' + this.customerData[0].gstNumber.toUpperCase(), style: 'textGst' },
                 { text: this.customerData[0].companyAddress.toUpperCase(), style: 'address' },
-                { text: this.customerData[0].location.toUpperCase(), style: 'address' },
-                { text: this.customerData[0].state.toUpperCase(), style: 'address' },
+                { text: this.customerData[0].location, style: 'address' },
+                { text: this.customerData[0].state, style: 'address' },
                 { text: this.customerData[0].pincode, style: 'address' },
                 { text: 'Phone: ' + this.customerData[0].mobileNumber, style: 'phone' },
               ]
@@ -975,8 +975,8 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 { text: this.customerData[0].companyName.toUpperCase(), style: 'textHeader' },
                 { text: 'GST : ' + this.customerData[0].gstNumber.toUpperCase(), style: 'textGst' },
                 { text: this.customerData[0].companyAddress.toUpperCase(), style: 'address' },
-                { text: this.customerData[0].location.toUpperCase(), style: 'address' },
-                { text: this.customerData[0].state.toUpperCase(), style: 'address' },
+                { text: this.customerData[0].location, style: 'address' },
+                { text: this.customerData[0].state, style: 'address' },
                 { text: this.customerData[0].pincode, style: 'address' },
                 { text: 'Phone: ' + this.customerData[0].mobileNumber, style: 'phone' },
               ]
