@@ -1,4 +1,4 @@
-<form [formGroup]="invoiceDetailsForm">
+<form [formGroup]="leadDetailsForm">
   <div class="row">
     <div class="col-md-6 col">
       <div class="btn">
@@ -7,9 +7,11 @@
             <option *ngFor="let data of searchType">{{data}}</option>
           </select>
           <input type="text" class="form-control" placeholder="Search" formControlName="srchterm" #searchValue />
-          <button mat-button type="button" 
-          (click)="searchBy(invoiceModel, selectElem.value, searchValue.value)">
+          <button mat-button type="submit" (click)="searchBy(leadModel, selectElem.value, searchValue.value)">
             <mat-icon>search</mat-icon>
+          </button>
+          <button matTooltip="Refresh" mat-icon-button (click)="searchAll(leadModel)">
+            <mat-icon>refresh</mat-icon>
           </button>
         </div>
       </div>

@@ -45,6 +45,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { ExistingCustomerComponent } from './existing-customer/existing-customer.component';
 import { ExistingService } from './existing-customer/existing.service';
 import { SearchComponent } from './search/search.component';
+import { SearchLeadComponent } from './search-lead/search-lead.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { SearchComponent } from './search/search.component';
     ViewFollowupComponent,
     ViewSingleLeadComponent,
     ExistingCustomerComponent,
-    SearchComponent],
+    SearchComponent,
+    SearchLeadComponent],
   imports: [
     CommonModule,
     CustomersModule,

@@ -1,73 +1,75 @@
-
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Invoice } from './../../shared/invoice.model';
+import { Lead } from './../../shared/lead.model';
 @Component({
-  selector: 'app-search-invoice',
-  templateUrl: './search-invoice.component.html',
-  styleUrls: ['./search-invoice.component.css']
+  selector: 'app-search-lead',
+  templateUrl: './search-lead.component.html',
+  styleUrls: ['./search-lead.component.css']
 })
-export class SearchInvoiceComponent implements OnInit {
+export class SearchLeadComponent implements OnInit {
   searchType = ['Name', 'MobileNumber',  'EmailId', 'Location'];
-  invoiceDetailsForm: FormGroup;
-  @Input() invoiceModel: Invoice;
-  @Output() searchInvoice = new EventEmitter<any>();
+  leadDetailsForm: FormGroup;
+  @Input() leadModel: Lead;
+  @Output() searchLead = new EventEmitter<any>();
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.invoiceDetailsForm = this.fb.group({
+    this.leadDetailsForm = this.fb.group({
       srchterm: [''],
     });
   }
-  searchBy(invoiceData, selectType, filter) {
+  searchAll(filterData) {
+    this.searchLead.emit(filterData);
+  }
+  searchBy(leadData, selectType, filter) {
     switch (selectType) {
       case 'Name': {
-        const filterData = invoiceData.filter(data => data.customerName.toUpperCase().indexOf(filter.toUpperCase()) > -1);
-        this.searchInvoice.emit(filterData);
+        const filterData = leadData.filter(data => data.name.toUpperCase().indexOf(filter.toUpperCase()) > -1);
+        this.searchLead.emit(filterData);
         break;
       }
       case 'MobileNumber': {
-        invoiceData.forEach(data => {
+        leadData.forEach(data => {
           if (!data.mobileNumber) {
             data.mobileNumber = '';
           }
         });
-        const filterData = invoiceData.filter(data =>
+        const filterData = leadData.filter(data =>
           data.mobileNumber.toString().indexOf(filter.toString()) > -1);
-        this.searchInvoice.emit(filterData);
+        this.searchLead.emit(filterData);
         break;
       }
       case 'EmailId': {
-        invoiceData.forEach(data => {
+        leadData.forEach(data => {
           if (!data.emailId) {
             data.emailId = '';
           }
         });
-        const filterData = invoiceData.filter(data =>
+        const filterData = leadData.filter(data =>
           data.emailId.toUpperCase().indexOf(filter.toUpperCase()) > -1);
-        this.searchInvoice.emit(filterData);
+        this.searchLead.emit(filterData);
         break;
       }
       case 'City': {
-        invoiceData.forEach(data => {
+        leadData.forEach(data => {
           if (!data.city) {
             data.city = '';
           }
         });
-        const filterData = invoiceData.filter(data =>
+        const filterData = leadData.filter(data =>
           data.city.toUpperCase().indexOf(filter.toUpperCase()) > -1);
-        this.searchInvoice.emit(filterData);
+        this.searchLead.emit(filterData);
         break;
       }
       case 'Location': {
-        invoiceData.forEach(data => {
+        leadData.forEach(data => {
           if (!data.location) {
             data.location = '';
           }
         });
-        const filterData = invoiceData.filter(data =>
+        const filterData = leadData.filter(data =>
           data.location.toUpperCase().indexOf(filter.toUpperCase()) > -1);
-        this.searchInvoice.emit(filterData);
+        this.searchLead.emit(filterData);
         break;
       }
     }

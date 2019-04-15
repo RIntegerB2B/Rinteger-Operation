@@ -1,6 +1,7 @@
 <form style="padding-top:20px">
   <div class="pageBoxLg">
-    <app-search-invoice [invoiceModel]="invoiceModel" (searchInvoice)="filterInvoice($event)"></app-search-invoice>
+    <app-search-invoice [invoiceModel]="invoiceModel"
+     (searchInvoice)="filterInvoice($event)"></app-search-invoice>
     <div class="row" [formGroup]="invoiceDetailsForm">
       <div class="col-md-2">
         <mat-form-field>

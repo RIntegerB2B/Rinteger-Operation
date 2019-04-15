@@ -2,6 +2,8 @@
   <app-search [searchDetails]="leadStatusModel" [leadModel]="array" (searchFilter)="getSearch($event)">
   </app-search>
   <!-- <div class="container-fluid"> -->
+      <app-search-lead [leadModel]="array"
+      (searchLead)="filterLead($event)"></app-search-lead>
 
   <div class="row" [formGroup]="leadForm">
     <div class="col-md-2">

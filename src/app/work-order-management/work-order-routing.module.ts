@@ -26,6 +26,9 @@ const routes: Routes = [
 }, {
   path: 'viewallworkorder',
   component: ViewAllWorkorderComponent
+}, {
+  path: ':viewallworkorder/:id',
+  component: ViewAllWorkorderComponent
 }
 ];
 @NgModule({

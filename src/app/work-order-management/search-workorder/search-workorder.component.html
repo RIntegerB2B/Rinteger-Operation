@@ -10,12 +10,18 @@
           <button mat-button type="submit" (click)="searchBy(workOrderModel, selectElem.value, searchValue.value)">
             <mat-icon>search</mat-icon>
           </button>
-          <button matTooltip="Refresh" mat-icon-button 
-          (click)="searchAll(workOrderModel)">
-            <mat-icon>refresh</mat-icon>
-          </button>
         </div>
       </div>
     </div>
+    <div class="col-md-4" *ngIf="!status">
+        <mat-form-field>
+          <mat-select placeholder="Status" (selectionChange)="searchStatus(workOrderModel, $event.value)">
+            <mat-option *ngFor="let status of workOrderSettingModel; let i = index"
+             [value]="status">
+              {{status}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div> 
   </div>
 </form>

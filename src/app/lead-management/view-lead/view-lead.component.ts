@@ -73,6 +73,12 @@ export class ViewLeadComponent implements OnInit {
       yearData: ['', Validators.required]
     });
   }
+  filterLead(data)   {
+    this.leadModel = new MatTableDataSource<Lead>(data);
+    this.leadModel.paginator = this.paginator;
+    this.leadModel.paginator = this.paginator;
+    this.leadModel = data;
+  }
   searchAll(data)   {
     this.leadModel = new MatTableDataSource<Lead>(data);
     this.leadModel.paginator = this.paginator;

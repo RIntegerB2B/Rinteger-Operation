@@ -12,6 +12,7 @@ import { TicketsettingsModel } from './ticket-setting/ticket-settings.model';
 import { IncomeSetting } from '../shared/income-setting.model';
 import { MaterialSetting } from '../shared/material-settings.model';
 import { TasksettingsModel } from '../shared/task-setting.module';
+import { WorkOrderSettingModel  } from '../shared/workorder-setting.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -323,6 +324,23 @@ export class SettingsServiceService {
     const addUrl = 'deletetaskassiginedby/';
     const url: string = this.serviceUrl + addUrl + val;
     return this.httpClient.delete<TasksettingsModel[]>(url);
+  }
+
+  addWorkOrderSetting(data: any): Observable<any> {
+    const addUrl = 'addworkorderstatus';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<WorkOrderSettingModel[]>(url, data);
+  }
+
+  viewWorkOrderSetting(): Observable<any> {
+    const addUrl = 'viewworkorderstatus';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<WorkOrderSettingModel[]>(url);
+  }
+  deleteWorkOrderSetting(val): Observable<any> {
+    const addUrl = 'deleteworkorderstatus/';
+    const url: string = this.serviceUrl + addUrl + val;
+    return this.httpClient.delete<WorkOrderSettingModel[]>(url);
   }
 
 }

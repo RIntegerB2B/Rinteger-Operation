@@ -201,7 +201,7 @@ export class ViewExpenseComponent implements OnInit {
   }
   getTotal() {
     let tot = 0;
-    for (var i = 0; i <= this.expenseValue.length - 1; i++) {
+    for (let i = 0; i <= this.expenseValue.length - 1; i++) {
       tot += this.expenseValue[i].totalAmount;
     }
     this.getBalance();
@@ -210,7 +210,7 @@ export class ViewExpenseComponent implements OnInit {
   }
   getPaid() {
     let paid = 0;
-    for (var i = 0; i <= this.expenseValue.length - 1; i++) {
+    for (let i = 0; i <= this.expenseValue.length - 1; i++) {
       paid += this.expenseValue[i].paid;
     }
     return paid;
@@ -218,7 +218,7 @@ export class ViewExpenseComponent implements OnInit {
   getBalance() {
     let bal = 0;
 
-    for (var i = 0; i <= this.expenseValue.length - 1; i++) {
+    for (let i = 0; i <= this.expenseValue.length - 1; i++) {
       bal += this.expenseValue[i].balance;
     }
     return bal;

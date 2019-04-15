@@ -8,9 +8,9 @@ describe('InvoiceGeneratePdfComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InvoiceGeneratePdfComponent ]
+      declarations: [InvoiceGeneratePdfComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

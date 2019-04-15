@@ -8,6 +8,7 @@ import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { Customer } from './../shared/customer.model';
 import { LeadSettings } from './../shared/lead-settings.model';
+import { WorkOrderSettingModel } from './../shared/workorder-setting.model';
 
 @Injectable({
   providedIn: 'root'
@@ -113,5 +114,15 @@ export class WorkOrderService {
     const addUrl = 'workorderunit';
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.post<WorkOrder[]>(url, dateSearch);
+  }
+  viewWorkOrderSetting(): Observable<any> {
+    const addUrl = 'viewworkorderstatus';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<WorkOrderSettingModel[]>(url);
+  }
+  updateSingleWorkOrderStatus(row, workid): Observable<any>  {
+    const addUrl = 'workorderstatus/';
+    const url: string = this.serviceUrl + addUrl + workid;
+    return this.httpClient.put<WorkOrder>(url, row);
   }
 }

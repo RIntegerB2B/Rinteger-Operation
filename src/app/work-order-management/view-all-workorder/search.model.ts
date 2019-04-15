@@ -4,4 +4,5 @@ export class DateSearch {
     month?: string;
     year?: string;
     leadUnit: string;
+    workOrderStatus?: String;
 }

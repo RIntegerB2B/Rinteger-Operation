@@ -41,6 +41,14 @@ export class CreateQuotationComponent implements OnInit {
     this.createForm();
     this.viewCompanyDetails();
   }
+
+  checkGst(event) {
+    if (event.checked) {
+      this.gstVal = 0;
+    } else {
+      this.gstVal = this.workOrderPDFModel[0].gst;
+    }
+  }
   createForm() {
     this.quotationDetailsForm = this.fb.group({
       customerID: [''],

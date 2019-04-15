@@ -71,6 +71,9 @@ export class ViewSingleQuotationComponent implements OnInit {
       console.log(error);
     });
   }
+  cancelQuotation()   {
+    this.router.navigate(['quotation/viewallquotation']);
+  }
   /* templateType(val) {
     const TYPE = this.singleQuotationDetailsForm.controls.termsType.value;
     if (val === 'With Discount + GST' && TYPE === 'Production Terms') {
@@ -303,11 +306,9 @@ export class ViewSingleQuotationComponent implements OnInit {
           this.allValues[i].price, this.allValues[i].discount, this.allValues[i].total);
         this.printArray.push(this.tempArray[i]);
       }
-      
       const columns = ['Item', 'Description', 'Quantity', 'Price', 'Total'];
       const columns1 = ['Company No', 'Name', 'Address', 'Email', 'Phone No'];
       this.doc = new jspdf();
-      
       this.doc.setFontSize(10);
       this.doc.setFont('Arial');
       this.doc.setFontType('bold');
