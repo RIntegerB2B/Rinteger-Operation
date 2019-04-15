@@ -23,6 +23,7 @@ export class EditMaterialComponent implements OnInit {
   unit = ['Studio', 'BSS', 'Technologies'];
   shootType;
   materialStatus;
+  materialttType;
   dispatchType;
   completed: boolean;
   pending: boolean;
@@ -37,6 +38,7 @@ export class EditMaterialComponent implements OnInit {
     this.getShootType();
     this.getMaterialStatus();
     this.getDispatchType();
+    this.getMaterialType();
   }
   createForm() {
     this.materialDetailForm = this.fb.group({
@@ -52,6 +54,7 @@ export class EditMaterialComponent implements OnInit {
       shootStatus: [''],
       paymentStatus: [''],
       modeOfInward: [''],
+      materialType: [''],
       modeOfOutward: [''],
       dispatchType: [''],
       materialStatus: [''],
@@ -126,6 +129,12 @@ export class EditMaterialComponent implements OnInit {
       this.materialStatus = this.materialType;
     });
   }
+  getMaterialType() {
+    this.marerialManagementService.getMaterialSetting().subscribe(data => {
+      this.materialType = data[0].materialType;
+      this.materialttType = this.materialType;
+    });
+  }
   getDispatchType() {
     this.marerialManagementService.getMaterialSetting().subscribe(data => {
       this.materialType = data[0].dispatchType;
@@ -134,7 +143,7 @@ export class EditMaterialComponent implements OnInit {
   }
   findPaymentStatus(value) {
     this.marerialManagementService.getPaymentStatus(value).subscribe(data => {
-      if (data.balanceAmount === 0) {
+      if (data[0].balanceAmount === 0) {
         this.paymentStatus = 'completed';
       } else {
         this.paymentStatus = 'pending';

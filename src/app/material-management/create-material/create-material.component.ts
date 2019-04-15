@@ -17,6 +17,7 @@ export class CreateMaterialComponent implements OnInit {
   product: FormArray;
   id;
   message;
+  materialType;
   action;
  /*  paymentStatus = ['yes', 'no']; */
  /*  shootType = ['Indoor', 'outdoor']; */
@@ -24,6 +25,7 @@ export class CreateMaterialComponent implements OnInit {
   materialStatus = ['received', 'not received'];
   dispatchType = ['travels', 'self'];
   unit = ['Studio','BSS','Technologies'];
+  materialEdit: any;
   constructor(private materialManagementService: MaterialManagementService,
     private router: Router, private fb: FormBuilder, private route: ActivatedRoute,
     private snackBar: MatSnackBar) { }
@@ -33,6 +35,7 @@ export class CreateMaterialComponent implements OnInit {
     });
     this.createForm();
     this.addSingleMaterial();
+    this.getMaterialType();
   }
   createForm() {
     this.materialDetailsForm = this.fb.group({
@@ -48,6 +51,7 @@ export class CreateMaterialComponent implements OnInit {
     /*   shootStatus: [''], */
    /*    paymentStatus: [''], */
       modeOfInward: [''],
+      materialType: [''],
     /*   modeOfOutward: [''], */
       /* dispatchType: [''], */
       /* materialStatus: [''], */
@@ -82,18 +86,18 @@ export class CreateMaterialComponent implements OnInit {
       console.log(error);
     });
   }
-  updateMaterial(materialDetailsForm: FormGroup) {
+  updateMaterial(materialDetailsForm: FormGroup, workOrderID, date, userName) {
     this.materialModel = new MaterialModel();
-    this.materialModel.workOrderID = materialDetailsForm.controls.workOrderID.value;
+    this.materialModel.workOrderID = workOrderID.value;
     this.materialModel.DCnumber = materialDetailsForm.controls.DCnumber.value;
-    this.materialModel.date = materialDetailsForm.controls.date.value;
-    this.materialModel.customerName = materialDetailsForm.controls.customerName.value;
+    this.materialModel.date = date.value;
+    this.materialModel.customerName = userName.value;
     this.materialModel.receivedBy = materialDetailsForm.controls.receivedBy.value;
     this.materialModel.unit = materialDetailsForm.controls.unit.value;
   /*   this.materialModel.shootStatus = materialDetailsForm.controls.shootStatus.value; */
    /*  this.materialModel.paymentStatus = materialDetailsForm.controls.paymentStatus.value; */
     this.materialModel.modeOfInward = materialDetailsForm.controls.modeOfInward.value;
-   /*  this.materialModel.modeOfOutward = materialDetailsForm.controls.modeOfOutward.value; */
+    this.materialModel.materialType = materialDetailsForm.controls.materialType.value;
    /*  this.materialModel.dispatchType = materialDetailsForm.controls.dispatchType.value; */
    /*  this.materialModel.materialStatus = materialDetailsForm.controls.materialStatus.value; */
     this.materialModel.remark = materialDetailsForm.controls.remark.value;
@@ -118,5 +122,12 @@ export class CreateMaterialComponent implements OnInit {
   }
   cancel() {
     this.router.navigate(['material/front']);
+  }
+
+  getMaterialType() {
+    this.materialManagementService.getMaterialSetting().subscribe(data => {
+      this.materialEdit = data[0].materialType;
+      this.materialType = this.materialEdit;
+    });
   }
 }
