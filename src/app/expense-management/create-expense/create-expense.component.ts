@@ -33,27 +33,28 @@ export class CreateExpenseComponent implements OnInit {
     this.getPaymode();
     /* this.getGst() */
   }
-  getExpense(){
-    this.expenseManagementService.allsttExpense().subscribe(data =>{
+  getExpense() {
+    this.expenseManagementService.allsttExpense().subscribe(data => {
       this.expenseModel = data;
       console.log(this.expenseModel);
       this.ExpenseType = this.expenseModel;
-    })
+    });
   }
-  getPaymode(){
-    this.expenseManagementService.allsttPayment().subscribe(data =>{
+  getPaymode() {
+    this.expenseManagementService.allsttPayment().subscribe(data => {
+      this.expenseModel = data;
+      this.Paymode = this.expenseModel;
+    }, error => {
+      console.log(error);
+    });
+  }
+  /* getGst(){
+    this.expenseManagementService.allsttGst().subscribe(data =>{
       this.expenseModel = data;
       console.log(this.expenseModel);
-      this.Paymode = this.expenseModel;
+      this.gst = this.expenseModel;
   })
-}
-/* getGst(){
-  this.expenseManagementService.allsttGst().subscribe(data =>{
-    this.expenseModel = data;
-    console.log(this.expenseModel);
-    this.gst = this.expenseModel;
-})
-} */
+  } */
 
   createForm() {
     this.expenseDetailsForm = this.fb.group({
@@ -65,9 +66,9 @@ export class CreateExpenseComponent implements OnInit {
       location: ['', [Validators.required]],
       date: ['', [Validators.required]],
       totalAmount: ['', [Validators.required]],
-      paid: ['',[ Validators.required]],
+      paid: ['', [Validators.required]],
       vouNo: ['', [Validators.required]],
-      expensesDescription: ['',[ Validators.required]],
+      expensesDescription: ['', [Validators.required]],
       gst: ['', [Validators.required]]
     });
   }
@@ -76,18 +77,18 @@ export class CreateExpenseComponent implements OnInit {
   }
   addSingleExpense(expenseDetailsForm: FormGroup) {
     this.expenseModel = new Expense();
-     this.expenseModel.mobileNumber = expenseDetailsForm.controls.mobileNumber.value,
-     this.expenseModel.name = expenseDetailsForm.controls.name.value,
-     this.expenseModel.companyName = expenseDetailsForm.controls.companyName.value,
-     this.expenseModel.expenseType = expenseDetailsForm.controls.expenseType.value,
-     this.expenseModel.modeOfPayment = expenseDetailsForm.controls.modeOfPayment.value,
-     this.expenseModel.location = expenseDetailsForm.controls.location.value,
-     this.expenseModel.date = expenseDetailsForm.controls.date.value,
-     this.expenseModel.totalAmount = expenseDetailsForm.controls.totalAmount.value,
-     this.expenseModel.paid = expenseDetailsForm.controls.paid.value,
-     this.expenseModel.vouNo = expenseDetailsForm.controls.vouNo.value,
-     this.expenseModel.expensesDescription = expenseDetailsForm.controls.expensesDescription.value,
-     this.expenseModel.gst = expenseDetailsForm.controls.gst.value;
+    this.expenseModel.mobileNumber = expenseDetailsForm.controls.mobileNumber.value,
+      this.expenseModel.name = expenseDetailsForm.controls.name.value,
+      this.expenseModel.companyName = expenseDetailsForm.controls.companyName.value,
+      this.expenseModel.expenseType = expenseDetailsForm.controls.expenseType.value,
+      this.expenseModel.modeOfPayment = expenseDetailsForm.controls.modeOfPayment.value,
+      this.expenseModel.location = expenseDetailsForm.controls.location.value,
+      this.expenseModel.date = expenseDetailsForm.controls.date.value,
+      this.expenseModel.totalAmount = expenseDetailsForm.controls.totalAmount.value,
+      this.expenseModel.paid = expenseDetailsForm.controls.paid.value,
+      this.expenseModel.vouNo = expenseDetailsForm.controls.vouNo.value,
+      this.expenseModel.expensesDescription = expenseDetailsForm.controls.expensesDescription.value,
+      this.expenseModel.gst = expenseDetailsForm.controls.gst.value;
     this.expenseManagementService.addSingleExpense(this.expenseModel).subscribe(data => {
       this.expenseModel = data;
       this.router.navigate(['expense/viewExpense']);

@@ -37,6 +37,10 @@ export class SearchComponent implements OnInit {
         this.selectedType(selectedValue, leadData);
         break;
       }
+      case 'Lead Unit': {
+        this.selectedUnit(selectedValue, leadData);
+        break;
+      }
       case 'All': {
         this.selectedAll(selectedValue, leadData);
         break;
@@ -65,6 +69,10 @@ export class SearchComponent implements OnInit {
   selectedType(source, leadData) {
     const filterData = leadData.filter(data => data.leadType.some(newData =>
       newData === source));
+    this.searchFilter.emit(filterData);
+  }
+  selectedUnit(source, leadData) {
+    const filterData = leadData.filter(data => data.leadUnit === source);
     this.searchFilter.emit(filterData);
   }
 }

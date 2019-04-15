@@ -65,9 +65,9 @@ export class ViewAllWorkorderComponent implements OnInit {
     });
     this.getAllWorkOrder();
   }
-  getCompleted()   {
+  /* getCompleted()   {
     this.router.navigate(['/workorder/viewallworkorder', 0]);
-  }
+  } */
   getAllWorkOrder() {
     this.workOrderService.allWorkOrder().subscribe(data => {
       const viewNotCompWorkOrder = data.filter(workorder => workorder.workOrderStatus !== 'Completed');

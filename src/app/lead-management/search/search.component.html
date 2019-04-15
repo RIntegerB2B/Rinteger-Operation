@@ -29,6 +29,13 @@
           {{status | lowercase }}
         </option>
       </optgroup>
+      <optgroup label='Lead Unit' *ngFor="let data of searchDetails">
+
+        <option [value]="unit" *ngFor="let unit of data.leadUnit">
+          {{unit | lowercase }}
+        </option>
+      </optgroup>
+
     </select>
   </div>
 </div>
