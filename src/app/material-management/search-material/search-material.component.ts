@@ -17,8 +17,15 @@ export class SearchMaterialComponent implements OnInit {
     });
   }
   searchBy(materialData, search) {
-    const filterData = materialData.filter(data =>
+    materialData.forEach(data => {
+      if (!data.customerName) {
+        data.customerName = '';
+      }
+    });
+     const filterData = materialData.filter(data =>
       data.customerName.toUpperCase().indexOf(search.toUpperCase()) > -1);
     this.searchMaterial.emit(filterData);
+    
+
   }
 }

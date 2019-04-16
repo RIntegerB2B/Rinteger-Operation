@@ -16,7 +16,13 @@
               <mat-icon class="gridEdit">add_box</mat-icon> Material Status
             </a>
           </div>
+      
+      <div fxFlex="25" class="pr-1">
+        <a (click)="showMaterialTypeForm()">
+          <mat-icon class="gridEdit">add_box</mat-icon> Material Type
+        </a>
       </div>
+  </div>
       <div fxLayout="row wrap" fxLayout.lt-sm="column">
         <div fxFlex="25" class="pr-1" *ngIf="showShootType">
           <h1>  Shoot Type</h1>
@@ -60,6 +66,20 @@
               </div>
             </div>
           </div>   
+          <div fxFlex="25" class="pr-1" *ngIf="showMaterialType">
+            <h1> Material Type</h1>
+            <mat-form-field class="full-width">
+              <input matInput formControlName="materialType" placeholder="Material Type" required>
+            </mat-form-field>
+            <button mat-raised-button color="primary"  type="button" (click)="addMaterialType()" 
+            [disabled]="!materialSettingsForm.controls.materialType.valid">Add</button>
+            <h5> Material Status</h5>
+            <div *ngFor="let data of settingValue ">
+              <div *ngFor="let value of data.materialType ">          
+                <p><a (click)="deleteMaterialType(value)"><mat-icon>clear</mat-icon></a>{{value}}</p>
+              </div>
+            </div>
+          </div>  
       </div>
     </form>
   </div>

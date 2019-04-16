@@ -290,6 +290,16 @@ export class SettingsServiceService {
     const url: string = this.serviceUrl + addUrl + val;
     return this.httpClient.delete<MaterialSetting[]>(url);
   }
+  addMaterialType(data): Observable<any> {
+    const addUrl = 'addmaterialtype';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<MaterialSetting[]>(url, data);
+  }
+  deleteMaterialType(val): Observable<any> {
+    const addUrl = 'deletematerialtype/';
+    const url: string = this.serviceUrl + addUrl + val;
+    return this.httpClient.delete<MaterialSetting[]>(url);
+  }
 
   addTaskDepartment(data: any): Observable<any> {
     const addUrl = 'adddepartment';

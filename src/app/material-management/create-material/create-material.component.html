@@ -7,11 +7,11 @@
           </div>       
           <div fxFlex="50" class="pr-1">
             <mat-form-field class="full-width">
-              <input matInput formControlName="workOrderID" 
-              [readonly]="true"
-              placeholder="workOrderID" 
-              [value]="materialValue?.workOrderID  || null" 
-              (ngModelChange)="materialValue.workOrderID=$event"
+              <input matInput formControlName="workOrderID" #workorderID
+              [readonly]="true" 
+              placeholder="workOrderID"  
+              [value]='materialValue?.workOrderID'
+              
                >  
             </mat-form-field>
           </div>
@@ -25,8 +25,8 @@
           <div fxFlex="50" class="pr-1">
               <mat-form-field>
                 <input matInput formControlName="date" [matDatepicker]="picker" 
-                [value]="materialValue?.date || null" 
-                (ngModelChange)="materialValue.date=$event"
+                [value]="materialValue?.date" #date
+                
                  placeholder="Choose a date">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
@@ -34,8 +34,8 @@
             </div>
           <div fxFlex="50" class="pr-1">
             <mat-form-field class="full-width">
-              <input matInput formControlName="customerName" [value]="materialValue?.customerName || null" 
-              (ngModelChange)="materialValue.customerName=$event"
+              <input matInput formControlName="customerName"  [value]="materialValue?.customerName" 
+             #customerName
                 placeholder="customerName">  
             </mat-form-field>
           </div>          
@@ -107,6 +107,17 @@
                     placeholder="Mode of Inward">
                 </mat-form-field>
               </div>
+              <div fxFlex="50" class="pr-1">
+                <mat-form-field class="full-width">
+                    <mat-select placeholder="Select material Type"  
+                     [(ngModel)]="materialEdit.materialType" 
+                    (ngModelChange)="materialEdit.materialType=$event" formControlName="materialType" multiple>
+                        <mat-option *ngFor="let data of materialType" [value]="data">
+                          {{data}}
+                        </mat-option>
+                      </mat-select>
+                </mat-form-field>
+              </div>
              <!--  <div fxFlex="50" class="pr-1">
                 <mat-form-field class="full-width">
                   <input matInput formControlName="modeOfOutward"
@@ -176,7 +187,7 @@
             <span fxFlex></span>
             <span fxFlex></span>           
              <button mat-raised-button type="button" color="primary" 
-             (click)="updateMaterial(materialDetailsForm)">Save</button> 
+             (click)="updateMaterial(materialDetailsForm, workorderID, date, customerName)">Save</button> 
           </div>
         </div>
       </form>

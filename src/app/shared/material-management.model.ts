@@ -12,6 +12,7 @@ export class MaterialModel {
     noOfProduct: number; */
     /* shootType: string; */
     shootStatus: string;
+    materialType: string;
     paymentStatus?: string;
     modeOfInward: string;
     modeOfOutward: string;

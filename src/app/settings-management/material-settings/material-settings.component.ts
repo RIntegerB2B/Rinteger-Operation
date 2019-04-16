@@ -18,6 +18,7 @@ export class MaterialSettingsComponent implements OnInit {
   showShootType: boolean;
   showDispatchType: boolean;
   showMaterialStatus: boolean;
+  showMaterialType: boolean;
   message;
   action;
   constructor(private fb: FormBuilder, private settingsService: SettingsServiceService,
@@ -30,23 +31,33 @@ export class MaterialSettingsComponent implements OnInit {
     this.materialSettingsForm = this.fb.group({
       shootType: [''],
       dispatchType: [''],
-      materialStatus: ['']
+      materialStatus: [''],
+      materialType: ['']
     });
   }
   showShootTypeForm() {
     this.showShootType = true;
     this.showDispatchType = false;
     this.showMaterialStatus = false;
+    this.showMaterialType = false;
   }
   showDispatchTypeForm() {
     this.showShootType = false;
     this.showDispatchType = true;
     this.showMaterialStatus = false;
+    this.showMaterialType = false;
   }
   showMaterialStatusForm() {
     this.showShootType = false;
     this.showDispatchType = false;
     this.showMaterialStatus = true;
+    this.showMaterialType = false;
+  }
+  showMaterialTypeForm() {
+    this.showShootType = false;
+    this.showDispatchType = false;
+    this.showMaterialStatus = false;
+    this.showMaterialType = true;
   }
   addShootType() {
     this.message = 'shootType mode added successfully';
@@ -61,7 +72,7 @@ export class MaterialSettingsComponent implements OnInit {
       this.materialSettingsForm.reset();
     }, error => {
       console.log(error);
-    })
+    });
   }
   viewMaterialSetting() {
     this.settingsService.getMaterial().subscribe(data => {
@@ -110,7 +121,7 @@ export class MaterialSettingsComponent implements OnInit {
       this.materialSettingsForm.reset();
     }, error => {
       console.log(error);
-    })
+    });
   }
   addMaterialStatus() {
     this.message = 'Material Status Option added successfully';
@@ -125,10 +136,10 @@ export class MaterialSettingsComponent implements OnInit {
       this.materialSettingsForm.reset();
     }, error => {
       console.log(error);
-    })
+    });
   }
   deleteMaterialStatus(test) {
-    this.message = 'Material Status option deleted successfully'
+    this.message = 'Material Status option deleted successfully';
     this.settingsService.deleteMaterialStatus(test).subscribe(data => {
       this.settingModel = data;
       this.settingValue = data;
@@ -138,6 +149,34 @@ export class MaterialSettingsComponent implements OnInit {
       this.materialSettingsForm.reset();
     }, error => {
       console.log(error);
-    })
+    });
+  }
+  addMaterialType() {
+    this.message = 'Material Type Option added successfully';
+    this.settingModel = new MaterialSetting();
+    this.settingModel.materialType = this.materialSettingsForm.controls.materialType.value;
+    this.settingsService.addMaterialType(this.settingModel).subscribe(data => {
+      this.settingModel = data;
+      this.settingValue = data;
+      this.snackBar.open(this.message, this.action, {
+        duration: 3000,
+      });
+      this.materialSettingsForm.reset();
+    }, error => {
+      console.log(error);
+    });
+  }
+  deleteMaterialType(test) {
+    this.message = 'Material Type option deleted successfully';
+    this.settingsService.deleteMaterialType(test).subscribe(data => {
+      this.settingModel = data;
+      this.settingValue = data;
+      this.snackBar.open(this.message, this.action, {
+        duration: 3000,
+      });
+      this.materialSettingsForm.reset();
+    }, error => {
+      console.log(error);
+    });
   }
 }

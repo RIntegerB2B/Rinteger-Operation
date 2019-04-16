@@ -107,8 +107,6 @@ export class ViewMaterialComponent implements OnInit {
     this.router.navigate(['material/editmaterial', data._id]);
   }
   filterMaterial(data) {
-    this.materialModel = data;
-    /* this.getNoOfProduct(); */
     this.materialModel = new MatTableDataSource<MaterialModel>(data);
     this.materialModel.paginator = this.paginator;
     this.materialModel = data;
@@ -122,6 +120,7 @@ export class ViewMaterialComponent implements OnInit {
     this.materialModel.toDate = materialDetailsForm.controls.toDate.value;
     this.materialManagementService.getByDateMaterial(this.materialModel).subscribe(data => {
       this.materialModel = data;
+      this.materialValue = data;
       /* this.getNoOfProduct(); */
       this.materialModel = new MatTableDataSource<MaterialModel>(data);
       this.materialModel.paginator = this.paginator;
@@ -139,6 +138,7 @@ export class ViewMaterialComponent implements OnInit {
     this.materialModel.finddate = materialDetailsForm.controls.finddate.value;
     this.materialManagementService.getByDateSingleMaterial(this.materialModel).subscribe(data => {
       this.materialModel = data;
+      this.materialValue = data;
       /*  this.getNoOfProduct(); */
       this.materialModel = new MatTableDataSource<MaterialModel>(data);
       this.materialModel.paginator = this.paginator;

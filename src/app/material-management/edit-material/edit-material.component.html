@@ -9,7 +9,7 @@
               <mat-form-field class="full-width">
                 <input matInput formControlName="workOrderID" [readonly]="true" 
                 placeholder="workOrderID" 
-                [ngModel]="materialEdit.workOrderID"
+                [ngModel]="materialEdit?.workOrderID"
                   (ngModelChange)="materialEdit.workOrderID=$event">      
               </mat-form-field>
             </div>
@@ -17,14 +17,14 @@
               <mat-form-field class="full-width">
                 <input matInput formControlName="DCnumber" [readonly]="true" 
                 placeholder="DCnumber" 
-                [ngModel]="materialEdit.DCnumber"
+                [ngModel]="materialEdit?.DCnumber"
                   (ngModelChange)="materialEdit.DCnumber=$event">      
               </mat-form-field>
             </div>
           <div fxFlex="50" class="pr-1">
               <mat-form-field>
                 <input matInput formControlName="date" [matDatepicker]="picker"
-                [ngModel]="materialEdit.date" [readonly]="true"
+                [ngModel]="materialEdit?.date" [readonly]="true"
                 (ngModelChange)="materialEdit.date=$event"
                  placeholder="Received Date">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -35,14 +35,14 @@
             <mat-form-field class="full-width">
               <input matInput formControlName="customerName" [readonly]="true" 
               placeholder="User Name" 
-              [ngModel]="materialEdit.customerName"
+              [ngModel]="materialEdit?.customerName"
                 (ngModelChange)="materialEdit.customerName=$event">    
             </mat-form-field>
           </div>
           <div fxFlex="50" class="pr-1">
             <mat-form-field class="full-width">
               <input matInput formControlName="receivedBy" 
-              [ngModel]="materialEdit.receivedBy" 
+              [ngModel]="materialEdit?.receivedBy" 
               (ngModelChange)="materialEdit.receivedBy=$event"
                 placeholder="Received By">    
             </mat-form-field>
@@ -50,7 +50,7 @@
           <div fxFlex="50" class="pr-1">
             <mat-form-field class="full-width">
                 <mat-select placeholder="Select Unit"  
-                [ngModel]="materialEdit.unit" 
+                [ngModel]="materialEdit?.unit" 
                 (ngModelChange)="materialEdit.unit=$event" formControlName="unit">
                     <mat-option *ngFor="let data of unit" [value]="data">
                       {{data}}
@@ -96,6 +96,13 @@
                   </mat-select>
             </mat-form-field>
           </div>
+          <div fxFlex="50" class="pr-1">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="materialType" [(ngModel)]="materialEdit.materialType"
+               (ngModelChange)="materialEdit.materialType=$event"  [readonly]="true" 
+                placeholder="materialType">
+            </mat-form-field>
+          </div>    
           <div fxFlex="50" class="pr-1">
             <mat-form-field class="full-width">
               <input matInput formControlName="paymentStatus" [readonly]="true" 
