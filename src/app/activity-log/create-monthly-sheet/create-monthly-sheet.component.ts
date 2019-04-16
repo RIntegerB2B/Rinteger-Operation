@@ -21,12 +21,13 @@ export class CreateMonthlySheetComponent implements OnInit {
   activeholder: any;
   ctrlValue: any;
   monthToString: any;
-  monthName: string;
+ /*  monthName: string; */
   id: string;
   yearValue: any;
   yearToString: any;
- /*  monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
-  'August', 'September', 'October', 'November', 'December']; */
+  year = ['2018', '2019', '2020', '2021', '2022', '2023', '2024'];
+  monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+  'August', 'September', 'October', 'November', 'December'];
   constructor(private fb: FormBuilder, private activityLogService: ActivityLogService,
     private router: Router, private route: ActivatedRoute) { }
 
@@ -44,6 +45,8 @@ export class CreateMonthlySheetComponent implements OnInit {
       customerName: [''],
       monthName: [''],
       year: [''],
+      title: [''],
+      description: [''],
       monthlyPlan:  this.fb.array([]),
       weeklyPlan:  this.fb.array([])
     });
@@ -51,13 +54,10 @@ export class CreateMonthlySheetComponent implements OnInit {
   }
   addForm() {
     const monthlyPlan = this.fb.group({
-     /*  monthlyId: [''],
-      monthName: [''],
-      year: [''], */
+      monthlyId: [''],
       monthStatus: [''],
       planTitle: [''],
-      planDescription: ['']/* ,
-      assignedTo: [''] */
+      planDescription: ['']
       });
     this.monthForms.push(monthlyPlan);
   }
@@ -66,12 +66,18 @@ export class CreateMonthlySheetComponent implements OnInit {
     return this.activityForm.get('monthlyPlan') as FormArray;
   }
 
+  deleteList(i) {
+    this.monthForms.removeAt(i);
+  }
+
   onSubmit(activityForm: FormGroup) {
     this.activeValue = new ActivityLogModel();
     this.activeValue.workOrderID = activityForm.controls.workOrderID.value;
     this.activeValue.customerName = activityForm.controls.customerName.value;
-    this.activeValue.monthName = activityForm.controls.monthName.value.getMonth() + 1;
-    this.activeValue.year = activityForm.controls.monthName.value.getFullYear();
+    this.activeValue.year = activityForm.controls.year.value;
+    this.activeValue.monthName = activityForm.controls.monthName.value;
+    this.activeValue.title = activityForm.controls.title.value;
+    this.activeValue.description = activityForm.controls.description.value;
     this.activeValue.monthlyPlan = activityForm.controls.monthlyPlan.value;
     this.activityLogService.createmonthly(this.activeValue).subscribe( data => {
       this.activeValue = data;
@@ -83,16 +89,9 @@ export class CreateMonthlySheetComponent implements OnInit {
   getAllWorkorder() {
     this.activityLogService.getFindAllWorkorder().subscribe( data => {
       this.activeValue = data[0];
-     /*  this.activeValue.forEach(element => {
-        if (this.id === element._id) {
-
-          this.activeValue = element;
-        }
-      }); */
       for (let i = 0; i <= this.activeValue.length - 1; i++) {
         if (this.id === this.activeValue[i]._id) {
           this.activeValue = this.activeValue;
-    
         }
       }
     });

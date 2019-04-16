@@ -65,21 +65,13 @@
               <label><h6>Title</h6></label>
             </div>
           </div>
-          <div class="col-md-2 vcenterHeader">
+          <div class="col-md-8 vcenterHeader">
             <div class="form-group">
               <label><h6>Description</h6></label>
             </div>
           </div>
-          <div class="col-md-2 vcenterHeader">
-            <div class="form-group">
-              <label><h6>Status</h6></label>
-            </div>
-          </div>
-          <div class="col-md-2 vcenterHeader">
-            <div class="form-group">
-              <label><h6>Select the Week</h6></label>
-            </div>
-          </div>
+          
+          
                 
           <!-- <div class="col-md-2 vcenterHeader">
             <div class="form-group">
@@ -104,32 +96,14 @@
               <label class="gridLabel">Title:</label>
             </div>
             <div class="col-md-2 col-6 vcenter form-group">
-              {{data.planTitle}}
+              {{data.title}}
             </div>
             <div class="display-none-large col-6">
               <label class="gridLabel">Description:</label>
             </div>
-            <div class="col-md-2 col-6 vcenter form-group" >
-              {{data.planDescription}}
+            <div class="col-md-8 col-6 vcenter form-group" >
+              {{data.description}}
             </div>
-            <div class="display-none-large col-6">
-              <label class="gridLabel">Status:</label>
-            </div>
-            <div class="col-md-2 col-6 vcenter form-group" >
-              {{data.monthStatus}}
-            </div>
-            <div class="col-md-2 col-6 vcenter form-group">
-             
-                  
-                      <mat-form-field>
-                        <mat-select placeholder="week" formControlName="week"  required>
-                          <mat-option *ngFor="let val of weeks" [value]="val">
-                            {{val}}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    
-              </div>
            <!--  <div class="display-none-large col-6">
               <label class="gridLabel">
                 Total Amount:
@@ -146,8 +120,8 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">    
-                  <a class="nav-link" (click)="CopyWeeklyPlan(data)">
-                      copy Weekly-Sheet
+                  <a class="nav-link" (click)="openList(data)">
+                      view
                     </a>         
                 <!-- <a class="nav-link" (click)="createWeeklyPlan(data)">
                   Create Weekly-Sheet

@@ -24,18 +24,41 @@
            
           </div>
 
-        <div fxFlex="50" class="pr-2"> 
+          <div fxFlex="50" class="pr-1">
             <mat-form-field>
-              <input matInput formControlName="monthName" [matDatepicker]="picker" 
-                placeholder="select month and year">
-              <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
+              <mat-select placeholder="Select the Year" formControlName="year">
+                <mat-option *ngFor="let data of year;let i = index " [value]="data">
+                  {{data}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div fxFlex="50" class="pr-1">
+            <mat-form-field>
+              <mat-select placeholder="monthName" formControlName="monthName">
+                <mat-option *ngFor="let data of monthName;let i = index " [value]="data">
+                  {{data}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div fxFlex="50" class="pr-2"> 
+            <mat-form-field>
+              <input matInput formControlName="title" 
+                placeholder="Enter the title">              
+            </mat-form-field>
+          </div>
+          <div fxFlex="50" class="pr-2"> 
+            <mat-form-field>
+              <input matInput formControlName="description"
+                placeholder="Enter the description">
+             
             </mat-form-field>
           </div>
      
-        <div fxLayout="row"   fxFlex="100" formArrayName="monthlyPlan" >
+        <div fxLayout="column"    fxFlex="100" formArrayName="monthlyPlan" >
           <div  *ngFor="let account of monthForms.controls; let i=index" [formGroupName]="i">
-          <div fxFlex="50" class="p-2">
+          <div fxFlex="25" class="p-2">
           <mat-form-field class="full-width">
             <input matInput formControlName="planTitle" placeholder="Title">
           </mat-form-field>
@@ -47,10 +70,18 @@
           </mat-form-field>
         </div>
         
- 
+        <a (click)="deleteList(i)">
+          <mat-icon>clear</mat-icon>
+        </a>
         
       </div>
     </div>
+    <div fxFlex="100" fxLayout="row">
+          <a (click)="addForm()">
+            <mat-icon class="gridEdit">add_box</mat-icon>
+          </a>
+          <p>Add New</p>
+        </div>
     <div fxFlex="100" class="mt-1">
         <button mat-raised-button color="primary">Create</button>
         <span fxFlex></span>

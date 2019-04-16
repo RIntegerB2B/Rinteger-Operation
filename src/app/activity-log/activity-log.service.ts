@@ -22,8 +22,8 @@ export class ActivityLogService {
     const url: string = this.serviceUrl + addUrl;
     return this.http.post<ActivityLogModel[]>(url, data);
   }
-  getFindAllMonthlySheet(): Observable<any> {
-    const addUrl = 'findmonthlysheet';
+  getAllactivityLog(): Observable<any> {
+    const addUrl = 'findallactivity';
     const url: string = this.serviceUrl + addUrl;
     return this.http.get<ActivityLogModel[]>(url);
   }
@@ -91,5 +91,10 @@ export class ActivityLogService {
     const addUrl = 'getmonthandyear';
     const url: string = this.serviceUrl + addUrl ;
     return this.http.post<ActivityLogModel[]>(url, data);
+  }
+  getSelectedActivityLog(id) : Observable<any> {
+    const addUrl = 'getselectedactivitylog/';
+    const url: string = this.serviceUrl + addUrl + id;
+    return this.http.get<ActivityLogModel[]>(url);
   }
 }

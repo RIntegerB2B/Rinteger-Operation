@@ -49,7 +49,7 @@ activityStatus: any;
     private activityLogService: ActivityLogService) { }
 
   ngOnInit() {
-    this.getAllMonthlyPlan();
+    this.getAllActivityLog();
     this.createForm();
     /* this.getStatus(); */
 
@@ -64,8 +64,8 @@ activityStatus: any;
       week: ['']
     });
   }
-  getAllMonthlyPlan() {
-    this.activityLogService.getFindAllMonthlySheet().subscribe( value => {
+  getAllActivityLog() {
+    this.activityLogService.getAllactivityLog().subscribe( value => {
       this.activityValue = value;
       this.activityValue = new MatTableDataSource<any>(value);
       this.activityValue.paginator = this.paginator;
@@ -81,7 +81,7 @@ activityStatus: any;
     /* console.log(data); */
     this.router.navigate(['activity-log/createweekly/', data._id]);
   }
-  CopyWeeklyPlan( data) {
+ /*  CopyWeeklyPlan( data) {
     console.log(data);
     console.log(this.ActivityDetailsForm.controls.week.value);
     this.activityModel = new ActivityMonth();
@@ -92,7 +92,7 @@ activityStatus: any;
       console.log(error);
     });
     this.router.navigate(['activity-log/viewweek']);
-  }
+  } */
   /* getStatus() {
     this.activityLogService.getStatus().subscribe( data => {
       this.activityModel = data;
@@ -135,5 +135,9 @@ activityStatus: any;
     const start = this.currentPage * this.pageSize;
     const part = this.array.slice(start, end);
     this.activityValue = part;
+  }
+
+  openList(row) {
+    this.router.navigate(['activity-log/viewlist/', row._id]);
   }
 }

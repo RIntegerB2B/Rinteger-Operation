@@ -98,7 +98,7 @@
               </div>
               <div class="col-md-2 col-6 vcenter form-group">    
                   <mat-form-field>
-                    <mat-select placeholder="assignedTo" formControlName="assignedTo" (ngModelChange)="activityValue[0].assignedTo=$event" required>
+                    <mat-select placeholder="assignedTo" [(value)]="data.assignedTo" (selectionChange)="selectMethod($event, data)"  required>
                       <mat-option *ngFor="let val of assignedTo" [value]="val.userName">
                         {{val.userName}}
                       </mat-option>
