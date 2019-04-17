@@ -34,6 +34,12 @@ export class CreateWeeklySheetComponent implements OnInit {
   photoSort: string;
   productSort: string;
   roleSort: string;
+  valueModel: any;
+  taskEdit: any;
+  workorder: any;
+  customer: any;
+  uniName: any;
+  valueEdit: any;
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router,
     private taskManagementService: TaskManagementService, private activityLogService: ActivityLogService) {
       this.route.paramMap.subscribe(
@@ -44,7 +50,7 @@ export class CreateWeeklySheetComponent implements OnInit {
 
   ngOnInit() {
     this.createtask();
-/*     this.getUnit(); */
+    this.getUnit();
     this.getUnitWiseName();
     this.getDepartment();
     this.getValue();
@@ -70,9 +76,11 @@ export class CreateWeeklySheetComponent implements OnInit {
       toTime: [''],
       closedDate: [''],
       time: [''],
-      list: this.fb.array([])
+      list: this.fb.array([]),
+      task: this.fb.array([])
     });
     this.addListForm();
+    this.addTaskForm();
   }
 
 
@@ -92,9 +100,23 @@ export class CreateWeeklySheetComponent implements OnInit {
     this.listForms.removeAt(i);
   }
 
+  addTaskForm() {
+    const task = this.fb.group({
+      moduleName: [''],
+      moduleDescription: [''],
+      moduleStatus: ['']
+      });
+    this.moduleForms.push(task);
+  }
 
+  get moduleForms() {
+    return this.taskForm.get('task') as FormArray;
+  }
+  deleteModule(i) {
+    this.moduleForms.removeAt(i);
+  }
   changed(e) {
-    console.log(this.unitName.filter(data => data.unit === e.value));
+   /*  console.log(this.unitName.filter(data => data.unit === e.value)); */
     this.taskname = this.unitName.filter(data => data.unit === e.value);
   }
 
@@ -150,7 +172,11 @@ export class CreateWeeklySheetComponent implements OnInit {
 
   getValue() {
     this.activityLogService.getWeekToTask(this.weekID).subscribe(data => {
-      this.valueholder = data;
+      this.valueEdit = data;
+      this.valueModel = data.weeklyPlan;
+    
+      this.taskEdit = this.valueModel.filter( value => value.weekID === this.weekID);
+      this.valueholder = this.taskEdit[0];
       console.log(this.valueholder);
     }, error => {
       console.log(error);
@@ -160,9 +186,9 @@ export class CreateWeeklySheetComponent implements OnInit {
   cancel() {
     this.router.navigate(['activity-log/viewweek']);
   }
-/* getUnit() {
+getUnit() {
   this.unitSort =  localStorage.getItem('unit');
   this.roleSort = localStorage.getItem('role');
 }
- */
+
 }

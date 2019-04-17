@@ -19,13 +19,16 @@ export class ViewAllActivityComponent implements OnInit {
   public array: any;
   private dataSource;
   activityValue: any;
+  activityModel: any;
   @ViewChild('MatPaginator') paginator: MatPaginator;
+  unitName: any;
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute,
     private activityLogService: ActivityLogService) { }
 
   ngOnInit() {
     this.getAllWorkorder();
     this.createForm();
+    this.getUnitName();
   }
 
   createForm() {
@@ -37,12 +40,14 @@ export class ViewAllActivityComponent implements OnInit {
   }
   getAllWorkorder() {
     this.activityLogService.getFindAllWorkorder().subscribe( value => {
-      this.activityValue = value;
-      this.activityValue = new MatTableDataSource<any>(value);
+      this.activityValue = value.filter( data => data.leadUnit === this.unitName);
+      this.activityModel = value.filter( data => data.leadUnit === this.unitName);
+      this.activityValue = new MatTableDataSource<any>( this.activityModel);
       this.activityValue.paginator = this.paginator;
-      this.array = value;
+      this.array =  this.activityModel;
       this.totalSize = this.array.length;
       this.iterator();
+      console.log(this.activityValue);
     }, error => {
       console.log(error);
     });
@@ -67,6 +72,10 @@ export class ViewAllActivityComponent implements OnInit {
     const start = this.currentPage * this.pageSize;
     const part = this.array.slice(start, end);
     this.activityValue = part;
+  }
+  getUnitName() {
+    this.unitName = localStorage.getItem('unit');
+  /*   console.log(this.unitName); */
   }
 
 }

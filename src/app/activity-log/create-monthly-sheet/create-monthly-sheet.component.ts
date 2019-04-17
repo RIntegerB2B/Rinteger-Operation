@@ -28,6 +28,7 @@ export class CreateMonthlySheetComponent implements OnInit {
   year = ['2018', '2019', '2020', '2021', '2022', '2023', '2024'];
   monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
   'August', 'September', 'October', 'November', 'December'];
+  unitName: string;
   constructor(private fb: FormBuilder, private activityLogService: ActivityLogService,
     private router: Router, private route: ActivatedRoute) { }
 
@@ -38,6 +39,7 @@ export class CreateMonthlySheetComponent implements OnInit {
     /* this.addForm(); */
     this.getAllWorkorder();
     this.createForm();
+    this.getUnitName();
   }
   createForm() {
     this.activityForm = this.fb.group({
@@ -77,6 +79,7 @@ export class CreateMonthlySheetComponent implements OnInit {
     this.activeValue.year = activityForm.controls.year.value;
     this.activeValue.monthName = activityForm.controls.monthName.value;
     this.activeValue.title = activityForm.controls.title.value;
+    this.activeValue.unit = this.unitName;
     this.activeValue.description = activityForm.controls.description.value;
     this.activeValue.monthlyPlan = activityForm.controls.monthlyPlan.value;
     this.activityLogService.createmonthly(this.activeValue).subscribe( data => {
@@ -103,5 +106,10 @@ export class CreateMonthlySheetComponent implements OnInit {
   }
   cancel() {
     this.router.navigate(['activity-log/viewallactivity']);
+  }
+
+  getUnitName() {
+    this.unitName = localStorage.getItem('unit');
+  /*   console.log(this.unitName); */
   }
 }

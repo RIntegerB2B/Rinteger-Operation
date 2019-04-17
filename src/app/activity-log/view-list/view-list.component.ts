@@ -26,6 +26,8 @@ export class ViewListComponent implements OnInit {
 
   week = ['week1', 'week2', 'week3', 'week4', 'week5'];
   id: string;
+  unitName: string;
+  activityEdit: any;
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute,
     private activityLogService: ActivityLogService) {
     this.route.paramMap.subscribe(
@@ -36,6 +38,7 @@ export class ViewListComponent implements OnInit {
   ngOnInit() {
     this.creatForm();
     this.getSelectAactivityLog();
+    this.getUnitName();
     /* this.getAllWeekly();
     this.getAssignedTo(); */
   }
@@ -51,12 +54,14 @@ export class ViewListComponent implements OnInit {
 
   getSelectAactivityLog() {
     this.activityLogService.getSelectedActivityLog(this.id).subscribe(data => {
-      this.activityValue = data[0].monthlyPlan;
-      /* this.activityValue = new MatTableDataSource<any>(data[0].monthlyPlan); */
-    /*   this.activityValue = new MatTableDataSource<any>(data);
-      /* this.array = data;
+      this.activityModel = data.filter( value => value.unit === this.unitName );
+      this.activityValue = this.activityModel[0].monthlyPlan;
+      this.activityEdit = this.activityModel[0].monthlyPlan;
+      /* console.log(this.activityValue); */
+      this.activityValue = new MatTableDataSource<any>(this.activityEdit );
+     this.array = this.activityEdit ;
       this.totalSize = this.array.length;
-      this.iterator(); */
+      this.iterator();
     }, error => {
       console.log(error);
     });
@@ -66,65 +71,11 @@ export class ViewListComponent implements OnInit {
     this.activityModel.week = row.week;
     this.activityLogService.copyMonthlyToWeek(this.activityModel, row._id).subscribe(data => {
       this.activityValue = data;
+      this.getSelectAactivityLog();
     }, error => {
       console.log(error);
     });
   }
-  /* copyweekstatus(ActivityDetailsForm: FormGroup, value) {
-    this.activityModel = new ActivityLogModel();
-    this.activityModel.week = ActivityDetailsForm.controls.week.value;
-    this.activityLogService
-  } */
-  /*  getAllWeekly() {
-     this.activityLogService.getFindAllWeekly().subscribe( data => {
-       this.activityValue = data;
-       this.activityValue = new MatTableDataSource<any>(data);
-       this.activityValue.paginator = this.paginator;
-       this.array = data;
-       this.totalSize = this.array.length;
-       this.iterator();
-     }, error => {
-       console.log(error);
-     });
-   }
-   getAssignedTo() {
-     this.activityLogService.getAssignedTo().subscribe( data => {
-       this.assignedTo = data;
-       console.log(this.assignedTo);
-     }, error => {
-       console.log(error);
-     });
-   }
-   assingToTask(data) {
-     this.router.navigate(['activity-log/createweekly/', data.weekID]);
-   }
-   assingedsave(ActivityDetailsForm: FormGroup, data) {
-     this.activityValue = new ActivityLogModel();
-     this.activityValue.weeklyPlan = ActivityDetailsForm.controls.assignedTo.value;
-     this.activityLogService.addAssignValue(ActivityDetailsForm.value, data.weekID).subscribe( data => {
-       this.activityValue = data;
-     }, error => {
-       console.log(error);
-     });
-   }
- 
-   deleteCompletely(data) {
-     this.activityLogService.deleteCompletePlan(data.weekID).subscribe( value => {
-       this.activityValue = value;
-     }, error => {
-       console.log(error);
-     });
-   }
-   deleteWeekly(row) {
-     this.activityLogService.deleteWeeklyPlan(row.weekID).subscribe( data => {
-       this.activityValue = data;
-     }, error => {
-       console.log(error);
-     });
-   }
-   goToMonthlySheet() {
-     this.router.navigate(['activity-log/viewallmonthly']);
-   }*/
   public handlePage(e: any) {
     this.currentPage = e.pageIndex;
     this.pageSize = e.pageSize;
@@ -135,5 +86,9 @@ export class ViewListComponent implements OnInit {
     const start = this.currentPage * this.pageSize;
     const part = this.array.slice(start, end);
     this.activityValue = part;
+  }
+  getUnitName() {
+    this.unitName = localStorage.getItem('unit');
+  /*   console.log(this.unitName); */
   }
 }

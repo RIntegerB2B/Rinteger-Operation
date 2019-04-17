@@ -24,7 +24,7 @@
         <div fxFlex="50" class="p-2">
             <mat-form-field class="full-width">
               <input matInput formControlName = "unit" placeholder="unit" 
-               [value]="valueholder?.weeklyPlan[0].unit" #weeklyPlanunit
+               [value]="valueEdit?.unit" #weeklyPlanunit
               [readonly]=true>             
             </mat-form-field>
           </div>
@@ -32,14 +32,14 @@
           <div fxFlex="50" class="p-2">
               <mat-form-field class="full-width">
                 <input matInput formControlName="assignedTo" placeholder="assignedTo" 
-                [value]="valueholder?.weeklyPlan[0].assignedTo" #weeklyPlanassingedTo
+                [value]="valueholder?.assignedTo" #weeklyPlanassingedTo
                 [readonly]=true>             
               </mat-form-field>
             </div>
             <div fxFlex="50" class="p-2">
                 <mat-form-field class="full-width">
                   <input matInput formControlName="clientName" placeholder="customerName" 
-                  [value]="valueholder?.customerName" #weeklyPlanclient
+                  [value]="valueEdit?.customerName" #weeklyPlanclient
                   [readonly]=true>             
                 </mat-form-field>
               </div>
@@ -47,7 +47,7 @@
           <div fxFlex="50" class="p-2">
             <mat-form-field class="full-width">
               <input matInput formControlName="taskTitle" placeholder="Task Title" 
-              [value]="valueholder?.weeklyPlan[0].planTitle" #weeklyPlanTitle
+              [value]="valueholder?.planTitle" #weeklyPlanTitle
               [readonly]=true>
             </mat-form-field>
           </div>
@@ -55,35 +55,35 @@
           <div fxFlex="50" class="p-2">
             <mat-form-field class="full-width">
               <textarea matInput formControlName="taskDescription" placeholder="Task Descrition"
-              [value]="valueholder?.weeklyPlan[0].planDescription" #weeklyPlanDesc
+              [value]="valueholder?.planDescription" #weeklyPlanDesc
               [readonly]=true></textarea>
             </mat-form-field>
           </div>
           <div fxFlex="50" class="p-2">
               <mat-form-field class="full-width">
                 <textarea matInput formControlName="weekID" placeholder="weekID"
-                [value]="valueholder?.weeklyPlan[0].weekID" #weeklyPlanWeekID
+                [value]="valueholder?.weekID" #weeklyPlanWeekID
                 [readonly]=true></textarea>
               </mat-form-field>
             </div>
           <div fxFlex="50" class="p-2">
               <mat-form-field class="full-width">
                 <input matInput formControlName="week" placeholder="week" 
-                [value]="valueholder?.weeklyPlan[0].week" 
+                [value]="valueholder?.week" 
                 [readonly]=true>
               </mat-form-field>
             </div>
             <div fxFlex="50" class="p-2">
                 <mat-form-field class="full-width">
                   <input matInput formControlName="year" placeholder="year" 
-                  [value]="valueholder?.year" 
+                  [value]="valueEdit?.year" 
                   [readonly]=true>
                 </mat-form-field>
               </div>
               <div fxFlex="50" class="p-2">
                   <mat-form-field class="full-width">
                     <input matInput formControlName="monthName" placeholder="Month" 
-                    [value]="valueholder?.monthName" 
+                    [value]="valueEdit?.monthName" 
                     [readonly]=true>
                   </mat-form-field>
                 </div>
@@ -156,12 +156,12 @@
           
           
   
-          <div fxFlex="100" class="textHeader">
-            <!-- *ngIf="(this.unitSort === 'BSS' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')"> -->
+          <div fxFlex="100" class="textHeader"
+            *ngIf="(this.unitSort === 'BSS' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')">
             <h5>Listing Details</h5>
           </div>
-          <div fxLayout="column" fxFlex="100" formArrayName="list">
-            <!-- *ngIf="(this.unitSort === 'BSS' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')"> -->
+          <div fxLayout="column" fxFlex="100" formArrayName="list"
+            *ngIf="(this.unitSort === 'BSS' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')">
             <div *ngFor="let account of listForms.controls; let i=index" [formGroupName]="i">
               <div fxFlex="10" class="pr-1">
                 <mat-form-field class="full-width">
@@ -185,14 +185,51 @@
             </div>
           </div>
   
-          <div fxFlex="50">
-            <!-- *ngIf="(this.unitSort === 'BSS' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')"> -->
+          <div fxFlex="50"
+            *ngIf="(this.unitSort === 'BSS' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')">
             <a (click)="addListForm()">
               <mat-icon class="gridEdit">add_box</mat-icon>
             </a>
             <p>Add New</p>
           </div>
-  
+          <div fxFlex="100" class="textHeader"
+          *ngIf="(this.unitSort === 'Technologies' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')">
+          <h5>Project Details</h5>
+        </div>
+        <div fxLayout="column" fxFlex="100" formArrayName="task"
+          *ngIf="(this.unitSort === 'Technologies' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')">
+          <div *ngFor="let account of moduleForms.controls; let i=index" [formGroupName]="i">
+            <div fxFlex="10" class="pr-1">
+              <mat-form-field class="full-width">
+                <input matInput formControlName="moduleName" placeholder="Module Name">
+              </mat-form-field>
+            </div>
+            <div fxFlex="30" class="pr-1">
+              <mat-form-field class="full-width">
+                <input matInput formControlName="moduleDescription" placeholder="moduleDescription">
+              </mat-form-field>
+            </div>
+            <div fxFlex="8" class="pr-1">
+              <mat-form-field class="full-width">
+                <input matInput formControlName="moduleStatus" placeholder="moduleStatus">
+              </mat-form-field>
+            </div>
+
+            <a (click)="deleteModule(i)">
+              <mat-icon>clear</mat-icon>
+            </a>
+          </div>
+        </div>
+
+        <div fxFlex="50"
+          *ngIf="(this.unitSort === 'Technologies' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')">
+          <a (click)="addTaskForm()">
+            <mat-icon class="gridEdit">add_box</mat-icon>
+          </a>
+          <p>Add New</p>
+        </div>
+
+
   
           <div fxFlex="100" class="mt-1">
             <button mat-raised-button color="primary">Create</button>
@@ -203,4 +240,4 @@
       </form>
     </div>
   
-  </div>{{valueholder | json}}
+  </div>

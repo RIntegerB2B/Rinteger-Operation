@@ -12,7 +12,7 @@ import { ActivityMonth } from '../../shared/activity-month.model';
   styleUrls: ['./view-week-sheet.component.css']
 })
 export class ViewWeekSheetComponent implements OnInit {
-  ActivityDetailsForm: FormGroup;
+  activityDetailsForm: FormGroup;
   activityModel: any;
     activityValue: any;
     public pageSize = 50;
@@ -21,6 +21,8 @@ export class ViewWeekSheetComponent implements OnInit {
     public array: any;
     private dataSource;
     assignedTo;
+  unitName: string;
+  activityEdit: any;
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute,
     private activityLogService: ActivityLogService) { }
     @ViewChild('MatPaginator') paginator: MatPaginator;
@@ -28,10 +30,11 @@ export class ViewWeekSheetComponent implements OnInit {
     this.creatForm();
     this.getAllWeekly();
     this.getAssignedTo();
+    this.getUnitName();
   }
 
   creatForm() {
-    this.ActivityDetailsForm = this.fb.group({
+    this.activityDetailsForm = this.fb.group({
       monthData: [''],
       yearData: [''],
       planTitle: [''],
@@ -41,7 +44,7 @@ export class ViewWeekSheetComponent implements OnInit {
       weekID: ['']
     });
   }
-  getAllWeekly() {
+  /* getAllWeekly() {
     this.activityLogService.getFindAllWeekly().subscribe( data => {
       this.activityValue = data;
       this.activityValue = new MatTableDataSource<any>(data);
@@ -52,23 +55,47 @@ export class ViewWeekSheetComponent implements OnInit {
     }, error => {
       console.log(error);
     });
-  }
-  getAssignedTo() {
-    this.activityLogService.getAssignedTo().subscribe( data => {
-      this.assignedTo = data;
-      console.log(this.assignedTo);
+  } */
+  getAllWeekly() {
+    this.activityLogService.getFindAllWeekly().subscribe( data => {
+      this.activityModel = data.filter( value => value.unit === this.unitName );
+      for (let i = 0; i <= this.activityModel.length - 1; i++) {
+        this.activityEdit = this.activityModel[i].weeklyPlan;
+      }
+      this.activityValue = this.activityEdit;
+      this.activityValue = new MatTableDataSource<any>(this.activityEdit);
+      this.activityValue.paginator = this.paginator;
+      this.array = this.activityEdit;
+      this.totalSize = this.array.length;
+      this.iterator();
+      /* console.log(this.activityValue); */
     }, error => {
       console.log(error);
     });
   }
+
+  getAssignedTo() {
+    this.activityLogService.getAssignedTo().subscribe( data => {
+      if (this.unitName === 'BSS') {
+        this.activityEdit = data.filter( value => value.unit === this.unitName);
+        this.assignedTo = this.activityEdit;
+       } else if (this.unitName === 'Technologies') {
+         this.activityEdit = data.filter( value => value.unit === this.unitName);
+         this.assignedTo = this.activityEdit;
+       }
+  }, error => {
+      console.log(error);
+    });
+  }
   assingToTask(data) {
+    /* console.log(data); */
     this.router.navigate(['activity-log/createweekly/', data.weekID]);
   }
   assingedsave(ActivityDetailsForm: FormGroup, data) {
     this.activityValue = new ActivityLogModel();
     this.activityValue.assignedTo = data.assignedTo;
-    this.activityLogService.addAssignValue( this.activityValue, data.weekID).subscribe( data => {
-      this.activityValue = data;
+    this.activityLogService.addAssignValue( this.activityValue, data.weekID).subscribe( value => {
+      this.activityValue = value;
     }, error => {
       console.log(error);
     });
@@ -102,4 +129,10 @@ export class ViewWeekSheetComponent implements OnInit {
     const part = this.array.slice(start, end);
     this.activityValue = part;
   }
+
+  getUnitName() {
+    this.unitName = localStorage.getItem('unit');
+  /*   console.log(this.unitName); */
+  }
+
 }
