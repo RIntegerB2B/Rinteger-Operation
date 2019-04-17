@@ -52,12 +52,11 @@ export class ViewListComponent implements OnInit {
   getSelectAactivityLog() {
     this.activityLogService.getSelectedActivityLog(this.id).subscribe(data => {
       this.activityValue = data[0].monthlyPlan;
-      this.activityValue = new MatTableDataSource<any>(data);
-      this.activityValue.paginator = this.paginator;
-      this.array = data;
+      /* this.activityValue = new MatTableDataSource<any>(data[0].monthlyPlan); */
+    /*   this.activityValue = new MatTableDataSource<any>(data);
+      /* this.array = data;
       this.totalSize = this.array.length;
-      this.iterator();
-      console.log(this.activityValue);
+      this.iterator(); */
     }, error => {
       console.log(error);
     });

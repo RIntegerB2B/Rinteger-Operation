@@ -8,6 +8,7 @@ import { WorkOrder } from './../../shared/workorder.model';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import {MatSnackBar} from '@angular/material';
+import { WorkOrderPdf } from '../../shared/workorderpdf.model';
 @Component({
   selector: 'app-edit-workorder',
   templateUrl: './edit-workorder.component.html',
@@ -17,6 +18,7 @@ export class EditWorkorderComponent implements OnInit {
   requirements: FormArray;
   workOrderDetailsForm: FormGroup;
   workOrder: WorkOrder;
+  workOrderPDFModel: WorkOrderPdf;
   workOrderData: WorkOrder;
   leadModel: Lead[] = [];
   customerModel: Customer;
@@ -27,6 +29,7 @@ export class EditWorkorderComponent implements OnInit {
   workId: string;
   message;
   action;
+  gstVal;
   constructor(private fb: FormBuilder, private workOrderService: WorkOrderService
     , private route: ActivatedRoute,  private snackBar: MatSnackBar, private router: Router) { }
 
@@ -35,6 +38,24 @@ export class EditWorkorderComponent implements OnInit {
     this.workId = this.route.snapshot.params.workId;
     this.viewWorkOrder();
     this.createForm();
+    this.viewCompanyDetails();
+  }
+  viewCompanyDetails() {
+    this.workOrderService.workorderPDFDetails().subscribe(data => {
+      if (data.length !== 0) {
+        this.workOrderPDFModel = data;
+        this.gstVal = this.workOrderPDFModel[0].gst;
+      }
+    }, error => {
+      console.log(error);
+    });
+  }
+  checkGst(event) {
+    if (event.checked) {
+      this.gstVal = 0;
+    } else {
+      this.gstVal = this.workOrderPDFModel[0].gst;
+    }
   }
   createForm() {
     this.workOrderDetailsForm = this.fb.group({
@@ -58,7 +79,6 @@ export class EditWorkorderComponent implements OnInit {
   viewWorkOrder()   {
     this.workOrderService.viewSingleWorkOrder(this.workId).subscribe(data => {
       this.workOrder = data[0];
-      console.log(this.workOrder);
       this.addForm();
       this.getTotal();
     }, error => {
@@ -105,6 +125,7 @@ export class EditWorkorderComponent implements OnInit {
     this.workOrder.workOrderID =  workOrderDetailsForm.controls.workOrderID.value;
     this.workOrderService.updateSingleWorkOrder(this.workOrder, this.workId).subscribe(data => {
       this.workOrderData = data[0];
+      
       this.snackBar.open(this.message, this.action, {
         duration: 3000,
       });
@@ -124,6 +145,7 @@ export class EditWorkorderComponent implements OnInit {
     });
     this.requirementsForms.push(requirements);
   }
+ 
 
   get requirementsForms() {
     return this.workOrderDetailsForm.get('requirements') as FormArray;

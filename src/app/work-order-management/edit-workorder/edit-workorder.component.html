@@ -120,7 +120,9 @@
       </div>
     </div>
     <div (keyup)="getTotal()" formArrayName="requirements">
-      <div *ngFor="let account of requirementsForms.controls; let i=index" [formGroupName]="i" class="row">
+      <div *ngFor="let account of requirementsForms.controls; let i=index"
+       [formGroupName]="i"
+        class="row">
         <div class="col-md-1 col-4">
           <div class="form-group">
             <mat-form-field class="full-width">
@@ -181,17 +183,24 @@
         <mat-icon class="gridEdit">add_box</mat-icon>
       </a>
     </div>
+    <div class="col-md-12">
+      <mat-checkbox 
+      (change)="checkGst($event)">Without Gst</mat-checkbox>
+    </div>
     <div class="offset-md-6 col-md-6">
       <div class="pageBoxLg">
         <div class="row">
           <div class="col-md-6 col-6">
             <mat-form-field class="full-width">
-              <input matInput formControlName="subTotal" [readonly]="true" placeholder="Sub Total" [ngModel]="sum">
+              <input matInput formControlName="subTotal"
+               [readonly]="true" placeholder="Sub Total" [ngModel]="sum">
             </mat-form-field>
           </div>
           <div class="col-md-6 col-6">
             <mat-form-field class="full-width">
-              <input matInput formControlName="tax" [readonly]="true" placeholder="Tax">
+              <input matInput formControlName="tax" 
+               [ngModel]="(workOrderDetailsForm.controls.subTotal.value * this?.gstVal / 100)"
+              [readonly]="true" placeholder="Tax">
             </mat-form-field>
           </div>
           <div class="col-md-12 col-12">
