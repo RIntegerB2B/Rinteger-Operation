@@ -18,9 +18,9 @@ const routes: Routes = [
     component: ViewEditedIncomeComponent
   },
   {
-    path: "editincomesheet/:id",
+    path: 'editincomesheet/:id',
     component: EditIncomeSheetComponent
-  } 
+  }
 ];
 
 @NgModule({

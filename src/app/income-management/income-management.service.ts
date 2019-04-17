@@ -60,6 +60,6 @@ export class IncomeManagementService {
   workOrderStatus(data): Observable<any> {
     const addUrl = 'workorderstatus/';
     const url: string = this.serviceUrl + addUrl + data.workOrderID;
-    return this.httpClient.put<WorkOrder[]>(url, data);
+    return this.httpClient.post<WorkOrder[]>(url, data);
   }
 }

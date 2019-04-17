@@ -195,7 +195,8 @@
     </div>
  -->
     <div (keyup)="getTotal()" formArrayName="requirements">
-      <div *ngFor="let account of requirementsForms.controls; let i=index" [formGroupName]="i" class="row">
+      <div *ngFor="let account of requirementsForms.controls; let i=index" 
+      [formGroupName]="i" class="row">
         <div class="col-md-1 col-4">
           <div class="form-group">
             <mat-form-field class="full-width">

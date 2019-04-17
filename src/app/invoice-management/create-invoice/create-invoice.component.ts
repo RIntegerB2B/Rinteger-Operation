@@ -76,7 +76,6 @@ export class CreateInvoiceComponent implements OnInit {
       invoiceDetailsForm.controls.tax.value
     );
     this.invoiceService.createInvoice(this.invoice).subscribe(data => {
-      /* this.router.navigate(['invoice/viewinvoice', data.workOrderID]); */
       this.getInvoiceStatus(data);
     }, error => {
       console.log(error);
@@ -115,6 +114,13 @@ export class CreateInvoiceComponent implements OnInit {
       console.log(error);
     });
     this.addForm();
+  }
+  checkGst(event) {
+    if (event.checked) {
+      this.gstVal = 0;
+    } else {
+      this.gstVal = this.workOrderPDFModel[0].gst;
+    }
   }
   addForm() {
     for (let i = 0; i <= this.workOrder[0].requirements.length - 1; i++) {
