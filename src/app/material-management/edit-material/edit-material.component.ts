@@ -22,6 +22,7 @@ export class EditMaterialComponent implements OnInit {
   paymentStatus;
   unit = ['Studio', 'BSS', 'Technologies'];
   shootType;
+  dispatchStatus = ['Dispatch not completed', 'Dispatch completed'];
   materialStatus;
   materialttType;
   dispatchType;
@@ -56,17 +57,19 @@ export class EditMaterialComponent implements OnInit {
       modeOfInward: [''],
       materialType: [''],
       modeOfOutward: [''],
+      outwardDate: [''],
       dispatchType: [''],
       materialStatus: [''],
+      dispatchStatus: [''],
       remark: [''],
       product: this.fb.array([])
-    })
-    /*  this.addForm(); */
+    });
   }
   addForm() {
     const product = this.fb.group({
       productType: [''],
-      noOfProduct: ['']
+      noOfProduct: [''],
+      modelType: ['']
     });
     this.productForms.push(product);
   }
@@ -83,7 +86,8 @@ export class EditMaterialComponent implements OnInit {
       const product = this.fb.group({
         _id: [this.materialEdit.product[i]._id],
         productType: [this.materialEdit.product[i].productType],
-        noOfProduct: [this.materialEdit.product[i].noOfProduct]
+        noOfProduct: [this.materialEdit.product[i].noOfProduct],
+        modelType: [this.materialEdit.product[i].modelType]
 
       });
       this.productForms.push(product);
@@ -105,8 +109,8 @@ export class EditMaterialComponent implements OnInit {
       console.log(error);
     });
   }
-  updateMaterial(materialDetailForm: FormGroup, data) {
-    this.marerialManagementService.getUpdateMaterial(materialDetailForm.value, data._id).subscribe(data => {
+  updateMaterial(materialDetailForm: FormGroup, row) {
+    this.marerialManagementService.getUpdateMaterial(materialDetailForm.value, row._id).subscribe(data => {
       this.materialEdit = data;
       this.router.navigate(['material/viewmaterial']);
     }, error => {

@@ -5,6 +5,8 @@ import { ViewMaterialComponent } from './view-material/view-material.component';
 import { ViewSingleMaterialComponent } from './view-single-material/view-single-material.component';
 import { FrontScreenComponent } from './front-screen/front-screen.component';
 import { EditMaterialComponent } from './edit-material/edit-material.component';
+import { DispatchedMaterialComponent } from './dispatched-material/dispatched-material.component';
+
 const routes: Routes = [
     {
         path: 'creatematerial/:id',
@@ -25,6 +27,10 @@ const routes: Routes = [
     {
         path: 'editmaterial/:id',
         component: EditMaterialComponent
+    },
+    {
+        path: 'dispatch',
+        component: DispatchedMaterialComponent
     }
 ];
 

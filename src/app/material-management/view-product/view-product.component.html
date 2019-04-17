@@ -5,29 +5,40 @@
     </div>
   </div>
   <div class="row gridRowHeader display-none-small">
-    <div class="col-md-6">
+    <div class="col-md-4">
       <div class="form-group">
         <label>Product Type</label>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
       <div class="form-group">
         <label>No. of Products</label>
       </div>
     </div>    
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>Model Type</label>
+      </div>
+    </div>
   </div>
   <div class="row gridRow" *ngFor="let data of productData; let i = index">
     <div class="display-none-large col-6">
       <label class="gridLabel">Product Type:</label>
     </div>
-    <div class="col-md-6 col-6 vcenter form-group">
+    <div class="col-md-4 col-6 vcenter form-group">
       {{data.productType}}
     </div>
     <div class="display-none-large col-6">
       <label class="gridLabel">No. of Products:</label>
     </div>
-    <div class="col-md-6 col-6 vcenter form-group">
+    <div class="col-md-4 col-6 vcenter form-group">
         {{data.noOfProduct}}
-    </div>    
+    </div>  
+    <div class="display-none-large col-6">
+      <label class="gridLabel">No. of Products:</label>
+    </div>
+    <div class="col-md-4 col-6 vcenter form-group">
+      {{data.modelType}}
+  </div>   
   </div>  
 </div>

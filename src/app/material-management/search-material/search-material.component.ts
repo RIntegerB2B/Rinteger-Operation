@@ -9,7 +9,7 @@ import { MaterialModel } from '../../shared/material-management.model';
 export class SearchMaterialComponent implements OnInit {
   materialDetailsForm: FormGroup;
   @Input() materialModel: MaterialModel;
-  @Output() searchMaterial = new EventEmitter<any>()
+  @Output() searchMaterial = new EventEmitter<any>();
   constructor(private fb: FormBuilder) { }
   ngOnInit() {
     this.materialDetailsForm = this.fb.group({
@@ -25,7 +25,5 @@ export class SearchMaterialComponent implements OnInit {
      const filterData = materialData.filter(data =>
       data.customerName.toUpperCase().indexOf(search.toUpperCase()) > -1);
     this.searchMaterial.emit(filterData);
-    
-
   }
 }

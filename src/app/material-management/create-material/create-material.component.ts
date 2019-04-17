@@ -24,7 +24,7 @@ export class CreateMaterialComponent implements OnInit {
   shootStatus = ['completed', 'not completed', 'partial'];
   materialStatus = ['received', 'not received'];
   dispatchType = ['travels', 'self'];
-  unit = ['Studio','BSS','Technologies'];
+  unit = ['Studio', 'BSS', 'Technologies'];
   materialEdit: any;
   constructor(private materialManagementService: MaterialManagementService,
     private router: Router, private fb: FormBuilder, private route: ActivatedRoute,
@@ -63,7 +63,8 @@ export class CreateMaterialComponent implements OnInit {
   addForm() {
     const product = this.fb.group({
     productType: [''],
-    noOfProduct: ['']
+    noOfProduct: [''],
+    modelType: ['']
       });
     this.productForms.push(product);
   }

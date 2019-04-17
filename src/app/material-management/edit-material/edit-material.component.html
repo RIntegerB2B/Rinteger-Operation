@@ -23,12 +23,11 @@
             </div>
           <div fxFlex="50" class="pr-1">
               <mat-form-field>
-                <input matInput formControlName="date" [matDatepicker]="picker"
+                <input matInput formControlName="date" 
                 [ngModel]="materialEdit?.date" [readonly]="true"
                 (ngModelChange)="materialEdit.date=$event"
                  placeholder="Received Date">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
+                
               </mat-form-field>
             </div>
           <div fxFlex="50" class="pr-1">
@@ -128,6 +127,16 @@
               </mat-form-field>
             </div>
             <div fxFlex="50" class="pr-1">
+              <mat-form-field>
+                <input matInput formControlName="outwardDate" [matDatepicker]="picker"
+                [ngModel]="materialEdit?.outwardDate" [readonly]="true"
+                (ngModelChange)="materialEdit.outwardDate=$event"
+                 placeholder="Outward Date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div fxFlex="50" class="pr-1">
                 <mat-form-field class="full-width">
                     <mat-select placeholder="Select Dispatch Type"  
                      [(ngModel)]="materialEdit.dispatchType" 
@@ -150,6 +159,18 @@
                         </mat-select>
                   </mat-form-field>
                 </div>                  
+                <div fxFlex="50" class="pr-1">
+                  <mat-form-field class="full-width">
+                      <mat-select placeholder="Select Dispatch Status"  
+                       [(ngModel)]="materialEdit.dispatchStatus" 
+                      (ngModelChange)="materialEdit.dispatchStatus=$event"
+                       formControlName="dispatchStatus">
+                          <mat-option *ngFor="let data of dispatchStatus" [value]="data">
+                            {{data}}
+                          </mat-option>
+                        </mat-select>
+                  </mat-form-field>
+                </div>   
           <div fxFlex="50" class="pr-1">
             <mat-form-field class="full-width">
               <input matInput formControlName="remark" [(ngModel)]="materialEdit.remark"
@@ -178,7 +199,14 @@
                   placeholder="noOfProduct">
                 </mat-form-field>
               </div>
-                  
+              <div fxFlex="15" class="pr-1">
+                <mat-form-field class="full-width">
+                  <input matInput formControlName="modelType"                    
+                  (ngModelChange)="materialEdit.modelType=$event"
+           
+                  placeholder="modelType">
+                </mat-form-field>
+              </div>
              
               <a (click)="deleteProducts(i)">
                 <mat-icon>clear</mat-icon>

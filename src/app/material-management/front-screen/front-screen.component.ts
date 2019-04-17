@@ -72,8 +72,7 @@ export class FrontScreenComponent implements OnInit {
   }
   filterMaterial(data) {
 
-    this.materialModel = data;
-    this.materialValue = data;
+    
     this.materialModel = new MatTableDataSource<MaterialModel>(data);
     this.materialModel.paginator = this.paginator;
     this.materialModel = data;
@@ -107,5 +106,8 @@ export class FrontScreenComponent implements OnInit {
     const start = this.currentPage * this.pageSize;
     const part = this.array.slice(start, end);
     this.materialModel = part;
+  }
+  findAllDispatch() {
+    this.router.navigate(['material/dispatch']);
   }
 }

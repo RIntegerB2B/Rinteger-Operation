@@ -16,8 +16,10 @@ export class MaterialModel {
     paymentStatus?: string;
     modeOfInward: string;
     modeOfOutward: string;
+    outwardDate: Date;
     dispatchType: string;
     materialStatus: string;
+    dispatchStatus: string;
     remark: string;
     product: [Product];
 }

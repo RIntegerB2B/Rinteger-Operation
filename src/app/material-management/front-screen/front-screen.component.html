@@ -24,7 +24,8 @@
         </div>        
         <div>
           <button mat-raised-button (click)="getMaterialSheet()" type="submit">MaterialSheet</button>
-          <button mat-raised-button (click)="findAllWorkOrder()" type="submit">Refresh</button>          
+          <button mat-raised-button (click)="findAllWorkOrder()" type="submit">Refresh</button>   
+          <button mat-raised-button (click)="findAllDispatch()" type="submit">Dispatched</button>         
         </div>
         <div class="col-5">
             <app-search-material [materialModel]='materialValue' (searchMaterial)='filterMaterial($event)'>            

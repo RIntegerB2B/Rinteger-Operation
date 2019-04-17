@@ -40,6 +40,7 @@ import { EditMaterialComponent } from './edit-material/edit-material.component';
 import { FrontScreenComponent } from './front-screen/front-screen.component';
 import { SearchMaterialComponent } from './search-material/search-material.component';
 import { ViewProductComponent } from './view-product/view-product.component';
+import { DispatchedMaterialComponent } from './dispatched-material/dispatched-material.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ViewProductComponent } from './view-product/view-product.component';
     EditMaterialComponent,
     FrontScreenComponent,
     SearchMaterialComponent,
-    ViewProductComponent
+    ViewProductComponent,
+    DispatchedMaterialComponent
   ],
   imports: [
     HttpClientModule,

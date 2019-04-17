@@ -95,4 +95,9 @@ export class MaterialManagementService {
     const url: string = this.serviceUrl + addUrl + id;
     return this.httpClient.get<MaterialModel[]>(url);
   }
+  getDispatchedMaterial(): Observable<any> {
+    const addUrl = 'finddispatchmaterial';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<MaterialModel[]>(url);
+  }
 }

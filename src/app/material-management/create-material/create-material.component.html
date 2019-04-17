@@ -166,7 +166,13 @@
                   placeholder="noOfProduct">
                 </mat-form-field>
               </div>
-                  
+              <div fxFlex="15" class="pr-1">
+                <mat-form-field class="full-width">
+                  <input matInput formControlName="modelType"  
+                  [value]="materialValue?.modelType || null"
+                  placeholder="modelType">
+                </mat-form-field>
+              </div>  
              
               <a (click)="deleteProducts(i)">
                 <mat-icon>clear</mat-icon>

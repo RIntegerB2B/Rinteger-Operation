@@ -44,7 +44,8 @@ export class ViewSingleMaterialComponent implements OnInit {
   addForm() {
     const product = this.fb.group({
       productType: [''],
-      noOfProduct: ['']
+      noOfProduct: [''],
+      modelType: ['']
     });
     this.productForms.push(product);
   }

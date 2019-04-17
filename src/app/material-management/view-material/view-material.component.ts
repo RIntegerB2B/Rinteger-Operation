@@ -15,8 +15,8 @@ export class ViewMaterialComponent implements OnInit {
   matdatasource = new MatTableDataSource([]);
   materialDetailsForm: FormGroup;
   materialModel: any = [];
-  materialType: any;
-  materialValue: MaterialModel;
+  materialType: MaterialModel;
+  materialValue: MaterialModel[];
   shootStatus = ['completed', 'not completed', 'partial'];
   /*   paymentStatus = ['yes', 'no']; */
   productType = ['shirt', 'pant'];
@@ -62,21 +62,16 @@ export class ViewMaterialComponent implements OnInit {
       finddate: [''],
       date: ['', Validators.required],
       customerName: ['', Validators.required],
-      productType: [''],
-      /*   shootType: [''], */
-      /*     noOfProduct: [''],
-          shootStatus: [''], */
+      productType: ['']
     });
   }
   getAllMaterial() {
     this.materialManagementService.getAllMaterial().subscribe(data => {
-      this.materialModel = data;
-      this.materialValue = data;
-      /*      this.getNoOfProduct(); */
-      this.materialModel = new MatTableDataSource<MaterialModel>(data);
+      this.materialValue =  data.filter( value => value.dispatchStatus !== 'Dispatch completed');
+      this.materialModel = data.filter( value => value.dispatchStatus !== 'Dispatch completed');
+      this.materialModel = new MatTableDataSource<MaterialModel>(this.materialValue);
       this.materialModel.paginator = this.paginator;
-      this.materialModel = data;
-      this.array = data;
+      this.array = this.materialValue;
       this.totalSize = this.array.length;
       this.iterator();
 
@@ -90,13 +85,11 @@ export class ViewMaterialComponent implements OnInit {
   }
   getDeleteMaterial(test) {
     this.materialManagementService.deleteMaterial(test).subscribe(data => {
-      this.materialModel = data;
-      this.materialValue = data;
-      /*   this.getNoOfProduct(); */
-      this.materialModel = new MatTableDataSource<MaterialModel>(data);
+      this.materialValue =  data.filter( value => value.dispatchStatus !== 'Dispatch completed');
+      this.materialModel = data.filter( value => value.dispatchStatus !== 'Dispatch completed');
+      this.materialModel = new MatTableDataSource<MaterialModel>(this.materialValue);
       this.materialModel.paginator = this.paginator;
-      this.materialModel = data;
-      this.array = data;
+      this.array = this.materialValue;
       this.totalSize = this.array.length;
       this.iterator();
     }, error => {
@@ -119,13 +112,11 @@ export class ViewMaterialComponent implements OnInit {
     this.materialModel.fromDate = materialDetailsForm.controls.fromDate.value;
     this.materialModel.toDate = materialDetailsForm.controls.toDate.value;
     this.materialManagementService.getByDateMaterial(this.materialModel).subscribe(data => {
-      this.materialModel = data;
-      this.materialValue = data;
-      /* this.getNoOfProduct(); */
-      this.materialModel = new MatTableDataSource<MaterialModel>(data);
+      this.materialValue =  data.filter( value => value.dispatchStatus !== 'Dispatch completed');
+      this.materialModel = data.filter( value => value.dispatchStatus !== 'Dispatch completed');
+      this.materialModel = new MatTableDataSource<MaterialModel>(this.materialValue);
       this.materialModel.paginator = this.paginator;
-      this.materialModel = data;
-      this.array = data;
+      this.array = this.materialValue;
       this.totalSize = this.array.length;
       this.iterator();
 
@@ -137,13 +128,11 @@ export class ViewMaterialComponent implements OnInit {
     this.materialModel = new MaterialModel();
     this.materialModel.finddate = materialDetailsForm.controls.finddate.value;
     this.materialManagementService.getByDateSingleMaterial(this.materialModel).subscribe(data => {
-      this.materialModel = data;
-      this.materialValue = data;
-      /*  this.getNoOfProduct(); */
-      this.materialModel = new MatTableDataSource<MaterialModel>(data);
+      this.materialValue =  data.filter( value => value.dispatchStatus !== 'Dispatch completed');
+      this.materialModel = data.filter( value => value.dispatchStatus !== 'Dispatch completed');
+      this.materialModel = new MatTableDataSource<MaterialModel>(this.materialValue);
       this.materialModel.paginator = this.paginator;
-      this.materialModel = data;
-      this.array = data;
+      this.array = this.materialValue;
       this.totalSize = this.array.length;
       this.iterator();
 
@@ -164,14 +153,13 @@ export class ViewMaterialComponent implements OnInit {
     this.materialModel = new MaterialModel();
     this.materialModel.shootStatus = row;
     this.materialManagementService.shootStatus(this.materialModel).subscribe(data => {
-      this.materialValue = data;
-      this.materialModel = new MatTableDataSource<MaterialModel>(data);
+      this.materialValue =  data.filter( value => value.dispatchStatus !== 'Dispatch completed');
+      this.materialModel = data.filter( value => value.dispatchStatus !== 'Dispatch completed');
+      this.materialModel = new MatTableDataSource<MaterialModel>(this.materialValue);
       this.materialModel.paginator = this.paginator;
-      this.materialModel = data;
-      this.array = data;
+      this.array = this.materialValue;
       this.totalSize = this.array.length;
       this.iterator();
-      /*  this.getNoOfProduct(); */
     }, error => {
       console.log(error);
     });
@@ -181,13 +169,11 @@ export class ViewMaterialComponent implements OnInit {
     this.materialModel.paymentStatus = row;
     console.log(this.materialModel);
     this.materialManagementService.paymentStatus(this.materialModel).subscribe(data => {
-      this.materialModel = data;
-      this.materialValue = data;
-      /*  this.getNoOfProduct(); */
-      this.materialModel = new MatTableDataSource<MaterialModel>(data);
+      this.materialValue =  data.filter( value => value.dispatchStatus !== 'Dispatch completed');
+      this.materialModel = data.filter( value => value.dispatchStatus !== 'Dispatch completed');
+      this.materialModel = new MatTableDataSource<MaterialModel>(this.materialValue);
       this.materialModel.paginator = this.paginator;
-      this.materialModel = data;
-      this.array = data;
+      this.array = this.materialValue;
       this.totalSize = this.array.length;
       this.iterator();
     }, error => {
@@ -199,13 +185,11 @@ export class ViewMaterialComponent implements OnInit {
     this.materialModel.shootType = row;
     console.log(this.materialModel);
     this.materialManagementService.shootType(this.materialModel).subscribe(data => {
-      this.materialModel = data;
-      this.materialValue = data;
-      /* this.getNoOfProduct(); */
-      this.materialModel = new MatTableDataSource<MaterialModel>(data);
+      this.materialValue =  data.filter( value => value.dispatchStatus !== 'Dispatch completed');
+      this.materialModel = data.filter( value => value.dispatchStatus !== 'Dispatch completed');
+      this.materialModel = new MatTableDataSource<MaterialModel>(this.materialValue);
       this.materialModel.paginator = this.paginator;
-      this.materialModel = data;
-      this.array = data;
+      this.array = this.materialValue;
       this.totalSize = this.array.length;
       this.iterator();
     }, error => {
@@ -217,13 +201,11 @@ export class ViewMaterialComponent implements OnInit {
     this.materialModel.dispatchType = row;
     console.log(this.materialModel);
     this.materialManagementService.dispatchType(this.materialModel).subscribe(data => {
-      this.materialModel = data;
-      this.materialValue = data;
-      /*   this.getNoOfProduct(); */
-      this.materialModel = new MatTableDataSource<MaterialModel>(data);
+      this.materialValue =  data.filter( value => value.dispatchStatus !== 'Dispatch completed');
+      this.materialModel = data.filter( value => value.dispatchStatus !== 'Dispatch completed');
+      this.materialModel = new MatTableDataSource<MaterialModel>(this.materialValue);
       this.materialModel.paginator = this.paginator;
-      this.materialModel = data;
-      this.array = data;
+      this.array = this.materialValue;
       this.totalSize = this.array.length;
       this.iterator();
     }, error => {
@@ -235,12 +217,11 @@ export class ViewMaterialComponent implements OnInit {
     this.materialModel.materialStatus = row;
     console.log(this.materialModel);
     this.materialManagementService.materialStatus(this.materialModel).subscribe(data => {
-      this.materialValue = data;
-      /* this.getNoOfProduct(); */
-      this.materialModel = new MatTableDataSource<MaterialModel>(data);
+      this.materialValue =  data.filter( value => value.dispatchStatus !== 'Dispatch completed');
+      this.materialModel = data.filter( value => value.dispatchStatus !== 'Dispatch completed');
+      this.materialModel = new MatTableDataSource<MaterialModel>(this.materialValue);
       this.materialModel.paginator = this.paginator;
-      this.materialModel = data;
-      this.array = data;
+      this.array = this.materialValue;
       this.totalSize = this.array.length;
       this.iterator();
     }, error => {
