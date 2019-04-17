@@ -5,6 +5,8 @@ export class ActivityLogModel {
     customerName: string;
     monthName: string;
     year: string;
+    title: string;
+    description: string;
     monthlyPlan: [ActivityMonth];
     weeklyPlan: [ActivityWeekMonth];
 }

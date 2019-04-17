@@ -1,0 +1,83 @@
+<form [formGroup]="ActivityDetailsForm">
+  <div class="pageBoxLg">
+    <div class="container-fluid">
+      <div class="row gridRowHeader display-none-small">
+        <div class="col-md-2 vcenterHeader">
+          <div class="form-group">
+            <label><h6>Title</h6></label>
+          </div>
+        </div>
+        <div class="col-md-2 vcenterHeader">
+          <div class="form-group">
+            <label><h6>Description</h6></label>
+          </div>
+        </div>
+        <div class="col-md-2 vcenterHeader">
+          <div class="form-group">
+            <label><h6>Week</h6></label>
+          </div>
+        </div>
+        <div class="col-md-2 vcenterHeader">
+          <div class="form-group">
+            <label><h6> Status</h6></label>
+          </div>
+        </div>
+        <div class="col-md-2 vcenterHeader">
+          <div class="form-group">
+            <label><h6>Action</h6></label>
+          </div>
+        </div>
+      </div>
+      <div *ngFor="let data of activityValue">
+        <div class="row gridRow">
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Title:</label>
+          </div>
+          <div class="col-md-2 col-6 vcenter form-group">
+            {{data.planTitle}}
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Description:</label>
+          </div>
+          <div class="col-md-2 col-6 vcenter form-group" >
+            {{data.planDescription}}
+          </div>
+          <div class="col-md-2 col-6 vcenter form-group">    
+            <mat-form-field>
+              <mat-select placeholder="select week"  (selectionChange)="selectMethod($event, data)" 
+              [(value)]="data.week"
+               required>
+                <mat-option *ngFor="let val of week; let i = index " [value]="val">
+                  {{val}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>            
+          <div class="display-none-large col-6">
+            <label class="gridLabel">
+              Status:
+            </label>
+          </div>
+          <div class="col-md-2 col-6 vcenter form-group">
+            &nbsp;{{data.monthStatus}}
+          </div>          
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Action:</label>
+          </div>
+          <div class="col-md-2 col-6 vcenter form-group">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">    
+                <a class="nav-link" (click) = "copyToWeeklyPlan(ActivityDetailsForm,data)">
+                   Copy To WeeklyPlan
+                  </a>         
+            </mat-menu>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true" [length]="totalSize"
+    [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>
+</form>

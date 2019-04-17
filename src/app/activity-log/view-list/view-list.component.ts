@@ -1,17 +1,18 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivityLogModel } from '../../shared/activity-log.model';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { ActivityLogService } from '../activity-log.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ActivityMonth } from '../../shared/activity-month.model';
+
 @Component({
-  selector: 'app-view-week-sheet',
-  templateUrl: './view-week-sheet.component.html',
-  styleUrls: ['./view-week-sheet.component.css']
+  selector: 'app-view-list',
+  templateUrl: './view-list.component.html',
+  styleUrls: ['./view-list.component.css']
 })
-export class ViewWeekSheetComponent implements OnInit {
+export class ViewListComponent implements OnInit {
   ActivityDetailsForm: FormGroup;
   activityModel: any;
     activityValue: any;
@@ -21,27 +22,65 @@ export class ViewWeekSheetComponent implements OnInit {
     public array: any;
     private dataSource;
     assignedTo;
+
+    week = ['week1', 'week2', 'week3', 'week4', 'week5'];
+
+
+
+  id: string;
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute,
-    private activityLogService: ActivityLogService) { }
+    private activityLogService: ActivityLogService) {
+      this.route.paramMap.subscribe(
+        (params: ParamMap) => {
+          this.id = params.get('id');
+        });
+     }
     @ViewChild('MatPaginator') paginator: MatPaginator;
   ngOnInit() {
+    
     this.creatForm();
-    this.getAllWeekly();
-    this.getAssignedTo();
+    this.getSelectAactivityLog();
+    /* this.getAllWeekly();
+    this.getAssignedTo(); */
   }
 
   creatForm() {
     this.ActivityDetailsForm = this.fb.group({
-      monthData: [''],
-      yearData: [''],
-      planTitle: [''],
-      planDescription: [''],
+      title: [''],
+      description: [''],
       week: [''],
-      assignedTo: [''],
-      weekID: ['']
+      monthStatus: ['']
     });
   }
-  getAllWeekly() {
+
+getSelectAactivityLog() {
+  this.activityLogService.getSelectedActivityLog(this.id).subscribe(data => {
+    this.activityValue = data[0].monthlyPlan;
+    this.activityValue = new MatTableDataSource<any>(data);
+      this.activityValue.paginator = this.paginator;
+      this.array = data;
+      this.totalSize = this.array.length;
+      this.iterator();
+    console.log(this.activityValue);
+  }, error => {
+    console.log(error);
+  });
+}
+copyToWeeklyPlan(ActivityDetailsForm: FormGroup, row) {
+  this.activityModel = new ActivityLogModel();
+  this.activityModel.week = row.week;
+  this.activityLogService.copyMonthlyToWeek( this.activityModel, row._id).subscribe( data => {
+    this.activityValue = data;
+  }, error => {
+    console.log(error);
+  });
+}
+/* copyweekstatus(ActivityDetailsForm: FormGroup, value) {
+  this.activityModel = new ActivityLogModel();
+  this.activityModel.week = ActivityDetailsForm.controls.week.value;
+  this.activityLogService
+} */
+ /*  getAllWeekly() {
     this.activityLogService.getFindAllWeekly().subscribe( data => {
       this.activityValue = data;
       this.activityValue = new MatTableDataSource<any>(data);
@@ -66,8 +105,8 @@ export class ViewWeekSheetComponent implements OnInit {
   }
   assingedsave(ActivityDetailsForm: FormGroup, data) {
     this.activityValue = new ActivityLogModel();
-    this.activityValue.assignedTo = data.assignedTo;
-    this.activityLogService.addAssignValue( this.activityValue, data.weekID).subscribe( data => {
+    this.activityValue.weeklyPlan = ActivityDetailsForm.controls.assignedTo.value;
+    this.activityLogService.addAssignValue(ActivityDetailsForm.value, data.weekID).subscribe( data => {
       this.activityValue = data;
     }, error => {
       console.log(error);
@@ -90,7 +129,7 @@ export class ViewWeekSheetComponent implements OnInit {
   }
   goToMonthlySheet() {
     this.router.navigate(['activity-log/viewallmonthly']);
-  }
+  }*/
   public handlePage(e: any) {
     this.currentPage = e.pageIndex;
     this.pageSize = e.pageSize;
@@ -101,5 +140,5 @@ export class ViewWeekSheetComponent implements OnInit {
     const start = this.currentPage * this.pageSize;
     const part = this.array.slice(start, end);
     this.activityValue = part;
-  }
+  } 
 }
