@@ -4,4 +4,8 @@ export class TaskShoot {
     productCount: String;
     shootType: String;
     modeName: String;
+    shootPurpose: String;
+    status: String;
+    approval: String;
+    requirement: String;
 }

@@ -38,28 +38,21 @@ editview: string;
         this.editview = params.get('editview');
       });
       this.createtask();
-      this.getAllTask();
+      this.getSelectedTask();
       this.getDepartment();
       this.getUnitWiseName();
       this.getUnit();
   }
-  getAllTask() {
-    this.taskManagementService.getAllTaskData().subscribe(data => {
-      this.taskholder = data;
-      this.taskholder.forEach((customer) => {
-        if (this.id === customer._id) {
-          this.taskEdit = customer;
-          this.addNewForm();
-          this.addNewTaskForm();
-          this.addNewShootForm();
-          this.addNewListForm();
-        console.log(this.taskEdit);
-      } else {
-        console.log('error occure');
-      }
-      }
-    );
-  });
+  getSelectedTask() {
+    this.taskManagementService.getSelectedTask(this.id).subscribe(data => {
+      this.taskEdit = data;
+      this.addNewForm();
+      this.addNewTaskForm();
+      this.addNewShootForm();
+      this.addNewListForm();
+    }, error => {
+      console.log(error);
+    });
   }
   createtask() {
     this.taskForm = this.fb.group({
@@ -79,6 +72,7 @@ editview: string;
     toCloseDate: [''],
     toTime: [''],
     closedDate: [''],
+    leaderComment: [''],
     time: [''],
     product: this.fb.array([]),
     task: this.fb.array([]),
@@ -122,7 +116,6 @@ editview: string;
         productName: [this.taskEdit.product[i].productName],
         productCount: [this.taskEdit.product[i].productCount],
         imageCount: [this.taskEdit.product[i].imageCount]
-
       });
       this.productForms.push(product);
     }
@@ -133,7 +126,6 @@ editview: string;
         moduleName: [this.taskEdit.task[i].moduleName],
         moduleDescription: [this.taskEdit.task[i].moduleDescription],
         moduleStatus: [this.taskEdit.task[i].moduleStatus]
-
       });
       this.moduleForms.push(task);
     }
@@ -144,7 +136,11 @@ editview: string;
       productName: [''],
       productCount: [''],
       shootType: [''],
-      modeName: ['']
+      modeName: [''],
+      shootPurpose:  [''],
+      status:  [''],
+      approval: [''],
+      requirement: ['']
       });
     this.ShootForms.push(shoot);
   }
@@ -162,14 +158,16 @@ editview: string;
         productName: [this.taskEdit.shoot[i].productName],
         productCount: [this.taskEdit.shoot[i].productCount],
         shootType: [this.taskEdit.shoot[i].shootType],
-        modeName: [this.taskEdit.shoot[i].modeName]
-
+        modeName: [this.taskEdit.shoot[i].modeName],
+        shootPurpose:  [this.taskEdit.shoot[i].shootPurpose],
+        status:  [this.taskEdit.shoot[i].status],
+        approval: [this.taskEdit.shoot[i].approval],
+        requirement: [this.taskEdit.shoot[i].requirement]
       });
       console.log(shoot);
       this.ShootForms.push(shoot);
     }
   }
-
   addListForm() {
     const list = this.fb.group({
       title: [''],
@@ -178,7 +176,6 @@ editview: string;
       });
     this.listForms.push(list);
   }
-
   get listForms() {
     return this.taskForm.get('list') as FormArray;
   }
@@ -191,12 +188,10 @@ editview: string;
         title: [this.taskEdit.list[i].title],
         listDescription: [this.taskEdit.list[i].listDescription],
         listStatus: [this.taskEdit.list[i].listStatus]
-
       });
       this.listForms.push(list);
     }
   }
-
   updateTask(taskForm: FormGroup, row) {
   this.taskManagementService.EditTask(taskForm.value, row._id).subscribe(data => {
     this.taskEdit = data;
@@ -223,10 +218,8 @@ getUnitWiseName() {
   });
 }
 changed(e) {
-/*   console.log(this.unitName.filter(data => data.unit === e.value)); */
   this.taskname = this.unitName.filter(data => data.unit === e.value);
 }
-
 getUnit() {
   this.unitSort =  localStorage.getItem('unit');
   this.roleSort = localStorage.getItem('role');

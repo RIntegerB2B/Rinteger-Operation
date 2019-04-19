@@ -31,8 +31,8 @@ export class TaskManagementService {
     const urlway = this.baseurl + 'findsingle/' + id;
     return this.http.get<TaskModel[]>(urlway);
   }
-  UpdateTask(data): Observable<any> {
-    const url: string = this.baseurl  + 'statusupdate/' + data._id;
+  UpdateTask(data, id): Observable<any> {
+    const url: string = this.baseurl  + 'statusupdate/' + id;
     return this.http.put<TaskModel[]>(url, data);
   }
   EditTask(data, id): Observable<any> {
@@ -83,6 +83,13 @@ getStatusWise(status): Observable<TaskModel[]> {
 
   return this.http.post<TaskModel[]>(urlway, status);
 }
+getSelectedTask(id): Observable<TaskModel[]> {
+  const urlway = this.baseurl + 'selectedtask/' + id;
+  return this.http.get<TaskModel[]>(urlway);
+}
+updateRating(rating, id): Observable<TaskModel[]> {
+  const urlway = this.baseurl + 'rating/' + id ;
 
-
+  return this.http.post<TaskModel[]>(urlway, rating);
+}
 }

@@ -31,17 +31,15 @@ export class EditTaskComponent implements OnInit {
     private router: Router, private fb: FormBuilder) { }
 
   ngOnInit() {
-
     this.route.paramMap.subscribe(
       (params: ParamMap) => {
         this.id = params.get('id');
         this.editview = params.get('editview');
       });
       this.createtask();
-      this.getAllTask();
       this.getUnit();
+      this.getSelectedTask();
   }
-
   createtask() {
     this.taskForm = this.fb.group({
     taskNo: [''],
@@ -68,7 +66,6 @@ export class EditTaskComponent implements OnInit {
     list: this.fb.array([])
     });
   }
-
   addForm() {
     const product = this.fb.group({
       productName: [''],
@@ -88,35 +85,29 @@ export class EditTaskComponent implements OnInit {
       });
     this.moduleForms.push(task);
   }
-
   get moduleForms() {
     return this.taskForm.get('task') as FormArray;
   }
-
   addNewForm() {
     for (let i = 0; i <= this.taskEdit.product.length - 1; i++) {
       const product = this.fb.group({
         productName: [this.taskEdit.product[i].productName],
         productCount: [this.taskEdit.product[i].productCount],
         imageCount: [this.taskEdit.product[i].imageCount]
-
       });
       this.productForms.push(product);
     }
   }
-
   addNewTaskForm() {
     for (let i = 0; i <= this.taskEdit.task.length - 1; i++) {
       const task = this.fb.group({
         moduleName: [this.taskEdit.task[i].moduleName],
         moduleDescription: [this.taskEdit.task[i].moduleDescription],
         moduleStatus: [this.taskEdit.task[i].moduleStatus]
-
       });
       this.moduleForms.push(task);
     }
   }
-
   addNewShootForm() {
     for (let i = 0; i <= this.taskEdit.shoot.length - 1; i++) {
       const shoot = this.fb.group({
@@ -124,10 +115,12 @@ export class EditTaskComponent implements OnInit {
         productName: [this.taskEdit.shoot[i].productName],
         productCount: [this.taskEdit.shoot[i].productCount],
         shootType: [this.taskEdit.shoot[i].shootType],
-        modeName: [this.taskEdit.shoot[i].modeName]
-
+        modeName: [this.taskEdit.shoot[i].modeName],
+        shootPurpose:  [this.taskEdit.shoot[i].shootPurpose],
+        status:  [this.taskEdit.shoot[i].status],
+        approval: [this.taskEdit.shoot[i].approval],
+        requirement: [this.taskEdit.shoot[i].requirement]
       });
-      console.log(shoot);
       this.ShootForms.push(shoot);
     }
   }
@@ -138,7 +131,11 @@ export class EditTaskComponent implements OnInit {
       productName: [''],
       productCount: [''],
       shootType: [''],
-      modeName: ['']
+      modeName: [''],
+      shootPurpose:  [''],
+      status:  [''],
+      approval: [''],
+      requirement: ['']
       });
     this.ShootForms.push(shoot);
   }
@@ -169,34 +166,19 @@ export class EditTaskComponent implements OnInit {
       this.listForms.push(list);
     }
   }
-
-  /*     });
-      this.productForms.push(product);
-    }
-  } */
-  getAllTask() {
-
-    this.taskManagementService.getAllTaskData().subscribe(data => {
-    this.taskholder = data;
-    this.taskholder.forEach((customer) => {
-      if (this.id === customer._id) {
-        this.taskEdit = customer;
-        this.addNewForm();
-        this.addNewTaskForm();
-        this.addNewShootForm();
-        this.addNewListForm();
-
-      console.log(this.taskEdit);
-// tslint:disable-next-line: no-unused-expression
-    } error => {
-      console.log(error);
-    };
-
+getSelectedTask() {
+  this.taskManagementService.getSelectedTask(this.id).subscribe( data => {
+    this.taskEdit = data;
+    this.addNewForm();
+    this.addNewTaskForm();
+    this.addNewShootForm();
+    this.addNewListForm();
+  }, error => {
+    console.log(error);
   });
-});
 }
-updateTask(value) {
-  this.taskManagementService.UpdateTask(value).subscribe(data => {
+updateTask(taskForm, row) {
+  this.taskManagementService.UpdateTask(taskForm.value, row._id).subscribe(data => {
     this.taskEdit = data;
     this.router.navigate(['task/viewtask', this.editview]);
   }, error => {

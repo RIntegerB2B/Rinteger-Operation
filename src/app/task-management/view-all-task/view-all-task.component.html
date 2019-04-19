@@ -93,6 +93,11 @@
       <label>Status</label>
     </div>
   </div>
+  <div class="col-md-1 vcenterHeader" *ngIf="this.userRole === 'teamleader' || this.userRole === 'admin'">
+      <div class="form-group">
+        <label>Rating</label>
+      </div>
+    </div>
   <div class="col-md-1 vcenterHeader">
     <div class="form-group">
       <label>Action</label>
@@ -154,6 +159,11 @@
     </div>
     <div class="col-md-1 col-6 vcenter form-group">
       {{data.status}}
+    </div>
+    <div *ngIf="this.userRole === 'teamleader' || this.userRole === 'admin'">
+        <app-rating [rating]='data.rating' 
+        [itemId]='data.id' (ratingClick)='ratingComponentClick($event, data._id)'></app-rating>
+       <h5> {{data.rating}}</h5>
     </div>
     <div class="col-md-1 col-6 vcenter form-group">
       <button mat-icon-button [matMenuTriggerFor]="menu">

@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col-md-4  col-6">
           <div class="form-group">
-            <label class="divLable">Task No:</label>
+            <label class="divLable">Task No</label>
           </div>
         </div>
         <div class="col-md-8  col-6">
@@ -17,7 +17,7 @@
         </div>
         <div class="col-md-4  col-6">
           <div class="form-group">
-            <label class="divLable">Assigned To:</label>
+            <label class="divLable">Assigned To</label>
           </div>
         </div>
         <div class="col-md-8  col-6">
@@ -57,7 +57,7 @@
         </div>
         <div class="col-md-4  col-6">
             <div class="form-group">
-              <label class="divLable">Start Date:</label>
+              <label class="divLable">Start Date</label>
             </div>
           </div>
         <div class="col-md-8  col-6">
@@ -84,7 +84,7 @@
 
         <div class="col-md-4  col-6">
           <div class="form-group">
-            <label class="divLable">Assigned By:</label>
+            <label class="divLable">Assigned By</label>
           </div>
         </div>
         <div class="col-md-8  col-6">
@@ -117,7 +117,7 @@
 
         <div class="col-md-4  col-6">
           <div class="form-group">
-            <label class="divLable">Deadline Date:</label>
+            <label class="divLable">Deadline Date</label>
           </div>
         </div>
         <div class="col-md-8  col-6">
@@ -127,7 +127,7 @@
         </div>
         <div class="col-md-4  col-6">
             <div class="form-group">
-              <label class="divLable">Deadline Time:</label>
+              <label class="divLable">Deadline Time</label>
             </div>
           </div>
           <div class="col-md-8  col-6">
@@ -138,7 +138,7 @@
 
         <div class="col-md-4  col-6">
           <div class="form-group">
-            <label class="divLable">Compeleted Date:</label>
+            <label class="divLable">Compeleted Date</label>
           </div>
         </div>
         <div class="col-md-8  col-6">
@@ -148,7 +148,7 @@
         </div>   
         <div class="col-md-4  col-6">
             <div class="form-group">
-              <label class="divLable">Compeleted Time:</label>
+              <label class="divLable">Compeleted Time</label>
             </div>
           </div>
           <div class="col-md-8  col-6">
@@ -158,7 +158,7 @@
           </div>     
           <div class="col-md-4  col-6">
             <div class="form-group">
-              <label class="divLable">Comment :</label>
+              <label class="divLable">Comment </label>
             </div>
           </div>
           <div class="col-md-8  col-6">
@@ -166,22 +166,32 @@
               : <label class="itemLable"> {{data.comment}}</label>
             </div>
           </div>   
+          <div class="col-md-4  col-6">
+              <div class="form-group">
+                <label class="divLable">Comment about project </label>
+              </div>
+            </div>
+            <div class="col-md-8  col-6">
+              <div class="form-group">
+                : <label class="itemLable"> {{data.leaderComment}}</label>
+              </div>
+            </div>   
            
       </div>    
   </div>
-  <div  *ngIf= "(this.unitSort === 'Studio' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')">
+  <div  *ngIf= "this.unitSort === 'Studio' || this.roleSort === 'admin'">
       <app-view-product [productData]="data.product" 
       ></app-view-product>
   </div>
-  <div  *ngIf = "(this.unitSort === 'Technologies' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')" > 
+  <div  *ngIf = "this.unitSort === 'Technologies' || this.roleSort === 'admin'" > 
       <app-view-module [moduleData]="data.task" 
       ></app-view-module>
   </div>
-  <div  *ngIf= "(this.unitSort === 'Studio' || this.roleSort === 'admin') && ((this.roleSort === 'teamleader' || this.roleSort === 'admin') || this.roleSort === 'photographer')"> 
+  <div  *ngIf= "this.unitSort === 'Studio' || this.roleSort === 'admin'"> 
     <app-view-shoot [shootData]="data.shoot" 
     ></app-view-shoot>
 </div>
-<div *ngIf = "(this.unitSort === 'BSS' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')"> 
+<div *ngIf = "this.unitSort === 'BSS' || this.roleSort === 'admin'"> 
   <app-view-list [listData]="data.list" 
   ></app-view-list>
 </div>

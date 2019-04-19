@@ -52,6 +52,7 @@ export class ViewSingleTaskComponent implements OnInit {
       toTime: [''],
       closedDate: [''],
       time: [''],
+      leaderComment: [''],
       product: this.fb.array([]),
       task: this.fb.array([]),
       shoot: this.fb.array([]),
@@ -81,7 +82,11 @@ export class ViewSingleTaskComponent implements OnInit {
       productName: [''],
       productCount: [''],
       shootType: [''],
-      modeName: ['']
+      modeName: [''],
+      shootPurpose:  [''],
+      status:  [''],
+      approval: [''],
+      requirement: ['']
       });
     this.ShootForms.push(shoot);
   }

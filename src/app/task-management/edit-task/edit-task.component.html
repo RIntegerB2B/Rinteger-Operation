@@ -11,20 +11,22 @@
         <div fxFlex="50" class="pr-1">
           <mat-form-field class="full-width">
             <input matInput formControlName="taskNo" [readonly]=true placeholder="Task.No" 
-            [value]="taskEdit?.taskNo || null" >  
+            (ngModelChange)="taskEdit.taskNo=$event"
+            [(ngModel)]="taskEdit.taskNo" >  
           </mat-form-field>
          
         </div>
         <div fxFlex="50" class="pr-1">
           <mat-form-field class="full-width">
-            <input matInput formControlName="dateTime" [readonly]=true [value]="taskEdit?.dateTime" 
-            
+            <input matInput formControlName="dateTime" [readonly]=true  [(ngModel)]="taskEdit.dateTime" 
+            (ngModelChange)="taskEdit.dateTime=$event"
               placeholder="Start time">  
           </mat-form-field>
         </div>
         <div fxFlex="50" class="pr-1">
           <mat-form-field class="full-width">
-            <input matInput formControlName="assignedTo" [value]="taskEdit?.assignedTo"
+            <input matInput formControlName="assignedTo"  [(ngModel)]="taskEdit.assignedTo"
+            (ngModelChange)="taskEdit.assignedTo=$event"
             [readonly]=true
               placeholder="AssignedTo">  
           </mat-form-field>
@@ -32,7 +34,8 @@
 
         <div fxFlex="50" class="pr-1">
           <mat-form-field class="full-width">
-            <input matInput formControlName="clientName" [value]="taskEdit?.clientName || null"
+            <input matInput formControlName="clientName"  [(ngModel)]="taskEdit.clientName"
+            (ngModelChange)="taskEdit.clientName=$event"
              [readonly]=true
               placeholder="Client Name">  
           </mat-form-field>
@@ -40,49 +43,40 @@
 
         <div fxFlex="50" class="pr-1">
           <mat-form-field class="full-width">
-            <input matInput formControlName="taskTitle" [value]="taskEdit?.taskTitle"
+            <input matInput formControlName="taskTitle"  [(ngModel)]="taskEdit.taskTitle"
+            (ngModelChange)="taskEdit.taskTitle=$event"
              [readonly]=true
               placeholder="Task Title">  
           </mat-form-field>
         </div>        
         <div fxFlex="50" class="pr-1">
           <mat-form-field class="full-width">
-            <input matInput formControlName="taskDescription" [value]="taskEdit?.taskDescription"
+            <input matInput formControlName="taskDescription"  [(ngModel)]="taskEdit.taskDescription"
+            (ngModelChange)="taskEdit.taskDescription=$event"
             [readonly]=true
               placeholder="Task Description">  
           </mat-form-field>
         </div>  
-       <!--  <div fxFlex="50" class="pr-1">
-          <mat-form-field class="full-width">
-            <textarea matInput formControlName="sizeColumn" [value]="taskEdit?.sizeColumn"
-             [readonly]=true
-              placeholder="sizeColumn">  </textarea>
-          </mat-form-field>
-        </div>   
         <div fxFlex="50" class="pr-1">
           <mat-form-field class="full-width">
-            <textarea matInput formControlName="imageDetail" [value]="taskEdit?.imageDetail"
-             [readonly]=true
-              placeholder="imageDetail">  </textarea>
-          </mat-form-field>
-        </div>    -->
-        <div fxFlex="50" class="pr-1">
-          <mat-form-field class="full-width">
-            <input matInput formControlName="priority" [value]="taskEdit?.priority"
+            <input matInput formControlName="priority"  [(ngModel)]="taskEdit.priority"
+            (ngModelChange)="taskEdit.priority=$event"
              [readonly]=true
               placeholder="Priority">  
           </mat-form-field>
         </div>       
         <div fxFlex="50" class="pr-1">
           <mat-form-field class="full-width">
-            <input matInput formControlName="units" [value]="taskEdit?.units"
+            <input matInput formControlName="units"  [(ngModel)]="taskEdit.units"
+            (ngModelChange)="taskEdit.units=$event"
              [readonly]=true
               placeholder="Units">  
           </mat-form-field>
         </div> 
         <div fxFlex="50" class="pr-1">
           <mat-form-field class="full-width">
-            <input matInput formControlName="department" [value]="taskEdit?.department"
+            <input matInput formControlName="department"  [(ngModel)]="taskEdit.department"
+            (ngModelChange)="taskEdit.department=$event"
              [readonly]=true
               placeholder="Department">  
           </mat-form-field>
@@ -90,7 +84,8 @@
        
         <div fxFlex="50" class="pr-1">
           <mat-form-field class="full-width">
-            <input matInput formControlName="assignedBy" [value]="taskEdit?.assignedBy"
+            <input matInput formControlName="assignedBy"  [(ngModel)]="taskEdit.assignedBy"
+            (ngModelChange)="taskEdit.assignedBy=$event"
              [readonly]=true
               placeholder="AssignedBy">  
           </mat-form-field>
@@ -107,28 +102,28 @@
         </div>
         <div fxFlex="50" class="pr-1">
           <mat-form-field class="full-width">
-            <input matInput formControlName="toCloseDate" [value]="taskEdit?.toCloseDate || null"
+            <input matInput formControlName="toCloseDate"  [(ngModel)]="taskEdit.toCloseDate"
              (ngModelChange)="taskEdit.toCloseDate=$event" [readonly]=true
               placeholder="Deadline Date">
           </mat-form-field>
         </div>
         <div fxFlex="50" class="pr-1">
           <mat-form-field class="full-width">
-            <input matInput formControlName="toTime" [value]="taskEdit?.toTime || null"
+            <input matInput formControlName="toTime"  [(ngModel)]="taskEdit.toTime"
              (ngModelChange)="taskEdit.toTime=$event" [readonly]=true
               placeholder="Deadline Time">
           </mat-form-field>
         </div>
         <div fxFlex="50" class="pr-1">
           <mat-form-field class="full-width">
-            <input matInput formControlName="toTime" [value]="taskEdit?.toTime || null"
+            <input matInput formControlName="toTime"  [(ngModel)]="taskEdit.toTime"
              (ngModelChange)="taskEdit.toTime=$event" [readonly]=true
               placeholder="toTime">
           </mat-form-field>
         </div>
         <div fxFlex="50" class="pr-1">
           <mat-form-field>
-            <input matInput formControlName="closedDate" [matDatepicker]="picker2" [value]="taskEdit?.closedDate || null" 
+            <input matInput formControlName="closedDate" [matDatepicker]="picker2"  [(ngModel)]="taskEdit.closedDate" 
             (ngModelChange)="taskEdit.closedDate=$event"
              placeholder=" Completed Date">
             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
@@ -137,23 +132,23 @@
         </div>
         <div fxFlex="50" class="pr-1">
           <mat-form-field>
-            <input matInput formControlName="time"  [value]="taskEdit?.time || null" 
+            <input matInput formControlName="time"   [(ngModel)]="taskEdit.time" 
             (ngModelChange)="taskEdit.time=$event" type="time"
              placeholder="Completed Time">            
           </mat-form-field>
         </div>
         <div fxFlex="50" class="pr-1">
           <mat-form-field>
-            <textarea matInput formControlName="comment"  [value]="taskEdit?.comment || null" 
+            <textarea matInput formControlName="comment"   [(ngModel)]="taskEdit.comment" 
             (ngModelChange)="taskEdit.comment=$event" 
              placeholder="Leave a Comment">   </textarea>         
           </mat-form-field>
         </div>
               
-        <div fxFlex="100" class="textHeader"  *ngIf= "(this.unitSort === 'Studio' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')">
+        <div fxFlex="100" class="textHeader"  *ngIf= "this.unitSort === 'Studio' || this.roleSort === 'admin'">
           <h5>Product Details</h5>
         </div>
-        <div  fxLayout="column" fxFlex="100" formArrayName="product"  *ngIf= "(this.unitSort === 'Studio' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')">
+        <div  fxLayout="column" fxFlex="100" formArrayName="product"  *ngIf= "this.unitSort === 'Studio' || this.roleSort === 'admin'">
           <div *ngFor="let account of productForms.controls; let i=index" [formGroupName]="i">
             <div fxFlex="25" class="pr-1">
               <mat-form-field class="full-width">
@@ -183,10 +178,10 @@
         </div>
 
 
-        <div fxFlex="100" class="textHeader" *ngIf = "(this.unitSort === 'Technologies' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')" >
+        <div fxFlex="100" class="textHeader" *ngIf = "this.unitSort === 'Technologies' || this.roleSort === 'admin'" >
             <h5>Project Details</h5>
           </div>
-          <div  fxLayout="column" fxFlex="100" formArrayName="task" *ngIf = "(this.unitSort === 'Technologies' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')">
+          <div  fxLayout="column" fxFlex="100" formArrayName="task" *ngIf = "this.unitSort === 'Technologies' || this.roleSort === 'admin'">
             <div *ngFor="let account of moduleForms.controls; let i=index" [formGroupName]="i">
               <div fxFlex="25" class="pr-1">
                 <mat-form-field class="full-width">
@@ -218,12 +213,13 @@
             </div>
           </div>
               
-          <div fxFlex="100" class="textHeader" *ngIf= "(this.unitSort === 'Studio' || this.roleSort === 'admin') && ((this.roleSort === 'teamleader' || this.roleSort === 'admin') || this.roleSort === 'photographer')">
+          <div fxFlex="100" class="textHeader" *ngIf= "this.unitSort === 'Studio' || this.roleSort === 'admin'">
             <h5>Shoot Details</h5>
           </div>
-          <div  fxLayout="column" fxFlex="100" formArrayName="shoot"  *ngIf= "(this.unitSort === 'Studios' || this.roleSort === 'admin') && ((this.roleSort === 'teamleader' || this.roleSort === 'admin') || this.roleSort === 'photographer')">
+          <div  fxLayout="column" fxFlex="100" formArrayName="shoot"  *ngIf= "this.unitSort === 'Studio' || this.roleSort === 'admin'">
             <div *ngFor="let account of ShootForms.controls; let i=index" [formGroupName]="i">
-              <div fxFlex="25" class="pr-1">
+              <div class="row">
+              <div fxFlex="15" class="pr-1">
                 <mat-form-field class="full-width">
                   <input matInput formControlName="customerName"    
                   (ngModelChange)="taskEdit.customerName=$event"
@@ -231,7 +227,7 @@
                   placeholder="customerName">
                 </mat-form-field>
               </div>
-              <div fxFlex="25" class="pr-1">
+              <div fxFlex="15" class="pr-1">
                 <mat-form-field class="full-width">
                   <input matInput formControlName="productName"                    
                   (ngModelChange)="taskEdit.productName=$event"
@@ -239,7 +235,7 @@
                   placeholder="productName">
                 </mat-form-field>
               </div>
-              <div fxFlex="25" class="pr-1">
+              <div fxFlex="15" class="pr-1">
                 <mat-form-field class="full-width">
                   <input matInput formControlName="productCount"                    
                   (ngModelChange)="taskEdit.productCount=$event"
@@ -247,7 +243,7 @@
                   placeholder="productCount">
                 </mat-form-field>
               </div>   
-              <div fxFlex="25" class="pr-1">
+              <div fxFlex="15" class="pr-1">
                 <mat-form-field class="full-width">
                   <input matInput formControlName="shootType"                    
                   (ngModelChange)="taskEdit.shootType=$event"
@@ -255,7 +251,7 @@
                   placeholder="shootType">
                 </mat-form-field>
               </div>   
-              <div fxFlex="25" class="pr-1">
+              <div fxFlex="15" class="pr-1">
                 <mat-form-field class="full-width">
                   <input matInput formControlName="modeName"                    
                   (ngModelChange)="taskEdit.modeName=$event"
@@ -263,12 +259,47 @@
                   placeholder="modeName">
                 </mat-form-field>
               </div>   
-                      </div>
+            </div>
+            <div class="row">
+              <div fxFlex="15" class="pr-1">
+                <mat-form-field class="full-width">
+                  <input matInput formControlName="shootPurpose"                    
+                  (ngModelChange)="taskEdit.shootPurpose=$event"
+                  [readonly]=true
+                  placeholder="shootPurpose">
+                </mat-form-field>
+              </div>  
+              <div fxFlex="15" class="pr-1">
+                <mat-form-field class="full-width">
+                  <input matInput formControlName="approval"                    
+                  (ngModelChange)="taskEdit.approval=$event"
+                  [readonly]=true
+                  placeholder="approval">
+                </mat-form-field>
+              </div>  
+              <div fxFlex="15" class="pr-1">
+                <mat-form-field class="full-width">
+                  <input matInput formControlName="requirement"                    
+                  (ngModelChange)="taskEdit.requirement=$event"
+                  [readonly]=true
+                  placeholder="requirement">
+                </mat-form-field>
+              </div>  
+              <div fxFlex="15" class="pr-1">
+                <mat-form-field class="full-width">
+                  <input matInput formControlName="status"                    
+                  (ngModelChange)="taskEdit.status=$event"
+                  
+                  placeholder="status">
+                </mat-form-field>
+              </div>  
+            </div>
           </div>
-          <div fxFlex="100" class="textHeader" *ngIf = "(this.unitSort === 'BSS' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')">
+          </div>
+          <div fxFlex="100" class="textHeader" *ngIf = "this.unitSort === 'BSS' || this.roleSort === 'admin'">
             <h5>List Details</h5>
           </div>
-          <div  fxLayout="column" fxFlex="100" formArrayName="list" *ngIf = "(this.unitSort === 'BSS' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')">
+          <div  fxLayout="column" fxFlex="100" formArrayName="list" *ngIf = "this.unitSort === 'BSS' || this.roleSort === 'admin'">
             <div *ngFor="let account of listForms.controls; let i=index" [formGroupName]="i">
               <div fxFlex="25" class="pr-1">
                 <mat-form-field class="full-width">
@@ -294,17 +325,11 @@
                   placeholder="listStatus">
                 </mat-form-field>
               </div>
-                  
-             
-              
             </div>
-          </div>
-        
-
-          
+          </div>    
         <div fxFlex="100" class="mt-1">
             <button mat-raised-button type="button" color="primary" 
-            (click)=updateTask(taskEdit)>Save</button>          
+            (click)="updateTask(taskForm, taskEdit)">Save</button>          
           <span fxFlex></span>
           <span fxFlex></span>
           <button mat-raised-button mat-button color="accent"

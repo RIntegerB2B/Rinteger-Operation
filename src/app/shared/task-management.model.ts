@@ -16,6 +16,7 @@ export class TaskModel {
     priority: string;
     weekID: string;
     units: string;
+    rating: number;
     department: string;
     assignedTo: string;
     assignedBy: string;
@@ -25,6 +26,7 @@ export class TaskModel {
     closedDate: Date;
     time: string;
     comment: string;
+    leaderComment: string;
     product: [TaskProduct];
     task: [TaskModule];
     shoot: [TaskShoot];

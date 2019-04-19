@@ -28,13 +28,14 @@ export class ViewAllTaskComponent implements OnInit {
   private dataSource;
   filterUnit;
   count;
+  ratingTask: TaskModel;
   all;
+  ratingClicked: number;
+  itemIdRatingClicked: string;
   userid;
   userRole;
   filterWise;
   deadcount;
-  /*  upname: boolean;
-   downname: boolean; */
 
   studios;
   BSSs;
@@ -53,11 +54,16 @@ export class ViewAllTaskComponent implements OnInit {
     private navheaderService: NavheaderService) { }
 
   ngOnInit() {
-    /* this.getRole(); */this.getRole();
+    this.getRole();
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.userId = params.get('id');
-      /*  this.userRole = params.get('role'); */
     });
+   this.LoadMethod();
+    this.navheaderService.hideMenuTrans();
+    this.navheaderService.menuItems();
+  }
+
+  LoadMethod() {
     if (this.userRole === 'admin') {
       this.getAllTask();
     } else if (this.userRole === 'teamleader') {
@@ -65,10 +71,7 @@ export class ViewAllTaskComponent implements OnInit {
     } else {
       this.CompareUserId();
     }
-    this.navheaderService.hideMenuTrans();
-    this.navheaderService.menuItems();
   }
-
   filterTask(data) {
     this.taskholder = new MatTableDataSource<TaskModel>(data);
     this.taskholder.paginator = this.paginator;
@@ -93,7 +96,6 @@ export class ViewAllTaskComponent implements OnInit {
   }
   getRole() {
     this.userRole = localStorage.getItem('role');
-    console.log(this.userRole);
   }
 
   getUnitWiseName() {
@@ -119,20 +121,6 @@ export class ViewAllTaskComponent implements OnInit {
     }, error => {
       console.log(error);
     });
-    /*  this.taskholder = this.filterWise.filter(data =>
-       data.units === this.userUnit); */
-    /*  this.taskManagementService.getunitwiseTask(name).subscribe(data => {
-       this.taskholder = data;
-       this.taskholder = new MatTableDataSource<any>(data);
-       this.taskholder.paginator = this.paginator;
-       this.taskholder = data;
-       this.filterWise = this.taskholder;
-       this.array = data;
-       this.totalSize = this.array.length;
-     }, error => {
-       console.log(error);
-     }
-     ); */
   }
 
   getunitwiseTask(value) {
@@ -141,7 +129,6 @@ export class ViewAllTaskComponent implements OnInit {
   }
 
   filterWiseTest() {
-
     this.studios = this.filterWise.filter(data => data.units === 'Studio');
     this.BSSs = this.filterWise.filter(data => data.units === 'BSS');
     this.technologys = this.filterWise.filter(data => data.units === 'Technologies');
@@ -171,17 +158,6 @@ export class ViewAllTaskComponent implements OnInit {
       this.taskholder = data;
     });
   }
-
-
-
-
-  /*  uniqTicket(data) {
-
-     this.ts.uniqTicket(data).subscribe(data =>{this.ticketholder=data;
-       console.log(this.ticketholder);
-   },error =>{console.log(error);}
-   );
-   } */
   public handlePage(e: any) {
     this.currentPage = e.pageIndex;
     this.pageSize = e.pageSize;
@@ -193,13 +169,7 @@ export class ViewAllTaskComponent implements OnInit {
     const part = this.array.slice(start, end);
     this.taskholder = part;
   }
-
-  /*  getRole() {
-    localStorage.setItem('id', )
-     } */
-
   CompareUserId() {
-    /*   JSON.parse(localStorage.getItem('loginUser')); */
     this.taskManagementService.compareUserId(this.userId).subscribe(data => {
       this.taskholder = data;
       this.taskholder = new MatTableDataSource<any>(data);
@@ -214,12 +184,10 @@ export class ViewAllTaskComponent implements OnInit {
     }, error => { console.log(error); }
     );
   }
-
   filterByStatus(row) {
     this.userUnit = localStorage.getItem('unit');
     this.taskholder = new TaskModel();
     this.taskholder.status = row;
-    console.log(this.taskholder);
     this.taskManagementService.getStatusWise(this.taskholder).subscribe( data => {
       this.taskEdit = data;
       if (this.userRole !== 'admin') {
@@ -231,5 +199,21 @@ export class ViewAllTaskComponent implements OnInit {
       console.log(error);
     });
   }
-
+  ratingComponentClick(clickObj: any, id): void {
+    const data = this.taskholder.find(((i: any) => i.id === clickObj.itemId));
+    this.ratingTask = new TaskModel();
+    this.ratingTask.rating = clickObj.rating;
+    this.taskManagementService.updateRating(clickObj, id).subscribe( row => {
+      this.taskEdit = row;
+      this.LoadMethod();
+    }, error => {
+      console.log(error);
+    });
+    console.log(this.ratingTask, id);
+    if (!!data) {
+      data.rating = clickObj.rating;
+      this.ratingClicked = clickObj.rating;
+      this.itemIdRatingClicked = data.company;
+    }
+  }
 }

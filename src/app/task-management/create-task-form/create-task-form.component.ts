@@ -111,7 +111,11 @@ export class CreateTaskFormComponent implements OnInit {
       productName: [''],
       productCount: [''],
       shootType: [''],
-      modeName: ['']
+      modeName: [''],
+      shootPurpose:  [''],
+      status:  [''],
+      approval: [''],
+      requirement: ['']
       });
     this.ShootForms.push(shoot);
   }
