@@ -142,7 +142,7 @@ export class CreateWeeklySheetComponent implements OnInit {
     this.taskholder.list = taskForm.controls.list.value;
     this.taskManagementService.createBssTask(this.taskholder).subscribe(data => {
       this.taskholder = data;
-      this.router.navigate(['activity-log/viewweek']);
+      this.router.navigate(['activity-log/viewweek/', this.valueEdit._id]);
     }, error => {
       console.log(error);
     });

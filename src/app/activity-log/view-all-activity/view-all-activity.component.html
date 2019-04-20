@@ -1,6 +1,8 @@
 <form [formGroup]="ActivityDetailsForm">
   <div class="pageBoxLg">
+     
     <div class="container-fluid">
+       
       <!-- <div class="row">       
         <div class="col-4">
           <div fxFlex="50" class="pr-1">
@@ -29,15 +31,21 @@
         </div>       
         
       </div> -->
-      <div>
+      <div align="center">
           <button mat-raised-button (click)="getMonthlyPlan()" type="submit">Monthly-Sheet</button>
           
         </div>
         <div>
+            <div fxFlex="100">
+                <label class="pageBoxLg-label">WorkOrder</label>
+              </div>
+        </div>
+       <!--  <div>
             <button mat-raised-button (click)="getWeeklyPlan()" type="submit">Weekly-Sheet</button>
             
-          </div>
+          </div> -->
       <div class="row gridRowHeader display-none-small">
+          
        <!--  <div class="col-md-2 vcenterHeader">
           <div class="form-group">
             <label><h6>WorkOrder ID</h6></label>

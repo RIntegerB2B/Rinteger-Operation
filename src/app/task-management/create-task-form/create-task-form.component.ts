@@ -77,6 +77,7 @@ export class CreateTaskFormComponent implements OnInit {
   }
   addForm() {
     const product = this.fb.group({
+    customerName: [''],
     productName: [''],
     productCount: [''],
     imageCount: ['']

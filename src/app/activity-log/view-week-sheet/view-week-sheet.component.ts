@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivityLogModel } from '../../shared/activity-log.model';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { ActivityLogService } from '../activity-log.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -14,6 +14,7 @@ import { ActivityMonth } from '../../shared/activity-month.model';
 export class ViewWeekSheetComponent implements OnInit {
   activityDetailsForm: FormGroup;
   activityModel: any;
+  id;
     activityValue: any;
     public pageSize = 50;
     public currentPage = 0;
@@ -24,13 +25,19 @@ export class ViewWeekSheetComponent implements OnInit {
   unitName: string;
   activityEdit: any;
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute,
-    private activityLogService: ActivityLogService) { }
+    private activityLogService: ActivityLogService) { 
+      this.route.paramMap.subscribe(
+        (params: ParamMap) => {
+          this.id = params.get('id');
+        });
+    }
     @ViewChild('MatPaginator') paginator: MatPaginator;
   ngOnInit() {
     this.creatForm();
-    this.getAllWeekly();
+   /*  this.getAllWeekly(); */
     this.getAssignedTo();
     this.getUnitName();
+    this.getSelectedWeeklyPlan();
   }
 
   creatForm() {
@@ -56,7 +63,7 @@ export class ViewWeekSheetComponent implements OnInit {
       console.log(error);
     });
   } */
-  getAllWeekly() {
+  /* getAllWeekly() {
     this.activityLogService.getFindAllWeekly().subscribe( data => {
       this.activityModel = data.filter( value => value.unit === this.unitName );
       for (let i = 0; i <= this.activityModel.length - 1; i++) {
@@ -68,7 +75,15 @@ export class ViewWeekSheetComponent implements OnInit {
       this.array = this.activityEdit;
       this.totalSize = this.array.length;
       this.iterator();
-      /* console.log(this.activityValue); */
+      
+    }, error => {
+      console.log(error);
+    });
+  } */
+  getSelectedWeeklyPlan() {
+    this.activityLogService.getSelectedWeek(this.id).subscribe( data => {
+     this.activityValue = data[0].weeklyPlan;
+     console.log(data);
     }, error => {
       console.log(error);
     });

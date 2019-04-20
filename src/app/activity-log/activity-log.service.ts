@@ -97,4 +97,9 @@ export class ActivityLogService {
     const url: string = this.serviceUrl + addUrl + id;
     return this.http.get<ActivityLogModel[]>(url);
   }
+  getSelectedWeek(id): Observable<any> {
+    const addUrl = 'getselectedactivitylog/';
+    const url: string = this.serviceUrl + addUrl + id ;
+    return this.http.get<ActivityLogModel[]>(url);
+  }
 }

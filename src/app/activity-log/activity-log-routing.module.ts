@@ -12,7 +12,7 @@ const routes: Routes = [
     { path: 'createmonthly/:id', component: CreateMonthlySheetComponent},
     { path: 'viewallmonthly', component: ViewMonthlySheetComponent},
     { path: 'createweekly/:id', component: CreateWeeklySheetComponent},
-    { path: 'viewweek', component: ViewWeekSheetComponent},
+    { path: 'viewweek/:id', component: ViewWeekSheetComponent},
     { path: 'viewlist/:id', component: ViewListComponent}
 ];
 

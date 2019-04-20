@@ -15,6 +15,7 @@ import { ActivityMonth } from '../../shared/activity-month.model';
 export class ViewListComponent implements OnInit {
   activityDetailsForm: FormGroup;
   activityModel: any;
+  activityID: any;
   activityValue: any;
   public pageSize = 50;
   public currentPage = 0;
@@ -41,6 +42,10 @@ export class ViewListComponent implements OnInit {
     this.getUnitName();
     /* this.getAllWeekly();
     this.getAssignedTo(); */
+  /*   this.route.paramMap.subscribe(
+      (params: ParamMap) => {
+        this.activityID = params.get('id');
+      }); */
   }
 
   creatForm() {
@@ -55,6 +60,7 @@ export class ViewListComponent implements OnInit {
   getSelectAactivityLog() {
     this.activityLogService.getSelectedActivityLog(this.id).subscribe(data => {
       this.activityModel = data.filter( value => value.unit === this.unitName );
+      this.activityID = data;
       this.activityValue = this.activityModel[0].monthlyPlan;
       this.activityEdit = this.activityModel[0].monthlyPlan;
       /* console.log(this.activityValue); */
@@ -90,5 +96,8 @@ export class ViewListComponent implements OnInit {
   getUnitName() {
     this.unitName = localStorage.getItem('unit');
   /*   console.log(this.unitName); */
+  }
+  goToWeeklyPlan() {
+    this.router.navigate(['activity-log/viewweek', this.activityID[0]._id]);
   }
 }

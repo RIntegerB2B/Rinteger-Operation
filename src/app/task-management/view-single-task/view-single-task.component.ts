@@ -65,6 +65,7 @@ export class ViewSingleTaskComponent implements OnInit {
   }
   addForm() {
     const product = this.fb.group({
+    customerName: [''],
     productName: [''],
     productCount: [''],
     imageCount: ['']

@@ -155,6 +155,13 @@
         </div>
         <div  fxLayout="column" fxFlex="100" formArrayName="product"  *ngIf= "this.unitSort === 'Studio' || this.roleSort === 'admin'" > 
           <div *ngFor="let account of productForms.controls; let i=index" [formGroupName]="i">
+              <div fxFlex="15" class="pr-1">
+                  <mat-form-field class="full-width">
+                    <input matInput formControlName="customerName" 
+                    (ngModelChange)="taskEdit.customerName=$event" 
+                    placeholder="customerName">
+                  </mat-form-field>
+                </div>
             <div fxFlex="15" class="pr-1">
               <mat-form-field class="full-width">
                 <input matInput formControlName="productName" 

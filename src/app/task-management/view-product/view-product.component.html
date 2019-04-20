@@ -5,39 +5,50 @@
     </div>
   </div>
   <div class="row gridRowHeader display-none-small">
-    <div class="col-md-4">
+      <div class="col-md-3">
+          <div class="form-group">
+            <label>Customer Name</label>
+          </div>
+        </div>
+    <div class="col-md-3">
       <div class="form-group">
         <label>Product Name</label>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class="form-group">
         <label>Product Count</label>
       </div>
     </div>    
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class="form-group">
         <label>Image Count</label>
       </div>
     </div>
   </div>
   <div class="row gridRow" *ngFor="let data of productData; let i = index">
+      <div class="display-none-large col-4">
+          <label class="gridLabel">Customer Name:</label>
+        </div>
+        <div class="col-md-3 col-4 vcenter form-group">
+          {{data.customerName}}
+        </div>
     <div class="display-none-large col-4">
       <label class="gridLabel">Product Name:</label>
     </div>
-    <div class="col-md-4 col-4 vcenter form-group">
+    <div class="col-md-3 col-4 vcenter form-group">
       {{data.productName}}
     </div>
     <div class="display-none-large col-4">
       <label class="gridLabel">Product Count:</label>
     </div>
-    <div class="col-md-4 col-4 vcenter form-group">
+    <div class="col-md-3 col-4 vcenter form-group">
         {{data.productCount}}
     </div>    
     <div class="display-none-large col-4">
       <label class="gridLabel">Image Count:</label>
     </div>
-    <div class="col-md-4 col-4 vcenter form-group">
+    <div class="col-md-3 col-4 vcenter form-group">
         {{data.imageCount}}
     </div>  
   </div>  

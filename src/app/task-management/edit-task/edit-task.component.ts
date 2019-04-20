@@ -68,6 +68,7 @@ export class EditTaskComponent implements OnInit {
   }
   addForm() {
     const product = this.fb.group({
+      customerName: [''],
       productName: [''],
       productCount: [''],
       imageCount: ['']
@@ -91,6 +92,7 @@ export class EditTaskComponent implements OnInit {
   addNewForm() {
     for (let i = 0; i <= this.taskEdit.product.length - 1; i++) {
       const product = this.fb.group({
+        customerName: [this.taskEdit.product[i].customerName],
         productName: [this.taskEdit.product[i].productName],
         productCount: [this.taskEdit.product[i].productCount],
         imageCount: [this.taskEdit.product[i].imageCount]

@@ -29,8 +29,13 @@
           </div>       
           
         </div> -->
-        <div>
+        <div align="center">
           <button mat-raised-button (click)="goToMonthlySheet()" type="submit">MonthlySheet</button>
+        </div>
+        <div>
+            <div fxFlex="100">
+                <label class="pageBoxLg-label">WeeklyPlan</label>
+              </div>
         </div>
         <div class="row gridRowHeader display-none-small">
          <!--  <div class="col-md-2 vcenterHeader">
@@ -125,12 +130,12 @@
                   <a class="nav-link" (click) = 'assingToTask(data);  assingedsave(ActivityDetailsForm, data)'>
                       Assign Task
                     </a>         
-                <a class="nav-link" (click) = 'deleteCompletely(data)'>
+               <!--  <a class="nav-link" (click) = 'deleteCompletely(data)'>
                   Delete Complete Task
                 </a>
                 <a class="nav-link" (click) = 'deleteWeekly(data)'>
                   Delete WeeklyPlan Only
-                </a>
+                </a> -->
               </mat-menu>
             </div>
           </div>
