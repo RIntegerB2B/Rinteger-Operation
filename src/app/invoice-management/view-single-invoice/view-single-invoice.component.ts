@@ -42,8 +42,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
   }
 
   cancelInvoice()   {
-    this.router.navigate(['invoice/viewinvoice',
-     this.invoice[0].workOrderID]);
+    this.router.navigate(['invoice/viewallinvoice']);
   }
   viewSingleInvoice() {
     this.invoiceService.viewSingleInvoice(
