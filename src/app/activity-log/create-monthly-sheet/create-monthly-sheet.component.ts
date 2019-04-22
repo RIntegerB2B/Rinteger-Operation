@@ -20,6 +20,7 @@ export class CreateMonthlySheetComponent implements OnInit {
   activeValue: any;
   activeholder: any;
   ctrlValue: any;
+  activityData: any;
   monthToString: any;
  /*  monthName: string; */
   id: string;
@@ -91,12 +92,9 @@ export class CreateMonthlySheetComponent implements OnInit {
   }
   getAllWorkorder() {
     this.activityLogService.getFindAllWorkorder().subscribe( data => {
-      this.activeValue = data[0];
-      for (let i = 0; i <= this.activeValue.length - 1; i++) {
-        if (this.id === this.activeValue[i]._id) {
-          this.activeValue = this.activeValue;
-        }
-      }
+      this.activityData = data.filter( value => value._id === this.id);
+     this.activeValue = this.activityData[0];
+      console.log(this.activeValue);
     });
   }
   chosenYearHandler(event) {
