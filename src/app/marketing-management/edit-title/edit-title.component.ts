@@ -24,7 +24,7 @@ export class EditTitleComponent implements OnInit {
   subCategory;
 
   constructor(private marketingManagementService: MarketingManagementService,
-    private fb: FormBuilder, private router: Router, private route: ActivatedRoute) { 
+    private fb: FormBuilder, private router: Router, private route: ActivatedRoute) {
       this.route.paramMap.subscribe(
         (params: ParamMap) => {
           this.id = params.get('id');

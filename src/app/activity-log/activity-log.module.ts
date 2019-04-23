@@ -39,12 +39,13 @@ import { CreateWeeklySheetComponent } from './create-weekly-sheet/create-weekly-
 import { ViewMonthlySheetComponent } from './view-monthly-sheet/view-monthly-sheet.component';
 import { ViewWeekSheetComponent } from './view-week-sheet/view-week-sheet.component';
 import { ViewListComponent } from './view-list/view-list.component';
+import { EditMonthlyPlanSheetComponent } from './edit-monthly-plan-sheet/edit-monthly-plan-sheet.component';
 
 
 
 
 @NgModule({
-  declarations: [ ViewAllActivityComponent, CreateMonthlySheetComponent, CreateWeeklySheetComponent, ViewMonthlySheetComponent, ViewWeekSheetComponent, ViewListComponent],
+  declarations: [ ViewAllActivityComponent, CreateMonthlySheetComponent, CreateWeeklySheetComponent, ViewMonthlySheetComponent, ViewWeekSheetComponent, ViewListComponent, EditMonthlyPlanSheetComponent],
   imports: [
     HttpClientModule,
     HttpModule,

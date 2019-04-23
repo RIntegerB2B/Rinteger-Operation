@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as XLSX from 'xlsx';
 import { MarketingManagementModel } from '../../shared/marketing-management.model';
 import { MarketingManagementService } from '../marketing-management.service';
+import { MatSnackBar } from '@angular/material';
 @Component({
   selector: 'app-upload-marketing-management',
   templateUrl: './upload-marketing-management.component.html',
@@ -12,18 +13,18 @@ bufferValue;
 marketingValue: any;
 title;
  file: File;
-  constructor(private marketingManagementService: MarketingManagementService) { }
-
+  message: string;
+  action: string;
+  constructor(private marketingManagementService: MarketingManagementService,
+     public snackBar: MatSnackBar) { }
   ngOnInit() {
-this.getAllTitle();
+    this.getAllTitle();
   }
-
   onSubmit(event) {
     this.file = event.target.files[0];
   }
-
-
   onChange(val) {
+    this.message = 'Upload Successful';
     const reader = new FileReader();
     reader.onload = (e) => {
      this.bufferValue = reader.result;
@@ -40,18 +41,18 @@ this.getAllTitle();
       this.marketingValue.companyDetail = XLSX.utils.sheet_to_json(sheet, {raw: true});
       this.marketingManagementService.addBulkUpload(this.marketingValue, val._id).subscribe( row => {
         this.marketingValue = data;
+        this.snackBar.open(this.message, this.action, {
+          duration: 3000,
+        });
       }, error => {
         console.log(error);
       });
-
     };
     reader.readAsArrayBuffer(this.file);
   }
   getAllTitle() {
     this.marketingManagementService.getTitle().subscribe( data => {
-
       this.title = data.filter( value => value.title );
-      console.log(this.title);
     }, error => {
       console.log(error);
     });

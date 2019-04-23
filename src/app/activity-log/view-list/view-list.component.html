@@ -2,8 +2,7 @@
   <div class="pageBoxLg">
     <div class="container-fluid">
         <div align="center">
-            <button mat-raised-button (click)="goToWeeklyPlan()" type="submit">Weekly-Sheet</button>
-            
+            <button mat-raised-button (click)="goToWeeklyPlan()" type="submit">Weekly-Sheet</button>            
           </div>
           <div>
               <div fxFlex="100">
@@ -80,7 +79,10 @@
             <mat-menu #menu="matMenu">    
                 <a class="nav-link" (click) = "copyToWeeklyPlan(activityDetailsForm,data)">
                    Copy To WeeklyPlan
-                  </a>         
+                  </a>       
+                  <a class="nav-link" (click) = "delete(data)">
+                    Delete
+                   </a>    
             </mat-menu>
           </div>
         </div>

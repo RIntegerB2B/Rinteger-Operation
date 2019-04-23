@@ -46,7 +46,6 @@ export class ViewActivityComponent implements OnInit {
      this.marketingValue = data.companyDetail;
      this.marketingholder = this.marketingValue.filter( value => value._id === this.id);
      this.marketingEdit = this.marketingholder[0].activity;
-      console.log(this.marketingEdit);
     }, error => {
       console.log(error);
     });

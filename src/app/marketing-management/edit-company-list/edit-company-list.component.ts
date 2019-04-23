@@ -18,10 +18,10 @@ export class EditCompanyListComponent implements OnInit {
   marketingHolder: any;
   marketingId: any;
   id: string;
-  status = ['DND', 'No problem']
+  status = ['DND', 'No problem'];
 
   constructor(private marketingManagementService: MarketingManagementService,
-    private fb: FormBuilder, private router: Router, private route: ActivatedRoute) { 
+    private fb: FormBuilder, private router: Router, private route: ActivatedRoute) {
       this.route.paramMap.subscribe(
         (params: ParamMap) => {
           this.id = params.get('id');
@@ -60,7 +60,6 @@ export class EditCompanyListComponent implements OnInit {
       this.marketingValue = data.companyDetail;
       this.marketingHolder =  this.marketingValue.filter( value => value._id === this.id);
       this.marketingEdit = this.marketingHolder[0];
-      console.log(this.marketingEdit);
     }, error => {
       console.log(error);
     });

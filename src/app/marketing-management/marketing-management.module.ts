@@ -47,7 +47,10 @@ import { ViewActivityComponent } from './view-activity/view-activity.component';
 
 
 @NgModule({
-  declarations: [UploadMarketingManagementComponent, ViewAllMarketingComponent, CreateMarketingTitleComponent, ViewTitleListComponent, CreateTitleListComponent, EditCompanyListComponent, ViewSingleCompanyComponent, EditTitleComponent, UpdateStatusComponent, ViewActivityComponent],
+  declarations: [UploadMarketingManagementComponent, ViewAllMarketingComponent,
+     CreateMarketingTitleComponent, ViewTitleListComponent, CreateTitleListComponent,
+      EditCompanyListComponent, ViewSingleCompanyComponent, EditTitleComponent,
+       UpdateStatusComponent, ViewActivityComponent],
   imports: [
     CommonModule,
     HttpClientModule,

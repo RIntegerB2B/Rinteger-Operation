@@ -40,12 +40,6 @@ export class ViewListComponent implements OnInit {
     this.creatForm();
     this.getSelectAactivityLog();
     this.getUnitName();
-    /* this.getAllWeekly();
-    this.getAssignedTo(); */
-  /*   this.route.paramMap.subscribe(
-      (params: ParamMap) => {
-        this.activityID = params.get('id');
-      }); */
   }
 
   creatForm() {
@@ -63,7 +57,6 @@ export class ViewListComponent implements OnInit {
       this.activityID = data;
       this.activityValue = this.activityModel[0].monthlyPlan;
       this.activityEdit = this.activityModel[0].monthlyPlan;
-      /* console.log(this.activityValue); */
       this.activityValue = new MatTableDataSource<any>(this.activityEdit );
      this.array = this.activityEdit ;
       this.totalSize = this.array.length;
@@ -95,9 +88,16 @@ export class ViewListComponent implements OnInit {
   }
   getUnitName() {
     this.unitName = localStorage.getItem('unit');
-  /*   console.log(this.unitName); */
   }
   goToWeeklyPlan() {
     this.router.navigate(['activity-log/viewweek', this.activityID[0]._id]);
+  }
+  delete(data) {
+    this.activityLogService.deleteMonthlyPlanList(data._id).subscribe( value => {
+      this.activityValue = data;
+      this.getSelectAactivityLog();
+    }, error => {
+      console.log( error );
+    });
   }
 }

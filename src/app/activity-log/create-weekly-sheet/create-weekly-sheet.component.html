@@ -2,33 +2,17 @@
     <div class="container topAlignContainer">
       <form [formGroup]="taskForm" (ngSubmit)="taskForm.valid && onSubmit(taskForm, weeklyPlanunit,
        weeklyPlanassingedTo, weeklyPlanclient, weeklyPlanTitle, weeklyPlanDesc, weeklyPlanWeekID)">
-  
-        <!--  <app-ticketcustomersearch [customerModel]="customerdetail" 
-      (searchCustomer)="filterCustomer($event)"></app-ticketcustomersearch> -->
-        <!-- <div *ngFor="let customerdata of customerModel">{{customerdata.name}}{{customerdata.mobileNumber}}</div> -->
-  
         <div fxLayout="row wrap" fxLayout.lt-sm="column">
           <div fxFlex="100">
             <label class="pageBoxLg-label">Create Task Form</label>
           </div>
-          <!-- 
-        <div fxFlex="50" class="p-2">
-          <mat-form-field class="full-width">
-            <input matInput formControlName="name" placeholder="Name">
-            <mat-error *ngIf="taskForm.controls['name'].errors?.required" required>
-              Name
-              <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
-        </div> -->
         <div fxFlex="50" class="p-2">
             <mat-form-field class="full-width">
               <input matInput formControlName = "unit" placeholder="unit" 
                [value]="valueEdit?.unit" #weeklyPlanunit
               [readonly]=true>             
             </mat-form-field>
-          </div>
-  
+          </div>  
           <div fxFlex="50" class="p-2">
               <mat-form-field class="full-width">
                 <input matInput formControlName="assignedTo" placeholder="assignedTo" 
@@ -42,16 +26,14 @@
                   [value]="valueEdit?.customerName" #weeklyPlanclient
                   [readonly]=true>             
                 </mat-form-field>
-              </div>
-  
+              </div>  
           <div fxFlex="50" class="p-2">
             <mat-form-field class="full-width">
               <input matInput formControlName="taskTitle" placeholder="Task Title" 
               [value]="valueholder?.planTitle" #weeklyPlanTitle
               [readonly]=true>
             </mat-form-field>
-          </div>
-  
+          </div>  
           <div fxFlex="50" class="p-2">
             <mat-form-field class="full-width">
               <textarea matInput formControlName="taskDescription" placeholder="Task Descrition"
@@ -87,9 +69,6 @@
                     [readonly]=true>
                   </mat-form-field>
                 </div>
-  
-  
-  
           <div fxFlex="50" class="pr-1">
             <mat-form-field>
               <mat-select placeholder="Priority" formControlName="priority">
@@ -99,15 +78,6 @@
               </mat-select>
             </mat-form-field>
           </div>
-  
-  
-  
-  
-  
-  
-  
-  
-  
           <div fxFlex="50" class="pr-1">
             <mat-form-field>
               <mat-select placeholder="Department" formControlName="department">
@@ -117,8 +87,6 @@
               </mat-select>
             </mat-form-field>
           </div>
-  
-  
           <div fxFlex="50" class="pr-1">
             <mat-form-field>
               <mat-select placeholder="Assigned By" formControlName="assignedBy">
@@ -128,12 +96,6 @@
               </mat-select>
             </mat-form-field>
           </div>
-  
-  
-  
-  
-  
-  
           <div fxFlex="50" class="pr-1">
             <mat-form-field>
               <input matInput formControlName="toCloseDate" [matDatepicker]="picker" ng-model-options="{timezone: 'utc'}"
@@ -142,7 +104,6 @@
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
           </div>
-  
           <div fxFlex="50" class="p-2">
             <mat-form-field class="full-width">
               <input matInput formControlName="toTime" placeholder="Deadline Time" type="time">
@@ -152,10 +113,6 @@
               </mat-error>
             </mat-form-field>
           </div>
-  
-          
-          
-  
           <div fxFlex="100" class="textHeader"
             *ngIf="(this.unitSort === 'BSS' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')">
             <h5>Listing Details</h5>
@@ -178,13 +135,11 @@
                   <input matInput formControlName="listStatus" placeholder="listStatus">
                 </mat-form-field>
               </div>
-  
               <a (click)="deleteList(i)">
                 <mat-icon>clear</mat-icon>
               </a>
             </div>
           </div>
-  
           <div fxFlex="50"
             *ngIf="(this.unitSort === 'BSS' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')">
             <a (click)="addListForm()">
@@ -214,13 +169,11 @@
                 <input matInput formControlName="moduleStatus" placeholder="moduleStatus">
               </mat-form-field>
             </div>
-
             <a (click)="deleteModule(i)">
               <mat-icon>clear</mat-icon>
             </a>
           </div>
         </div>
-
         <div fxFlex="50"
           *ngIf="(this.unitSort === 'Technologies' || this.roleSort === 'admin') && (this.roleSort === 'teamleader' || this.roleSort === 'admin')">
           <a (click)="addTaskForm()">
@@ -228,9 +181,6 @@
           </a>
           <p>Add New</p>
         </div>
-
-
-  
           <div fxFlex="100" class="mt-1">
             <button mat-raised-button color="primary">Create</button>
             <span fxFlex></span>
@@ -239,5 +189,4 @@
         </div>
       </form>
     </div>
-  
   </div>

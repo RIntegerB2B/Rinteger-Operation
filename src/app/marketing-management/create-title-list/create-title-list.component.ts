@@ -16,7 +16,6 @@ export class CreateTitleListComponent implements OnInit {
   marketingValue: any;
   marketingEdit: any;
   id: string;
-
   constructor(private marketingManagementService: MarketingManagementService,
     private fb: FormBuilder, private router: Router, private route: ActivatedRoute) {
       this.route.paramMap.subscribe(
@@ -24,12 +23,10 @@ export class CreateTitleListComponent implements OnInit {
           this.id = params.get('id');
         });
      }
-
   ngOnInit() {
     this.createForm();
     this.getSelectedTitle();
   }
-
   createForm() {
     this.MarketingManagementForm = this.fb.group({
       title: [''],
@@ -66,7 +63,6 @@ createCompanyDetail(MarketingManagementForm: FormGroup, row) {
   }, error => {
     console.log(error);
   });
- 
 }
 cancel() {
   this.router.navigate(['marketing/viewtitlelist/', this.marketingValue._id]);

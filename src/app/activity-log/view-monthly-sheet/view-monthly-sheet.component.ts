@@ -53,8 +53,6 @@ activityStatus: any;
     this.getAllActivityLog();
     this.createForm();
     this.getUnitName();
-    /* this.getStatus(); */
-
   }
 
   createForm() {
@@ -80,7 +78,6 @@ activityStatus: any;
     });
   }
   createWeeklyPlan(data) {
-    /* console.log(data); */
     this.router.navigate(['activity-log/createweekly/', data._id]);
   }
   Delete(row) {
@@ -104,7 +101,6 @@ activityStatus: any;
     });
   }
   changed(e) {
-   /*  console.log(this.unitName.filter(data => data.unit === e.value)); */
     this.activityValue = this.activityValue.filter(data => data.year === e.value);
   }
   public handlePage(e: any) {
@@ -118,12 +114,13 @@ activityStatus: any;
     const part = this.array.slice(start, end);
     this.activityValue = part;
   }
-
   openList(row) {
     this.router.navigate(['activity-log/viewlist/', row._id]);
   }
   getUnitName() {
     this.unitName = localStorage.getItem('unit');
-  /*   console.log(this.unitName); */
+  }
+  Edit(row) {
+    this.router.navigate(['activity-log/editmonthlysheet/', row._id]);
   }
 }

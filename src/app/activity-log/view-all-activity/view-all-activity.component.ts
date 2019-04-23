@@ -47,13 +47,11 @@ export class ViewAllActivityComponent implements OnInit {
       this.array =  this.activityModel;
       this.totalSize = this.array.length;
       this.iterator();
-      console.log(this.activityValue);
     }, error => {
       console.log(error);
     });
   }
   createMonthlyPlan(data) {
-    console.log(data._id);
     this.router.navigate(['activity-log/createmonthly/', data._id]);
   }
   getMonthlyPlan() {
@@ -75,7 +73,5 @@ export class ViewAllActivityComponent implements OnInit {
   }
   getUnitName() {
     this.unitName = localStorage.getItem('unit');
-  /*   console.log(this.unitName); */
   }
-
 }

@@ -77,6 +77,11 @@ export class ActivityLogService {
     const url: string = this.serviceUrl + addUrl + id;
     return this.http.delete<ActivityLogModel[]>(url);
   }
+  deleteMonthlyPlanList(id): Observable<any> {
+    const addUrl = 'deletemonthlyPlanlist/';
+    const url: string = this.serviceUrl + addUrl + id;
+    return this.http.delete<ActivityLogModel[]>(url);
+  }
   deleteCompletePlan(id): Observable<any> {
     const addUrl = 'deleteCompletePlan/';
     const url: string = this.serviceUrl + addUrl + id;
@@ -101,5 +106,15 @@ export class ActivityLogService {
     const addUrl = 'getselectedactivitylog/';
     const url: string = this.serviceUrl + addUrl + id ;
     return this.http.get<ActivityLogModel[]>(url);
+  }
+  getSelectedMonthlyPlan(id): Observable<any> {
+    const addUrl = 'getselectedactivitylog/';
+    const url: string = this.serviceUrl + addUrl + id ;
+    return this.http.get<ActivityLogModel[]>(url);
+  }
+  updateMonthlyPlan(data, id) {
+    const addUrl = 'updatemonthlyplan/';
+    const url: string = this.serviceUrl + addUrl + id;
+    return this.http.post<ActivityLogModel[]>(url, data);
   }
 }

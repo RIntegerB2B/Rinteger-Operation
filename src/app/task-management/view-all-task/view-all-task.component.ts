@@ -36,6 +36,7 @@ export class ViewAllTaskComponent implements OnInit {
   userRole;
   filterWise;
   deadcount;
+  deletevalue;
 
   studios;
   BSSs;
@@ -62,7 +63,6 @@ export class ViewAllTaskComponent implements OnInit {
     this.navheaderService.hideMenuTrans();
     this.navheaderService.menuItems();
   }
-
   LoadMethod() {
     if (this.userRole === 'admin') {
       this.getAllTask();
@@ -77,7 +77,6 @@ export class ViewAllTaskComponent implements OnInit {
     this.taskholder.paginator = this.paginator;
     this.taskholder = data;
   }
-
   getAllTask() {
     this.taskManagementService.getAllTaskData().subscribe(data => {
       this.taskholder = data;
@@ -97,13 +96,11 @@ export class ViewAllTaskComponent implements OnInit {
   getRole() {
     this.userRole = localStorage.getItem('role');
   }
-
   getUnitWiseName() {
     this.taskManagementService.getUnitWiseName().subscribe(data => {
       this.UnitName = data;
     });
   }
-
   getUnitWise() {
     this.userUnit = localStorage.getItem('unit');
     this.taskManagementService.compareUserUnits(this.userUnit).subscribe(data => {
@@ -122,12 +119,10 @@ export class ViewAllTaskComponent implements OnInit {
       console.log(error);
     });
   }
-
   getunitwiseTask(value) {
     this.taskholder = this.filterWise.filter(data =>
       data.units === value);
   }
-
   filterWiseTest() {
     this.studios = this.filterWise.filter(data => data.units === 'Studio');
     this.BSSs = this.filterWise.filter(data => data.units === 'BSS');
@@ -136,7 +131,6 @@ export class ViewAllTaskComponent implements OnInit {
     this.units[1].counts = this.BSSs.length;
     this.units[2].counts = this.technologys.length;
   }
-
   deadlinedTask() {
     this.taskManagementService.deadlinedTask().subscribe(data => {
       this.taskholder = data;
@@ -152,10 +146,14 @@ export class ViewAllTaskComponent implements OnInit {
       console.log(error);
     });
   }
-
   delete(value) {
     this.taskManagementService.DeleteTask(value).subscribe(data => {
-      this.taskholder = data;
+      this.deletevalue = data;
+      if (this.userRole !== 'admin') {
+        this.taskholder = this.deletevalue.filter( value => this.userUnit === value.units);
+      } else {
+        this.taskholder = this.deletevalue;
+      }
     });
   }
   public handlePage(e: any) {

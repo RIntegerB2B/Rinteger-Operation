@@ -21,15 +21,15 @@ export class UpdateStatusComponent implements OnInit {
   id: string;
   contactType;
   assingedTo = ['person1', 'person2'];
-
+  message;
+  action;
   constructor(private marketingManagementService: MarketingManagementService,
-    private fb: FormBuilder, private router: Router, private route: ActivatedRoute) { 
+    private fb: FormBuilder, private router: Router, private route: ActivatedRoute) {
       this.route.paramMap.subscribe(
         (params: ParamMap) => {
           this.id = params.get('id');
         });
     }
-
   ngOnInit() {
     this.createForm();
     this.getSelectedCompant();
@@ -62,11 +62,9 @@ export class UpdateStatusComponent implements OnInit {
       console.log(error);
     });
   }
-
   CreateStatus(MarketingManagementForm: FormGroup) {
     this.marketingholder = new MarketingTitleModel();
     this.marketingholder.activity = MarketingManagementForm.controls.activity.value;
-   /*  console.log(this.marketingholder,this.marketingEdit[0]._id); */
    this.marketingManagementService.addActivity(this.marketingholder, this.marketingEdit[0]._id).subscribe(data => {
      this.marketingEdit = data;
      this.router.navigate(['marketing/viewtitlelist/', this.marketingId._id ]);
@@ -74,7 +72,6 @@ export class UpdateStatusComponent implements OnInit {
      console.log(error);
    });
   }
-
   cancel() {
     this.router.navigate(['marketing/viewtitlelist/', this.marketingId._id ]);
   }
@@ -85,6 +82,4 @@ export class UpdateStatusComponent implements OnInit {
       console.log(error);
     });
   }
-
-
 }

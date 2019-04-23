@@ -174,7 +174,7 @@
         <a class="nav-link" [routerLink]="['/task/viewsingle', data._id, userId ]">View</a>
         <a class="nav-link" [routerLink]="['/task/edittask', data._id, userId ]">Update Status</a>
         <a class="nav-link" *ngIf="this.userRole === 'admin' || this.userRole === 'teamleader'" [routerLink]="['/task/reedittask', data._id, userId ]">Edit</a>
-        <a class="nav-link" *ngIf="this.userRole === 'admin' || this.userRole === 'teamleader'" (click)="delete(data)">Detele</a>
+        <a class="nav-link" *ngIf="this.userRole === 'admin' || this.userRole === 'teamleader'" (click)="delete(data)">Delete</a>
       </mat-menu>
     </div>
 

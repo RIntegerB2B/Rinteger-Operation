@@ -5,7 +5,6 @@ import { from } from 'rxjs';
 import { TaskManagementService } from '../../task-management/task-management.service';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { Register } from '../../user-management/registration/register.model';
-/* import { Customer } from './../../customer-management/customer/create-customer/customer.model'; */
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ActivityLogService } from '../activity-log.service';
 
@@ -82,8 +81,6 @@ export class CreateWeeklySheetComponent implements OnInit {
     this.addListForm();
     this.addTaskForm();
   }
-
-
   addListForm() {
     const list = this.fb.group({
       title: [''],
@@ -92,14 +89,12 @@ export class CreateWeeklySheetComponent implements OnInit {
       });
     this.listForms.push(list);
   }
-
   get listForms() {
     return this.taskForm.get('list') as FormArray;
   }
   deleteList(i) {
     this.listForms.removeAt(i);
   }
-
   addTaskForm() {
     const task = this.fb.group({
       moduleName: [''],
@@ -108,7 +103,6 @@ export class CreateWeeklySheetComponent implements OnInit {
       });
     this.moduleForms.push(task);
   }
-
   get moduleForms() {
     return this.taskForm.get('task') as FormArray;
   }
@@ -116,11 +110,8 @@ export class CreateWeeklySheetComponent implements OnInit {
     this.moduleForms.removeAt(i);
   }
   changed(e) {
-   /*  console.log(this.unitName.filter(data => data.unit === e.value)); */
     this.taskname = this.unitName.filter(data => data.unit === e.value);
   }
-
-
   onSubmit(taskForm: FormGroup, unit, assignedTo, clientName, taskTitle, taskDescription, weekID) {
     this.taskholder = new TaskModel();
     this.taskholder.userId = taskForm.controls.assignedTo.value._id;
@@ -146,16 +137,7 @@ export class CreateWeeklySheetComponent implements OnInit {
     }, error => {
       console.log(error);
     });
-
   }
-
-/*   onSubmit(value) {
-   this.taskManagementService.createBssTask(value).subscribe( data => {
-     this.valueholder = data;
-   }, error => {
-     console.log(error);
-   });
-  } */
   getDepartment() {
     this.taskManagementService.getDepartmentData().subscribe(data => {
       this.taskholder = data;
@@ -174,21 +156,18 @@ export class CreateWeeklySheetComponent implements OnInit {
     this.activityLogService.getWeekToTask(this.weekID).subscribe(data => {
       this.valueEdit = data;
       this.valueModel = data.weeklyPlan;
-    
       this.taskEdit = this.valueModel.filter( value => value.weekID === this.weekID);
       this.valueholder = this.taskEdit[0];
-      console.log(this.valueholder);
     }, error => {
       console.log(error);
     });
   }
 
   cancel() {
-    this.router.navigate(['activity-log/viewweek']);
+    this.router.navigate(['activity-log/viewweek/', this.valueEdit._id]);
   }
 getUnit() {
   this.unitSort =  localStorage.getItem('unit');
   this.roleSort = localStorage.getItem('role');
 }
-
 }

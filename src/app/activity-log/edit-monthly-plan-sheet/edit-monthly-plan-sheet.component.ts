@@ -6,22 +6,21 @@ import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { ActivityLogService } from '../activity-log.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { WorkOrder } from '../../shared/workorder.model';
-
+import { error } from 'util';
 
 @Component({
-  selector: 'app-create-monthly-sheet',
-  templateUrl: './create-monthly-sheet.component.html',
-  styleUrls: ['./create-monthly-sheet.component.css']
+  selector: 'app-edit-monthly-plan-sheet',
+  templateUrl: './edit-monthly-plan-sheet.component.html',
+  styleUrls: ['./edit-monthly-plan-sheet.component.css']
 })
-export class CreateMonthlySheetComponent implements OnInit {
+export class EditMonthlyPlanSheetComponent implements OnInit {
   activityForm: FormGroup;
-
   activeValue: any;
   activeholder: any;
   ctrlValue: any;
   activityData: any;
   monthToString: any;
+ /*  monthName: string; */
   id: string;
   yearValue: any;
   yearToString: any;
@@ -30,16 +29,15 @@ export class CreateMonthlySheetComponent implements OnInit {
   'August', 'September', 'October', 'November', 'December'];
   unitName: string;
   constructor(private fb: FormBuilder, private activityLogService: ActivityLogService,
-    private router: Router, private route: ActivatedRoute) { 
-      this.route.paramMap.subscribe((params: ParamMap) => {
-        this.id = params.get('id');
-      });
-    }
+    private router: Router, private route: ActivatedRoute) { this.route.paramMap.subscribe(
+    (params: ParamMap) => {
+      this.id = params.get('id');
+    }); }
 
   ngOnInit() {
-    this.getAllWorkorder();
     this.createForm();
     this.getUnitName();
+    this.getMonthlyPlan();
   }
   createForm() {
     this.activityForm = this.fb.group({
@@ -52,7 +50,7 @@ export class CreateMonthlySheetComponent implements OnInit {
       monthlyPlan:  this.fb.array([]),
       weeklyPlan:  this.fb.array([])
     });
-    this.addForm();
+
   }
   addForm() {
     const monthlyPlan = this.fb.group({
@@ -63,43 +61,52 @@ export class CreateMonthlySheetComponent implements OnInit {
       });
     this.monthForms.push(monthlyPlan);
   }
+
   get monthForms() {
     return this.activityForm.get('monthlyPlan') as FormArray;
   }
+
   deleteList(i) {
     this.monthForms.removeAt(i);
   }
-  onSubmit(activityForm: FormGroup) {
-    this.activeValue = new ActivityLogModel();
-    this.activeValue.workOrderID = activityForm.controls.workOrderID.value;
-    this.activeValue.customerName = activityForm.controls.customerName.value;
-    this.activeValue.year = activityForm.controls.year.value;
-    this.activeValue.monthName = activityForm.controls.monthName.value;
-    this.activeValue.title = activityForm.controls.title.value;
-    this.activeValue.unit = this.unitName;
-    this.activeValue.description = activityForm.controls.description.value;
-    this.activeValue.monthlyPlan = activityForm.controls.monthlyPlan.value;
-    this.activityLogService.createmonthly(this.activeValue).subscribe( data => {
-      this.activeValue = data;
-      this.router.navigate(['activity-log/viewallmonthly']);
+  addNewForm() {
+    for (let i = 0; i <= this.activeValue.monthlyPlan.length - 1; i++) {
+      const monthlyPlan = this.fb.group({
+        planTitle: [this.activeValue.monthlyPlan[i].planTitle],
+        planDescription: [this.activeValue.monthlyPlan[i].planDescription]
+      });
+      this.monthForms.push(monthlyPlan);
+    }
+  }
+  getMonthlyPlan() {
+    this.activityLogService.getSelectedMonthlyPlan(this.id).subscribe( data => {
+      this.activeValue = data[0];
+      this.addNewForm();
     }, error => {
       console.log(error);
     });
   }
-  getAllWorkorder() {
-    this.activityLogService.getFindAllWorkorder().subscribe( data => {
-      this.activityData = data.filter( value => value._id === this.id);
-     this.activeValue = this.activityData[0];
-    });
-  }
-  chosenYearHandler(event) {
-    this.yearValue = event.getMonth();
-    this.yearToString = this.yearValue.toString();
-  }
-  cancel() {
-    this.router.navigate(['activity-log/viewallactivity']);
+  updatevalue(activityForm: FormGroup, row) {
+    this.activeValue = new ActivityLogModel();
+    this.activeValue.workOrderID = activityForm.controls.workOrderID.value;
+    this.activeValue.customerName = activityForm.controls.customerName.value;
+    this.activeValue.monthName = activityForm.controls.monthName.value;
+    this.activeValue.year = activityForm.controls.year.value;
+    this.activeValue.title = activityForm.controls.title.value;
+    this.activeValue.unit = this.unitName;
+    this.activeValue.description = activityForm.controls.description.value;
+    this.activeValue.monthlyPlan = activityForm.controls.monthlyPlan.value;
+   this.activityLogService.updateMonthlyPlan(this.activeValue, row._id).subscribe( data => {
+     this.activeValue = data;
+     this.router.navigate(['activity-log/viewallmonthly']);
+   }, error => {
+     console.log(error);
+   });
   }
   getUnitName() {
     this.unitName = localStorage.getItem('unit');
+  }
+  cancel() {
+    this.router.navigate(['activity-log/viewallmonthly']);
   }
 }

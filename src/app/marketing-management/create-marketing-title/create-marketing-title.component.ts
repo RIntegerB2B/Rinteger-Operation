@@ -14,11 +14,9 @@ import { MarketingManagementModel } from 'src/app/shared/marketing-management.mo
 export class CreateMarketingTitleComponent implements OnInit {
   MarketingManagementForm: FormGroup;
   marketingValue: any;
-
   location;
   category;
   subCategory;
-
   constructor(private marketingManagementService: MarketingManagementService,
     private fb: FormBuilder, private router: Router) { }
 
@@ -43,12 +41,11 @@ export class CreateMarketingTitleComponent implements OnInit {
     this.marketingValue.location = MarketingManagementForm.controls.location.value;
     this.marketingManagementService.CreateTitle(this.marketingValue).subscribe( data => {
       this.marketingValue = data;
+      this.router.navigate(['marketing/view-all']);
     }, error => {
       console.log(error);
     });
-    this.router.navigate(['marketing/view-all']);
   }
-
   cancel() {
     this.router.navigate(['marketing/view-all']);
   }

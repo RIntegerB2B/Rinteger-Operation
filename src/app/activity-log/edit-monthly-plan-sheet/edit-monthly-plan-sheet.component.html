@@ -1,9 +1,9 @@
 <div class="pageBoxLg">
   <div class="container topAlignContainer">
-    <form [formGroup]="activityForm" (ngSubmit)="activityForm.valid && onSubmit(activityForm)">
+    <form [formGroup]="activityForm" >
       <div fxLayout="row wrap" fxLayout.lt-sm="column">
         <div fxFlex="100">
-          <label class="pageBoxLg-label">Create Monthly Plan</label>
+          <label class="pageBoxLg-label">Edit Monthly Plan</label>
         </div>
         <div fxFlex="50" class="pr-2">
           <mat-form-field class="full-width">
@@ -13,13 +13,14 @@
         </div>
         <div fxFlex="50" class="pr-2">
             <mat-form-field class="full-width">
-              <input matInput formControlName="customerName" [readonly]=true placeholder="customerName" 
+              <input matInput formControlName="customerName" placeholder="customerName" 
               [(ngModel)]="activeValue.customerName" >  
             </mat-form-field>
           </div>
           <div fxFlex="50" class="pr-1">
             <mat-form-field>
-              <mat-select placeholder="Select the Year" formControlName="year">
+              <mat-select placeholder="Select the Year" formControlName="year" 
+              [(ngModel)]="activeValue.year" >
                 <mat-option *ngFor="let data of year;let i = index " [value]="data">
                   {{data}}
                 </mat-option>
@@ -28,7 +29,7 @@
           </div>
           <div fxFlex="50" class="pr-1">
             <mat-form-field>
-              <mat-select placeholder="monthName" formControlName="monthName">
+              <mat-select placeholder="monthName" formControlName="monthName" [(ngModel)]="activeValue.monthName" >                  
                 <mat-option *ngFor="let data of monthName;let i = index " [value]="data">
                   {{data}}
                 </mat-option>
@@ -37,13 +38,13 @@
           </div>
           <div fxFlex="50" class="pr-2"> 
             <mat-form-field>
-              <input matInput formControlName="title" 
+              <input matInput formControlName="title"   [(ngModel)]="activeValue.title" 
                 placeholder="Enter the title">              
             </mat-form-field>
           </div>
           <div fxFlex="50" class="pr-2"> 
             <mat-form-field>
-              <input matInput formControlName="description"
+              <input matInput formControlName="description"  [(ngModel)]="activeValue.description" 
                 placeholder="Enter the description">
             </mat-form-field>
           </div>
@@ -51,12 +52,14 @@
           <div  *ngFor="let account of monthForms.controls; let i=index" [formGroupName]="i">
           <div fxFlex="25" class="p-2">
           <mat-form-field class="full-width">
-            <input matInput formControlName="planTitle" placeholder="Title">
+            <input matInput formControlName="planTitle" placeholder="Title" 
+              (ngModelChange)="activeValue.planTitle=$event" >
           </mat-form-field>
         </div>
         <div fxFlex="50" class="p-2">
           <mat-form-field class="full-width">
-            <input matInput formControlName="planDescription" placeholder="Descrition">
+            <input matInput formControlName="planDescription" placeholder="Descrition" 
+             (ngModelChange)="activeValue.planDescription=$event">
           </mat-form-field>
         </div>
         <a (click)="deleteList(i)">
@@ -71,7 +74,7 @@
           <p>Add New</p>
         </div>
     <div fxFlex="100" class="mt-1">
-        <button mat-raised-button color="primary">Create</button>
+        <button mat-raised-button color="primary" (click)="updatevalue(activityForm,activeValue)">Create</button>
         <span fxFlex></span>
         <button mat-raised-button mat-button color="accent" type="button" (click)="cancel()">Cancel</button>
       </div>
