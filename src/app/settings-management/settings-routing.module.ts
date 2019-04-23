@@ -9,6 +9,7 @@ import { IncomeSettingsComponent } from './income-settings/income-settings.compo
 import { MaterialSettingsComponent } from './material-settings/material-settings.component';
 import { TaskSettingsComponent } from './task-settings/task-settings.component';
 import { WorkorderSettingComponent } from './workorder-setting/workorder-setting.component';
+import { MarketingSettingComponent } from './marketing-setting/marketing-setting.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,10 @@ const routes: Routes = [
   {
     path: 'workordersetting',
     component: WorkorderSettingComponent
+  },
+  {
+    path: 'marketingsetting',
+    component: MarketingSettingComponent
   }
 ];
 

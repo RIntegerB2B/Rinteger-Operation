@@ -13,6 +13,7 @@ import { IncomeSetting } from '../shared/income-setting.model';
 import { MaterialSetting } from '../shared/material-settings.model';
 import { TasksettingsModel } from '../shared/task-setting.module';
 import { WorkOrderSettingModel  } from '../shared/workorder-setting.model';
+import { MarketingSetting } from '../shared/marketing-setting.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -352,5 +353,50 @@ export class SettingsServiceService {
     const url: string = this.serviceUrl + addUrl + val;
     return this.httpClient.delete<WorkOrderSettingModel[]>(url);
   }
+  addMarketingLocation(data: any): Observable<any> {
+    const addUrl = 'addmarketinglocaiton';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<MarketingSetting[]>(url, data);
+  }
 
+  viewMarketingSetting(): Observable<any> {
+    const addUrl = 'viewmarketingsetting';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<MarketingSetting[]>(url);
+  }
+  deleteMarketingLocation(val): Observable<any> {
+    const addUrl = 'deletemarketinglocation/';
+    const url: string = this.serviceUrl + addUrl + val;
+    return this.httpClient.delete<MarketingSetting[]>(url);
+  }
+  addMarketingCategory(data: any): Observable<any> {
+    const addUrl = 'addmarketingcategory';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<MarketingSetting[]>(url, data);
+  }
+  deleteMarketingCategory(val): Observable<any> {
+    const addUrl = 'deletemarketingcategory/';
+    const url: string = this.serviceUrl + addUrl + val;
+    return this.httpClient.delete<MarketingSetting[]>(url);
+  }
+  addMarketingSubCategory(data: any): Observable<any> {
+    const addUrl = 'addmarketingsubcategory';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<MarketingSetting[]>(url, data);
+  }
+  deleteMarketingSubCategory(val): Observable<any> {
+    const addUrl = 'deletemarketingsubcategory/';
+    const url: string = this.serviceUrl + addUrl + val;
+    return this.httpClient.delete<MarketingSetting[]>(url);
+  }
+  addMarketingContactType(data: any): Observable<any> {
+    const addUrl = 'addmarketingcontacttype';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<MarketingSetting[]>(url, data);
+  }
+  deleteMarketingContactType(val): Observable<any> {
+    const addUrl = 'deletemarketingconatcttype/';
+    const url: string = this.serviceUrl + addUrl + val;
+    return this.httpClient.delete<MarketingSetting[]>(url);
+  }
 }

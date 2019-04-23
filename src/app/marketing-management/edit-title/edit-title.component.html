@@ -1,0 +1,59 @@
+<div class="pageBoxLg">
+    <div class="container topAlignContainer ">
+      <form [formGroup]="MarketingManagementForm" >
+        <div fxLayout="row wrap" fxLayout.lt-sm="column">
+          <div fxFlex="100">
+            <label class="pageBoxLg-label">Edit Title</label>
+          </div>       
+          <div fxFlex="100" class="pr-1">
+              <mat-form-field class="full-width">
+                <input matInput formControlName="title"  [(ngModel)]="marketingholder.title"  
+                (ngModelChange)="marketingholder.title=$event" placeholder="title">  
+              </mat-form-field>
+            </div>
+          <div fxFlex="50" class="pr-1">
+              <mat-form-field class="full-width">
+                  <mat-select placeholder="Select Location" [(ngModel)]="marketingholder.location" 
+                  (ngModelChange)="marketingholder.location=$event" formControlName="location">
+                      <mat-option *ngFor="let data of location" [value]="data">
+                        {{data}}
+                      </mat-option>
+                    </mat-select>
+              </mat-form-field>
+            </div>
+        
+          <div fxFlex="50" class="pr-1">
+              <mat-form-field class="full-width">
+                  <mat-select placeholder="Select Category" [(ngModel)]="marketingholder.category" 
+                  (ngModelChange)="marketingholder.category=$event" formControlName="category">
+                      <mat-option *ngFor="let data of category" [value]="data">
+                        {{data}}
+                      </mat-option>
+                    </mat-select>
+              </mat-form-field>
+            </div>
+            <div fxFlex="50" class="pr-1">
+                <mat-form-field class="full-width">
+                    <mat-select placeholder="Select Sub-category" [(ngModel)]="marketingholder.subCategory"
+                    (ngModelChange)="marketingholder.subCategory=$event"  formControlName="subCategory">
+                        <mat-option *ngFor="let data of subCategory" [value]="data">
+                          {{data}}
+                        </mat-option>
+                      </mat-select>
+                </mat-form-field>
+              </div>
+         
+           
+          <div fxFlex="100" class="mt-1">
+              <button mat-raised-button mat-button color="accent"
+              type="button" (click)="cancel()">Cancel</button>
+              
+            <span fxFlex></span>
+            <span fxFlex></span>
+            <button mat-raised-button type="button" color="primary" 
+              (click)="updateTitle(MarketingManagementForm, marketingholder)">Save</button>          
+          </div>
+        </div>
+      </form>
+    </div>
+    </div>

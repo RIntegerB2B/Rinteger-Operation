@@ -40,7 +40,8 @@ export class CreateRoleComponent implements OnInit {
         bookingNav: [false, Validators.required],
         quotationNav: [false, Validators.required],
         workOrderNav: [false, Validators.required],
-        activitylogNav: [false, Validators.required]
+        activitylogNav: [false, Validators.required],
+        marketingNav: [false, Validators.required]
       }),
       financialRole: this.fb.group({
         incomeNav: [false, Validators.required],
@@ -76,7 +77,8 @@ export class CreateRoleComponent implements OnInit {
         bookingNav: [false, Validators.required],
         quotationNav: [false, Validators.required],
         workOrderNav: [false, Validators.required],
-        activitylogNav: [false, Validators.required]
+        activitylogNav: [false, Validators.required],
+        marketingNav: [false, Validators.required]
       }),
       financialRole: this.fb.group({
         incomeNav: [false, Validators.required],

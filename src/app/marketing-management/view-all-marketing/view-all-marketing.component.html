@@ -1,0 +1,95 @@
+<form [formGroup]="MarketingDetailsForm">
+    <div class="pageBoxLg">       
+      <div class="container-fluid">    
+        <div class="row"> 
+        <div class="col-md-1">
+            <span [routerLink]="['/marketing/creatematerial']">              
+              <mat-icon class="gridEdit" >add_box</mat-icon>
+            </span>
+        </div>   
+        <div class="col-md-2">
+            <mat-form-field class="full-width">
+                <mat-select placeholder="Select Location" formControlName="location" 
+                (selectionChange)="onLocationChange($event)">
+                    <mat-option *ngFor="let data of location" [value]="data">
+                      {{data}}
+                    </mat-option>
+                  </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-2">
+            <mat-form-field class="full-width">
+                <mat-select placeholder="Select Category" formControlName="category" 
+                 (selectionChange)="onCategoryChange($event)">
+                    <mat-option *ngFor="let data of category" [value]="data">
+                      {{data}}
+                    </mat-option>
+                  </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-2">
+            <mat-form-field class="full-width">
+                <mat-select placeholder="Select Sub-category" formControlName="subCategory"  
+                (selectionChange)="onSubCategoryChange($event)">
+                    <mat-option *ngFor="let data of subCategory" [value]="data">
+                      {{data}}
+                    </mat-option>
+                  </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-2">
+            <button mat-raised-button (click)="goToUpload()" type="submit">Upload</button>
+            
+          </div>
+        </div> 
+          <div>
+              <div fxFlex="100">
+                  <label class="pageBoxLg-label">Marketing Title</label>
+              </div>
+          </div>       
+        <div class="row gridRowHeader display-none-small">  
+          <div class="col-md-10 vcenterHeader" align="center">
+            <div class="form-group" >
+              <label><h6>Title</h6></label>
+            </div>
+          </div>               
+          <div class="col-md-2 vcenterHeader">
+            <div class="form-group">
+              <label><h6>Action</h6></label>
+            </div>
+          </div>
+        </div>
+        <div *ngFor="let data of marketingValue">
+          <div class="row gridRow">       
+            <div class="display-none-large col-6">
+              <label class="gridLabel">Title:</label>
+            </div>
+            <div class="col-md-10 col-6 vcenter form-group"  align="center">
+              {{data.title}}
+            </div>       
+            <div class="display-none-large col-6">
+              <label class="gridLabel">Action:</label>
+            </div>
+            <div class="col-md-2 col-6 vcenter form-group">
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">             
+                <a class="nav-link" (click)="openTitle(data)">
+                 view
+                </a>      
+                <a class="nav-link" (click)="EditTitle(data)">
+                    Edit
+                   </a>   
+                   <a class="nav-link" (click)="DeleteTitle(data)">
+                      Delete
+                     </a>   
+              </mat-menu>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true" [length]="totalSize"
+      [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>
+  </form>

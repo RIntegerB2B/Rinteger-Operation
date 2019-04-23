@@ -1,0 +1,59 @@
+<div class="pageBoxLg">
+    <div class="container topAlignContainer ">
+      <form [formGroup]="MarketingManagementForm" >
+        <div fxLayout="row wrap" fxLayout.lt-sm="column">
+          <div fxFlex="100">
+            <label class="pageBoxLg-label">Update stauts</label>
+          </div>       
+          <div fxLayout="column"    fxFlex="100" formArrayName="activity" >
+              <div  *ngFor="let account of activityDetailsForms.controls; let i=index" [formGroupName]="i">
+                <div class="row">
+            <div fxFlex="50" class="pr-1">
+                <mat-form-field>
+                  <input matInput formControlName="date" [matDatepicker]="picker" placeholder="Choose a date">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </div>
+        
+          <div fxFlex="50" class="pr-1">
+              <mat-form-field class="full-width">
+                  <mat-select placeholder="Select contactType"  formControlName="contactType">
+                      <mat-option *ngFor="let data of contactType" [value]="data">
+                        {{data}}
+                      </mat-option>
+                    </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div fxFlex="50" class="pr-1">
+                <mat-form-field class="full-width">
+                    <mat-select placeholder="Select assingedTo"  formControlName="assingedTo">
+                        <mat-option *ngFor="let data of assingedTo" [value]="data">
+                          {{data}}
+                        </mat-option>
+                      </mat-select>
+                </mat-form-field>
+              </div>
+              <div fxFlex="50" class="pr-1">
+                  <mat-form-field class="full-width">
+                    <input matInput formControlName="comment"  placeholder="comment">  
+                  </mat-form-field>
+                </div>
+              </div>
+           </div>
+          </div>
+          <div fxFlex="100" class="mt-1">
+              <button mat-raised-button mat-button color="accent"
+              type="button" (click)="cancel()">Cancel</button>
+              
+            <span fxFlex></span>
+            <span fxFlex></span>
+            <button mat-raised-button type="button" color="primary" 
+              (click)="CreateStatus(MarketingManagementForm)">Save</button>          
+          </div>
+        </div>
+      </form>
+    </div>
+    </div>

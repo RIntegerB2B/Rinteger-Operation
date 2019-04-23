@@ -1,0 +1,79 @@
+<form novalidate style="padding-top:20px" [formGroup]="MarketingDetailsForm">
+    <div class="pageBoxLg">
+<div class="container-fluid">
+   
+  <div class="row" *ngFor="let data of marketingholder">
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-4  col-6">
+          <div class="form-group">
+            <label class="divLable">Name:</label>
+          </div>
+        </div>
+        <div class="col-md-8  col-6">
+          <div class="form-group">
+            : <label class="itemLable"> {{data.name}}</label>
+          </div>
+        </div>
+        <div class="col-md-4  col-6">
+          <div class="form-group">
+            <label class="divLable">Mobile Number</label>
+          </div>
+        </div>
+        <div class="col-md-8  col-6">
+          <div class="form-group">
+            : <label class="itemLable">{{data.mobileNumber}}</label>
+          </div>
+        </div>
+        <div class="col-md-4  col-6">
+          <div class="form-group">
+            <label class="divLable">Email-ID</label>
+          </div>
+        </div>
+        <div class="col-md-8  col-6">
+          <div class="form-group">
+            : <label class="itemLable">{{data.emailID}}</label>
+          </div>
+        </div>
+        <div class="col-md-4  col-6">
+          <div class="form-group">
+            <label class="divLable">Address</label>
+          </div>
+        </div>
+        <div class="col-md-8  col-6">
+          <div class="form-group">
+            : <label class="itemLable">{{data.address}}</label>
+          </div>
+        </div>
+        <div class="col-md-4  col-6">
+          <div class="form-group">
+            <label class="divLable">Remark</label>
+          </div>
+        </div>
+        <div class="col-md-8  col-6">
+          <div class="form-group">
+            : <label class="itemLable">{{data.remark}}</label>
+          </div>
+        </div>
+        <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Status</label>
+            </div>
+          </div>
+        <div class="col-md-8  col-6">
+          <div class="form-group">
+            : <label class="itemLable"> {{data.status}}</label>
+          </div>
+        </div>
+        
+      
+      </div>
+    </div>
+  
+  <div fxFlex="100" class="mt-1">    
+    <button mat-raised-button mat-button color="accent" type="button" (click)="Back()">Back</button>
+  </div>
+</div>
+</div>
+</div>
+</form>

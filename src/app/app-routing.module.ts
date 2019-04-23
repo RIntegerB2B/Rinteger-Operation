@@ -23,6 +23,10 @@ const routes: Routes = [
     loadChildren: './work-order-management/work-order-management.module#WorkOrderManagementModule'
   },
   {
+    path: 'marketing',
+    loadChildren: './marketing-management/marketing-management.module#MarketingManagementModule'
+  },
+  {
     path: 'quotation',
     canActivate: [AuthGuard],
     loadChildren: './quotation-management/quotation-management.module#QuotationManagementModule'

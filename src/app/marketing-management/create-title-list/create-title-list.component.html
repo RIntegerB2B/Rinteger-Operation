@@ -1,0 +1,55 @@
+<div class="pageBoxLg">
+    <div class="container topAlignContainer ">
+      <form [formGroup]="MarketingManagementForm" >
+        <div fxLayout="row wrap" fxLayout.lt-sm="column">
+          <div fxFlex="100">
+            <label class="pageBoxLg-label">Create Company Detail</label>
+          </div>       
+          <div fxFlex="100" class="pr-1">
+              <mat-form-field class="full-width">
+                <input matInput formControlName="title" [readonly]=true   [value]="marketingValue?.title"  placeholder="title">  
+              </mat-form-field>
+            </div>
+            <div fxLayout="column"    fxFlex="100" formArrayName="companyDetail" >
+                <div  *ngFor="let account of companyDetailsForms.controls; let i=index" [formGroupName]="i">
+            <div class="row">
+                  <div fxFlex="50" class="pr-1">
+                <mat-form-field class="full-width">
+                  <input matInput formControlName="name"    placeholder="name">  
+                </mat-form-field>
+              </div>
+        
+              <div fxFlex="50" class="pr-1">
+                  <mat-form-field class="full-width">
+                    <input matInput formControlName="mobileNumber"    placeholder="mobileNumber">  
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div fxFlex="50" class="pr-1">
+                    <mat-form-field class="full-width">
+                      <input matInput formControlName="emailID"    placeholder="emailID">  
+                    </mat-form-field>
+                  </div>
+                  <div fxFlex="50" class="pr-1">
+                      <mat-form-field class="full-width">
+                        <input matInput formControlName="address"     placeholder="address">  
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+            </div>
+           
+          <div fxFlex="100" class="mt-1">
+              <button mat-raised-button mat-button color="accent"
+              type="button" (click)="cancel()">Cancel</button>
+              
+            <span fxFlex></span>
+            <span fxFlex></span>
+            <button mat-raised-button type="button" color="primary" 
+              (click)="createCompanyDetail(MarketingManagementForm, marketingValue)">Save</button>          
+          </div>
+        </div>
+      </form>
+    </div>
+    </div>

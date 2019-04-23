@@ -1,0 +1,85 @@
+<div class="pageBoxLg">
+    <form [formGroup]="MarketingSettingsForm" style="margin-top:20px;">
+      <div fxLayout="row wrap" fxLayout.lt-sm="column">
+        <div fxFlex="25" class="pr-1">
+          <a (click)="showLocationForm()">
+            <mat-icon class="gridEdit">add_box</mat-icon>  Location
+          </a>
+        </div>
+        <div fxFlex="25" class="pr-1">
+          <a (click)="showCategoryForm()">
+            <mat-icon class="gridEdit">add_box</mat-icon> Category
+          </a>
+        </div>      
+        <div fxFlex="25" class="pr-1">
+            <a (click)="showSubCategoryForm()">
+              <mat-icon class="gridEdit">add_box</mat-icon> Sub Category
+            </a>
+          </div>
+      
+      <div fxFlex="25" class="pr-1">
+        <a (click)="showContactTypeForm()">
+          <mat-icon class="gridEdit">add_box</mat-icon> Contact Type
+        </a>
+      </div>
+  </div>
+      <div fxLayout="row wrap" fxLayout.lt-sm="column">
+        <div fxFlex="25" class="pr-1" *ngIf="showLocation">
+          <h1>  Location</h1>
+          <mat-form-field class="full-width">
+            <input matInput formControlName="location" placeholder="Location" required>
+          </mat-form-field>
+          <button mat-raised-button color="primary" type="button"  (click)="addLocation()" 
+          [disabled]="!MarketingSettingsForm.controls.location.valid">Add</button>
+          <h5> Location</h5>
+          <div *ngFor="let data of settingValue ">
+            <div *ngFor="let value of data.location ">          
+              <p><a (click)="deleteLocation(value)"><mat-icon>clear</mat-icon></a>{{value}}</p>
+            </div>
+          </div>
+        </div>
+        <div fxFlex="25" class="pr-1" *ngIf="showCategory">
+          <h1> Category</h1>
+          <mat-form-field class="full-width">
+            <input matInput formControlName="category" placeholder="Category" required>
+          </mat-form-field>
+          <button mat-raised-button color="primary"  type="button" (click)="addCategory()" 
+          [disabled]="!MarketingSettingsForm.controls.category.valid">Add</button>
+          <h5>Category</h5>
+          <div *ngFor="let data of settingValue ">
+            <div *ngFor="let value of data.category ">          
+              <p><a (click)="deleteCategory(value)"><mat-icon>clear</mat-icon></a>{{value}}</p>
+            </div>
+          </div>
+        </div>   
+        <div fxFlex="25" class="pr-1" *ngIf="showSubCategory">
+            <h1> Sub Category</h1>
+            <mat-form-field class="full-width">
+              <input matInput formControlName="subCategory" placeholder="Sub Category" required>
+            </mat-form-field>
+            <button mat-raised-button color="primary"  type="button" (click)="addSubCategory()" 
+            [disabled]="!MarketingSettingsForm.controls.subCategory.valid">Add</button>
+            <h5> Sub Category</h5>
+            <div *ngFor="let data of settingValue ">
+              <div *ngFor="let value of data.subCategory ">          
+                <p><a (click)="deleteSubCategory(value)"><mat-icon>clear</mat-icon></a>{{value}}</p>
+              </div>
+            </div>
+          </div>   
+          <div fxFlex="25" class="pr-1" *ngIf="showContactType">
+            <h1> Contact Type</h1>
+            <mat-form-field class="full-width">
+              <input matInput formControlName="contactType" placeholder="Contact Type" required>
+            </mat-form-field>
+            <button mat-raised-button color="primary"  type="button" (click)="addContactType()" 
+            [disabled]="!MarketingSettingsForm.controls.contactType.valid">Add</button>
+            <h5> Contact Type</h5>
+            <div *ngFor="let data of settingValue ">
+              <div *ngFor="let value of data.contactType ">          
+                <p><a (click)="deleteContactType(value)"><mat-icon>clear</mat-icon></a>{{value}}</p>
+              </div>
+            </div>
+          </div>  
+      </div>
+    </form>
+  </div>

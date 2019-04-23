@@ -1,0 +1,98 @@
+<form [formGroup]="MarketingDetailsForm">
+    <div class="pageBoxLg">
+      <div class="container-fluid">
+         
+        <div class="row">
+            <div class="col-md-1">
+                <span [routerLink]="['/marketing/createtitlelist/', marketingValue._id]">              
+                  <mat-icon class="gridEdit" >add_box</mat-icon>
+                </span>
+            </div>   
+        </div>
+            <div>
+                <div fxFlex="100">
+                    <label class="pageBoxLg-label">{{marketingValue.title}}</label>
+                  </div>
+            </div>
+        <div class="row gridRowHeader display-none-small">
+          <div class="col-md-3 vcenterHeader">
+            <div class="form-group">
+              <label><h6>Name</h6></label>
+            </div>
+          </div>
+          <div class="col-md-3 vcenterHeader">
+            <div class="form-group">
+              <label><h6>MobileNumber</h6></label>
+            </div>
+          </div>
+          <div class="col-md-3 vcenterHeader">
+            <div class="form-group">
+              <label><h6>Email-ID</h6></label>
+            </div>
+          </div>
+         
+          <div class="col-md-3 vcenterHeader">
+            <div class="form-group">
+              <label><h6>Action</h6></label>
+            </div>
+          </div>
+        </div>
+        <div *ngFor="let data of marketingEdit">
+          <div class="row gridRow">
+            <div class="display-none-large col-6">
+              <label class="gridLabel">Name:</label>
+            </div>
+            <div class="col-md-3 col-6 vcenter form-group">
+              {{data.name}}
+            </div>
+            <div class="display-none-large col-6">
+              <label class="gridLabel">MobileNumber:</label>
+            </div>
+            <div class="col-md-3 col-6 vcenter form-group" >
+              {{data.mobileNumber}}
+            </div>
+                      
+            <div class="display-none-large col-6">
+              <label class="gridLabel">
+                Email-ID:
+              </label>
+            </div>
+            <div class="col-md-3 col-6 vcenter form-group">
+              &nbsp;{{data.emailID}}
+            </div>          
+            <div class="display-none-large col-6">
+              <label class="gridLabel">Action:</label>
+            </div>
+            <div class="col-md-3 col-6 vcenter form-group">
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">    
+                  <a class="nav-link" (click) = "viewSingleDoc(data)">
+                     view
+                    </a>       
+                    <!-- <a class="nav-link" (click) = "copyToWeeklyPlan(activityDetailsForm,data)">
+                        Move To Lead
+                       </a>  -->
+                       <a class="nav-link" (click) = "updateStatus(data)">
+                          Update Status
+                         </a> 
+                         <a class="nav-link" (click) = "vewActivityLog(data)">
+                            ActivityLog
+                           </a> 
+
+                           <a class="nav-link" (click) = "EditCompanyDetail(data)">
+                              Edit
+                             </a> 
+                             <a class="nav-link" (click) = "deleteList(data)">
+                                Delete
+                               </a> 
+              </mat-menu>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   <!--  <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true" [length]="totalSize"
+      [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator> -->
+  </form>

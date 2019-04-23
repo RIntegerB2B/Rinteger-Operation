@@ -61,6 +61,11 @@
           Activity-log
         </mat-checkbox>
       </div>
+      <div class="col-md-2">
+        <mat-checkbox formControlName="marketingNav" class="mail-checkbox">
+         Marketing-management
+        </mat-checkbox>
+      </div>
     </div>
     <div formGroupName="financialRole" class="pb-3" class="row">
       <div class="col-md-12">Financial</div>
@@ -183,6 +188,12 @@
         <mat-checkbox class="mail-checkbox" formControlName='activitylogNav' #activitylogNav
           (ngModelChange)="mark.activitylogNav=$event" [(ngModel)]="mark.activitylogNav" [checked]="mark.activitylogNav">
           Activity-log
+        </mat-checkbox>
+      </div>
+      <div class="col-md-2">
+        <mat-checkbox class="mail-checkbox" formControlName='marketingNav' #marketingNav
+          (ngModelChange)="mark.marketingNav=$event" [(ngModel)]="mark.marketingNav" [checked]="mark.marketingNav">
+          Marketing-management
         </mat-checkbox>
       </div>
     </div>
