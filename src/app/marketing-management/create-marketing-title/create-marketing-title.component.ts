@@ -41,7 +41,6 @@ export class CreateMarketingTitleComponent implements OnInit {
     this.marketingValue.category = MarketingManagementForm.controls.category.value;
     this.marketingValue.subCategory = MarketingManagementForm.controls.subCategory.value;
     this.marketingValue.location = MarketingManagementForm.controls.location.value;
-  
     this.marketingManagementService.CreateTitle(this.marketingValue).subscribe( data => {
       this.marketingValue = data;
     }, error => {

@@ -20,7 +20,7 @@ export class ViewActivityComponent implements OnInit {
   marketingholder: any;
 
   constructor(private marketingManagementService: MarketingManagementService,
-    private fb: FormBuilder, private router: Router, private route: ActivatedRoute) { 
+    private fb: FormBuilder, private router: Router, private route: ActivatedRoute) {
       this.route.paramMap.subscribe(
         (params: ParamMap) => {
           this.id = params.get('id');
@@ -52,8 +52,8 @@ export class ViewActivityComponent implements OnInit {
     });
   }
   delete(data) {
-    this.marketingManagementService.deleteSelectedActivity(data._id).subscribe( data => {
-      this.marketingValue = data;
+    this.marketingManagementService.deleteSelectedActivity(data._id).subscribe( value => {
+      this.marketingValue = value;
     }, error => {
       console.log(error);
     });

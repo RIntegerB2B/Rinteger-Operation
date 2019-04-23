@@ -21,7 +21,7 @@ export class ViewTitleListComponent implements OnInit {
   marketingEdit: any;
 
   constructor(private marketingManagementService: MarketingManagementService,
-    private fb: FormBuilder, private router: Router, private route: ActivatedRoute) { 
+    private fb: FormBuilder, private router: Router, private route: ActivatedRoute) {
       this.route.paramMap.subscribe(
         (params: ParamMap) => {
           this.id = params.get('id');
@@ -49,8 +49,8 @@ export class ViewTitleListComponent implements OnInit {
      this.marketingEdit = data.companyDetail;
      this.marketingValue = data;
      console.log(this.marketingValue);
-   }, error => {
-     console.log(error);
+   }, err => {
+     console.log(err);
    });
  }
 
@@ -71,8 +71,8 @@ export class ViewTitleListComponent implements OnInit {
    this.marketingManagementService.deleteSelectedlist(data._id).subscribe( value => {
      this.marektingholder = value;
      this.getSelectedTitle();
-   }, error => {
-     console.log(error);
+   }, err => {
+     console.log(err);
    });
  }
 }
