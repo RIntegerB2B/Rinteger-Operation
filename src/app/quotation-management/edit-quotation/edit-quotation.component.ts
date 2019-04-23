@@ -30,7 +30,7 @@ export class EditQuotationComponent implements OnInit {
   quotationId: string;
   message;
   action;
-  gstVal;
+  gstVal = 0;
   constructor(private fb: FormBuilder, private quotationService: QuotationManagementService
     , private route: ActivatedRoute,  private snackBar: MatSnackBar, private router: Router) { }
 
@@ -111,8 +111,8 @@ export class EditQuotationComponent implements OnInit {
       quotationDetailsForm.controls.leadID.value,
       quotationDetailsForm.controls.date.value,
       quotationDetailsForm.controls.requirements.value,
-      quotationDetailsForm.controls.allTotal.value,
       quotationDetailsForm.controls.subTotal.value,
+      quotationDetailsForm.controls.allTotal.value,
       quotationDetailsForm.controls.tax.value
     );
     this.quotation.quotationID =  quotationDetailsForm.controls.quotationID.value;
