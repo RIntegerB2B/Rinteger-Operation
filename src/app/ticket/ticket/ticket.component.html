@@ -1,16 +1,18 @@
+<div class="pageBoxLg">
 <div class="container topAlignContainer">
   <form [formGroup]="ticketform" (ngSubmit)="ticketform.valid && onSubmit()">
-
-    <app-ticketcustomersearch [customerModel]="customerdetail" 
-    (searchCustomer)="filterCustomer($event)"></app-ticketcustomersearch>
-    <div *ngFor="let customerdata of customerModel">{{customerdata.name}}{{customerdata.mobileNumber}}</div>
-
+    
     <div fxLayout="row wrap" fxLayout.lt-sm="column">
       <div fxFlex="100">
         <label class="pageBoxLg-label">Create Ticket Form</label>
       </div>
+      <div fxFlex="100" class="pr-1">
+        <app-ticketcustomersearch [customerModel]="customerdetail" 
+        (searchCustomer)="filterCustomer($event)"></app-ticketcustomersearch>
+        <div *ngFor="let customerdata of customerModel">{{customerdata.name}}{{customerdata.mobileNumber}}</div>
+        </div>
 
-      <div fxFlex="50" class="p-2">
+      <div fxFlex="50" class="pr-1">
         <mat-form-field class="full-width">
           <input matInput formControlName="customername" placeholder="customername"required>
           <mat-error *ngIf="ticketform.controls['customername'].errors?.required" >
@@ -21,7 +23,7 @@
       </div>
 
 
-      <div fxFlex="50" class="p-2">
+      <div fxFlex="50" class="pr-1">
         <mat-form-field class="full-width">
           <input matInput formControlName="requirement" placeholder="requirement" required>
           <mat-error *ngIf="ticketform.controls['requirement'].errors?.required" >
@@ -111,15 +113,15 @@
         </mat-form-field>
       </div>
 
-    </div>
-    <div fxFlex="50" class="mt-1">
+    
+    <div fxFlex="100" class="mt-1">
       <button mat-raised-button color="primary">Create</button>
-      </div>
-      <div fxFlex="50" class="mt-1">
+     
       
       <button mat-raised-button mat-button color="accent" type="button" 
       (click)="getReset()">Cancel</button>
       </div>
-    
+    </div>
   </form>
+</div>
 </div>

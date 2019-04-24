@@ -6,6 +6,7 @@ import { TicketRoutingModule } from './ticket-routing.module';
 import { TicketComponent } from './ticket/ticket.component';
 import {TicketService} from './ticket.service';
 import {MatBadgeModule} from '@angular/material/badge';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   MatSidenavModule,
   MatListModule,
@@ -51,6 +52,7 @@ import { TicketEditComponent } from './ticket-edit/ticket-edit.component';
     MatSelectModule,
     MatMenuModule,
     MatSnackBarModule,
+    FlexLayoutModule,
     MatGridListModule,
     MatToolbarModule,
     MatIconModule,

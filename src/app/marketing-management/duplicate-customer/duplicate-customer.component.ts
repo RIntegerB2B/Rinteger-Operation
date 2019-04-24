@@ -17,7 +17,7 @@ export class DuplicateCustomerComponent implements OnInit {
   marketingValue: any;
   marektingholder: any;
   id: string;
-  marketingEdit =[];
+  marketingEdit = [];
   marketingData: any;
   marketingdelete: any;
   constructor(private marketingManagementService: MarketingManagementService,
