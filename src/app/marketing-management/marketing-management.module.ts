@@ -43,6 +43,7 @@ import { ViewSingleCompanyComponent } from './view-single-company/view-single-co
 import { EditTitleComponent } from './edit-title/edit-title.component';
 import { UpdateStatusComponent } from './update-status/update-status.component';
 import { ViewActivityComponent } from './view-activity/view-activity.component';
+import { DuplicateCustomerComponent } from './duplicate-customer/duplicate-customer.component';
 
 
 
@@ -50,7 +51,7 @@ import { ViewActivityComponent } from './view-activity/view-activity.component';
   declarations: [UploadMarketingManagementComponent, ViewAllMarketingComponent,
      CreateMarketingTitleComponent, ViewTitleListComponent, CreateTitleListComponent,
       EditCompanyListComponent, ViewSingleCompanyComponent, EditTitleComponent,
-       UpdateStatusComponent, ViewActivityComponent],
+       UpdateStatusComponent, ViewActivityComponent, DuplicateCustomerComponent],
   imports: [
     CommonModule,
     HttpClientModule,

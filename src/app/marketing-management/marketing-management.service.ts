@@ -92,4 +92,9 @@ getSetting(): Observable<any> {
   const url: string = this.serviceUrl + addUrl;
   return this.http.get<MarketingSetting[]>(url);
 }
+/* getAllmarketing(): Observable<any> {
+  const addUrl = 'getmarketing';
+  const url: string = this.serviceUrl + addUrl;
+  return this.http.get<MarketingManagementModel[]>(url);
+} */
 }

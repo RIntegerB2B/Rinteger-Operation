@@ -92,12 +92,12 @@ export class ActivityLogService {
     const url: string = this.serviceUrl + addUrl + id;
     return this.http.delete<ActivityLogModel[]>(url);
   }
-  getMonthAndYearWise(data): Observable<any> {
-    const addUrl = 'getmonthandyear';
+  getYearWise(data): Observable<any> {
+    const addUrl = 'getyear';
     const url: string = this.serviceUrl + addUrl ;
     return this.http.post<ActivityLogModel[]>(url, data);
   }
-  getSelectedActivityLog(id) : Observable<any> {
+  getSelectedActivityLog(id): Observable<any> {
     const addUrl = 'getselectedactivitylog/';
     const url: string = this.serviceUrl + addUrl + id;
     return this.http.get<ActivityLogModel[]>(url);

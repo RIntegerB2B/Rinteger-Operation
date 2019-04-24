@@ -6,6 +6,28 @@
                 <label class="pageBoxLg-label">MonthlyPlan</label>
               </div>
         </div>
+        <div class="row">
+        <div class="col-md-2">
+          <mat-form-field>
+            <mat-select placeholder="Select the Year" formControlName="yearData"
+            (selectionChange)="SearchByYear($event)">
+              <mat-option *ngFor="let data of year;let i = index " [value]="data">
+                {{data}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div  class="col-md-2">
+          <mat-form-field>
+            <mat-select placeholder="monthName" formControlName="monthData"
+            (selectionChange)="filterByMonth($event)">
+              <mat-option *ngFor="let data of monthName;let i = index " [value]="data">
+                {{data}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
         <div class="row gridRowHeader display-none-small">
           <div class="col-md-2 vcenterHeader">
             <div class="form-group">

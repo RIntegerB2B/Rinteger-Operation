@@ -10,6 +10,7 @@ import { ViewSingleCompanyComponent } from './view-single-company/view-single-co
 import { EditTitleComponent } from './edit-title/edit-title.component';
 import { UpdateStatusComponent } from './update-status/update-status.component';
 import { ViewActivityComponent } from './view-activity/view-activity.component';
+import { DuplicateCustomerComponent } from './duplicate-customer/duplicate-customer.component';
 
 const routes: Routes = [
 {
@@ -51,6 +52,10 @@ const routes: Routes = [
 {
   path: 'viewactivity/:id',
   component: ViewActivityComponent
+},
+{
+  path: 'duplicate/:id',
+  component: DuplicateCustomerComponent
 }
 ];
 

@@ -182,14 +182,14 @@ getSelectedTask() {
 updateTask(taskForm, row) {
   this.taskManagementService.UpdateTask(taskForm.value, row._id).subscribe(data => {
     this.taskEdit = data;
-    this.router.navigate(['task/viewtask', this.editview]);
+    this.router.navigate(['task/viewtask/', this.editview]);
   }, error => {
     console.log(error);
   });
 }
 
 cancel() {
-  this.router.navigate(['task/viewtask', this.editview]);
+  this.router.navigate(['task/viewtask/', this.editview]);
 }
 getUnit() {
   this.unitSort =  localStorage.getItem('unit');

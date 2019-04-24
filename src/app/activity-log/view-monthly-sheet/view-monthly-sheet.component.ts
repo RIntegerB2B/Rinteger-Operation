@@ -7,6 +7,8 @@ import { ActivityLogService } from '../activity-log.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ActivityMonth } from '../../shared/activity-month.model';
 import { timingSafeEqual } from 'crypto';
+import { error } from 'util';
+
 @Component({
   selector: 'app-view-monthly-sheet',
   templateUrl: './view-monthly-sheet.component.html',
@@ -18,12 +20,16 @@ export class ViewMonthlySheetComponent implements OnInit {
 activityModel: any;
 activityReturn: any;
 activityStatus: any;
+yearValue: any;
   activityValue: any;
   public pageSize = 50;
   public currentPage = 0;
   public totalSize = 0;
   public array: any;
   private dataSource;
+  year = ['2018', '2019', '2020', '2021', '2022', '2023', '2024'];
+  monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+  'August', 'September', 'October', 'November', 'December'];
   weeks = ['week1', 'week2', 'week3', 'week4'];
    activeValue: ActivityLogModel;
    allMonth = [{ month: 'January', number: 2 }, { month: 'February', number: 3 }, { month: 'March', number: 4 },
@@ -59,9 +65,11 @@ activityStatus: any;
     this.ActivityDetailsForm = this.fb.group({
       monthData: [''],
       yearData: [''],
+      customerName: [''],
       planTitle: [''],
       planDescription: [''],
-      week: ['']
+      monthName: [''],
+      year: ['']
     });
   }
   getAllActivityLog() {
@@ -73,8 +81,8 @@ activityStatus: any;
       this.array = this.activityModel;
       this.totalSize = this.array.length;
       this.iterator();
-    }, error => {
-      console.log(error);
+    }, err => {
+      console.log(err);
     });
   }
   createWeeklyPlan(data) {
@@ -83,22 +91,12 @@ activityStatus: any;
   Delete(row) {
     this.activityLogService.deleteMonthlyPlan(row._id).subscribe( data => {
       this.activityValue = data;
-    }, error => {
-      console.log(error);
+    }, err => {
+      console.log(err);
     });
   }
   GoToWeeklyPlanSheet() {
     this.router.navigate(['activity-log/viewweek']);
-  }
-  searchMonth(ActivityDetailsForm: FormGroup) {
-    this.activityModel = new ActivityLogModel();
-    this.activityModel.monthName = ActivityDetailsForm.controls.monthData.value;
-    this.activityModel.year = ActivityDetailsForm.controls.yearData.value;
-    this.activityLogService.getMonthAndYearWise(this.activityModel).subscribe( data => {
-      this.activityValue = data;
-    }, error => {
-      console.log(error);
-    });
   }
   changed(e) {
     this.activityValue = this.activityValue.filter(data => data.year === e.value);
@@ -122,5 +120,19 @@ activityStatus: any;
   }
   Edit(row) {
     this.router.navigate(['activity-log/editmonthlysheet/', row._id]);
+  }
+  SearchByYear(e) {
+    this.ActivityDetailsForm.controls.monthData.reset();
+    this.yearValue = new ActivityLogModel();
+    this.yearValue.year = e.value;
+    this.activityLogService.getYearWise(this.yearValue).subscribe( data => {
+      this.activityValue = data;
+      this.yearValue = data;
+    }, err => {
+      console.log(err);
+    });
+  }
+  filterByMonth(e) {
+    this.activityValue = this.yearValue.filter( value => value.monthName === e.value);
   }
 }
