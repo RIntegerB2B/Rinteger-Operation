@@ -49,6 +49,10 @@
         <a class="nav-link textMenu" *ngIf="fin.profomaInvoiceNav"
           [routerLink]="['/proformainvoice/viewallproformainvoice']">Profoma Invoice</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link textMenu" 
+          [routerLink]="['/asset/view-all']">Asset</a>
+      </li>
       <li class="nav-item" *ngFor="let fin of this.navheaderService?.getItems?.marketingRole">
           <a class="nav-link textMenu"  *ngIf="fin.marketingNav"
             [routerLink]="['/marketing/view-all']">Marketing</a>
@@ -68,6 +72,7 @@
           <a class="dropdown-item" [routerLink]="['/settings/materialsetting']">Material Settings</a>
           <a class="dropdown-item" [routerLink]="['/settings/tasksetting']">Task Settings</a>
           <a class="dropdown-item" [routerLink]="['/settings/marketingsetting']">Marketing Settings</a>
+          <a class="dropdown-item" [routerLink]="['/settings/assetsetting']">Asset Settings</a>
         </div>
       </li>
       <li class="nav-item dropdown" *ngFor="let adm of this.navheaderService?.getItems?.adminRole">

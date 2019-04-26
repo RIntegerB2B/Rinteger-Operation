@@ -10,6 +10,7 @@ import { MaterialSettingsComponent } from './material-settings/material-settings
 import { TaskSettingsComponent } from './task-settings/task-settings.component';
 import { WorkorderSettingComponent } from './workorder-setting/workorder-setting.component';
 import { MarketingSettingComponent } from './marketing-setting/marketing-setting.component';
+import { AssetSettingsComponent } from './asset-settings/asset-settings.component';
 
 const routes: Routes = [
   {
@@ -46,6 +47,10 @@ const routes: Routes = [
   {
     path: 'marketingsetting',
     component: MarketingSettingComponent
+  },
+  {
+    path: 'assetsetting',
+    component: AssetSettingsComponent
   }
 ];
 

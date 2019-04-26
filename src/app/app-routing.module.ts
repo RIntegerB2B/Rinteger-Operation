@@ -80,6 +80,10 @@ const routes: Routes = [
     loadChildren: './user-management/user-management.module#UserManagementModule',
   },
   {
+    path: 'asset',
+    loadChildren: './asset-listing/asset-listing.module#AssetListingModule',
+  },
+  {
     path: '',
     redirectTo: 'account/login',
     pathMatch: 'full'

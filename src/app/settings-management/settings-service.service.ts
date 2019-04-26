@@ -14,6 +14,7 @@ import { MaterialSetting } from '../shared/material-settings.model';
 import { TasksettingsModel } from '../shared/task-setting.module';
 import { WorkOrderSettingModel  } from '../shared/workorder-setting.model';
 import { MarketingSetting } from '../shared/marketing-setting.model';
+import { AssetListingSettingModel } from '../shared/asset-listing-setting.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -398,5 +399,33 @@ export class SettingsServiceService {
     const addUrl = 'deletemarketingconatcttype/';
     const url: string = this.serviceUrl + addUrl + val;
     return this.httpClient.delete<MarketingSetting[]>(url);
+  }
+
+
+
+  viewAssetSetting(): Observable<any> {
+    const addUrl = 'viewassetsetting';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<AssetListingSettingModel[]>(url);
+  }
+  addAssetDeparment(data: any): Observable<any> {
+    const addUrl = 'addassetdepartment';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<AssetListingSettingModel[]>(url, data);
+  }
+  deleteAssetDeparment(val): Observable<any> {
+    const addUrl = 'deleteassetdepartment/';
+    const url: string = this.serviceUrl + addUrl + val;
+    return this.httpClient.delete<AssetListingSettingModel[]>(url);
+  }
+  addAssetStatus(data: any): Observable<any> {
+    const addUrl = 'addassetstatus';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<AssetListingSettingModel[]>(url, data);
+  }
+  deleteAssetStatus(val): Observable<any> {
+    const addUrl = 'deleteassetstatus/';
+    const url: string = this.serviceUrl + addUrl + val;
+    return this.httpClient.delete<AssetListingSettingModel[]>(url);
   }
 }

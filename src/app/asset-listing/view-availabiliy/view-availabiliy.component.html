@@ -1,0 +1,34 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="form-group">
+        <label class="labelHeader">Availability Detail</label>
+      </div>
+    </div>
+    <div class="row gridRowHeader display-none-small">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Quanitity</label>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Description</label>
+        </div>
+      </div>    
+      
+    </div>
+    <div class="row gridRow" *ngFor="let data of assetData; let i = index">
+      <div class="display-none-large col-4">
+        <label class="gridLabel">Quantity:</label>
+      </div>
+      <div class="col-md-6 col-4 vcenter form-group">
+        {{data.currentQuantity}}
+      </div>
+      <div class="display-none-large col-4">
+        <label class="gridLabel">Description:</label>
+      </div>
+      <div class="col-md-6 col-4 vcenter form-group">
+          {{data.description}}
+      </div>     
+    </div>  
+  </div>

@@ -1,0 +1,129 @@
+<div class="pageBoxLg">
+  <div class="container topAlignContainer ">
+    <form [formGroup]="AssetListingForm">
+      <div fxLayout="row wrap" fxLayout.lt-sm="column">
+        <div fxFlex="100">
+          <label class="pageBoxLg-label">Edit Asset</label>
+        </div>
+
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="date"  placeholder="date" type="date"
+            [(ngModel)]="assetValue.date"
+              (ngModelChange)="assetValue.date=$event">
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="productName" [ngModel]="assetValue?.productName"
+             (ngModelChange)="assetValue.productName=$event" placeholder="productName">
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="responsePerson" [ngModel]="assetValue?.responsePerson" 
+            (ngModelChange)="assetValue.responsePerson=$event"
+              placeholder="responsePerson" required>
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="verifiedBy" [ngModel]="assetValue?.verifiedBy" 
+            (ngModelChange)="assetValue.verifiedBy=$event"
+              placeholder="verifiedBy" required>
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Select department" formControlName="department" 
+            [(ngModel)]="assetValue.department"
+             (ngModelChange)="assetValue.department=$event" required>
+              <mat-option *ngFor="let data of department" [value]="data">
+                {{data}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+       <!--  <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Select availableStatus" [(ngModel)]="assetValue.availableStatus"
+             (ngModelChange)="assetValue.availableStatus=$event"
+              formControlName="availableStatus" required>
+              <mat-option *ngFor="let data of availableStatus" [value]="data">
+                {{data}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div> -->
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="productPrice" [ngModel]="assetValue?.productPrice"
+             (ngModelChange)="assetValue.productPrice=$event"
+              placeholder="productPrice" required>
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="purchaseQuantitiy"
+              [ngModel]="assetValue?.purchaseQuantitiy"
+             (ngModelChange)="assetValue.purchaseQuantitiy=$event" placeholder="purchaseQuantitiy">              
+            </mat-form-field>
+          </div>
+          <div fxFlex="50" class="pr-1">
+              <mat-form-field class="full-width">
+                <input matInput formControlName="Description"
+                [ngModel]="assetValue?.Description"
+             (ngModelChange)="assetValue.Description=$event" placeholder="Description">                
+              </mat-form-field>
+            </div>
+            <div fxFlex="50" class="pr-1">
+                <mat-form-field class="full-width">
+                  <input matInput formControlName="availableQuantitiy"
+                  [ngModel]="assetValue?.availableQuantitiy"
+               (ngModelChange)="assetValue.availableQuantitiy=$event" placeholder="availableQuantitiy">                
+                </mat-form-field>
+              </div>
+
+        <div fxLayout="column"    fxFlex="100" formArrayName="availability" >
+          <div  *ngFor="let account of availabilityForm.controls; let i=index" [formGroupName]="i">
+          <div fxFlex="25" class="p-2">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="currentQuantity" placeholder="Quantity"
+            (ngModelChange)="assetValue.currentQuantity=$event">
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="p-2">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="description" placeholder="description"
+            (ngModelChange)="assetValue.description=$event">
+          </mat-form-field>
+        </div>
+       <!--  <a (click)="deleteAsset(i)">
+          <mat-icon>clear</mat-icon>
+        </a> -->
+      </div>
+    </div>
+   <!--  <div fxFlex="100" fxLayout="row">
+          <a (click)="addForm()">
+            <mat-icon class="gridEdit">add_box</mat-icon>
+          </a>
+          <p>Add New</p>
+        </div>
+-->
+
+
+
+
+
+        <div fxFlex="100" class="mt-1">
+          <button mat-raised-button mat-button color="accent" type="button" (click)="cancel()">Cancel</button>
+
+          <span fxFlex></span>
+          <span fxFlex></span>
+
+          <button mat-raised-button type="button" color="primary" (click)="updateAsset(AssetListingForm, assetValue)">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

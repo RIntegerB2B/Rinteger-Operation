@@ -1,0 +1,138 @@
+<form [formGroup]="AssetListingForm">
+  <div class="pageBoxLg">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="btn">
+          <a (click)="addAssetListing()">
+            <mat-icon class="gridEdit">add_box</mat-icon>
+          </a>
+        </div>
+        <div class="col-md-4" >
+            <app-search [assetValue]="assetModel" 
+                  (searchTask)="filterAsset($event)"></app-search>
+            </div>
+      </div>
+      <div class="row">
+      <div fxFlex="80">
+          <label class="pageBoxLg-label"><h5>Asset-List</h5></label>
+        </div>
+        <div class="bor col-md-2" fxFlex="20">
+          Quantity : {{getQuantity()}}<br>
+          Total Asset Value : {{getTotal()}}
+      
+  
+        </div>
+        
+      </div>
+     
+      <div class="row gridRowHeader display-none-small">
+          
+       <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label><h6>Date</h6></label>
+          </div>
+        </div>
+        <div class="col-md-2 vcenterHeader">
+          <div class="form-group">
+            <label><h6>ProductName</h6></label>
+          </div>
+        </div>
+        <div class="col-md-2 vcenterHeader">
+          <div class="form-group">
+            <label><h6>ResponsePerson</h6></label>
+          </div>
+        </div>
+        <div class="col-md-2 vcenterHeader">
+            <div class="form-group">
+              <label><h6>Verified By</h6></label>
+            </div>
+          </div>
+        <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label><h6>Available quantity</h6></label>
+          </div>
+        </div>
+
+        <div class="col-md-2 vcenterHeader">
+          <div class="form-group">
+            <label><h6>Status</h6></label>
+          </div>
+        </div>
+        <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label><h6>Action</h6></label>
+          </div>
+        </div>
+      </div>
+      <div *ngFor="let data of assetValue">
+        <div class="row gridRow">
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Date:</label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group">
+            {{data.date}}
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">ProductName:</label>
+          </div>
+          <div class="col-md-2 col-6 vcenter form-group">
+            {{data.productName}}
+
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">ResponsePerson:</label>
+          </div>
+          <div class="col-md-2 col-6 vcenter form-group">
+            {{data.responsePerson}}
+          </div>
+          <div class="display-none-large col-6">
+              <label class="gridLabel">Verified By:</label>
+            </div>
+            <div class="col-md-2 col-6 vcenter form-group">
+              {{data.verifiedBy}}
+            </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Available quantity:</label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group">
+            {{data.availableQuantitiy}}
+          </div>
+         
+          <div class="display-none-large col-6">
+            <label class="gridLabel">
+              Status:
+            </label>
+          </div>
+          <div class="col-md-2 col-6 vcenter form-group">
+            &nbsp;{{data.availableStatus}}
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Action:</label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <a class="nav-link" (click)="getView(data)">
+                View
+              </a>
+              <a class="nav-link" (click)="getEdit(data)">
+                Edit
+              </a>
+              <a class="nav-link" (click)="getUpdate(data)">
+                Update
+              </a>
+              <a class="nav-link" (click)="getDelete(data)">
+                Delete
+              </a>
+            </mat-menu>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true"
+    [length]="totalSize" [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>
+  </div>
+</form>
