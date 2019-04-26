@@ -5,6 +5,7 @@ import { AssetListingService } from './../asset-listing.service';
 import { Expense } from '../../shared/expense.model';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
+import {AppSetting} from '../../config/appSetting';
 
 
 @Component({
@@ -16,6 +17,7 @@ export class ViewSingleComponent implements OnInit {
   AssetListingForm: FormGroup;
   assetValue: any;
   id: string;
+  appSetting: string = AppSetting.imageUrl;
 
   constructor(private assetListingService: AssetListingService, private fb: FormBuilder,
     private router: Router, private route: ActivatedRoute) {
@@ -44,8 +46,11 @@ export class ViewSingleComponent implements OnInit {
   }
   getSelectedAsset() {
     this.assetListingService.getSelectedAsset(this.id).subscribe( data => {
+        for (let i = 0 ; i <= data.assetImageName.length - 1; i++) {
+          data.assetImageName[i] = this.appSetting +  data.assetID + '/' + data.assetImageName[i];
+        }
       this.assetValue = data;
-      console.log(this.assetValue);
+      console.log(this.assetValue, 'single asset');
     }, error => {
       console.log(error);
     });

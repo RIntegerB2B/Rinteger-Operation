@@ -1,9 +1,24 @@
 <div class="pageBoxLg">
     <div class="container topAlignContainer">
-      <form [formGroup]="AssetListingForm" (ngSubmit)="AssetListingForm.valid && addSingleAsset(AssetListingForm)">
+      <form [formGroup]="AssetListingForm" (ngSubmit)="validateProducts()">
         <div fxLayout="row wrap" fxLayout.lt-sm="column">
           <div fxFlex="100">
             <label class="pageBoxLg-label">Create Asset-List</label>
+          </div>
+          <div fxFlex="100">
+            <label>
+              <input type="file" (change)="handleFileInput($event.target.files)" multiple>
+            </label>
+            <div class="alert alert-danger" *ngIf="imageError">
+              <h4>Please Select the images</h4>
+            </div>
+            <div class="row">
+              <div class="col-md-6 pb-2" *ngFor="let url of urls">
+                <mat-card>
+                  <img class="img-fluid" [src]="url" height="600px" width="600px" />
+                </mat-card>
+              </div>
+            </div>
           </div>
           <div fxFlex="50" class="p-2">
             <div >

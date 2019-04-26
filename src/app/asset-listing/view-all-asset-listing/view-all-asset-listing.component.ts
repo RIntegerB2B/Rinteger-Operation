@@ -7,6 +7,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { error } from '@angular/compiler/src/util';
 import { ConstantPool } from '@angular/compiler';
+import {AppSetting} from '../../config/appSetting';
+
+
 
 @Component({
   selector: 'app-view-all-asset-listing',
@@ -21,6 +24,7 @@ export class ViewAllAssetListingComponent implements OnInit {
   public currentPage = 0;
   public totalSize = 0;
   public array: any;
+  appSetting: string = AppSetting.imageUrl;
 
   @ViewChild('MatPaginator') paginator: MatPaginator;
   matdatasource = new MatTableDataSource([]);
@@ -48,8 +52,13 @@ export class ViewAllAssetListingComponent implements OnInit {
   }
   getAllAssetList() {
     this.assetListingService.getAllAssetList().subscribe(data => {
-      this.assetValue = data;
-      this.assetModel = data;
+      /* this.assetValue = data;
+      this.assetModel = data; */
+      for (let i = 0; i <= data.length - 1; i++) {
+        for (let j = 0 ; j <= data[i].assetImageName.length - 1; j++) {
+          data[i].assetImageName[j] = this.appSetting +  data[i].assetID + '/' + data[i].assetImageName[j];
+        }
+        }
       this.assetValue = new MatTableDataSource<any>(data);
       this.assetValue.paginator = this.paginator;
       this.assetValue = data;
@@ -70,8 +79,11 @@ export class ViewAllAssetListingComponent implements OnInit {
   }
   getDelete(data) {
     this.assetListingService.deleteAsset(data._id).subscribe( value => {
-      this.assetValue = value;
-      this.assetModel = value;
+      for (let i = 0; i <= value.length - 1; i++) {
+        for (let j = 0 ; j <= value[i].assetImageName.length - 1; j++) {
+          value[i].assetImageName[j] = this.appSetting +  value[i].assetID + '/' + value[i].assetImageName[j];
+        }
+        }
       this.assetValue = new MatTableDataSource<any>(value);
       this.assetValue.paginator = this.paginator;
       this.assetValue = value;

@@ -26,6 +26,11 @@
       </div>
      
       <div class="row gridRowHeader display-none-small">
+          <div class="col-md-2 vcenterHeader">
+              <div class="form-group">
+                <label><h6>Assets</h6></label>
+              </div>
+            </div>
           
        <div class="col-md-1 vcenterHeader">
           <div class="form-group">
@@ -37,7 +42,7 @@
             <label><h6>ProductName</h6></label>
           </div>
         </div>
-        <div class="col-md-2 vcenterHeader">
+        <div class="col-md-1 vcenterHeader">
           <div class="form-group">
             <label><h6>ResponsePerson</h6></label>
           </div>
@@ -53,7 +58,7 @@
           </div>
         </div>
 
-        <div class="col-md-2 vcenterHeader">
+        <div class="col-md-1 vcenterHeader">
           <div class="form-group">
             <label><h6>Status</h6></label>
           </div>
@@ -66,6 +71,12 @@
       </div>
       <div *ngFor="let data of assetValue">
         <div class="row gridRow">
+            <div class="display-none-large col-6">
+                <label class="gridLabel">Assets:</label>
+              </div>
+              <div class="col-md-2 col-6 vcenter form-group">
+               <img [src]="data.assetImageName[0]" style="width:100px; height:100px;"> 
+              </div>
           <div class="display-none-large col-6">
             <label class="gridLabel">Date:</label>
           </div>
@@ -82,7 +93,7 @@
           <div class="display-none-large col-6">
             <label class="gridLabel">ResponsePerson:</label>
           </div>
-          <div class="col-md-2 col-6 vcenter form-group">
+          <div class="col-md-1 col-6 vcenter form-group">
             {{data.responsePerson}}
           </div>
           <div class="display-none-large col-6">
@@ -103,7 +114,7 @@
               Status:
             </label>
           </div>
-          <div class="col-md-2 col-6 vcenter form-group">
+          <div class="col-md-1 col-6 vcenter form-group">
             &nbsp;{{data.availableStatus}}
           </div>
           <div class="display-none-large col-6">

@@ -50,4 +50,11 @@ export class AssetListingService {
     const url: string = this.serviceUrl + addUrl;
     return this.http.get<AssetListingSettingModel[]>(url);
   }
+
+  // image upload
+  uploadImages(data, assetId): Observable<any> {
+    const addUrl = 'productimages/';
+    const url: string = this.serviceUrl + addUrl + assetId ;
+    return this.http.put<boolean>(url, data);
+  }
 }
