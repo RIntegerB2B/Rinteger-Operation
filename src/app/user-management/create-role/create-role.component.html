@@ -123,6 +123,11 @@
           Material
         </mat-checkbox>
       </div>
+      <div class="col-md-2">
+          <mat-checkbox formControlName="assetlistNav" class="mail-checkbox">
+              Asset-List
+          </mat-checkbox>
+        </div>
     </div>
     <div formGroupName="workOrderRole" class="pb-3" class="row">
       <div class="col-md-12">workOrder</div>
@@ -263,6 +268,12 @@
           Material
         </mat-checkbox>
       </div>
+      <div class="col-md-2">
+          <mat-checkbox formControlName="assetlistNav" class="mail-checkbox" (ngModelChange)="material.assetlistNav=$event"
+            [(ngModel)]="material.assetlistNav" [checked]="material.assetlistNav">
+            Asset-List
+          </mat-checkbox>
+        </div>
     </div>
     <div formGroupName="workOrderRole" class="pb-3" class="row" *ngFor="let work of data.workOrderMenu">
       <div class="col-md-12">workOrder</div>

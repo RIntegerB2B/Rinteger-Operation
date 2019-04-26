@@ -29,7 +29,8 @@ export class UserPermission {
         uploadNav: Boolean
     }];
     materialRole: [{
-        materialNav: Boolean
+        materialNav: Boolean,
+        assetlistNav: Boolean
     }];
     workOrderRole: [{
         workOrderMenu: Boolean

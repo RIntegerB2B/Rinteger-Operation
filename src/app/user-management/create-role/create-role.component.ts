@@ -59,6 +59,7 @@ export class CreateRoleComponent implements OnInit {
       }),
       materialRole: this.fb.group({
         materialNav: [false, Validators.required],
+        assetlistNav: [false, Validators.required],
       }),
       workOrderRole: this.fb.group({
         workOrderMenu: [false, Validators.required],
@@ -96,6 +97,7 @@ export class CreateRoleComponent implements OnInit {
       }),
       materialRole: this.fb.group({
         materialNav: [false, Validators.required],
+        assetlistNav: [false, Validators.required],
       }),
       workOrderRole: this.fb.group({
         workOrderMenu: [false, Validators.required],

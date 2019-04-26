@@ -49,8 +49,8 @@
         <a class="nav-link textMenu" *ngIf="fin.profomaInvoiceNav"
           [routerLink]="['/proformainvoice/viewallproformainvoice']">Profoma Invoice</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link textMenu" 
+      <li class="nav-item" *ngFor="let fin of this.navheaderService?.getItems?.materialRole">
+        <a class="nav-link textMenu"  *ngIf="fin.assetlistNav"
           [routerLink]="['/asset/view-all']">Asset</a>
       </li>
       <li class="nav-item" *ngFor="let fin of this.navheaderService?.getItems?.marketingRole">
