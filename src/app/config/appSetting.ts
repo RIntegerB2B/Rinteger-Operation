@@ -6,3 +6,4 @@ export const AppSetting: AppSettingType = {
    serviceUrl: 'https://jrdrbr8zte.execute-api.ap-south-1.amazonaws.com/latest/',
     imageUrl: ' http://rinteger-operation.s3-website.ap-south-1.amazonaws.com/images/assetlists/'
 };
+

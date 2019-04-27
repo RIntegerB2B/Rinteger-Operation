@@ -40,12 +40,14 @@ import { EditAssetListingComponent } from './edit-asset-listing/edit-asset-listi
 import { UpdateAssetListingComponent } from './update-asset-listing/update-asset-listing.component';
 import { ViewAvailabiliyComponent } from './view-availabiliy/view-availabiliy.component';
 import { SearchComponent } from './search/search.component';
+import {SafePipe} from '../shared/safe.pipe';
 
 
 
 
 @NgModule({
-  declarations: [ViewAllAssetListingComponent, CreateAssetListingComponent, ViewSingleComponent, EditAssetListingComponent, UpdateAssetListingComponent, ViewAvailabiliyComponent, SearchComponent],
+  declarations: [ViewAllAssetListingComponent, CreateAssetListingComponent, ViewSingleComponent, EditAssetListingComponent,
+    UpdateAssetListingComponent, ViewAvailabiliyComponent, SearchComponent, SafePipe],
   imports: [
     HttpClientModule,
     HttpModule,

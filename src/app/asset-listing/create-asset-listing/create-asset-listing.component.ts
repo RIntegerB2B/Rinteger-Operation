@@ -45,11 +45,12 @@ export class CreateAssetListingComponent implements OnInit {
   }
 
   validateProducts() {
-    if ( this.fileToUpload === undefined ) {
+    this.addSingleAsset(this.AssetListingForm);
+   /*  if ( this.fileToUpload === undefined ) {
       this.imageError = true;
     } else {
       this.addSingleAsset(this.AssetListingForm);
-    }
+    } */
   }
 
   addSingleAsset(AssetListingForm: FormGroup) {
@@ -65,7 +66,8 @@ export class CreateAssetListingComponent implements OnInit {
    /*  this.assetValue.availableQuantitiy = AssetListingForm.controls.availableQuantitiy.value; */
     this.assetListingService.createAsset(this.assetValue).subscribe(data => {
       this.assetValue = data;
-      this.uploadImages(data.assetID);
+      this.redirect();
+      /* this.uploadImages(data.assetID); */
     }, error => {
       console.log(error);
     });
