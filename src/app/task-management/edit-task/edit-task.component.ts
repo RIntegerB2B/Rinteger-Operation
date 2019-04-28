@@ -15,7 +15,7 @@ export class EditTaskComponent implements OnInit {
   taskEdit: any;
   taskForm: FormGroup;
   id;
-  units = ['studio', 'BSS', 'technology'];
+  units = ['studio', 'BSS', 'technology', 'Marketing', 'Operation'];
   priority = ['low', 'medium', 'high', 'critical'];
   department = ['studio', 'BSS', 'technology'];
   assignedBy = ['teamleader1', 'teamleader2'];

@@ -16,6 +16,7 @@ export class TaskModel {
     priority: string;
     weekID: string;
     units: string;
+    role: string;
     rating: number;
     department: string;
     assignedTo: string;

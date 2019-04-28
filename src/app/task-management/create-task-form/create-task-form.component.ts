@@ -19,7 +19,7 @@ export class CreateTaskFormComponent implements OnInit {
   /*  customerdetail; */
   unitName: Register[];
   taskname: any;
-  units = ['Studio', 'BSS', 'Technologies'];
+  units = ['Studio', 'BSS', 'Technologies', 'Marketing', 'Operation'];
   priority = ['low', 'medium', 'high', 'critical'];
   taskForm: FormGroup;
   taskholder: TaskModel;
@@ -167,6 +167,7 @@ export class CreateTaskFormComponent implements OnInit {
     this.taskholder.status = this.taskForm.controls.status.value;
     this.taskholder.toCloseDate = this.taskForm.controls.toCloseDate.value;
     this.taskholder.toTime = this.taskForm.controls.toTime.value;
+    this.taskholder.role = this.roleSort;
     this.taskholder.closedDate = this.taskForm.controls.closedDate.value;
     this.taskholder.time = this.taskForm.controls.time.value;
     this.taskholder.product = this.taskForm.controls.product.value;

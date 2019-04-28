@@ -21,7 +21,7 @@ editview: string;
   department;
   departmentData;
   assignedBy;
-  units = ['Studio', 'BSS', 'Technologies'];
+  units = ['Studio', 'BSS', 'Technologies', 'Marekting', 'Operation'];
   priority = ['low', 'medium', 'high', 'critical'];
   unitName: any;
   taskname: any;
@@ -195,7 +195,29 @@ editview: string;
     }
   }
   updateTask(taskForm: FormGroup, row) {
-  this.taskManagementService.EditTask(taskForm.value, row._id).subscribe(data => {
+    this.taskEdit = new TaskModel();
+    /* this.taskEdit.userId = this.taskForm.controls.assignedTo.value._id; */
+    this.taskEdit.clientName = this.taskForm.controls.clientName.value;
+    this.taskEdit.dateTime = this.taskForm.controls.dateTime.value;
+    this.taskEdit.taskTitle = this.taskForm.controls.taskTitle.value;
+    this.taskEdit.taskDescription = this.taskForm.controls.taskDescription.value;
+    this.taskEdit.units = this.taskForm.controls.units.value;
+    this.taskEdit.priority = this.taskForm.controls.priority.value;
+    this.taskEdit.department = this.taskForm.controls.department.value;
+    this.taskEdit.assignedTo = this.taskForm.controls.assignedTo.value;
+    this.taskEdit.assignedBy = this.taskForm.controls.assignedBy.value;
+    this.taskEdit.status = this.taskForm.controls.status.value;
+    this.taskEdit.toCloseDate = this.taskForm.controls.toCloseDate.value;
+    this.taskEdit.toTime = this.taskForm.controls.toTime.value;
+    this.taskEdit.role = this.roleSort;
+    this.taskEdit.closedDate = this.taskForm.controls.closedDate.value;
+    this.taskEdit.time = this.taskForm.controls.time.value;
+    this.taskEdit.product = this.taskForm.controls.product.value;
+    this.taskEdit.task = this.taskForm.controls.task.value;
+    this.taskEdit.shoot = this.taskForm.controls.shoot.value;
+    this.taskEdit.list = this.taskForm.controls.list.value;
+
+  this.taskManagementService.EditTask(this.taskEdit, row._id).subscribe(data => {
     this.taskEdit = data;
     this.router.navigate(['task/viewtask', this.editview]);
   }, error => {

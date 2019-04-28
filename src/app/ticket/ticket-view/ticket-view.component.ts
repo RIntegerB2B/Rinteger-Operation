@@ -27,11 +27,14 @@ export class TicketViewComponent implements OnInit {
   filterWise;
   deadcount;
   studios; BSSs; technologys;
-  units = [{ name: 'studio', counts: 0 }, { name: 'BSS', counts: 0 }, { name: 'technology', counts: 0 }];
+  units = [{ name: 'studio', counts: 0 }, { name: 'BSS', counts: 0 }, { name: 'technology', counts: 0 },
+  { name: 'Marketing', counts: 0}, { name: 'Operation', counts: 0}];
   @ViewChild('MatPaginator') paginator: MatPaginator;
   matdatasource = new MatTableDataSource([]);
   userId: any;
   userRole: string;
+  marketing: any;
+  operation: any;
 
 
 
@@ -102,9 +105,13 @@ export class TicketViewComponent implements OnInit {
     this.studios = this.filterWise.filter(data => data.units === 'studio');
     this.BSSs = this.filterWise.filter(data => data.units === 'BSS');
     this.technologys = this.filterWise.filter(data => data.units === 'technology');
+    this.marketing = this.filterWise.filter(data => data.units === 'Marketing');
+    this.operation = this.filterWise.filter(data => data.units === 'Operation');
     this.units[0].counts = this.studios.length;
     this.units[1].counts = this.BSSs.length;
     this.units[2].counts = this.technologys.length;
+    this.units[3].counts = this.marketing.length;
+    this.units[4].counts = this.operation.length;
   }
 
   deadlinedTicket() {

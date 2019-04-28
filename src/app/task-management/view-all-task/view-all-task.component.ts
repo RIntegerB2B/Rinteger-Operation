@@ -19,6 +19,7 @@ import { NavheaderService } from '../../shared/navheader/navheader.service';
 export class ViewAllTaskComponent implements OnInit {
   taskholder: any;
   taskValue: TaskModel;
+  taskData: TaskModel[];
   UnitName: any;
   taskRoleName: any;
   public pageSize = 50;
@@ -41,7 +42,8 @@ export class ViewAllTaskComponent implements OnInit {
   studios;
   BSSs;
   technologys;
-  units = [{ name: 'Studio', counts: 0 }, { name: 'BSS', counts: 0 }, { name: 'Technologies', counts: 0 }];
+  units = [{ name: 'Studio', counts: 0 }, { name: 'BSS', counts: 0 }, { name: 'Technologies', counts: 0 },
+{ name: 'Marketing', counts: 0}, { name: 'Operation', counts: 0}];
   @ViewChild('MatPaginator') paginator: MatPaginator;
   matdatasource = new MatTableDataSource([]);
 
@@ -50,6 +52,8 @@ export class ViewAllTaskComponent implements OnInit {
   userUnit: any;
   taskModel: MatTableDataSource<any>;
   taskEdit: TaskModel[];
+  marketing: any;
+  operation: any;
 
   constructor(private taskManagementService: TaskManagementService, private route: ActivatedRoute,
     private navheaderService: NavheaderService) { }
@@ -67,7 +71,11 @@ export class ViewAllTaskComponent implements OnInit {
     if (this.userRole === 'admin') {
       this.getAllTask();
     } else if (this.userRole === 'teamleader') {
+      if (this.userRole === 'photographer') {
+        this.getRoleWise();
+      } else {
       this.getUnitWise();
+    }
     } else {
       this.CompareUserId();
     }
@@ -104,6 +112,24 @@ export class ViewAllTaskComponent implements OnInit {
   getUnitWise() {
     this.userUnit = localStorage.getItem('unit');
     this.taskManagementService.compareUserUnits(this.userUnit).subscribe(data => {
+      this.taskholder = data.filter( value => value.role !== 'photographer');
+      this.taskValue = data.filter( value => value.role !== 'photographer');
+      this.taskData = data.filter( value => value.role !== 'photographer');
+      this.taskholder = new MatTableDataSource<any>(this.taskData);
+      this.taskholder.paginator = this.paginator;
+      this.taskholder = this.taskData;
+      this.all = this.taskholder.length;
+      this.filterWise = this.taskholder;
+      this.array = this.taskData;
+      this.totalSize = this.array.length;
+      this.iterator();
+      this.filterWiseTest();
+    }, error => {
+      console.log(error);
+    });
+  }
+  getRoleWise() {
+    this.taskManagementService.compareUserRole(this.userRole).subscribe( data => {
       this.taskholder = data;
       this.taskValue = data;
       this.taskholder = new MatTableDataSource<any>(data);
@@ -127,9 +153,13 @@ export class ViewAllTaskComponent implements OnInit {
     this.studios = this.filterWise.filter(data => data.units === 'Studio');
     this.BSSs = this.filterWise.filter(data => data.units === 'BSS');
     this.technologys = this.filterWise.filter(data => data.units === 'Technologies');
+    this.marketing = this.filterWise.filter(data => data.units === 'Marketing');
+    this.operation = this.filterWise.filter(data => data.units === 'Operation');
     this.units[0].counts = this.studios.length;
     this.units[1].counts = this.BSSs.length;
     this.units[2].counts = this.technologys.length;
+    this.units[3].counts = this.marketing.length;
+    this.units[4].counts = this.operation.length;
   }
   deadlinedTask() {
     this.taskManagementService.deadlinedTask().subscribe(data => {
@@ -150,7 +180,7 @@ export class ViewAllTaskComponent implements OnInit {
     this.taskManagementService.DeleteTask(value).subscribe(data => {
       this.deletevalue = data;
       if (this.userRole !== 'admin') {
-        this.taskholder = this.deletevalue.filter( value => this.userUnit === value.units);
+        this.taskholder = this.deletevalue.filter( row => this.userUnit === row.units);
       } else {
         this.taskholder = this.deletevalue;
       }

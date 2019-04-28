@@ -92,4 +92,9 @@ updateRating(rating, id): Observable<TaskModel[]> {
 
   return this.http.post<TaskModel[]>(urlway, rating);
 }
+compareUserRole(data): Observable<any> {
+  const urlway = this.baseurl + 'finduserrole/' + data;
+
+  return this.http.get<TaskModel[]>(urlway);
+}
 }

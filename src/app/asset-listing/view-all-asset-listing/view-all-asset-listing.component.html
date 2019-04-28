@@ -134,7 +134,7 @@
               <a class="nav-link" (click)="getUpdate(data)">
                 Update
               </a>
-              <a class="nav-link" (click)="getDelete(data)">
+              <a class="nav-link" (click)="getDelete(data)" *ngIf = "this.userRole === 'admin'">
                 Delete
               </a>
             </mat-menu>

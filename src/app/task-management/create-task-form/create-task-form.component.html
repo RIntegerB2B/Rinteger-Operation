@@ -123,12 +123,12 @@
         </div>
 
         <div fxFlex="100" class="textHeader"
-          *ngIf="this.unitSort === 'Studio' || this.roleSort === 'admin'">
+          *ngIf="((this.unitSort === 'Studio') && (this.roleSort !== 'photographer')) || this.roleSort === 'admin'">
           <h5>Product Details</h5>
         </div>
 
         <div fxLayout="column" fxFlex="100" formArrayName="product"
-          *ngIf="this.unitSort === 'Studio' || this.roleSort === 'admin'">
+          *ngIf="(this.unitSort === 'Studio') && (this.roleSort !== 'photographer') || this.roleSort === 'admin'">
           <div *ngFor="let account of productForms.controls; let i=index" [formGroupName]="i">
               <div fxFlex="15" class="pr-1">
                   <mat-form-field class="full-width">
@@ -159,7 +159,7 @@
 
 
         <div fxFlex="100" fxLayout="row"
-          *ngIf="this.unitSort === 'Studio' || this.roleSort === 'admin'">
+          *ngIf="(this.unitSort === 'Studio') && (this.roleSort !== 'photographer') || this.roleSort === 'admin'">
           <a (click)="addForm()">
             <mat-icon class="gridEdit">add_box</mat-icon>
           </a>
@@ -207,12 +207,12 @@
 
 
         <div fxFlex="100" class="textHeader"
-          *ngIf="this.unitSort === 'Studio' || this.roleSort === 'admin'">
+          *ngIf="this.roleSort === 'photographer' || this.roleSort === 'admin'">
           <h5>Shoot Details</h5>
         </div>
 
         <div fxLayout="column" fxFlex="100" formArrayName="shoot"
-          *ngIf="this.unitSort === 'Studio' || this.roleSort === 'admin'">
+          *ngIf="this.roleSort === 'photographer' || this.roleSort === 'admin'">
           <div *ngFor="let account of ShootForms.controls; let i=index" [formGroupName]="i">
            <div class="row">
             <div fxFlex="15" class="pr-1">
@@ -276,7 +276,7 @@
 
 
         <div fxFlex="100" fxLayout="row"
-          *ngIf="this.unitSort === 'Studio' || this.roleSort === 'admin'">
+          *ngIf="this.roleSort === 'photographer' || this.roleSort === 'admin'">
           <a (click)="addShootForm()">
             <mat-icon class="gridEdit">add_box</mat-icon>
           </a>

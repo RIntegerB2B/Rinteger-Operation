@@ -33,7 +33,7 @@
           </mat-form-field>
         </div>
 
-        <div fxFlex="50" class="p-2">
+        <div fxFlex="50" class="p-2"  *ngIf="this.unitSort !=='Studio'">
           <mat-form-field class="full-width">
             <input matInput formControlName="clientName" placeholder="Client Name"  
             [(ngModel)]="taskEdit.clientName" (ngModelChange)="taskEdit.clientName=$event">
@@ -150,10 +150,10 @@
            
             </mat-form-field>
           </div>
-        <div fxFlex="100" class="textHeader"  *ngIf= "this.unitSort === 'Studio' || this.roleSort === 'admin'" >
+        <div fxFlex="100" class="textHeader"  *ngIf= "(this.unitSort === 'Studio') && (this.roleSort !== 'photographer') || this.roleSort === 'admin'" >
           <h5>Product Details</h5>
         </div>
-        <div  fxLayout="column" fxFlex="100" formArrayName="product"  *ngIf= "this.unitSort === 'Studio' || this.roleSort === 'admin'" > 
+        <div  fxLayout="column" fxFlex="100" formArrayName="product"  *ngIf= "(this.unitSort === 'Studio') && (this.roleSort !== 'photographer') || this.roleSort === 'admin'" > 
           <div *ngFor="let account of productForms.controls; let i=index" [formGroupName]="i">
               <div fxFlex="15" class="pr-1">
                   <mat-form-field class="full-width">
@@ -192,7 +192,7 @@
           </div>
         </div>
   
-          <div fxFlex="50"  *ngIf= "this.unitSort === 'Studio' || this.roleSort === 'admin'" >
+          <div fxFlex="50"  *ngIf= "(this.unitSort === 'Studio') && (this.roleSort !== 'photographer') || this.roleSort === 'admin'" >
             <a (click)="addForm()">
               <mat-icon class="gridEdit">add_box</mat-icon>
             </a>
@@ -241,10 +241,10 @@
                 <p>Add New</p>
               </div>
       
-              <div fxFlex="100" class="textHeader" *ngIf= "this.unitSort === 'Studio' || this.roleSort === 'admin'">
+              <div fxFlex="100" class="textHeader" *ngIf= "this.roleSort === 'photographer' || this.roleSort === 'admin'">
                 <h5>Shoot Details</h5>
               </div>
-              <div  fxLayout="column" fxFlex="100" formArrayName="shoot"  *ngIf= "this.unitSort === 'Studio' || this.roleSort === 'admin'" > 
+              <div  fxLayout="column" fxFlex="100" formArrayName="shoot"  *ngIf= "this.roleSort === 'photographer' || this.roleSort === 'admin'" > 
                 <div *ngFor="let account of ShootForms.controls; let i=index" [formGroupName]="i">
                   <div class="row">
                   <div fxFlex="15" class="pr-1">
@@ -324,7 +324,7 @@
                 </div>
               </div>
         
-                <div fxFlex="50" *ngIf= "this.unitSort === 'Studio' || this.roleSort === 'admin'" >
+                <div fxFlex="50" *ngIf= "this.roleSort === 'photographer' || this.roleSort === 'admin'" >
                   <a (click)="addShootForm()">
                     <mat-icon class="gridEdit">add_box</mat-icon>
                   </a>

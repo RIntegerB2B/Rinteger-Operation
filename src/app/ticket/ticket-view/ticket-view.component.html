@@ -13,7 +13,7 @@
     <button mat-raised-button color="accent" (click)="retriveTicket()" matBadge="{{all}}" matBadgePosition="after"
       matBadgeColor="accent">All Tickets </button>
   </div>
-  <div class="col-md-2 m-3" *ngFor="let unit of units">
+  <div class="col-md m-3" *ngFor="let unit of units">
     <button mat-raised-button color="primary" matBadge="{{unit.counts}}" matBadgePosition="before"
       matBadgeColor="primary" (click)="getunitwiseTicket(unit.name)">{{unit.name}}</button>
   </div>

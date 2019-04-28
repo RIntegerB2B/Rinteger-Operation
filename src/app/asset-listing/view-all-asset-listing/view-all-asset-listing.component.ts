@@ -28,6 +28,7 @@ export class ViewAllAssetListingComponent implements OnInit {
 
   @ViewChild('MatPaginator') paginator: MatPaginator;
   matdatasource = new MatTableDataSource([]);
+  userRole: string;
 
   constructor(private assetListingService: AssetListingService, private fb: FormBuilder,
     private router: Router, private route: ActivatedRoute) { }
@@ -126,5 +127,8 @@ export class ViewAllAssetListingComponent implements OnInit {
     const start = this.currentPage * this.pageSize;
     const part = this.array.slice(start, end);
     this.assetValue = part;
+  }
+  getRole() {
+    this.userRole = localStorage.getItem('role');
   }
 }
