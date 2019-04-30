@@ -1,7 +1,7 @@
 export class TaskShoot {
     customerName: String;
     productName: String;
-    productCount: String;
+    productCount: Number;
     shootType: String;
     modeName: String;
     shootPurpose: String;

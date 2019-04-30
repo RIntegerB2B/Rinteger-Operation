@@ -35,4 +35,7 @@ export class UserPermission {
     workOrderRole: [{
         workOrderMenu: Boolean
     }];
+    reportRole: [{
+        taskReportNav: Boolean
+    }];
 }

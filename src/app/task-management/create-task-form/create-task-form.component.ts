@@ -68,12 +68,14 @@ export class CreateTaskFormComponent implements OnInit {
       product: this.fb.array([]),
       task: this.fb.array([]),
       shoot: this.fb.array([]),
-      list: this.fb.array([])
+      list: this.fb.array([]),
+      marketing: this.fb.array([])
     });
     this.addForm();
     this.addTaskForm();
     this.addShootForm();
     this.addListForm();
+    this.addMarketingForm();
   }
   addForm() {
     const product = this.fb.group({
@@ -132,7 +134,9 @@ export class CreateTaskFormComponent implements OnInit {
     const list = this.fb.group({
       title: [''],
       listDescription: [''],
-      listStatus: ['']
+      listStatus: [''],
+      listCount: [''],
+      noOfProductLive: ['']
       });
     this.listForms.push(list);
   }
@@ -142,6 +146,26 @@ export class CreateTaskFormComponent implements OnInit {
   }
   deleteList(i) {
     this.listForms.removeAt(i);
+  }
+
+
+
+  addMarketingForm() {
+    const marketing = this.fb.group({
+      title: [''],
+      description: [''],
+      activityAssignedCount: [''],
+      activityCompletedCount: [''],
+      leadCount: ['']
+      });
+    this.MarketingForms.push(marketing);
+  }
+
+  get MarketingForms() {
+    return this.taskForm.get('marketing') as FormArray;
+  }
+  deleteMarkeing(i) {
+    this.MarketingForms.removeAt(i);
   }
 
 
@@ -174,6 +198,7 @@ export class CreateTaskFormComponent implements OnInit {
     this.taskholder.task = this.taskForm.controls.task.value;
     this.taskholder.shoot = this.taskForm.controls.shoot.value;
     this.taskholder.list = this.taskForm.controls.list.value;
+    this.taskholder.marketing = this.taskForm.controls.marketing.value;
     this.taskManagementService.createTask(this.taskholder).subscribe(data => {
       this.taskholder = data;
       this.router.navigate(['task/viewtask', this.userId]);

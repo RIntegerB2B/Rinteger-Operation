@@ -25,7 +25,7 @@ export class ViewWeekSheetComponent implements OnInit {
   unitName: string;
   activityEdit: any;
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute,
-    private activityLogService: ActivityLogService) { 
+    private activityLogService: ActivityLogService) {
       this.route.paramMap.subscribe(
         (params: ParamMap) => {
           this.id = params.get('id');

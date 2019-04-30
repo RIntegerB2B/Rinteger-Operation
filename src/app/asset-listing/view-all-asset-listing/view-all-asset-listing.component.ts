@@ -36,6 +36,7 @@ export class ViewAllAssetListingComponent implements OnInit {
   ngOnInit() {
     this.createAsset();
     this.getAllAssetList();
+    this.getRole();
   }
   createAsset() {
     this.AssetListingForm = this.fb.group({

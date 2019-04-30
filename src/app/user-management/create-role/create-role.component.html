@@ -137,6 +137,14 @@
         </mat-checkbox>
       </div>
     </div>
+    <div formGroupName="reportRole" class="pb-3" class="row">
+        <div class="col-md-12">Report</div>
+        <div class="col-md-2">
+          <mat-checkbox formControlName="taskReportNav" class="mail-checkbox">
+            Task Report
+          </mat-checkbox>
+        </div>
+      </div>
     <button mat-raised-button color="accent">Submit</button>
   </form>
 </div>
@@ -284,6 +292,15 @@
         </mat-checkbox>
       </div>
     </div>
+    <div formGroupName="reportRole" class="pb-3" class="row" *ngFor="let work of data.reportRole">
+        <div class="col-md-12">Report</div>
+        <div class="col-md-2">
+          <mat-checkbox formControlName="taskReportNav" class="mail-checkbox" (ngModelChange)="work.taskReportNav=$event"
+            [(ngModel)]="work.taskReportNav" [checked]="work.taskReportNav">
+            Task Report
+          </mat-checkbox>
+        </div>
+      </div>
 
     <button mat-raised-button color="accent" (click)="updateRole(editForm,data._id)">update</button>
     <button mat-raised-button color="accent" (click)="deleteRole(data._id)">Delete</button>

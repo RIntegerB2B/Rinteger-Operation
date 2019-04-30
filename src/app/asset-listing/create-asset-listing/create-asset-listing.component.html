@@ -23,7 +23,7 @@
           <div fxFlex="50" class="p-2">
             <div >
             <mat-form-field class="full-width">
-              <input matInput formControlName="date" type="date" placeholder="Select date " >
+              <input matInput formControlName="date" type="date" placeholder="Select Date " >
               <mat-error *ngIf="AssetListingForm.controls['date'].errors?.required" >
                 Date
                 <strong>required</strong>
@@ -34,7 +34,7 @@
           </div>
           <div fxFlex="50" class="p-2">
             <mat-form-field class="full-width">
-              <input matInput formControlName="productName" placeholder="productName">
+              <input matInput formControlName="productName" placeholder="ProductName">
               <mat-error *ngIf="AssetListingForm.controls['productName'].errors?.required" >
                 Product Name
                 <strong>required</strong>
@@ -42,26 +42,26 @@
             </mat-form-field>
           </div>
           <div fxFlex="50" class="p-2">
-            <mat-form-field class="full-width">
-              <input matInput formControlName="responsePerson" placeholder="responsePerson">
-              <mat-error *ngIf="AssetListingForm.controls['responsePerson'].errors?.required">
-                Response Person
-                <strong>required</strong>
-              </mat-error>
-            </mat-form-field>
+              <mat-form-field>
+                  <mat-select placeholder="ResponsePerson" formControlName="responsePerson">
+                    <mat-option *ngFor="let data of responsePerson;let i = index " [value]="data">
+                      {{data}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
           </div>
           <div fxFlex="50" class="p-2">
-              <mat-form-field class="full-width">
-                <input matInput formControlName="verifiedBy" placeholder="verifiedBy">
-                <mat-error *ngIf="AssetListingForm.controls['verifiedBy'].errors?.required">
-                  Verified By
-                  <strong>required</strong>
-                </mat-error>
-              </mat-form-field>
+              <mat-form-field>
+                  <mat-select placeholder="Categories" formControlName="categories">
+                    <mat-option *ngFor="let data of categories;let i = index " [value]="data">
+                      {{data}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
             </div>
           <div fxFlex="50" class="pr-1">
             <mat-form-field class="full-width">
-              <mat-select placeholder="Select department" formControlName="department">
+              <mat-select placeholder="Select Department" formControlName="department">
                 <mat-option *ngFor="let data of department" [value]="data">
                   {{data}}
                 </mat-option>
@@ -70,7 +70,7 @@
           </div>
           <div fxFlex="50" class="p-2">
               <mat-form-field class="full-width">
-                <input matInput formControlName="productPrice" placeholder="productPrice">
+                <input matInput formControlName="ProductPrice" placeholder="productPrice">
                 <mat-error *ngIf="AssetListingForm.controls['productPrice'].errors?.required">
                   Product Price
                   <strong>required</strong>
@@ -79,7 +79,7 @@
             </div>
             <div fxFlex="50" class="p-2">
                 <mat-form-field class="full-width">
-                  <input matInput formControlName="purchaseQuantitiy" placeholder="purchaseQuantitiy">
+                  <input matInput formControlName="purchaseQuantitiy" placeholder="PurchaseQuantitiy">
                   <mat-error *ngIf="AssetListingForm.controls['purchaseQuantitiy'].errors?.required">
                    Purchase Quantity
                     <strong>required</strong>
@@ -95,15 +95,7 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-               <!--  <div fxFlex="50" class="p-2">
-                    <mat-form-field class="full-width">
-                      <input matInput formControlName="availableQuantitiy" placeholder="availableQuantitiy">
-                      <mat-error *ngIf="AssetListingForm.controls['availableQuantitiy'].errors?.required">
-                       AvailabileQuantity
-                        <strong>required</strong>
-                      </mat-error>
-                    </mat-form-field>
-                  </div> -->
+             
          
 
 

@@ -20,18 +20,41 @@
           </mat-form-field>
         </div>
         <div fxFlex="50" class="pr-1">
+         
+
           <mat-form-field class="full-width">
-            <input matInput formControlName="responsePerson" [ngModel]="assetValue?.responsePerson" 
-            (ngModelChange)="assetValue.responsePerson=$event"
-              placeholder="responsePerson" required>
-          </mat-form-field>
+              <mat-select placeholder="Select responsePerson" formControlName="responsePerson" 
+              [(ngModel)]="assetValue.responsePerson"
+               (ngModelChange)="assetValue.responsePerson=$event" required>
+                <mat-option *ngFor="let data of responsePerson" [value]="data">
+                  {{data}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
         </div>
         <div fxFlex="50" class="pr-1">
-          <mat-form-field class="full-width">
-            <input matInput formControlName="verifiedBy" [ngModel]="assetValue?.verifiedBy" 
-            (ngModelChange)="assetValue.verifiedBy=$event"
-              placeholder="verifiedBy" required>
-          </mat-form-field>
+
+            <mat-form-field class="full-width">
+                <mat-select placeholder="Select verifiedBy" formControlName="verifiedBy" 
+                [(ngModel)]="assetValue.verifiedBy"
+                 (ngModelChange)="assetValue.verifiedBy=$event" required>
+                  <mat-option *ngFor="let data of verifiedBy" [value]="data">
+                    {{data}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+
+            <mat-form-field class="full-width">
+                <mat-select placeholder="Select categories" formControlName="categories" 
+                [(ngModel)]="assetValue.categories"
+                 (ngModelChange)="assetValue.categories=$event" required>
+                  <mat-option *ngFor="let data of categories" [value]="data">
+                    {{data}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
         </div>
         <div fxFlex="50" class="pr-1">
           <mat-form-field class="full-width">

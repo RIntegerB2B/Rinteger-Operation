@@ -428,4 +428,35 @@ export class SettingsServiceService {
     const url: string = this.serviceUrl + addUrl + val;
     return this.httpClient.delete<AssetListingSettingModel[]>(url);
   }
+  addAssetResponsablePerson(data: any): Observable<any> {
+    const addUrl = 'addassetresponsableperson';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<AssetListingSettingModel[]>(url, data);
+  }
+  deleteAssetResponsablePerson(val): Observable<any> {
+    const addUrl = 'deleteassetresponsableperson/';
+    const url: string = this.serviceUrl + addUrl + val;
+    return this.httpClient.delete<AssetListingSettingModel[]>(url);
+  }
+  addAssetVerifiedBy(data: any): Observable<any> {
+    const addUrl = 'addassetverifiedby';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<AssetListingSettingModel[]>(url, data);
+  }
+  deleteAssetVerifiedBy(val): Observable<any> {
+    const addUrl = 'deleteassetverifiedby/';
+    const url: string = this.serviceUrl + addUrl + val;
+    return this.httpClient.delete<AssetListingSettingModel[]>(url);
+  }
+
+  addAssetCategories(data: any): Observable<any> {
+    const addUrl = 'addassetcategories';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<AssetListingSettingModel[]>(url, data);
+  }
+  deleteAssetCategories(val): Observable<any> {
+    const addUrl = 'deleteassetcategories/';
+    const url: string = this.serviceUrl + addUrl + val;
+    return this.httpClient.delete<AssetListingSettingModel[]>(url);
+  }
 }

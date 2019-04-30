@@ -179,11 +179,12 @@ export class ViewAllTaskComponent implements OnInit {
   delete(value) {
     this.taskManagementService.DeleteTask(value).subscribe(data => {
       this.deletevalue = data;
-      if (this.userRole !== 'admin') {
+      this.LoadMethod();
+    /*   if (this.userRole !== 'admin') {
         this.taskholder = this.deletevalue.filter( row => this.userUnit === row.units);
       } else {
         this.taskholder = this.deletevalue;
-      }
+      } */
     });
   }
   public handlePage(e: any) {

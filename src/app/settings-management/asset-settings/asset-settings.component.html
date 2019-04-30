@@ -1,16 +1,34 @@
 <div class="pageBoxLg">
   <form [formGroup] = "AssetSettingForm" style="margin-top:20px;">
     <div fxLayout="row wrap" fxLayout.lt-sm="column">
-      <div fxFlex="25" class="pr-1">
+      <div fxFlex="15" class="pr-1">
         <a (click)="showDepartmentForm()">
           <mat-icon class="gridEdit">add_box</mat-icon>  Deparment
         </a>
       </div>
-      <div fxFlex="25" class="pr-1">
+      <div fxFlex="15" class="pr-1">
         <a (click)="showStatusForm()">
           <mat-icon class="gridEdit">add_box</mat-icon> Status
         </a>
       </div>
+      <div fxFlex="15" class="pr-1">
+        <a (click)="showResponsalbePersonForm()">
+          <mat-icon class="gridEdit">add_box</mat-icon> Response Person
+
+        </a>
+      </div>
+      <div fxFlex="15" class="pr-1">
+        <a (click)="showVerifiedByForm()">
+          <mat-icon class="gridEdit">add_box</mat-icon> Verified By
+
+        </a>
+      </div>
+      <div fxFlex="15" class="pr-1">
+          <a (click)="showCategoriesForm()">
+            <mat-icon class="gridEdit">add_box</mat-icon> Categories
+  
+          </a>
+        </div>
     </div>
 
     <div fxLayout="row wrap" fxLayout.lt-sm="column">
@@ -49,6 +67,58 @@
 
         </div>
       </div>
+
+      <div fxFlex="25" class="pr-1" *ngIf="showResponsalbePerson">
+        <h1>Response Person</h1>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="responsePerson" placeholder="Response Person" required>
+        </mat-form-field>
+        <button mat-raised-button color="primary"  type="button" (click)="addResponsePerson()" 
+        [disabled]="!AssetSettingForm.controls.responsePerson.valid">Add</button>
+        <h5>Response Person</h5>
+        <div *ngFor="let data of settingModel ">
+          <div *ngFor="let value of data.responsePerson ">          
+            <p><a (click)="deleteResponsePerson(value)"><mat-icon>clear</mat-icon></a>{{value}}</p>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div fxFlex="25" class="pr-1" *ngIf="showVerifiedBy">
+        <h1>Verified By</h1>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="verifiedBy" placeholder="Verified By" required>
+        </mat-form-field>
+        <button mat-raised-button color="primary"  type="button" (click)="addVerifiedBy()" 
+        [disabled]="!AssetSettingForm.controls.verifiedBy.valid">Add</button>
+        <h5>Verified By</h5>
+        <div *ngFor="let data of settingModel ">
+          <div *ngFor="let value of data.verifiedBy ">          
+            <p><a (click)="deleteVerifiedBy(value)"><mat-icon>clear</mat-icon></a>{{value}}</p>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div fxFlex="25" class="pr-1" *ngIf="showCategories">
+          <h1>Categories</h1>
+          <mat-form-field class="full-width">
+            <input matInput formControlName="categories" placeholder="categories" required>
+          </mat-form-field>
+          <button mat-raised-button color="primary"  type="button" (click)="addCategories()" 
+          [disabled]="!AssetSettingForm.controls.categories.valid">Add</button>
+          <h5>Categories</h5>
+          <div *ngFor="let data of settingModel ">
+            <div *ngFor="let value of data.categories ">          
+              <p><a (click)="deleteCategories(value)"><mat-icon>clear</mat-icon></a>{{value}}</p>
+            </div>
+  
+          </div>
+        </div>
+
+
     </div>
   </form>
 </div>

@@ -85,7 +85,9 @@ export class CreateWeeklySheetComponent implements OnInit {
     const list = this.fb.group({
       title: [''],
       listDescription: [''],
-      listStatus: ['']
+      listStatus: [''],
+      listCount: [''],
+      noOfProductLive: ['']
       });
     this.listForms.push(list);
   }

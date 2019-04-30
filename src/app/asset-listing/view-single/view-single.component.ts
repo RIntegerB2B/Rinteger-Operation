@@ -37,6 +37,7 @@ export class ViewSingleComponent implements OnInit {
       productName: [''],
       responsePerson: [''],
       department: [''],
+      categories: [''],
       availableStatus: [''],
       verifiedBy: [''],
       productPrice: [''],

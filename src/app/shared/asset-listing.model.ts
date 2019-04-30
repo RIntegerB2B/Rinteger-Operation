@@ -6,6 +6,7 @@ export class AssetListingModel {
     responsePerson: string;
     verifiedBy: string;
     department: string;
+    categories: string;
     availableStatus: string;
     productPrice: number;
     purchaseQuantitiy: number;

@@ -1,0 +1,189 @@
+<form [formGroup]="TaskReportForm">
+  <div class="pageBoxLg">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-2">
+          <mat-form-field>
+            <mat-select placeholder="Select Unit" formControlName="units"
+            (selectionChange)="SelectUnit($event)">
+              <mat-option *ngFor="let data of unit;let i = index " [value]="data">
+                {{data}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+
+        <div class="col-md-2" *ngIf="displayRole">
+          <mat-form-field>
+            <mat-select placeholder="Select role" formControlName="roles"
+            (selectionChange)="SelectRole($event)">
+              <mat-option *ngFor="let data of role;let i = index " [value]="data">
+                {{data}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-2" *ngIf="displayName">
+          <mat-form-field>
+            <mat-select placeholder="Select Name" formControlName="nameEmp"
+            (selectionChange)="SelectName($event)">
+              <mat-option *ngFor="let data of name;let i = index " [value]="data.userName">
+                {{data.userName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-2" *ngIf="afterNameSelect" >
+            <mat-form-field>
+              <mat-select placeholder="Select year" formControlName="year"
+              (selectionChange)="SelectYear($event)">
+                <mat-option *ngFor="let data of year;let i = index " [value]="data">
+                  {{data}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-2" *ngIf="afterYearSelect" >
+              <mat-form-field>
+                <mat-select placeholder="Select month" formControlName="year"
+                (selectionChange)="SelectMonth($event)">
+                  <mat-option *ngFor="let data of allMonth;let i = index " [value]="data.value">
+                    {{data.month}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="bor col-md-2" *ngIf="editing">
+              Product Count : {{getTotalProductCount()}}<br>
+              Image Count : {{getImageCount()}}
+            </div>
+            <div class="bor col-md-2" *ngIf="photosuit">
+              Product Count : {{getPhotoProductCount()}}<br>
+             <!--  Image Count : {{getImageCount()}} -->
+            </div>
+            <div class="bor col-md-2" *ngIf="bssshow">
+              List Count : {{getListCount()}}<br>
+              No.of Prodcut Live : {{getProductLive()}}
+            </div>
+
+      </div>
+      <div class="row gridRowHeader display-none-small" *ngIf="this.userUnit === 'Studio'">   
+          <div class="col-md-3 vcenterHeader">
+              <div class="form-group">
+                <label>Customer Name</label>
+              </div>
+            </div>
+        <div class="col-md-3 vcenterHeader">
+          <div class="form-group">
+            <label>Product Name</label>
+          </div>
+        </div>
+        <div class="col-md-3 vcenterHeader">
+          <div class="form-group">
+            <label>Product Count</label>
+          </div>
+        </div>
+        <div class="col-md-3 vcenterHeader" *ngIf="this.userRole !== 'photographer'">
+          <div class="form-group">
+            <label>Image Count</label>
+          </div>
+        </div>   
+      </div>
+      <div *ngIf="this.userUnit === 'Studio'">
+      <div *ngFor="let data of studioValue" >
+        <div class="row gridRow">
+            <div class="display-none-large col-6">
+                <label class="gridLabel">Customer Name:</label>
+              </div>
+              <div class="col-md-3 col-6 vcenter form-group">
+                {{data.customerName}}
+              </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Product Name:</label>
+          </div>
+          <div class="col-md-3 col-6 vcenter form-group">
+            {{data.productName}}
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Product Count:</label>
+          </div>
+          <div class="col-md-3 col-6 vcenter form-group">
+            {{data.productCount}}
+          </div>
+          <div class="display-none-large col-6" *ngIf="this.userRole !== 'photographer'">
+            <label class="gridLabel">
+              Image Count:
+            </label>
+          </div>
+          <div class="col-md-3 col-6 vcenter form-group wordWrap" *ngIf="this.userRole !== 'photographer'">
+            {{data.imageCount}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div class="row gridRowHeader display-none-small" *ngIf="this.userUnit === 'BSS'">   
+        <div class="col-md-3 vcenterHeader">
+            <div class="form-group">
+              <label>Title</label>
+            </div>
+          </div>
+      <div class="col-md-3 vcenterHeader">
+        <div class="form-group">
+          <label>List Description</label>
+        </div>
+      </div>
+      <div class="col-md-3 vcenterHeader">
+        <div class="form-group">
+          <label>List Count</label>
+        </div>
+      </div>
+      <div class="col-md-3 vcenterHeader">
+        <div class="form-group">
+          <label>No.of Product Live</label>
+        </div>
+      </div>   
+    </div>
+    <div *ngIf="this.userUnit === 'BSS'">
+    <div *ngFor="let data of BssValue" >
+      <div class="row gridRow">
+          <div class="display-none-large col-6">
+              <label class="gridLabel">Title:</label>
+            </div>
+            <div class="col-md-3 col-6 vcenter form-group">
+              {{data.title}}
+            </div>
+        <div class="display-none-large col-6">
+          <label class="gridLabel">List Description:</label>
+        </div>
+        <div class="col-md-3 col-6 vcenter form-group">
+          {{data.listDescription}}
+        </div>
+        <div class="display-none-large col-6">
+          <label class="gridLabel">List Count:</label>
+        </div>
+        <div class="col-md-3 col-6 vcenter form-group">
+          {{data.listCount}}
+        </div>
+        <div class="display-none-large col-6" >
+          <label class="gridLabel">
+              No.of Product Live:
+          </label>
+        </div>
+        <div class="col-md-3 col-6 vcenter form-group wordWrap" *ngIf="this.userRole !== 'photographer'">
+          {{data.noOfProductLive}}
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>
+    <!-- <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true"
+    [length]="totalSize" [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator> -->
+  </div>
+</form>

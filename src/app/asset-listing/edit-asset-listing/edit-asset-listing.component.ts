@@ -14,6 +14,9 @@ export class EditAssetListingComponent implements OnInit {
   AssetListingForm: FormGroup;
   assetValue: any;
   department;
+  responsePerson;
+  verifiedBy;
+  categories;
   availableStatus;
   id: string;
   constructor(private assetListingService: AssetListingService, private fb: FormBuilder,
@@ -38,6 +41,7 @@ export class EditAssetListingComponent implements OnInit {
       availableStatus: [''],
       verifiedBy: [''],
       productPrice: [''],
+      categories: [''],
       purchaseQuantitiy: [''],
       Description: [''],
       availableQuantitiy: [''],
@@ -88,7 +92,7 @@ export class EditAssetListingComponent implements OnInit {
     this.assetValue.responsePerson = AssetListingForm.controls.responsePerson.value;
     this.assetValue.verifiedBy = AssetListingForm.controls.verifiedBy.value;
     this.assetValue.department = AssetListingForm.controls.department.value;
-   /*  this.assetValue.availableStatus = AssetListingForm.controls.availableStatus.value; */
+    this.assetValue.categories = AssetListingForm.controls.categories.value;
     this.assetValue.productPrice = AssetListingForm.controls.productPrice.value;
     this.assetValue.purchaseQuantitiy = AssetListingForm.controls.purchaseQuantitiy.value;
     this.assetValue.Description = AssetListingForm.controls.Description.value;
@@ -108,7 +112,10 @@ export class EditAssetListingComponent implements OnInit {
   getAssetSetting() {
     this.assetListingService.getAssetSetting().subscribe( data => {
       this.department = data[0].department;
+      this.verifiedBy = data[0].verifiedBy;
+      this.responsePerson = data[0].responsePerson;
       this.availableStatus = data[0].availableStatus;
+      this.categories = data[0].categories;
     }, error => {
       console.log(error);
     } );

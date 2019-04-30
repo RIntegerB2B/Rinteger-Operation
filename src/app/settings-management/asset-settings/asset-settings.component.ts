@@ -17,6 +17,9 @@ export class AssetSettingsComponent implements OnInit {
   AssetSettingForm: FormGroup;
   showDepartment: boolean;
   showStatus: boolean;
+  showResponsalbePerson: boolean;
+  showVerifiedBy: boolean;
+  showCategories: boolean;
   settingModel: AssetListingSettingModel;
   action;
   message;
@@ -30,17 +33,48 @@ export class AssetSettingsComponent implements OnInit {
   createForm() {
     this.AssetSettingForm = this.fb.group({
       department: [''],
-      availableStatus: ['']
+      availableStatus: [''],
+      responsePerson: [''],
+      verifiedBy: [''],
+      categories: ['']
     });
   }
   showDepartmentForm() {
     this.showDepartment = true;
     this.showStatus = false;
+    this.showResponsalbePerson = false;
+    this.showVerifiedBy = false;
+    this.showCategories = false;
   }
   showStatusForm() {
     this.showDepartment = false;
     this.showStatus = true;
+    this.showResponsalbePerson = false;
+    this.showVerifiedBy = false;
+    this.showCategories = false;
   }
+  showResponsalbePersonForm() {
+    this.showDepartment = false;
+    this.showStatus = false;
+    this.showResponsalbePerson = true;
+    this.showVerifiedBy = false;
+    this.showCategories = false;
+  }
+  showVerifiedByForm() {
+    this.showDepartment = false;
+    this.showStatus = false;
+    this.showResponsalbePerson = false;
+    this.showVerifiedBy = true;
+    this.showCategories = false;
+  }
+  showCategoriesForm() {
+    this.showDepartment = false;
+    this.showStatus = false;
+    this.showResponsalbePerson = false;
+    this.showVerifiedBy = false;
+    this.showCategories = true;
+  }
+
   viewAssetSetting() {
     this.settingsService.viewAssetSetting().subscribe(data => {
       this.settingModel = data;
@@ -98,4 +132,85 @@ export class AssetSettingsComponent implements OnInit {
       console.log(error);
     });
   }
+
+
+
+  addResponsePerson() {
+    this.message = 'Response Person added Successfully';
+    this.settingModel = new AssetListingSettingModel();
+    this.settingModel.responsePerson = this.AssetSettingForm.controls.responsePerson.value;
+    this.settingsService.addAssetResponsablePerson(this.settingModel).subscribe(data => {
+      this.settingModel = data;
+      this.snackbar.open(this.message, this.action, {
+        duration: 3000,
+      });
+    }, error => {
+      console.log(error);
+    });
+    this.AssetSettingForm.reset();
+  }
+  deleteResponsePerson(value) {
+    this.message = 'Response Person deleted Successfully';
+    this.settingsService.deleteAssetResponsablePerson(value).subscribe(data => {
+      this.settingModel = data;
+      this.snackbar.open(this.message, this.action, {
+        duration: 3000,
+      });
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  addVerifiedBy() {
+    this.message = 'VerfiedBy added Successfully';
+    this.settingModel = new AssetListingSettingModel();
+    this.settingModel.verifiedBy = this.AssetSettingForm.controls.verifiedBy.value;
+    this.settingsService.addAssetVerifiedBy(this.settingModel).subscribe(data => {
+      this.settingModel = data;
+      this.snackbar.open(this.message, this.action, {
+        duration: 3000,
+      });
+    }, error => {
+      console.log(error);
+    });
+    this.AssetSettingForm.reset();
+  }
+  deleteVerifiedBy(value) {
+    this.message = 'VerifiedBy deleted Successfully';
+    this.settingsService.deleteAssetVerifiedBy(value).subscribe(data => {
+      this.settingModel = data;
+      this.snackbar.open(this.message, this.action, {
+        duration: 3000,
+      });
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  addCategories() {
+    this.message = 'Categories added Successfully';
+    this.settingModel = new AssetListingSettingModel();
+    this.settingModel.categories = this.AssetSettingForm.controls.categories.value;
+    this.settingsService.addAssetCategories(this.settingModel).subscribe(data => {
+      this.settingModel = data;
+      this.snackbar.open(this.message, this.action, {
+        duration: 3000,
+      });
+    }, error => {
+      console.log(error);
+    });
+    this.AssetSettingForm.reset();
+  }
+  deleteCategories(value) {
+    this.message = 'Categories deleted Successfully';
+    this.settingsService.deleteAssetCategories(value).subscribe(data => {
+      this.settingModel = data;
+      this.snackbar.open(this.message, this.action, {
+        duration: 3000,
+      });
+    }, error => {
+      console.log(error);
+    });
+  }
+
 }

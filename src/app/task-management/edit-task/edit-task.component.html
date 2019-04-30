@@ -334,6 +334,22 @@
                   placeholder="listDescription">
                 </mat-form-field>
               </div>
+              <div fxFlex="10" class="pr-1">
+                  <mat-form-field class="full-width">
+                    <input matInput formControlName="listCount"                    
+                    (ngModelChange)="taskEdit.listCount=$event"
+               
+                    placeholder="listCount">
+                  </mat-form-field>
+                </div>
+                <div fxFlex="10" class="pr-1">
+                    <mat-form-field class="full-width">
+                      <input matInput formControlName="noOfProductLive"                    
+                      (ngModelChange)="taskEdit.noOfProductLive=$event"
+                 
+                      placeholder="noOfProductLive">
+                    </mat-form-field>
+                  </div>
               <div fxFlex="25" class="pr-1">
                 <mat-form-field class="full-width">
                   <input matInput formControlName="listStatus"                    
@@ -344,6 +360,56 @@
               </div>
             </div>
           </div>    
+
+
+          <div fxFlex="100" class="textHeader" 
+          *ngIf = "this.unitSort === 'Marketing' || this.roleSort === 'admin'">
+            <h5>Marketing Details</h5>
+          </div>
+          <div  fxLayout="column" fxFlex="100" formArrayName="marketing" 
+          *ngIf = "this.unitSort === 'Marketing' || this.roleSort === 'admin'">
+            <div *ngFor="let account of MarketingForms.controls; let i=index" [formGroupName]="i">
+              <div fxFlex="25" class="pr-1">
+                <mat-form-field class="full-width">
+                  <input matInput formControlName="title"    
+                  (ngModelChange)="taskEdit.title=$event"
+                  [readonly]=true
+                  placeholder="Task Title">
+                </mat-form-field>
+              </div>
+              <div fxFlex="25" class="pr-1">
+                <mat-form-field class="full-width">
+                  <input matInput formControlName="description"                    
+                  (ngModelChange)="taskEdit.description=$event"
+                  [readonly]=true
+                  placeholder="Task Description">
+                </mat-form-field>
+              </div>
+              <div fxFlex="10" class="pr-1">
+                  <mat-form-field class="full-width">
+                    <input matInput formControlName="activityAssignedCount"                    
+                    (ngModelChange)="taskEdit.activityAssignedCount=$event"
+                    [readonly]=true
+                    placeholder="Activity Assigined Count">
+                  </mat-form-field>
+                </div>
+                <div fxFlex="10" class="pr-1">
+                    <mat-form-field class="full-width">
+                      <input matInput formControlName="activityCompletedCount"                    
+                      (ngModelChange)="taskEdit.activityCompletedCount=$event"
+                      placeholder="Activity Completed Count">
+                    </mat-form-field>
+                  </div>
+              <div fxFlex="25" class="pr-1">
+                <mat-form-field class="full-width">
+                  <input matInput formControlName="leadCount"                    
+                  (ngModelChange)="taskEdit.leadCount=$event"
+                  placeholder="Lead Count">
+                </mat-form-field>
+              </div>
+            </div>
+          </div>  
+
         <div fxFlex="100" class="mt-1">
             <button mat-raised-button type="button" color="primary" 
             (click)="updateTask(taskForm, taskEdit)">Save</button>          

@@ -301,7 +301,17 @@
                 <input matInput formControlName="listDescription" placeholder="listDescription">
               </mat-form-field>
             </div>
-            <div fxFlex="8" class="pr-1">
+            <div fxFlex="10" class="pr-1">
+                <mat-form-field class="full-width">
+                  <input matInput formControlName="listCount" placeholder="listCount">
+                </mat-form-field>
+              </div>
+              <div fxFlex="10" class="pr-1">
+                  <mat-form-field class="full-width">
+                    <input matInput formControlName="noOfProductLive" placeholder="noOfProductLive">
+                  </mat-form-field>
+                </div>
+            <div fxFlex="10" class="pr-1">
               <mat-form-field class="full-width">
                 <input matInput formControlName="listStatus" placeholder="listStatus">
               </mat-form-field>
@@ -320,6 +330,55 @@
           </a>
           <p>Add New</p>
         </div>
+
+
+        <div fxFlex="100" class="textHeader"
+        *ngIf="this.unitSort === 'Marketing' || this.roleSort === 'admin'">
+        <h5>Marketing Details</h5>
+      </div>
+      <div fxLayout="column" fxFlex="100" formArrayName="marketing"
+        *ngIf="this.unitSort === 'Marketing' || this.roleSort === 'admin'">
+        <div *ngFor="let account of MarketingForms.controls; let i=index" [formGroupName]="i">
+          <div fxFlex="10" class="pr-1">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="title" placeholder="Task Title">
+            </mat-form-field>
+          </div>
+          <div fxFlex="30" class="pr-1">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="description" placeholder="Task Description">
+            </mat-form-field>
+          </div>
+          <div fxFlex="20" class="pr-1">
+              <mat-form-field class="full-width">
+                <input matInput formControlName="activityAssignedCount" placeholder="Activity Assigned Count">
+              </mat-form-field>
+            </div>
+            <div fxFlex="20" class="pr-1">
+                <mat-form-field class="full-width">
+                  <input matInput formControlName="activityCompletedCount" placeholder="Activity Completed Count">
+                </mat-form-field>
+              </div>
+          <div fxFlex="20" class="pr-1">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="leadCount" placeholder="Lead Count">
+            </mat-form-field>
+          </div>
+
+          <a (click)="deleteMarkeing(i)">
+            <mat-icon>clear</mat-icon>
+          </a>
+        </div>
+      </div>
+
+      <div fxFlex="50"
+        *ngIf="this.unitSort === 'Marketing' || this.roleSort === 'admin'">
+        <a (click)="addMarketingForm()">
+          <mat-icon class="gridEdit">add_box</mat-icon>
+        </a>
+        <p>Add New</p>
+      </div>
+
 
 
         <div fxFlex="100" class="mt-1">

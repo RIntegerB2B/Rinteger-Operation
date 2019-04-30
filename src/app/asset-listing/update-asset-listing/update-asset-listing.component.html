@@ -34,10 +34,17 @@
           </mat-form-field>
         </div>
         <div fxFlex="50" class="pr-1">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="department"  [readonly] = true [ngModel]="assetValue?.department" 
+              (ngModelChange)="assetValue.department=$event"
+                placeholder="department" required>
+            </mat-form-field>
+          </div>
+        <div fxFlex="50" class="pr-1">
           <mat-form-field class="full-width">
-            <input matInput formControlName="department"  [readonly] = true [ngModel]="assetValue?.department" 
-            (ngModelChange)="assetValue.department=$event"
-              placeholder="department" required>
+            <input matInput formControlName="categories"  [readonly] = true [ngModel]="assetValue?.categories" 
+            (ngModelChange)="assetValue.categories=$event"
+              placeholder="categories" required>
           </mat-form-field>
         </div>
         <div fxFlex="50" class="pr-1">

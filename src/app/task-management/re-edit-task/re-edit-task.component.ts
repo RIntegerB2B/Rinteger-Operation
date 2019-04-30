@@ -50,6 +50,7 @@ editview: string;
       this.addNewTaskForm();
       this.addNewShootForm();
       this.addNewListForm();
+      this.addMarketingDataForm();
     }, error => {
       console.log(error);
     });
@@ -77,7 +78,8 @@ editview: string;
     product: this.fb.array([]),
     task: this.fb.array([]),
     shoot: this.fb.array([]),
-    list: this.fb.array([])
+    list: this.fb.array([]),
+    marketing: this.fb.array([])
     });
   }
 
@@ -174,7 +176,9 @@ editview: string;
     const list = this.fb.group({
       title: [''],
       listDescription: [''],
-      listStatus: ['']
+      listStatus: [''],
+      listCount: [''],
+      noOfProductLive: ['']
       });
     this.listForms.push(list);
   }
@@ -189,11 +193,50 @@ editview: string;
       const list = this.fb.group({
         title: [this.taskEdit.list[i].title],
         listDescription: [this.taskEdit.list[i].listDescription],
-        listStatus: [this.taskEdit.list[i].listStatus]
+        listStatus: [this.taskEdit.list[i].listStatus],
+        listCount: [this.taskEdit.list[i].listCount],
+        noOfProductLive: [this.taskEdit.list[i].noOfProductLive]
+
       });
       this.listForms.push(list);
     }
   }
+
+
+  addMarketingForm() {
+    const marketing = this.fb.group({
+      title: [''],
+      description: [''],
+      activityAssignedCount: [''],
+      activityCompletedCount: [''],
+      leadCount: ['']
+      });
+    this.MarketingForms.push(marketing);
+  }
+
+  get MarketingForms() {
+    return this.taskForm.get('marketing') as FormArray;
+  }
+  deleteMarkeing(i) {
+    this.MarketingForms.removeAt(i);
+  }
+
+
+  addMarketingDataForm() {
+    for (let i = 0; i <= this.taskEdit.marketing.length - 1; i++) {
+      const marketing = this.fb.group({
+        title: [this.taskEdit.marketing[i].title],
+        description: [this.taskEdit.marketing[i].description],
+        activityAssignedCount: [this.taskEdit.marketing[i].activityAssignedCount],
+        activityCompletedCount: [this.taskEdit.marketing[i].activityCompletedCount],
+        leadCount: [this.taskEdit.marketing[i].leadCount]
+
+      });
+      this.MarketingForms.push(marketing);
+    }
+  }
+
+
   updateTask(taskForm: FormGroup, row) {
     this.taskEdit = new TaskModel();
     /* this.taskEdit.userId = this.taskForm.controls.assignedTo.value._id; */

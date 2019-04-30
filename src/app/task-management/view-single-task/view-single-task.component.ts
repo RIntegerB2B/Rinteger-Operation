@@ -109,6 +109,21 @@ export class ViewSingleTaskComponent implements OnInit {
     return this.taskDetailsForm.get('list') as FormArray;
   }
 
+  addMarketingForm() {
+    const marketing = this.fb.group({
+      title: [''],
+      description: [''],
+      activityAssignedCount: [''],
+      activityCompletedCount: [''],
+      leadCount: ['']
+      });
+    this.MarketingForms.push(marketing);
+  }
+
+  get MarketingForms() {
+    return this.taskDetailsForm.get('marketing') as FormArray;
+  }
+
   getSingleTask() {
 
     this.taskManagementService.getSingleData(this.id).subscribe(data => {

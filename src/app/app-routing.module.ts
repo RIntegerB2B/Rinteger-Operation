@@ -76,6 +76,10 @@ const routes: Routes = [
     loadChildren: './material-management/material-management.module#MaterialModule',
   },
   {
+    path: 'report',
+    loadChildren: './report/report.module#ReportModule',
+  },
+  {
     path: 'user',
     loadChildren: './user-management/user-management.module#UserManagementModule',
   },

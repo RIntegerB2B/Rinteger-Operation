@@ -3,6 +3,7 @@ import { TaskProduct } from './taskProduct.model';
 import { TaskModule } from './taskModule.model';
 import { TaskShoot } from './taskShoot.model';
 import { TaskList } from './taskList.model';
+import { TaskMarketing } from './taskMarketing.model';
 export class TaskModel {
     _id: string;
     userId: string;
@@ -32,4 +33,5 @@ export class TaskModel {
     task: [TaskModule];
     shoot: [TaskShoot];
     list: [TaskList];
+    marketing: [TaskMarketing];
 }

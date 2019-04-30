@@ -63,6 +63,9 @@ export class CreateRoleComponent implements OnInit {
       }),
       workOrderRole: this.fb.group({
         workOrderMenu: [false, Validators.required],
+      }),
+      reportRole: this.fb.group({
+        taskReportNav: [false, Validators.required],
       })
     });
   }
@@ -101,6 +104,9 @@ export class CreateRoleComponent implements OnInit {
       }),
       workOrderRole: this.fb.group({
         workOrderMenu: [false, Validators.required],
+      }),
+      reportRole: this.fb.group({
+        taskReportNav: [false, Validators.required],
       })
     });
   }
@@ -114,6 +120,7 @@ export class CreateRoleComponent implements OnInit {
     this.accessPermission.adminRole = accessForm.controls.adminRole.value;
     this.accessPermission.materialRole = accessForm.controls.materialRole.value;
     this.accessPermission.workOrderRole = accessForm.controls.workOrderRole.value;
+    this.accessPermission.reportRole = accessForm.controls.reportRole.value;
     this.userManagementService.permissionUsers(this.accessPermission).subscribe(data => {
       this.router.navigate(['./user/register']);
     }, error => {
@@ -144,6 +151,7 @@ export class CreateRoleComponent implements OnInit {
     this.updatePermission.adminRole = editForm.controls.adminRole.value;
     this.updatePermission.materialRole = editForm.controls.materialRole.value;
     this.updatePermission.workOrderRole = editForm.controls.workOrderRole.value;
+    this.updatePermission.reportRole = editForm.controls.reportRole.value;
     this.userManagementService.updateRole(this.updatePermission, value).subscribe(data => {
       this.roleholder = data;
       this.router.navigate(['./user/register']);

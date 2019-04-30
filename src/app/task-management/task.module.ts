@@ -44,10 +44,11 @@ import { ViewShootComponent } from './view-shoot/view-shoot.component';
 import { ViewListComponent } from './view-list/view-list.component';
 import { SearchTaskComponent } from './search-task/search-task.component';
 import { RatingComponent } from './rating/rating.component';
+import { ViewMarketingComponent } from './view-marketing/view-marketing.component';
 @NgModule({
   declarations: [CreateTaskFormComponent, ViewAllTaskComponent,
      ViewSingleTaskComponent, EditTaskComponent, ViewProductComponent,
-      ReEditTaskComponent, ViewModuleComponent, ViewShootComponent, ViewListComponent, SearchTaskComponent, RatingComponent],
+      ReEditTaskComponent, ViewModuleComponent, ViewShootComponent, ViewListComponent, SearchTaskComponent, RatingComponent, ViewMarketingComponent],
   imports: [
     CommonModule,
      HttpModule,

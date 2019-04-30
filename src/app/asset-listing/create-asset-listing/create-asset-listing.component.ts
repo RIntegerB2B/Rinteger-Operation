@@ -18,6 +18,10 @@ export class CreateAssetListingComponent implements OnInit {
   fileLength;
   selectRegion: number;
   fileToUpload;
+  verifiedBy;
+  categories;
+  responsePerson;
+
   urls = new Array<string>();
   localArray: any = [];
   selected: string;
@@ -37,6 +41,7 @@ export class CreateAssetListingComponent implements OnInit {
       responsePerson: [''],
       verifiedBy: [''],
       department: [''],
+      categories: [''],
       productPrice: [''],
       purchaseQuantitiy: [''],
       Description: [''],
@@ -58,7 +63,7 @@ export class CreateAssetListingComponent implements OnInit {
     this.assetValue.date = AssetListingForm.controls.date.value;
     this.assetValue.productName = AssetListingForm.controls.productName.value;
     this.assetValue.responsePerson = AssetListingForm.controls.responsePerson.value;
-    this.assetValue.verifiedBy = AssetListingForm.controls.verifiedBy.value;
+    this.assetValue.categories = AssetListingForm.controls.categories.value;
     this.assetValue.department = AssetListingForm.controls.department.value;
     this.assetValue.productPrice = AssetListingForm.controls.productPrice.value;
     this.assetValue.purchaseQuantitiy = AssetListingForm.controls.purchaseQuantitiy.value;
@@ -75,6 +80,9 @@ export class CreateAssetListingComponent implements OnInit {
   getAssetSetting() {
     this.assetListingService.getAssetSetting().subscribe( data => {
       this.department = data[0].department;
+      this.responsePerson = data[0].responsePerson;
+      this.verifiedBy = data[0].verifiedBy;
+      this.categories = data[0].categories;
     }, error => {
       console.log(error);
     } );

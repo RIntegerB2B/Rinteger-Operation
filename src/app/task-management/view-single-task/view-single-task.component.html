@@ -195,6 +195,10 @@
   <app-view-list [listData]="data.list" 
   ></app-view-list>
 </div>
+<div *ngIf = "this.unitSort === 'Marketing' || this.roleSort === 'admin'"> 
+  <app-view-marketing [marketingData]="data.marketing" 
+  ></app-view-marketing>
+</div>
   <div fxFlex="100" class="mt-1">    
     <button mat-raised-button mat-button color="accent" type="button" (click)="Back()">Back</button>
   </div>

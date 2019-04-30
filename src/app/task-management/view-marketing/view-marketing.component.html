@@ -1,66 +1,66 @@
 <div class="container-fluid">
   <div class="row">
     <div class="form-group">
-      <label class="labelHeader">List Detail</label>
+      <label class="labelHeader">Marketing Detail</label>
     </div>
   </div>
   <div class="row gridRowHeader display-none-small">
     <div class="col-md-2">
       <div class="form-group">
-        <label>List Title</label>
+        <label>Task Title</label>
       </div>
     </div>
     <div class="col-md-2">
       <div class="form-group">
-        <label>List Description</label>
+        <label>Task Description</label>
       </div>
     </div>    
     <div class="col-md-2">
         <div class="form-group">
-          <label>List Count</label>
+          <label>Activity Assigned Count</label>
         </div>
       </div>
       <div class="col-md-2">
           <div class="form-group">
-            <label>No.of Product Live</label>
+            <label>Activity Completed Count</label>
           </div>
         </div>
     <div class="col-md-2">
       <div class="form-group">
-        <label>List Status</label>
+        <label>Lead Count</label>
       </div>
     </div>
   </div>
-  <div class="row gridRow" *ngFor="let data of listData; let i = index">
+  <div class="row gridRow" *ngFor="let data of marketingData; let i = index">
     <div class="display-none-large col-4">
-      <label class="gridLabel">List Title:</label>
+      <label class="gridLabel">Task Title:</label>
     </div>
     <div class="col-md-2 col-4 vcenter form-group">
       {{data.title}}
     </div>
     <div class="display-none-large col-4">
-      <label class="gridLabel">List Description:</label>
+      <label class="gridLabel">Task Description:</label>
     </div>
     <div class="col-md-2 col-4 vcenter form-group">
-        {{data.listDescription}}
+        {{data.description}}
     </div>    
     <div class="display-none-large col-4">
-        <label class="gridLabel">List Count:</label>
+        <label class="gridLabel">Activity Assigned Count:</label>
       </div>
       <div class="col-md-2 col-4 vcenter form-group">
-          {{data.listCount}}
+          {{data.activityAssignedCount}}
       </div> 
       <div class="display-none-large col-4">
-          <label class="gridLabel">No.of Product Live:</label>
+          <label class="gridLabel">Activity Completed Count:</label>
         </div>
         <div class="col-md-2 col-4 vcenter form-group">
-            {{data.noOfProductLive}}
+            {{data.activityCompletedCount}}
         </div> 
     <div class="display-none-large col-4">
-      <label class="gridLabel">List Status:</label>
+      <label class="gridLabel">Lead Count:</label>
     </div>
     <div class="col-md-2 col-4 vcenter form-group">
-        {{data.listStatus}}
+        {{data.leadCount}}
     </div>  
   </div>  
 </div>

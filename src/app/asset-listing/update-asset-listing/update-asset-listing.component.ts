@@ -36,6 +36,7 @@ export class UpdateAssetListingComponent implements OnInit {
       responsePerson: [''],
       department: [''],
       availableStatus: [''],
+      categories: [''],
       verifiedBy: [''],
       productPrice: [''],
       purchaseQuantitiy: [''],
@@ -88,6 +89,7 @@ export class UpdateAssetListingComponent implements OnInit {
     this.assetValue.responsePerson = AssetListingForm.controls.responsePerson.value;
     this.assetValue.verifiedBy = AssetListingForm.controls.verifiedBy.value;
     this.assetValue.department = AssetListingForm.controls.department.value;
+    this.assetValue.categories = AssetListingForm.controls.categories.value;
     this.assetValue.availableStatus = AssetListingForm.controls.availableStatus.value;
     this.assetValue.productPrice = AssetListingForm.controls.productPrice.value;
     this.assetValue.purchaseQuantitiy = AssetListingForm.controls.purchaseQuantitiy.value;
