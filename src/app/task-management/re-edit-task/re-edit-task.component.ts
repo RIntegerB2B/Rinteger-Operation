@@ -168,7 +168,7 @@ editview: string;
         approval: [this.taskEdit.shoot[i].approval],
         requirement: [this.taskEdit.shoot[i].requirement]
       });
-      console.log(shoot);
+     /*  console.log(shoot); */
       this.ShootForms.push(shoot);
     }
   }

@@ -29,6 +29,7 @@ export class CreateMonthlySheetComponent implements OnInit {
   monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
   'August', 'September', 'October', 'November', 'December'];
   unitName: string;
+  userRole: any;
   constructor(private fb: FormBuilder, private activityLogService: ActivityLogService,
     private router: Router, private route: ActivatedRoute) { 
       this.route.paramMap.subscribe((params: ParamMap) => {
@@ -76,7 +77,7 @@ export class CreateMonthlySheetComponent implements OnInit {
     this.activeValue.year = activityForm.controls.year.value;
     this.activeValue.monthName = activityForm.controls.monthName.value;
     this.activeValue.title = activityForm.controls.title.value;
-    this.activeValue.unit = this.unitName;
+    this.activeValue.unit = this.userRole;
     this.activeValue.description = activityForm.controls.description.value;
     this.activeValue.monthlyPlan = activityForm.controls.monthlyPlan.value;
     this.activityLogService.createmonthly(this.activeValue).subscribe( data => {
@@ -90,6 +91,7 @@ export class CreateMonthlySheetComponent implements OnInit {
     this.activityLogService.getFindAllWorkorder().subscribe( data => {
       this.activityData = data.filter( value => value._id === this.id);
      this.activeValue = this.activityData[0];
+     this.userRole = this.activityData[0].leadUnit;
     });
   }
   chosenYearHandler(event) {

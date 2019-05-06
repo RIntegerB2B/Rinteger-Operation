@@ -128,7 +128,7 @@ export class ViewSingleTaskComponent implements OnInit {
 
     this.taskManagementService.getSingleData(this.id).subscribe(data => {
     this.taskholder = data;
-      console.log(this.taskholder);
+      /* console.log(this.taskholder); */
     }, error => { console.log(error); }
     );
   }

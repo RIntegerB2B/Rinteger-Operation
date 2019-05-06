@@ -27,6 +27,16 @@
             </mat-select>
           </mat-form-field>
         </div>
+        <div  class="col-md-2" *ngIf = "this.userRole === 'admin'">
+          <mat-form-field>
+            <mat-select placeholder="Unit Wise" formControlName="unitwise"
+            (selectionChange)="filterByUnit($event)">
+              <mat-option *ngFor="let data of UnitsWise;let i = index " [value]="data">
+                {{data}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
       </div>
         <div class="row gridRowHeader display-none-small">
           <div class="col-md-2 vcenterHeader">
@@ -54,7 +64,12 @@
                 <label><h6> Year</h6></label>
               </div>
             </div>
-          <div class="col-md-2 vcenterHeader">
+          <div class="col-md-1 vcenterHeader">
+            <div class="form-group">
+              <label><h6>Unit</h6></label>
+            </div>
+          </div>
+          <div class="col-md-1 vcenterHeader">
             <div class="form-group">
               <label><h6>Action</h6></label>
             </div>
@@ -95,11 +110,19 @@
               </div>
               <div class="col-md-2 col-6 vcenter form-group">
                 {{data.year}}
-              </div>       
+              </div>     
+              <div class="display-none-large col-6">
+                <label class="gridLabel">
+                  Unit:
+                </label>
+              </div>
+              <div class="col-md-1 col-6 vcenter form-group">
+                {{data.unit}}
+              </div>   
             <div class="display-none-large col-6">
               <label class="gridLabel">Action:</label>
             </div>
-            <div class="col-md-2 col-6 vcenter form-group">
+            <div class="col-md-1 col-6 vcenter form-group">
               <button mat-icon-button [matMenuTriggerFor]="menu">
                 <mat-icon>more_vert</mat-icon>
               </button>

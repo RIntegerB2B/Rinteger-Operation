@@ -53,7 +53,7 @@ export class ViewListComponent implements OnInit {
 
   getSelectAactivityLog() {
     this.activityLogService.getSelectedActivityLog(this.id).subscribe(data => {
-      this.activityModel = data.filter( value => value.unit === this.unitName );
+      this.activityModel = data;
       this.activityID = data;
       this.activityValue = this.activityModel[0].monthlyPlan;
       this.activityEdit = this.activityModel[0].monthlyPlan;

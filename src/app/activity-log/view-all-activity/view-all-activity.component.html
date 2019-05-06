@@ -29,7 +29,12 @@
           <div class="form-group">
             <label><h6>Company Name</h6></label>
           </div>
-        </div>        
+        </div>       
+        <div class="col-md-2 vcenterHeader" *ngIf = "this.userRole === 'admin'">
+          <div class="form-group">
+            <label><h6>Unit</h6></label>
+          </div>
+        </div>  
         <div class="col-md-2 vcenterHeader">
           <div class="form-group">
             <label><h6>Action</h6></label>
@@ -62,6 +67,12 @@
           <div class="col-md-2 col-6 vcenter form-group">
             {{data.companyName }}
           </div>    
+          <div class="display-none-large col-6" *ngIf = "this.userRole === 'admin'">
+            <label class="gridLabel">Units:</label>
+          </div>
+          <div class="col-md-2 col-6 vcenter form-group" *ngIf = "this.userRole === 'admin'">
+            {{data.leadUnit }}
+          </div>
           <div class="display-none-large col-6">
             <label class="gridLabel">Action:</label>
           </div>

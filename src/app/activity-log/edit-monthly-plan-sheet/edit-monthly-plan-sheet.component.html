@@ -5,19 +5,19 @@
         <div fxFlex="100">
           <label class="pageBoxLg-label">Edit Monthly Plan</label>
         </div>
-        <div fxFlex="50" class="pr-2">
+        <div fxFlex="50" class="pr-2" *ngIf = 'activeValue?.workOrderID'>
           <mat-form-field class="full-width">
             <input matInput formControlName="workOrderID" [readonly]=true placeholder="workOrderID" 
             [(ngModel)]="activeValue.workOrderID" >  
           </mat-form-field>
         </div>
-        <div fxFlex="50" class="pr-2">
+        <div fxFlex="50" class="pr-2" *ngIf = 'activeValue?.customerName'>
             <mat-form-field class="full-width">
               <input matInput formControlName="customerName" placeholder="customerName" 
               [(ngModel)]="activeValue.customerName" >  
             </mat-form-field>
           </div>
-          <div fxFlex="50" class="pr-1">
+          <div fxFlex="50" class="pr-1" *ngIf = 'activeValue?.year'>
             <mat-form-field>
               <mat-select placeholder="Select the Year" formControlName="year" 
               [(ngModel)]="activeValue.year" >
@@ -27,7 +27,7 @@
               </mat-select>
             </mat-form-field>
           </div>
-          <div fxFlex="50" class="pr-1">
+          <div fxFlex="50" class="pr-1" *ngIf = 'activeValue?.monthName'> 
             <mat-form-field>
               <mat-select placeholder="monthName" formControlName="monthName" [(ngModel)]="activeValue.monthName" >                  
                 <mat-option *ngFor="let data of monthName;let i = index " [value]="data">
@@ -36,13 +36,13 @@
               </mat-select>
             </mat-form-field>
           </div>
-          <div fxFlex="50" class="pr-2"> 
+          <div fxFlex="50" class="pr-2" *ngIf = 'activeValue?.title'> 
             <mat-form-field>
               <input matInput formControlName="title"   [(ngModel)]="activeValue.title" 
                 placeholder="Enter the title">              
             </mat-form-field>
           </div>
-          <div fxFlex="50" class="pr-2"> 
+          <div fxFlex="50" class="pr-2" *ngIf = 'activeValue?.description'> 
             <mat-form-field>
               <input matInput formControlName="description"  [(ngModel)]="activeValue.description" 
                 placeholder="Enter the description">
@@ -74,7 +74,7 @@
           <p>Add New</p>
         </div>
     <div fxFlex="100" class="mt-1">
-        <button mat-raised-button color="primary" (click)="updatevalue(activityForm,activeValue)">Create</button>
+        <button mat-raised-button color="primary" (click)="updatevalue(activityForm,activeValue)">Update</button>
         <span fxFlex></span>
         <button mat-raised-button mat-button color="accent" type="button" (click)="cancel()">Cancel</button>
       </div>

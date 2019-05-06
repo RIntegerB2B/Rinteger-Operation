@@ -9,7 +9,7 @@
           <label class="pageBoxLg-label">Edit Task Form</label>
         </div>
   
-        <div fxFlex="50" class="pr-1">
+        <div fxFlex="50" class="pr-1" >
           <mat-form-field>
             <mat-select placeholder="Units" formControlName="units"  [(ngModel)]="taskEdit.units" 
             (ngModelChange)="taskEdit.units=$event" 
@@ -21,8 +21,8 @@
           </mat-form-field>
         </div>
   
-        <div fxFlex="50" class="pr-1">
-          <mat-form-field>
+        <div fxFlex="50" class="pr-1"  >
+          <mat-form-field >
             <mat-select placeholder="Assigned To" formControlName="assignedTo"
               [(ngModel)]="taskEdit.assignedTo" 
             (ngModelChange)="taskEdit.assignedTo=$event">
@@ -33,7 +33,8 @@
           </mat-form-field>
         </div>
 
-        <div fxFlex="50" class="p-2"  *ngIf="this.unitSort !=='Studio'">
+        <div fxFlex="50" class="p-2" >
+        <div  *ngIf="this.unitSort !=='Studio'" >
           <mat-form-field class="full-width">
             <input matInput formControlName="clientName" placeholder="Client Name"  
             [(ngModel)]="taskEdit.clientName" (ngModelChange)="taskEdit.clientName=$event">
@@ -43,8 +44,9 @@
             </mat-error>
           </mat-form-field>
         </div>
+      </div>
   
-        <div fxFlex="50" class="p-2">
+        <div fxFlex="50" class="p-2"  >
           <mat-form-field class="full-width">
             <input matInput formControlName="taskTitle" placeholder="Task Title"  
             [(ngModel)]="taskEdit.taskTitle" (ngModelChange)="taskEdit.taskTitle=$event"
@@ -56,7 +58,7 @@
           </mat-form-field>
         </div>
   
-        <div fxFlex="50" class="p-2">
+        <div fxFlex="50" class="p-2" >
           <mat-form-field class="full-width">
             <input matInput formControlName="taskDescription" placeholder="Task Descrition" 
              [(ngModel)]="taskEdit.taskDescription"  (ngModelChange)="taskEdit.taskDescription=$event"
@@ -72,7 +74,7 @@
       
   
   
-        <div fxFlex="50" class="pr-1">
+        <div fxFlex="50" class="pr-1" >
           <mat-form-field>
             <mat-select placeholder="Priority" formControlName="priority" 
              [(ngModel)]="taskEdit.priority" 
@@ -92,7 +94,7 @@
   
   
   
-        <div fxFlex="50" class="pr-1">
+        <div fxFlex="50" class="pr-1" >
           <mat-form-field>
             <mat-select placeholder="Department" formControlName="department" 
              [(ngModel)]="taskEdit.department" 
@@ -105,7 +107,7 @@
         </div>
   
        
-        <div fxFlex="50" class="pr-1">
+        <div fxFlex="50" class="pr-1" >
           <mat-form-field>
             <mat-select placeholder="Assigned By" formControlName="assignedBy"  
             [(ngModel)]="taskEdit.assignedBy" 
@@ -122,7 +124,7 @@
        
   
   
-        <div fxFlex="50" class="pr-1">
+        <div fxFlex="50" class="pr-1" >
           <mat-form-field>
             <input matInput formControlName="toCloseDate" [matDatepicker]="picker" 
             (ngModelChange)="taskEdit.toCloseDate=$event"
@@ -133,7 +135,7 @@
           </mat-form-field>
         </div>
   
-        <div fxFlex="50" class="p-2">
+        <div fxFlex="50" class="p-2" > 
           <mat-form-field class="full-width">
             <input matInput formControlName="toTime" placeholder="Deadline Time" type="time" 
             [(ngModel)]="taskEdit.toTime" (ngModelChange)="taskEdit.toTime=$event">
@@ -143,7 +145,7 @@
             </mat-error>
           </mat-form-field>
         </div>
-        <div fxFlex="50" class="p-2">
+        <div fxFlex="50" class="p-2" >
             <mat-form-field class="full-width">
               <input matInput formControlName="leaderComment" placeholder="comment about project" 
               [(ngModel)]="taskEdit.leaderComment" (ngModelChange)="taskEdit.leaderComment=$event">

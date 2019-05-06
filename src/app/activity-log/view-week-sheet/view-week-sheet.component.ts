@@ -24,6 +24,7 @@ export class ViewWeekSheetComponent implements OnInit {
     assignedTo;
   unitName: string;
   activityEdit: any;
+  userUnit: any;
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute,
     private activityLogService: ActivityLogService) {
       this.route.paramMap.subscribe(
@@ -34,9 +35,10 @@ export class ViewWeekSheetComponent implements OnInit {
     @ViewChild('MatPaginator') paginator: MatPaginator;
   ngOnInit() {
     this.creatForm();
+    this.getSelectedWeeklyPlan();
     this.getAssignedTo();
     this.getUnitName();
-    this.getSelectedWeeklyPlan();
+    
   }
 
   creatForm() {
@@ -53,19 +55,22 @@ export class ViewWeekSheetComponent implements OnInit {
   getSelectedWeeklyPlan() {
     this.activityLogService.getSelectedWeek(this.id).subscribe( data => {
      this.activityValue = data[0].weeklyPlan;
+     this.userUnit = data[0].unit;
     }, error => {
       console.log(error);
     });
   }
   getAssignedTo() {
     this.activityLogService.getAssignedTo().subscribe( data => {
-      if (this.unitName === 'BSS') {
+     /*  if (this.userUnit === 'BSS') {
         this.activityEdit = data.filter( value => value.unit === this.unitName);
         this.assignedTo = this.activityEdit;
-       } else if (this.unitName === 'Technologies') {
+       } else if (this.userUnit === 'Technologies') {
          this.activityEdit = data.filter( value => value.unit === this.unitName);
          this.assignedTo = this.activityEdit;
-       }
+       } */
+       this.activityEdit = data.filter( value => value.unit === this.userUnit);
+       this.assignedTo = this.activityEdit;
   }, error => {
       console.log(error);
     });

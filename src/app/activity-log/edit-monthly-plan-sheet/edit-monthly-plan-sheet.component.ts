@@ -28,6 +28,7 @@ export class EditMonthlyPlanSheetComponent implements OnInit {
   monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
   'August', 'September', 'October', 'November', 'December'];
   unitName: string;
+  userUnit: any;
   constructor(private fb: FormBuilder, private activityLogService: ActivityLogService,
     private router: Router, private route: ActivatedRoute) { this.route.paramMap.subscribe(
     (params: ParamMap) => {
@@ -81,6 +82,8 @@ export class EditMonthlyPlanSheetComponent implements OnInit {
   getMonthlyPlan() {
     this.activityLogService.getSelectedMonthlyPlan(this.id).subscribe( data => {
       this.activeValue = data[0];
+      this.userUnit = data[0].unit;
+      console.log(this.userUnit);
       this.addNewForm();
     }, error => {
       console.log(error);
@@ -93,7 +96,7 @@ export class EditMonthlyPlanSheetComponent implements OnInit {
     this.activeValue.monthName = activityForm.controls.monthName.value;
     this.activeValue.year = activityForm.controls.year.value;
     this.activeValue.title = activityForm.controls.title.value;
-    this.activeValue.unit = this.unitName;
+    this.activeValue.unit = this.userUnit;
     this.activeValue.description = activityForm.controls.description.value;
     this.activeValue.monthlyPlan = activityForm.controls.monthlyPlan.value;
    this.activityLogService.updateMonthlyPlan(this.activeValue, row._id).subscribe( data => {

@@ -31,6 +31,7 @@ yearValue: any;
   monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
   'August', 'September', 'October', 'November', 'December'];
   weeks = ['week1', 'week2', 'week3', 'week4'];
+  UnitsWise = ['All', 'BSS', 'Technologies'];
    activeValue: ActivityLogModel;
    allMonth = [{ month: 'January', number: 2 }, { month: 'February', number: 3 }, { month: 'March', number: 4 },
   { month: 'April', number: 5 }, { month: 'May', number: 6 }, { month: 'June', number: 7 },
@@ -52,6 +53,7 @@ yearValue: any;
   ];
   @ViewChild('MatPaginator') paginator: MatPaginator;
   unitName: string;
+  userRole: any;
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute,
     private activityLogService: ActivityLogService) { }
 
@@ -65,6 +67,7 @@ yearValue: any;
     this.ActivityDetailsForm = this.fb.group({
       monthData: [''],
       yearData: [''],
+      unitwise: [''],
       customerName: [''],
       planTitle: [''],
       planDescription: [''],
@@ -74,8 +77,13 @@ yearValue: any;
   }
   getAllActivityLog() {
     this.activityLogService.getAllactivityLog().subscribe( value => {
+      if (this.userRole !== 'admin') {
       this.activityValue = value.filter( data => data.unit === this.unitName);
       this.activityModel = value.filter( data => data.unit === this.unitName);
+    } else {
+      this.activityValue = value.filter( data => (data.unit === 'BSS' ) || (data.unit === 'Technologies'));
+      this.activityModel = value.filter( data => (data.unit === 'BSS' ) || (data.unit === 'Technologies'));
+    }
       this.activityValue = new MatTableDataSource<any>(this.activityModel);
       this.activityValue.paginator = this.paginator;
       this.array = this.activityModel;
@@ -117,6 +125,7 @@ yearValue: any;
   }
   getUnitName() {
     this.unitName = localStorage.getItem('unit');
+    this.userRole = localStorage.getItem('role');
   }
   Edit(row) {
     this.router.navigate(['activity-log/editmonthlysheet/', row._id]);
@@ -134,5 +143,13 @@ yearValue: any;
   }
   filterByMonth(e) {
     this.activityValue = this.yearValue.filter( value => value.monthName === e.value);
+  }
+  filterByUnit(e) {
+    if (e.value !== 'All') {
+    this.activityValue = this.activityModel.filter( value => value.unit === e.value);
+  } else {
+    this.getAllActivityLog();
+  }
+
   }
 }

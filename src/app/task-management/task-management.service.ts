@@ -23,7 +23,7 @@ export class TaskManagementService {
     return this.http.post<TaskModel[]>(urlway, data);
   }
   getAllTaskData(): Observable<any> {
-    const urlway = this.baseurl + 'findalltask';
+    const urlway = this.baseurl + 'findalltaskdata';
 
     return this.http.get<TaskModel[]>(urlway);
   }
@@ -93,7 +93,7 @@ updateRating(rating, id): Observable<TaskModel[]> {
   return this.http.post<TaskModel[]>(urlway, rating);
 }
 compareUserRole(data): Observable<any> {
-  const urlway = this.baseurl + 'finduserrole/' + data;
+  const urlway = this.baseurl + 'finduserroledata/' + data;
 
   return this.http.get<TaskModel[]>(urlway);
 }

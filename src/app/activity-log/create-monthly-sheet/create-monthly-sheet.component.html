@@ -5,13 +5,13 @@
         <div fxFlex="100">
           <label class="pageBoxLg-label">Create Monthly Plan</label>
         </div>
-        <div fxFlex="50" class="pr-2">
+        <div fxFlex="50" class="pr-2" *ngIf = 'activeValue?.workOrderID'>
           <mat-form-field class="full-width">
             <input matInput formControlName="workOrderID" [readonly]=true placeholder="workOrderID" 
             [(ngModel)]="activeValue.workOrderID" >  
           </mat-form-field>
         </div>
-        <div fxFlex="50" class="pr-2">
+        <div fxFlex="50" class="pr-2" *ngIf = 'activeValue?.customerName'>
             <mat-form-field class="full-width">
               <input matInput formControlName="customerName" [readonly]=true placeholder="customerName" 
               [(ngModel)]="activeValue.customerName" >  

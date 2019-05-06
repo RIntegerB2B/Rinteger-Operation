@@ -170,7 +170,7 @@ export class CreateTaskFormComponent implements OnInit {
 
 
   changed(e) {
-    console.log(this.unitName.filter(data => data.unit === e.value));
+    /* console.log(this.unitName.filter(data => data.unit === e.value)); */
     this.taskname = this.unitName.filter(data => data.unit === e.value);
   }
 

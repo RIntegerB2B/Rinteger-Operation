@@ -22,6 +22,7 @@ export class ViewAllActivityComponent implements OnInit {
   activityModel: any;
   @ViewChild('MatPaginator') paginator: MatPaginator;
   unitName: any;
+  userRole: string;
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute,
     private activityLogService: ActivityLogService) { }
 
@@ -40,8 +41,13 @@ export class ViewAllActivityComponent implements OnInit {
   }
   getAllWorkorder() {
     this.activityLogService.getFindAllWorkorder().subscribe( value => {
+      if (this.userRole !== 'admin') {
       this.activityValue = value.filter( data => data.leadUnit === this.unitName);
       this.activityModel = value.filter( data => data.leadUnit === this.unitName);
+    } else {
+      this.activityValue = value.filter( data => (data.leadUnit === 'BSS' ) || (data.leadUnit === 'Technologies'));
+      this.activityModel = value.filter( data => (data.leadUnit === 'BSS' ) || (data.leadUnit === 'Technologies'));
+    }
       this.activityValue = new MatTableDataSource<any>( this.activityModel);
       this.activityValue.paginator = this.paginator;
       this.array =  this.activityModel;
@@ -73,5 +79,6 @@ export class ViewAllActivityComponent implements OnInit {
   }
   getUnitName() {
     this.unitName = localStorage.getItem('unit');
+    this.userRole = localStorage.getItem('role');
   }
 }
