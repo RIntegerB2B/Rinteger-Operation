@@ -24,7 +24,7 @@ export class ViewSingleTaskComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(
+  /*   this.route.paramMap.subscribe(
       (params: ParamMap) => {
         this.id = params.get('id');
         this.single = params.get('single');
@@ -32,7 +32,7 @@ export class ViewSingleTaskComponent implements OnInit {
     );
     this.getSingleTask();
     this.createtask();
-    this.getUnit();
+    this.getUnit(); */
   }
   createtask() {
     this.taskDetailsForm = this.fb.group({

@@ -39,14 +39,14 @@ export class CreateTaskFormComponent implements OnInit {
     private taskManagementService: TaskManagementService) { }
 
   ngOnInit() {
-    this.createtask();
+  /*   this.createtask();
     this.getUnit();
     this.getUnitWiseName();
     this.getDepartment();
     this.route.paramMap.subscribe(
       (params: ParamMap) => {
         this.userId = params.get('id');
-      });
+      }); */
   }
   createtask() {
     this.taskForm = this.fb.group({

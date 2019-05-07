@@ -31,14 +31,14 @@ export class EditTaskComponent implements OnInit {
     private router: Router, private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(
+    /* this.route.paramMap.subscribe(
       (params: ParamMap) => {
         this.id = params.get('id');
         this.editview = params.get('editview');
       });
       this.createtask();
       this.getUnit();
-      this.getSelectedTask();
+      this.getSelectedTask(); */
   }
   createtask() {
     this.taskForm = this.fb.group({

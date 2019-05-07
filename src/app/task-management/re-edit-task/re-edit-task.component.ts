@@ -32,7 +32,7 @@ editview: string;
      private router: Router) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(
+   /*  this.route.paramMap.subscribe(
       (params: ParamMap) => {
         this.id = params.get('id');
         this.editview = params.get('editview');
@@ -41,7 +41,7 @@ editview: string;
       this.getSelectedTask();
       this.getDepartment();
       this.getUnitWiseName();
-      this.getUnit();
+      this.getUnit(); */
   }
   getSelectedTask() {
     this.taskManagementService.getSelectedTask(this.id).subscribe(data => {

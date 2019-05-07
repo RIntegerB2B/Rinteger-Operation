@@ -14,9 +14,9 @@ export class SearchTaskComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.taskDetailsForm = this.fb.group({
+  /*   this.taskDetailsForm = this.fb.group({
       srchterm: [''],
-    });
+    }); */
   }
   searchAll(filterData) {
     this.searchTask.emit(filterData);

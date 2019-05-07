@@ -12,7 +12,7 @@ export class RatingComponent implements OnInit {
 
   inputName: string;
   ngOnInit() {
-    this.inputName = this.itemId + '_rating';
+  /*   this.inputName = this.itemId + '_rating'; */
   }
   onClick(rating: number): void {
     this.rating = rating;
