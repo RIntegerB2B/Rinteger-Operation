@@ -29,11 +29,13 @@ export class ViewAllAssetListingComponent implements OnInit {
   @ViewChild('MatPaginator') paginator: MatPaginator;
   matdatasource = new MatTableDataSource([]);
   userRole: string;
+  Ast: any;
 
   constructor(private assetListingService: AssetListingService, private fb: FormBuilder,
     private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.Ast = this.route.snapshot.data['asset'];
     this.createAsset();
     this.getAllAssetList();
     this.getRole();
