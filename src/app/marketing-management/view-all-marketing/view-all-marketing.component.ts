@@ -31,7 +31,7 @@ export class ViewAllMarketingComponent implements OnInit {
     private fb: FormBuilder, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.Mar = this.route.snapshot.data['marketing'];
+   /*  this.Mar = this.route.snapshot.data['marketing']; */
     this.getMarketingDB();
     this.createForm();
     this.getSetting();

@@ -11,7 +11,7 @@ import { EditTitleComponent } from './edit-title/edit-title.component';
 import { UpdateStatusComponent } from './update-status/update-status.component';
 import { ViewActivityComponent } from './view-activity/view-activity.component';
 import { DuplicateCustomerComponent } from './duplicate-customer/duplicate-customer.component';
-import { MarketingResolve } from './view-all-marketing/marketing.resolve';
+/* import { MarketingResolve } from './view-all-marketing/marketing.resolve'; */
 
 const routes: Routes = [
 {
@@ -21,9 +21,9 @@ const routes: Routes = [
 {
     path: 'view-all',
     component: ViewAllMarketingComponent,
-    resolve: {
+   /*  resolve: {
       marketing: MarketingResolve
-    }
+    } */
 },
 {
   path: 'creatematerial',
@@ -65,7 +65,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-  providers: [MarketingResolve]
+  exports: [RouterModule]/* ,
+  providers: [MarketingResolve] */
 })
 export class MarketingRoutingModule { }
