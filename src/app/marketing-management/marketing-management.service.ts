@@ -4,7 +4,7 @@ import { AppSetting } from './../config/appSetting';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MarketingSetting } from '../shared/marketing-setting.model';
-import { MarketingData } from './view-all-marketing/marketing.interface';
+/* import { MarketingData } from './view-all-marketing/marketing.interface'; */
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class MarketingManagementService {
   getTitle(): Observable<any> {
     const addUrl = 'gettitle';
     const url: string = this.serviceUrl + addUrl;
-    return this.http.get<MarketingData[]>(url).pipe();
+    return this.http.get<MarketingManagementModel[]>(url);
   }
   getSelectedTitle(id): Observable<any> {
     const addUrl = 'getselectedtitle/';
