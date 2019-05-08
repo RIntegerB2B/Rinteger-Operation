@@ -1,6 +1,6 @@
 interface AppSettingType {
     awsServiceUrl: string;
-    local3021CrmServiceUrl: string;
+    local3041CrmServiceUrl: string;
     serviceUrl: string;
     imageUrl: string;
 }

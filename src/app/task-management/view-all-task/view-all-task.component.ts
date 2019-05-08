@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskModel } from '../../shared/task-management.model';
 import { TaskManagementService } from './../task-management.service';
-/* import { LogIn } from '../../shared/'; */
+
 import { ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';

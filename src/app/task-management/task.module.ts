@@ -45,10 +45,16 @@ import { ViewListComponent } from './view-list/view-list.component';
 import { SearchTaskComponent } from './search-task/search-task.component';
 import { RatingComponent } from './rating/rating.component';
 import { ViewMarketingComponent } from './view-marketing/view-marketing.component';
+import { MainModelComponent } from './main-model/main-model.component';
+import { ViewDevelopingUnitComponent } from './developing-unit/view-developing-unit/view-developing-unit.component';
+import { CreateDevelopingUnitComponent } from './developing-unit/create-developing-unit/create-developing-unit.component';
+import { ViewSingleDevelopingUnitComponent } from './developing-unit/view-single-developing-unit/view-single-developing-unit.component';
+import { UpdateDevelopingUnitComponent } from './developing-unit/update-developing-unit/update-developing-unit.component';
+import { EditDevelopingUnitComponent } from './developing-unit/edit-developing-unit/edit-developing-unit.component';
 @NgModule({
   declarations: [CreateTaskFormComponent, ViewAllTaskComponent,
      ViewSingleTaskComponent, EditTaskComponent, ViewProductComponent,
-      ReEditTaskComponent, ViewModuleComponent, ViewShootComponent, ViewListComponent, SearchTaskComponent, RatingComponent, ViewMarketingComponent],
+      ReEditTaskComponent, ViewModuleComponent, ViewShootComponent, ViewListComponent, SearchTaskComponent, RatingComponent, ViewMarketingComponent, MainModelComponent, ViewDevelopingUnitComponent, CreateDevelopingUnitComponent, ViewSingleDevelopingUnitComponent, UpdateDevelopingUnitComponent, EditDevelopingUnitComponent],
   imports: [
     CommonModule,
      HttpModule,

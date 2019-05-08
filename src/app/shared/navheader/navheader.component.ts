@@ -19,10 +19,10 @@ export class NavheaderComponent implements OnInit {
     localStorage.removeItem('menus');
     this.router.navigate(['/account/login']);
   }
- /*  getTask()   {
-    this.userId = localStorage.getItem('userId');
-    this.router.navigate(['/task/viewtask', this.userId]);
-  } */
+  getTask()   {
+    /* this.userId = localStorage.getItem('userId'); */
+    this.router.navigate(['/task/mainmodel']);
+  }
   getCompleted()   {
     this.router.navigate(['/workorder/viewallworkorder', 0]);
   }
