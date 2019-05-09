@@ -125,12 +125,10 @@ export class ViewSingleTaskComponent implements OnInit {
   }
 
   getSingleTask() {
-
     this.taskManagementService.getSingleData(this.id).subscribe(data => {
     this.taskholder = data;
-      /* console.log(this.taskholder); */
-    }, error => { console.log(error); }
-    );
+    }, error => { console.log(error); 
+    });
   }
   updateTask(data) {
     this.router.navigate(['task/edittask', data._id]);

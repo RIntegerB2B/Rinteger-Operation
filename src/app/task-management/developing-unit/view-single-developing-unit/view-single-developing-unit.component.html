@@ -1,0 +1,208 @@
+<form novalidate style="padding-top:20px" [formGroup]="taskDetailsForm">
+  <div class="pageBoxLg">
+<div class="container-fluid">
+ 
+<div class="row" *ngFor="let data of taskholder">
+  <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-4  col-6">
+        <div class="form-group">
+          <label class="divLable">Task No</label>
+        </div>
+      </div>
+      <div class="col-md-8  col-6">
+        <div class="form-group">
+          : <label class="itemLable"> {{data.taskNo}}</label>
+        </div>
+      </div>
+      <div class="col-md-4  col-6">
+        <div class="form-group">
+          <label class="divLable">Assigned To</label>
+        </div>
+      </div>
+      <div class="col-md-8  col-6">
+        <div class="form-group">
+          : <label class="itemLable">{{data.assignedTo}}</label>
+        </div>
+      </div>
+      <div class="col-md-4  col-6">
+        <div class="form-group">
+          <label class="divLable">Client Name</label>
+        </div>
+      </div>
+      <div class="col-md-8  col-6">
+        <div class="form-group">
+          : <label class="itemLable">{{data.clientName}}</label>
+        </div>
+      </div>
+      <div class="col-md-4  col-6">
+        <div class="form-group">
+          <label class="divLable">Task Title</label>
+        </div>
+      </div>
+      <div class="col-md-8  col-6">
+        <div class="form-group">
+          : <label class="itemLable">{{data.taskTitle}}</label>
+        </div>
+      </div>
+      <div class="col-md-4  col-6">
+        <div class="form-group">
+          <label class="divLable">Task Description</label>
+        </div>
+      </div>
+      <div class="col-md-8  col-6">
+        <div class="form-group">
+          : <label class="itemLable">{{data.taskDescription}}</label>
+        </div>
+      </div>
+      <div class="col-md-4  col-6">
+          <div class="form-group">
+            <label class="divLable">Start Date</label>
+          </div>
+        </div>
+      <div class="col-md-8  col-6">
+        <div class="form-group">
+          : <label class="itemLable"> {{data.dateTime}}</label>
+        </div>
+      </div>
+      
+      
+      <div class="col-md-4  col-6">
+        <div class="form-group">
+          <label class="divLable">Department</label>
+        </div>
+      </div>
+      <div class="col-md-8  col-6">
+        <div class="form-group">
+          : <label class="itemLable"> {{data.department}}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="row">
+
+      <div class="col-md-4  col-6">
+        <div class="form-group">
+          <label class="divLable">Assigned By</label>
+        </div>
+      </div>
+      <div class="col-md-8  col-6">
+        <div class="form-group">
+          : <label class="itemLable"> {{data.assignedBy}}</label>
+        </div>
+      </div>
+      <div class="col-md-4  col-6">
+        <div class="form-group">
+          <label class="divLable">Priority</label>
+        </div>
+      </div>
+      <div class="col-md-8  col-6">
+        <div class="form-group">
+          : <label class="itemLable"> {{data.priority}}</label>
+        </div>
+      </div>
+
+      <div class="col-md-4  col-6">
+        <div class="form-group">
+          <label class="divLable">Status</label>
+        </div>
+      </div>
+      <div class="col-md-8  col-6">
+        <div class="form-group">
+          : <label class="itemLable"> {{data.status}}</label>
+        </div>
+      </div>
+
+
+      <div class="col-md-4  col-6">
+        <div class="form-group">
+          <label class="divLable">Deadline Date</label>
+        </div>
+      </div>
+      <div class="col-md-8  col-6">
+        <div class="form-group">
+          : <label class="itemLable"> {{data.toCloseDate}}</label>
+        </div>
+      </div>
+      <div class="col-md-4  col-6">
+          <div class="form-group">
+            <label class="divLable">Deadline Time</label>
+          </div>
+        </div>
+        <div class="col-md-8  col-6">
+          <div class="form-group">
+            : <label class="itemLable"> {{data.toTime}}</label>
+          </div>
+        </div>
+
+      <div class="col-md-4  col-6">
+        <div class="form-group">
+          <label class="divLable">Compeleted Date</label>
+        </div>
+      </div>
+      <div class="col-md-8  col-6">
+        <div class="form-group">
+          : <label class="itemLable"> {{data.closedDate}}</label>
+        </div>
+      </div>   
+      <div class="col-md-4  col-6">
+          <div class="form-group">
+            <label class="divLable">Compeleted Time</label>
+          </div>
+        </div>
+        <div class="col-md-8  col-6">
+          <div class="form-group">
+            : <label class="itemLable"> {{data.time}}</label>
+          </div>
+        </div>     
+        <div class="col-md-4  col-6">
+          <div class="form-group">
+            <label class="divLable">Comment </label>
+          </div>
+        </div>
+        <div class="col-md-8  col-6">
+          <div class="form-group">
+            : <label class="itemLable"> {{data.comment}}</label>
+          </div>
+        </div>   
+        <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Leader Comment </label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable"> {{data.leaderComment}}</label>
+            </div>
+          </div>   
+         
+    </div>    
+</div>
+<!-- <div  *ngIf= "this.unitSort === 'Studio' || this.roleSort === 'admin'">
+    <app-view-product [productData]="data.product" 
+    ></app-view-product>
+</div> -->
+<div> 
+    <app-view-module [moduleData]="data.task" 
+    ></app-view-module>
+</div>
+<!-- <div  *ngIf= "this.unitSort === 'Studio' || this.roleSort === 'admin'"> 
+  <app-view-shoot [shootData]="data.shoot" 
+  ></app-view-shoot>
+</div> -->
+<!-- <div *ngIf = "this.unitSort === 'BSS' || this.roleSort === 'admin'"> 
+<app-view-list [listData]="data.list" 
+></app-view-list>
+</div> -->
+<!-- <div *ngIf = "this.unitSort === 'Marketing' || this.roleSort === 'admin'"> 
+<app-view-marketing [marketingData]="data.marketing" 
+></app-view-marketing>
+</div> -->
+<div fxFlex="100" class="mt-1">    
+  <button mat-raised-button mat-button color="accent" type="button" (click)="Back()">Back</button>
+</div>
+</div>
+</div>
+</div>
+</form>

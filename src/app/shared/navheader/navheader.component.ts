@@ -13,7 +13,6 @@ export class NavheaderComponent implements OnInit {
    }
 
   ngOnInit() {
- 
   }
   logOutSession()   {
     localStorage.removeItem('loginUser');
@@ -22,7 +21,7 @@ export class NavheaderComponent implements OnInit {
   }
   getTask()   {
     this.userId = localStorage.getItem('userId');
-    this.router.navigate(['/task/viewtask', this.userId]);
+    this.router.navigate(['/task/viewtask/', this.userId]);
   }
   getCompleted()   {
     this.router.navigate(['/workorder/viewallworkorder', 0]);
@@ -35,6 +34,5 @@ export class NavheaderComponent implements OnInit {
     this.userId = localStorage.getItem('userId');
     this.router.navigate(['/material/front']);
   }
- 
 
 }

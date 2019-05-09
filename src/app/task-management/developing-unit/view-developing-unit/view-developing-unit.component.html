@@ -1,0 +1,184 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-1">
+  <span [routerLink]="['/task/createDeveloping']">
+  
+    <mat-icon class="gridEdit" 
+    *ngIf="this.userRole === 'teamleader'">
+    add_box</mat-icon>
+  </span>
+  </div>
+  <!-- <div class="col-md-4" >
+  <app-search-task [taskholder]="taskValue" 
+        (searchTask)="filterTask($event)"></app-search-task>
+  </div> -->
+ <!--  <div class="col-md-2">
+    
+      <select placeholder="status" (change)=filterByStatus($event.target.value)>
+          <option *ngFor="let data of status" [value]="data">{{data}}</option>
+        </select>
+    
+    </div> -->
+  </div>
+<!--   <div class=row>
+    <div class="col-md-2">
+      <button mat-raised-button color="accent" matBadge="{{deadcount}}" *ngIf="this.userRole === 'admin'"
+        matBadgePosition="after" matBadgeColor="accent" (click)="deadlinedTask()"> DeadLine passed </button>
+    </div>
+    <div class="col-md-2">
+      <button mat-raised-button color="accent" (click)="getAllTask()" *ngIf="this.userRole === 'admin'" matBadge="{{all}}"
+        matBadgePosition="after" matBadgeColor="accent">All Tickets </button>
+    </div>
+    <div class="col-md" *ngFor="let unit of units">
+     
+      <button mat-raised-button color="primary" matBadge="{{unit.counts}}" matBadgePosition="before"
+        matBadgeColor="primary" (click)="getunitwiseTask(unit.name)">{{unit.name}}</button>
+    </div>
+    
+  
+  </div> -->
+  
+  
+  
+  
+  <div class="row gridRowHeader display-none-small">
+    <div class="col-md-1 vcenterHeader">
+      <div class="form-group">
+        <label>Task No</label>
+      </div>
+    </div>
+    <div class="col-md-1 vcenterHeader">
+      <div class="form-group">
+        <label>Client Name</label>
+      </div>
+    </div>
+    <div class="col-md-1 vcenterHeader">
+      <div class="form-group">
+        <label>Name</label>	
+       
+      </div>
+    </div>
+    <div class="col-md-1 vcenterHeader">
+      <div class="form-group">
+        <label>Start Date</label>
+      </div>
+    </div>
+    <div class="col-md-1 vcenterHeader">
+      <div class="form-group">
+        <label>DeadLine Date</label>
+      </div>
+    </div>
+    <div class="col-md-1 vcenterHeader">
+      <div class="form-group">
+        <label>Priority</label>
+      </div>
+    </div>
+   
+    <div class="col-md-1 vcenterHeader">
+      <div class="form-group"> 
+        <label>Department</label>
+      </div>
+    </div>
+    <div class="col-md-1 vcenterHeader">
+      <div class="form-group">
+        <label>Task Title</label>
+      </div>
+    </div>
+    <div class="col-md-1 vcenterHeader">
+      <div class="form-group">
+        <label>Status</label>
+      </div>
+    </div>
+    <div class="col-md-1 vcenterHeader" *ngIf="this.userRole === 'teamleader'">
+        <div class="form-group">
+          <label>Rating</label>
+        </div>
+      </div>
+    <div class="col-md-1 vcenterHeader">
+      <div class="form-group">
+        <label>Action</label>
+      </div>
+    </div>
+  </div>
+  <div *ngFor="let data of taskValue">
+    <div class="row gridRow">
+      <div class="display-none-large col-6">
+        <label class="gridLabel">Ticket No</label>
+      </div>
+      <div class="col-md-1 col-6 vcenter form-group">
+        {{data.taskNo}}
+      </div>
+      <div class="display-none-large col-6">
+        <label class="gridLabel">Client Name:</label>
+      </div>
+      <div class="col-md-1 col-6 vcenter form-group">
+        {{data.clientName}}
+      </div>
+      <div class="display-none-large col-6">
+        <label class="gridLabel">Name:</label>
+      </div>
+      <div class="col-md-1 col-6 vcenter form-group">
+        {{data.assignedTo}}
+      </div>
+      <div class="display-none-large col-6">
+        <label class="gridLabel">Start Date:</label>
+      </div>
+      <div class="col-md-1 col-6 vcenter form-group">
+        {{data.dateTime}}
+      </div>
+      <div class="display-none-large col-6">
+        <label class="gridLabel">DeadLine Date:</label>
+      </div>
+      <div class="col-md-1 col-6 vcenter form-group">
+        {{data.toCloseDate}}
+      </div>
+      <div class="display-none-large col-6">
+        <label class="gridLabel">Priority:</label>
+      </div>
+      <div class="col-md-1 col-6 vcenter form-group">
+        {{data.priority}}
+      </div>
+      <div class="display-none-large col-6">
+        <label class="gridLabel">Department:</label>
+      </div>
+      <div class="col-md-1 col-6 vcenter form-group">
+        {{data.department}}
+      </div>
+      <div class="display-none-large col-6">
+        <label class="gridLabel">Task Title:</label>
+      </div>
+      <div class="col-md-1 col-6 vcenter form-group">
+        {{data.taskTitle}}
+      </div>
+      <div class="display-none-large col-6">
+        <label class="gridLabel">Status:</label>
+      </div>
+      <div class="col-md-1 col-6 vcenter form-group">
+        {{data.status}}
+      </div>
+      <div *ngIf="this.userRole === 'teamleader'">
+          <app-rating [rating]='data.rating' 
+          [itemId]='data.id' (ratingClick)='ratingComponentClick($event, data._id)'></app-rating>
+         <h5> {{data.rating}}</h5>
+      </div>
+      <div class="col-md-1 col-6 vcenter form-group">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+  
+          <a class="nav-link" [routerLink]="['/task/view-single-developing/', data._id ]">View</a>
+          <a class="nav-link" [routerLink]="['/task/update-developing/', data._id]">Update Status</a>
+          <a class="nav-link" *ngIf="this.userRole === 'teamleader' || this.userRole === 'admin'" [routerLink]="['/task/edit-developing', data._id]">Edit</a>
+          <a class="nav-link" *ngIf="this.userRole === 'teamleader' || this.userRole === 'admin'" (click)="delete(data)">Delete</a>
+        </mat-menu>
+      </div>
+  
+    </div>
+  
+  </div>
+  
+  
+ <!--  <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true"
+    [length]="totalSize" [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator> -->
+  </div>

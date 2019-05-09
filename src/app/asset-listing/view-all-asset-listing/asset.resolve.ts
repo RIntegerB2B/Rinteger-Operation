@@ -6,8 +6,8 @@ import { AssetData } from './asset.interface';
 
 @Injectable()
 export class AssetResolve implements Resolve<AssetData[]> {
-  constructor(private AssetListingService: AssetListingService) {}
+  constructor(private assetListingService: AssetListingService) {}
   resolve(route: ActivatedRouteSnapshot): Observable<AssetData[]> {
-    return this.AssetListingService.getAllAssetList();
+    return this.assetListingService.getAllAssetList();
   }
 }

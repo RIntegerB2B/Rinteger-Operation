@@ -5,11 +5,14 @@ import { CreateAssetListingComponent } from './create-asset-listing/create-asset
 import { ViewSingleComponent } from './view-single/view-single.component';
 import { EditAssetListingComponent } from './edit-asset-listing/edit-asset-listing.component';
 import { UpdateAssetListingComponent } from './update-asset-listing/update-asset-listing.component';
-
+import { AssetResolve } from './view-all-asset-listing/asset.resolve';
 const routes: Routes = [
   {
     path: 'view-all',
-    component: ViewAllAssetListingComponent
+    component: ViewAllAssetListingComponent,
+    resolve: {
+      asset: AssetResolve
+    }
   },
   {
     path: 'create-asset-list',
@@ -31,7 +34,8 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AssetResolve]
 })
 export class AssetListingRoutingModule { }
 

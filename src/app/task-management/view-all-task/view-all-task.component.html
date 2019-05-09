@@ -19,7 +19,7 @@
       </select>
   
   </div>
-  <div class="col-4">
+ <!--  <div class="col-4">
       <div fxFlex="50" class="pr-1">
         <mat-form-field>
           <input matInput #fromDate [matDatepicker]="picker" placeholder="Starting Date">
@@ -35,7 +35,7 @@
       <div class="col-4">
         <button mat-button (click)="searchByDate(fromDate.value, toDate.value)" type="submit"><mat-icon>search</mat-icon></button>
       </div>
-    </div>
+    </div> -->
 </div>
 <div class=row>
   <div class="col-md-2">
@@ -47,14 +47,11 @@
       matBadgePosition="after" matBadgeColor="accent">All Tickets </button>
   </div>
   <div class="col-md" *ngFor="let unit of units">
-    <!-- {{unit.counts | json}} -->
+   
     <button mat-raised-button color="primary" matBadge="{{unit.counts}}" matBadgePosition="before"
       matBadgeColor="primary" (click)="getunitwiseTask(unit.name)">{{unit.name}}</button>
   </div>
-  <!-- <div class="col-md-2">
-    <button mat-raised-button color="accent" (click)="getUnitWise()" *ngIf="this.userRole === 'teamleader'" matBadge="{{all}}"
-      matBadgePosition="after" matBadgeColor="accent">Unit Wise </button>
-  </div> -->
+  
 
 </div>
 
@@ -75,10 +72,7 @@
   <div class="col-md-1 vcenterHeader">
     <div class="form-group">
       <label>Name</label>	
-      <!-- <button mat-icon-button (click)="upName()" >
-          <mat-icon>keyboard_arrow_up</mat-icon>
-         </button>
-           <button mat-icon-button (click)="downName()"><mat-icon>keyboard_arrow_down</mat-icon></button> -->
+     
     </div>
   </div>
   <div class="col-md-1 vcenterHeader">

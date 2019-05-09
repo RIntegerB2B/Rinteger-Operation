@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskModel } from '../../shared/task-management.model';
 import { TaskManagementService } from './../task-management.service';
-/* import { LogIn } from '../../shared/'; */
+
 import { ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
@@ -60,13 +60,13 @@ export class ViewAllTaskComponent implements OnInit {
     private navheaderService: NavheaderService) { }
 
   ngOnInit() {
-    this.getRole();
+   /*   this.getRole();
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.userId = params.get('id');
     });
    this.LoadMethod();
     this.navheaderService.hideMenuTrans();
-    this.navheaderService.menuItems();
+    this.navheaderService.menuItems(); */
   }
   LoadMethod() {
     if (this.userRole === 'admin') {
@@ -181,11 +181,11 @@ export class ViewAllTaskComponent implements OnInit {
     this.taskManagementService.DeleteTask(value).subscribe(data => {
       this.deletevalue = data;
       this.LoadMethod();
-    /*   if (this.userRole !== 'admin') {
+      if (this.userRole !== 'admin') {
         this.taskholder = this.deletevalue.filter( row => this.userUnit === row.units);
       } else {
         this.taskholder = this.deletevalue;
-      } */
+      }
     });
   }
   public handlePage(e: any) {
@@ -246,7 +246,7 @@ export class ViewAllTaskComponent implements OnInit {
       this.itemIdRatingClicked = data.company;
     }
   }
-  searchByDate(date1, date2) {
+  /* searchByDate(date1, date2) {
     this.dateValue = new TaskModel();
     this.dateValue.date1 = date1;
     this.dateValue.date2 = date2;
@@ -255,5 +255,5 @@ export class ViewAllTaskComponent implements OnInit {
     }, error => {
       console.log(error);
     });
-  }
+  } */
 }

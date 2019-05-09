@@ -4,7 +4,7 @@ import { AppSetting } from './../config/appSetting';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MarketingSetting } from '../shared/marketing-setting.model';
-
+/* import { MarketingData } from './view-all-marketing/marketing.interface'; */
 
 @Injectable({
   providedIn: 'root'

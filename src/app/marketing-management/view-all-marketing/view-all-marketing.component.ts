@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MarketingManagementModel } from '../../shared/marketing-management.model';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { MarketingManagementService } from '../marketing-management.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -12,7 +12,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   styleUrls: ['./view-all-marketing.component.css']
 })
 export class ViewAllMarketingComponent implements OnInit {
-
+  Mar: any;
   MarketingDetailsForm: FormGroup;
   marketingValue: any;
   marketingEdit: any;
@@ -28,9 +28,10 @@ export class ViewAllMarketingComponent implements OnInit {
 
 
   constructor(private marketingManagementService: MarketingManagementService,
-    private fb: FormBuilder, private router: Router) { }
+    private fb: FormBuilder, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+   /*  this.Mar = this.route.snapshot.data['marketing']; */
     this.getMarketingDB();
     this.createForm();
     this.getSetting();

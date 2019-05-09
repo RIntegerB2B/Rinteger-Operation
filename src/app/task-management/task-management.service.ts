@@ -27,10 +27,7 @@ export class TaskManagementService {
 
     return this.http.get<TaskModel[]>(urlway);
   }
-  getSingleData(id): Observable<any> {
-    const urlway = this.baseurl + 'findsingle/' + id;
-    return this.http.get<TaskModel[]>(urlway);
-  }
+ 
   UpdateTask(data, id): Observable<any> {
     const url: string = this.baseurl  + 'statusupdate/' + id;
     return this.http.put<TaskModel[]>(url, data);
@@ -49,20 +46,9 @@ export class TaskManagementService {
 
     return this.http.get<TaskModel[]>(urlway);
   }
-  getUnitWiseName(): Observable<any> {
-    const urlway = this.baseurl + 'unitName';
 
-    return this.http.get<Register[]>(urlway);
-}
-getDepartmentData(): Observable<any> {
-  const urlway = this.baseurl + 'viewdepartments';
 
-  return this.http.get<TaskModel[]>(urlway);
-}
-DeleteTask(data): Observable<any> {
-  const url: string = this.baseurl + 'deletetask/' + data._id;
-  return this.http.delete<TaskModel[]>(url);
-}
+
 getRolewisedata(): Observable<any> {
   const urlway = this.baseurl + 'admin/validate';
 
@@ -83,10 +69,7 @@ getStatusWise(status): Observable<TaskModel[]> {
 
   return this.http.post<TaskModel[]>(urlway, status);
 }
-getSelectedTask(id): Observable<TaskModel[]> {
-  const urlway = this.baseurl + 'selectedtask/' + id;
-  return this.http.get<TaskModel[]>(urlway);
-}
+
 updateRating(rating, id): Observable<TaskModel[]> {
   const urlway = this.baseurl + 'rating/' + id ;
 
@@ -97,10 +80,53 @@ compareUserRole(data): Observable<any> {
 
   return this.http.get<TaskModel[]>(urlway);
 }
-getDataByDate(data): Observable<any> {
-  const urlway = this.baseurl + 'getdatabydate';
 
-  return this.http.post<TaskModel[]>(urlway, data);
+
+
+
+getDevelopingData(): Observable<any> {
+  const urlway = this.baseurl + 'getdevelopingdata';
+
+  return this.http.get<TaskModel[]>(urlway);
 }
 
+getByUserIDDevelopingData(id): Observable<any> {
+  const urlway = this.baseurl + 'getbyuseriddevelopingdata/' + id;
+
+  return this.http.get<TaskModel[]>(urlway);
+}
+createTaskForDevelopting(data): Observable<any> {
+  const urlway = this.baseurl + 'createtaskfordeveloping';
+  return this.http.post<TaskModel[]>(urlway, data);
+}
+getDepartmentData(): Observable<any> {
+  const urlway = this.baseurl + 'viewdepartments';
+
+  return this.http.get<TaskModel[]>(urlway);
+}
+getUnitWiseName(): Observable<any> {
+  const urlway = this.baseurl + 'unitName';
+
+  return this.http.get<Register[]>(urlway);
+}
+getSingleData(id): Observable<any> {
+  const urlway = this.baseurl + 'findsingle/' + id;
+  return this.http.get<TaskModel[]>(urlway);
+}
+getSelectedTask(id): Observable<TaskModel[]> {
+  const urlway = this.baseurl + 'selectedtask/' + id;
+  return this.http.get<TaskModel[]>(urlway);
+}
+UpdateTaskForDeveloping(data, id): Observable<any> {
+  const url: string = this.baseurl  + 'statusupdatefordeveloping/' + id;
+  return this.http.put<TaskModel[]>(url, data);
+}
+EditTaskForDeveloping(data, id): Observable<any> {
+  const url: string = this.baseurl  + 'edittaskfordeveloping/' + id;
+  return this.http.put<TaskModel[]>(url, data);
+}
+DeleteTask(data): Observable<any> {
+  const url: string = this.baseurl + 'deletetask/' + data._id;
+  return this.http.delete<TaskModel[]>(url);
+}
 }
