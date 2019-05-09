@@ -5,7 +5,7 @@ import { TaskManagementService } from './../task-management.service';
 import { ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MAT_DATEPICKER_VALUE_ACCESSOR } from '@angular/material';
 import { PageEvent } from '@angular/material';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { filter } from 'rxjs/operators';
@@ -54,6 +54,7 @@ export class ViewAllTaskComponent implements OnInit {
   taskEdit: TaskModel[];
   marketing: any;
   operation: any;
+  dateValue: any;
 
   constructor(private taskManagementService: TaskManagementService, private route: ActivatedRoute,
     private navheaderService: NavheaderService) { }
@@ -244,5 +245,15 @@ export class ViewAllTaskComponent implements OnInit {
       this.ratingClicked = clickObj.rating;
       this.itemIdRatingClicked = data.company;
     }
+  }
+  searchByDate(date1, date2) {
+    this.dateValue = new TaskModel();
+    this.dateValue.date1 = date1;
+    this.dateValue.date2 = date2;
+    this.taskManagementService.getDataByDate(this.dateValue).subscribe( data => {
+      this.taskholder = data;
+    }, error => {
+      console.log(error);
+    });
   }
 }

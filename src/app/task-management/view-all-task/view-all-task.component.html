@@ -19,6 +19,23 @@
       </select>
   
   </div>
+  <div class="col-4">
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field>
+          <input matInput #fromDate [matDatepicker]="picker" placeholder="Starting Date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput #toDate [matDatepicker]="picker1" placeholder="Ending Date">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-4">
+        <button mat-button (click)="searchByDate(fromDate.value, toDate.value)" type="submit"><mat-icon>search</mat-icon></button>
+      </div>
+    </div>
 </div>
 <div class=row>
   <div class="col-md-2">

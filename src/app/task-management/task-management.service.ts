@@ -97,4 +97,10 @@ compareUserRole(data): Observable<any> {
 
   return this.http.get<TaskModel[]>(urlway);
 }
+getDataByDate(data): Observable<any> {
+  const urlway = this.baseurl + 'getdatabydate';
+
+  return this.http.post<TaskModel[]>(urlway, data);
+}
+
 }
