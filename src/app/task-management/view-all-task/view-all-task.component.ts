@@ -60,13 +60,13 @@ export class ViewAllTaskComponent implements OnInit {
     private navheaderService: NavheaderService) { }
 
   ngOnInit() {
-   /*   this.getRole();
+     this.getRole();
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.userId = params.get('id');
     });
    this.LoadMethod();
     this.navheaderService.hideMenuTrans();
-    this.navheaderService.menuItems(); */
+    this.navheaderService.menuItems();
   }
   LoadMethod() {
     if (this.userRole === 'admin') {
