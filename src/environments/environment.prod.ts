@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  serviceUrl: 'https://rinteger-operations.appspot.com/',
+  serviceUrl: 'https://rinteger-operation-service.appspot.com'
 };

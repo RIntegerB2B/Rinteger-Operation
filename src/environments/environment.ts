@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
    serviceUrl: 'http://localhost:3041/',
-  /*  serviceUrl: 'https://jrdrbr8zte.execute-api.ap-south-1.amazonaws.com/latest/' */
+   /* serviceUrl: 'https://jrdrbr8zte.execute-api.ap-south-1.amazonaws.com/latest/' */
 };
 
 /*
