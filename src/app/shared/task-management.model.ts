@@ -9,7 +9,7 @@ export class TaskModel {
     userId: string;
     clientName: string;
     taskNo: string;
-    dateTime: String;
+    dateTime: Date;
     taskTitle: string;
     taskDescription: string;
    /*  sizeColumn: string;
@@ -23,9 +23,9 @@ export class TaskModel {
     assignedTo: string;
     assignedBy: string;
     status: string;
-    toCloseDate: String;
+    toCloseDate: Date;
     toTime: string;
-    closedDate: String;
+    closedDate: Date;
     time: string;
     comment: string;
     leaderComment: string;
