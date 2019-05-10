@@ -3,4 +3,5 @@ export class MarketingSetting {
     category: [String];
     subCategory: [String];
     contactType: [String];
+    status: [String];
 }

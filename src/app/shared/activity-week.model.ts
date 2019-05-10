@@ -5,5 +5,6 @@ export class ActivityWeekMonth {
     planTitle: String;
     planDescription: String;
     assignedTo: String;
+    userId: String;
     unit: String;
     }

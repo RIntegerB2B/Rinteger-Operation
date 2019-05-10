@@ -19,6 +19,7 @@ export class MarketingSettingComponent implements OnInit {
   showCategory: boolean;
   showSubCategory: boolean;
   showContactType: boolean;
+  showStatus: boolean;
   message;
   action;
   constructor(private fb: FormBuilder, private settingsService: SettingsServiceService,
@@ -32,7 +33,8 @@ export class MarketingSettingComponent implements OnInit {
       location: [''],
       category: [''],
       subCategory: [''],
-      contactType: ['']
+      contactType: [''],
+      status: ['']
     });
   }
   showLocationForm() {
@@ -40,24 +42,35 @@ export class MarketingSettingComponent implements OnInit {
     this.showCategory = false;
     this.showSubCategory = false;
     this.showContactType = false;
+    this.showStatus = false;
   }
   showCategoryForm() {
     this.showLocation = false;
     this.showCategory = true;
     this.showSubCategory = false;
     this.showContactType = false;
+    this.showStatus = false;
   }
   showSubCategoryForm() {
     this.showLocation = false;
     this.showCategory = false;
     this.showSubCategory = true;
     this.showContactType = false;
+    this.showStatus = false;
   }
   showContactTypeForm() {
     this.showLocation = false;
     this.showCategory = false;
     this.showSubCategory = false;
     this.showContactType = true;
+    this.showStatus = false;
+  }
+  showStatusForm() {
+    this.showLocation = false;
+    this.showCategory = false;
+    this.showSubCategory = false;
+    this.showContactType = false;
+    this.showStatus = true;
   }
   addLocation() {
     this.message = 'Location mode added successfully';
@@ -179,4 +192,35 @@ export class MarketingSettingComponent implements OnInit {
       console.log(error);
     });
   }
+
+  addStatus() {
+    this.message = 'Status Option added successfully';
+    this.settingModel = new MarketingSetting();
+    this.settingModel.status = this.MarketingSettingsForm.controls.status.value;
+    this.settingsService.addMarketingStatus(this.settingModel).subscribe(data => {
+      this.settingModel = data;
+      this.settingValue = data;
+      this.snackBar.open(this.message, this.action, {
+        duration: 3000,
+      });
+      this.MarketingSettingsForm.reset();
+    }, error => {
+      console.log(error);
+    });
+  }
+  deleteStatus(test) {
+    this.message = 'Status option deleted successfully';
+    this.settingsService.deleteMarketingStatus(test).subscribe(data => {
+      this.settingModel = data;
+      this.settingValue = data;
+      this.snackBar.open(this.message, this.action, {
+        duration: 3000,
+      });
+      this.MarketingSettingsForm.reset();
+    }, error => {
+      console.log(error);
+    });
+  }
+
+
 }

@@ -59,11 +59,11 @@
 
 
 <div class="row gridRowHeader display-none-small">
-  <div class="col-md-1 vcenterHeader">
+  <!-- <div class="col-md-1 vcenterHeader">
     <div class="form-group">
       <label>Task No</label>
     </div>
-  </div>
+  </div> -->
   <div class="col-md-1 vcenterHeader" *ngIf="this.userRole !== 'photographer'">
     <div class="form-group">
       <label>Client Name</label>
@@ -119,12 +119,12 @@
 </div>
 <div *ngFor="let data of taskholder">
   <div class="row gridRow">
-    <div class="display-none-large col-6">
+    <!-- <div class="display-none-large col-6">
       <label class="gridLabel">Ticket No</label>
     </div>
     <div class="col-md-1 col-6 vcenter form-group">
       {{data.taskNo}}
-    </div>
+    </div> -->
     <div class="display-none-large col-6" *ngIf="this.userRole !== 'photographer'">
       <label class="gridLabel">Client Name:</label>
     </div>

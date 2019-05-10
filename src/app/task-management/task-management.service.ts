@@ -24,10 +24,8 @@ export class TaskManagementService {
   }
   getAllTaskData(): Observable<any> {
     const urlway = this.baseurl + 'findalltaskdata';
-
     return this.http.get<TaskModel[]>(urlway);
   }
- 
   UpdateTask(data, id): Observable<any> {
     const url: string = this.baseurl  + 'statusupdate/' + id;
     return this.http.put<TaskModel[]>(url, data);
@@ -38,61 +36,42 @@ export class TaskManagementService {
   }
   getunitwiseTask(name): Observable<TaskModel[]> {
     const urlway = this.baseurl + 'unitwisetask/' + name;
-
     return this.http.get<TaskModel[]>(urlway);
   }
   deadlinedTask(): Observable<any> {
     const urlway = this.baseurl + 'deadlinedTask';
-
     return this.http.get<TaskModel[]>(urlway);
   }
-
-
-
 getRolewisedata(): Observable<any> {
   const urlway = this.baseurl + 'admin/validate';
-
   return this.http.get<Register[]>(urlway);
 }
 compareUserId(data): Observable<any> {
   const urlway = this.baseurl + 'finduserid/' + data;
-
   return this.http.get<TaskModel[]>(urlway);
 }
 compareUserUnits(data): Observable<any> {
   const urlway = this.baseurl + 'finduserunit/' + data;
-
   return this.http.get<TaskModel[]>(urlway);
 }
 getStatusWise(status): Observable<TaskModel[]> {
   const urlway = this.baseurl + 'statusfitler' ;
-
   return this.http.post<TaskModel[]>(urlway, status);
 }
-
 updateRating(rating, id): Observable<TaskModel[]> {
   const urlway = this.baseurl + 'rating/' + id ;
-
   return this.http.post<TaskModel[]>(urlway, rating);
 }
 compareUserRole(data): Observable<any> {
   const urlway = this.baseurl + 'finduserroledata/' + data;
-
   return this.http.get<TaskModel[]>(urlway);
 }
-
-
-
-
 getDevelopingData(): Observable<any> {
   const urlway = this.baseurl + 'getdevelopingdata';
-
   return this.http.get<TaskModel[]>(urlway);
 }
-
 getByUserIDDevelopingData(id): Observable<any> {
   const urlway = this.baseurl + 'getbyuseriddevelopingdata/' + id;
-
   return this.http.get<TaskModel[]>(urlway);
 }
 createTaskForDevelopting(data): Observable<any> {
@@ -101,12 +80,10 @@ createTaskForDevelopting(data): Observable<any> {
 }
 getDepartmentData(): Observable<any> {
   const urlway = this.baseurl + 'viewdepartments';
-
   return this.http.get<TaskModel[]>(urlway);
 }
 getUnitWiseName(): Observable<any> {
   const urlway = this.baseurl + 'unitName';
-
   return this.http.get<Register[]>(urlway);
 }
 getSingleData(id): Observable<any> {

@@ -45,7 +45,13 @@
           </mat-form-field>
         </div>
       </div>
-  
+      <div fxFlex="50" class="pr-1" >
+        <mat-form-field class="full-width">
+          <input matInput formControlName="dateTime" [readonly]=true  [(ngModel)]="taskEdit.dateTime" 
+          (ngModelChange)="taskEdit.dateTime=$event"
+            placeholder="Start time">  
+        </mat-form-field>
+      </div>
         <div fxFlex="50" class="p-2"  >
           <mat-form-field class="full-width">
             <input matInput formControlName="taskTitle" placeholder="Task Title"  
@@ -121,7 +127,16 @@
   
   
   
-       
+        <div fxFlex="50" class="pr-1" *ngIf = "taskEdit?.status">
+          <mat-form-field>
+            <mat-select placeholder="Status" formControlName="status"  [(ngModel)]="taskEdit.status" 
+            (ngModelChange)="taskEdit.status=$event">
+              <mat-option *ngFor="let data of status;let i = index " [value]="data">
+                <a>{{data}}</a>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
   
   
         <div fxFlex="50" class="pr-1" >
@@ -134,7 +149,6 @@
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
         </div>
-  
         <div fxFlex="50" class="p-2" > 
           <mat-form-field class="full-width">
             <input matInput formControlName="toTime" placeholder="Deadline Time" type="time" 
@@ -145,9 +159,31 @@
             </mat-error>
           </mat-form-field>
         </div>
+        <div fxFlex="50" class="pr-1"  *ngIf = "taskEdit?.closedDate">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="closedDate" [readonly]=true  [(ngModel)]="taskEdit.closedDate" 
+            (ngModelChange)="taskEdit.closedDate=$event"
+              placeholder="Completed Date">  
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1" *ngIf = "taskEdit?.time">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="time" [readonly]=true  [(ngModel)]="taskEdit.time" 
+            (ngModelChange)="taskEdit.time=$event"
+              placeholder="Completed Time">  
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="p-2" *ngIf = "this.taskEdit?.comment">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="comment" placeholder="comment" [readonly]=true
+            [(ngModel)]="taskEdit.comment" (ngModelChange)="taskEdit.comment=$event">
+         
+          </mat-form-field>
+        </div>
+      
         <div fxFlex="50" class="p-2" >
             <mat-form-field class="full-width">
-              <input matInput formControlName="leaderComment" placeholder="comment about project" 
+              <input matInput formControlName="leaderComment" placeholder="Leader Comment" 
               [(ngModel)]="taskEdit.leaderComment" (ngModelChange)="taskEdit.leaderComment=$event">
            
             </mat-form-field>

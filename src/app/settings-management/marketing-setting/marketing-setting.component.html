@@ -1,23 +1,28 @@
 <div class="pageBoxLg">
     <form [formGroup]="MarketingSettingsForm" style="margin-top:20px;">
       <div fxLayout="row wrap" fxLayout.lt-sm="column">
-        <div fxFlex="25" class="pr-1">
+        <div fxFlex="15" class="pr-1">
           <a (click)="showLocationForm()">
             <mat-icon class="gridEdit">add_box</mat-icon>  Location
           </a>
         </div>
-        <div fxFlex="25" class="pr-1">
+        <div fxFlex="15" class="pr-1">
           <a (click)="showCategoryForm()">
             <mat-icon class="gridEdit">add_box</mat-icon> Category
           </a>
         </div>      
-        <div fxFlex="25" class="pr-1">
+        <div fxFlex="15" class="pr-1">
             <a (click)="showSubCategoryForm()">
               <mat-icon class="gridEdit">add_box</mat-icon> Sub Category
             </a>
           </div>
+          <div fxFlex="15" class="pr-1">
+            <a (click)="showStatusForm()">
+              <mat-icon class="gridEdit">add_box</mat-icon> Status
+            </a>
+          </div>
       
-      <div fxFlex="25" class="pr-1">
+      <div fxFlex="15" class="pr-1">
         <a (click)="showContactTypeForm()">
           <mat-icon class="gridEdit">add_box</mat-icon> Contact Type
         </a>
@@ -80,6 +85,22 @@
               </div>
             </div>
           </div>  
+
+          <div fxFlex="25" class="pr-1" *ngIf="showStatus">
+            <h1> Status</h1>
+            <mat-form-field class="full-width">
+              <input matInput formControlName="status" placeholder="Status" required>
+            </mat-form-field>
+            <button mat-raised-button color="primary"  type="button" (click)="addStatus()" 
+            [disabled]="!MarketingSettingsForm.controls.status.valid">Add</button>
+            <h5>Status</h5>
+            <div *ngFor="let data of settingValue ">
+              <div *ngFor="let value of data.status ">          
+                <p><a (click)="deleteStatus(value)"><mat-icon>clear</mat-icon></a>{{value}}</p>
+              </div>
+            </div>
+          </div>  
+
       </div>
     </form>
   </div>

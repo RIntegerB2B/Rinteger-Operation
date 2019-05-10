@@ -400,7 +400,16 @@ export class SettingsServiceService {
     const url: string = this.serviceUrl + addUrl + val;
     return this.httpClient.delete<MarketingSetting[]>(url);
   }
-
+  addMarketingStatus(data: any): Observable<any> {
+    const addUrl = 'addmarketingstatus';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<MarketingSetting[]>(url, data);
+  }
+  deleteMarketingStatus(val): Observable<any> {
+    const addUrl = 'deletemarketingstatus/';
+    const url: string = this.serviceUrl + addUrl + val;
+    return this.httpClient.delete<MarketingSetting[]>(url);
+  }
 
 
   viewAssetSetting(): Observable<any> {

@@ -25,6 +25,7 @@ export class ViewWeekSheetComponent implements OnInit {
   unitName: string;
   activityEdit: any;
   userUnit: any;
+  assingId: any;
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute,
     private activityLogService: ActivityLogService) {
       this.route.paramMap.subscribe(
@@ -38,7 +39,6 @@ export class ViewWeekSheetComponent implements OnInit {
     this.getSelectedWeeklyPlan();
     this.getAssignedTo();
     this.getUnitName();
-    
   }
 
   creatForm() {
@@ -55,6 +55,7 @@ export class ViewWeekSheetComponent implements OnInit {
   getSelectedWeeklyPlan() {
     this.activityLogService.getSelectedWeek(this.id).subscribe( data => {
      this.activityValue = data[0].weeklyPlan;
+     console.log(this.activityValue);
      this.userUnit = data[0].unit;
     }, error => {
       console.log(error);
@@ -75,9 +76,15 @@ export class ViewWeekSheetComponent implements OnInit {
       console.log(error);
     });
   }
+  selectMethod(e, value) {
+
+    this.assingId = this.assignedTo.filter(data => data.userName === e.value);
+    console.log(this.assingId);
+  }
   assingedsave(ActivityDetailsForm: FormGroup, data) {
     this.activityValue = new ActivityLogModel();
     this.activityValue.assignedTo = data.assignedTo;
+    this.activityValue.userId = this.assingId[0]._id;
     this.activityLogService.addAssignValue( this.activityValue, data.weekID).subscribe( value => {
       this.activityValue = value;
       this.router.navigate(['activity-log/createweekly/', data.weekID]);

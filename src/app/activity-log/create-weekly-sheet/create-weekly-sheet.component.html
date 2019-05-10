@@ -1,7 +1,7 @@
 <div class="pageBoxLg">
     <div class="container topAlignContainer">
       <form [formGroup]="taskForm" (ngSubmit)="taskForm.valid && onSubmit(taskForm, weeklyPlanunit,
-       weeklyPlanassingedTo, weeklyPlanclient, weeklyPlanTitle, weeklyPlanDesc, weeklyPlanWeekID)">
+       weeklyPlanassingedTo, weeklyPlanclient, weeklyPlanTitle, weeklyPlanDesc)">
         <div fxLayout="row wrap" fxLayout.lt-sm="column">
           <div fxFlex="100">
             <label class="pageBoxLg-label">Create Task Form</label>
@@ -41,13 +41,13 @@
               [readonly]=true></textarea>
             </mat-form-field>
           </div>
-          <div fxFlex="50" class="p-2">
+         <!--  <div fxFlex="50" class="p-2">
               <mat-form-field class="full-width">
                 <textarea matInput formControlName="weekID" placeholder="weekID"
                 [value]="valueholder?.weekID" #weeklyPlanWeekID
                 [readonly]=true></textarea>
               </mat-form-field>
-            </div>
+            </div> -->
           <div fxFlex="50" class="p-2">
               <mat-form-field class="full-width">
                 <input matInput formControlName="week" placeholder="week" 

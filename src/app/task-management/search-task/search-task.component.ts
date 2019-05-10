@@ -7,7 +7,7 @@ import { TaskModel } from '../../shared/task-management.model';
   styleUrls: ['./search-task.component.css']
 })
 export class SearchTaskComponent implements OnInit {
-  searchType = ['Name', 'TaskNo', 'ClientName', 'TaskTitle'];
+  searchType = ['Name', 'ClientName', 'TaskTitle'];
   taskDetailsForm: FormGroup;
   @Input() taskholder: TaskModel;
   @Output() searchTask = new EventEmitter<any>();

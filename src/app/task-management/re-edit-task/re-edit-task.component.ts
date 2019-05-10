@@ -21,8 +21,9 @@ editview: string;
   department;
   departmentData;
   assignedBy;
-  units = ['Technologies'];
+  units = ['Studio', 'BSS', 'Technologies', 'Marketing', 'Operation'];
   priority = ['low', 'medium', 'high', 'critical'];
+  status = ['Started', 'In-Progress', 'Completed', 'Onhold', 'Stopped'];
   unitName: any;
   taskname: any;
   unitSort: string;
@@ -73,6 +74,7 @@ editview: string;
     toCloseDate: [''],
     toTime: [''],
     closedDate: [''],
+    comment: [''],
     leaderComment: [''],
     time: [''],
     product: this.fb.array([]),
@@ -252,7 +254,8 @@ editview: string;
     this.taskEdit.status = this.taskForm.controls.status.value;
     this.taskEdit.toCloseDate = this.taskForm.controls.toCloseDate.value;
     this.taskEdit.toTime = this.taskForm.controls.toTime.value;
-    this.taskEdit.role = this.roleSort;
+    this.taskEdit.leaderComment = this.taskForm.controls.leaderComment.value;
+    this.taskEdit.comment = this.taskForm.controls.comment.value;
     this.taskEdit.closedDate = this.taskForm.controls.closedDate.value;
     this.taskEdit.time = this.taskForm.controls.time.value;
     this.taskEdit.product = this.taskForm.controls.product.value;
@@ -286,6 +289,7 @@ getUnitWiseName() {
 }
 changed(e) {
   this.taskname = this.unitName.filter(data => data.unit === e.value);
+  console.log(this.taskname);
 }
 getUnit() {
   this.unitSort =  localStorage.getItem('unit');

@@ -56,7 +56,7 @@ export class CreateWeeklySheetComponent implements OnInit {
   }
   createtask() {
     this.taskForm = this.fb.group({
-      taskNo: [''],
+     /*  taskNo: [''], */
       dateTime: [''],
       taskTitle: [''],
       clientName: [''],
@@ -71,6 +71,7 @@ export class CreateWeeklySheetComponent implements OnInit {
       assignedTo: [''],
       assignedBy: [''],
       status: [''],
+      
       toCloseDate: [''],
       toTime: [''],
       closedDate: [''],
@@ -114,9 +115,9 @@ export class CreateWeeklySheetComponent implements OnInit {
   changed(e) {
     this.taskname = this.unitName.filter(data => data.unit === e.value);
   }
-  onSubmit(taskForm: FormGroup, unit, assignedTo, clientName, taskTitle, taskDescription, weekID) {
+  onSubmit(taskForm: FormGroup, unit, assignedTo, clientName, taskTitle, taskDescription) {
     this.taskholder = new TaskModel();
-    this.taskholder.userId = taskForm.controls.assignedTo.value._id;
+    this.taskholder.userId = this.valueholder.userId;
     this.taskholder.clientName = clientName.value;
     this.taskholder.dateTime = taskForm.controls.dateTime.value;
     this.taskholder.taskTitle = taskTitle.value;
@@ -131,7 +132,7 @@ export class CreateWeeklySheetComponent implements OnInit {
     this.taskholder.toTime = taskForm.controls.toTime.value;
     this.taskholder.closedDate = taskForm.controls.closedDate.value;
     this.taskholder.time = taskForm.controls.time.value;
-    this.taskholder.weekID = weekID.value;
+    this.taskholder.weekID = this.valueholder.weekID;
     this.taskholder.list = taskForm.controls.list.value;
     this.taskManagementService.createBssTask(this.taskholder).subscribe(data => {
       this.taskholder = data;
@@ -151,6 +152,7 @@ export class CreateWeeklySheetComponent implements OnInit {
   getUnitWiseName() {
     this.taskManagementService.getUnitWiseName().subscribe(data => {
       this.unitName = data;
+   /*    console.log(this.uniName); */
     });
   }
 
@@ -160,6 +162,7 @@ export class CreateWeeklySheetComponent implements OnInit {
       this.valueModel = data.weeklyPlan;
       this.taskEdit = this.valueModel.filter( value => value.weekID === this.weekID);
       this.valueholder = this.taskEdit[0];
+      console.log(this.valueholder);
     }, error => {
       console.log(error);
     });
