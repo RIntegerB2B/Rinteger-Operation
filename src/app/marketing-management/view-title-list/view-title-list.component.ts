@@ -48,6 +48,7 @@ export class ViewTitleListComponent implements OnInit {
    this.marketingManagementService.getSelectedTitle(this.id).subscribe( data => {
      this.marketingEdit = data.companyDetail;
      this.marketingValue = data;
+    /*  console.log(this.marketingEdit); */
    }, err => {
      console.log(err);
    });

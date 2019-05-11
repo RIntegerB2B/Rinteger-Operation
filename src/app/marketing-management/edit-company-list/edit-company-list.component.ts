@@ -18,7 +18,7 @@ export class EditCompanyListComponent implements OnInit {
   marketingHolder: any;
   marketingId: any;
   id: string;
-  status = ['DND', 'No problem'];
+  status;
 
   constructor(private marketingManagementService: MarketingManagementService,
     private fb: FormBuilder, private router: Router, private route: ActivatedRoute) {
@@ -39,6 +39,7 @@ export class EditCompanyListComponent implements OnInit {
       companyDetail: this.fb.array([])
     });
     this.addForm();
+    this.getSetting();
   }
   addForm() {
     const companyDetail = this.fb.group({
@@ -64,6 +65,14 @@ export class EditCompanyListComponent implements OnInit {
       console.log(error);
     });
   }
+  getSetting() {
+    this.marketingManagementService.getSetting().subscribe( data => {
+      this.status = data[0].status;
+    }, error => {
+      console.log(error);
+    });
+  }
+
   updateCompanyDetail(MarketingManagementForm: FormGroup, data) {
     this.marketingHolder = new MarketingManagementModel();
     this.marketingHolder.companyDetail = MarketingManagementForm.controls.companyDetail.value;

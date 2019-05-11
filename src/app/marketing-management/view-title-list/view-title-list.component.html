@@ -19,23 +19,28 @@
                   </div>
             </div>
         <div class="row gridRowHeader display-none-small">
-          <div class="col-md-3 vcenterHeader">
+          <div class="col-md-2 vcenterHeader">
             <div class="form-group">
               <label><h6>Name</h6></label>
             </div>
           </div>
-          <div class="col-md-3 vcenterHeader">
+          <div class="col-md-2 vcenterHeader">
             <div class="form-group">
               <label><h6>MobileNumber</h6></label>
             </div>
           </div>
-          <div class="col-md-3 vcenterHeader">
+          <div class="col-md-2 vcenterHeader">
             <div class="form-group">
               <label><h6>Email-ID</h6></label>
             </div>
           </div>
+          <div class="col-md-2 vcenterHeader">
+            <div class="form-group">
+              <label><h6>Status</h6></label>
+            </div>
+          </div>
          
-          <div class="col-md-3 vcenterHeader">
+          <div class="col-md-2 vcenterHeader">
             <div class="form-group">
               <label><h6>Action</h6></label>
             </div>
@@ -46,13 +51,13 @@
             <div class="display-none-large col-6">
               <label class="gridLabel">Name:</label>
             </div>
-            <div class="col-md-3 col-6 vcenter form-group">
+            <div class="col-md-2 col-6 vcenter form-group">
               {{data.name}}
             </div>
             <div class="display-none-large col-6">
               <label class="gridLabel">MobileNumber:</label>
             </div>
-            <div class="col-md-3 col-6 vcenter form-group" >
+            <div class="col-md-2 col-6 vcenter form-group" >
               {{data.mobileNumber}}
             </div>
                       
@@ -61,13 +66,21 @@
                 Email-ID:
               </label>
             </div>
-            <div class="col-md-3 col-6 vcenter form-group">
+            <div class="col-md-2 col-6 vcenter form-group">
               &nbsp;{{data.emailID}}
-            </div>          
+            </div>     
+            <div class="display-none-large col-6">
+              <label class="gridLabel">
+                Status:
+              </label>
+            </div>
+            <div class="col-md-2 col-6 vcenter form-group">
+              &nbsp;{{data.status}}
+            </div>      
             <div class="display-none-large col-6">
               <label class="gridLabel">Action:</label>
             </div>
-            <div class="col-md-3 col-6 vcenter form-group">
+            <div class="col-md-2 col-6 vcenter form-group">
               <button mat-icon-button [matMenuTriggerFor]="menu">
                 <mat-icon>more_vert</mat-icon>
               </button>

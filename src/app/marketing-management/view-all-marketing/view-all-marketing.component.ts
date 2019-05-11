@@ -40,7 +40,9 @@ export class ViewAllMarketingComponent implements OnInit {
   createForm() {
     this.MarketingDetailsForm = this.fb.group({
       location: [''],
-      title: ['']
+      title: [''],
+      category: [''],
+      subCategory: ['']
     });
   }
   getMarketingDB() {

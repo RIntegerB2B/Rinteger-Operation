@@ -221,7 +221,11 @@ export class ViewAllTaskComponent implements OnInit {
     this.taskManagementService.getStatusWise(this.taskholder).subscribe( data => {
       this.taskEdit = data;
       if (this.userRole !== 'admin') {
-      this.taskholder = this.taskEdit.filter( value => this.userUnit === value.units);
+      if (this.userRole === 'teamleader') {
+        this.taskholder = this.taskEdit.filter( value => this.userUnit === value.units);
+      } else {
+        this.taskholder = this.taskEdit.filter( value => this.userId === value.userId);
+      }
     } else {
       this.taskholder = this.taskEdit;
     }
