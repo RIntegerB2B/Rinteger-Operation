@@ -9,7 +9,7 @@ export class TaskModel {
     userId: string;
     clientName: string;
     taskNo: string;
-    dateTime: Date;
+    dateTime: string;
     taskTitle: string;
     taskDescription: string;
    /*  sizeColumn: string;
