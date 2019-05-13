@@ -5,6 +5,7 @@ export class ActivityLogModel {
     customerName: string;
     monthName: string;
     year: string;
+    mobileNumber: string;
     title: string;
     unit: string;
     description: string;

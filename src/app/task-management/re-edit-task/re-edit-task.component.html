@@ -33,8 +33,8 @@
           </mat-form-field>
         </div>
 
-        <div fxFlex="50" class="p-2" >
-        <div  *ngIf="this.unitSort !=='Studio'" >
+        <div fxFlex="50" class="p-2" *ngIf="this.unitSort !=='Studio'" >
+        <div  >
           <mat-form-field class="full-width">
             <input matInput formControlName="clientName" placeholder="Client Name"  
             [(ngModel)]="taskEdit.clientName" (ngModelChange)="taskEdit.clientName=$event">
@@ -45,6 +45,21 @@
           </mat-form-field>
         </div>
       </div>
+
+      <div fxFlex="50" class="p-2" 
+      *ngIf="this.unitSort ==='Technologies' || this.unitSort === 'BSS' || this.roleSort === 'admin'" >
+        <div >
+          <mat-form-field class="full-width">
+            <input matInput formControlName="mobileNumber" placeholder="Mobile Number"  
+            [(ngModel)]="taskEdit.mobileNumber" (ngModelChange)="taskEdit.mobileNumber=$event">
+            <mat-error *ngIf="taskForm.controls['mobileNumber'].errors?.required" required>
+              Mobile Number
+              <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
       <div fxFlex="50" class="pr-1" >
         <mat-form-field class="full-width">
           <input matInput formControlName="dateTime" [readonly]=true  [(ngModel)]="taskEdit.dateTime" 

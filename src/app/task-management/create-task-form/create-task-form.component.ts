@@ -61,6 +61,7 @@ export class CreateTaskFormComponent implements OnInit {
       assignedTo: [''],
       assignedBy: [''],
       status: [''],
+      mobileNumber: [''],
       toCloseDate: [''],
       toTime: [''],
       closedDate: [''],
@@ -180,6 +181,7 @@ export class CreateTaskFormComponent implements OnInit {
   /*   this.taskholder.taskNo = this.taskForm.controls.taskNo.value; */
     this.taskholder.userId = this.taskForm.controls.assignedTo.value._id;
     this.taskholder.clientName = this.taskForm.controls.clientName.value;
+    this.taskholder.mobileNumber = this.taskForm.controls.mobileNumber.value;
     this.taskholder.dateTime = this.taskForm.controls.dateTime.value;
     this.taskholder.taskTitle = this.taskForm.controls.taskTitle.value;
     this.taskholder.taskDescription = this.taskForm.controls.taskDescription.value;

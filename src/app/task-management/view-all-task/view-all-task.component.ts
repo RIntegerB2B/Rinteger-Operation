@@ -55,6 +55,7 @@ export class ViewAllTaskComponent implements OnInit {
   marketing: any;
   operation: any;
   dateValue: any;
+  valueData: TaskModel;
 
   constructor(private taskManagementService: TaskManagementService, private route: ActivatedRoute,
     private navheaderService: NavheaderService) { }
@@ -67,6 +68,7 @@ export class ViewAllTaskComponent implements OnInit {
    this.LoadMethod();
     this.navheaderService.hideMenuTrans();
     this.navheaderService.menuItems();
+   /*  this.deadlinedTask(); */
   }
   LoadMethod() {
     if (this.userRole === 'admin') {
@@ -104,6 +106,7 @@ export class ViewAllTaskComponent implements OnInit {
   }
   getRole() {
     this.userRole = localStorage.getItem('role');
+    this.userUnit = localStorage.getItem('unit');
   }
   getUnitWiseName() {
     this.taskManagementService.getUnitWiseName().subscribe(data => {
@@ -111,7 +114,6 @@ export class ViewAllTaskComponent implements OnInit {
     });
   }
   getUnitWise() {
-    this.userUnit = localStorage.getItem('unit');
     this.taskManagementService.compareUserUnits(this.userUnit).subscribe(data => {
       this.taskholder = data.filter( value => value.role !== 'photographer');
       this.taskValue = data.filter( value => value.role !== 'photographer');
@@ -123,6 +125,7 @@ export class ViewAllTaskComponent implements OnInit {
       this.filterWise = this.taskholder;
       this.array = this.taskData;
       this.totalSize = this.array.length;
+      console.log(data);
       this.iterator();
       this.filterWiseTest();
     }, error => {
@@ -163,6 +166,7 @@ export class ViewAllTaskComponent implements OnInit {
     this.units[4].counts = this.operation.length;
   }
   deadlinedTask() {
+    if (this.userRole === 'admin') {
     this.taskManagementService.deadlinedTask().subscribe(data => {
       this.taskholder = data;
       this.taskValue = data;
@@ -176,6 +180,39 @@ export class ViewAllTaskComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+  } else if (this.userRole === 'teamleader') {
+    this.valueData = new TaskModel();
+    this.valueData.units = this.userUnit;
+    this.taskManagementService.deadlinedTaskByTeamLeader(this.valueData).subscribe( data => {
+      this.taskholder = data;
+      this.taskValue = data;
+      this.deadcount = this.taskholder.length;
+      this.taskholder = new MatTableDataSource<any>(data);
+      this.taskholder.paginator = this.paginator;
+      this.taskholder = data;
+      this.filterWise = this.taskholder;
+      this.array = data;
+      this.totalSize = this.array.length;
+    }, error => {
+      console.log(error);
+    });
+  } else {
+    this.valueData = new TaskModel();
+    this.valueData.userId = this.userId;
+    this.taskManagementService.deadlinedTaskByUserID(this.valueData).subscribe( data => {
+      this.taskholder = data;
+      this.taskValue = data;
+      this.deadcount = this.taskholder.length;
+      this.taskholder = new MatTableDataSource<any>(data);
+      this.taskholder.paginator = this.paginator;
+      this.taskholder = data;
+      this.filterWise = this.taskholder;
+      this.array = data;
+      this.totalSize = this.array.length;
+    }, error => {
+      console.log(error);
+    });
+  }
   }
   delete(value) {
     this.taskManagementService.DeleteTask(value).subscribe(data => {

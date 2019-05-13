@@ -46,6 +46,7 @@ export class EditMonthlyPlanSheetComponent implements OnInit {
       customerName: [''],
       monthName: [''],
       year: [''],
+      mobileNumber: [''],
       title: [''],
       description: [''],
       monthlyPlan:  this.fb.array([]),
@@ -93,6 +94,7 @@ export class EditMonthlyPlanSheetComponent implements OnInit {
     this.activeValue = new ActivityLogModel();
     this.activeValue.workOrderID = activityForm.controls.workOrderID.value;
     this.activeValue.customerName = activityForm.controls.customerName.value;
+    this.activeValue.mobileNumber = activityForm.controls.mobileNumber.value;
     this.activeValue.monthName = activityForm.controls.monthName.value;
     this.activeValue.year = activityForm.controls.year.value;
     this.activeValue.title = activityForm.controls.title.value;

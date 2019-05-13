@@ -30,6 +30,7 @@ export class CreateMonthlySheetComponent implements OnInit {
   'August', 'September', 'October', 'November', 'December'];
   unitName: string;
   userRole: any;
+  activeData: ActivityLogModel;
   constructor(private fb: FormBuilder, private activityLogService: ActivityLogService,
     private router: Router, private route: ActivatedRoute) { 
       this.route.paramMap.subscribe((params: ParamMap) => {
@@ -71,16 +72,17 @@ export class CreateMonthlySheetComponent implements OnInit {
     this.monthForms.removeAt(i);
   }
   onSubmit(activityForm: FormGroup) {
-    this.activeValue = new ActivityLogModel();
-    this.activeValue.workOrderID = activityForm.controls.workOrderID.value;
-    this.activeValue.customerName = activityForm.controls.customerName.value;
-    this.activeValue.year = activityForm.controls.year.value;
-    this.activeValue.monthName = activityForm.controls.monthName.value;
-    this.activeValue.title = activityForm.controls.title.value;
-    this.activeValue.unit = this.userRole;
-    this.activeValue.description = activityForm.controls.description.value;
-    this.activeValue.monthlyPlan = activityForm.controls.monthlyPlan.value;
-    this.activityLogService.createmonthly(this.activeValue).subscribe( data => {
+    this.activeData = new ActivityLogModel();
+    this.activeData.workOrderID = activityForm.controls.workOrderID.value;
+    this.activeData.customerName = activityForm.controls.customerName.value;
+    this.activeData.year = activityForm.controls.year.value;
+    this.activeData.monthName = activityForm.controls.monthName.value;
+    this.activeData.title = activityForm.controls.title.value;
+    this.activeData.mobileNumber = this.activeValue.mobileNumber;
+    this.activeData.unit = this.userRole;
+    this.activeData.description = activityForm.controls.description.value;
+    this.activeData.monthlyPlan = activityForm.controls.monthlyPlan.value;
+    this.activityLogService.createmonthly(this.activeData).subscribe( data => {
       this.activeValue = data;
       this.router.navigate(['activity-log/viewallmonthly']);
     }, error => {
@@ -92,6 +94,7 @@ export class CreateMonthlySheetComponent implements OnInit {
       this.activityData = data.filter( value => value._id === this.id);
      this.activeValue = this.activityData[0];
      this.userRole = this.activityData[0].leadUnit;
+     console.log(this.activeValue);
     });
   }
   chosenYearHandler(event) {

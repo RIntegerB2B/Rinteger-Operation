@@ -28,6 +28,7 @@ editview: string;
   taskname: any;
   unitSort: string;
   roleSort: string;
+  taskValue: TaskModel;
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private taskManagementService: TaskManagementService,
      private router: Router) { }
@@ -67,6 +68,7 @@ editview: string;
     imageDetail: [''],
     priority: [''],
     units: [''],
+    mobileNumber: [''],
     department: [''],
     assignedTo: [''],
     assignedBy: [''],
@@ -240,30 +242,32 @@ editview: string;
 
 
   updateTask(taskForm: FormGroup, row) {
-    this.taskEdit = new TaskModel();
-    /* this.taskEdit.userId = this.taskForm.controls.assignedTo.value._id; */
-    this.taskEdit.clientName = this.taskForm.controls.clientName.value;
-    this.taskEdit.dateTime = this.taskForm.controls.dateTime.value;
-    this.taskEdit.taskTitle = this.taskForm.controls.taskTitle.value;
-    this.taskEdit.taskDescription = this.taskForm.controls.taskDescription.value;
-    this.taskEdit.units = this.taskForm.controls.units.value;
-    this.taskEdit.priority = this.taskForm.controls.priority.value;
-    this.taskEdit.department = this.taskForm.controls.department.value;
-    this.taskEdit.assignedTo = this.taskForm.controls.assignedTo.value;
-    this.taskEdit.assignedBy = this.taskForm.controls.assignedBy.value;
-    this.taskEdit.status = this.taskForm.controls.status.value;
-    this.taskEdit.toCloseDate = this.taskForm.controls.toCloseDate.value;
-    this.taskEdit.toTime = this.taskForm.controls.toTime.value;
-    this.taskEdit.leaderComment = this.taskForm.controls.leaderComment.value;
-    this.taskEdit.comment = this.taskForm.controls.comment.value;
-    this.taskEdit.closedDate = this.taskForm.controls.closedDate.value;
-    this.taskEdit.time = this.taskForm.controls.time.value;
-    this.taskEdit.product = this.taskForm.controls.product.value;
-    this.taskEdit.task = this.taskForm.controls.task.value;
-    this.taskEdit.shoot = this.taskForm.controls.shoot.value;
-    this.taskEdit.list = this.taskForm.controls.list.value;
+    this.taskValue = new TaskModel();
+    this.taskValue.userId = this.taskForm.controls.assignedTo.value._id;
+    this.taskValue.clientName = this.taskForm.controls.clientName.value;
+    this.taskValue.mobileNumber = this.taskForm.controls.mobileNumber.value;
+    this.taskValue.dateTime = this.taskForm.controls.dateTime.value;
+    this.taskValue.taskTitle = this.taskForm.controls.taskTitle.value;
+    this.taskValue.taskDescription = this.taskForm.controls.taskDescription.value;
+    this.taskValue.units = this.taskForm.controls.units.value;
+    this.taskValue.priority = this.taskForm.controls.priority.value;
+    this.taskValue.department = this.taskForm.controls.department.value;
+    this.taskValue.assignedTo = this.taskForm.controls.assignedTo.value.userName;
+    this.taskValue.assignedBy = this.taskForm.controls.assignedBy.value;
+    this.taskValue.status = this.taskForm.controls.status.value;
+    this.taskValue.toCloseDate = this.taskForm.controls.toCloseDate.value;
+    /* this.taskValue.role = this.taskEdit.role; */
+    this.taskValue.toTime = this.taskForm.controls.toTime.value;
+    this.taskValue.leaderComment = this.taskForm.controls.leaderComment.value;
+    this.taskValue.comment = this.taskForm.controls.comment.value;
+    this.taskValue.closedDate = this.taskForm.controls.closedDate.value;
+    this.taskValue.time = this.taskForm.controls.time.value;
+    this.taskValue.product = this.taskForm.controls.product.value;
+    this.taskValue.task = this.taskForm.controls.task.value;
+    this.taskValue.shoot = this.taskForm.controls.shoot.value;
+    this.taskValue.list = this.taskForm.controls.list.value;
 
-  this.taskManagementService.EditTask(this.taskEdit, row._id).subscribe(data => {
+  this.taskManagementService.EditTask(this.taskValue, row._id).subscribe(data => {
     this.taskEdit = data;
     this.router.navigate(['task/viewtask', this.editview]);
   }, error => {

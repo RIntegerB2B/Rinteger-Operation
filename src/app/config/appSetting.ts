@@ -4,7 +4,7 @@ export const AppSetting: AppSettingType = {
     local3041CrmServiceUrl: 'http://localhost:3041/',
     serviceUrl: environment.serviceUrl,
     /* serviceUrl: 'http://localhost:3041/' , */
-   /*  serviceUrl: 'https://rinteger-operations.appspot.com/', */
+    /* serviceUrl: 'https://rinteger-operation-service-qa.appspot.com/', */
     imageUrl: ' http://rinteger-operation.s3-website.ap-south-1.amazonaws.com/images/assetlists/'
 };
 

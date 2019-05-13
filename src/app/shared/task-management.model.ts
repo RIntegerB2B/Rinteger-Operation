@@ -9,7 +9,7 @@ export class TaskModel {
     userId: string;
     clientName: string;
     taskNo: string;
-    dateTime: Date;
+    dateTime: string;
     taskTitle: string;
     taskDescription: string;
    /*  sizeColumn: string;
@@ -19,6 +19,7 @@ export class TaskModel {
     units: string;
     role: string;
     rating: number;
+    mobileNumber: string;
     department: string;
     assignedTo: string;
     assignedBy: string;

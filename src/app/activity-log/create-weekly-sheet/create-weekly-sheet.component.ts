@@ -39,6 +39,7 @@ export class CreateWeeklySheetComponent implements OnInit {
   customer: any;
   uniName: any;
   valueEdit: any;
+  mobileValue: any;
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router,
     private taskManagementService: TaskManagementService, private activityLogService: ActivityLogService) {
       this.route.paramMap.subscribe(
@@ -71,7 +72,7 @@ export class CreateWeeklySheetComponent implements OnInit {
       assignedTo: [''],
       assignedBy: [''],
       status: [''],
-      
+      mobileNumber: [''],
       toCloseDate: [''],
       toTime: [''],
       closedDate: [''],
@@ -115,13 +116,14 @@ export class CreateWeeklySheetComponent implements OnInit {
   changed(e) {
     this.taskname = this.unitName.filter(data => data.unit === e.value);
   }
-  onSubmit(taskForm: FormGroup, unit, assignedTo, clientName, taskTitle, taskDescription) {
+  onSubmit(taskForm: FormGroup, unit, assignedTo, clientName, taskTitle, taskDescription, mobileNumber) {
     this.taskholder = new TaskModel();
     this.taskholder.userId = this.valueholder.userId;
     this.taskholder.clientName = clientName.value;
-    this.taskholder.dateTime = taskForm.controls.dateTime.value;
+  /*   this.taskholder.dateTime = taskForm.controls.dateTime.value; */
     this.taskholder.taskTitle = taskTitle.value;
     this.taskholder.taskDescription = taskDescription.value;
+    this.taskholder.mobileNumber = mobileNumber.value;
     this.taskholder.units = unit.value;
     this.taskholder.priority = taskForm.controls.priority.value;
     this.taskholder.department = taskForm.controls.department.value;
@@ -159,10 +161,11 @@ export class CreateWeeklySheetComponent implements OnInit {
   getValue() {
     this.activityLogService.getWeekToTask(this.weekID).subscribe(data => {
       this.valueEdit = data;
+      this.mobileValue = data;
       this.valueModel = data.weeklyPlan;
       this.taskEdit = this.valueModel.filter( value => value.weekID === this.weekID);
       this.valueholder = this.taskEdit[0];
-      console.log(this.valueholder);
+      console.log(  this.mobileValue);
     }, error => {
       console.log(error);
     });

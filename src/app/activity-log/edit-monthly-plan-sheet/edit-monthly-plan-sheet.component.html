@@ -17,6 +17,12 @@
               [(ngModel)]="activeValue.customerName" >  
             </mat-form-field>
           </div>
+          <div fxFlex="50" class="pr-2" *ngIf = 'activeValue?.mobileNumber'>
+            <mat-form-field class="full-width">
+              <input matInput formControlName="mobileNumber" placeholder="Mobile Number" 
+              [(ngModel)]="activeValue.mobileNumber" >  
+            </mat-form-field>
+          </div>
           <div fxFlex="50" class="pr-1" *ngIf = 'activeValue?.year'>
             <mat-form-field>
               <mat-select placeholder="Select the Year" formControlName="year" 

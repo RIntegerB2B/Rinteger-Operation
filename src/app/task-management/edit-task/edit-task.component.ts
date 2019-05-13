@@ -56,6 +56,7 @@ export class EditTaskComponent implements OnInit {
     assignedBy: [''],
     comment: [''],
     status: [''],
+    mobileNumber: [''],
     toCloseDate: [''],
     toTime: [''],
     closedDate: [''],

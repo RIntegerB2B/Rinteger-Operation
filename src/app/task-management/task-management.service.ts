@@ -42,6 +42,14 @@ export class TaskManagementService {
     const urlway = this.baseurl + 'deadlinedTask';
     return this.http.get<TaskModel[]>(urlway);
   }
+  deadlinedTaskByTeamLeader(data): Observable<any> {
+    const urlway = this.baseurl + 'deadlinedtaskforteamleader';
+    return this.http.post<TaskModel[]>(urlway, data);
+  }
+  deadlinedTaskByUserID(data): Observable<any> {
+    const urlway = this.baseurl + 'deadlinedtaskforuserid';
+    return this.http.post<TaskModel[]>(urlway, data);
+  }
 getRolewisedata(): Observable<any> {
   const urlway = this.baseurl + 'admin/validate';
   return this.http.get<Register[]>(urlway);
