@@ -4,6 +4,7 @@ import { TaskManagementService } from './../task-management.service';
 import { from } from 'rxjs';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { Notification } from '../../shared/notification.model';
 
 @Component({
   selector: 'app-edit-task',
@@ -27,6 +28,10 @@ export class EditTaskComponent implements OnInit {
   editview;
   unitSort: string;
   roleSort: string;
+  titleMsg: string;
+  title: any;
+  notificationBody: string;
+  notificationModel: Notification;
   constructor(private taskManagementService: TaskManagementService, private route: ActivatedRoute,
     private router: Router, private fb: FormBuilder) { }
 
@@ -36,36 +41,36 @@ export class EditTaskComponent implements OnInit {
         this.id = params.get('id');
         this.editview = params.get('editview');
       });
-      this.createtask();
-      this.getUnit();
-      this.getSelectedTask();
+    this.createtask();
+    this.getUnit();
+    this.getSelectedTask();
   }
   createtask() {
     this.taskForm = this.fb.group({
-    taskNo: [''],
-    dateTime: [''],
-    taskTitle: [''],
-    clientName: [''],
-    taskDescription: [''],
-    sizeColumn: [''],
-    imageDetail: [''],
-    priority: [''],
-    units: [''],
-    department: [''],
-    assignedTo: [''],
-    assignedBy: [''],
-    comment: [''],
-    status: [''],
-    mobileNumber: [''],
-    toCloseDate: [''],
-    toTime: [''],
-    closedDate: [''],
-    time: [''],
-    product: this.fb.array([]),
-    task: this.fb.array([]),
-    shoot: this.fb.array([]),
-    list: this.fb.array([]),
-    marketing: this.fb.array([])
+      taskNo: [''],
+      dateTime: [''],
+      taskTitle: [''],
+      clientName: [''],
+      taskDescription: [''],
+      sizeColumn: [''],
+      imageDetail: [''],
+      priority: [''],
+      units: [''],
+      department: [''],
+      assignedTo: [''],
+      assignedBy: [''],
+      comment: [''],
+      status: [''],
+      mobileNumber: [''],
+      toCloseDate: [''],
+      toTime: [''],
+      closedDate: [''],
+      time: [''],
+      product: this.fb.array([]),
+      task: this.fb.array([]),
+      shoot: this.fb.array([]),
+      list: this.fb.array([]),
+      marketing: this.fb.array([])
     });
   }
   addForm() {
@@ -85,7 +90,7 @@ export class EditTaskComponent implements OnInit {
       moduleName: [''],
       moduleDescription: [''],
       moduleStatus: ['']
-      });
+    });
     this.moduleForms.push(task);
   }
   get moduleForms() {
@@ -120,8 +125,8 @@ export class EditTaskComponent implements OnInit {
         productCount: [this.taskEdit.shoot[i].productCount],
         shootType: [this.taskEdit.shoot[i].shootType],
         modeName: [this.taskEdit.shoot[i].modeName],
-        shootPurpose:  [this.taskEdit.shoot[i].shootPurpose],
-        status:  [this.taskEdit.shoot[i].status],
+        shootPurpose: [this.taskEdit.shoot[i].shootPurpose],
+        status: [this.taskEdit.shoot[i].status],
         approval: [this.taskEdit.shoot[i].approval],
         requirement: [this.taskEdit.shoot[i].requirement]
       });
@@ -136,11 +141,11 @@ export class EditTaskComponent implements OnInit {
       productCount: [''],
       shootType: [''],
       modeName: [''],
-      shootPurpose:  [''],
-      status:  [''],
+      shootPurpose: [''],
+      status: [''],
       approval: [''],
       requirement: ['']
-      });
+    });
     this.ShootForms.push(shoot);
   }
 
@@ -154,7 +159,7 @@ export class EditTaskComponent implements OnInit {
       listStatus: [''],
       listCount: [''],
       noOfProductLive: ['']
-      });
+    });
     this.listForms.push(list);
   }
 
@@ -183,7 +188,7 @@ export class EditTaskComponent implements OnInit {
       activityAssignedCount: [''],
       activityCompletedCount: [''],
       leadCount: ['']
-      });
+    });
     this.MarketingForms.push(marketing);
   }
 
@@ -205,32 +210,48 @@ export class EditTaskComponent implements OnInit {
     }
   }
 
-getSelectedTask() {
-  this.taskManagementService.getSelectedTask(this.id).subscribe( data => {
-    this.taskEdit = data;
-    this.addNewForm();
-    this.addNewTaskForm();
-    this.addNewShootForm();
-    this.addNewListForm();
-    this.addMarketingDataForm();
-  }, error => {
-    console.log(error);
-  });
-}
-updateTask(taskForm, row) {
-  this.taskManagementService.UpdateTask(taskForm.value, row._id).subscribe(data => {
-    this.taskEdit = data;
-    this.router.navigate(['task/viewtask/', this.editview]);
-  }, error => {
-    console.log(error);
-  });
-}
+  getSelectedTask() {
+    this.taskManagementService.getSelectedTask(this.id).subscribe(data => {
+      this.taskEdit = data;
+      this.addNewForm();
+      this.addNewTaskForm();
+      this.addNewShootForm();
+      this.addNewListForm();
+      this.addMarketingDataForm();
+    }, error => {
+      console.log(error);
+    });
+  }
+  updateTask(taskForm, row) {
+    /* console.log(taskForm.value); */
+    this.taskManagementService.UpdateTask(taskForm.value, row._id).subscribe(data => {
+      this.taskEdit = data;
+      this.router.navigate(['task/viewtask/', this.editview]);
 
-cancel() {
-  this.router.navigate(['task/viewtask/', this.editview]);
-}
-getUnit() {
-  this.unitSort =  localStorage.getItem('unit');
-  this.roleSort = localStorage.getItem('role');
-}
+    }, error => {
+      console.log(error);
+    });
+  }
+  sendNotification(mobNo, title, status) {
+    this.title = title;
+    this.notificationBody = 'Your Project' + status;
+    this.notificationModel = new Notification();
+    this.notificationModel.title = this.title;
+    this.notificationModel.notificationBody = this.notificationBody;
+    this.notificationModel.mobileNumber = mobNo;
+    this.taskManagementService.SendPushNotification(this.notificationModel).subscribe(data => {
+      this.notificationModel = data;
+      this.router.navigate(['task/viewtask/', this.editview]);
+    }, err => {
+      console.log(err);
+    });
+  }
+
+  cancel() {
+    this.router.navigate(['task/viewtask/', this.editview]);
+  }
+  getUnit() {
+    this.unitSort = localStorage.getItem('unit');
+    this.roleSort = localStorage.getItem('role');
+  }
 }

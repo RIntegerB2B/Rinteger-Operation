@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Register } from './registration/register.model';
 import {  UserPermission } from './../shared/userPermission.model';
 import {  LeadSettings } from './../shared/lead-settings.model';
+import { CustomerRegister } from './customer-registration/customer-registration.model';
 
 
 @Injectable({
@@ -17,6 +18,11 @@ export class UserManagementService {
     const addUrl = 'register';
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.post<Register>(url, data);
+  }
+  CustomerRegistration(data: CustomerRegister) {
+    const addUrl = 'customerregister';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<CustomerRegister>(url, data);
   }
   allRegister(): Observable<any> {
     const addUrl = 'allregister';

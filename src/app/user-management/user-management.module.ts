@@ -32,9 +32,10 @@ import {
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { CreateRoleComponent } from './create-role/create-role.component';
+import { CustomerRegistrationComponent } from './customer-registration/customer-registration.component';
 
 @NgModule({
-  declarations: [RegistrationComponent, CreateRoleComponent],
+  declarations: [RegistrationComponent, CreateRoleComponent, CustomerRegistrationComponent],
   imports: [
     CommonModule,
     UserManagementRoutingModule,

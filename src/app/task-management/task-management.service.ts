@@ -114,4 +114,8 @@ DeleteTask(data): Observable<any> {
   const url: string = this.baseurl + 'deletetask/' + data._id;
   return this.http.delete<TaskModel[]>(url);
 }
+SendPushNotification(data): Observable<any> {
+  const urlway = this.baseurl + 'sendnotificationforstatus';
+  return this.http.post<TaskModel[]>(urlway, data);
+}
 }
