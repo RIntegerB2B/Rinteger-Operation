@@ -71,10 +71,11 @@ export class InvoiceGeneratePdfComponent implements OnInit {
     const headerArray = [{ text: 'Item', style: 'tableHeaderRow' },
     { text: 'Description', style: 'tableHeaderRow' },
     { text: 'Quantity', style: 'tableHeaderRow' },
-    { text: 'Price', style: 'tableHeaderTotal' }, {
+     {
       text: 'Discount (%)',
       style: 'tableHeaderRow'
     },
+    { text: 'Price', style: 'tableHeaderTotal' },
     { text: 'Total', style: 'tableHeaderTotal' }];
     newTestArray.push(headerArray);
     for (let i = 0; i < this.invoiceReq.length; i++) {
@@ -778,7 +779,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           style: 'tableExample',
           table: {
             headerRows: 1,
-            widths: ['*', '*', '*', '*', '*'],
+            widths: [125, 125, 50, 85, 85],
             body: this.discountNull()
           },
           layout: {
@@ -797,7 +798,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           style: 'tableBox',
           table: {
             headerRows: 1,
-            widths: ['*', '*', '*', '*', '*'],
+            widths: [125, 125, 50, 85, 85],
             body: [[{ text: '', style: 'rowStyle',
             border: [false, false, false, false] },
            { text: '', style: 'rowStyle',
@@ -1030,7 +1031,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           style: 'tableExample',
           table: {
             headerRows: 1,
-            widths: ['*', '*', '*', '*', '*'],
+            widths: [125, 125, 50, 85, 85],
             body: this.discountNull()
           },
           layout: {
@@ -1049,7 +1050,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
           style: 'tableBox',
           table: {
             headerRows: 1,
-            widths: ['*', '*', '*', '*', '*'],
+            widths: [125, 125, 50, 85, 85],
             body: [[{ text: '', style: 'rowStyle',
             border: [false, false, false, false] },
            { text: '', style: 'rowStyle',
