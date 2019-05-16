@@ -50,9 +50,8 @@
         <div class="form-group">
           <mat-form-field>
             <mat-select formControlName="role" placeholder="Role">
-              <mat-option style="padding:5px;" *ngFor="let access of newRoles" 
-              [value]="access.role">
-                {{access.role}}
+              <mat-option style="padding:5px;" *ngFor="let access of newRoles" [value]="access">
+                {{access}}
               </mat-option>
             </mat-select>
             <mat-error *ngIf="registerForm.controls['role'].errors?.required">

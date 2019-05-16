@@ -5,7 +5,7 @@
         <div fxFlex="100">
           <label class="pageBoxLg-label">Create Task Form</label>
         </div>
-   
+
         <div fxFlex="50" class="pr-1">
           <mat-form-field>
             <mat-select placeholder="Units" formControlName="units" (selectionChange)="changed($event)" required>
@@ -34,7 +34,8 @@
             </mat-error>
           </mat-form-field>
         </div>
-        <div fxFlex="50" class="p-2" *ngIf="this.unitSort ==='Technologies' || this.unitSort === 'BSS' || this.roleSort === 'admin'">
+        <div fxFlex="50" class="p-2"
+          *ngIf="this.unitSort ==='Technologies' || this.unitSort === 'BSS' || this.roleSort === 'admin'">
           <mat-form-field class="full-width">
             <input matInput formControlName="mobileNumber" placeholder="Mobile Number" type="tel">
             <mat-error *ngIf="taskForm.controls['mobileNumber'].errors?.required" required>
@@ -139,11 +140,11 @@
         <div fxLayout="column" fxFlex="100" formArrayName="product"
           *ngIf="(this.unitSort === 'Studio') && (this.roleSort !== 'photographer') || this.roleSort === 'admin'">
           <div *ngFor="let account of productForms.controls; let i=index" [formGroupName]="i">
-              <div fxFlex="15" class="pr-1">
-                  <mat-form-field class="full-width">
-                    <input matInput formControlName="customerName" placeholder="customerName">
-                  </mat-form-field>
-                </div>
+            <div fxFlex="15" class="pr-1">
+              <mat-form-field class="full-width">
+                <input matInput formControlName="customerName" placeholder="customerName">
+              </mat-form-field>
+            </div>
             <div fxFlex="15" class="pr-1">
               <mat-form-field class="full-width">
                 <input matInput formControlName="productName" placeholder="productName">
@@ -176,8 +177,7 @@
         </div>
 
 
-        <div fxFlex="100" class="textHeader"
-          *ngIf="this.unitSort === 'Technologies' || this.roleSort === 'admin'">
+        <div fxFlex="100" class="textHeader" *ngIf="this.unitSort === 'Technologies' || this.roleSort === 'admin'">
           <h5>Project Details</h5>
         </div>
         <div fxLayout="column" fxFlex="100" formArrayName="task"
@@ -205,8 +205,7 @@
           </div>
         </div>
 
-        <div fxFlex="50"
-          *ngIf="this.unitSort === 'Technologies' || this.roleSort === 'admin'">
+        <div fxFlex="50" *ngIf="this.unitSort === 'Technologies' || this.roleSort === 'admin'">
           <a (click)="addTaskForm()">
             <mat-icon class="gridEdit">add_box</mat-icon>
           </a>
@@ -215,67 +214,66 @@
 
 
 
-        <div fxFlex="100" class="textHeader"
-          *ngIf="this.roleSort === 'photographer' || this.roleSort === 'admin'">
+        <div fxFlex="100" class="textHeader" *ngIf="this.roleSort === 'photographer' || this.roleSort === 'admin'">
           <h5>Shoot Details</h5>
         </div>
 
         <div fxLayout="column" fxFlex="100" formArrayName="shoot"
           *ngIf="this.roleSort === 'photographer' || this.roleSort === 'admin'">
           <div *ngFor="let account of ShootForms.controls; let i=index" [formGroupName]="i">
-           <div class="row">
-            <div fxFlex="15" class="pr-1">
-              <mat-form-field class="full-width">
-                <input matInput formControlName="customerName" placeholder="customerName">
-              </mat-form-field>
-            </div>
+            <div class="row">
+              <div fxFlex="15" class="pr-1">
+                <mat-form-field class="full-width">
+                  <input matInput formControlName="customerName" placeholder="customerName">
+                </mat-form-field>
+              </div>
 
-            <div fxFlex="15" class="pr-1">
-              <mat-form-field class="full-width">
-                <input matInput formControlName="productName" placeholder="productName">
-              </mat-form-field>
-            </div>
+              <div fxFlex="15" class="pr-1">
+                <mat-form-field class="full-width">
+                  <input matInput formControlName="productName" placeholder="productName">
+                </mat-form-field>
+              </div>
 
-            <div fxFlex="15" class="pr-1">
-              <mat-form-field class="full-width">
-                <input matInput formControlName="productCount" placeholder="productCount">
-              </mat-form-field>
-            </div>
+              <div fxFlex="15" class="pr-1">
+                <mat-form-field class="full-width">
+                  <input matInput formControlName="productCount" placeholder="productCount">
+                </mat-form-field>
+              </div>
 
-            <div fxFlex="15" class="pr-1">
-              <mat-form-field class="full-width">
-                <input matInput formControlName="shootType" placeholder="shootType">
-              </mat-form-field>
-            </div>
+              <div fxFlex="15" class="pr-1">
+                <mat-form-field class="full-width">
+                  <input matInput formControlName="shootType" placeholder="shootType">
+                </mat-form-field>
+              </div>
 
-            <div fxFlex="15" class="pr-1">
-              <mat-form-field class="full-width">
-                <input matInput formControlName="modeName" placeholder="modelName">
-              </mat-form-field>
+              <div fxFlex="15" class="pr-1">
+                <mat-form-field class="full-width">
+                  <input matInput formControlName="modeName" placeholder="modelName">
+                </mat-form-field>
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div fxFlex="15" class="pr-1">
-              <mat-form-field class="full-width">
-                <input matInput formControlName="shootPurpose" placeholder="shootPurpose">
-              </mat-form-field>
+            <div class="row">
+              <div fxFlex="15" class="pr-1">
+                <mat-form-field class="full-width">
+                  <input matInput formControlName="shootPurpose" placeholder="shootPurpose">
+                </mat-form-field>
+              </div>
+              <div fxFlex="15" class="pr-1">
+                <mat-form-field class="full-width">
+                  <input matInput formControlName="approval" placeholder="approval">
+                </mat-form-field>
+              </div>
+              <div fxFlex="15" class="pr-1">
+                <mat-form-field class="full-width">
+                  <input matInput formControlName="requirement" placeholder="requirement">
+                </mat-form-field>
+              </div>
+              <div fxFlex="15" class="pr-1">
+                <mat-form-field class="full-width">
+                  <input matInput formControlName="status" placeholder="status">
+                </mat-form-field>
+              </div>
             </div>
-            <div fxFlex="15" class="pr-1">
-              <mat-form-field class="full-width">
-                <input matInput formControlName="approval" placeholder="approval">
-              </mat-form-field>
-            </div>
-            <div fxFlex="15" class="pr-1">
-              <mat-form-field class="full-width">
-                <input matInput formControlName="requirement" placeholder="requirement">
-              </mat-form-field>
-            </div>
-            <div fxFlex="15" class="pr-1">
-              <mat-form-field class="full-width">
-                <input matInput formControlName="status" placeholder="status">
-              </mat-form-field>
-            </div>
-          </div>
 
             <a (click)="deleteShoot(i)">
               <mat-icon>clear</mat-icon>
@@ -284,8 +282,7 @@
         </div>
 
 
-        <div fxFlex="100" fxLayout="row"
-          *ngIf="this.roleSort === 'photographer' || this.roleSort === 'admin'">
+        <div fxFlex="100" fxLayout="row" *ngIf="this.roleSort === 'photographer' || this.roleSort === 'admin'">
           <a (click)="addShootForm()">
             <mat-icon class="gridEdit">add_box</mat-icon>
           </a>
@@ -293,8 +290,7 @@
         </div>
 
 
-        <div fxFlex="100" class="textHeader"
-          *ngIf="this.unitSort === 'BSS' || this.roleSort === 'admin'">
+        <div fxFlex="100" class="textHeader" *ngIf="this.unitSort === 'BSS' || this.roleSort === 'admin'">
           <h5>Listing Details</h5>
         </div>
         <div fxLayout="column" fxFlex="100" formArrayName="list"
@@ -311,15 +307,15 @@
               </mat-form-field>
             </div>
             <div fxFlex="10" class="pr-1">
-                <mat-form-field class="full-width">
-                  <input matInput formControlName="listCount" placeholder="listCount">
-                </mat-form-field>
-              </div>
-              <div fxFlex="10" class="pr-1">
-                  <mat-form-field class="full-width">
-                    <input matInput formControlName="noOfProductLive" placeholder="noOfProductLive">
-                  </mat-form-field>
-                </div>
+              <mat-form-field class="full-width">
+                <input matInput formControlName="listCount" placeholder="listCount">
+              </mat-form-field>
+            </div>
+            <div fxFlex="10" class="pr-1">
+              <mat-form-field class="full-width">
+                <input matInput formControlName="noOfProductLive" placeholder="noOfProductLive">
+              </mat-form-field>
+            </div>
             <div fxFlex="10" class="pr-1">
               <mat-form-field class="full-width">
                 <input matInput formControlName="listStatus" placeholder="listStatus">
@@ -332,8 +328,7 @@
           </div>
         </div>
 
-        <div fxFlex="50"
-          *ngIf="this.unitSort === 'BSS' || this.roleSort === 'admin'">
+        <div fxFlex="50" *ngIf="this.unitSort === 'BSS' || this.roleSort === 'admin'">
           <a (click)="addListForm()">
             <mat-icon class="gridEdit">add_box</mat-icon>
           </a>
@@ -341,52 +336,50 @@
         </div>
 
 
-        <div fxFlex="100" class="textHeader"
-        *ngIf="this.unitSort === 'Marketing' || this.roleSort === 'admin'">
-        <h5>Marketing Details</h5>
-      </div>
-      <div fxLayout="column" fxFlex="100" formArrayName="marketing"
-        *ngIf="this.unitSort === 'Marketing' || this.roleSort === 'admin'">
-        <div *ngFor="let account of MarketingForms.controls; let i=index" [formGroupName]="i">
-          <div fxFlex="10" class="pr-1">
-            <mat-form-field class="full-width">
-              <input matInput formControlName="title" placeholder="Task Title">
-            </mat-form-field>
-          </div>
-          <div fxFlex="30" class="pr-1">
-            <mat-form-field class="full-width">
-              <input matInput formControlName="description" placeholder="Task Description">
-            </mat-form-field>
-          </div>
-          <div fxFlex="20" class="pr-1">
+        <div fxFlex="100" class="textHeader" *ngIf="this.unitSort === 'Marketing' || this.roleSort === 'admin'">
+          <h5>Marketing Details</h5>
+        </div>
+        <div fxLayout="column" fxFlex="100" formArrayName="marketing"
+          *ngIf="this.unitSort === 'Marketing' || this.roleSort === 'admin'">
+          <div *ngFor="let account of MarketingForms.controls; let i=index" [formGroupName]="i">
+            <div fxFlex="10" class="pr-1">
+              <mat-form-field class="full-width">
+                <input matInput formControlName="title" placeholder="Task Title">
+              </mat-form-field>
+            </div>
+            <div fxFlex="30" class="pr-1">
+              <mat-form-field class="full-width">
+                <input matInput formControlName="description" placeholder="Task Description">
+              </mat-form-field>
+            </div>
+            <div fxFlex="20" class="pr-1">
               <mat-form-field class="full-width">
                 <input matInput formControlName="activityAssignedCount" placeholder="Activity Assigned Count">
               </mat-form-field>
             </div>
             <div fxFlex="20" class="pr-1">
-                <mat-form-field class="full-width">
-                  <input matInput formControlName="activityCompletedCount" placeholder="Activity Completed Count">
-                </mat-form-field>
-              </div>
-          <div fxFlex="20" class="pr-1">
-            <mat-form-field class="full-width">
-              <input matInput formControlName="leadCount" placeholder="Lead Count">
-            </mat-form-field>
+              <mat-form-field class="full-width">
+                <input matInput formControlName="activityCompletedCount" placeholder="Activity Completed Count">
+              </mat-form-field>
+            </div>
+            <div fxFlex="20" class="pr-1">
+              <mat-form-field class="full-width">
+                <input matInput formControlName="leadCount" placeholder="Lead Count">
+              </mat-form-field>
+            </div>
+
+            <a (click)="deleteMarkeing(i)">
+              <mat-icon>clear</mat-icon>
+            </a>
           </div>
-
-          <a (click)="deleteMarkeing(i)">
-            <mat-icon>clear</mat-icon>
-          </a>
         </div>
-      </div>
 
-      <div fxFlex="50"
-        *ngIf="this.unitSort === 'Marketing' || this.roleSort === 'admin'">
-        <a (click)="addMarketingForm()">
-          <mat-icon class="gridEdit">add_box</mat-icon>
-        </a>
-        <p>Add New</p>
-      </div>
+        <div fxFlex="50" *ngIf="this.unitSort === 'Marketing' || this.roleSort === 'admin'">
+          <a (click)="addMarketingForm()">
+            <mat-icon class="gridEdit">add_box</mat-icon>
+          </a>
+          <p>Add New</p>
+        </div>
 
 
 

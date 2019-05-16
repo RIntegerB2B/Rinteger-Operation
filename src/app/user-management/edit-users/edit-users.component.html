@@ -1,0 +1,61 @@
+<div class="pageBoxLg">
+  <div class="container topAlignContainer ">
+    <form [formGroup]="EditRegisteredUserForm" >
+      <div fxLayout="row wrap" fxLayout.lt-sm="column">
+        <div fxFlex="100">
+          <label class="pageBoxLg-label">Edit Registered User</label>
+        </div>       
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="userName"  placeholder="User Name" 
+            [value]="registeredUserValue.userName"
+              (ngModelChange)="registeredUserValue.userName=$event">  
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="mobileNumber" [value]="registeredUserValue.mobileNumber" 
+            (ngModelChange)="registeredUserValue.mobileNumber=$event"
+              placeholder="Mobile Number">  
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+              <mat-select placeholder="Select Role" [(ngModel)]="registeredUserValue.role"
+              (ngModelChange)="registeredUserValue.role=$event" formControlName="role">
+                  <mat-option *ngFor="let data of roles" [value]="data">
+                    {{data}}
+                  </mat-option>
+                </mat-select>
+          </mat-form-field>
+        </div> 
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+              <mat-select placeholder="Select Units" [(ngModel)]="registeredUserValue.unit"
+              (ngModelChange)="registeredUserValue.unit=$event" formControlName="unit">
+                  <mat-option *ngFor="let data of units" [value]="data">
+                    {{data}}
+                  </mat-option>
+                </mat-select>
+          </mat-form-field>
+        </div>       
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="password" [value]="registeredUserValue.password"
+             (ngModelChange)="registeredUserValue.password=$event" 
+              placeholder="Password">
+          </mat-form-field>
+        </div>
+              
+        <div fxFlex="100" class="mt-1">
+            <button mat-raised-button type="button" color="primary" 
+            (click)=updateRegisteredUser(registeredUserValue)>Save</button>          
+          <span fxFlex></span>
+          <span fxFlex></span>
+          <button mat-raised-button mat-button color="accent"
+           type="button" (click)="cancel()">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  </div>

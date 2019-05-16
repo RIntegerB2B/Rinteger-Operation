@@ -22,7 +22,7 @@ export class UserManagementService {
   CustomerRegistration(data: CustomerRegister) {
     const addUrl = 'customerregister';
     const url: string = this.serviceUrl + addUrl;
-    return this.httpClient.post<CustomerRegister>(url, data);
+    return this.httpClient.post<CustomerRegister[]>(url, data);
   }
   allRegister(): Observable<any> {
     const addUrl = 'allregister';
@@ -52,5 +52,19 @@ export class UserManagementService {
   DeleteRole(data): Observable<any> {
     const url: string = this.serviceUrl + 'deleterole/' + data;
     return this.httpClient.delete<UserPermission[]>(url);
+  }
+  DeleteRegisteredUser(data): Observable<any> {
+    const url: string = this.serviceUrl + 'deleteregistereduser/' + data;
+    return this.httpClient.delete<Register[]>(url);
+  }
+  SelectedRegisteredUser(id): Observable<any> {
+    const addUrl = 'editregistereduser/';
+    const url: string = this.serviceUrl + addUrl + id;
+    return this.httpClient.get<Register[]>(url);
+  }
+  updateRegisteredUser(data): Observable<any> {
+    const addUrl = 'updateregistereduser/';
+    const url: string = this.serviceUrl + addUrl + data._id;
+    return this.httpClient.post<Register>(url, data);
   }
 }

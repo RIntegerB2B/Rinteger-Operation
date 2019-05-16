@@ -80,11 +80,11 @@ export class CreateTaskFormComponent implements OnInit {
   }
   addForm() {
     const product = this.fb.group({
-    customerName: [''],
-    productName: [''],
-    productCount: [''],
-    imageCount: ['']
-      });
+      customerName: [''],
+      productName: [''],
+      productCount: [''],
+      imageCount: ['']
+    });
     this.productForms.push(product);
   }
 
@@ -99,7 +99,7 @@ export class CreateTaskFormComponent implements OnInit {
       moduleName: [''],
       moduleDescription: [''],
       moduleStatus: ['']
-      });
+    });
     this.moduleForms.push(task);
   }
 
@@ -116,11 +116,11 @@ export class CreateTaskFormComponent implements OnInit {
       productCount: [''],
       shootType: [''],
       modeName: [''],
-      shootPurpose:  [''],
-      status:  [''],
+      shootPurpose: [''],
+      status: [''],
       approval: [''],
       requirement: ['']
-      });
+    });
     this.ShootForms.push(shoot);
   }
 
@@ -138,7 +138,7 @@ export class CreateTaskFormComponent implements OnInit {
       listStatus: [''],
       listCount: [''],
       noOfProductLive: ['']
-      });
+    });
     this.listForms.push(list);
   }
 
@@ -158,7 +158,7 @@ export class CreateTaskFormComponent implements OnInit {
       activityAssignedCount: [''],
       activityCompletedCount: [''],
       leadCount: ['']
-      });
+    });
     this.MarketingForms.push(marketing);
   }
 
@@ -178,11 +178,11 @@ export class CreateTaskFormComponent implements OnInit {
 
   onSubmit(taskForm: FormGroup) {
     this.taskholder = new TaskModel();
-  /*   this.taskholder.taskNo = this.taskForm.controls.taskNo.value; */
+    /*   this.taskholder.taskNo = this.taskForm.controls.taskNo.value; */
     this.taskholder.userId = this.taskForm.controls.assignedTo.value._id;
     this.taskholder.clientName = this.taskForm.controls.clientName.value;
     this.taskholder.mobileNumber = this.taskForm.controls.mobileNumber.value;
-  /*   this.taskholder.dateTime = this.taskForm.controls.dateTime.value; */
+    /*   this.taskholder.dateTime = this.taskForm.controls.dateTime.value; */
     this.taskholder.taskTitle = this.taskForm.controls.taskTitle.value;
     this.taskholder.taskDescription = this.taskForm.controls.taskDescription.value;
     this.taskholder.units = this.taskForm.controls.units.value;
@@ -226,11 +226,11 @@ export class CreateTaskFormComponent implements OnInit {
 
 
   cancel() {
-    this.router.navigate(['task/viewtask',  this.userId]);
+    this.router.navigate(['task/viewtask', this.userId]);
   }
-getUnit() {
-  this.unitSort =  localStorage.getItem('unit');
-  this.roleSort = localStorage.getItem('role');
-}
+  getUnit() {
+    this.unitSort = localStorage.getItem('unit');
+    this.roleSort = localStorage.getItem('role');
+  }
 
 }
