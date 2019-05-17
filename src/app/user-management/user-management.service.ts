@@ -44,6 +44,11 @@ export class UserManagementService {
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.get<UserPermission[]>(url);
   }
+  permissionRoleForEdit(): Observable<any>  {
+    const addUrl = 'allrolesforedit';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<UserPermission[]>(url);
+  }
   updateRole(data, value): Observable<any> {
     const addUrl = 'update/';
     const url: string = this.serviceUrl + addUrl + value;
@@ -66,5 +71,24 @@ export class UserManagementService {
     const addUrl = 'updateregistereduser/';
     const url: string = this.serviceUrl + addUrl + data._id;
     return this.httpClient.post<Register>(url, data);
+  }
+  getAllCustomerRegistration(): Observable<any> {
+    const addUrl = 'getallcustomerregistration';
+    const url: string = this.serviceUrl + addUrl ;
+    return this.httpClient.get<CustomerRegister>(url);
+  }
+  SelectedRegisteredCustomer(id): Observable<any> {
+    const addUrl = 'editregisteredcustomer/';
+    const url: string = this.serviceUrl + addUrl + id;
+    return this.httpClient.get<CustomerRegister[]>(url);
+  }
+  updateRegisteredCustomer(data): Observable<any> {
+    const addUrl = 'updateregisteredcustomer/';
+    const url: string = this.serviceUrl + addUrl + data._id;
+    return this.httpClient.post<CustomerRegister>(url, data);
+  }
+  DeleteRegisteredCustomer(data): Observable<any> {
+    const url: string = this.serviceUrl + 'deleteregisteredcustomer/' + data;
+    return this.httpClient.delete<CustomerRegister[]>(url);
   }
 }

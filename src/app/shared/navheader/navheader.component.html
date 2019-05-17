@@ -81,10 +81,11 @@
           user Management
         </a>
         <div *ngIf="adm.settingNav" class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" [routerLink]="['/user/register']">Register</a>
-          <a class="dropdown-item" [routerLink]="['/user/rolecreate']">Role Create</a>
-          <a class="dropdown-item" [routerLink]="['/user/customerregistration']">Customer Registration</a>
-          <a class="dropdown-item" [routerLink]="['/user/viewregistereduser']">View Registered User</a>
+          <a class="dropdown-item" [routerLink]="['/user/register']" *ngIf="this.navheaderService?.getRole() === 'admin'">Register</a>
+          <a class="dropdown-item" [routerLink]="['/user/rolecreate']" *ngIf="this.navheaderService?.getRole() === 'admin'">Role Create</a>
+          <a class="dropdown-item" [routerLink]="['/user/customerregistration']" *ngIf="this.navheaderService?.getRole() === 'admin'">Customer Registration</a>
+          <a class="dropdown-item" [routerLink]="['/user/viewregistereduser']" *ngIf="this.navheaderService?.getRole() === 'admin'">Ripsil User</a>
+          <a class="dropdown-item" [routerLink]="['/user/viewcustomerregistration']">Rinteger Customer</a>
         </div>
       </li>
       <li class="nav-item" *ngFor="let ticket of this.navheaderService?.getItems?.materialRole ">

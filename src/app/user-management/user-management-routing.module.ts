@@ -5,6 +5,8 @@ import { CreateRoleComponent } from './create-role/create-role.component';
 import { CustomerRegistrationComponent } from './customer-registration/customer-registration.component';
 import { ViewUsersComponent } from './view-users/view-users.component';
 import { EditUsersComponent } from './edit-users/edit-users.component';
+import { ViewCustomerRegistrationComponent } from './view-customer-registration/view-customer-registration.component';
+import { EditCustomerComponent } from './edit-customer/edit-customer.component';
 
 const routes: Routes = [
   {
@@ -21,6 +23,12 @@ const routes: Routes = [
   },
   {
     path: 'editregistereduser/:id', component: EditUsersComponent
+  },
+  {
+    path: 'viewcustomerregistration', component: ViewCustomerRegistrationComponent
+  },
+  {
+    path: 'editregisteredcustomer/:id' , component: EditCustomerComponent
   }
 ];
 

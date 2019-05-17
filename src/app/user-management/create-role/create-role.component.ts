@@ -128,7 +128,7 @@ export class CreateRoleComponent implements OnInit {
     });
   }
   getRole() {
-    this.userManagementService.permissionRole().subscribe(data => {
+    this.userManagementService.permissionRoleForEdit().subscribe(data => {
       this.roleValue = data;
       this.roleNameValue = this.roleValue;
       console.log(this.roleNameValue);

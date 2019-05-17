@@ -63,7 +63,6 @@ export class CustomerRegistrationComponent implements OnInit {
         this.showError = false;
         this.snack.open('register successfully', 'OK', { duration: 1000, panelClass: ['blue-snackbar'] });
       }
-     
      /*  this.router.navigate(['./account/login']); */
     }, error => {
       console.log(error);

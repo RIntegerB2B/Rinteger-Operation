@@ -1,0 +1,41 @@
+<div class="pageBoxLg">
+  <div class="container topAlignContainer ">
+    <form [formGroup]="EditRegisteredCustomerForm" >
+      <div fxLayout="row wrap" fxLayout.lt-sm="column">
+        <div fxFlex="100">
+          <label class="pageBoxLg-label">Edit Registered Customer</label>
+        </div>       
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="customerName"  placeholder="Customer Name" 
+            [value]="registeredCustomerValue.customerName"
+              (ngModelChange)="registeredCustomerValue.customerName=$event">  
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="mobileNumber" [value]="registeredCustomerValue.mobileNumber" 
+            (ngModelChange)="registeredCustomerValue.mobileNumber=$event"
+              placeholder="Mobile Number">  
+          </mat-form-field>
+        </div>      
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="password" [value]="registeredCustomerValue.password"
+             (ngModelChange)="registeredCustomerValue.password=$event" 
+              placeholder="Password">
+          </mat-form-field>
+        </div>
+              
+        <div fxFlex="100" class="mt-1">
+            <button mat-raised-button type="button" color="primary" 
+            (click)=updateRegisteredCustomer(registeredCustomerValue)>Save</button>          
+          <span fxFlex></span>
+          <span fxFlex></span>
+          <button mat-raised-button mat-button color="accent"
+           type="button" (click)="cancel()">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  </div>

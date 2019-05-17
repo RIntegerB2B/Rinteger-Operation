@@ -33,7 +33,7 @@
           </mat-form-field>
         </div>
 
-        <div fxFlex="50" class="p-2" *ngIf="this.unitSort !=='Studio'" >
+        <div fxFlex="50" class="p-2"  >
         <div  >
           <mat-form-field class="full-width">
             <input matInput formControlName="clientName" placeholder="Client Name"  
@@ -46,8 +46,7 @@
         </div>
       </div>
 
-      <div fxFlex="50" class="p-2" 
-      *ngIf="this.unitSort ==='Technologies' || this.unitSort === 'BSS' || this.roleSort === 'admin'" >
+      <div fxFlex="50" class="p-2">
         <div >
           <mat-form-field class="full-width">
             <input matInput formControlName="mobileNumber" placeholder="Mobile Number"  
@@ -208,7 +207,7 @@
         </div>
         <div  fxLayout="column" fxFlex="100" formArrayName="product"  *ngIf= "(this.unitSort === 'Studio') && (this.roleSort !== 'photographer') || this.roleSort === 'admin'" > 
           <div *ngFor="let account of productForms.controls; let i=index" [formGroupName]="i">
-              <div fxFlex="15" class="pr-1">
+              <div fxFlex="15" class="pr-1" *ngIf="taskEdit?.customerName">
                   <mat-form-field class="full-width">
                     <input matInput formControlName="customerName" 
                     (ngModelChange)="taskEdit.customerName=$event" 
