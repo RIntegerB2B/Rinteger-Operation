@@ -80,4 +80,9 @@ export class TicketService {
     const url: string = this.baseurl  + 'deleteTicket/' + data;
     return this.http.delete<any[]>(url);
   }
+  getMyIssue(data): Observable<TicketModel[]> {
+    const urlway = this.baseurl + 'myissue/' + data;
+
+    return this.http.get<TicketModel[]>(urlway);
+  }
 }

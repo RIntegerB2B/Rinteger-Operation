@@ -5,6 +5,7 @@ import { AppSetting } from './../config/appSetting';
 import { Observable } from 'rxjs';
 import { Register } from './../user-management/registration/register.model';
 import { LogIn } from '../shared/login.model';
+import { CustomerRegister } from '../user-management/customer-registration/customer-registration.model';
 /* import { Customer } from './../customer-management/customer/create-customer/customer.model'; */
 
 @Injectable({
@@ -117,5 +118,10 @@ DeleteTask(data): Observable<any> {
 SendPushNotification(data): Observable<any> {
   const urlway = this.baseurl + 'sendnotificationforstatus';
   return this.http.post<TaskModel[]>(urlway, data);
+}
+getAllSubscribedCustomer(): Observable<any> {
+  const addUrl = 'getallsubscribedcustomer';
+  const url: string = this.baseurl + addUrl ;
+  return this.http.get<CustomerRegister>(url);
 }
 }

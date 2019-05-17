@@ -14,11 +14,7 @@
 
       <div fxFlex="50" class="pr-1">
         <mat-form-field class="full-width">
-          <input matInput formControlName="customername" placeholder="customername"required>
-          <mat-error *ngIf="ticketform.controls['customername'].errors?.required" >
-            Customer Name
-            <strong>required</strong>
-          </mat-error>
+          <input matInput formControlName="customername" placeholder="customername">
         </mat-form-field>
       </div>
 
@@ -49,12 +45,16 @@
 
       <div fxFlex="50" class="pr-1">
         <mat-form-field>
-          <mat-select placeholder="units"  (selectionChange)="changed($event)" formControlName="units">
+          <mat-select placeholder="units"  (selectionChange)="changed($event)" formControlName="units" required>
             <mat-option *ngFor="let data of units" [value]="data">
               {{data}}
 
             </mat-option>
           </mat-select>
+          <mat-error *ngIf="ticketform.controls['units'].errors?.required" >
+              Unit
+              <strong>required</strong>
+            </mat-error>
         </mat-form-field>
       </div>
 
@@ -73,28 +73,36 @@
 
       <div fxFlex="50" class="pr-1">
         <mat-form-field>
-          <mat-select placeholder="assignedto" formControlName="assignedto">
-            <mat-option *ngFor="let data of registerterdetail;let i = index " [value]="data">
+          <mat-select placeholder="assignedto" formControlName="assignedto" required>
+            <mat-option *ngFor="let data of taskname;let i = index " [value]="data">
               {{data.userName}}
             </mat-option>
           </mat-select>
+          <mat-error *ngIf="ticketform.controls['assignedto'].errors?.required" >
+              AssignedTo
+              <strong>required</strong>
+            </mat-error>
         </mat-form-field>
       </div> 
 
       <div fxFlex="50" class="pr-1">
         <mat-form-field>
-          <mat-select placeholder="assignedby" formControlName="assignedby">
-            <mat-option *ngFor="let data of taskname; let i = index " [value]="data.userName">
+          <mat-select placeholder="assignedby" formControlName="assignedby" required>
+            <mat-option *ngFor="let data of assignedBy; let i = index " [value]="data">
               {{data.userName}}
 
             </mat-option>
           </mat-select>
+          <mat-error *ngIf="ticketform.controls['assignedby'].errors?.required" required>
+              AssignedBy
+              <strong>required</strong>
+            </mat-error>
         </mat-form-field>
       </div>
 
 
 
-      <div fxFlex="50" class="p-2">
+    <!--   <div fxFlex="50" class="p-2">
         <mat-form-field class="full-width">
           <input matInput formControlName="status" placeholder="status">
           <mat-error *ngIf="ticketform.controls['status'].errors?.required" required>
@@ -103,11 +111,11 @@
           </mat-error>
         </mat-form-field>
       </div>
-
+ -->
 
       <div fxFlex="50" class="pr-1">
         <mat-form-field>
-          <input matInput formControlName="toclosedate" [matDatepicker]="picker" placeholder="Choose a date">
+          <input matInput formControlName="toclosedate" [matDatepicker]="picker" placeholder="Deadline Date">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>

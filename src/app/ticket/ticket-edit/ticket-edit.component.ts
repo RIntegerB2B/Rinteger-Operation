@@ -95,7 +95,7 @@ export class TicketEditComponent implements OnInit {
       if (this.id === customer._id) {
         this.ticketEdit = customer;
 
-      console.log(this.ticketEdit);
+   /*    console.log(this.ticketEdit); */
 // tslint:disable-next-line: no-unused-expression
     } error => {
       console.log(error);

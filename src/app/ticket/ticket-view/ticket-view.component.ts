@@ -22,12 +22,13 @@ export class TicketViewComponent implements OnInit {
   public totalSize = 0;
   public array: any;
   private dataSource;
+  hidenValue = true;
   count;
   all;
   filterWise;
   deadcount;
   studios; BSSs; technologys;
-  units = [{ name: 'studio', counts: 0 }, { name: 'BSS', counts: 0 }, { name: 'technology', counts: 0 },
+  units = [{ name: 'Studio', counts: 0 }, { name: 'BSS', counts: 0 }, { name: 'Technologies', counts: 0 },
   { name: 'Marketing', counts: 0}, { name: 'Operation', counts: 0}];
   @ViewChild('MatPaginator') paginator: MatPaginator;
   matdatasource = new MatTableDataSource([]);
@@ -36,31 +37,25 @@ export class TicketViewComponent implements OnInit {
   marketing: any;
   operation: any;
 
-
-
-
   constructor(private ts: TicketService, private router: Router, private route: ActivatedRoute,
     private navheaderService: NavheaderService) { }
 
   ngOnInit() {
-
     this.userRole = localStorage.getItem('role');
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.userId = params.get('id');
       /* this.userRole = params.get ('role'); */
     });
-
     if (this.userRole === 'admin') {
       this.retriveTicket();
     } else {
       this.CompareUserId();
     }
-
     this.navheaderService.hideMenuTrans();
     this.navheaderService.menuItems();
   }
-
   retriveTicket() {
+    this.hidenValue = true;
     this.ts.retriveTicket().subscribe(data => {
       this.ticketholder = data;
       this.ticketholder = new MatTableDataSource<any>(data);
@@ -72,39 +67,19 @@ export class TicketViewComponent implements OnInit {
       this.totalSize = this.array.length;
       this.iterator();
       this.filterWiseTest();
-
-    }, error => { console.log(error); }
-    );
-
+    }, error => { console.log(error); 
+    });
   }
-
-  /* getunitwiseTicket(name) {
-    this.ts.getunitwiseTicket(name).subscribe(data => {
-      this.ticketholder = data;
-      this.ticketholder = new MatTableDataSource<any>(data);
-      this.ticketholder.paginator = this.paginator;
-      this.ticketholder = data;
-      this.filterWise = this.ticketholder;
-      this.array = data;
-      this.totalSize = this.array.length;
-
-    }, error => {
-      console.log(error);
-    }
-    );
-  } */
   getunitwiseTicket(name) {
+    this.hidenValue = true;
     this.ticketholder = this.filterWise.filter(data =>
       data.units === name
     );
   }
-
-
   filterWiseTest() {
-
-    this.studios = this.filterWise.filter(data => data.units === 'studio');
+    this.studios = this.filterWise.filter(data => data.units === 'Studio');
     this.BSSs = this.filterWise.filter(data => data.units === 'BSS');
-    this.technologys = this.filterWise.filter(data => data.units === 'technology');
+    this.technologys = this.filterWise.filter(data => data.units === 'Technologies');
     this.marketing = this.filterWise.filter(data => data.units === 'Marketing');
     this.operation = this.filterWise.filter(data => data.units === 'Operation');
     this.units[0].counts = this.studios.length;
@@ -113,8 +88,8 @@ export class TicketViewComponent implements OnInit {
     this.units[3].counts = this.marketing.length;
     this.units[4].counts = this.operation.length;
   }
-
   deadlinedTicket() {
+    this.hidenValue = true;
     this.ts.deadlinedTicket().subscribe(data => {
       this.ticketholder = data;
       this.deadcount = this.ticketholder.length;
@@ -126,21 +101,9 @@ export class TicketViewComponent implements OnInit {
       this.totalSize = this.array.length;
     }, error => {
       console.log(error);
-    }
-    );
+    });
   }
 
-
-
-
-
-  /*  uniqTicket(data) {
-
-     this.ts.uniqTicket(data).subscribe(data =>{this.ticketholder=data;
-       console.log(this.ticketholder);
-   },error =>{console.log(error);}
-   );
-   } */
   public handlePage(e: any) {
     this.currentPage = e.pageIndex;
     this.pageSize = e.pageSize;
@@ -152,9 +115,8 @@ export class TicketViewComponent implements OnInit {
     const part = this.array.slice(start, end);
     this.ticketholder = part;
   }
-
-
   CompareUserId() {
+    this.hidenValue = true;
     this.ts.compareUserId(this.userId).subscribe(data => {
       this.ticketholder = data;
       this.deadcount = this.ticketholder.length;
@@ -165,14 +127,24 @@ export class TicketViewComponent implements OnInit {
       this.array = data;
       this.totalSize = this.array.length;
       this.filterWiseTest();
-    }
-
-    );
-
+    });
   }
   deleteTicket(value) {
     this.ts.deleteTicket(value._id).subscribe(data => {
       this.ticketholder = data;
+    });
+  }
+  getMyIssue() {
+    this.hidenValue = false;
+    this.ts.getMyIssue(this.userId).subscribe(data => {
+      this.ticketholder = data;
+      this.ticketholder = new MatTableDataSource<any>(data);
+      this.ticketholder.paginator = this.paginator;
+      this.ticketholder = data;
+      this.array = data;
+      this.totalSize = this.array.length;
+    }, error => {
+      console.log(error);
     });
   }
 }

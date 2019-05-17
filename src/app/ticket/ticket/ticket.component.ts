@@ -18,7 +18,7 @@ export class TicketComponent implements OnInit {
   assignedby;
   customerdetail;
   registerterdetail: Register[];
-  units = ['studio', 'BSS', 'technology'];
+  units = ['Studio', 'BSS', 'Technologies', 'Marketing', 'Operation'];
   priority = ['low', 'medium', 'high', 'critical'];
   ticketform: FormGroup;
   ticketholder: TicketModel;
@@ -27,7 +27,7 @@ export class TicketComponent implements OnInit {
   departmentData;
   assignedBy;
   assignedTo;
-  taskname: Register[];
+  taskname;
   userId: string;
   userRole: string;
   constructor(private ts: TicketService, private fb: FormBuilder, private router: Router,
@@ -68,7 +68,6 @@ export class TicketComponent implements OnInit {
 
   onSubmit() {
     this.ticketholder = new TicketModel();
-    this.ticketholder.ticketno = this.ticketform.controls.ticketno.value;
     this.ticketholder.datetime = this.ticketform.controls.datetime.value;
     this.ticketholder.customername = this.ticketform.controls.customername.value;
     this.ticketholder.requirement = this.ticketform.controls.requirement.value;
@@ -77,7 +76,8 @@ export class TicketComponent implements OnInit {
     this.ticketholder.department = this.ticketform.controls.department.value;
     this.ticketholder.assignedto = this.ticketform.controls.assignedto.value.userName;
     this.ticketholder.userId = this.ticketform.controls.assignedto.value._id;
-    this.ticketholder.assignedby = this.ticketform.controls.assignedby.value;
+    this.ticketholder.assignerId = this.ticketform.controls.assignedby.value._id;
+    this.ticketholder.assignedby = this.ticketform.controls.assignedby.value.userName;
     this.ticketholder.status = this.ticketform.controls.status.value;
     this.ticketholder.toclosedate = this.ticketform.controls.toclosedate.value;
     this.ticketholder.closeddate = this.ticketform.controls.closeddate.value;
@@ -94,8 +94,9 @@ export class TicketComponent implements OnInit {
       this.ticketholder = data;
       this.department = this.ticketholder;
       this.departmentData = this.ticketholder[0].department;
-      this.assignedBy = this.ticketholder[0].assignedby;
-      this.assignedTo = this.ticketholder[0].assignedto;
+      /* this.assignedBy = this.ticketholder[0].assignedby;
+      this.assignedTo = this.ticketholder[0].assignedto; */
+      /* console.log(data); */
     });
   }
 
@@ -121,13 +122,16 @@ export class TicketComponent implements OnInit {
   getAllRegisteres() {
     this.ts.getAllRegisteres().subscribe(regdata => {
       this.registerterdetail = regdata;
+      this.assignedBy = regdata;
+      console.log(this.assignedBy);
     }, error => {
       console.log(error);
     });
 
   }
   changed(e) {
-    console.log(this.registerterdetail.filter(data => data.unit === e.value));
+    /* console.log(this.registerterdetail.filter(data => data.unit === e.value)); */
      this.taskname = this.registerterdetail.filter(data => data.unit === e.value);
+     /* console.log(this.taskname); */
   }
 }

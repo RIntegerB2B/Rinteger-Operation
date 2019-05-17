@@ -5,6 +5,10 @@
 
 
 <div class="row">
+    <div class="col-md-2  m-3" >
+        <button mat-raised-button color="accent" 
+          (click)="getMyIssue()"> My Issue </button>
+      </div>
   <div class="col-md-2  m-3" *ngIf="this.userRole === 'admin'">
     <button mat-raised-button color="accent" matBadge="{{deadcount}}" matBadgePosition="after" matBadgeColor="accent"
       (click)="deadlinedTicket()"> DeadLine passed </button>
@@ -26,11 +30,6 @@
 <div class="row gridRowHeader display-none-small">
   <div class="col-md-2 vcenterHeader">
     <div class="form-group">
-      <label>Ticket No</label>
-    </div>
-  </div>
-  <div class="col-md-2 vcenterHeader">
-    <div class="form-group">
       <label>Customer Name</label>
     </div>
   </div>
@@ -40,7 +39,7 @@
     </div>
   </div>
   <div class="col-md-2 vcenterHeader">
-    <div>
+    <div class="form-group">
       <label>Department</label>
     </div>
   </div>
@@ -56,13 +55,7 @@
   </div>
 </div>
 <div *ngFor="let data of ticketholder">
-  <div class="row gridRow">
-    <div class="display-none-large col-6">
-      <label class="gridLabel">Ticket No</label>
-    </div>
-    <div class="col-md-2 col-6 vcenter form-group">
-      {{data.ticketno}}
-    </div>
+  <div class="row gridRow"> 
     <div class="display-none-large col-6">
       <label class="gridLabel">Customer Name:</label>
     </div>
@@ -100,7 +93,7 @@
       <mat-menu #menu="matMenu">
         <!-- <a class="nav-link" (click)="uniqTicket(data._id)">View</a> -->
         <a class="nav-link" [routerLink]="['/ticket/uniqueview',data._id]">View</a>
-        <a class="nav-link" [routerLink]="['/ticket/ticketedit', data._id, userId ]">Update Status</a>
+        <a class="nav-link" [routerLink]="['/ticket/ticketedit', data._id, userId ]" *ngIf="hidenValue === true">Update Status</a>
         <a class="nav-link" *ngIf="this.userRole === 'admin'" (click)=" deleteTicket(data)">Detele</a>
       </mat-menu>
     </div>

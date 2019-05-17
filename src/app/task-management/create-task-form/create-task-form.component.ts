@@ -31,10 +31,13 @@ export class CreateTaskFormComponent implements OnInit {
   task: FormArray;
   assignedTo;
   userId;
+  clientName;
   unitSort: string;
   photoSort: string;
   productSort: string;
   roleSort: string;
+  mob: any;
+  mobHolder: any;
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router,
     private taskManagementService: TaskManagementService) { }
 
@@ -43,6 +46,7 @@ export class CreateTaskFormComponent implements OnInit {
     this.getUnit();
     this.getUnitWiseName();
     this.getDepartment();
+    this.getAllsubscribedCustomer();
     this.route.paramMap.subscribe(
       (params: ParamMap) => {
         this.userId = params.get('id');
@@ -87,7 +91,6 @@ export class CreateTaskFormComponent implements OnInit {
     });
     this.productForms.push(product);
   }
-
   get productForms() {
     return this.taskForm.get('product') as FormArray;
   }
@@ -102,7 +105,6 @@ export class CreateTaskFormComponent implements OnInit {
     });
     this.moduleForms.push(task);
   }
-
   get moduleForms() {
     return this.taskForm.get('task') as FormArray;
   }
@@ -123,14 +125,12 @@ export class CreateTaskFormComponent implements OnInit {
     });
     this.ShootForms.push(shoot);
   }
-
   get ShootForms() {
     return this.taskForm.get('shoot') as FormArray;
   }
   deleteShoot(i) {
     this.ShootForms.removeAt(i);
   }
-
   addListForm() {
     const list = this.fb.group({
       title: [''],
@@ -141,16 +141,12 @@ export class CreateTaskFormComponent implements OnInit {
     });
     this.listForms.push(list);
   }
-
   get listForms() {
     return this.taskForm.get('list') as FormArray;
   }
   deleteList(i) {
     this.listForms.removeAt(i);
   }
-
-
-
   addMarketingForm() {
     const marketing = this.fb.group({
       title: [''],
@@ -161,27 +157,22 @@ export class CreateTaskFormComponent implements OnInit {
     });
     this.MarketingForms.push(marketing);
   }
-
   get MarketingForms() {
     return this.taskForm.get('marketing') as FormArray;
   }
   deleteMarkeing(i) {
     this.MarketingForms.removeAt(i);
   }
-
-
   changed(e) {
     /* console.log(this.unitName.filter(data => data.unit === e.value)); */
     this.taskname = this.unitName.filter(data => data.unit === e.value);
   }
-
-
-  onSubmit(taskForm: FormGroup) {
+  onSubmit(taskForm: FormGroup, mobe) {
     this.taskholder = new TaskModel();
     /*   this.taskholder.taskNo = this.taskForm.controls.taskNo.value; */
     this.taskholder.userId = this.taskForm.controls.assignedTo.value._id;
-    this.taskholder.clientName = this.taskForm.controls.clientName.value;
-    this.taskholder.mobileNumber = this.taskForm.controls.mobileNumber.value;
+    this.taskholder.clientName = this.taskForm.controls.clientName.value.customerName;
+    this.taskholder.mobileNumber = mobe.value;
     /*   this.taskholder.dateTime = this.taskForm.controls.dateTime.value; */
     this.taskholder.taskTitle = this.taskForm.controls.taskTitle.value;
     this.taskholder.taskDescription = this.taskForm.controls.taskDescription.value;
@@ -207,9 +198,7 @@ export class CreateTaskFormComponent implements OnInit {
     }, error => {
       console.log(error);
     });
-
   }
-
   getDepartment() {
     this.taskManagementService.getDepartmentData().subscribe(data => {
       this.taskholder = data;
@@ -223,8 +212,6 @@ export class CreateTaskFormComponent implements OnInit {
       this.unitName = data;
     });
   }
-
-
   cancel() {
     this.router.navigate(['task/viewtask', this.userId]);
   }
@@ -232,5 +219,16 @@ export class CreateTaskFormComponent implements OnInit {
     this.unitSort = localStorage.getItem('unit');
     this.roleSort = localStorage.getItem('role');
   }
-
+  getAllsubscribedCustomer() {
+    this.taskManagementService.getAllSubscribedCustomer().subscribe(data => {
+  this.clientName = data;
+    }, error => {
+      console.log(error);
+    });
+  }
+  changedByClient(e) {
+    const temp = e.value;
+    this.mob = this.clientName.filter(data => data.mobileNumber === temp.mobileNumber);
+    this.mobHolder = this.mob[0].mobileNumber;
+  }
 }

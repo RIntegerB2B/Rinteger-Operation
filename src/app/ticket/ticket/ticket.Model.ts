@@ -1,5 +1,4 @@
 export class TicketModel {
-    ticketno: string;
     datetime: string;
     customername: string;
     requirement: string;
@@ -8,6 +7,7 @@ export class TicketModel {
     department: string;
     assignedto: string;
     userId: string;
+    assignerId: string;
     assignedby: string;
     status: string;
     toclosedate: string;
