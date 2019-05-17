@@ -54,7 +54,7 @@
           </mat-form-field>
         </div>
 
-        <div fxFlex="50" class="p-2" *ngIf="this.unitSort !=='Studio'">
+        <div fxFlex="50" class="p-2" >
           <mat-form-field class="full-width">
             <textarea matInput formControlName="taskDescription" placeholder="Task Descrition"></textarea>
             <mat-error *ngIf="taskForm.controls['taskDescription'].errors?.required" required>

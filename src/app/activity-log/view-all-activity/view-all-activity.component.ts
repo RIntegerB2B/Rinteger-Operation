@@ -81,4 +81,7 @@ export class ViewAllActivityComponent implements OnInit {
     this.unitName = localStorage.getItem('unit');
     this.userRole = localStorage.getItem('role');
   }
+  ViewWorkorder(row) {
+    this.router.navigate(['activity-log/viewworkorderforactivitylog/', row._id]);
+  }
 }

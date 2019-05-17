@@ -26,7 +26,7 @@ import {
   MatChipsModule,
   MatInputModule,
   MatStepperModule,
-  MatDatepickerModule, 
+  MatDatepickerModule,
   MatNativeDateModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -40,12 +40,14 @@ import { ViewMonthlySheetComponent } from './view-monthly-sheet/view-monthly-she
 import { ViewWeekSheetComponent } from './view-week-sheet/view-week-sheet.component';
 import { ViewListComponent } from './view-list/view-list.component';
 import { EditMonthlyPlanSheetComponent } from './edit-monthly-plan-sheet/edit-monthly-plan-sheet.component';
+import { ViewforWorkorderComponent } from './view-workorder/view-workorder.component';
 
 
 
 
 @NgModule({
-  declarations: [ ViewAllActivityComponent, CreateMonthlySheetComponent, CreateWeeklySheetComponent, ViewMonthlySheetComponent, ViewWeekSheetComponent, ViewListComponent, EditMonthlyPlanSheetComponent],
+  declarations: [ViewAllActivityComponent, CreateMonthlySheetComponent, CreateWeeklySheetComponent, ViewMonthlySheetComponent, ViewWeekSheetComponent,
+                ViewListComponent, EditMonthlyPlanSheetComponent, ViewforWorkorderComponent],
   imports: [
     HttpClientModule,
     HttpModule,

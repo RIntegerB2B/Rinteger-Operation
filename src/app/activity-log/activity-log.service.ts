@@ -4,6 +4,7 @@ import { AppSetting } from './../config/appSetting';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { WorkOrder } from '../shared/workorder.model';
+import { Customer } from './../shared/customer.model';
 
 @Injectable({
   providedIn: 'root'
@@ -117,4 +118,10 @@ export class ActivityLogService {
     const url: string = this.serviceUrl + addUrl + id;
     return this.http.post<ActivityLogModel[]>(url, data);
   }
+  viewforSingleWorkOrder(workid): Observable<any> {
+    const addUrl = 'viewsingleworkorder/';
+    const url: string = this.serviceUrl + addUrl + workid;
+    return this.http.get<WorkOrder[]>(url);
+  }
+
 }

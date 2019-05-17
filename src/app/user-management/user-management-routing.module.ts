@@ -7,6 +7,7 @@ import { ViewUsersComponent } from './view-users/view-users.component';
 import { EditUsersComponent } from './edit-users/edit-users.component';
 import { ViewCustomerRegistrationComponent } from './view-customer-registration/view-customer-registration.component';
 import { EditCustomerComponent } from './edit-customer/edit-customer.component';
+import { SubscribedCustomerComponent } from './subscribed-customer/subscribed-customer.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,9 @@ const routes: Routes = [
   },
   {
     path: 'editregisteredcustomer/:id' , component: EditCustomerComponent
+  },
+  {
+    path: 'subscribedcustomer', component: SubscribedCustomerComponent
   }
 ];
 

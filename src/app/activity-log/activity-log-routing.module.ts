@@ -7,6 +7,7 @@ import { CreateWeeklySheetComponent } from './create-weekly-sheet/create-weekly-
 import { ViewWeekSheetComponent } from './view-week-sheet/view-week-sheet.component';
 import { ViewListComponent } from './view-list/view-list.component';
 import { EditMonthlyPlanSheetComponent } from './edit-monthly-plan-sheet/edit-monthly-plan-sheet.component';
+import { ViewforWorkorderComponent } from './view-workorder/view-workorder.component';
 
 
 import { fromEventPattern } from 'rxjs';
@@ -17,7 +18,8 @@ const routes: Routes = [
     { path: 'createweekly/:id', component: CreateWeeklySheetComponent},
     { path: 'viewweek/:id', component: ViewWeekSheetComponent},
     { path: 'viewlist/:id', component: ViewListComponent},
-    { path: 'editmonthlysheet/:id', component: EditMonthlyPlanSheetComponent}
+    { path: 'editmonthlysheet/:id', component: EditMonthlyPlanSheetComponent},
+    { path: 'viewworkorderforactivitylog/:id', component: ViewforWorkorderComponent}
 ];
 
 @NgModule({

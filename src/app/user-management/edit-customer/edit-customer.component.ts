@@ -16,7 +16,7 @@ export class EditCustomerComponent implements OnInit {
   id;
 
   constructor(private userManagementService: UserManagementService, private router: Router,
-    private fb: FormBuilder, private route: ActivatedRoute) { 
+    private fb: FormBuilder, private route: ActivatedRoute) {
       this.route.paramMap.subscribe(
         (params: ParamMap) => {
           this.id = params.get('id');

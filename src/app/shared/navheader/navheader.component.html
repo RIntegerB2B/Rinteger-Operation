@@ -59,10 +59,11 @@
         </li>
       <li class="nav-item dropdown" *ngFor="let adm of this.navheaderService?.getItems?.adminRole">
         <a class="nav-link dropdown-toggle textMenu" id="navbarDropdown" role="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false" *ngIf="adm.settingNav">
+          aria-haspopup="true" aria-expanded="false" *ngIf="adm.settingNav && this.navheaderService?.getRole() === 'admin'" >
           Settings
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+      
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown"   *ngIf="this.navheaderService?.getRole() === 'admin'">
           <a class="dropdown-item" [routerLink]="['/settings/leadsettings']">Lead Settings</a>
           <a class="dropdown-item" [routerLink]="['/settings/workordersetting']">WorkOrder Settings</a>
           <a class="dropdown-item" [routerLink]="['/settings/workorderpdf']">PDF Settings</a>
@@ -86,6 +87,7 @@
           <a class="dropdown-item" [routerLink]="['/user/customerregistration']" *ngIf="this.navheaderService?.getRole() === 'admin'">Customer Registration</a>
           <a class="dropdown-item" [routerLink]="['/user/viewregistereduser']" *ngIf="this.navheaderService?.getRole() === 'admin'">Ripsil User</a>
           <a class="dropdown-item" [routerLink]="['/user/viewcustomerregistration']">Rinteger Customer</a>
+          <a class="dropdown-item" [routerLink]="['/user/subscribedcustomer']">Subscribed Customer</a>
         </div>
       </li>
       <li class="nav-item" *ngFor="let ticket of this.navheaderService?.getItems?.materialRole ">

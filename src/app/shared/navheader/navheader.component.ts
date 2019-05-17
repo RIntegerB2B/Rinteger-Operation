@@ -14,7 +14,6 @@ export class NavheaderComponent implements OnInit {
    }
 
   ngOnInit() {
-    
   }
   logOutSession()   {
     localStorage.removeItem('loginUser');
@@ -36,6 +35,5 @@ export class NavheaderComponent implements OnInit {
     this.userId = localStorage.getItem('userId');
     this.router.navigate(['/material/front']);
   }
- 
 
 }
