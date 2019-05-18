@@ -119,8 +119,8 @@ SendPushNotification(data): Observable<any> {
   const urlway = this.baseurl + 'sendnotificationforstatus';
   return this.http.post<TaskModel[]>(urlway, data);
 }
-getAllSubscribedCustomer(): Observable<any> {
-  const addUrl = 'getallsubscribedcustomer';
+getAllCustomerRegisterer(): Observable<any> {
+  const addUrl = 'getallcustomerregistration';
   const url: string = this.baseurl + addUrl ;
   return this.http.get<CustomerRegister>(url);
 }

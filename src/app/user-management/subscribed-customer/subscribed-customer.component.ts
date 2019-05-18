@@ -13,11 +13,13 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
 })
 export class SubscribedCustomerComponent implements OnInit {
   registeredUserModel;
+  userRole: string;
 
   constructor(private userManagementService: UserManagementService, private router: Router,
     private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.getRole();
 
   }
   getAllsubscribedCustomer() {
@@ -34,5 +36,14 @@ export class SubscribedCustomerComponent implements OnInit {
       console.log(error);
     });
   }
-
+  getDelete(row) {
+    this.userManagementService.DeleteSubscribe(row._id).subscribe(data => {
+      this.registeredUserModel = data;
+    }, error => {
+      console.log(error);
+    });
+  }
+  getRole() {
+    this.userRole = localStorage.getItem('role');
+  }
 }

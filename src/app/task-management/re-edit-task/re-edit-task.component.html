@@ -36,7 +36,7 @@
         <div fxFlex="50" class="p-2"  >
         <div  >
           <mat-form-field class="full-width">
-            <input matInput formControlName="clientName" placeholder="Client Name"  
+            <input matInput formControlName="clientName" placeholder="Client Name"  [readonly]=true 
             [(ngModel)]="taskEdit.clientName" (ngModelChange)="taskEdit.clientName=$event">
             <mat-error *ngIf="taskForm.controls['clientName'].errors?.required" required>
               Client Name
@@ -49,7 +49,7 @@
       <div fxFlex="50" class="p-2">
         <div >
           <mat-form-field class="full-width">
-            <input matInput formControlName="mobileNumber" placeholder="Mobile Number"  
+            <input matInput formControlName="mobileNumber" placeholder="Mobile Number"  [readonly]=true 
             [(ngModel)]="taskEdit.mobileNumber" (ngModelChange)="taskEdit.mobileNumber=$event">
             <mat-error *ngIf="taskForm.controls['mobileNumber'].errors?.required" required>
               Mobile Number

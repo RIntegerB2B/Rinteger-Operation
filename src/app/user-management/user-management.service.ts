@@ -101,4 +101,8 @@ export class UserManagementService {
     const url: string = this.serviceUrl + addUrl ;
     return this.httpClient.get<CustomerRegister>(url);
   }
+  DeleteSubscribe(data): Observable<any> {
+    const url: string = this.serviceUrl + 'deletesubscribedcustomer/' + data;
+    return this.httpClient.delete<CustomerRegister[]>(url);
+  }
 }

@@ -220,7 +220,7 @@ export class CreateTaskFormComponent implements OnInit {
     this.roleSort = localStorage.getItem('role');
   }
   getAllsubscribedCustomer() {
-    this.taskManagementService.getAllSubscribedCustomer().subscribe(data => {
+    this.taskManagementService.getAllCustomerRegisterer().subscribe(data => {
   this.clientName = data;
     }, error => {
       console.log(error);

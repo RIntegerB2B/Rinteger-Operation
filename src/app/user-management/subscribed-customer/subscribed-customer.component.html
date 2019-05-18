@@ -22,11 +22,11 @@
               <label><h6>Password</h6></label>
             </div>
           </div>  
-          <!-- <div class="col-md-2 vcenterHeader" *ngIf="this.userRole === 'admin'">
+          <div class="col-md-2 vcenterHeader" *ngIf="this.userRole === 'admin'">
             <div class="form-group">
               <label><h6>Action</h6></label>
             </div>
-          </div> -->
+          </div>
         </div>
         <div *ngFor="let data of registeredUserModel">
           <div class="row gridRow">
@@ -48,22 +48,22 @@
             <div class="col-md-2 col-6 vcenter form-group">
               {{data.password}}
             </div>          
-            <!-- <div class="display-none-large col-6" *ngIf="this.userRole === 'admin'"> 
+            <div class="display-none-large col-6" *ngIf="this.userRole === 'admin'"> 
               <label class="gridLabel">Action:</label>
-            </div> -->
-          <!--   <div class="col-md-2 col-6 vcenter form-group"  *ngIf="this.userRole === 'admin'">
+            </div>
+            <div class="col-md-2 col-6 vcenter form-group"  *ngIf="this.userRole === 'admin'">
               <button mat-icon-button [matMenuTriggerFor]="menu">
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">             
-                <a class="nav-link" (click)="getEdit(data)">
+                <!-- <a class="nav-link" (click)="getEdit(data)">
                   Edit
-                </a>
+                </a> -->
                 <a class="nav-link" (click)="getDelete(data)">
                   Delete
                 </a>
               </mat-menu>
-            </div> -->
+            </div>
           </div>
         </div>
       </div>
