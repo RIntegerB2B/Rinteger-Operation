@@ -1,6 +1,13 @@
 <form >
   <div class="pageBoxLg">
     <div class="container-fluid">
+        <app-search-user [registeredUserModel]="tempValue"
+        (searchCustomer)="filterRegistrationCustomer($event)"></app-search-user>
+        <div>
+            <div fxFlex="100">
+                <label class="pageBoxLg-label">Ripsil User</label>
+              </div>
+        </div>
       <div class="row gridRowHeader display-none-small">
         <div class="col-md-2 vcenterHeader">
           <div class="form-group">
@@ -85,6 +92,6 @@
       </div>
     </div>
   </div>
-  <!-- <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true" [length]="totalSize"
-    [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator> -->
+  <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true" [length]="totalSize"
+    [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>
 </form>

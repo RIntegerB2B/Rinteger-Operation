@@ -1,9 +1,22 @@
 <form >
     <div class="pageBoxLg">
       <div class="container-fluid">
-          <div>
+          
+          
+          <div class="row">
+            <div class="col-md-4">
               <button mat-raised-button (click)="getAllsubscribedCustomer()" type="submit">Subscribed Customer</button>
               <button mat-raised-button (click)="NotSubscribedCustomer()" type="submit">Non-Subscribe Customer</button>
+            </div>
+            <div class="col-md-8">
+              <app-search [registeredUserModel]="tempValue"
+          (searchCustomer)="filterRegistrationCustomer($event)"></app-search>
+        </div>
+            </div>
+            <div>
+                <div fxFlex="100">
+                    <label class="pageBoxLg-label">Subscribtion Details</label>
+                  </div>
             </div>
         <div class="row gridRowHeader display-none-small">
           
@@ -68,6 +81,6 @@
         </div>
       </div>
     </div>
-    <!-- <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true" [length]="totalSize"
-      [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator> -->
+    <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[1, 50, 100, 150]" [showFirstLastButtons]="true" [length]="totalSize"
+      [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>
   </form>

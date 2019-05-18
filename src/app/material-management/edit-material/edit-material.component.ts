@@ -45,7 +45,7 @@ export class EditMaterialComponent implements OnInit {
     this.materialDetailForm = this.fb.group({
       workOrderID: [''],
       DCnumber: [''],
-      date: ['', Validators.required],
+      date: [''],
       customerName: [''],
       receivedBy: [''],
       unit: [''],

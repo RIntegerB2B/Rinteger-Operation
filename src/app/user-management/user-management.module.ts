@@ -39,9 +39,11 @@ import { EditUsersComponent } from './edit-users/edit-users.component';
 import { ViewCustomerRegistrationComponent } from './view-customer-registration/view-customer-registration.component';
 import { EditCustomerComponent } from './edit-customer/edit-customer.component';
 import { SubscribedCustomerComponent } from './subscribed-customer/subscribed-customer.component';
+import { SearchComponent } from './search/search.component';
+import { SearchUserComponent } from './search-user/search-user.component';
 
 @NgModule({
-  declarations: [RegistrationComponent, CreateRoleComponent, CustomerRegistrationComponent, ViewUsersComponent, EditUsersComponent, ViewCustomerRegistrationComponent, EditCustomerComponent, SubscribedCustomerComponent],
+  declarations: [RegistrationComponent, CreateRoleComponent, CustomerRegistrationComponent, ViewUsersComponent, EditUsersComponent, ViewCustomerRegistrationComponent, EditCustomerComponent, SubscribedCustomerComponent, SearchComponent, SearchUserComponent],
   imports: [
     CommonModule,
     UserManagementRoutingModule,

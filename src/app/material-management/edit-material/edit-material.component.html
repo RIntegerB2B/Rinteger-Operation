@@ -21,13 +21,23 @@
                   (ngModelChange)="materialEdit.DCnumber=$event">      
               </mat-form-field>
             </div>
-          <div fxFlex="50" class="pr-1">
+        <!--   <div fxFlex="50" class="pr-1">
               <mat-form-field>
                 <input matInput formControlName="date" 
                 [ngModel]="materialEdit?.date" [readonly]="true"
                 (ngModelChange)="materialEdit.date=$event"
                  placeholder="Received Date">
                 
+              </mat-form-field>
+            </div> -->
+            <div fxFlex="50" class="pr-1">
+              <mat-form-field>
+                <input matInput formControlName="date" [matDatepicker]="picker1" 
+                (ngModelChange)="materialEdit.date=$event"
+                [(ngModel)]="materialEdit.date"
+                 placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
               </mat-form-field>
             </div>
           <div fxFlex="50" class="pr-1">
