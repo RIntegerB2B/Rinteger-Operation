@@ -42,11 +42,11 @@ import { SearchProformaInvoiceComponent } from './search-proforma-invoice/search
 
 @NgModule({
   declarations: [CreateProformaComponent,
-    ViewSingleProformaComponent, ViewProformaComponent, ViewAllProformaComponent, EditProfomaInvoiceComponent, GenerateProfomaPdfComponent, SearchProformaInvoiceComponent
+    ViewSingleProformaComponent, ViewProformaComponent,
+     ViewAllProformaComponent, EditProfomaInvoiceComponent, GenerateProfomaPdfComponent, SearchProformaInvoiceComponent
   ],
     imports: [
       ProformaRoutingModule,
-      HttpClientModule,
       HttpModule,
       CommonModule,
       MatSidenavModule,

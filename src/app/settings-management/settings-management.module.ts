@@ -43,10 +43,10 @@ import { MarketingSettingComponent } from './marketing-setting/marketing-setting
 import { AssetSettingsComponent } from './asset-settings/asset-settings.component';
 @NgModule({
   declarations: [LeadSettingsComponent, WorkorderPdfTemplateComponent, ExpenseSettingsComponent, TicketSettingComponent,
-    IncomeSettingsComponent, MaterialSettingsComponent, TaskSettingsComponent, WorkorderSettingComponent, MarketingSettingComponent, AssetSettingsComponent
+    IncomeSettingsComponent, MaterialSettingsComponent, 
+    TaskSettingsComponent, WorkorderSettingComponent, MarketingSettingComponent, AssetSettingsComponent
   ],
   imports: [
-    HttpClientModule,
     HttpModule,
     CommonModule,
     MatSidenavModule,

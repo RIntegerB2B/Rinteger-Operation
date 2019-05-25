@@ -5,12 +5,7 @@ import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@ang
 import { ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { MatTableDataSource } from '@angular/material';
-import { PageEvent } from '@angular/material';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { filter } from 'rxjs/operators';
-import { Key } from 'protractor';
-import { NavheaderService } from '../../../shared/navheader/navheader.service';
+import { SharedService } from '../../../shared-module/shared.service';
 
 
 @Component({
@@ -34,7 +29,8 @@ export class EditDevelopingUnitComponent implements OnInit {
   nameValue: any;
   taskValue: TaskModel;
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private taskManagementService: TaskManagementService,
+  constructor(private fb: FormBuilder, private route: ActivatedRoute,
+     private taskManagementService: TaskManagementService,
     private router: Router) {
       this.route.paramMap.subscribe(
         (params: ParamMap) => {

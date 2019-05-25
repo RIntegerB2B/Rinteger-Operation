@@ -26,9 +26,9 @@ export class EditUsersComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.createForm();
     this.getSelectedUserDetail();
     this.getAllRole();
+    this.createForm();
   }
   createForm() {
     this.EditRegisteredUserForm = this.fb.group({

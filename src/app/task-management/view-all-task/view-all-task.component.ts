@@ -10,7 +10,7 @@ import { PageEvent } from '@angular/material';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { filter } from 'rxjs/operators';
 import { Key } from 'protractor';
-import { NavheaderService } from '../../shared/navheader/navheader.service';
+import { SharedService } from '../../shared-module/shared.service';
 @Component({
   selector: 'app-view-all-task',
   templateUrl: './view-all-task.component.html',
@@ -58,7 +58,7 @@ export class ViewAllTaskComponent implements OnInit {
   valueData: TaskModel;
 
   constructor(private taskManagementService: TaskManagementService, private route: ActivatedRoute,
-    private navheaderService: NavheaderService) { }
+    private sharedService: SharedService) { }
 
   ngOnInit() {
      this.getRole();
@@ -66,8 +66,8 @@ export class ViewAllTaskComponent implements OnInit {
       this.userId = params.get('id');
     });
    this.LoadMethod();
-    this.navheaderService.hideMenuTrans();
-    this.navheaderService.menuItems();
+    this.sharedService.hideMenuTrans();
+    this.sharedService.menuItems();
    /*  this.deadlinedTask(); */
   }
   LoadMethod() {

@@ -54,7 +54,6 @@ import { DispatchedMaterialComponent } from './dispatched-material/dispatched-ma
     DispatchedMaterialComponent
   ],
   imports: [
-    HttpClientModule,
     HttpModule,
     CommonModule,
     MaterialRoutingModule,

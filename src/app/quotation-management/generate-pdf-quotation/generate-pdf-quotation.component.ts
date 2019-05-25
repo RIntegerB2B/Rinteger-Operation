@@ -520,7 +520,7 @@ export class GeneratePdfQuotationComponent implements OnInit {
           style: 'tableExample',
           table: {
             headerRows: 1,
-            widths: ['*', '*', '*', '*', '*'],
+            widths: [125, 125, 50, 85, 85],
             body: this.discountNull()
           },
           layout: {
@@ -539,7 +539,7 @@ export class GeneratePdfQuotationComponent implements OnInit {
           style: 'tableBox',
           table: {
             headerRows: 1,
-            widths: ['*', '*', '*', '*', '*'],
+            widths: [125, 125, 50, 85, 85],
             /*  body: [[
                { text: '', style: 'rowStyle', border: [false, false, false, false] },
                { text: '', style: 'rowStyle', border: [false, false, false, false] }, {

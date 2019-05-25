@@ -54,7 +54,12 @@ import { EditDevelopingUnitComponent } from './developing-unit/edit-developing-u
 @NgModule({
   declarations: [CreateTaskFormComponent, ViewAllTaskComponent,
      ViewSingleTaskComponent, EditTaskComponent, ViewProductComponent,
-      ReEditTaskComponent, ViewModuleComponent, ViewShootComponent, ViewListComponent, SearchTaskComponent, RatingComponent, ViewMarketingComponent, MainModelComponent, ViewDevelopingUnitComponent, CreateDevelopingUnitComponent, ViewSingleDevelopingUnitComponent, UpdateDevelopingUnitComponent, EditDevelopingUnitComponent],
+      ReEditTaskComponent, ViewModuleComponent,
+       ViewShootComponent, ViewListComponent, SearchTaskComponent,
+        RatingComponent, ViewMarketingComponent, MainModelComponent,
+         ViewDevelopingUnitComponent, CreateDevelopingUnitComponent,
+          ViewSingleDevelopingUnitComponent, UpdateDevelopingUnitComponent,
+           EditDevelopingUnitComponent],
   imports: [
     CommonModule,
      HttpModule,

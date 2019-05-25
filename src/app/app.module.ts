@@ -3,29 +3,27 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
-import { NavheaderComponent } from './shared/navheader/navheader.component';
-
+import { SharedModuleModule } from './shared-module/shared-module.module';
+import { HttpClientModule } from '@angular/common/http';
 /* import { EditMonthlySheetComponent } from './edit-monthly-sheet/edit-monthly-sheet.component'; */
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NavheaderComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
+    SharedModuleModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpModule,
-    HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+}

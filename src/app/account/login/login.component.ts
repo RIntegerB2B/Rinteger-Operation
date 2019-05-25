@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NavheaderService } from './../../shared/navheader/navheader.service';
+import { SharedService } from './../../shared-module/shared.service';
+import { AuthenticationService } from './../../shared-module/auth-service/authentication.service';
 import { AccountService } from './../../account/account.service';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LogIn } from './login.model';
@@ -12,9 +13,10 @@ import { LogIn } from './login.model';
 })
 export class LoginComponent implements OnInit {
   loginFailed = false;
-  constructor(public navheaderService: NavheaderService, private accountService: AccountService, private fb: FormBuilder,
+  constructor(public sharedService: SharedService,
+     private authenticationService: AuthenticationService, private accountService: AccountService, private fb: FormBuilder,
     private router: Router) {
-    this.navheaderService.makeMenuTrans();
+    this.sharedService.makeMenuTrans();
   }
   onLoginForm: FormGroup;
   login: LogIn;
@@ -32,15 +34,17 @@ export class LoginComponent implements OnInit {
     this.login = new LogIn();
     this.login.userName = this.onLoginForm.controls.userName.value;
     this.login.password = this.onLoginForm.controls.password.value;
-    this.accountService.logIn(this.login).subscribe(data => {
+    this.authenticationService.login(this.login.userName, this.login.password)
+    .subscribe(data => {
       if (data.length !== 0
       ) {
-        localStorage.setItem('loginUser', 'true');
-        localStorage.setItem('menus', JSON.stringify(data[0].userdetails));
-        localStorage.setItem('role', data[0].role);
-        localStorage.setItem('unit', data[0].unit);
-        localStorage.setItem('userId', data[0]._id);
-        if (localStorage.getItem('role') !== 'admin') {
+        sessionStorage.setItem('loginUser', 'true');
+        sessionStorage.setItem('menus', JSON.stringify(data[0].userdetails));
+        sessionStorage.setItem('role', data[0].role);
+        sessionStorage.setItem('unit', data[0].unit);
+        sessionStorage.setItem('userId', data[0]._id);
+        sessionStorage.setItem('token', data[0].token);
+        if (sessionStorage.getItem('role') !== 'admin') {
           this.router.navigate(['./task/viewtask', data[0]._id]);
         } else {
           this.router.navigate(['./lead/leadview']);

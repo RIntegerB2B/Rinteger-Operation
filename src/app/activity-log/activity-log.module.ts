@@ -46,10 +46,10 @@ import { ViewforWorkorderComponent } from './view-workorder/view-workorder.compo
 
 
 @NgModule({
-  declarations: [ViewAllActivityComponent, CreateMonthlySheetComponent, CreateWeeklySheetComponent, ViewMonthlySheetComponent, ViewWeekSheetComponent,
+  declarations: [ViewAllActivityComponent, CreateMonthlySheetComponent,
+     CreateWeeklySheetComponent, ViewMonthlySheetComponent, ViewWeekSheetComponent,
                 ViewListComponent, EditMonthlyPlanSheetComponent, ViewforWorkorderComponent],
   imports: [
-    HttpClientModule,
     HttpModule,
     CommonModule,
     ActivityLogRoutingModule,

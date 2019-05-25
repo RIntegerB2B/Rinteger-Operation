@@ -3,7 +3,7 @@
 
   <div class="col-md-4">
     <mat-form-field>
-      <mat-select placeholder="Select role" formControlName='role' (selectionChange)="changed($event)">
+      <mat-select placeholder="Select role"  (selectionChange)="changed($event)">
         <mat-option *ngFor="let data of roleNameValue;let i = index " [value]="data._id">
           <a>{{data.role}}</a>
         </mat-option>

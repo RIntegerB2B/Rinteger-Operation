@@ -1,0 +1,6 @@
+.textMenu {
+    color: #ffff !important;
+  }
+  .active a:first-child {
+    background-color: lightslategrey;
+  }

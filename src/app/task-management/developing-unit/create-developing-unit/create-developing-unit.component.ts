@@ -2,15 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { TaskModel } from '../../../shared/task-management.model';
 import { TaskManagementService } from './../../task-management.service';
 import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
-import { ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { MatTableDataSource } from '@angular/material';
-import { PageEvent } from '@angular/material';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { filter } from 'rxjs/operators';
-import { Key } from 'protractor';
-import { NavheaderService } from '../../../shared/navheader/navheader.service';
+import { SharedService } from '../../../shared-module/shared.service';
 
 @Component({
   selector: 'app-create-developing-unit',
@@ -29,7 +22,7 @@ export class CreateDevelopingUnitComponent implements OnInit {
   taskname: any;
 
   constructor(private taskManagementService: TaskManagementService, private route: ActivatedRoute,
-    private navheaderService: NavheaderService, private fb: FormBuilder, private router: Router) { }
+    private sharedService: SharedService, private fb: FormBuilder, private router: Router) { }
 
   ngOnInit() {
     this.createtask();

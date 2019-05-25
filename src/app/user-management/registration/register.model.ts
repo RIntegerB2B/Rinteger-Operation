@@ -4,5 +4,6 @@ export class Register {
     mobileNumber: number;
     emailId: string;
     role: string;
+    roleId: string;
     unit: string;
 }

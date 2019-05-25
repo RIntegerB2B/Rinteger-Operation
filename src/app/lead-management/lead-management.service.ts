@@ -17,30 +17,7 @@ import { LeadSettings } from '../shared/lead-settings.model';
 })
 export class LeadManagementService {
   serviceUrl: string = AppSetting.serviceUrl;
-  headers: Headers = new Headers({
-    'Content-Type': 'application/json; charset=utf-8'
-  });
-  dialogRef: MatDialogRef<LeadAddComponent>;
-  requestOptions: RequestOptions = new RequestOptions({ headers: this.headers });
-
-  handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      // TODO: send the error to remote logging infrastructure
-      console.log(error); // log to console instead
-      // TODO: better job of transforming error for user consumption
-      // this.log(`${operation} failed: ${error.message}`);
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
-  }
-  constructor(private http: Http, private httpClient: HttpClient,
-    private dialog: MatDialog) { }
-  /* createCustomer(data: any): Observable<any> {
-    const addUrl = 'customers';
-    const url: string = this.serviceUrl + addUrl;
-    return this.httpClient.post<Customer[]>(url, data);
-  } */
-  // all customer details
+  constructor(private httpClient: HttpClient) { }
   allLead(): Observable<any> {
     const addUrl = 'viewleads';
     const url: string = this.serviceUrl + addUrl;

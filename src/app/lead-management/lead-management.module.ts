@@ -38,7 +38,7 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LeadManagementService } from './../lead-management/lead-management.service';
-import { CustomersModule } from './../customer-management/customer.module';
+/* import { CustomersModule } from './../customer-management/customer.module'; */
 import { CustomerManagementService } from './../customer-management/customer-management.service';
 import { ViewSingleLeadComponent } from './view-single-lead/view-single-lead.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
@@ -46,7 +46,6 @@ import { ExistingCustomerComponent } from './existing-customer/existing-customer
 import { ExistingService } from './existing-customer/existing.service';
 import { SearchComponent } from './search/search.component';
 import { SearchLeadComponent } from './search-lead/search-lead.component';
-
 
 @NgModule({
   declarations: [SampleComponent,
@@ -61,12 +60,11 @@ import { SearchLeadComponent } from './search-lead/search-lead.component';
     SearchLeadComponent],
   imports: [
     CommonModule,
-    CustomersModule,
-    HttpClientModule,
+    /* CustomersModule, */
+    /* HttpClientModule, */
     MatDatepickerModule,
     MatNativeDateModule,
     HttpModule,
-    CommonModule,
     MatSidenavModule,
     MatListModule,
     MatTooltipModule,

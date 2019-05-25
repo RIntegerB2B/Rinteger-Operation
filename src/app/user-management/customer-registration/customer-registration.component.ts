@@ -23,24 +23,24 @@ export class CustomerRegistrationComponent implements OnInit {
 
   ngOnInit() {
     this.userRegister();
-    /* this.getAllRole(); */
-   /*  this.viewLeadSettings(); */
+    this.getAllRole();
+    this.viewLeadSettings();
   }
 
- /*  getAllRole() {
+  getAllRole() {
     this.userManagementService.permissionRole().subscribe(data => {
       this.newRoles = data;
     }, error => {
       console.log(error);
     });
-  } */
- /*  viewLeadSettings() {
+  }
+  viewLeadSettings() {
     this.userManagementService.leadSource().subscribe(data => {
       this.fullLeadUnit = data[0].leadUnit;
     }, err => {
       console.log(err);
     });
-  } */
+  }
   userRegister() {
     this.registerForm = this.fb.group({
       _id: [''],

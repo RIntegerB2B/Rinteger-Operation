@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TicketModel } from './../ticket/ticket.Model';
 import { TicketService } from './../ticket.service';
-import { NavheaderService } from '../../shared/navheader/navheader.service';
+import { SharedService } from '../../shared-module/shared.service';
 
 import { ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
@@ -38,7 +38,7 @@ export class TicketViewComponent implements OnInit {
   operation: any;
 
   constructor(private ts: TicketService, private router: Router, private route: ActivatedRoute,
-    private navheaderService: NavheaderService) { }
+    private sharedService: SharedService) { }
 
   ngOnInit() {
     this.userRole = localStorage.getItem('role');
@@ -51,8 +51,8 @@ export class TicketViewComponent implements OnInit {
     } else {
       this.CompareUserId();
     }
-    this.navheaderService.hideMenuTrans();
-    this.navheaderService.menuItems();
+    this.sharedService.hideMenuTrans();
+    this.sharedService.menuItems();
   }
   retriveTicket() {
     this.hidenValue = true;

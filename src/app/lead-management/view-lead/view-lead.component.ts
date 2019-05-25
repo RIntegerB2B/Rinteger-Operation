@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { LeadManagementService } from './../lead-management.service';
-import { NavheaderService } from './../../shared/navheader/navheader.service';
+import { SharedService } from './../../shared-module/shared.service';
 import { CreateCustomerService } from './../../customer-management/customer/create-customer/create-customer.service';
 import { Router } from '@angular/router';
 import { Lead } from './../../shared/lead.model';
 import { DateSearch } from './search.model';
-import { LeadAddComponent } from './../lead-add/lead-add.component';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { WorkOrder } from './../../shared/workorder.model';
@@ -55,14 +54,14 @@ export class ViewLeadComponent implements OnInit {
   ];
   constructor(private fb: FormBuilder,
     private leadManagementService: LeadManagementService,
-    private navheaderService: NavheaderService,
-    private createCustomerService: CreateCustomerService, private dialog: MatDialog,
+    private sharedService: SharedService,
+    private createCustomerService: CreateCustomerService,
     private router: Router) {
   }
   ngOnInit() {
     this.getAllLeads();
-    this.navheaderService.hideMenuTrans();
-    this.navheaderService.menuItems();
+    this.sharedService.hideMenuTrans();
+    this.sharedService.menuItems();
     this.createForm();
   }
   createForm() {

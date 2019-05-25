@@ -34,7 +34,7 @@ body {
   position: relative;
   box-shadow: 0 8px 16px 0 rgba(12, 41, 251, 0.2), 0 6px 20px 0 rgba(12, 41, 251, 0.2);
 }
-vcenterHeader {
+.vcenterHeader {
   font-size: 12px;
 }
 .pageBoxLg-label {

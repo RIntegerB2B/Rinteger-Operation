@@ -47,7 +47,6 @@ import { SearchQuotationComponent } from './search-quotation/search-quotation.co
      EditQuotationComponent,
      SearchQuotationComponent],
   imports: [
-    HttpClientModule,
     HttpModule,
     CommonModule,
     MatSidenavModule,

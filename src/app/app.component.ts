@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { NavheaderService } from './shared/navheader/navheader.service';
+import { SharedService } from './shared-module/shared.service';
 
 
 @Component({
@@ -9,11 +8,11 @@ import { NavheaderService } from './shared/navheader/navheader.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(public navheaderService: NavheaderService) {
+  constructor(public sharedService: SharedService) {
   }
   title = 'rinteger-operation';
   ngOnInit() {
-    this.navheaderService.menuItems();
+    this.sharedService.menuItems();
   }
 
 }

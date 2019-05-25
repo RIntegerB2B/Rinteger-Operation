@@ -66,7 +66,6 @@ import { ViewSingleSubcribecustomerComponent
     CreateMarketcustomerComponent, ViewSinglemarketcustomerComponent, ViewSubcribecustomerComponent, ViewSingleSubcribecustomerComponent
   ],
   imports: [
-    HttpClientModule,
     HttpModule,
     CommonModule,
     CustomersRoutingModule,

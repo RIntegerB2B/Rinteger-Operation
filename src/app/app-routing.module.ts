@@ -15,6 +15,7 @@ const routes: Routes = [
   },
   {
     path: 'activity-log',
+    canActivate: [AuthGuard],
     loadChildren: './activity-log/activity-log.module#ActivityLogModule'
   },
   {
@@ -24,6 +25,7 @@ const routes: Routes = [
   },
   {
     path: 'marketing',
+    canActivate: [AuthGuard],
     loadChildren: './marketing-management/marketing-management.module#MarketingManagementModule'
   },
   {
@@ -53,39 +55,53 @@ const routes: Routes = [
   },
   {
     path: 'account',
+    /* canActivate: [AuthGuard], */
     loadChildren: './account/account.module#AccountModule',
   },
   {
     path: 'expense',
+    canActivate: [AuthGuard],
     loadChildren: './expense-management/expense.module#ExpenseModule',
   },
   {
     path: 'income',
+    canActivate: [AuthGuard],
     loadChildren: './income-management/income.module#IncomeModule',
   },
   {
     path: 'ticket',
+    canActivate: [AuthGuard],
     loadChildren: './ticket/ticket.module#TicketModule',
   },
   {
     path: 'task',
+    canActivate: [AuthGuard],
     loadChildren: './task-management/task.module#TaskModule',
   },
   {
     path: 'material',
+    canActivate: [AuthGuard],
     loadChildren: './material-management/material-management.module#MaterialModule',
   },
   {
     path: 'report',
+    canActivate: [AuthGuard],
     loadChildren: './report/report.module#ReportModule',
   },
   {
     path: 'user',
+    canActivate: [AuthGuard],
     loadChildren: './user-management/user-management.module#UserManagementModule',
   },
   {
     path: 'asset',
+    canActivate: [AuthGuard],
     loadChildren: './asset-listing/asset-listing.module#AssetListingModule',
+  },
+  {
+    path: 'shared',
+    canActivate: [AuthGuard],
+    loadChildren: './shared-module/shared-module.module#SharedModuleModule',
   },
   {
     path: '',

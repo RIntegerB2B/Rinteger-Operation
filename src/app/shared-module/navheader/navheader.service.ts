@@ -8,6 +8,7 @@ export class NavheaderService {
   menuHide: string;
   getItems: any;
   role: string;
+  loginUser: boolean;
   constructor() {
   }
 
@@ -19,12 +20,12 @@ export class NavheaderService {
     this.menuHide = '';
   }
   menuItems() {
-    this.getItems = JSON.parse(localStorage.getItem('menus'));
+    this.getItems = JSON.parse(sessionStorage.getItem('menus'));
   }
   getUnit() {
-       return localStorage.getItem('unit');
+       return sessionStorage.getItem('unit');
       }
       getRole() {
-        return localStorage.getItem('role');
+        return sessionStorage.getItem('role');
       }
 }

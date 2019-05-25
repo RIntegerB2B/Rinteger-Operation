@@ -49,7 +49,6 @@ import { SearchWorkorderComponent } from './search-workorder/search-workorder.co
     ViewAllWorkorderComponent,
     SearchWorkorderComponent],
     imports: [
-      HttpClientModule,
       HttpModule,
       CommonModule,
       WorkOrderRoutingModule,

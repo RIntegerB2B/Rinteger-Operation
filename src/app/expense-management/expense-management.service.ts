@@ -26,7 +26,7 @@ export class ExpenseManagementService {
     const addUrl = 'createexpense';
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.post<Expense[]>(url, data);
-  } 
+  }
   editExpense(edit): Observable<any> {
     const addUrl = 'editexpense/';
     const url: string = this.serviceUrl + addUrl + edit._id;
@@ -41,40 +41,40 @@ export class ExpenseManagementService {
     const addUrl = 'singleexpense/';
     const url: string = this.serviceUrl + addUrl + id;
     return this.httpClient.get<Expense[]>(url);
-  }  
-  typeFilter(data):Observable<any>{
+  }
+  typeFilter(data): Observable<any> {
     const addUrl = 'typefilter';
-    const url: string = this.serviceUrl + addUrl ;
+    const url: string = this.serviceUrl + addUrl;
     return this.httpClient.post<Expense[]>(url, data);
   }
-  dateFilter(data):Observable<any>{
+  dateFilter(data): Observable<any> {
     const addUrl = 'datefilter/';
-    const url: string = this.serviceUrl + addUrl  ;
+    const url: string = this.serviceUrl + addUrl;
     return this.httpClient.post<Expense[]>(url, data);
   }
   tdsFind(): Observable<any> {
-    const addUrl ='tdsfind';
+    const addUrl = 'tdsfind';
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.get<Expense[]>(url);
   }
   gstFind(): Observable<any> {
     const addUrl = 'gstfind';
-    const url:string = this.serviceUrl + addUrl;
+    const url: string = this.serviceUrl + addUrl;
     return this.httpClient.get<Expense[]>(url);
-  } 
+  }
   allsttExpense(): Observable<any> {
     const addUrl = 'expense';
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.get<Expense[]>(url);
-  } 
+  }
   allsttPayment(): Observable<any> {
     const addUrl = 'expense';
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.get<Expense[]>(url);
-  } 
+  }
   allsttGst(): Observable<any> {
     const addUrl = 'expense';
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.get<Expense[]>(url);
-  } 
+  }
 }

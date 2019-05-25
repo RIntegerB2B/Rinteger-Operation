@@ -49,7 +49,6 @@ import { SearchIncomeComponent } from './search-income/search-income.component';
     SearchIncomeComponent
     ],
   imports: [
-    HttpClientModule,
     HttpModule,
     CommonModule,
     IncomeRoutingModule,

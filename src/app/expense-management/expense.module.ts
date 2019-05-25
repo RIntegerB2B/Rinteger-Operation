@@ -46,7 +46,6 @@ import { AmountDetailsComponent } from './amount-details/amount-details.componen
     AmountDetailsComponent
     ],
   imports: [
-    HttpClientModule,
     HttpModule,
     CommonModule,
     ExpenseRoutingModule,

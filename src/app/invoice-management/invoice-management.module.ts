@@ -47,7 +47,6 @@ import { SearchInvoiceComponent } from './search-invoice/search-invoice.componen
       ViewAllInvoiceComponent,
       InvoiceGeneratePdfComponent, EditInvoiceComponent, SearchInvoiceComponent],
   imports: [
-    HttpClientModule,
     HttpModule,
     CommonModule,
     MatSidenavModule,
