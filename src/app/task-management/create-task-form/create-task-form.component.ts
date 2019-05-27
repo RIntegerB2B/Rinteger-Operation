@@ -216,8 +216,8 @@ export class CreateTaskFormComponent implements OnInit {
     this.router.navigate(['task/viewtask', this.userId]);
   }
   getUnit() {
-    this.unitSort = localStorage.getItem('unit');
-    this.roleSort = localStorage.getItem('role');
+    this.unitSort = sessionStorage.getItem('unit');
+    this.roleSort = sessionStorage.getItem('role');
   }
   getAllsubscribedCustomer() {
     this.taskManagementService.getAllCustomerRegisterer().subscribe(data => {

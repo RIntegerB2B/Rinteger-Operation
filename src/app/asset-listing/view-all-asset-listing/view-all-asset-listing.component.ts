@@ -132,6 +132,6 @@ export class ViewAllAssetListingComponent implements OnInit {
     this.assetValue = part;
   }
   getRole() {
-    this.userRole = localStorage.getItem('role');
+    this.userRole = sessionStorage.getItem('role');
   }
 }

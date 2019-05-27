@@ -124,8 +124,8 @@ yearValue: any;
     this.router.navigate(['activity-log/viewlist/', row._id]);
   }
   getUnitName() {
-    this.unitName = localStorage.getItem('unit');
-    this.userRole = localStorage.getItem('role');
+    this.unitName = sessionStorage.getItem('unit');
+    this.userRole = sessionStorage.getItem('role');
   }
   Edit(row) {
     this.router.navigate(['activity-log/editmonthlysheet/', row._id]);

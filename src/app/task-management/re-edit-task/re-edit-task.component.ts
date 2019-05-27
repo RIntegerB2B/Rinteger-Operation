@@ -296,7 +296,7 @@ changed(e) {
   console.log(this.taskname);
 }
 getUnit() {
-  this.unitSort =  localStorage.getItem('unit');
-  this.roleSort = localStorage.getItem('role');
+  this.unitSort =  sessionStorage.getItem('unit');
+  this.roleSort = sessionStorage.getItem('role');
 }
 }

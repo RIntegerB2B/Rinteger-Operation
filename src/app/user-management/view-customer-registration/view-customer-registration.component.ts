@@ -63,7 +63,7 @@ export class ViewCustomerRegistrationComponent implements OnInit {
     this.router.navigate(['user/editregisteredcustomer/', data._id]);
   }
   getRole() {
-    this.userRole = localStorage.getItem('role');
+    this.userRole = sessionStorage.getItem('role');
   }
   public handlePage(e: any) {
     this.currentPage = e.pageIndex;

@@ -44,8 +44,8 @@ export class ViewDevelopingUnitComponent implements OnInit {
   }
 
   getRole() {
-    this.userRole = localStorage.getItem('role');
-    this.userId = localStorage.getItem('userId');
+    this.userRole = sessionStorage.getItem('role');
+    this.userId = sessionStorage.getItem('userId');
   }
 
   delete(value) {

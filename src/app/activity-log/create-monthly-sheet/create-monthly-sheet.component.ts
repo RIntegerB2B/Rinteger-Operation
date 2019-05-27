@@ -105,6 +105,6 @@ export class CreateMonthlySheetComponent implements OnInit {
     this.router.navigate(['activity-log/viewallactivity']);
   }
   getUnitName() {
-    this.unitName = localStorage.getItem('unit');
+    this.unitName = sessionStorage.getItem('unit');
   }
 }

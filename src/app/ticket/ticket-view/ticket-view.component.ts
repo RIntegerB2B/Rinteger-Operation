@@ -41,7 +41,7 @@ export class TicketViewComponent implements OnInit {
     private sharedService: SharedService) { }
 
   ngOnInit() {
-    this.userRole = localStorage.getItem('role');
+    this.userRole = sessionStorage.getItem('role');
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.userId = params.get('id');
       /* this.userRole = params.get ('role'); */

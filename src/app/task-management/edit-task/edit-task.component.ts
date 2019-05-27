@@ -251,7 +251,7 @@ export class EditTaskComponent implements OnInit {
     this.router.navigate(['task/viewtask/', this.editview]);
   }
   getUnit() {
-    this.unitSort = localStorage.getItem('unit');
-    this.roleSort = localStorage.getItem('role');
+    this.unitSort = sessionStorage.getItem('unit');
+    this.roleSort = sessionStorage.getItem('role');
   }
 }

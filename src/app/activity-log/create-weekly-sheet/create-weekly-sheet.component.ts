@@ -175,7 +175,7 @@ export class CreateWeeklySheetComponent implements OnInit {
     this.router.navigate(['activity-log/viewweek/', this.valueEdit._id]);
   }
 getUnit() {
-  this.unitSort =  localStorage.getItem('unit');
-  this.roleSort = localStorage.getItem('role');
+  this.unitSort =  sessionStorage.getItem('unit');
+  this.roleSort = sessionStorage.getItem('role');
 }
 }

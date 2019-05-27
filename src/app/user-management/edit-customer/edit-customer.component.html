@@ -8,20 +8,20 @@
         <div fxFlex="50" class="pr-1">
           <mat-form-field class="full-width">
             <input matInput formControlName="customerName"  placeholder="Customer Name" 
-            [value]="registeredCustomerValue?.customerName"
+            [value]="registeredCustomerValue.customerName"
               (ngModelChange)="registeredCustomerValue.customerName=$event">  
           </mat-form-field>
         </div>
         <div fxFlex="50" class="pr-1">
           <mat-form-field class="full-width">
-            <input matInput formControlName="mobileNumber" [value]="registeredCustomerValue?.mobileNumber" 
+            <input matInput formControlName="mobileNumber" [value]="registeredCustomerValue.mobileNumber" 
             (ngModelChange)="registeredCustomerValue.mobileNumber=$event"
               placeholder="Mobile Number">  
           </mat-form-field>
         </div>      
         <div fxFlex="50" class="pr-1">
           <mat-form-field class="full-width">
-            <input matInput formControlName="password" [value]="registeredCustomerValue?.password"
+            <input matInput formControlName="password" [value]="registeredCustomerValue.password"
              (ngModelChange)="registeredCustomerValue.password=$event" 
               placeholder="Password">
           </mat-form-field>

@@ -43,8 +43,8 @@ import { TicketEditComponent } from './ticket-edit/ticket-edit.component';
   declarations: [TicketComponent, TicketViewComponent, UniqueTicketComponent,
      TicketcustomersearchComponent, UnitwiseViewComponent, TicketEditComponent],
   imports: [
-    CommonModule,HttpModule,
-    TicketRoutingModule,FormsModule,ReactiveFormsModule,MatBadgeModule,
+    CommonModule, HttpModule,
+    TicketRoutingModule, FormsModule , ReactiveFormsModule, MatBadgeModule,
     MatSidenavModule,
     MatListModule,
     MatTooltipModule,

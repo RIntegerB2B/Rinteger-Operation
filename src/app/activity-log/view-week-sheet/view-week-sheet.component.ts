@@ -121,7 +121,7 @@ export class ViewWeekSheetComponent implements OnInit {
     this.activityValue = part;
   }
   getUnitName() {
-    this.unitName = localStorage.getItem('unit');
+    this.unitName = sessionStorage.getItem('unit');
   }
   Delete(row) {
    this.activityLogService.deleteWeeklyPlan(row._id).subscribe( data => {

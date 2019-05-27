@@ -15,6 +15,6 @@ export class MainModelComponent implements OnInit {
     this.getUnit();
   }
 getUnit() {
-  this.userUnit = localStorage.getItem('unit');
+  this.userUnit = sessionStorage.getItem('unit');
 }
 }

@@ -105,8 +105,8 @@ export class ViewAllTaskComponent implements OnInit {
     );
   }
   getRole() {
-    this.userRole = localStorage.getItem('role');
-    this.userUnit = localStorage.getItem('unit');
+    this.userRole = sessionStorage.getItem('role');
+    this.userUnit = sessionStorage.getItem('unit');
   }
   getUnitWiseName() {
     this.taskManagementService.getUnitWiseName().subscribe(data => {

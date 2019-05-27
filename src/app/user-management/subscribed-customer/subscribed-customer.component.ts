@@ -64,7 +64,7 @@ export class SubscribedCustomerComponent implements OnInit {
     });
   }
   getRole() {
-    this.userRole = localStorage.getItem('role');
+    this.userRole = sessionStorage.getItem('role');
   }
   filterRegistrationCustomer(data) {
     this.registeredUserModel = new MatTableDataSource<CustomerRegister>(data);

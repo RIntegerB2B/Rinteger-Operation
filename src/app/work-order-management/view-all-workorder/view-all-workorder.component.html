@@ -192,8 +192,10 @@
         <div class="col-md-2 col-6  form-group" *ngIf="!viewCompleted; else elseBlock">
           <mat-form-field>
             <mat-label>Select Status:</mat-label>
-            <mat-select (selectionChange)="workOrderStatusUpdate($event, data._id)" [(value)]="data.workOrderStatus">
-              <mat-option *ngFor="let status of workOrderSettingModel; let i = index" [value]="status">
+            <mat-select (selectionChange)="workOrderStatusUpdate($event, data._id)" 
+            [(value)]="data.workOrderStatus">
+              <mat-option *ngFor="let status of workOrderSettingModel; let i = index"
+               [value]="status">
                 {{status}}
               </mat-option>
             </mat-select>

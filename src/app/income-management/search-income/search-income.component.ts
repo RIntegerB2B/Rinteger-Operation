@@ -10,16 +10,16 @@ import { IncomeModel } from '../../shared/income.model';
 export class SearchIncomeComponent implements OnInit {
   incomeDetailsForm: FormGroup;
   @Input() incomeModel: IncomeModel;
-  @Output() searchIncome = new EventEmitter<any>() 
-  constructor(private fb:FormBuilder) { }
+  @Output() searchIncome = new EventEmitter<any>(); 
+  constructor(private fb: FormBuilder) { }
   ngOnInit() {
     this.incomeDetailsForm = this.fb.group({
       srchterm: [''],
-    })
+    });
   }
   searchBy(incomeData, search){
-    const filterData = incomeData.filter(data=>
-      data.customerName.toUpperCase().indexOf(search.toUpperCase())>-1);
-    this.searchIncome.emit(filterData);
+      const filterData = incomeData.filter(data =>
+      data.customerName.toUpperCase().indexOf(search.toUpperCase()) > -1);
+      this.searchIncome.emit(filterData);
   }
 }

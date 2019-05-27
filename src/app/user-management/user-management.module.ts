@@ -43,7 +43,11 @@ import { SearchComponent } from './search/search.component';
 import { SearchUserComponent } from './search-user/search-user.component';
 
 @NgModule({
-  declarations: [RegistrationComponent, CreateRoleComponent, CustomerRegistrationComponent, ViewUsersComponent, EditUsersComponent, ViewCustomerRegistrationComponent, EditCustomerComponent, SubscribedCustomerComponent, SearchComponent, SearchUserComponent],
+  declarations: [RegistrationComponent,
+     CreateRoleComponent, CustomerRegistrationComponent,
+      ViewUsersComponent, EditUsersComponent,
+       ViewCustomerRegistrationComponent, EditCustomerComponent,
+        SubscribedCustomerComponent, SearchComponent, SearchUserComponent],
   imports: [
     CommonModule,
     UserManagementRoutingModule,

@@ -59,11 +59,11 @@ export class ViewEditedIncomeComponent implements OnInit {
       this.arry = data;
       this.totalSize = this.arry.length;
       this.iterator();
-    },error => {
+    }, error => {
       console.log(error);
-    })
+    });
   }
-  filterIncome(data){
+  filterIncome(data) {
     this.incomeModel = new MatTableDataSource<IncomeModel>(data);
     this.incomeModel.paginator = this.paginator;
     this.incomeModel = data;
@@ -72,15 +72,15 @@ export class ViewEditedIncomeComponent implements OnInit {
     this.iterator();
     this.getTotal();
   }
-  getEditIncome(data){
+  getEditIncome(data) {
     this.router.navigate(['income/editincomesheet',data._id]);
   }
-  getDeleteIncome(data){
+  getDeleteIncome(data) {
     this.incomemanagementservice.DeleteIncomeSheet(data).subscribe(data =>{
       this.incomeModel = data;
-    })
+    });
   }
-  getTds(){
+  getTds() {
     this.incomemanagementservice.getTDS().subscribe(data => {
       this.incomeModel = new MatTableDataSource<IncomeModel>(data);
       this.incomeModel.paginator = this.paginator;
@@ -90,14 +90,14 @@ export class ViewEditedIncomeComponent implements OnInit {
       this.iterator();
       this.incomeValue = data;
       this.getTotal();
-    })
+    });
   }
-  getAll(){
+  getAll() {
     this.incomemanagementservice.getFindAll().subscribe(data =>{
       this.incomeModel = data;
       this.incomeValue = data;
       this.getTotal();
-  })
+  });
 }
 public handlePage(e: any) {
   this.currentPage = e.pageIndex;
@@ -111,10 +111,10 @@ private iterator() {
   this.incomeModel = part;
 }
 getTotal() {
-  let tot = 0;    
-  for (var i = 0; i <= this.incomeModel.length-1; i++){
-    tot += this.incomeModel[i].allTotal;      
-  }    
+  let tot = 0;
+  for (let i = 0; i <= this.incomeModel.length - 1; i++) {
+    tot += this.incomeModel[i].allTotal;
+  }
   this.getBalance();
   this.getPaid();
   this.getTdsTotal();
@@ -122,23 +122,21 @@ getTotal() {
 }
 getPaid() {
   let paid = 0;
-  for (var i = 0; i <= this.incomeModel.length-1; i++){
+  for (let i = 0; i <= this.incomeModel.length - 1; i++) {
     paid += this.incomeModel[i].paidAmount;
   }
   return paid;
 }
 getBalance() {
   let bal = 0;
-  
-  for (var i = 0; i <= this.incomeModel.length-1; i++){
+  for (let i = 0; i <= this.incomeModel.length - 1; i++) {
     bal += this.incomeModel[i].balanceAmount;
   }
   return bal;
 }
 getTdsTotal() {
   let td = 0;
-  
-  for (var i = 0; i <= this.incomeModel.length-1; i++){
+  for (let i = 0; i <= this.incomeModel.length - 1; i++) {
     td += this.incomeModel[i].tds;
   }
   return td;

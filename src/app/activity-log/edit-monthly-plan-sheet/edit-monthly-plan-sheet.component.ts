@@ -86,8 +86,8 @@ export class EditMonthlyPlanSheetComponent implements OnInit {
       this.userUnit = data[0].unit;
       console.log(this.userUnit);
       this.addNewForm();
-    }, error => {
-      console.log(error);
+      }, err => {
+      console.log(err);
     });
   }
   updatevalue(activityForm: FormGroup, row) {
@@ -104,8 +104,8 @@ export class EditMonthlyPlanSheetComponent implements OnInit {
    this.activityLogService.updateMonthlyPlan(this.activeValue, row._id).subscribe( data => {
      this.activeValue = data;
      this.router.navigate(['activity-log/viewallmonthly']);
-   }, error => {
-     console.log(error);
+     }, err => {
+     console.log(err);
    });
   }
   getUnitName() {

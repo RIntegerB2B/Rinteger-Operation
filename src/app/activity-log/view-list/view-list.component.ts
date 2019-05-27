@@ -87,7 +87,7 @@ export class ViewListComponent implements OnInit {
     this.activityValue = part;
   }
   getUnitName() {
-    this.unitName = localStorage.getItem('unit');
+    this.unitName = sessionStorage.getItem('unit');
   }
   goToWeeklyPlan() {
     this.router.navigate(['activity-log/viewweek', this.activityID[0]._id]);
