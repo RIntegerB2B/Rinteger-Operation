@@ -38,8 +38,8 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LeadManagementService } from './../lead-management/lead-management.service';
-/* import { CustomersModule } from './../customer-management/customer.module'; */
-import { CustomerManagementService } from './../customer-management/customer-management.service';
+import { CreateCustomerService } from './../lead-management/create-customer/create-customer.service';
+import { CreateCustomerComponent } from './../lead-management/create-customer/create-customer.component';
 import { ViewSingleLeadComponent } from './view-single-lead/view-single-lead.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { ExistingCustomerComponent } from './existing-customer/existing-customer.component';
@@ -56,6 +56,7 @@ import { SearchLeadComponent } from './search-lead/search-lead.component';
     ViewFollowupComponent,
     ViewSingleLeadComponent,
     ExistingCustomerComponent,
+    CreateCustomerComponent,
     SearchComponent,
     SearchLeadComponent],
   imports: [
@@ -94,8 +95,8 @@ import { SearchLeadComponent } from './search-lead/search-lead.component';
     LeadManagementRoutingModule,
     MatAutocompleteModule
   ],
-  providers: [LeadManagementService, ExistingService],
-  entryComponents: [ExistingCustomerComponent]
+  providers: [LeadManagementService, ExistingService, CreateCustomerService],
+  entryComponents: [ExistingCustomerComponent, CreateCustomerComponent]
 })
 export class LeadManagementModule { }
 

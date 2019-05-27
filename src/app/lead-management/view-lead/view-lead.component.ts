@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { LeadManagementService } from './../lead-management.service';
 import { SharedService } from './../../shared-module/shared.service';
-import { CreateCustomerService } from './../../customer-management/customer/create-customer/create-customer.service';
+import { CreateCustomerService } from './../create-customer/create-customer.service';
 import { Router } from '@angular/router';
 import { Lead } from './../../shared/lead.model';
 import { DateSearch } from './search.model';
@@ -15,8 +15,7 @@ import { LeadSettings } from './../../shared/lead-settings.model';
 @Component({
   selector: 'app-view-lead',
   templateUrl: './view-lead.component.html',
-  styleUrls: ['./view-lead.component.css'],
-  providers: [CreateCustomerService, LeadManagementService]
+  styleUrls: ['./view-lead.component.css']
 })
 export class ViewLeadComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;

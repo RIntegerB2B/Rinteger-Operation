@@ -48,8 +48,7 @@ export class ViewSingleWorkorderComponent implements OnInit {
   viewWorkOrder() {
     this.workOrderService.viewSingleWorkOrder(this.workId).subscribe(data => {
       this.workOrder = data;
-      this.customerID = this.workOrder[0].customerID;
-      this.customerDetails();
+      this.customerModel = this.workOrder[0].customer;
       this.viewCompanyDetails();
     }, error => {
       console.log(error);
@@ -81,12 +80,12 @@ export class ViewSingleWorkorderComponent implements OnInit {
     }
   } */
 
-  customerDetails() {
+  /* customerDetails() {
     this.workOrderService.singleCustomerDetails(this.workOrder[0].customerID).subscribe(data => {
       this.customerModel = data; }, error => {
         console.log(error);
       });
-  }
+  } */
 
  /*  savePDFWithDiscountTerms() {
     this.viewCompanyDetails();

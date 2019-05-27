@@ -79,6 +79,7 @@ export class EditWorkorderComponent implements OnInit {
   viewWorkOrder()   {
     this.workOrderService.viewSingleWorkOrder(this.workId).subscribe(data => {
       this.workOrder = data[0];
+      this.customerModel = data[0].customer;
       this.addForm();
       this.getTotal();
     }, error => {
@@ -104,9 +105,8 @@ export class EditWorkorderComponent implements OnInit {
 }
   updateWorkOrder(workOrderDetailsForm: FormGroup)   {
     this.message = 'WorkOrder Updated Successfully';
-    console.log(workOrderDetailsForm.value);
     this.workOrder = new WorkOrder(
-      workOrderDetailsForm.controls.customerID.value,
+     /*  workOrderDetailsForm.controls.customerID.value,
       workOrderDetailsForm.controls.customerName.value,
       workOrderDetailsForm.controls.companyName.value,
       workOrderDetailsForm.controls.address.value,
@@ -120,12 +120,16 @@ export class EditWorkorderComponent implements OnInit {
       workOrderDetailsForm.controls.subTotal.value,
       workOrderDetailsForm.controls.tax.value,
       '',
-      ''
+      '' */
     );
+    this.workOrder.date = workOrderDetailsForm.controls.date.value,
+    this.workOrder.requirements = workOrderDetailsForm.controls.requirements.value,
+    this.workOrder.allTotal = workOrderDetailsForm.controls.allTotal.value,
+    this.workOrder.subTotal = workOrderDetailsForm.controls.subTotal.value,
+    this.workOrder.tax = workOrderDetailsForm.controls.tax.value,
     this.workOrder.workOrderID =  workOrderDetailsForm.controls.workOrderID.value;
     this.workOrderService.updateSingleWorkOrder(this.workOrder, this.workId).subscribe(data => {
       this.workOrderData = data[0];
-      
       this.snackBar.open(this.message, this.action, {
         duration: 3000,
       });
@@ -149,6 +153,13 @@ export class EditWorkorderComponent implements OnInit {
 
   get requirementsForms() {
     return this.workOrderDetailsForm.get('requirements') as FormArray;
+  }
+  getSingleCustomer() {
+    this.workOrderService.singleCustomer(this.workOrder.customerID).subscribe(data => {
+      this.customerModel = data;
+    }, error => {
+      console.log(error);
+    });
   }
   getTotal() {
     this.sum = 0;

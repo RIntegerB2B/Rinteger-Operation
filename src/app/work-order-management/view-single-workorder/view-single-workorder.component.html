@@ -2,7 +2,7 @@
  [formGroup]="singleWorkorderDetailsForm" >
   <label class="pageBoxLg-label">Work Order Details</label>
   <div class="pageBoxLg" *ngFor="let data of workOrder; let i = index">
-    <div class="row">
+    <div class="row" *ngFor="let cust of data.customer; let i = index">
       <div class="col-md-6">
         <div class="row">
           <div class="col-md-4  col-6">
@@ -12,7 +12,7 @@
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              : <label class="itemLable">{{data?.customerID}}</label>
+              : <label class="itemLable">{{cust?.customerID}}</label>
             </div>
           </div>
           <div class="col-md-4  col-6">
@@ -22,7 +22,7 @@
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              : <label class="itemLable">{{data?.customerName}}</label>
+              : <label class="itemLable">{{cust?.name}}</label>
             </div>
           </div>
           <div class="col-md-4  col-6">
@@ -32,7 +32,7 @@
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              : <label class="itemLable">{{data?.companyName}}</label>
+              : <label class="itemLable">{{cust?.companyName}}</label>
             </div>
           </div>
           <div class="col-md-4  col-6">
@@ -42,7 +42,7 @@
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              : <label class="itemLable">{{data?.companyAddress}}</label>
+              : <label class="itemLable">{{cust?.companyAddress}}</label>
             </div>
           </div>
           <div class="col-md-4  col-6">
@@ -52,7 +52,7 @@
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              : <label class="itemLable">{{data?.mobileNumber}}</label>
+              : <label class="itemLable">{{cust?.mobileNumber}}</label>
             </div>
           </div>
         </div>

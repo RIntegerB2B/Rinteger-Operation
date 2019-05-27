@@ -125,4 +125,11 @@ export class WorkOrderService {
     const url: string = this.serviceUrl + addUrl + workid;
     return this.httpClient.put<WorkOrder>(url, row);
   }
+  singleCustomer(id): Observable<any> {
+
+    const addUrl = 'customerdetails/';
+
+    const url: string = this.serviceUrl + addUrl + id;
+    return this.httpClient.get<Customer[]>(url);
+  }
 }

@@ -96,8 +96,8 @@
             <h5 class="card-title">Account Summary</h5>
             <p class="card-text">Unit: <b>{{selectedUnit }}</b></p>
             <p class="card-text">Number of Work Order : <b>{{workOrderModel?.length}}</b></p>
-            <p class="card-text">GST : <b>{{getTax() }}</b></p>
-            <p class="card-text">Total : <b>{{this.getTotal()}}</b></p>
+            <p class="card-text">GST : <b>{{getTax().toFixed(2) }}</b></p>
+            <p class="card-text">Total : <b>{{this.getTotal().toFixed(2)}}</b></p>
           </div>
         </div>
       </div>
@@ -149,7 +149,7 @@
       No Work Order
     </div>
     <div *ngFor="let data of workOrder">
-      <div class="row gridRow">
+      <div class="row gridRow" *ngFor="let cust of data?.customer">
         <div class="display-none-large col-6">
           <label class="gridLabel">Work Order ID:</label>
         </div>
@@ -160,13 +160,13 @@
           <label class="gridLabel">Name:</label>
         </div>
         <div class="col-md-2 col-6 vcenter form-group">
-          {{data.customerName}}
+          {{cust.name}}
         </div>
         <div class="display-none-large col-6">
           <label class="gridLabel">Mobile Number:</label>
         </div>
         <div class="col-md-2 col-6 vcenter form-group">
-          {{data.mobileNumber}}
+          {{cust.mobileNumber}}
         </div>
         <div class="display-none-large col-6">
           <label class="gridLabel">Unit:</label>

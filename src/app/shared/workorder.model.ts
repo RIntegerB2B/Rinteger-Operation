@@ -3,14 +3,14 @@ export class WorkOrder {
     _id?: string;
     workOrderID?: string;
     customerID: string;
-    customerName: string;
+    /* customerName: string;
     companyName: string;
-    companyAddress: string;
+    companyAddress: string; */
     leadID: number;
     leadUnit: String;
     workOrderStatus: string;
-    mobileNumber: string;
-    emailId: string;
+    /* mobileNumber: string;
+    emailId: string; */
     date: Date;
     requirements: [Detail];
     allTotal: number;
@@ -18,7 +18,7 @@ export class WorkOrder {
     tax: number;
     totalAmount: number;
     invoiceStatus: string;
-    constructor(
+   /*  constructor(
         customerID: string,
         customerName: string,
         companyName: string,
@@ -50,5 +50,5 @@ export class WorkOrder {
         this.tax = tax;
         this.workOrderStatus = workOrderStatus;
         this.invoiceStatus = invoiceStatus;
-    }
+    } */
 }

@@ -88,26 +88,18 @@ export class CreateWorkorderComponent implements OnInit {
   }
   createLeadWorkOrder(workOrderDetailsForm: FormGroup) {
     console.log('value', this.taxVal);
-    this.workOrder = new WorkOrder(
-      workOrderDetailsForm.controls.customerID.value,
-      workOrderDetailsForm.controls.customerName.value,
-      workOrderDetailsForm.controls.companyName.value,
-      workOrderDetailsForm.controls.companyAddress.value,
-      workOrderDetailsForm.controls.leadID.value,
-      workOrderDetailsForm.controls.leadUnit.value,
-      workOrderDetailsForm.controls.mobileNumber.value,
-      workOrderDetailsForm.controls.emailId.value,
-      workOrderDetailsForm.controls.date.value,
-      workOrderDetailsForm.controls.requirements.value,
-      workOrderDetailsForm.controls.allTotal.value,
-      workOrderDetailsForm.controls.subTotal.value,
-      workOrderDetailsForm.controls.tax.value,
-      '',
-      ''
-    );
+    this.workOrder = new WorkOrder();
+    this.workOrder.customerID = workOrderDetailsForm.controls.customerID.value;
+    this.workOrder.leadID = workOrderDetailsForm.controls.leadID.value;
+    this.workOrder.leadUnit = workOrderDetailsForm.controls.leadUnit.value;
+    this.workOrder.date = workOrderDetailsForm.controls.date.value;
+    this.workOrder.requirements = workOrderDetailsForm.controls.requirements.value;
+    this.workOrder.allTotal = workOrderDetailsForm.controls.allTotal.value;
+    this.workOrder.subTotal = workOrderDetailsForm.controls.subTotal.value;
+    this.workOrder.tax = workOrderDetailsForm.controls.tax.value;
     this.workOrderService.createWorkOrder(this.workOrder).subscribe(data => {
       this.workOrder = data;
-      this.router.navigate(['workorder/viewworkorder', this.workOrder.leadID]);
+      this.router.navigate(['workorder/viewallworkorder']);
     }, error => {
       console.log(error);
     });

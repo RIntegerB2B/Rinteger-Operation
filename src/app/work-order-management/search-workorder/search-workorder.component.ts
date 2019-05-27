@@ -29,7 +29,8 @@ export class SearchWorkorderComponent implements OnInit {
   searchBy(workOrderData, selectType, filter) {
     switch (selectType) {
       case 'Name': {
-        const filterData = workOrderData.filter(data => data.customerName.toUpperCase().indexOf(filter.toUpperCase()) > -1);
+        const filterData = workOrderData.filter(data => data.customer.filter(cust =>
+           cust.name.toUpperCase().indexOf(filter.toUpperCase())) > -1);
         this.searchWorkOrder.emit(filterData);
         break;
       }
@@ -39,8 +40,8 @@ export class SearchWorkorderComponent implements OnInit {
             data.mobileNumber = '';
           }
         });
-        const filterData = workOrderData.filter(data =>
-          data.mobileNumber.toString().indexOf(filter.toString()) > -1);
+        const filterData = workOrderData.filter(data => data.customer.filter(cust =>
+          cust.mobileNumber.toString().indexOf(filter.toString()) ) > -1);
         this.searchWorkOrder.emit(filterData);
         break;
       }

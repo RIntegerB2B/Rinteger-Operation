@@ -28,6 +28,11 @@ export class LeadManagementService {
     const url: string = this.serviceUrl + addUrl + id;
     return this.httpClient.get<Lead[]>(url);
   }
+  addSingleCustomer(data: any): Observable<any> {
+    const addUrl = 'addcustomer';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.post<Customer[]>(url, data);
+  }
   addSingleLead(data: any): Observable<any> {
     const addUrl = 'addlead';
     const url: string = this.serviceUrl + addUrl;

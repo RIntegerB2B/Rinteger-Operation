@@ -1,9 +1,9 @@
 import { Component, OnInit, Inject, Optional, Input } from '@angular/core';
 import { Customer } from './customer.model';
-import { mobileNumberValidation } from '../../shared/mobileNumberValidation';
+/* import { mobileNumberValidation } from '../../shared/'; */
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CustomerManagementService } from './../../customer-management.service';
+import { LeadManagementService } from './../lead-management.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 
@@ -18,7 +18,7 @@ export class CreateCustomerComponent implements OnInit {
   constructor(private fb: FormBuilder,
     @Optional() public dialogRef: MatDialogRef<CreateCustomerComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
-    private customerManagementService: CustomerManagementService,
+    private leadManagementService: LeadManagementService,
   ) {
   }
 
@@ -31,7 +31,7 @@ export class CreateCustomerComponent implements OnInit {
   createForm() {
     this.customerDetailsForm = this.fb.group({
       customerID: [''],
-      mobileNumber: ['', mobileNumberValidation],
+      mobileNumber: [''],
       altMobileNumber: [''],
       name: ['', Validators.required],
       emailId: ['', [
@@ -66,7 +66,7 @@ export class CreateCustomerComponent implements OnInit {
       customerDetailsForm.controls.gstNumber.value,
       customerDetailsForm.controls.brandName.value
     );
-    this.customerManagementService.addSingleCustomer(this.customerModel).subscribe(data => {
+    this.leadManagementService.addSingleCustomer(this.customerModel).subscribe(data => {
       this.customerModel = data;
       console.log(data.message);
       this.dialogRef.close(true);
