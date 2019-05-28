@@ -54,7 +54,6 @@ import { DuplicateCustomerComponent } from './duplicate-customer/duplicate-custo
        UpdateStatusComponent, ViewActivityComponent, DuplicateCustomerComponent],
   imports: [
     CommonModule,
-    HttpClientModule,
     MatDatepickerModule,
     MatNativeDateModule,
     HttpModule,

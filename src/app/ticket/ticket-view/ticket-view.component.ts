@@ -67,7 +67,7 @@ export class TicketViewComponent implements OnInit {
       this.totalSize = this.array.length;
       this.iterator();
       this.filterWiseTest();
-    }, error => { console.log(error); 
+    }, error => { console.log(error);
     });
   }
   getunitwiseTicket(name) {
