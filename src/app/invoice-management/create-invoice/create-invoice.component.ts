@@ -59,22 +59,16 @@ export class CreateInvoiceComponent implements OnInit {
     });
   }
   createLeadInvoice(invoiceDetailsForm: FormGroup) {
-    this.invoice = new Invoice(
-      invoiceDetailsForm.controls.customerID.value,
-      invoiceDetailsForm.controls.customerName.value,
-      invoiceDetailsForm.controls.companyName.value,
-      invoiceDetailsForm.controls.companyAddress.value,
-      invoiceDetailsForm.controls.mobileNumber.value,
-      invoiceDetailsForm.controls.emailId.value,
-      invoiceDetailsForm.controls.leadID.value,
-      invoiceDetailsForm.controls.requirements.value,
-      invoiceDetailsForm.controls.workOrderID.value,
-      invoiceDetailsForm.controls.date.value,
-      invoiceDetailsForm.controls.expiryDate.value,
-      invoiceDetailsForm.controls.allTotal.value,
-      invoiceDetailsForm.controls.subTotal.value,
-      invoiceDetailsForm.controls.tax.value
-    );
+    this.invoice = new Invoice();
+    this.invoice.customerID = invoiceDetailsForm.controls.customerID.value,
+    this.invoice.leadID = invoiceDetailsForm.controls.leadID.value,
+    this.invoice.requirements = invoiceDetailsForm.controls.requirements.value,
+    this.invoice.workOrderID = invoiceDetailsForm.controls.workOrderID.value,
+    this.invoice.date = invoiceDetailsForm.controls.date.value,
+    this.invoice.expiryDate = invoiceDetailsForm.controls.expiryDate.value,
+    this.invoice.allTotal = invoiceDetailsForm.controls.allTotal.value,
+    this.invoice.subTotal = invoiceDetailsForm.controls.subTotal.value,
+    this.invoice.tax = invoiceDetailsForm.controls.tax.value;
     this.invoiceService.createInvoice(this.invoice).subscribe(data => {
       this.getInvoiceStatus(data);
     }, error => {
@@ -85,13 +79,13 @@ export class CreateInvoiceComponent implements OnInit {
   getInvoiceStatus(value) {
     this.invoiceService.setInvoiceStatus(value).subscribe(data => {
       /* this.workOrderData = data; */
-      this.router.navigate(['invoice/viewinvoice', data.workOrderID]);
+      this.router.navigate(['invoice/viewallinvoice']);
     }, error => {
       console.log(error);
     });
   }
   cancelInvoice() {
-    this.router.navigate(['workorder/viewworkorder', this.leadId]);
+    this.router.navigate(['workorder/viewallworkorder']);
   }
   addNewForm() {
     const requirements = this.fb.group({

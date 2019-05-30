@@ -1,7 +1,7 @@
 <form novalidate style="padding-top:20px" [formGroup]="singleInvoiceForm" >
   <label class="pageBoxLg-label">Invoice Details</label>
   <div class="pageBoxLg" *ngFor="let invoiceData of invoice ">
-    <div class="row">
+    <div class="row" *ngFor="let cust of invoiceData.customer">
       <div class="col-md-6">
         <div class="row">
           <div class="col-md-4  col-6">
@@ -11,7 +11,7 @@
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              : <label class="itemLable">{{invoiceData?.companyName}}</label>
+              : <label class="itemLable">{{cust?.companyName}}</label>
             </div>
           </div>
           <div class="col-md-4  col-6">
@@ -21,7 +21,7 @@
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              : <label class="itemLable">{{invoiceData?.mobileNumber}}</label>
+              : <label class="itemLable">{{cust?.mobileNumber}}</label>
             </div>
           </div>
           <div class="col-md-4  col-6">
@@ -31,7 +31,7 @@
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              : <label class="itemLable">{{invoiceData?.customerName}}</label>
+              : <label class="itemLable">{{cust?.name}}</label>
             </div>
           </div>
         </div>

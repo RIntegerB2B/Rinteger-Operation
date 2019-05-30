@@ -22,8 +22,12 @@ export class SearchInvoiceComponent implements OnInit {
   searchBy(invoiceData, selectType, filter) {
     switch (selectType) {
       case 'Name': {
-        const filterData = invoiceData.filter(data => data.customerName.toUpperCase().indexOf(filter.toUpperCase()) > -1);
-        this.searchInvoice.emit(filterData);
+        /* const filterData = invoiceData.filter(data => data.customerName.toUpperCase().indexOf(filter.toUpperCase()) > -1);
+        this.searchInvoice.emit(filterData); */
+        const filterData = invoiceData.filter(data => data.customer.filter(cust =>
+          cust.name.toUpperCase().indexOf(filter.toUpperCase())) > -1);
+       this.searchInvoice.emit(filterData);
+       break;
         break;
       }
       case 'MobileNumber': {
@@ -32,8 +36,8 @@ export class SearchInvoiceComponent implements OnInit {
             data.mobileNumber = '';
           }
         });
-        const filterData = invoiceData.filter(data =>
-          data.mobileNumber.toString().indexOf(filter.toString()) > -1);
+        const filterData = invoiceData.filter(data => data.customer.filter(cust =>
+          cust.mobileNumber.toString().indexOf(filter.toString()) ) > -1);
         this.searchInvoice.emit(filterData);
         break;
       }
@@ -43,9 +47,12 @@ export class SearchInvoiceComponent implements OnInit {
             data.emailId = '';
           }
         });
-        const filterData = invoiceData.filter(data =>
+       /*  const filterData = invoiceData.filter(data =>
           data.emailId.toUpperCase().indexOf(filter.toUpperCase()) > -1);
-        this.searchInvoice.emit(filterData);
+        this.searchInvoice.emit(filterData); */
+        const filterData = invoiceData.filter(data => data.customer.filter(cust =>
+          cust.emailId.toUpperCase().indexOf(filter.toUpperCase())) > -1);
+       this.searchInvoice.emit(filterData);
         break;
       }
       case 'City': {
@@ -65,9 +72,9 @@ export class SearchInvoiceComponent implements OnInit {
             data.location = '';
           }
         });
-        const filterData = invoiceData.filter(data =>
-          data.location.toUpperCase().indexOf(filter.toUpperCase()) > -1);
-        this.searchInvoice.emit(filterData);
+        const filterData = invoiceData.filter(data => data.customer.filter(cust =>
+          cust.location.toUpperCase().indexOf(filter.toUpperCase())) > -1);
+       this.searchInvoice.emit(filterData);
         break;
       }
     }

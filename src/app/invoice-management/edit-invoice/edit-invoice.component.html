@@ -3,7 +3,7 @@
 style="padding-top:20px">
   <label class="pageBoxLg-label">Edit Invoice</label>
   <div class="pageBoxLg">
-    <div class="row">
+    <div class="row" *ngFor="let customer of customerModel">
       <div class="col-md-6">
         <div class="row">
           <div class="col-md-4  col-6">
@@ -15,8 +15,8 @@ style="padding-top:20px">
             <div class="form-group">
               : <label class="itemLable">
                 <input hidden formControlName="customerID"
-                 [ngModel]="invoice?.customerID">
-                {{invoice?.customerID}}
+                 [ngModel]="customer?.customerID">
+                {{customer?.customerID}}
               </label>
             </div>
           </div>
@@ -27,8 +27,8 @@ style="padding-top:20px">
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              <input hidden  formControlName="companyName" [ngModel]="invoice?.companyName">
-              : <label class="itemLable">{{invoice?.companyName}}</label>
+              <!-- <input hidden  formControlName="companyName" [ngModel]="invoice?.companyName"> -->
+              : <label class="itemLable">{{customer?.companyName}}</label>
             </div>
           </div>
           <div class="col-md-4  col-6">
@@ -38,8 +38,8 @@ style="padding-top:20px">
             </div>
             <div class="col-md-8  col-6">
                 <div class="form-group">
-                  <input hidden  formControlName="companyAddress" [ngModel]="invoice?.companyAddress">
-                  : <label class="itemLable">{{invoice?.companyAddress}}</label>
+                  <!-- <input hidden  formControlName="companyAddress" [ngModel]="invoice?.companyAddress"> -->
+                  : <label class="itemLable">{{customer?.companyAddress}}</label>
                 </div>
               </div>
           <div class="col-md-4  col-6">
@@ -49,8 +49,8 @@ style="padding-top:20px">
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              <input hidden formControlName="customerName" [ngModel]="invoice?.customerName">
-              : <label class="itemLable">{{invoice?.customerName}}</label>
+              <!-- <input hidden formControlName="customerName" [ngModel]="invoice?.customerName"> -->
+              : <label class="itemLable">{{customer?.name}}</label>
             </div>
           </div>
 
@@ -61,8 +61,8 @@ style="padding-top:20px">
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              : <label class="itemLable">{{invoice?.mobileNumber}}</label>
-              <input hidden  formControlName="mobileNumber" [ngModel]="invoice?.mobileNumber">
+              : <label class="itemLable">{{customer?.mobileNumber}}</label>
+              <!-- <input hidden  formControlName="mobileNumber" [ngModel]="invoice?.mobileNumber"> -->
             </div>
           </div>
           <div class="col-md-4  col-6">
@@ -72,8 +72,14 @@ style="padding-top:20px">
             </div>
           <div class="col-md-8  col-6">
               <div class="form-group">
-                : <label class="itemLable">{{invoice?.emailId}}</label>
-                <input hidden formControlName="emailId" [ngModel]="invoice?.emailId">
+                : <label class="itemLable">{{customer?.emailId}}</label>
+                <!-- <input hidden formControlName="emailId" [ngModel]="invoice?.emailId"> -->
+              </div>
+            </div>
+          <div class="col-md-8  col-6">
+              <div class="form-group">
+                <input hidden formControlName="workOrderID" [ngModel]="invoice?.workOrderID">
+                : <label class="itemLable">{{invoice?.workOrderID}}</label>
               </div>
             </div>
 
@@ -100,7 +106,8 @@ style="padding-top:20px">
           <div class="col-md-8  col-6">
             <div class="form-group">
               <mat-form-field>
-                <input matInput formControlName="date" [matDatepicker]="picker" [ngModel]="invoice?.date" 
+                <input matInput formControlName="date" [matDatepicker]="picker" 
+                [ngModel]="invoice?.date" 
                  placeholder="Choose a date">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
@@ -122,8 +129,6 @@ style="padding-top:20px">
                   </mat-form-field>
                 </div>
               </div>
-          <input hidden formControlName="date" [ngModel]="invoice?.date" placeholder="item">
-          <input hidden formControlName="date" [ngModel]="invoice?.date" placeholder="item">
         </div>
       </div>
     </div>
@@ -235,3 +240,4 @@ style="padding-top:20px">
     </div>
   </div>
 </form>
+

@@ -48,7 +48,7 @@ export class ViewSingleInvoiceComponent implements OnInit {
     this.invoiceService.viewSingleInvoice(
       this.invId).subscribe(data => {
         this.invoice = data;
-        this.customerDetails();
+        this.customerModel = this.invoice[0].customer;
         this.viewCompanyDetails();
       }, error => {
         console.log(error);

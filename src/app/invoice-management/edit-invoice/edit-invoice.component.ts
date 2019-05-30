@@ -65,6 +65,7 @@ export class EditInvoiceComponent implements OnInit {
   viewInvoice()   {
     this.invoiceService.viewSingleInvoice(this.invoiceId).subscribe(data => {
       this.invoice = data[0];
+      this.customerModel = data[0].customer;
       console.log(this.invoice);
       this.addForm();
       this.getTotal();
@@ -124,24 +125,18 @@ deleteRequirements(i) {
   this.getTotal();
 }
 updateInvoice(invoiceDetailsForm: FormGroup)   {
-  this.message = 'Invoice Updated Successfully';
-  this.invoice = new Invoice(
-    invoiceDetailsForm.controls.customerID.value,
-    invoiceDetailsForm.controls.customerName.value,
-    invoiceDetailsForm.controls.companyName.value,
-    invoiceDetailsForm.controls.companyAddress.value,
-    invoiceDetailsForm.controls.mobileNumber.value,
-    invoiceDetailsForm.controls.emailId.value,
-    invoiceDetailsForm.controls.leadID.value,
-    invoiceDetailsForm.controls.requirements.value,
-    invoiceDetailsForm.controls.workOrderID.value,
-    invoiceDetailsForm.controls.date.value,
-    invoiceDetailsForm.controls.expiryDate.value,
-    invoiceDetailsForm.controls.allTotal.value,
-    invoiceDetailsForm.controls.subTotal.value,
-    invoiceDetailsForm.controls.tax.value
-  );
-  this.invoice.invoiceID = this.invoiceDetailsForm.controls.invoiceID.value;
+    this.message = 'Invoice Updated Successfully';
+    this.invoice = new Invoice();
+    this.invoice.customerID = invoiceDetailsForm.controls.customerID.value,
+    this.invoice.leadID = invoiceDetailsForm.controls.leadID.value,
+    this.invoice.requirements = invoiceDetailsForm.controls.requirements.value,
+    this.invoice.workOrderID = invoiceDetailsForm.controls.workOrderID.value,
+    this.invoice.date = invoiceDetailsForm.controls.date.value,
+    this.invoice.expiryDate = invoiceDetailsForm.controls.expiryDate.value,
+    this.invoice.allTotal = invoiceDetailsForm.controls.allTotal.value,
+    this.invoice.subTotal = invoiceDetailsForm.controls.subTotal.value,
+    this.invoice.tax = invoiceDetailsForm.controls.tax.value;
+    this.invoice.invoiceID = this.invoiceDetailsForm.controls.invoiceID.value;
     this.invoiceService.updateSingleInvoice(this.invoice, this.invoiceId).subscribe(data => {
     this.invoiceData = data[0];
     this.snackBar.open(this.message, this.action, {

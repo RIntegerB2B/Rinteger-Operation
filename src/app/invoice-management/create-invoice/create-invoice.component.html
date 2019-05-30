@@ -1,9 +1,9 @@
 <form novalidate [formGroup]="invoiceDetailsForm" style="padding-top:20px">
   <label class="pageBoxLg-label">Create Invoice</label>
-  <div class="pageBoxLg">
-    <div class="row" *ngFor="let data of workOrder">
+  <div class="pageBoxLg" *ngFor="let data of workOrder">
+    <div class="row" *ngFor="let cust of data?.customer">
       <div class="col-md-6">
-        <div class="row">
+        <div class="row" >
           <div class="col-md-4  col-6">
             <div class="form-group">
               <label class="divLable">Customer ID</label>
@@ -12,8 +12,8 @@
           <div class="col-md-8  col-6">
             <div class="form-group">
               : <label class="itemLable">
-                <input hidden formControlName="customerID" [ngModel]="data?.customerID">
-                {{data?.customerID}}
+                <input hidden formControlName="customerID" [ngModel]="cust?.customerID">
+                {{cust?.customerID}}
               </label>
             </div>
           </div>
@@ -24,8 +24,8 @@
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              <input hidden formControlName="customerName" [ngModel]="data?.customerName">
-              : <label class="itemLable">{{data?.customerName}}</label>
+              <!-- <input hidden formControlName="customerName" [ngModel]="data?.customerName"> -->
+              : <label class="itemLable">{{cust?.name}}</label>
             </div>
           </div>
           <div class="col-md-4  col-6">
@@ -35,8 +35,8 @@
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              <input hidden formControlName="companyName" [ngModel]="data?.companyName">
-              : <label class="itemLable">{{data?.companyName}}</label>
+              <!-- <input hidden formControlName="companyName" [ngModel]="data?.companyName"> -->
+              : <label class="itemLable">{{cust?.companyName}}</label>
             </div>
           </div>
           <div class="col-md-4  col-6">
@@ -46,8 +46,8 @@
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              <input hidden formControlName="companyAddress" [ngModel]="data?.companyAddress">
-              : <label class="itemLable">{{data?.companyAddress}}</label>
+              <!-- <input hidden formControlName="companyAddress" [ngModel]="data?.companyAddress"> -->
+              : <label class="itemLable">{{cust?.companyAddress}}</label>
             </div>
           </div>
           <div class="col-md-4  col-6">
@@ -57,8 +57,8 @@
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              <input hidden formControlName="emailId" [ngModel]="data?.emailId">
-              : <label class="itemLable">{{data?.emailId}}</label>
+              <!-- <input hidden formControlName="emailId" [ngModel]="data?.emailId"> -->
+              : <label class="itemLable">{{cust?.emailId}}</label>
             </div>
           </div>
           <div class="col-md-4  col-6">
@@ -83,8 +83,8 @@
           </div>
           <div class="col-md-8  col-6">
             <div class="form-group">
-              : <label class="itemLable">{{data?.mobileNumber}}</label>
-              <input hidden formControlName="mobileNumber" [ngModel]="data?.mobileNumber">
+              : <label class="itemLable">{{cust.mobileNumber}}</label>
+              <!-- <input hidden formControlName="mobileNumber" [ngModel]="data?.mobileNumber"> -->
             </div>
           </div>
           <div class="col-md-4  col-6">
