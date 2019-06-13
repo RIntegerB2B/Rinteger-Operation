@@ -55,7 +55,7 @@ const routes: Routes = [
   },
   {
     path: 'account',
-    /* canActivate: [AuthGuard], */
+    canActivate: [AuthGuard],
     loadChildren: './account/account.module#AccountModule',
   },
   {

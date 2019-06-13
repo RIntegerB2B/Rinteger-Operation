@@ -181,7 +181,7 @@ existingCustomer() {
       leadDetailsForm.controls.leadID.value,
       customer.mobileNumber,
       customer.name,
-      customer.emailId ,
+      customer.emailId,
       leadDetailsForm.controls.leadOwner.value,
       leadDetailsForm.controls.leadType.value,
       leadDetailsForm.controls.leadSource.value,
