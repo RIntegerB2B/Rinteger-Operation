@@ -1,10 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { InvoiceService } from './../invoice.service';
 import { Invoice } from './../../shared/invoice.model';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { DateSearch } from './dateSearch';
+
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-view-all-invoice',
@@ -13,6 +15,8 @@ import { DateSearch } from './dateSearch';
 })
 export class ViewAllInvoiceComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild('table') table: ElementRef;
+
   invoice: any;
   dateSearch: DateSearch;
   invoiceDetailsForm: FormGroup;
@@ -138,3 +142,49 @@ export class ViewAllInvoiceComponent implements OnInit {
     });
   }
 }
+/* 
+ConvertToCSV(objArray) {
+  var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+  var str = '';
+  var row = "";
+
+  for (let index in objArray[0]) {
+    row += index + ',';
+  }
+  row = row.slice(0, -1);
+  //append Label row with line break
+  str += row + '\r\n';
+
+  for (var i = 0; i < array.length; i++) {
+    var line = '';
+    for (var index in array[i]) {
+      if (line != '') line += ','
+
+      line += array[i][index];
+    }
+    str += line + '\r\n';
+  }
+  return str;
+} */
+
+/* fireEvent()
+{
+  const ws: XLSX.WorkSheet=XLSX.utils.table_to_sheet(this.table.nativeElement);
+  const wb: XLSX.WorkBook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+  XLSX.writeFile(wb, 'SheetJS.xlsx');
+  
+} */
+/* download(){    
+  var csvData = this.ConvertToCSV(this.invoiceModel);
+                         var a = document.createElement("a");
+                         a.setAttribute('style', 'display:none;');
+                         document.body.appendChild(a);
+                         var blob = new Blob([csvData], { type: 'text/csv' });
+                         var url= window.URL.createObjectURL(blob);
+                         a.href = url;
+                         a.download = 'User_Results.csv';
+                         a.click();
+                         return 'success';
+ }
+}*/

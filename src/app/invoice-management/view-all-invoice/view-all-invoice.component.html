@@ -1,7 +1,7 @@
 <form style="padding-top:20px">
   <div class="pageBoxLg">
-    <app-search-invoice [invoiceModel]="invoiceModel"
-     (searchInvoice)="filterInvoice($event)"></app-search-invoice>
+
+    <app-search-invoice [invoiceModel]="invoiceModel" (searchInvoice)="filterInvoice($event)"></app-search-invoice>
     <div class="row" [formGroup]="invoiceDetailsForm">
       <div class="col-md-2">
         <mat-form-field>
@@ -78,8 +78,7 @@
       No Invoice
     </div>
     <div *ngFor="let data of invoice">
-      <div class="row gridRow"
-             *ngFor="let cust of data?.customer">
+      <div class="row gridRow" *ngFor="let cust of data?.customer">
         <div class="display-none-large col-6">
           <label class="gridLabel">Invoice ID:</label>
         </div>
@@ -136,7 +135,58 @@
         </div>
       </div>
     </div>
-    <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true" [length]="totalSize"
-      [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>
+    <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true"
+      [length]="totalSize" [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>
   </div>
 </form>
+<!-- 
+<div class="container">
+  <table class="table" #table>
+    <thead>
+      <tr>
+        <th>invoiceID
+        </th>
+        <th>companyName
+        </th>
+        <th>mobileNumber
+        </th>
+        <th>date
+        </th>
+        <th>expiryDate
+        </th>
+        <th>customerDetails
+          </th>
+        
+      </tr>
+    </thead>
+    <tbody >
+      <tr *ngFor="let item of invoiceModel;index as i">
+        <td>
+          {{item.invoiceID}}
+        </td>
+        <td>
+          {{item.mobileNumber}}
+        </td>
+        <td>
+          {{item.date | date: 'dd/MM/yyyy' }}
+        </td>
+        <td>
+          {{item.expiryDate | date: 'dd/MM/yyyy' }}
+        </td>
+        <td *ngFor="let cust of data?.customer">
+           
+            <tr>
+              <td>
+                {{cust.companyName}}
+              </td>
+              <td>
+                  {{cust.mobileNumber}}
+                </td>
+            </tr>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="button" (click)="fireEvent()">Export</button>
+</div>
+ -->
