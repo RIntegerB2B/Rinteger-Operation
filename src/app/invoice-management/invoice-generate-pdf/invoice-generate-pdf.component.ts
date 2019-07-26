@@ -83,8 +83,8 @@ export class InvoiceGeneratePdfComponent implements OnInit {
       { text: this.invoiceReq[i].description, style: 'rowStyle' },
       { text: this.invoiceReq[i].quantity, style: 'rowStyle' },
       { text: this.invoiceReq[i].discount, style: 'rowStyle' },
-      { text: this.invoiceReq[i].price.toFixed(2), style: 'rowTotal', },
-      { text: this.invoiceReq[i].total.toFixed(2), style: 'rowTotal' }]);
+      { text: Math.round(this.invoiceReq[i].price).toFixed(2), style: 'rowTotal', },
+      { text: Math.round(this.invoiceReq[i].total).toFixed(2), style: 'rowTotal' }]);
     }
     return newTestArray;
   }
@@ -276,7 +276,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
               style: 'rowStyle',  border: [false, false, false, false]
             },
             { text: 'Sub Total', style: 'rowStyle', border: [true, false, true, true]  },
-            { text: this.invoice[0].subTotal.toFixed(2), style: 'rowTotal', border: [false, false, true, true]  }],
+            { text: Math.round(this.invoice[0].subTotal).toFixed(2), style: 'rowTotal', border: [false, false, true, true]  }],
 
               [
               { text: '', style: 'rowStyle', border: [false, false, false, false] },
@@ -287,7 +287,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
               text: '',
               style: 'rowStyle', border: [false, false, false, false]
             }, { text: 'GST ( ' + this.workOrderPdf[0].gst + ' % )', style: 'rowStyle' },
-            { text: this.invoice[0].tax.toFixed(2), style: 'rowTotal' }],
+            { text: Math.round(this.invoice[0].tax).toFixed(2), style: 'rowTotal' }],
             [{ text: '', style: 'rowStyle', border: [false, false, false, false] },
             { text: '', style: 'rowStyle', border: [false, false, false, false] }, {
               text: '',
@@ -296,7 +296,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
               text: '',
               style: 'rowStyle', border: [false, false, false, false]
             }, { text: 'Amount', style: 'rowStyle' },
-            { text: Math.ceil(this.invoice[0].allTotal).toFixed(2), style: 'rowTotal' }]
+            { text: Math.round(this.invoice[0].allTotal).toFixed(2), style: 'rowTotal' }]
             ]
           },
         },
@@ -495,7 +495,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 { text: 'Invoice ID:  ' + this.invoice[0].invoiceID.toUpperCase(), style: 'textGst' },
                 { text: 'Date: ' + new Date(this.invoice[0].date).toLocaleDateString(), style: 'address' },
                 { text: 'Due Date: ' + new Date(this.invoice[0].expiryDate).toLocaleDateString(), style: 'address' },
-                { text: 'Total Amount: ' + Math.ceil(this.invoice[0].allTotal).toFixed(2), style: 'address' }
+                { text: 'Total Amount: ' + Math.round(this.invoice[0].allTotal), style: 'address' }
               ]
             },
           ],
@@ -533,7 +533,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
              style: 'rowStyle',  border: [false, false, false, false]
            },
            { text: 'Sub Total', style: 'rowStyle', border: [true, false, true, true]  },
-           { text: this.invoice[0].subTotal.toFixed(2), style: 'rowTotal', border: [false, false, true, true]  }],
+           { text: Math.round(this.invoice[0].subTotal).toFixed(2), style: 'rowTotal', border: [false, false, true, true]  }],
               [
                 { text: '', style: 'rowStyle', border: [false, false, false, false] },
               { text: '', style: 'rowStyle', border: [false, false, false, false] },
@@ -544,7 +544,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
               { text: 'SGST ( ' + this.workOrderPdf[0].sgst + ' % )', style: 'rowStyle' }
               ,
               {
-                text: ((100 / this.workOrderPdf[0].gst * this.invoice[0].tax) *
+                text: Math.round((100 / this.workOrderPdf[0].gst * this.invoice[0].tax) *
                   (this.workOrderPdf[0].sgst / 100)).toFixed(2), style: 'rowTotal'
               }],
             [
@@ -561,7 +561,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
               }
               , { text: 'CGST ( ' + this.workOrderPdf[0].cgst + ' % )', style: 'rowStyle' },
               {
-                text: ((100 / this.workOrderPdf[0].gst * this.invoice[0].tax) *
+                text: Math.round((100 / this.workOrderPdf[0].gst * this.invoice[0].tax) *
                   (this.workOrderPdf[0].cgst / 100)).toFixed(2), style: 'rowTotal'
               }],
             [
@@ -571,7 +571,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 text: '',
                 style: 'rowStyle', border: [false, false, false, false]
               }, { text: 'Amount', style: 'rowStyle' },
-              { text: Math.ceil(this.invoice[0].allTotal).toFixed(2), style: 'rowTotal' }]
+              { text: Math.round(this.invoice[0].allTotal).toFixed(2), style: 'rowTotal' }]
             ]
           },
         },
@@ -770,7 +770,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 { text: 'Invoice ID:  ' + this.invoice[0].invoiceID.toUpperCase(), style: 'textGst' },
                 { text: 'Date: ' + new Date(this.invoice[0].date).toLocaleDateString(), style: 'address' },
                 { text: 'Due Date: ' + new Date(this.invoice[0].expiryDate).toLocaleDateString(), style: 'address' },
-                { text: 'Total Amount: ' + Math.ceil(this.workPrice).toFixed(2), style: 'address' }
+                { text: 'Total Amount: ' + Math.round(this.workPrice), style: 'address' }
               ]
             },
           ],
@@ -807,7 +807,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
              style: 'rowStyle',  border: [false, false, false, false]
            },
            { text: 'Sub Total', style: 'rowStyle', border: [true, false, true, true]  },
-           { text: this.totalAmountWithDiscount.toFixed(2), style: 'rowTotal', border: [false, false, true, true]  }], [
+           { text: Math.round(this.totalAmountWithDiscount).toFixed(2), style: 'rowTotal', border: [false, false, true, true]  }], [
               { text: '', style: 'rowStyle', border: [false, false, false, false] }, {
                 text: '',
                 style: 'rowStyle', border: [false, false, false, false]
@@ -816,14 +816,14 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 text: '',
                 style: 'rowStyle', border: [false, false, false, false]
               }, { text: 'GST ( ' + this.workOrderPdf[0].gst + ' % )', style: 'rowStyle' },
-              { text: this.invoice[0].tax.toFixed(2), style: 'rowTotal' }],
+              { text: Math.round(this.invoice[0].tax).toFixed(2), style: 'rowTotal' }],
             [
               { text: '', style: 'rowStyle', border: [false, false, false, false] },
               { text: '', style: 'rowStyle', border: [false, false, false, false] }, {
                 text: '',
                 style: 'rowStyle', border: [false, false, false, false]
               }, { text: 'Amount', style: 'rowStyle' },
-              { text: Math.ceil(this.totalAmountWithDiscount + this.invoice[0].tax).toFixed(2), style: 'rowTotal' }]
+              { text: Math.round(this.totalAmountWithDiscount + this.invoice[0].tax).toFixed(2), style: 'rowTotal' }]
             ]
           },
         }, {
@@ -1022,7 +1022,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 { text: 'Invoice ID:  ' + this.invoice[0].invoiceID.toUpperCase(), style: 'textGst' },
                 { text: 'Date: ' + new Date(this.invoice[0].date).toLocaleDateString(), style: 'address' },
                 { text: 'Due Date: ' + new Date(this.invoice[0].expiryDate).toLocaleDateString(), style: 'address' },
-                { text: 'Total Amount: ' + Math.ceil(this.workPrice).toFixed(2), style: 'address' }
+                { text: 'Total Amount: ' + Math.round(this.workPrice), style: 'address' }
               ]
             },
           ],
@@ -1059,7 +1059,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
              style: 'rowStyle',  border: [false, false, false, false]
            },
            { text: 'Sub Total', style: 'rowStyle', border: [true, false, true, true]  },
-           { text: this.totalAmountWithDiscount.toFixed(2), style: 'rowTotal', border: [false, false, true, true]  }], [
+           { text: Math.round(this.totalAmountWithDiscount).toFixed(2), style: 'rowTotal', border: [false, false, true, true]  }], [
               { text: '', style: 'rowStyle', border: [false, false, false, false] }, {
                 text: '',
                 style: 'rowStyle', border: [false, false, false, false]
@@ -1068,7 +1068,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 style: 'rowStyle', border: [false, false, false, false]
               }, { text: 'SGST ( ' + this.workOrderPdf[0].sgst + ' % )', style: 'rowStyle' },
               {
-                text: ((100 / this.workOrderPdf[0].gst * this.invoice[0].tax) *
+                text: Math.round((100 / this.workOrderPdf[0].gst * this.invoice[0].tax) *
                   (this.workOrderPdf[0].sgst / 100)).toFixed(2), style: 'rowTotal'
               }],
             [
@@ -1080,7 +1080,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 style: 'rowStyle', border: [false, false, false, false]
               }, { text: 'CGST ( ' + this.workOrderPdf[0].cgst + ' % )', style: 'rowStyle' },
               {
-                text: ((100 / this.workOrderPdf[0].gst * this.invoice[0].tax) *
+                text: Math.round((100 / this.workOrderPdf[0].gst * this.invoice[0].tax) *
                   (this.workOrderPdf[0].cgst / 100)).toFixed(2), style: 'rowTotal'
               }],
             [
@@ -1091,7 +1091,7 @@ export class InvoiceGeneratePdfComponent implements OnInit {
                 text: '',
                 style: 'rowStyle', border: [false, false, false, false]
               }, { text: 'Amount', style: 'rowStyle' },
-              { text: Math.ceil (this.totalAmountWithDiscount + this.invoice[0].tax).toFixed(2), style: 'rowTotal' }]
+              { text: Math.round (this.totalAmountWithDiscount + this.invoice[0].tax).toFixed(2), style: 'rowTotal' }]
             ]
           },
         }, {
