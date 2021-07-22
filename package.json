@@ -29,7 +29,7 @@
     "material-icons": "^0.3.0",
     "pdfmake": "^0.1.53",
     "rxjs": "~6.3.3",
-    "xlsx": "^0.14.1",
+    "xlsx": "^0.17.0",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
